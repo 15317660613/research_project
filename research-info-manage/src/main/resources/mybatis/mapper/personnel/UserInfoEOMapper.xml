@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.personnel.dao.UserInfoEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.research.personnel.entity.UserInfoEO" >
+    <id column="id" property="id" />
+    <result column="user_id" property="userId" />
+    <result column="education_experience" property="educationExperience" />
+    <result column="oversea_experience" property="overseaExperience" />
+    <result column="research_experience" property="researchExperience" />
+    <result column="personal_evaluation" property="personalEvaluation" />
+    <result column="resume" property="resume" />
+    <result column="research_direction" property="researchDirection" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="create_user_name" property="createUserName" />
+    <result column="create_time" property="createTime" />
+    <result column="modify_time" property="modifyTime" />
+    <result column="del_flag" property="delFlag" />
+    <result column="ext1" property="ext1" />
+    <result column="ext2" property="ext2" />
+    <result column="ext3" property="ext3" />
+    <result column="ext4" property="ext4" />
+    <result column="ext5" property="ext5" />
+
+      <result column="user_name" property="userName" />
+      <result column="title_of" property="titleOf" />
+      <result column="last_degree" property="lastDegree" />
+      <result column="qualifications" property="qualifications" />
+      <result column="email" property="email" />
+      <result column="sex" property="sex" />
+      <result column="id_card" property="idCard" />
+      <result column="user_code" property="userCode" />
+  </resultMap>
+
+  <!-- RS_USER_INFO table all fields -->
+  <sql id="Base_Column_List" >
+     id, user_id, education_experience, oversea_experience, research_experience, personal_evaluation, resume, research_direction, create_user_id, create_user_name, create_time, modify_time, del_flag, ext2, ext3, ext4, ext5
+  </sql>
+
+    <sql id="Base_Column_AS_List" >
+ esu.id, esu.user_id, esu.education_experience, esu.oversea_experience, esu.research_experience, esu.personal_evaluation, esu.resume, esu.research_direction, esu.create_user_id, esu.create_user_name, esu.create_time, esu.modify_time, esu.del_flag, esu.ext2, esu.ext3, esu.ext4, esu.ext5
+
+  </sql>
+
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="userId != null" >
+        and user_id ${userIdOperator} #{userId}
+      </if>
+      <if test="educationExperience != null" >
+        and education_experience ${educationExperienceOperator} #{educationExperience}
+      </if>
+      <if test="overseaExperience != null" >
+        and oversea_experience ${overseaExperienceOperator} #{overseaExperience}
+      </if>
+      <if test="researchExperience != null" >
+        and research_experience ${researchExperienceOperator} #{researchExperience}
+      </if>
+      <if test="personalEvaluation != null" >
+        and personal_evaluation ${personalEvaluationOperator} #{personalEvaluation}
+      </if>
+      <if test="resume != null" >
+        and resume ${resumeOperator} #{resume}
+      </if>
+      <if test="researchDirection != null" >
+        and research_direction ${researchDirectionOperator} #{researchDirection}
+      </if>
+      <if test="createUserId != null" >
+        and create_user_id ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="createUserName != null" >
+        and create_user_name ${createUserNameOperator} #{createUserName}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="modifyTime != null" >
+        and modify_time ${modifyTimeOperator} #{modifyTime}
+      </if>
+      <if test="modifyTime1 != null" >
+        and modify_time &gt;= #{modifyTime1}
+      </if>
+      <if test="modifyTime2 != null" >
+        and modify_time &lt;= #{modifyTime2}
+      </if>
+      <if test="delFlag != null" >
+        and del_flag = 0
+      </if>
+      <if test="ext1 != null" >
+        and ext1 ${ext1Operator} #{ext1}
+      </if>
+      <if test="ext2 != null" >
+        and ext2 ${ext2Operator} #{ext2}
+      </if>
+      <if test="ext3 != null" >
+        and ext3 ${ext3Operator} #{ext3}
+      </if>
+      <if test="ext4 != null" >
+        and ext4 ${ext4Operator} #{ext4}
+      </if>
+      <if test="ext5 != null" >
+        and ext5 ${ext5Operator} #{ext5}
+      </if>
+
+        <if test="userName != null" >
+            and user_name ${userNameOperator} #{userName}
+        </if>
+        <if test="titleOf != null" >
+            and title_of ${titleOfOperator} #{titleOf}
+        </if>
+        <if test="lastDegree != null" >
+            and last_degree ${lastDegreeOperator} #{lastDegree}
+        </if>
+        <if test="qualifications != null" >
+            and qualifications ${qualificationsOperator} #{qualifications}
+        </if>
+        <if test="email != null" >
+            and email ${emailOperator} #{email}
+        </if>
+        <if test="sex != null" >
+            and sex ${sexOperator} #{sex}
+        </if>
+        <if test="idCard != null" >
+            and id_card ${idCardOperator} #{idCard}
+        </if>
+    </trim>
+  </sql>
+
+    <sql id="Base_Where_AS_Clause">
+
+        <trim suffixOverrides="," >
+            <if test="id != null" >
+                and esu.id ${idOperator}  '%'||#{id}||'%'
+            </if>
+            <if test="userId != null" >
+                and esu.user_id ${userIdOperator} '%'||#{userId}||'%'
+            </if>
+            <if test="educationExperience != null" >
+                and esu.education_experience ${educationExperienceOperator} #{educationExperience}
+            </if>
+            <if test="overseaExperience != null" >
+                and esu.oversea_experience ${overseaExperienceOperator} #{overseaExperience}
+            </if>
+            <if test="researchExperience != null" >
+                and esu.research_experience ${researchExperienceOperator} #{researchExperience}
+            </if>
+            <if test="personalEvaluation != null" >
+                and esu.personal_evaluation ${personalEvaluationOperator} #{personalEvaluation}
+            </if>
+            <if test="resume != null" >
+                and esu.resume ${resumeOperator} #{resume}
+            </if>
+            <if test="researchDirection != null" >
+                and esu.research_direction ${researchDirectionOperator} #{researchDirection}
+            </if>
+            <if test="createUserId != null" >
+                and esu.create_user_id ${createUserIdOperator} #{createUserId}
+            </if>
+            <if test="createUserName != null" >
+                and esu.create_user_name ${createUserNameOperator} #{createUserName}
+            </if>
+            <if test="createTime != null" >
+                and esu.create_time ${createTimeOperator} #{createTime}
+            </if>
+            <if test="createTime1 != null" >
+                and esu.create_time &gt;= #{createTime1}
+            </if>
+            <if test="createTime2 != null" >
+                and esu.create_time &lt;= #{createTime2}
+            </if>
+            <if test="modifyTime != null" >
+                and esu.modify_time ${modifyTimeOperator} #{modifyTime}
+            </if>
+            <if test="modifyTime1 != null" >
+                and esu.modify_time &gt;= #{modifyTime1}
+            </if>
+            <if test="modifyTime2 != null" >
+                and esu.modify_time &lt;= #{modifyTime2}
+            </if>
+            <if test="delFlag != null" >
+                and esu.del_flag =0
+            </if>
+            <if test="ext1 != null" >
+                and tsu.birth_date ${ext1Operator} #{ext1}
+            </if>
+            <if test="ext2 != null" >
+                and esu.ext2 ${ext2Operator} #{ext2}
+            </if>
+            <if test="ext3 != null" >
+                and esu.ext3 ${ext3Operator} #{ext3}
+            </if>
+            <if test="ext4 != null" >
+                and esu.ext4 ${ext4Operator} #{ext4}
+            </if>
+            <if test="ext5 != null" >
+                and esu.ext5 ${ext5Operator} #{ext5}
+            </if>
+
+            <if test="userName != null" >
+                and tsu.usname ${userNameOperator} '%'||#{userName}||'%'
+            </if>
+            <if test="titleOf != null" >
+                and tsu.job_title ${titleOfOperator} #{titleOf}
+            </if>
+            <if test="lastDegree != null" >
+                and tsu.last_degree ${lastDegreeOperator} #{lastDegree}
+            </if>
+            <if test="qualifications != null" >
+                and tsu.final_degree ${qualificationsOperator} #{qualifications}
+            </if>
+            <if test="email != null" >
+                and tsu.email ${emailOperator} #{email}
+            </if>
+            <if test="sex != null" >
+                and tsu.gender ${sexOperator} #{sex}
+            </if>
+            <if test="idCard != null" >
+                and tsu.identity_number ${idCardOperator} #{idCard}
+            </if>
+            <if test="userCode != null" >
+                and lower(tsu.user_code) ${userCodeOperator} '%'||#{userCode}||'%'
+            </if>
+        </trim>
+    </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.research.personnel.entity.UserInfoEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RS_USER_INFO.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into RS_USER_INFO(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{userId, jdbcType=VARCHAR}, #{educationExperience, jdbcType=VARCHAR}, #{overseaExperience, jdbcType=VARCHAR}, #{researchExperience, jdbcType=VARCHAR}, #{personalEvaluation, jdbcType=VARCHAR}, #{resume, jdbcType=VARCHAR}, #{researchDirection, jdbcType=VARCHAR}, #{createUserId, jdbcType=VARCHAR}, #{createUserName, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{modifyTime, jdbcType=TIMESTAMP}, #{delFlag, jdbcType=INTEGER}, #{ext1, jdbcType=VARCHAR}, #{ext2, jdbcType=VARCHAR}, #{ext3, jdbcType=VARCHAR}, #{ext4, jdbcType=VARCHAR}, #{ext5, jdbcType=VARCHAR}, #{userName, jdbcType=VARCHAR}
+      , #{titleOf, jdbcType=VARCHAR}, #{lastDegree, jdbcType=VARCHAR}, #{qualifications, jdbcType=VARCHAR}, #{email, jdbcType=VARCHAR}, #{sex, jdbcType=VARCHAR}, #{idCard, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.research.personnel.entity.UserInfoEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RS_USER_INFO.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into RS_USER_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="userId != null" >user_id,</if>
+                <if test="educationExperience != null" >education_experience,</if>
+                <if test="overseaExperience != null" >oversea_experience,</if>
+                <if test="researchExperience != null" >research_experience,</if>
+                <if test="personalEvaluation != null" >personal_evaluation,</if>
+                <if test="resume != null" >resume,</if>
+                <if test="researchDirection != null" >research_direction,</if>
+                <if test="createUserId != null" >create_user_id,</if>
+                <if test="createUserName != null" >create_user_name,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="modifyTime != null" >modify_time,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="ext1 != null" >ext1,</if>
+                <if test="ext2 != null" >ext2,</if>
+                <if test="ext3 != null" >ext3,</if>
+                <if test="ext4 != null" >ext4,</if>
+                <if test="ext5 != null" >ext5,</if>
+
+
+
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="userId != null" >#{userId, jdbcType=VARCHAR},</if>
+                <if test="educationExperience != null" >#{educationExperience, jdbcType=VARCHAR},</if>
+                <if test="overseaExperience != null" >#{overseaExperience, jdbcType=VARCHAR},</if>
+                <if test="researchExperience != null" >#{researchExperience, jdbcType=VARCHAR},</if>
+                <if test="personalEvaluation != null" >#{personalEvaluation, jdbcType=VARCHAR},</if>
+                <if test="resume != null" >#{resume, jdbcType=VARCHAR},</if>
+                <if test="researchDirection != null" >#{researchDirection, jdbcType=VARCHAR},</if>
+                <if test="createUserId != null" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="createUserName != null" >#{createUserName, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="modifyTime != null" >#{modifyTime, jdbcType=TIMESTAMP},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=INTEGER},</if>
+                <if test="ext1 != null" >#{ext1, jdbcType=VARCHAR},</if>
+                <if test="ext2 != null" >#{ext2, jdbcType=VARCHAR},</if>
+                <if test="ext3 != null" >#{ext3, jdbcType=VARCHAR},</if>
+                <if test="ext4 != null" >#{ext4, jdbcType=VARCHAR},</if>
+                <if test="ext5 != null" >#{ext5, jdbcType=VARCHAR},</if>
+
+
+
+
+
+    </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.research.personnel.entity.UserInfoEO" >
+    update RS_USER_INFO
+       set  user_id = #{userId},
+            education_experience = #{educationExperience},
+            oversea_experience = #{overseaExperience},
+            research_experience = #{researchExperience},
+            personal_evaluation = #{personalEvaluation},
+            resume = #{resume},
+            research_direction = #{researchDirection},
+            create_user_id = #{createUserId},
+            create_user_name = #{createUserName},
+            create_time = #{createTime},
+            modify_time = #{modifyTime},
+            del_flag = #{delFlag},
+            ext1 = #{ext1},
+            ext2 = #{ext2},
+            ext3 = #{ext3},
+            ext4 = #{ext4},
+            ext5 = #{ext5},
+
+
+
+      where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.research.personnel.entity.UserInfoEO" >
+    update RS_USER_INFO
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId},
+      </if>
+      <if test="educationExperience != null" >
+        education_experience = #{educationExperience},
+      </if>
+      <if test="overseaExperience != null" >
+        oversea_experience = #{overseaExperience},
+      </if>
+      <if test="researchExperience != null" >
+        research_experience = #{researchExperience},
+      </if>
+      <if test="personalEvaluation != null" >
+        personal_evaluation = #{personalEvaluation},
+      </if>
+      <if test="resume != null" >
+        resume = #{resume},
+      </if>
+      <if test="researchDirection != null" >
+        research_direction = #{researchDirection},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="createUserName != null" >
+        create_user_name = #{createUserName},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="ext1 != null" >
+        ext1 = #{ext1},
+      </if>
+      <if test="ext2 != null" >
+        ext2 = #{ext2},
+      </if>
+      <if test="ext3 != null" >
+        ext3 = #{ext3},
+      </if>
+      <if test="ext4 != null" >
+        ext4 = #{ext4},
+      </if>
+      <if test="ext5 != null" >
+        ext5 = #{ext5},
+      </if>
+
+
+
+
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据user_id查询 RS_USER_INFO -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from RS_USER_INFO
+     where user_id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RS_USER_INFO
+     where id = #{value}
+
+  </delete>
+<!-- 批量删除-->
+    <delete id="logicDelete"  parameterType = "java.util.List">
+        delete from RS_USER_INFO where 1>2
+        or id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")" index="index">
+            #{id}
+        </foreach>
+    </delete>
+  <!-- RS_USER_INFO 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from RS_USER_INFO esu left join TS_USER tsu on esu.user_id =tsu.usid
+    where esu.del_flag =0
+    <include refid="Base_Where_AS_Clause"/>
+  </select>
+
+  <!-- 查询RS_USER_INFO列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_AS_List" /> ,tsu.usname  user_name,tsu.job_title title_of,tsu.last_degree last_degree,tsu.final_degree qualifications,tsu.email email,tsu.gender sex,tsu.identity_number id_card, tsu.birth_date ext1,tsu.user_code  from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from RS_USER_INFO
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex}) esu left join TS_USER tsu on esu.user_id =tsu.usid
+
+			where rn &gt;= ${pager.startIndex}  <include refid="Base_Where_AS_Clause"/>
+            order by create_time desc
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from RS_USER_INFO
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

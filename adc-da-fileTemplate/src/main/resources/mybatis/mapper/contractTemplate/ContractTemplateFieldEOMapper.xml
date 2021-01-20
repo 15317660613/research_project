@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.contractTemplate.dao.ContractTemplateFieldEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.contractTemplate.entity.ContractTemplateFieldEO" >
+    <id column="file_id" property="fileId" />
+    <result column="template_json" property="templateJson" />
+    <result column="create_time" property="createTime" />
+    <result column="temp_no" property="tempNo" />
+  </resultMap>
+
+  <!-- CONTRACT_TEMPLATE_FIELD table all fields -->
+  <sql id="Base_Column_List" >
+     file_id, template_json, create_time, temp_no
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="fileId != null" >
+        and file_id ${fileIdOperator} #{fileId}
+      </if>
+      <if test="templateJson != null" >
+        and template_json ${templateJsonOperator} #{templateJson}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="tempNo != null" >
+        and temp_no ${tempNoOperator} #{tempNo}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.contractTemplate.entity.ContractTemplateFieldEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="file_id">
+        SELECT SEQ_CONTRACT_TEMPLATE_FIELD.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into CONTRACT_TEMPLATE_FIELD(<include refid="Base_Column_List" />)
+    values (#{fileId, jdbcType=VARCHAR}, #{templateJson, jdbcType=CLOB}, #{createTime, jdbcType=TIMESTAMP}, #{tempNo, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.contractTemplate.entity.ContractTemplateFieldEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="file_id">
+        SELECT SEQ_CONTRACT_TEMPLATE_FIELD.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into CONTRACT_TEMPLATE_FIELD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="fileId != null" >file_id,</if>
+                <if test="templateJson != null" >template_json,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="tempNo != null" >temp_no,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="fileId != null" >#{fileId, jdbcType=VARCHAR},</if>
+                <if test="templateJson != null" >#{templateJson, jdbcType=CLOB},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="tempNo != null" >#{tempNo, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.contractTemplate.entity.ContractTemplateFieldEO" >
+    update CONTRACT_TEMPLATE_FIELD
+       set  template_json = #{templateJson},
+            create_time = #{createTime},
+            temp_no = #{tempNo}
+     where  file_id = #{fileId}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.contractTemplate.entity.ContractTemplateFieldEO" >
+    update CONTRACT_TEMPLATE_FIELD
+    <set >
+      <if test="templateJson != null" >
+        template_json = #{templateJson},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="tempNo != null" >
+        temp_no = #{tempNo},
+      </if>
+    </set>
+     where file_id = #{fileId}
+  </update>
+
+  <!-- 根据id查询 CONTRACT_TEMPLATE_FIELD -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from CONTRACT_TEMPLATE_FIELD
+     where file_id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from CONTRACT_TEMPLATE_FIELD
+     where file_id = #{value}
+
+  </delete>
+
+  <!-- CONTRACT_TEMPLATE_FIELD 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from CONTRACT_TEMPLATE_FIELD
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询CONTRACT_TEMPLATE_FIELD列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from CONTRACT_TEMPLATE_FIELD
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from CONTRACT_TEMPLATE_FIELD
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

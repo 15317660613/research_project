@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.adc.da.progress.dao.ProjectRateEODao">
+    <!-- Result Map-->
+    <resultMap id = "BaseResultMap" type = "com.adc.da.progress.entity.ProjectRateEO">
+        <id column = "id_" property = "id"/>
+        <result column = "project_id_" property = "projectId"/>
+        <result column = "proc_inst_id_" property = "procInstId"/>
+        <result column = "process_name_id_" property = "processNameId"/>
+        <result column = "create_time_" property = "createTime"/>
+        <result column = "modified_time" property = "modifiedTime"/>
+        <result column = "del_flag_" property = "delFlag"/>
+        <result column = "ext_info_1_" property = "extInfo1"/>
+        <result column = "ext_info_2_" property = "extInfo2"/>
+        <result column = "ext_info_3_" property = "extInfo3"/>
+        <result column = "ext_info_4_" property = "extInfo4"/>
+        <result column = "ext_info_5_" property = "extInfo5"/>
+        <result column = "ext_info_6_" property = "extInfo6"/>
+    </resultMap>
+
+    <!-- PR_PROJECT_RATE table all fields -->
+    <sql id = "Base_Column_List">
+        id_, project_id_, proc_inst_id_, process_name_id_, create_time_, modified_time, del_flag_, ext_info_1_, ext_info_2_, ext_info_3_, ext_info_4_, ext_info_5_, ext_info_6_
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id = "Base_Where_Clause">
+        where 1=1 and del_flag_ != '1'
+        <trim suffixOverrides = ",">
+            <if test = "id != null">
+                and id_ ${idOperator} #{id}
+            </if>
+            <if test = "projectId != null">
+                and project_id_ ${projectIdOperator} #{projectId}
+            </if>
+            <if test = "procInstId != null">
+                and proc_inst_id_ ${procInstIdOperator} #{procInstId}
+            </if>
+            <if test = "processNameId != null">
+                and process_name_id_ ${processNameIdOperator} #{processNameId}
+            </if>
+            <if test = "createTime != null">
+                and create_time_ ${createTimeOperator} #{createTime}
+            </if>
+            <if test = "createTime1 != null">
+                and create_time_ &gt;= #{createTime1}
+            </if>
+            <if test = "createTime2 != null">
+                and create_time_ &lt;= #{createTime2}
+            </if>
+            <if test = "modifiedTime != null">
+                and modified_time ${modifiedTimeOperator} #{modifiedTime}
+            </if>
+            <if test = "modifiedTime1 != null">
+                and modified_time &gt;= #{modifiedTime1}
+            </if>
+            <if test = "modifiedTime2 != null">
+                and modified_time &lt;= #{modifiedTime2}
+            </if>
+            <if test = "delFlag != null">
+                and del_flag_ ${delFlagOperator} #{delFlag}
+            </if>
+            <if test = "extInfo1 != null">
+                and ext_info_1_ ${extInfo1Operator} #{extInfo1}
+            </if>
+            <if test = "extInfo2 != null">
+                and ext_info_2_ ${extInfo2Operator} #{extInfo2}
+            </if>
+            <if test = "extInfo3 != null">
+                and ext_info_3_ ${extInfo3Operator} #{extInfo3}
+            </if>
+            <if test = "extInfo4 != null">
+                and ext_info_4_ ${extInfo4Operator} #{extInfo4}
+            </if>
+            <if test = "extInfo5 != null">
+                and ext_info_5_ ${extInfo5Operator} #{extInfo5}
+            </if>
+            <if test = "extInfo6 != null">
+                and ext_info_6_ ${extInfo6Operator} #{extInfo6}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id = "insert" parameterType = "com.adc.da.progress.entity.ProjectRateEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+            SELECT SEQ_PR_PROJECT_RATE.NEXTVAL FROM DUAL
+        </selectKey> -->insert into PR_PROJECT_RATE(<include
+            refid = "Base_Column_List"/>) values (#{id, jdbcType=VARCHAR}, #{projectId, jdbcType=VARCHAR}, #{procInstId, jdbcType=VARCHAR}, #{processNameId, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{modifiedTime, jdbcType=TIMESTAMP}, #{delFlag, jdbcType=VARCHAR}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR}, #{extInfo6, jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id = "insertSelective" parameterType = "com.adc.da.progress.entity.ProjectRateEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_PR_PROJECT_RATE.NEXTVAL FROM DUAL
+    </selectKey> -->insert into PR_PROJECT_RATE
+        <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">id_,</if>
+            <if test = "projectId != null">project_id_,</if>
+            <if test = "procInstId != null">proc_inst_id_,</if>
+            <if test = "processNameId != null">process_name_id_,</if>
+            <if test = "createTime != null">create_time_,</if>
+            <if test = "modifiedTime != null">modified_time,</if>
+            <if test = "delFlag != null">del_flag_,</if>
+            <if test = "extInfo1 != null">ext_info_1_,</if>
+            <if test = "extInfo2 != null">ext_info_2_,</if>
+            <if test = "extInfo3 != null">ext_info_3_,</if>
+            <if test = "extInfo4 != null">ext_info_4_,</if>
+            <if test = "extInfo5 != null">ext_info_5_,</if>
+            <if test = "extInfo6 != null">ext_info_6_,</if>
+        </trim>
+        <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">#{id, jdbcType=VARCHAR},</if>
+            <if test = "projectId != null">#{projectId, jdbcType=VARCHAR},</if>
+            <if test = "procInstId != null">#{procInstId, jdbcType=VARCHAR},</if>
+            <if test = "processNameId != null">#{processNameId, jdbcType=VARCHAR},</if>
+            <if test = "createTime != null">#{createTime, jdbcType=TIMESTAMP},</if>
+            <if test = "modifiedTime != null">#{modifiedTime, jdbcType=TIMESTAMP},</if>
+            <if test = "delFlag != null">#{delFlag, jdbcType=VARCHAR},</if>
+            <if test = "extInfo1 != null">#{extInfo1, jdbcType=VARCHAR},</if>
+            <if test = "extInfo2 != null">#{extInfo2, jdbcType=VARCHAR},</if>
+            <if test = "extInfo3 != null">#{extInfo3, jdbcType=VARCHAR},</if>
+            <if test = "extInfo4 != null">#{extInfo4, jdbcType=VARCHAR},</if>
+            <if test = "extInfo5 != null">#{extInfo5, jdbcType=VARCHAR},</if>
+            <if test = "extInfo6 != null">#{extInfo6, jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <!-- 根据pk，修改记录-->
+    <update id = "updateByPrimaryKey" parameterType = "com.adc.da.progress.entity.ProjectRateEO">
+        UPDATE PR_PROJECT_RATE
+        SET project_id_      = #{projectId},
+            proc_inst_id_    = #{procInstId},
+            process_name_id_ = #{processNameId},
+            create_time_     = #{createTime},
+            modified_time    = #{modifiedTime},
+            del_flag_        = #{delFlag},
+            ext_info_1_      = #{extInfo1},
+            ext_info_2_      = #{extInfo2},
+            ext_info_3_      = #{extInfo3},
+            ext_info_4_      = #{extInfo4},
+            ext_info_5_      = #{extInfo5},
+            ext_info_6_      = #{extInfo6}
+        WHERE id_ = #{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id = "updateByPrimaryKeySelective" parameterType = "com.adc.da.progress.entity.ProjectRateEO">
+        update PR_PROJECT_RATE
+        <set>
+            <if test = "projectId != null">
+                project_id_ = #{projectId},
+            </if>
+            <if test = "procInstId != null">
+                proc_inst_id_ = #{procInstId},
+            </if>
+            <if test = "processNameId != null">
+                process_name_id_ = #{processNameId},
+            </if>
+            <if test = "createTime != null">
+                create_time_ = #{createTime},
+            </if>
+            <if test = "modifiedTime != null">
+                modified_time = #{modifiedTime},
+            </if>
+            <if test = "delFlag != null">
+                del_flag_ = #{delFlag},
+            </if>
+            <if test = "extInfo1 != null">
+                ext_info_1_ = #{extInfo1},
+            </if>
+            <if test = "extInfo2 != null">
+                ext_info_2_ = #{extInfo2},
+            </if>
+            <if test = "extInfo3 != null">
+                ext_info_3_ = #{extInfo3},
+            </if>
+            <if test = "extInfo4 != null">
+                ext_info_4_ = #{extInfo4},
+            </if>
+            <if test = "extInfo5 != null">
+                ext_info_5_ = #{extInfo5},
+            </if>
+            <if test = "extInfo6 != null">
+                ext_info_6_ = #{extInfo6},
+            </if>
+        </set>
+        where id_ = #{id}
+    </update>
+
+    <!-- 根据id查询 PR_PROJECT_RATE -->
+    <select id = "selectByPrimaryKey" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+        select
+        <include refid = "Base_Column_List"/>
+        from PR_PROJECT_RATE where id_ = #{value} and del_flag_ != '1'
+
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id = "deleteByPrimaryKey" parameterType = "java.lang.String">
+
+   delete from PR_PROJECT_RATE
+     where id_ = #{value}
+  </delete>
+
+    <!-- 逻辑删除记录 -->
+    <update id="deleteByPrimaryKeysInFlag" parameterType="java.util.List">
+        update PR_PROJECT_RATE set del_flag_ = '1'
+        where id_ in
+        <foreach item="id_" collection="list" open="(" separator=","
+                 close=")" index="index">
+            #{id_}
+        </foreach>
+    </update>
+
+
+
+
+  <!-- PR_PROJECT_RATE 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from PR_PROJECT_RATE
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+    <!-- 查询PR_PROJECT_RATE列表 -->
+    <select id = "queryByPage" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from (select tmp_tb.* , rownum rn from (select
+        <include refid = "Base_Column_List"/>
+        from PR_PROJECT_RATE
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex}) where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id = "queryByList" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from PR_PROJECT_RATE
+        <include refid = "Base_Where_Clause"/>
+
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+    </select>
+
+
+    <select id = "getProjectTypeByProjectId" resultType = "string" parameterType = "string">
+        SELECT PROCESS_NAME_ID_
+        FROM PR_PROJECT_RATE
+        WHERE PROC_INST_ID_ = '-1'
+        AND PROJECT_ID_ = #{projectId}
+    </select>
+</mapper>

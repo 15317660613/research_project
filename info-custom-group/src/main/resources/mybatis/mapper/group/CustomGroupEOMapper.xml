@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.adc.da.group.dao.CustomGroupEODao">
+    <!-- Result Map-->
+    <resultMap id = "BaseResultMap" type = "com.adc.da.group.entity.CustomGroupEO">
+        <id column = "id_" property = "id"/>
+        <result column = "create_user_id_" property = "createUserId"/>
+        <result column = "group_name_" property = "groupName"/>
+        <result column = "create_time_" property = "createTime"/>
+        <result column = "ext_info_1_" property = "extInfo1"/>
+        <result column = "ext_info_2_" property = "extInfo2"/>
+    </resultMap>
+
+    <!-- TS_CUSTOM_GROUP table all fields -->
+    <sql id = "Base_Column_List">
+        id_, create_user_id_, group_name_, create_time_, ext_info_1_, ext_info_2_
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id = "Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides = ",">
+            <if test = "id != null">
+                and id_ ${idOperator} #{id}
+            </if>
+            <if test = "createUserId != null">
+                and create_user_id_ ${createUserIdOperator} #{createUserId}
+            </if>
+            <if test = "groupName != null">
+                and group_name_ ${groupNameOperator} #{groupName}
+            </if>
+            <if test = "createTime != null">
+                and create_time_ ${createTimeOperator} #{createTime}
+            </if>
+            <if test = "createTime1 != null">
+                and create_time_ &gt;= #{createTime1}
+            </if>
+            <if test = "createTime2 != null">
+                and create_time_ &lt;= #{createTime2}
+            </if>
+            <if test = "extInfo1 != null">
+                and ext_info_1_ ${extInfo1Operator} #{extInfo1}
+            </if>
+            <if test = "extInfo2 != null">
+                and ext_info_2_ ${extInfo2Operator} #{extInfo2}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id = "insert" parameterType = "com.adc.da.group.entity.CustomGroupEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+            SELECT SEQ_TS_CUSTOM_GROUP.NEXTVAL FROM DUAL
+        </selectKey> -->insert into TS_CUSTOM_GROUP(<include
+            refid = "Base_Column_List"/>) values (#{id, jdbcType=VARCHAR}, #{createUserId, jdbcType=VARCHAR}, #{groupName, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id = "insertSelective" parameterType = "com.adc.da.group.entity.CustomGroupEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_TS_CUSTOM_GROUP.NEXTVAL FROM DUAL
+    </selectKey> -->insert into TS_CUSTOM_GROUP
+        <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">id_,</if>
+            <if test = "createUserId != null">create_user_id_,</if>
+            <if test = "groupName != null">group_name_,</if>
+            <if test = "createTime != null">create_time_,</if>
+            <if test = "extInfo1 != null">ext_info_1_,</if>
+            <if test = "extInfo2 != null">ext_info_2_,</if>
+        </trim>
+        <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">#{id, jdbcType=VARCHAR},</if>
+            <if test = "createUserId != null">#{createUserId, jdbcType=VARCHAR},</if>
+            <if test = "groupName != null">#{groupName, jdbcType=VARCHAR},</if>
+            <if test = "createTime != null">#{createTime, jdbcType=TIMESTAMP},</if>
+            <if test = "extInfo1 != null">#{extInfo1, jdbcType=VARCHAR},</if>
+            <if test = "extInfo2 != null">#{extInfo2, jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <!-- 根据pk，修改记录-->
+    <update id = "updateByPrimaryKey" parameterType = "com.adc.da.group.entity.CustomGroupEO">
+        UPDATE TS_CUSTOM_GROUP
+        SET create_user_id_ = #{createUserId},
+            group_name_     = #{groupName},
+            create_time_    = #{createTime},
+            ext_info_1_     = #{extInfo1},
+            ext_info_2_     = #{extInfo2}
+        WHERE id_ = #{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id = "updateByPrimaryKeySelective" parameterType = "com.adc.da.group.entity.CustomGroupEO">
+        update TS_CUSTOM_GROUP
+        <set>
+            <if test = "createUserId != null">
+                create_user_id_ = #{createUserId},
+            </if>
+            <if test = "groupName != null">
+                group_name_ = #{groupName},
+            </if>
+            <if test = "createTime != null">
+                create_time_ = #{createTime},
+            </if>
+            <if test = "extInfo1 != null">
+                ext_info_1_ = #{extInfo1},
+            </if>
+            <if test = "extInfo2 != null">
+                ext_info_2_ = #{extInfo2},
+            </if>
+        </set>
+        where id_ = #{id}
+    </update>
+
+    <!-- 根据id查询 TS_CUSTOM_GROUP -->
+    <select id = "selectByPrimaryKey" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+        select
+        <include refid = "Base_Column_List"/>
+        from TS_CUSTOM_GROUP where id_ = #{value}
+
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id = "deleteByPrimaryKey" parameterType = "java.lang.String">
+        DELETE
+        FROM TS_CUSTOM_GROUP
+        WHERE id_ = #{value}
+
+    </delete>
+
+    <!-- TS_CUSTOM_GROUP 列表总数-->
+    <select id = "queryByCount" resultType = "java.lang.Integer" parameterType = "com.adc.da.base.page.BasePage">
+        select count(1) from TS_CUSTOM_GROUP
+        <include refid = "Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询TS_CUSTOM_GROUP列表 -->
+    <select id = "queryByPage" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from (select tmp_tb.* , rownum rn from (select
+        <include refid = "Base_Column_List"/>
+        from TS_CUSTOM_GROUP
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex}) where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id = "queryByList" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from TS_CUSTOM_GROUP
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+    </select>
+
+
+    <select id = "queryByCreateUserId" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+        select
+        <include refid = "Base_Column_List"/>
+        from TS_CUSTOM_GROUP where CREATE_USER_ID_ = #{0}
+    </select>
+
+
+    <select id = "queryByCreateUserIdAndGroupNameLike" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+        select
+        <include refid = "Base_Column_List"/>
+        from TS_CUSTOM_GROUP where GROUP_NAME_ like CONCAT('%',CONCAT(#{0},'%')) and CREATE_USER_ID_ = #{1}
+    </select>
+
+
+</mapper>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.statistics.dao.BusinessWorktimeDao" >
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="com.adc.da.business.entity.BusinessWorktimeEO" >
+        <id column="id" property="id" />
+        <result column="business_id" property="businessId" />
+        <result column="daily_time" property="dailyTime" />
+        <result column="create_time" property="createTime" />
+        <result column="worktime" property="worktime" />
+        <result column="department_id" property="departmentId" />
+        <result column="extinfo1" property="extinfo1" />
+        <result column="extinfo2" property="extinfo2" />
+        <result column="extinfo3" property="extinfo3" />
+        <result column="extinfo4" property="extinfo4" />
+        <result column="extinfo5" property="extinfo5" />
+        <result column="extinfo6" property="extinfo6" />
+        <result column="year" property="year" />
+        <result column="month" property="month" />
+    </resultMap>
+
+
+
+    <!-- ST_BUSINESS_WORKTIME table all fields -->
+    <sql id="Base_Column_List" >
+     id, business_id, daily_time, create_time, worktime, department_id, extinfo1, extinfo2, extinfo3, extinfo4, extinfo5, extinfo6, year, month
+  </sql>
+
+
+
+    <!-- 根据id查询 ST_BUSINESS_WORKTIME -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="Base_Column_List" />
+        from ST_BUSINESS_WORKTIME
+        where id = #{value}
+
+    </select>
+
+    <!-- 根据id查询 ST_BUSINESS_WORKTIME -->
+    <select id="getManDayByMonth" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select business_id,year,month, sum(worktime) as worktime
+        from ST_BUSINESS_WORKTIME
+        where business_id = #{id} and year = #{year}
+        group by business_id, year, month order by month
+    </select>
+
+
+    <!-- 根据id查询 ST_BUSINESS_WORKTIME -->
+    <select id="queryByYearAndMonth" resultMap="BaseResultMap" >
+        select  <include refid="Base_Column_List" />
+        from ST_BUSINESS_WORKTIME
+        where YEAR= #{year} and MONTH >=  #{startMonth} and MONTH  &lt;= #{finishMonth}
+    </select>
+
+
+
+    <!-- 根据id查询 ST_BUSINESS_WORKTIME -->
+    <select id="queryDeptWorkTimeByYearAndMonth" resultType="java.lang.Double" >
+       SELECT sum(WORKTIME) FROM ST_BUSINESS_WORKTIME
+        WHERE DEPARTMENT_ID IN (SELECT ID FROM TS_ORG CONNECT BY PRIOR id = PARENT_ID START WITH ID = #{deptId})
+        and YEAR= #{year} and MONTH >=  #{startMonth} and MONTH  &lt;= #{finishMonth}
+    </select>
+
+    <!-- 根据id查询 ST_BUSINESS_WORKTIME -->
+    <select id="queryBusinessWorkTimeByYearAndMonth" resultType="java.lang.Double" >
+    select sum(WORKTIME) from ST_BUSINESS_WORKTIME
+    where  BUSINESS_ID = #{businessId}  and YEAR= #{year} and MONTH >=  #{startMonth} and MONTH  &lt;= #{finishMonth}
+    </select>
+
+</mapper>

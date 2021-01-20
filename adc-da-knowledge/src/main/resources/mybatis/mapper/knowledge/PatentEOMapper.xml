@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.knowledge.dao.PatentEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.knowledge.entity.PatentEO" >
+    <id column="id_" property="id" />
+    <result column="belong_user_address_" property="belongUserAddress" />
+    <result column="ext_info1_" property="extInfo1" />
+    <result column="ext_info2_" property="extInfo2" />
+    <result column="ext_info3_" property="extInfo3" />
+    <result column="ext_info4_" property="extInfo4" />
+    <result column="ext_info5_" property="extInfo5" />
+    <result column="ext_info6_" property="extInfo6" />
+    <result column="type_" property="type" />
+    <result column="name_" property="name" />
+    <result column="num_" property="num" />
+    <result column="apply_date_" property="applyDate" />
+    <result column="belong_user_name_" property="belongUserName" />
+    <result column="belong_user_id_" property="belongUserId" />
+    <result column="authorize_date_" property="authorizeDate" />
+    <result column="authorize_num_" property="authorizeNum" />
+    <result column="certificate_num_" property="certificateNum" />
+    <result column="upload_user_id_" property="uploadUserId" />
+    <result column="designer_user_names_" property="designerUserNames" />
+    <result column="designer_user_ids_" property="designerUserIds" />
+    <result column="upload_user_name_" property="uploadUserName" />
+      <result column="dept_id_" property="deptId" />
+      <result column="dept_name_" property="deptName" />
+      <result column="upload_time_" property="uploadTime" />
+      <result column="auto_number_" property="autoNumber" />
+  </resultMap>
+
+  <!-- K_PATENT table all fields -->
+  <sql id="Base_Column_List" >
+     belong_user_address_, ext_info1_, ext_info2_, ext_info3_, ext_info4_, ext_info5_, ext_info6_, id_, type_, name_, num_, apply_date_, belong_user_name_, belong_user_id_, authorize_date_, authorize_num_, certificate_num_, upload_user_id_, designer_user_names_, designer_user_ids_, upload_user_name_, dept_name_, dept_id_, upload_time_, auto_number_
+  </sql>
+
+    <!-- K_PATENT table all fields -->
+    <sql id="Base_Column_List1" >
+        belong_user_address_, id_, type_, name_, num_, apply_date_, belong_user_name_, belong_user_id_, authorize_date_, authorize_num_, certificate_num_, upload_user_id_, designer_user_names_, designer_user_ids_, upload_user_name_, dept_name_, dept_id_, upload_time_, auto_number_
+    </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="belongUserAddress != null" >
+        and belong_user_address_ ${belongUserAddressOperator} #{belongUserAddress}
+      </if>
+      <if test="extInfo1 != null" >
+        and ext_info1_ ${extInfo1Operator} #{extInfo1}
+      </if>
+      <if test="extInfo2 != null" >
+        and ext_info2_ ${extInfo2Operator} #{extInfo2}
+      </if>
+      <if test="extInfo3 != null" >
+        and ext_info3_ ${extInfo3Operator} #{extInfo3}
+      </if>
+      <if test="extInfo4 != null" >
+        and ext_info4_ ${extInfo4Operator} #{extInfo4}
+      </if>
+      <if test="extInfo5 != null" >
+        and ext_info5_ ${extInfo5Operator} #{extInfo5}
+      </if>
+      <if test="extInfo6 != null" >
+        and ext_info6_ ${extInfo6Operator} #{extInfo6}
+      </if>
+      <if test="id != null" >
+        and id_ ${idOperator} #{id}
+      </if>
+      <if test="type != null" >
+        and type_ ${typeOperator} #{type}
+      </if>
+      <if test="name != null" >
+        and name_ ${nameOperator} #{name}
+      </if>
+      <if test="num != null" >
+        and num_ ${numOperator} #{num}
+      </if>
+      <if test="applyDate != null" >
+        and apply_date_ ${applyDateOperator} #{applyDate}
+      </if>
+      <if test="applyDate1 != null" >
+        and apply_date_ &gt;= #{applyDate1}
+      </if>
+      <if test="applyDate2 != null" >
+        and apply_date_ &lt;= #{applyDate2}
+      </if>
+      <if test="belongUserName != null" >
+        and belong_user_name_ ${belongUserNameOperator} #{belongUserName}
+      </if>
+      <if test="belongUserId != null" >
+        and belong_user_id_ ${belongUserIdOperator} #{belongUserId}
+      </if>
+      <if test="authorizeDate != null" >
+        and authorize_date_ ${authorizeDateOperator} #{authorizeDate}
+      </if>
+      <if test="authorizeDate1 != null" >
+        and authorize_date_ &gt;= #{authorizeDate1}
+      </if>
+      <if test="authorizeDate2 != null" >
+        and authorize_date_ &lt;= #{authorizeDate2}
+      </if>
+      <if test="authorizeNum != null" >
+        and authorize_num_ ${authorizeNumOperator} #{authorizeNum}
+      </if>
+      <if test="certificateNum != null" >
+        and certificate_num_ ${certificateNumOperator} #{certificateNum}
+      </if>
+      <if test="uploadUserId != null" >
+        and upload_user_id_ ${uploadUserIdOperator} #{uploadUserId}
+      </if>
+      <if test="designerUserNames != null" >
+        and designer_user_names_ ${designerUserNamesOperator} #{designerUserNames}
+      </if>
+      <if test="designerUserIds != null" >
+        and designer_user_ids_ ${designerUserIdsOperator} #{designerUserIds}
+      </if>
+      <if test="uploadUserName != null" >
+        and upload_user_name_ ${uploadUserNameOperator} #{uploadUserName}
+      </if>
+    </trim>
+  </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause1">
+        where 1=1
+        <trim suffixOverrides="," >
+            <if test="belongUserAddress != null" >
+                and belong_user_address_ like  CONCAT('%',CONCAT(  #{belongUserAddress},'%'))
+            </if>
+            <if test="id != null" >
+                and id_ = #{id}
+            </if>
+            <if test="type != null" >
+                and type_ like  CONCAT('%',CONCAT(   #{type},'%'))
+            </if>
+            <if test="name != null" >
+                and name_ like  CONCAT('%',CONCAT(  #{name},'%'))
+            </if>
+            <if test="num != null" >
+                and num_ like  CONCAT('%',CONCAT(  #{num},'%'))
+            </if>
+            <if test="startApplyDate != null" >
+                and (to_date(to_char(apply_date_ ,'yyyy-mm-dd'),'yyyy-mm-dd')) &gt;= #{startApplyDate}
+            </if>
+            <if test="endApplyDate != null" >
+                and (to_date(to_char(apply_date_ ,'yyyy-mm-dd'),'yyyy-mm-dd')) &lt;= #{endApplyDate}
+            </if>
+            <if test="belongUserName != null" >
+                and belong_user_name_ like  CONCAT('%',CONCAT(  #{belongUserName},'%'))
+            </if>
+            <if test="belongUserId != null" >
+                and belong_user_id_ = #{belongUserId}
+            </if>
+            <if test="startAuthorizeDate != null" >
+                and (to_date(to_char(authorize_date_ ,'yyyy-mm-dd'),'yyyy-mm-dd')) &gt;= #{startAuthorizeDate}
+            </if>
+            <if test="endAuthorizeDate != null" >
+                and (to_date(to_char(authorize_date_ ,'yyyy-mm-dd'),'yyyy-mm-dd')) &lt;= #{endAuthorizeDate}
+            </if>
+            <if test="authorizeNum != null" >
+                and authorize_num_ like  CONCAT('%',CONCAT(  #{authorizeNum},'%'))
+            </if>
+            <if test="certificateNum != null" >
+                and certificate_num_ like  CONCAT('%',CONCAT(  #{certificateNum},'%'))
+            </if>
+            <if test="uploadUserId != null" >
+                and upload_user_id_ = #{uploadUserId}
+            </if>
+            <if test="designerUserNames != null" >
+                and designer_user_names_ like  CONCAT('%',CONCAT(  #{designerUserNames},'%'))
+            </if>
+            <if test="designerUserIds != null" >
+                and designer_user_ids_ = #{designerUserIds}
+            </if>
+            <if test="uploadUserName != null" >
+                and upload_user_name_ like  CONCAT('%',CONCAT(  #{uploadUserName},'%'))
+            </if>
+            <if test="deptId != null" >
+                and dept_id_ = #{deptId}
+            </if>
+
+            <if test="deptIdList != null" >
+                and dept_id_ in
+                <foreach  item="item" collection="deptIdList" index="index"  open="(" separator="," close=")">
+
+                    #{item}
+
+                </foreach>
+            </if>
+
+            <if test="deptName != null" >
+                and dept_name_ like  CONCAT('%',CONCAT(  #{deptName},'%'))
+            </if>
+            <if test="uploadTime != null" >
+                and upload_time_ = #{uploadTime}
+            </if>
+        </trim>
+    </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.knowledge.entity.PatentEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_K_PATENT.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into K_PATENT(<include refid="Base_Column_List" />)
+    values (#{belongUserAddress, jdbcType=VARCHAR}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR}, #{extInfo6, jdbcType=VARCHAR}, #{id, jdbcType=VARCHAR}, #{type, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, #{num, jdbcType=VARCHAR}, #{applyDate, jdbcType=TIMESTAMP}, #{belongUserName, jdbcType=VARCHAR}, #{belongUserId, jdbcType=VARCHAR}, #{authorizeDate, jdbcType=TIMESTAMP}, #{authorizeNum, jdbcType=VARCHAR}, #{certificateNum, jdbcType=VARCHAR}, #{uploadUserId, jdbcType=VARCHAR}, #{designerUserNames, jdbcType=VARCHAR}, #{designerUserIds, jdbcType=VARCHAR}, #{uploadUserName, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.knowledge.entity.PatentEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_K_PATENT.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into K_PATENT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="belongUserAddress != null" >belong_user_address_,</if>
+                <if test="extInfo1 != null" >ext_info1_,</if>
+                <if test="extInfo2 != null" >ext_info2_,</if>
+                <if test="extInfo3 != null" >ext_info3_,</if>
+                <if test="extInfo4 != null" >ext_info4_,</if>
+                <if test="extInfo5 != null" >ext_info5_,</if>
+                <if test="extInfo6 != null" >ext_info6_,</if>
+                <if test="id != null" >id_,</if>
+                <if test="type != null" >type_,</if>
+                <if test="name != null" >name_,</if>
+                <if test="num != null" >num_,</if>
+                <if test="applyDate != null" >apply_date_,</if>
+                <if test="belongUserName != null" >belong_user_name_,</if>
+                <if test="belongUserId != null" >belong_user_id_,</if>
+                <if test="authorizeDate != null" >authorize_date_,</if>
+                <if test="authorizeNum != null" >authorize_num_,</if>
+                <if test="certificateNum != null" >certificate_num_,</if>
+                <if test="uploadUserId != null" >upload_user_id_,</if>
+                <if test="designerUserNames != null" >designer_user_names_,</if>
+                <if test="designerUserIds != null" >designer_user_ids_,</if>
+                <if test="uploadUserName != null" >upload_user_name_,</if>
+                <if test="deptId != null" >dept_id_,</if>
+                <if test="deptName != null" >dept_name_,</if>
+                <if test="uploadTime != null" >upload_time_,</if>
+                <if test="autoNumber != null" >auto_number_,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="belongUserAddress != null" >#{belongUserAddress, jdbcType=VARCHAR},</if>
+                <if test="extInfo1 != null" >#{extInfo1, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="extInfo3 != null" >#{extInfo3, jdbcType=VARCHAR},</if>
+                <if test="extInfo4 != null" >#{extInfo4, jdbcType=VARCHAR},</if>
+                <if test="extInfo5 != null" >#{extInfo5, jdbcType=VARCHAR},</if>
+                <if test="extInfo6 != null" >#{extInfo6, jdbcType=VARCHAR},</if>
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="type != null" >#{type, jdbcType=VARCHAR},</if>
+                <if test="name != null" >#{name, jdbcType=VARCHAR},</if>
+                <if test="num != null" >#{num, jdbcType=VARCHAR},</if>
+                <if test="applyDate != null" >#{applyDate, jdbcType=TIMESTAMP},</if>
+                <if test="belongUserName != null" >#{belongUserName, jdbcType=VARCHAR},</if>
+                <if test="belongUserId != null" >#{belongUserId, jdbcType=VARCHAR},</if>
+                <if test="authorizeDate != null" >#{authorizeDate, jdbcType=TIMESTAMP},</if>
+                <if test="authorizeNum != null" >#{authorizeNum, jdbcType=VARCHAR},</if>
+                <if test="certificateNum != null" >#{certificateNum, jdbcType=VARCHAR},</if>
+                <if test="uploadUserId != null" >#{uploadUserId, jdbcType=VARCHAR},</if>
+                <if test="designerUserNames != null" >#{designerUserNames, jdbcType=VARCHAR},</if>
+                <if test="designerUserIds != null" >#{designerUserIds, jdbcType=VARCHAR},</if>
+                <if test="uploadUserName != null" >#{uploadUserName, jdbcType=VARCHAR},</if>
+                <if test="deptId != null" >#{deptId, jdbcType=VARCHAR},</if>
+                <if test="deptName != null" >#{deptName, jdbcType=VARCHAR},</if>
+                <if test="uploadTime != null" >#{uploadTime, jdbcType=TIMESTAMP},</if>
+                <if test="autoNumber != null" >#{autoNumber, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.knowledge.entity.PatentEO" >
+    update K_PATENT
+       set  belong_user_address_ = #{belongUserAddress},
+            ext_info1_ = #{extInfo1, jdbcType=VARCHAR},
+            ext_info2_ = #{extInfo2, jdbcType=VARCHAR},
+            ext_info3_ = #{extInfo3, jdbcType=VARCHAR},
+            ext_info4_ = #{extInfo4, jdbcType=VARCHAR},
+            ext_info5_ = #{extInfo5, jdbcType=VARCHAR},
+            ext_info6_ = #{extInfo6, jdbcType=VARCHAR},
+            type_ = #{type, jdbcType=VARCHAR},
+            name_ = #{name, jdbcType=VARCHAR},
+            num_ = #{num, jdbcType=VARCHAR},
+            dept_id_ = #{deptId, jdbcType=VARCHAR},
+            dept_name_ = #{deptName, jdbcType=VARCHAR},
+            apply_date_ = #{applyDate, jdbcType=TIMESTAMP},
+            belong_user_name_ = #{belongUserName, jdbcType=VARCHAR},
+            belong_user_id_ = #{belongUserId, jdbcType=VARCHAR},
+            authorize_date_ = #{authorizeDate, jdbcType=TIMESTAMP},
+            authorize_num_ = #{authorizeNum, jdbcType=VARCHAR},
+            certificate_num_ = #{certificateNum, jdbcType=VARCHAR},
+            upload_user_id_ = #{uploadUserId, jdbcType=VARCHAR},
+            designer_user_names_ = #{designerUserNames, jdbcType=VARCHAR},
+            designer_user_ids_ = #{designerUserIds, jdbcType=VARCHAR},
+            upload_user_name_ = #{uploadUserName, jdbcType=VARCHAR}
+     where  id_ = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.knowledge.entity.PatentEO" >
+    update K_PATENT
+    <set >
+      <if test="belongUserAddress != null" >
+        belong_user_address_ = #{belongUserAddress},
+      </if>
+      <if test="extInfo1 != null" >
+        ext_info1_ = #{extInfo1},
+      </if>
+      <if test="extInfo2 != null" >
+        ext_info2_ = #{extInfo2},
+      </if>
+      <if test="extInfo3 != null" >
+        ext_info3_ = #{extInfo3},
+      </if>
+      <if test="extInfo4 != null" >
+        ext_info4_ = #{extInfo4},
+      </if>
+      <if test="extInfo5 != null" >
+        ext_info5_ = #{extInfo5},
+      </if>
+      <if test="extInfo6 != null" >
+        ext_info6_ = #{extInfo6},
+      </if>
+      <if test="type != null" >
+        type_ = #{type},
+      </if>
+      <if test="name != null" >
+        name_ = #{name},
+      </if>
+      <if test="num != null" >
+        num_ = #{num},
+      </if>
+      <if test="applyDate != null" >
+        apply_date_ = #{applyDate},
+      </if>
+      <if test="belongUserName != null" >
+        belong_user_name_ = #{belongUserName},
+      </if>
+      <if test="belongUserId != null" >
+        belong_user_id_ = #{belongUserId},
+      </if>
+      <if test="authorizeDate != null" >
+        authorize_date_ = #{authorizeDate},
+      </if>
+      <if test="authorizeNum != null" >
+        authorize_num_ = #{authorizeNum},
+      </if>
+      <if test="certificateNum != null" >
+        certificate_num_ = #{certificateNum},
+      </if>
+      <if test="deptId != null" >
+          dept_id_ = #{deptId},
+      </if>
+      <if test="deptName != null" >
+          dept_name_ = #{deptName},
+      </if>
+      <if test="uploadUserId != null" >
+        upload_user_id_ = #{uploadUserId},
+      </if>
+      <if test="designerUserNames != null" >
+        designer_user_names_ = #{designerUserNames},
+      </if>
+      <if test="designerUserIds != null" >
+        designer_user_ids_ = #{designerUserIds},
+      </if>
+      <if test="uploadUserName != null" >
+        upload_user_name_ = #{uploadUserName},
+      </if>
+        <if test="uploadTime != null" >
+            upload_time_ = #{uploadTime},
+        </if>
+    </set>
+     where id_ = #{id}
+  </update>
+
+  <!-- 根据id查询 K_PATENT -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from K_PATENT
+     where id_ = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from K_PATENT
+     where id_ = #{value}
+
+  </delete>
+
+  <!-- K_PATENT 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from K_PATENT
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+    <select id="queryByMyCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        select count(1) from K_PATENT
+        <include refid="Base_Where_Clause1"/>
+    </select>
+
+  <!-- 查询K_PATENT列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from K_PATENT
+			 <include refid="Base_Where_Clause1"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+    <!-- 查询K_PATENT列表 -->
+    <select id="queryByMyPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select <include refid="Base_Column_List1" /> from
+        (select tmp_tb.* , rownum rn from
+        (select <include refid="Base_Column_List1" /> from K_PATENT
+        <include refid="Base_Where_Clause1"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from K_PATENT
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+    <select id="queryPatentByPatentIdsIn" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List1"/> from K_PATENT
+        where ID_ in
+        <foreach item="it" collection="patentIdList" open="(" separator=","
+                 close=")" index="index">
+            #{it}
+        </foreach>
+
+    </select>
+</mapper>

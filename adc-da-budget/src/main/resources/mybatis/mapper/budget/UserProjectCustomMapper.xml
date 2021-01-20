@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.budget.dao.UserProjectCustomDao">
+
+	<resultMap id="BaseResultMap" type="com.adc.da.budget.entity.UserProjectCustom">
+		<id column="ID" jdbcType="VARCHAR" property="id" />
+		<result column="TYPE" jdbcType="VARCHAR" property="type" />
+		<result column="CHILDTASKID" jdbcType="VARCHAR" property="childtaskid" />
+		<result column="TASKID" jdbcType="VARCHAR" property="taskid" />
+		<result column="PROJECTID" jdbcType="VARCHAR" property="projectid" />
+		<result column="BUSINESSID" jdbcType="VARCHAR" property="businessid" />
+		<result column="STATUS" jdbcType="VARCHAR" property="status" />
+		<result column="USERID" jdbcType="VARCHAR" property="userid" />
+	</resultMap>
+
+
+	<sql id="Base_Column_List">
+  ID, TYPE, CHILDTASKID, TASKID, PROJECTID, BUSINESSID, STATUS,USERID
+</sql>
+
+
+	<delete id="delete" parameterType="java.lang.String">
+  delete from USER_PROJECT_CUSTOM
+  where ID = #{id,jdbcType=VARCHAR}
+</delete>
+
+
+	<insert id="insert" parameterType="com.adc.da.budget.entity.UserProjectCustom">
+  insert into USER_PROJECT_CUSTOM (ID, TYPE, CHILDTASKID,
+    TASKID, PROJECTID, BUSINESSID,
+    STATUS,USERID)
+  values (#{id,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{childtaskid,jdbcType=VARCHAR},
+    #{taskid,jdbcType=VARCHAR}, #{projectid,jdbcType=VARCHAR}, #{businessid,jdbcType=VARCHAR},
+    #{status,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR})
+</insert>
+
+
+	<insert id="insertDynamic" parameterType="com.adc.da.budget.entity.UserProjectCustom">
+		insert into USER_PROJECT_CUSTOM
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="childtaskid != null">
+				CHILDTASKID,
+			</if>
+			<if test="taskid != null">
+				TASKID,
+			</if>
+			<if test="projectid != null">
+				PROJECTID,
+			</if>
+			<if test="businessid != null">
+				BUSINESSID,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="userid != null">
+				USERID
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=VARCHAR},
+			</if>
+			<if test="childtaskid != null">
+				#{childtaskid,jdbcType=VARCHAR},
+			</if>
+			<if test="taskid != null">
+				#{taskid,jdbcType=VARCHAR},
+			</if>
+			<if test="projectid != null">
+				#{projectid,jdbcType=VARCHAR},
+			</if>
+			<if test="businessid != null">
+				#{businessid,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="userid != null">
+				#{userid,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</insert>
+
+
+	<insert id="insertList" parameterType="java.util.List">
+		INSERT ALL
+		<foreach collection="list" item="item" index="index">
+			<if test="item.id !=null">
+				into USER_PROJECT_CUSTOM
+				<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="item.id != null">id,</if>
+					<if test="item.type != null">type,</if>
+					<if test="item.childtaskid != null">childtaskid,</if>
+					<if test="item.taskid != null">taskid,</if>
+					<if test="item.projectid != null">projectid,</if>
+					<if test="item.businessid != null">businessid,</if>
+					<if test="item.status != null">status,</if>
+					<if test="item.userid != null">userid,</if>
+				</trim>
+				<trim prefix="values (" suffix=")" suffixOverrides=",">
+					<if test="item.id != null">#{item.id, jdbcType=VARCHAR},</if>
+					<if test="item.type != null">#{item.type, jdbcType=VARCHAR},</if>
+					<if test="item.childtaskid != null">#{item.childtaskid, jdbcType=VARCHAR},</if>
+					<if test="item.taskid != null">#{item.taskid, jdbcType=VARCHAR},</if>
+					<if test="item.projectid != null">#{item.projectid, jdbcType=VARCHAR},</if>
+					<if test="item.businessid != null">#{item.businessid, jdbcType=VARCHAR},</if>
+					<if test="item.status != null">#{item.status, jdbcType=VARCHAR},</if>
+					<if test="item.userid != null">#{item.userid, jdbcType=TIMESTAMP},</if>
+				</trim>
+			</if>
+		</foreach>
+		SELECT 1 FROM dual
+	</insert>
+
+	<!-- 批量更新第一种方法，通过接收传进来的参数list进行循环着组装sql -->
+	<update id="updateList" parameterType="java.util.List">
+		<!-- 接收list参数，循环着组装sql语句，注意for循环的写法
+             separator=";" 代表着每次循环完，在sql后面放一个分号
+             item="cus" 循环List的每条的结果集
+             collection="list" list 即为 map传过来的参数key -->
+		<foreach collection="list" separator=";" item="cus">
+			update USER_PROJECT_CUSTOM set
+			type = #{cus.type},
+			childtaskid = #{cus.childtaskid},
+			taskid = #{cus.taskid},
+			projectid = #{cus.projectid},
+			businessid = #{cus.businessid},
+			status = #{cus.status},
+			userid = #{cus.userid}
+			where id = #{cus.id}
+		</foreach>
+	</update>
+
+
+	<update id="updateDynamic" parameterType="com.adc.da.budget.entity.UserProjectCustom">
+		update USER_PROJECT_CUSTOM
+		<set>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=VARCHAR},
+			</if>
+			<if test="childtaskid != null">
+				CHILDTASKID = #{childtaskid,jdbcType=VARCHAR},
+			</if>
+			<if test="taskid != null">
+				TASKID = #{taskid,jdbcType=VARCHAR},
+			</if>
+			<if test="projectid != null">
+				PROJECTID = #{projectid,jdbcType=VARCHAR},
+			</if>
+			<if test="businessid != null">
+				BUSINESSID = #{businessid,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="userid != null">
+				USERID = #{userid,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+
+
+	<update id="update" parameterType="com.adc.da.budget.entity.UserProjectCustom">
+  update USER_PROJECT_CUSTOM
+  set TYPE = #{type,jdbcType=VARCHAR},
+    CHILDTASKID = #{childtaskid,jdbcType=VARCHAR},
+    TASKID = #{taskid,jdbcType=VARCHAR},
+    PROJECTID = #{projectid,jdbcType=VARCHAR},
+    BUSINESSID = #{businessid,jdbcType=VARCHAR},
+    STATUS = #{status,jdbcType=VARCHAR},
+    USERID = #{userid,jdbcType=VARCHAR}
+  where ID = #{id,jdbcType=VARCHAR}
+</update>
+
+
+	<select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from  user_project_custom
+		where ID = #{id,jdbcType=VARCHAR}
+	</select>
+
+
+	<sql id="findPageWithWhere">
+		<where> 1=1
+			<if test="id != null and id != ''" >
+				and ID = #{id,jdbcType=VARCHAR}
+			</if>
+			<if test="type != null and type != ''" >
+				and TYPE = #{type,jdbcType=VARCHAR}
+			</if>
+			<if test="childtaskid != null and childtaskid != ''" >
+				and CHILDTASKID = #{childtaskid,jdbcType=VARCHAR}
+			</if>
+			<if test="taskid != null and taskid != ''" >
+				and TASKID = #{taskid,jdbcType=VARCHAR}
+			</if>
+			<if test="projectid != null and projectid != ''" >
+				and PROJECTID = #{projectid,jdbcType=VARCHAR}
+			</if>
+			<if test="businessid != null and businessid != ''" >
+				and BUSINESSID = #{businessid,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				and STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="userid != null and userid != ''" >
+				and USERID = #{userid,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</sql>
+
+
+	<!--<select id="findPageWithResult" parameterType="com.adc.da.budget.dto.UserProjectCustomDTO" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from  user_project_custom
+		<include refid="findPageWithWhere" />
+		limit #{start},#{pageSize}
+	</select>
+
+
+	<select id="findPageWithCount" parameterType="com.adc.da.budget.dto.UserProjectCustomDTO" resultType="Integer">
+		select count(1)
+		from user_project_custom
+		<include refid="findPageWithWhere" />
+	</select>-->
+
+	<select id="findAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from  user_project_custom
+		<where> USERID = #{userid,jdbcType=VARCHAR}</where>
+	</select>
+
+	<select id="findAllHideBusinessId" resultType = "java.lang.String" parameterType = "java.lang.String">
+		select
+		BUSINESSID
+		from  user_project_custom
+		where USERID = #{userid,jdbcType=VARCHAR} and status=0 and PROJECTID IS NULL AND TASKID IS NULL
+	</select>
+
+	<select id="findAllHideProjectId" resultType = "java.lang.String" parameterType = "java.lang.String">
+		select
+		PROJECTID
+		from  user_project_custom
+		where USERID = #{userid,jdbcType=VARCHAR} AND status=0 AND TASKID IS NULL AND projectid is not null
+	</select>
+
+	<select id="findAllByType" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from  user_project_custom
+		<where>
+			USERID = #{userid,jdbcType=VARCHAR}
+			and TYPE = #{type,jdbcType=VARCHAR}
+		</where>
+	</select>
+
+	<select id="findByStatus" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from  user_project_custom
+		<where>
+		 	STATUS = #{status,jdbcType=VARCHAR}
+			and USERID = #{userid,jdbcType=VARCHAR}
+		</where>
+	</select>
+
+
+	<select id="findHideByStatusAndTypeAndUserId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from  user_project_custom
+		<where>
+			STATUS = #{status,jdbcType=VARCHAR}
+			and TYPE = #{type,jdbcType=VARCHAR}
+			and USERID = #{userid,jdbcType=VARCHAR}
+		</where>
+	</select>
+
+
+	<select id="findUserProjectCustomListByBussinessIdAndUserId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"/>
+		from user_project_custom
+		<where>1=1
+			<if test="businessid != null and businessid != ''">
+				and BUSINESSID = #{businessid,jdbcType=VARCHAR}
+			</if>
+			<if test="userid != null and userid != ''">
+				and USERID = #{userid,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+
+	<select id="findUserProjectCustomByBussinessId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from  user_project_custom
+		<where> 1=1
+			<if test="type != null and type != ''" >
+				and TYPE = #{type,jdbcType=VARCHAR}
+			</if>
+			<if test="businessid != null and businessid != ''" >
+				and BUSINESSID = #{businessid,jdbcType=VARCHAR}
+			</if>
+			<if test="userid != null and userid != ''" >
+				and USERID = #{userid,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="findUserProjectCustomByProjectId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from  user_project_custom
+		<where> 1=1
+			<if test="type != null and type != ''" >
+				and TYPE = #{type,jdbcType=VARCHAR}
+			</if>
+			<if test="projectid != null and projectid != ''" >
+				and PROJECTID = #{projectid,jdbcType=VARCHAR}
+			</if>
+			<if test="userid != null and userid != ''" >
+				and USERID = #{userid,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	<select id="findUserProjectCustomByTaskId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from  user_project_custom
+		<where> 1=1
+			<if test="type != null and type != ''" >
+				and TYPE = #{type,jdbcType=VARCHAR}
+			</if>
+			<if test="taskid != null and taskid != ''" >
+				and TASKID = #{taskid,jdbcType=VARCHAR}
+			</if>
+			<if test="userid != null and userid != ''" >
+				and USERID = #{userid,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	<select id="findUserProjectCustomByChildtaskId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from  user_project_custom
+		<where> 1=1
+			<if test="type != null and type != ''" >
+				and TYPE = #{type,jdbcType=VARCHAR}
+			</if>
+			<if test="childtaskid != null and childtaskid != ''" >
+				and CHILDTASKID = #{childtaskid,jdbcType=VARCHAR}
+			</if>
+			<if test="userid != null and userid != ''" >
+				and USERID = #{userid,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+
+
+<!--	// 根据budgetId 和userId 删除某个用户在budget下所有隐藏显示的数据-->
+<!--	int deleteByBudgetIdAndUserId(@Param("businessid") String businessid,@Param("userid") String userid);-->
+<delete id="deleteByBudgetIdAndUserId">
+  delete from USER_PROJECT_CUSTOM
+  where businessid = #{businessid,jdbcType=VARCHAR} and userid = #{userid,jdbcType=VARCHAR}
+</delete>
+
+<!--	// 根据projectId 和userId 删除某个用户在project下所有隐藏显示的数据-->
+<!--	int deleteByProjectIdAndUserId(@Param("projectid") String projectid,@Param("userid") String userid);-->
+<delete id="deleteByProjectIdAndUserId">
+  delete from USER_PROJECT_CUSTOM
+  where projectid = #{projectid,jdbcType=VARCHAR} and userid = #{userid,jdbcType=VARCHAR}
+</delete>
+
+<!--	// 根据taskId 和userId 删除某个用户在task下所有隐藏显示的数据-->
+<!--	int deleteByTaskIdAndUserId(@Param("taskid") String taskid,@Param("userid") String userid);-->
+<delete id="deleteByTaskIdAndUserId">
+  delete from USER_PROJECT_CUSTOM
+  where taskid = #{taskid,jdbcType=VARCHAR} and userid = #{userid,jdbcType=VARCHAR}
+</delete>
+
+
+
+</mapper>

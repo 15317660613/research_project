@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.epis.dao.BuisnessContractInfoEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.epis.entity.BuisnessContractInfoEO" >
+    <id column="id" property="id" />
+    <result column="project_id" property="projectId" />
+    <result column="is_subject" property="isSubject" />
+    <result column="subject_id" property="subjectId" />
+    <result column="contract_number" property="contractNumber" />
+    <result column="contrack_name" property="contrackName" />
+    <result column="signed_time" property="signedTime" />
+    <result column="contrack_money" property="contrackMoney" />
+    <result column="manager_money" property="managerMoney" />
+    <result column="devel_money" property="develMoney" />
+    <result column="devel_research_money" property="develResearchMoney" />
+    <result column="designed_consulting" property="designedConsulting" />
+    <result column="perform_type" property="performType" />
+    <result column="create_time" property="createTime" />
+    <result column="modify_time" property="modifyTime" />
+    <result column="create_user" property="createUser" />
+    <result column="contract_type" property="contractType" />
+    <result column="contract_start" property="contractStart" />
+    <result column="contract_end" property="contractEnd" />
+    <result column="contract_project_type" property="contractProjectType" />
+  </resultMap>
+
+  <!-- BUISNESS_CONTRACT_INFO table all fields -->
+  <sql id="Base_Column_List" >
+     id, project_id, is_subject, subject_id, contract_number, contrack_name, signed_time, contrack_money, manager_money, devel_money, devel_research_money, designed_consulting, perform_type, create_time, modify_time, create_user, contract_type, contract_start, contract_end, contract_project_type
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="projectId != null" >
+        and project_id ${projectIdOperator} #{projectId}
+      </if>
+      <if test="isSubject != null" >
+        and is_subject ${isSubjectOperator} #{isSubject}
+      </if>
+      <if test="subjectId != null" >
+        and subject_id ${subjectIdOperator} #{subjectId}
+      </if>
+      <if test="contractNumber != null" >
+        and contract_number ${contractNumberOperator} #{contractNumber}
+      </if>
+      <if test="contrackName != null" >
+        and contrack_name ${contrackNameOperator} #{contrackName}
+      </if>
+      <if test="signedTime != null" >
+        and signed_time ${signedTimeOperator} #{signedTime}
+      </if>
+      <if test="signedTime1 != null" >
+        and signed_time &gt;= #{signedTime1}
+      </if>
+      <if test="signedTime2 != null" >
+        and signed_time &lt;= #{signedTime2}
+      </if>
+      <if test="contrackMoney != null" >
+        and contrack_money ${contrackMoneyOperator} #{contrackMoney}
+      </if>
+      <if test="managerMoney != null" >
+        and manager_money ${managerMoneyOperator} #{managerMoney}
+      </if>
+      <if test="develMoney != null" >
+        and devel_money ${develMoneyOperator} #{develMoney}
+      </if>
+      <if test="develResearchMoney != null" >
+        and devel_research_money ${develResearchMoneyOperator} #{develResearchMoney}
+      </if>
+      <if test="designedConsulting != null" >
+        and designed_consulting ${designedConsultingOperator} #{designedConsulting}
+      </if>
+      <if test="performType != null" >
+        and perform_type ${performTypeOperator} #{performType}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="modifyTime != null" >
+        and modify_time ${modifyTimeOperator} #{modifyTime}
+      </if>
+      <if test="modifyTime1 != null" >
+        and modify_time &gt;= #{modifyTime1}
+      </if>
+      <if test="modifyTime2 != null" >
+        and modify_time &lt;= #{modifyTime2}
+      </if>
+      <if test="createUser != null" >
+        and create_user ${createUserOperator} #{createUser}
+      </if>
+      <if test="contractType != null" >
+        and contract_type ${contractTypeOperator} #{contractType}
+      </if>
+      <if test="contractStart != null" >
+        and contract_start ${contractStartOperator} #{contractStart}
+      </if>
+      <if test="contractStart1 != null" >
+        and contract_start &gt;= #{contractStart1}
+      </if>
+      <if test="contractStart2 != null" >
+        and contract_start &lt;= #{contractStart2}
+      </if>
+      <if test="contractEnd != null" >
+        and contract_end ${contractEndOperator} #{contractEnd}
+      </if>
+      <if test="contractEnd1 != null" >
+        and contract_end &gt;= #{contractEnd1}
+      </if>
+      <if test="contractEnd2 != null" >
+        and contract_end &lt;= #{contractEnd2}
+      </if>
+      <if test="contractProjectType != null" >
+        and contract_project_type ${contractProjectTypeOperator} #{contractProjectType}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.epis.entity.BuisnessContractInfoEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_BUISNESS_CONTRACT_INFO.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into BUISNESS_CONTRACT_INFO(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{projectId, jdbcType=VARCHAR}, #{isSubject, jdbcType=INTEGER}, #{subjectId, jdbcType=VARCHAR}, #{contractNumber, jdbcType=VARCHAR}, #{contrackName, jdbcType=VARCHAR}, #{signedTime, jdbcType=TIMESTAMP}, #{contrackMoney, jdbcType=VARCHAR}, #{managerMoney, jdbcType=VARCHAR}, #{develMoney, jdbcType=VARCHAR}, #{develResearchMoney, jdbcType=VARCHAR}, #{designedConsulting, jdbcType=VARCHAR}, #{performType, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{modifyTime, jdbcType=TIMESTAMP}, #{createUser, jdbcType=VARCHAR}, #{contractType, jdbcType=INTEGER}, #{contractStart, jdbcType=TIMESTAMP}, #{contractEnd, jdbcType=TIMESTAMP}, #{contractProjectType, jdbcType=INTEGER})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.epis.entity.BuisnessContractInfoEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_BUISNESS_CONTRACT_INFO.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into BUISNESS_CONTRACT_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="projectId != null" >project_id,</if>
+                <if test="isSubject != null" >is_subject,</if>
+                <if test="subjectId != null" >subject_id,</if>
+                <if test="contractNumber != null" >contract_number,</if>
+                <if test="contrackName != null" >contrack_name,</if>
+                <if test="signedTime != null" >signed_time,</if>
+                <if test="contrackMoney != null" >contrack_money,</if>
+                <if test="managerMoney != null" >manager_money,</if>
+                <if test="develMoney != null" >devel_money,</if>
+                <if test="develResearchMoney != null" >devel_research_money,</if>
+                <if test="designedConsulting != null" >designed_consulting,</if>
+                <if test="performType != null" >perform_type,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="modifyTime != null" >modify_time,</if>
+                <if test="createUser != null" >create_user,</if>
+                <if test="contractType != null" >contract_type,</if>
+                <if test="contractStart != null" >contract_start,</if>
+                <if test="contractEnd != null" >contract_end,</if>
+                <if test="contractProjectType != null" >contract_project_type,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="projectId != null" >#{projectId, jdbcType=VARCHAR},</if>
+                <if test="isSubject != null" >#{isSubject, jdbcType=INTEGER},</if>
+                <if test="subjectId != null" >#{subjectId, jdbcType=VARCHAR},</if>
+                <if test="contractNumber != null" >#{contractNumber, jdbcType=VARCHAR},</if>
+                <if test="contrackName != null" >#{contrackName, jdbcType=VARCHAR},</if>
+                <if test="signedTime != null" >#{signedTime, jdbcType=TIMESTAMP},</if>
+                <if test="contrackMoney != null" >#{contrackMoney, jdbcType=VARCHAR},</if>
+                <if test="managerMoney != null" >#{managerMoney, jdbcType=VARCHAR},</if>
+                <if test="develMoney != null" >#{develMoney, jdbcType=VARCHAR},</if>
+                <if test="develResearchMoney != null" >#{develResearchMoney, jdbcType=VARCHAR},</if>
+                <if test="designedConsulting != null" >#{designedConsulting, jdbcType=VARCHAR},</if>
+                <if test="performType != null" >#{performType, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="modifyTime != null" >#{modifyTime, jdbcType=TIMESTAMP},</if>
+                <if test="createUser != null" >#{createUser, jdbcType=VARCHAR},</if>
+                <if test="contractType != null" >#{contractType, jdbcType=INTEGER},</if>
+                <if test="contractStart != null" >#{contractStart, jdbcType=TIMESTAMP},</if>
+                <if test="contractEnd != null" >#{contractEnd, jdbcType=TIMESTAMP},</if>
+                <if test="contractProjectType != null" >#{contractProjectType, jdbcType=INTEGER},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.epis.entity.BuisnessContractInfoEO" >
+    update BUISNESS_CONTRACT_INFO
+       set  project_id = #{projectId},
+            is_subject = #{isSubject},
+            subject_id = #{subjectId},
+            contract_number = #{contractNumber},
+            contrack_name = #{contrackName},
+            signed_time = #{signedTime},
+            contrack_money = #{contrackMoney},
+            manager_money = #{managerMoney},
+            devel_money = #{develMoney},
+            devel_research_money = #{develResearchMoney},
+            designed_consulting = #{designedConsulting},
+            perform_type = #{performType},
+            create_time = #{createTime},
+            modify_time = #{modifyTime},
+            create_user = #{createUser},
+            contract_type = #{contractType},
+            contract_start = #{contractStart},
+            contract_end = #{contractEnd},
+            contract_project_type = #{contractProjectType}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.epis.entity.BuisnessContractInfoEO" >
+    update BUISNESS_CONTRACT_INFO
+    <set >
+      <if test="projectId != null" >
+        project_id = #{projectId},
+      </if>
+      <if test="isSubject != null" >
+        is_subject = #{isSubject},
+      </if>
+      <if test="subjectId != null" >
+        subject_id = #{subjectId},
+      </if>
+      <if test="contractNumber != null" >
+        contract_number = #{contractNumber},
+      </if>
+      <if test="contrackName != null" >
+        contrack_name = #{contrackName},
+      </if>
+      <if test="signedTime != null" >
+        signed_time = #{signedTime},
+      </if>
+      <if test="contrackMoney != null" >
+        contrack_money = #{contrackMoney},
+      </if>
+      <if test="managerMoney != null" >
+        manager_money = #{managerMoney},
+      </if>
+      <if test="develMoney != null" >
+        devel_money = #{develMoney},
+      </if>
+      <if test="develResearchMoney != null" >
+        devel_research_money = #{develResearchMoney},
+      </if>
+      <if test="designedConsulting != null" >
+        designed_consulting = #{designedConsulting},
+      </if>
+      <if test="performType != null" >
+        perform_type = #{performType},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser},
+      </if>
+      <if test="contractType != null" >
+        contract_type = #{contractType},
+      </if>
+      <if test="contractStart != null" >
+        contract_start = #{contractStart},
+      </if>
+      <if test="contractEnd != null" >
+        contract_end = #{contractEnd},
+      </if>
+      <if test="contractProjectType != null" >
+        contract_project_type = #{contractProjectType},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 BUISNESS_CONTRACT_INFO -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from BUISNESS_CONTRACT_INFO
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from BUISNESS_CONTRACT_INFO
+     where id = #{value}
+
+  </delete>
+
+  <!-- BUISNESS_CONTRACT_INFO 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from BUISNESS_CONTRACT_INFO
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询BUISNESS_CONTRACT_INFO列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from BUISNESS_CONTRACT_INFO
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from BUISNESS_CONTRACT_INFO
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

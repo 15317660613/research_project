@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.epis.dao.BuisnessBugDetailEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.epis.entity.BuisnessBugDetailEO" >
+    <id column="id" property="id" />
+    <result column="project_id" property="projectId" />
+    <result column="cheack_year_week" property="cheackYearWeek" />
+    <result column="bug_num" property="bugNum" />
+    <result column="create_time" property="createTime" />
+    <result column="modify" property="modify" />
+    <result column="create_user" property="createUser" />
+    <result column="create_bug_num" property="createBugNum" />
+    <result column="solve_bug_num" property="solveBugNum" />
+    <result column="left_bug_num" property="leftBugNum" />
+  </resultMap>
+
+  <!-- BUISNESS_BUG_DETAIL table all fields -->
+  <sql id="Base_Column_List" >
+     id, project_id, cheack_year_week, bug_num, create_time, modify, create_user, create_bug_num, solve_bug_num, left_bug_num
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="projectId != null" >
+        and project_id ${projectIdOperator} #{projectId}
+      </if>
+      <if test="cheackYearWeek != null" >
+        and cheack_year_week ${cheackYearWeekOperator} #{cheackYearWeek}
+      </if>
+      <if test="cheackYearWeek1 != null" >
+        and cheack_year_week &gt;= #{cheackYearWeek1}
+      </if>
+      <if test="cheackYearWeek2 != null" >
+        and cheack_year_week &lt;= #{cheackYearWeek2}
+      </if>
+      <if test="bugNum != null" >
+        and bug_num ${bugNumOperator} #{bugNum}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="modify != null" >
+        and modify ${modifyOperator} #{modify}
+      </if>
+      <if test="modify1 != null" >
+        and modify &gt;= #{modify1}
+      </if>
+      <if test="modify2 != null" >
+        and modify &lt;= #{modify2}
+      </if>
+      <if test="createUser != null" >
+        and create_user ${createUserOperator} #{createUser}
+      </if>
+      <if test="createBugNum != null" >
+        and create_bug_num ${createBugNumOperator} #{createBugNum}
+      </if>
+      <if test="solveBugNum != null" >
+        and solve_bug_num ${solveBugNumOperator} #{solveBugNum}
+      </if>
+      <if test="leftBugNum != null" >
+        and left_bug_num ${leftBugNumOperator} #{leftBugNum}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.epis.entity.BuisnessBugDetailEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_BUISNESS_BUG_DETAIL.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into BUISNESS_BUG_DETAIL(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{projectId, jdbcType=VARCHAR}, #{cheackYearWeek, jdbcType=TIMESTAMP}, #{bugNum, jdbcType=INTEGER}, #{createTime, jdbcType=TIMESTAMP}, #{modify, jdbcType=TIMESTAMP}, #{createUser, jdbcType=VARCHAR}, #{createBugNum, jdbcType=INTEGER}, #{solveBugNum, jdbcType=INTEGER}, #{leftBugNum, jdbcType=INTEGER})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.epis.entity.BuisnessBugDetailEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_BUISNESS_BUG_DETAIL.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into BUISNESS_BUG_DETAIL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="projectId != null" >project_id,</if>
+                <if test="cheackYearWeek != null" >cheack_year_week,</if>
+                <if test="bugNum != null" >bug_num,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="modify != null" >modify,</if>
+                <if test="createUser != null" >create_user,</if>
+                <if test="createBugNum != null" >create_bug_num,</if>
+                <if test="solveBugNum != null" >solve_bug_num,</if>
+                <if test="leftBugNum != null" >left_bug_num,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="projectId != null" >#{projectId, jdbcType=VARCHAR},</if>
+                <if test="cheackYearWeek != null" >#{cheackYearWeek, jdbcType=TIMESTAMP},</if>
+                <if test="bugNum != null" >#{bugNum, jdbcType=INTEGER},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="modify != null" >#{modify, jdbcType=TIMESTAMP},</if>
+                <if test="createUser != null" >#{createUser, jdbcType=VARCHAR},</if>
+                <if test="createBugNum != null" >#{createBugNum, jdbcType=INTEGER},</if>
+                <if test="solveBugNum != null" >#{solveBugNum, jdbcType=INTEGER},</if>
+                <if test="leftBugNum != null" >#{leftBugNum, jdbcType=INTEGER},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.epis.entity.BuisnessBugDetailEO" >
+    update BUISNESS_BUG_DETAIL
+       set  project_id = #{projectId},
+            cheack_year_week = #{cheackYearWeek},
+            bug_num = #{bugNum},
+            create_time = #{createTime},
+            modify = #{modify},
+            create_user = #{createUser},
+            create_bug_num = #{createBugNum},
+            solve_bug_num = #{solveBugNum},
+            left_bug_num = #{leftBugNum}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.epis.entity.BuisnessBugDetailEO" >
+    update BUISNESS_BUG_DETAIL
+    <set >
+      <if test="projectId != null" >
+        project_id = #{projectId},
+      </if>
+      <if test="cheackYearWeek != null" >
+        cheack_year_week = #{cheackYearWeek},
+      </if>
+      <if test="bugNum != null" >
+        bug_num = #{bugNum},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="modify != null" >
+        modify = #{modify},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser},
+      </if>
+      <if test="createBugNum != null" >
+        create_bug_num = #{createBugNum},
+      </if>
+      <if test="solveBugNum != null" >
+        solve_bug_num = #{solveBugNum},
+      </if>
+      <if test="leftBugNum != null" >
+        left_bug_num = #{leftBugNum},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 BUISNESS_BUG_DETAIL -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from BUISNESS_BUG_DETAIL
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from BUISNESS_BUG_DETAIL
+     where id = #{value}
+
+  </delete>
+
+  <!-- BUISNESS_BUG_DETAIL 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from BUISNESS_BUG_DETAIL
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询BUISNESS_BUG_DETAIL列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from BUISNESS_BUG_DETAIL
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from BUISNESS_BUG_DETAIL
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

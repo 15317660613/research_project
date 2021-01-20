@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.budget.dao.BuinessPerfonmanceContractEODao" >
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="com.adc.da.budget.entity.BuinessPerfonmanceContractEO" >
+        <id column="id" property="id" />
+        <result column="deptId" property="deptId" />
+        <result column="contractNo" property="contractNo" />
+        <result column="secondParty" property="secondParty" />
+        <result column="startDate" property="startDate" />
+        <result column="endDate" property="endDate" />
+        <result column="contractName" property="contractName" />
+        <result column="conMoney" property="conMoney" />
+        <result column="conState" property="conState" />
+        <result column="conType" property="conType" />
+        <result column="conType1" property="conType1" />
+        <result column="isStock" property="isStock" />
+        <result column="wkpje" property="wkpje" />
+        <result column="wzcje" property="wzcje" />
+        <result column="yjbxfpje2018s4" property="yjbxfpje2018s4" />
+        <result column="yjzfje2018s4" property="yjzfje2018s4" />
+        <result column="yjbxfpje2019" property="yjbxfpje2019" />
+        <result column="yjzfje2019" property="yjzfje2019" />
+        <result column="yjbxfpje2020" property="yjbxfpje2020" />
+        <result column="yjzfje2020" property="yjzfje2020" />
+        <result column="zerenren" property="zerenren" />
+        <result column="remark" property="remark" />
+        <result column="startTimre" property="startTimre" />
+        <result column="updatetTime" property="updatetTime" />
+        <result column="admin" property="admin" />
+        <result column="islock" property="islock" />
+        <result column="ifWillApprove" property="ifWillApprove" />
+        <result column="willTime" property="willTime" />
+        <result column="willProjectName" property="willProjectName" />
+        <result column="contractBelong" property="contractBelong" />
+        <result column="hasInvoice" property="hasInvoice" />
+        <result column="prepaid" property="prepaid" />
+        <result column="expenseNov" property="expenseNov" />
+        <result column="expenditureNov" property="expenditureNov" />
+        <result column="processInstanceId" property="processInstanceId" />
+    </resultMap>
+
+    <!-- BUINESS_PERFONMANCE_CONTRACT table all fields -->
+    <sql id="Base_Column_List" >
+     id, deptId, contractNo, secondParty, startDate, endDate, contractName, conMoney, conState, conType, conType1, isStock, wkpje, wzcje, yjbxfpje2018s4, yjzfje2018s4, yjbxfpje2019, yjzfje2019, yjbxfpje2020, yjzfje2020, zerenren, remark, startTimre, updatetTime, admin, islock, ifWillApprove, willTime, willProjectName, contractBelong, hasInvoice, prepaid, expenseNov, expenditureNov, processInstanceId
+  </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides="," >
+            <if test="id != null" >
+                and id ${idOperator} #{id}
+            </if>
+            <if test="deptId != null" >
+                and deptId ${deptIdOperator} #{deptId}
+            </if>
+
+            <if test="orgNames != null" >
+                and deptId in
+                <foreach item="orgName" collection="orgNames" open="(" separator=","
+                         close=")" index="index">
+                    #{orgName}
+                </foreach>
+            </if>
+
+            <if test="contractNo != null" >
+                and contractNo ${contractNoOperator} #{contractNo}
+            </if>
+            <if test="secondParty != null" >
+                and secondParty ${secondPartyOperator} #{secondParty}
+            </if>
+            <if test="ifWillApprove != null" >
+                and ifWillApprove ${ifWillApproveOperator} #{ifWillApprove}
+            </if>
+            <if test="willTime != null" >
+                and willTime ${willTimeOperator} #{willTime}
+            </if>
+            <if test="willProjectName != null" >
+                and willProjectName ${willProjectNameOperator} #{willProjectName}
+            </if>
+            <if test="contractBelong != null" >
+                and contractBelong ${contractBelongOperator} #{contractBelong}
+            </if>
+            <if test="hasInvoice != null" >
+                and hasInvoice ${hasInvoiceOperator} #{hasInvoice}
+            </if>
+            <if test="prepaid != null" >
+                and prepaid ${prepaidOperator} #{prepaid}
+            </if>
+            <if test="expenseNov != null" >
+            and expenseNov ${expenseNovOperator} #{expenseNov}
+            </if>
+            <if test="expenditureNov != null" >
+                and expenditureNov ${expenditureNovOperator} #{expenditureNov}
+            </if>
+            <if test="processInstanceId != null" >
+                and processInstanceId ${processInstanceIdOperator} #{processInstanceId}
+            </if>
+            <if test="startDate != null" >
+                and startDate ${startDateOperator} #{startDate}
+            </if>
+            <if test="endDate != null" >
+                and endDate ${endDateOperator} #{endDate}
+            </if>
+            <if test="contractName != null" >
+                and contractName ${contractNameOperator} #{contractName}
+            </if>
+            <if test="conMoney != null" >
+                and conMoney ${conMoneyOperator} #{conMoney}
+            </if>
+            <if test="conState != null" >
+                and conState ${conStateOperator} #{conState}
+            </if>
+            <if test="conType != null" >
+                and conType ${conTypeOperator} #{conType}
+            </if>
+            <if test="conType1 != null" >
+                and conType1 ${conType1Operator} #{conType1}
+            </if>
+            <if test="isStock != null" >
+                and isStock ${isStockOperator} #{isStock}
+            </if>
+            <if test="wkpje != null" >
+                and wkpje ${wkpjeOperator} #{wkpje}
+            </if>
+            <if test="wzcje != null" >
+                and wzcje ${wzcjeOperator} #{wzcje}
+            </if>
+            <if test="yjbxfpje2018s4 != null" >
+                and yjbxfpje2018s4 ${yjbxfpje2018s4Operator} #{yjbxfpje2018s4}
+            </if>
+            <if test="yjzfje2018s4 != null" >
+                and yjzfje2018s4 ${yjzfje2018s4Operator} #{yjzfje2018s4}
+            </if>
+            <if test="yjbxfpje2019 != null" >
+                and yjbxfpje2019 ${yjbxfpje2019Operator} #{yjbxfpje2019}
+            </if>
+            <if test="yjzfje2019 != null" >
+                and yjzfje2019 ${yjzfje2019Operator} #{yjzfje2019}
+            </if>
+            <if test="yjbxfpje2020 != null" >
+                and yjbxfpje2020 ${yjbxfpje2020Operator} #{yjbxfpje2020}
+            </if>
+            <if test="yjzfje2020 != null" >
+                and yjzfje2020 ${yjzfje2020Operator} #{yjzfje2020}
+            </if>
+            <if test="zerenren != null" >
+                and zerenren ${zerenrenOperator} #{zerenren}
+            </if>
+            <if test="remark != null" >
+                and remark ${remarkOperator} #{remark}
+            </if>
+            <if test="startTimre != null" >
+                and startTimre ${startTimreOperator} #{startTimre}
+            </if>
+            <if test="startTimre1 != null" >
+                and startTimre &gt;= #{startTimre1}
+            </if>
+            <if test="startTimre2 != null" >
+                and startTimre &lt;= #{startTimre2}
+            </if>
+            <if test="updatetTime != null" >
+                and updatetTime ${updatetTimeOperator} #{updatetTime}
+            </if>
+            <if test="updatetTime1 != null" >
+                and updatetTime &gt;= #{updatetTime1}
+            </if>
+            <if test="updatetTime2 != null" >
+                and updatetTime &lt;= #{updatetTime2}
+            </if>
+            <if test="admin != null" >
+                and admin ${adminOperator} #{admin}
+            </if>
+            <if test="islock != null" >
+                and islock ${islockOperator} #{islock}
+            </if>
+            <if test="processInstanceIdIsNull != null" >
+                <if test="processInstanceIdIsNull == 'true'" >
+                    and processInstanceId IS NULL
+                </if>
+                <if test="processInstanceIdIsNull == 'false'" >
+                    and processInstanceId IS NOT NULL
+                </if>
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="com.adc.da.budget.entity.BuinessPerfonmanceContractEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+            SELECT SEQ_BUINESS_PERFONMANCE_CONTRACT.NEXTVAL FROM DUAL
+        </selectKey> -->
+        insert into BUINESS_PERFONMANCE_CONTRACT(<include refid="Base_Column_List" />)
+        values (#{id, jdbcType=VARCHAR}, #{deptId, jdbcType=VARCHAR}, #{contractNo, jdbcType=VARCHAR}, #{secondParty, jdbcType=VARCHAR}, #{startDate, jdbcType=VARCHAR}, #{endDate, jdbcType=VARCHAR}, #{contractName, jdbcType=VARCHAR}, #{conMoney, jdbcType=VARCHAR}, #{conState, jdbcType=VARCHAR}, #{conType, jdbcType=VARCHAR}, #{conType1, jdbcType=VARCHAR}, #{isStock, jdbcType=VARCHAR}, #{wkpje, jdbcType=VARCHAR}, #{wzcje, jdbcType=VARCHAR}, #{yjbxfpje2018s4, jdbcType=VARCHAR}, #{yjzfje2018s4, jdbcType=VARCHAR}, #{yjbxfpje2019, jdbcType=VARCHAR}, #{yjzfje2019, jdbcType=VARCHAR}, #{yjbxfpje2020, jdbcType=VARCHAR}, #{yjzfje2020, jdbcType=VARCHAR}, #{zerenren, jdbcType=VARCHAR}, #{remark, jdbcType=VARCHAR}, #{startTimre, jdbcType=TIMESTAMP}, #{updatetTime, jdbcType=TIMESTAMP}, #{admin, jdbcType=VARCHAR}, #{islock, jdbcType=VARCHAR}, #{ifWillApprove, jdbcType=VARCHAR}, #{willTime, jdbcType=VARCHAR}, #{willProjectName, jdbcType=VARCHAR}, #{contractBelong, jdbcType=VARCHAR}, #{hasInvoice, jdbcType=VARCHAR}, #{prepaid, jdbcType=VARCHAR}, #{expenseNov, jdbcType=VARCHAR}, #{expenditureNov, jdbcType=VARCHAR}, #{processInstanceId, jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id="insertSelective" parameterType="com.adc.da.budget.entity.BuinessPerfonmanceContractEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_BUINESS_PERFONMANCE_CONTRACT.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into BUINESS_PERFONMANCE_CONTRACT
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >id,</if>
+            <if test="deptId != null" >deptId,</if>
+            <if test="contractNo != null" >contractNo,</if>
+            <if test="secondParty != null" >secondParty,</if>
+            <if test="ifWillApprove != null" >
+                ifWillApprove,
+            </if>
+            <if test="willTime != null" >
+               willTime,
+            </if>
+            <if test="willProjectName != null" >
+                willProjectName,
+            </if>
+            <if test="contractBelong != null" >
+                contractBelong,
+            </if>
+            <if test="hasInvoice != null" >
+                hasInvoice,
+            </if>
+            <if test="prepaid != null" >
+                prepaid,
+            </if>
+            <if test="expenseNov != null" >
+                expenseNov,
+            </if>
+            <if test="expenditureNov != null" >
+                expenditureNov,
+            </if>
+            <if test="processInstanceId != null" >
+                processInstanceId,
+            </if>
+            <if test="startDate != null" >startDate,</if>
+            <if test="endDate != null" >endDate,</if>
+            <if test="contractName != null" >contractName,</if>
+            <if test="conMoney != null" >conMoney,</if>
+            <if test="conState != null" >conState,</if>
+            <if test="conType != null" >conType,</if>
+            <if test="conType1 != null" >conType1,</if>
+            <if test="isStock != null" >isStock,</if>
+            <if test="wkpje != null" >wkpje,</if>
+            <if test="wzcje != null" >wzcje,</if>
+            <if test="yjbxfpje2018s4 != null" >yjbxfpje2018s4,</if>
+            <if test="yjzfje2018s4 != null" >yjzfje2018s4,</if>
+            <if test="yjbxfpje2019 != null" >yjbxfpje2019,</if>
+            <if test="yjzfje2019 != null" >yjzfje2019,</if>
+            <if test="yjbxfpje2020 != null" >yjbxfpje2020,</if>
+            <if test="yjzfje2020 != null" >yjzfje2020,</if>
+            <if test="zerenren != null" >zerenren,</if>
+            <if test="remark != null" >remark,</if>
+            <if test="startTimre != null" >startTimre,</if>
+            <if test="updatetTime != null" >updatetTime,</if>
+            <if test="admin != null" >admin,</if>
+            <if test="islock != null" >islock,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+            <if test="deptId != null" >#{deptId, jdbcType=VARCHAR},</if>
+            <if test="contractNo != null" >#{contractNo, jdbcType=VARCHAR},</if>
+            <if test="secondParty != null" >#{secondParty, jdbcType=VARCHAR},</if>
+            <if test="ifWillApprove != null" >#{ifWillApprove, jdbcType=VARCHAR},</if>
+            <if test="willTime != null" >#{willTime, jdbcType=VARCHAR},</if>
+            <if test="willProjectName != null" >#{willProjectName, jdbcType=VARCHAR},</if>
+            <if test="contractBelong != null" >#{contractBelong, jdbcType=VARCHAR},</if>
+            <if test="hasInvoice != null" >#{hasInvoice, jdbcType=VARCHAR},</if>
+            <if test="prepaid != null" >#{prepaid, jdbcType=VARCHAR},</if>
+            <if test="expenseNov != null" >#{expenseNov, jdbcType=VARCHAR},</if>
+            <if test="expenditureNov != null" >#{expenditureNov, jdbcType=VARCHAR},</if>
+            <if test="processInstanceId != null" >#{processInstanceId, jdbcType=VARCHAR},</if>
+            <if test="startDate != null" >#{startDate, jdbcType=VARCHAR},</if>
+            <if test="endDate != null" >#{endDate, jdbcType=VARCHAR},</if>
+            <if test="contractName != null" >#{contractName, jdbcType=VARCHAR},</if>
+            <if test="conMoney != null" >#{conMoney, jdbcType=VARCHAR},</if>
+            <if test="conState != null" >#{conState, jdbcType=VARCHAR},</if>
+            <if test="conType != null" >#{conType, jdbcType=VARCHAR},</if>
+            <if test="conType1 != null" >#{conType1, jdbcType=VARCHAR},</if>
+            <if test="isStock != null" >#{isStock, jdbcType=VARCHAR},</if>
+            <if test="wkpje != null" >#{wkpje, jdbcType=VARCHAR},</if>
+            <if test="wzcje != null" >#{wzcje, jdbcType=VARCHAR},</if>
+            <if test="yjbxfpje2018s4 != null" >#{yjbxfpje2018s4, jdbcType=VARCHAR},</if>
+            <if test="yjzfje2018s4 != null" >#{yjzfje2018s4, jdbcType=VARCHAR},</if>
+            <if test="yjbxfpje2019 != null" >#{yjbxfpje2019, jdbcType=VARCHAR},</if>
+            <if test="yjzfje2019 != null" >#{yjzfje2019, jdbcType=VARCHAR},</if>
+            <if test="yjbxfpje2020 != null" >#{yjbxfpje2020, jdbcType=VARCHAR},</if>
+            <if test="yjzfje2020 != null" >#{yjzfje2020, jdbcType=VARCHAR},</if>
+            <if test="zerenren != null" >#{zerenren, jdbcType=VARCHAR},</if>
+            <if test="remark != null" >#{remark, jdbcType=VARCHAR},</if>
+            <if test="startTimre != null" >#{startTimre, jdbcType=TIMESTAMP},</if>
+            <if test="updatetTime != null" >#{updatetTime, jdbcType=TIMESTAMP},</if>
+            <if test="admin != null" >#{admin, jdbcType=VARCHAR},</if>
+            <if test="islock != null" >#{islock, jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <!-- 根据pk，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="com.adc.da.budget.entity.BuinessPerfonmanceContractEO" >
+    update BUINESS_PERFONMANCE_CONTRACT
+       set  deptId = #{deptId},
+            contractNo = #{contractNo},
+            secondParty = #{secondParty},
+            ifWillApprove = #{ifWillApprove},
+            willTime = #{willTime},
+            willProjectName = #{willProjectName},
+            contractBelong = #{contractBelong},
+            hasInvoice = #{hasInvoice},
+            prepaid = #{prepaid},
+            expenseNov = #{expenseNov},
+            expenditureNov = #{expenditureNov},
+            processInstanceId = #{processInstanceId},
+            startDate = #{startDate},
+            endDate = #{endDate},
+            contractName = #{contractName},
+            conMoney = #{conMoney},
+            conState = #{conState},
+            conType = #{conType},
+            conType1 = #{conType1},
+            isStock = #{isStock},
+            wkpje = #{wkpje},
+            wzcje = #{wzcje},
+            yjbxfpje2018s4 = #{yjbxfpje2018s4},
+            yjzfje2018s4 = #{yjzfje2018s4},
+            yjbxfpje2019 = #{yjbxfpje2019},
+            yjzfje2019 = #{yjzfje2019},
+            yjbxfpje2020 = #{yjbxfpje2020},
+            yjzfje2020 = #{yjzfje2020},
+            zerenren = #{zerenren},
+            remark = #{remark},
+            startTimre = #{startTimre},
+            updatetTime = #{updatetTime},
+            admin = #{admin},
+            islock = #{islock}
+     where  id = #{id}
+  </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.budget.entity.BuinessPerfonmanceContractEO" >
+        update BUINESS_PERFONMANCE_CONTRACT
+        <set >
+            <if test="deptId != null" >
+                deptId = #{deptId},
+            </if>
+            <if test="contractNo != null" >
+                contractNo = #{contractNo},
+            </if>
+            <if test="secondParty != null" >
+                secondParty = #{secondParty},
+            </if>
+            <if test="ifWillApprove != null" >
+                ifWillApprove = #{ifWillApprove},
+            </if>
+            <if test="willTime != null" >
+                willTime = #{willTime},
+            </if>
+            <if test="willProjectName != null" >
+                willProjectName = #{willProjectName},
+            </if>
+            <if test="contractBelong != null" >
+                contractBelong = #{contractBelong},
+            </if>
+            <if test="hasInvoice != null" >
+                hasInvoice = #{hasInvoice},
+            </if>
+            <if test="prepaid != null" >
+                prepaid = #{prepaid},
+            </if>
+            <if test="expenseNov != null" >
+                expenseNov = #{expenseNov},
+            </if>
+            <if test="expenditureNov != null" >
+                expenditureNov = #{expenditureNov},
+            </if>
+            <if test="processInstanceId != null" >
+                processInstanceId = #{processInstanceId},
+            </if>
+            <if test="startDate != null" >
+                startDate = #{startDate},
+            </if>
+            <if test="endDate != null" >
+                endDate = #{endDate},
+            </if>
+            <if test="contractName != null" >
+                contractName = #{contractName},
+            </if>
+            <if test="conMoney != null" >
+                conMoney = #{conMoney},
+            </if>
+            <if test="conState != null" >
+                conState = #{conState},
+            </if>
+            <if test="conType != null" >
+                conType = #{conType},
+            </if>
+            <if test="conType1 != null" >
+                conType1 = #{conType1},
+            </if>
+            <if test="isStock != null" >
+                isStock = #{isStock},
+            </if>
+            <if test="wkpje != null" >
+                wkpje = #{wkpje},
+            </if>
+            <if test="wzcje != null" >
+                wzcje = #{wzcje},
+            </if>
+            <if test="yjbxfpje2018s4 != null" >
+                yjbxfpje2018s4 = #{yjbxfpje2018s4},
+            </if>
+            <if test="yjzfje2018s4 != null" >
+                yjzfje2018s4 = #{yjzfje2018s4},
+            </if>
+            <if test="yjbxfpje2019 != null" >
+                yjbxfpje2019 = #{yjbxfpje2019},
+            </if>
+            <if test="yjzfje2019 != null" >
+                yjzfje2019 = #{yjzfje2019},
+            </if>
+            <if test="yjbxfpje2020 != null" >
+                yjbxfpje2020 = #{yjbxfpje2020},
+            </if>
+            <if test="yjzfje2020 != null" >
+                yjzfje2020 = #{yjzfje2020},
+            </if>
+            <if test="zerenren != null" >
+                zerenren = #{zerenren},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark},
+            </if>
+            <if test="startTimre != null" >
+                startTimre = #{startTimre},
+            </if>
+            <if test="updatetTime != null" >
+                updatetTime = #{updatetTime},
+            </if>
+            <if test="admin != null" >
+                admin = #{admin},
+            </if>
+            <if test="islock != null" >
+                islock = #{islock},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!-- 根据id查询 BUINESS_PERFONMANCE_CONTRACT -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="Base_Column_List" />
+        from BUINESS_PERFONMANCE_CONTRACT
+        where id = #{value}
+
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from BUINESS_PERFONMANCE_CONTRACT
+     where id = #{value}
+
+  </delete>
+    <!-- 批量删除-->
+    <delete id="deleteInBatch" parameterType="java.util.List">
+        delete from BUINESS_PERFONMANCE_CONTRACT
+        where id in
+        <foreach item="id" collection="list" open="(" separator=","
+                 close=")" index="index">
+            #{id}
+        </foreach>
+    </delete>
+    <!-- BUINESS_PERFONMANCE_CONTRACT 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        select count(1) from BUINESS_PERFONMANCE_CONTRACT
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询BUINESS_PERFONMANCE_CONTRACT列表 -->
+    <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select <include refid="Base_Column_List" /> from
+        (select tmp_tb.* , rownum rn from
+        (select <include refid="Base_Column_List" /> from BUINESS_PERFONMANCE_CONTRACT
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select <include refid="Base_Column_List"/> from BUINESS_PERFONMANCE_CONTRACT
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+            ${pager.orderCondition}
+        </if>
+        ORDER BY startTimre ASC
+    </select>
+    <select id="getData" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from BUINESS_PERFONMANCE_CONTRACT
+    </select>
+    <insert id="batchInsert" parameterType="com.adc.da.budget.entity.BuinessPerfonmanceContractEO">
+        insert into BUINESS_PERFONMANCE_CONTRACT (<include refid="Base_Column_List" />)
+        values (#{id, jdbcType=VARCHAR}, #{deptId, jdbcType=VARCHAR}, #{contractNo, jdbcType=VARCHAR}, #{secondParty, jdbcType=VARCHAR}, #{startDate, jdbcType=VARCHAR}, #{endDate, jdbcType=VARCHAR}, #{contractName, jdbcType=VARCHAR}, #{conMoney, jdbcType=VARCHAR}, #{conState, jdbcType=VARCHAR}, #{conType, jdbcType=VARCHAR}, #{conType1, jdbcType=VARCHAR}, #{isStock, jdbcType=VARCHAR}, #{wkpje, jdbcType=VARCHAR}, #{wzcje, jdbcType=VARCHAR}, #{yjbxfpje2018s4, jdbcType=VARCHAR}, #{yjzfje2018s4, jdbcType=VARCHAR}, #{yjbxfpje2019, jdbcType=VARCHAR}, #{yjzfje2019, jdbcType=VARCHAR}, #{yjbxfpje2020, jdbcType=VARCHAR}, #{yjzfje2020, jdbcType=VARCHAR}, #{zerenren, jdbcType=VARCHAR}, #{remark, jdbcType=VARCHAR}, #{startTimre, jdbcType=TIMESTAMP}, #{updatetTime, jdbcType=TIMESTAMP}, #{admin, jdbcType=VARCHAR}, #{islock, jdbcType=VARCHAR}, #{ifWillApprove, jdbcType=VARCHAR}, #{willTime, jdbcType=VARCHAR}, #{willProjectName, jdbcType=VARCHAR}, #{contractBelong, jdbcType=VARCHAR}, #{hasInvoice, jdbcType=VARCHAR}, #{prepaid, jdbcType=VARCHAR}, #{expenseNov, jdbcType=VARCHAR}, #{expenditureNov, jdbcType=VARCHAR}, #{processInstanceId, jdbcType=VARCHAR})
+    </insert>
+
+
+    <update id="updateprocessInstanceIdByIdList">
+        UPDATE BUINESS_PERFONMANCE_CONTRACT SET processInstanceId = #{processInstanceIdUpdateDTO.processInstanceId},updatetTime = SYSDATE
+        WHERE id IN
+        <foreach collection="processInstanceIdUpdateDTO.idList" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </update>
+</mapper>

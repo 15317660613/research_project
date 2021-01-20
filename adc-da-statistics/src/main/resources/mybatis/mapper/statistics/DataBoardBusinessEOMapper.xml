@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.statistics.dao.DataBoardBusinessEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.statistics.entity.DataBoardBusinessEO" >
+    <id column="id_" property="id" />
+    <result column="project_id_" property="projectId" />
+    <result column="budget_id_" property="budgetId" />
+    <result column="project_no_" property="projectNo" />
+    <result column="contract_amount_" property="contractAmount" />
+    <result column="dept_id_" property="deptId" />
+    <result column="billing_" property="billing" />
+    <result column="credit_" property="credit" />
+    <result column="expenditure_" property="expenditure" />
+    <result column="work_time_" property="workTime" />
+    <result column="create_time_" property="createTime" />
+    <result column="year_" property="year" />
+    <result column="month_" property="month" />
+    <result column="ext_info_01_" property="extInfo01" />
+    <result column="ext_info_02_" property="extInfo02" />
+    <result column="ext_info_03_" property="extInfo03" />
+    <result column="ext_info_04_" property="extInfo04" />
+    <result column="ext_info_05_" property="extInfo05" />
+  </resultMap>
+
+  <!-- ST_DATA_BOARD_BUSINESS table all fields -->
+  <sql id="Base_Column_List" >
+     id_, project_id_, budget_id_, project_no_, contract_amount_, dept_id_, billing_, credit_, expenditure_, work_time_, create_time_, year_, month_, ext_info_01_, ext_info_02_, ext_info_03_, ext_info_04_, ext_info_05_
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id_ ${idOperator} #{id}
+      </if>
+      <if test="projectId != null" >
+        and project_id_ ${projectIdOperator} #{projectId}
+      </if>
+      <if test="budgetId != null" >
+        and budget_id_ ${budgetIdOperator} #{budgetId}
+      </if>
+      <if test="projectNo != null" >
+        and project_no_ ${projectNoOperator} #{projectNo}
+      </if>
+      <if test="contractAmount != null" >
+        and contract_amount_ ${contractAmountOperator} #{contractAmount}
+      </if>
+      <if test="deptId != null" >
+        and dept_id_ ${deptIdOperator} #{deptId}
+      </if>
+      <if test="billing != null" >
+        and billing_ ${billingOperator} #{billing}
+      </if>
+      <if test="credit != null" >
+        and credit_ ${creditOperator} #{credit}
+      </if>
+      <if test="expenditure != null" >
+        and expenditure_ ${expenditureOperator} #{expenditure}
+      </if>
+      <if test="workTime != null" >
+        and work_time_ ${workTimeOperator} #{workTime}
+      </if>
+      <if test="createTime != null" >
+        and create_time_ ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time_ &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time_ &lt;= #{createTime2}
+      </if>
+      <if test="year != null" >
+        and year_ ${yearOperator} #{year}
+      </if>
+      <if test="month != null" >
+        and month_ ${monthOperator} #{month}
+      </if>
+      <if test="extInfo01 != null" >
+        and ext_info_01_ ${extInfo01Operator} #{extInfo01}
+      </if>
+      <if test="extInfo02 != null" >
+        and ext_info_02_ ${extInfo02Operator} #{extInfo02}
+      </if>
+      <if test="extInfo03 != null" >
+        and ext_info_03_ ${extInfo03Operator} #{extInfo03}
+      </if>
+      <if test="extInfo04 != null" >
+        and ext_info_04_ ${extInfo04Operator} #{extInfo04}
+      </if>
+      <if test="extInfo05 != null" >
+        and ext_info_05_ ${extInfo05Operator} #{extInfo05}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.statistics.entity.DataBoardBusinessEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_ST_DATA_BOARD_BUSINESS.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into ST_DATA_BOARD_BUSINESS(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{projectId, jdbcType=VARCHAR}, #{budgetId, jdbcType=VARCHAR}, #{projectNo, jdbcType=VARCHAR}, #{contractAmount, jdbcType=DOUBLE}, #{deptId, jdbcType=VARCHAR}, #{billing, jdbcType=DOUBLE}, #{credit, jdbcType=DOUBLE}, #{expenditure, jdbcType=DOUBLE}, #{workTime, jdbcType=DOUBLE}, #{createTime, jdbcType=TIMESTAMP}, #{year, jdbcType=INTEGER}, #{month, jdbcType=INTEGER}, #{extInfo01, jdbcType=VARCHAR}, #{extInfo02, jdbcType=VARCHAR}, #{extInfo03, jdbcType=VARCHAR}, #{extInfo04, jdbcType=VARCHAR}, #{extInfo05, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.statistics.entity.DataBoardBusinessEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_ST_DATA_BOARD_BUSINESS.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into ST_DATA_BOARD_BUSINESS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id_,</if>
+                <if test="projectId != null" >project_id_,</if>
+                <if test="budgetId != null" >budget_id_,</if>
+                <if test="projectNo != null" >project_no_,</if>
+                <if test="contractAmount != null" >contract_amount_,</if>
+                <if test="deptId != null" >dept_id_,</if>
+                <if test="billing != null" >billing_,</if>
+                <if test="credit != null" >credit_,</if>
+                <if test="expenditure != null" >expenditure_,</if>
+                <if test="workTime != null" >work_time_,</if>
+                <if test="createTime != null" >create_time_,</if>
+                <if test="year != null" >year_,</if>
+                <if test="month != null" >month_,</if>
+                <if test="extInfo01 != null" >ext_info_01_,</if>
+                <if test="extInfo02 != null" >ext_info_02_,</if>
+                <if test="extInfo03 != null" >ext_info_03_,</if>
+                <if test="extInfo04 != null" >ext_info_04_,</if>
+                <if test="extInfo05 != null" >ext_info_05_,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="projectId != null" >#{projectId, jdbcType=VARCHAR},</if>
+                <if test="budgetId != null" >#{budgetId, jdbcType=VARCHAR},</if>
+                <if test="projectNo != null" >#{projectNo, jdbcType=VARCHAR},</if>
+                <if test="contractAmount != null" >#{contractAmount, jdbcType=DOUBLE},</if>
+                <if test="deptId != null" >#{deptId, jdbcType=VARCHAR},</if>
+                <if test="billing != null" >#{billing, jdbcType=DOUBLE},</if>
+                <if test="credit != null" >#{credit, jdbcType=DOUBLE},</if>
+                <if test="expenditure != null" >#{expenditure, jdbcType=DOUBLE},</if>
+                <if test="workTime != null" >#{workTime, jdbcType=DOUBLE},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="year != null" >#{year, jdbcType=INTEGER},</if>
+                <if test="month != null" >#{month, jdbcType=INTEGER},</if>
+                <if test="extInfo01 != null" >#{extInfo01, jdbcType=VARCHAR},</if>
+                <if test="extInfo02 != null" >#{extInfo02, jdbcType=VARCHAR},</if>
+                <if test="extInfo03 != null" >#{extInfo03, jdbcType=VARCHAR},</if>
+                <if test="extInfo04 != null" >#{extInfo04, jdbcType=VARCHAR},</if>
+                <if test="extInfo05 != null" >#{extInfo05, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.statistics.entity.DataBoardBusinessEO" >
+    update ST_DATA_BOARD_BUSINESS
+       set  project_id_ = #{projectId},
+            budget_id_ = #{budgetId},
+            project_no_ = #{projectNo},
+            contract_amount_ = #{contractAmount},
+            dept_id_ = #{deptId},
+            billing_ = #{billing},
+            credit_ = #{credit},
+            expenditure_ = #{expenditure},
+            work_time_ = #{workTime},
+            create_time_ = #{createTime},
+            year_ = #{year},
+            month_ = #{month},
+            ext_info_01_ = #{extInfo01},
+            ext_info_02_ = #{extInfo02},
+            ext_info_03_ = #{extInfo03},
+            ext_info_04_ = #{extInfo04},
+            ext_info_05_ = #{extInfo05}
+     where  id_ = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.statistics.entity.DataBoardBusinessEO" >
+    update ST_DATA_BOARD_BUSINESS
+    <set >
+      <if test="projectId != null" >
+        project_id_ = #{projectId},
+      </if>
+      <if test="budgetId != null" >
+        budget_id_ = #{budgetId},
+      </if>
+      <if test="projectNo != null" >
+        project_no_ = #{projectNo},
+      </if>
+      <if test="contractAmount != null" >
+        contract_amount_ = #{contractAmount},
+      </if>
+      <if test="deptId != null" >
+        dept_id_ = #{deptId},
+      </if>
+      <if test="billing != null" >
+        billing_ = #{billing},
+      </if>
+      <if test="credit != null" >
+        credit_ = #{credit},
+      </if>
+      <if test="expenditure != null" >
+        expenditure_ = #{expenditure},
+      </if>
+      <if test="workTime != null" >
+        work_time_ = #{workTime},
+      </if>
+      <if test="createTime != null" >
+        create_time_ = #{createTime},
+      </if>
+      <if test="year != null" >
+        year_ = #{year},
+      </if>
+      <if test="month != null" >
+        month_ = #{month},
+      </if>
+      <if test="extInfo01 != null" >
+        ext_info_01_ = #{extInfo01},
+      </if>
+      <if test="extInfo02 != null" >
+        ext_info_02_ = #{extInfo02},
+      </if>
+      <if test="extInfo03 != null" >
+        ext_info_03_ = #{extInfo03},
+      </if>
+      <if test="extInfo04 != null" >
+        ext_info_04_ = #{extInfo04},
+      </if>
+      <if test="extInfo05 != null" >
+        ext_info_05_ = #{extInfo05},
+      </if>
+    </set>
+     where id_ = #{id}
+  </update>
+
+  <!-- 根据id查询 ST_DATA_BOARD_BUSINESS -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from ST_DATA_BOARD_BUSINESS
+     where id_ = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ST_DATA_BOARD_BUSINESS
+     where id_ = #{value}
+
+  </delete>
+
+  <!-- ST_DATA_BOARD_BUSINESS 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from ST_DATA_BOARD_BUSINESS
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询ST_DATA_BOARD_BUSINESS列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from ST_DATA_BOARD_BUSINESS
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from ST_DATA_BOARD_BUSINESS
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

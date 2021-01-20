@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.dao.EndProjectKpiEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.research.entity.EndProjectKpiEO" >
+    <id column="proc_business_key_" property="procBusinessKey" />
+    <result column="research_project_id_" property="researchProjectId" />
+    <result column="num_invention_patents_" property="numInventionPatents" />
+    <result column="num_utility_models_" property="numUtilityModels" />
+    <result column="num_appearance_patents_" property="numAppearancePatents" />
+    <result column="num_copyright_" property="numCopyright" />
+    <result column="num_core_papers_" property="numCorePapers" />
+    <result column="num_other_papers_" property="numOtherPapers" />
+    <result column="other_" property="other" />
+    <result column="ext_info_1_" property="extInfo1" />
+    <result column="ext_info_2_" property="extInfo2" />
+    <result column="ext_info_3_" property="extInfo3" />
+  </resultMap>
+
+  <!-- RS_END_PROJECT_KPI table all fields -->
+  <sql id="Base_Column_List" >
+     proc_business_key_, research_project_id_, num_invention_patents_, num_utility_models_, num_appearance_patents_, num_copyright_, num_core_papers_, num_other_papers_, other_, ext_info_1_, ext_info_2_, ext_info_3_
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="procBusinessKey != null" >
+        and proc_business_key_ ${procBusinessKeyOperator} #{procBusinessKey}
+      </if>
+      <if test="researchProjectId != null" >
+        and research_project_id_ ${researchProjectIdOperator} #{researchProjectId}
+      </if>
+      <if test="numInventionPatents != null" >
+        and num_invention_patents_ ${numInventionPatentsOperator} #{numInventionPatents}
+      </if>
+      <if test="numUtilityModels != null" >
+        and num_utility_models_ ${numUtilityModelsOperator} #{numUtilityModels}
+      </if>
+      <if test="numAppearancePatents != null" >
+        and num_appearance_patents_ ${numAppearancePatentsOperator} #{numAppearancePatents}
+      </if>
+      <if test="numCopyright != null" >
+        and num_copyright_ ${numCopyrightOperator} #{numCopyright}
+      </if>
+      <if test="numCorePapers != null" >
+        and num_core_papers_ ${numCorePapersOperator} #{numCorePapers}
+      </if>
+      <if test="numOtherPapers != null" >
+        and num_other_papers_ ${numOtherPapersOperator} #{numOtherPapers}
+      </if>
+      <if test="other != null" >
+        and other_ ${otherOperator} #{other}
+      </if>
+      <if test="extInfo1 != null" >
+        and ext_info_1_ ${extInfo1Operator} #{extInfo1}
+      </if>
+      <if test="extInfo2 != null" >
+        and ext_info_2_ ${extInfo2Operator} #{extInfo2}
+      </if>
+      <if test="extInfo3 != null" >
+        and ext_info_3_ ${extInfo3Operator} #{extInfo3}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.research.entity.EndProjectKpiEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="proc_business_key_">
+        SELECT SEQ_RS_END_PROJECT_KPI.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into RS_END_PROJECT_KPI(<include refid="Base_Column_List" />)
+    values (#{procBusinessKey, jdbcType=VARCHAR}, #{researchProjectId, jdbcType=VARCHAR}, #{numInventionPatents, jdbcType=INTEGER}, #{numUtilityModels, jdbcType=INTEGER}, #{numAppearancePatents, jdbcType=INTEGER}, #{numCopyright, jdbcType=INTEGER}, #{numCorePapers, jdbcType=INTEGER}, #{numOtherPapers, jdbcType=INTEGER}, #{other, jdbcType=VARCHAR}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.research.entity.EndProjectKpiEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="proc_business_key_">
+        SELECT SEQ_RS_END_PROJECT_KPI.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into RS_END_PROJECT_KPI
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="procBusinessKey != null" >proc_business_key_,</if>
+                <if test="researchProjectId != null" >research_project_id_,</if>
+                <if test="numInventionPatents != null" >num_invention_patents_,</if>
+                <if test="numUtilityModels != null" >num_utility_models_,</if>
+                <if test="numAppearancePatents != null" >num_appearance_patents_,</if>
+                <if test="numCopyright != null" >num_copyright_,</if>
+                <if test="numCorePapers != null" >num_core_papers_,</if>
+                <if test="numOtherPapers != null" >num_other_papers_,</if>
+                <if test="other != null" >other_,</if>
+                <if test="extInfo1 != null" >ext_info_1_,</if>
+                <if test="extInfo2 != null" >ext_info_2_,</if>
+                <if test="extInfo3 != null" >ext_info_3_,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="procBusinessKey != null" >#{procBusinessKey, jdbcType=VARCHAR},</if>
+                <if test="researchProjectId != null" >#{researchProjectId, jdbcType=VARCHAR},</if>
+                <if test="numInventionPatents != null" >#{numInventionPatents, jdbcType=INTEGER},</if>
+                <if test="numUtilityModels != null" >#{numUtilityModels, jdbcType=INTEGER},</if>
+                <if test="numAppearancePatents != null" >#{numAppearancePatents, jdbcType=INTEGER},</if>
+                <if test="numCopyright != null" >#{numCopyright, jdbcType=INTEGER},</if>
+                <if test="numCorePapers != null" >#{numCorePapers, jdbcType=INTEGER},</if>
+                <if test="numOtherPapers != null" >#{numOtherPapers, jdbcType=INTEGER},</if>
+                <if test="other != null" >#{other, jdbcType=VARCHAR},</if>
+                <if test="extInfo1 != null" >#{extInfo1, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="extInfo3 != null" >#{extInfo3, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.research.entity.EndProjectKpiEO" >
+    update RS_END_PROJECT_KPI
+       set  research_project_id_ = #{researchProjectId},
+            num_invention_patents_ = #{numInventionPatents},
+            num_utility_models_ = #{numUtilityModels},
+            num_appearance_patents_ = #{numAppearancePatents},
+            num_copyright_ = #{numCopyright},
+            NUM_CORE_PAPERS_ = #{numCorePapers},
+            NUM_OTHER_PAPERS_ = #{numOtherPapers},
+            other_ = #{other},
+            ext_info_1_ = #{extInfo1},
+            ext_info_2_ = #{extInfo2},
+            ext_info_3_ = #{extInfo3}
+     where  proc_business_key_ = #{procBusinessKey}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.research.entity.EndProjectKpiEO" >
+    update RS_END_PROJECT_KPI
+    <set >
+      <if test="researchProjectId != null" >
+        research_project_id_ = #{researchProjectId},
+      </if>
+      <if test="numInventionPatents != null" >
+        num_invention_patents_ = #{numInventionPatents},
+      </if>
+      <if test="numUtilityModels != null" >
+        num_utility_models_ = #{numUtilityModels},
+      </if>
+      <if test="numAppearancePatents != null" >
+        num_appearance_patents_ = #{numAppearancePatents},
+      </if>
+      <if test="numCopyright != null" >
+        num_copyright_ = #{numCopyright},
+      </if>
+      <if test="numCorePapers != null" >
+        num_core_papers_ = #{numCorePapers},
+      </if>
+      <if test="numOtherPapers != null" >
+        num_other_papers_ = #{numOtherPapers},
+      </if>
+      <if test="other != null" >
+        other_ = #{other},
+      </if>
+      <if test="extInfo1 != null" >
+        ext_info_1_ = #{extInfo1},
+      </if>
+      <if test="extInfo2 != null" >
+        ext_info_2_ = #{extInfo2},
+      </if>
+      <if test="extInfo3 != null" >
+        ext_info_3_ = #{extInfo3},
+      </if>
+    </set>
+     where proc_business_key_ = #{procBusinessKey}
+  </update>
+
+  <!-- 根据id查询 RS_END_PROJECT_KPI -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from RS_END_PROJECT_KPI
+     where proc_business_key_ = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RS_END_PROJECT_KPI
+     where proc_business_key_ = #{value}
+
+  </delete>
+
+  <!-- RS_END_PROJECT_KPI 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from RS_END_PROJECT_KPI
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询RS_END_PROJECT_KPI列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from RS_END_PROJECT_KPI
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from RS_END_PROJECT_KPI
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.adc.da.sys.dao.MyOrgEODao">
+
+    <!-- Result Map-->
+    <resultMap id = "BaseResultMap" type = "com.adc.da.sys.entity.OrgEO">
+        <id column = "id" property = "id"/>
+        <result column = "del_flag" property = "delFlag"/>
+        <result column = "org_name" property = "name"/>
+        <result column = "org_desc" property = "orgDesc"/>
+        <result column = "org_code" property = "orgCode"/>
+        <result column = "org_type" property = "orgType"/>
+        <result column = "parent_id" property = "parentId"/>
+        <result column = "parent_ids" property = "parentIds"/>
+        <result column = "is_show" property = "isShow"/>
+        <result column = "remarks" property = "remarks"/>
+
+    </resultMap>
+
+
+
+    <!-- TS_ORG table all fields -->
+    <sql id = "Base_Column_List">
+        TS_ORG.id, TS_ORG.del_flag, TS_ORG.org_name, TS_ORG.org_desc,TS_ORG.org_code,TS_ORG.parent_id, TS_ORG.parent_ids, TS_ORG.is_show, TS_ORG.remarks
+    </sql>
+
+
+    <!-- 根据id查询 组织机构 -->
+    <select id = "getOrgIdByOrgName" resultType = "java.lang.String" parameterType = "java.lang.String">
+        SELECT id
+        FROM TS_ORG
+        WHERE org_name = #{orgName}
+          AND del_flag = 0
+    </select>
+
+    <!--  组织机构 -->
+    <select id = "queryBigDeptList" resultMap = "BaseResultMap">
+        select   <include refid = "Base_Column_List"/>
+        from TS_ORG where org_name like '%本部%'
+    </select>
+
+    <!--&lt;!&ndash;  组织机构 &ndash;&gt;-->
+    <!--<select id="querySubDeptList" resultMap="BaseResultMap" >-->
+    <!--select   <include refid="Base_Column_List"/>-->
+    <!--from TS_ORG where org_name  not like '%本部%' and like '%部%'-->
+    <!--</select>-->
+
+    <!--  组织机构 -->
+    <select id = "querySubDeptPersonCount" resultType = "java.util.Map">
+
+        SELECT a.ORG_NAME AS deptName, count(a.ORG_NAME) AS pCount
+        FROM TS_ORG a
+                 INNER JOIN TR_USER_ORG b ON a.ID = b.ORG_ID
+                 INNER JOIN TS_USER c ON b.USER_ID = c.USID
+        WHERE a.ORG_NAME NOT LIKE '%本部'
+          AND a.ORG_NAME LIKE '%部'
+        GROUP BY A.ORG_NAME
+    </select>
+
+    <select id = "queryDeptPersonCount" resultType = "java.lang.Integer">
+    SELECT count(distinct a.USER_ID)FROM TR_USER_ORG a INNER JOIN TS_USER c ON a.USER_ID = c.USID where a.ORG_ID in (
+                  SELECT ID FROM TS_ORG CONNECT BY PRIOR id = PARENT_ID START WITH ID = #{deptId}
+                  ) and c.del_flag != 1
+    </select>
+
+
+
+
+    <!--根据ids查询pidList-->
+    <select id = "queryOrgPidById" resultType = "java.lang.String">
+        SELECT DISTINCT PARENT_ID
+        FROM TS_ORG
+        where
+        id in <foreach item = "item" collection = "ids" index = "index" open = "(" separator = "," close = ")">
+        #{item}
+        </foreach>
+
+    </select>
+
+
+    <!--根据ids查询pidList-->
+    <select id = "queryOrgChildIdsByPids" resultType = "java.lang.String">
+        SELECT DISTINCT id
+        FROM TS_ORG
+        where
+        parent_id in
+        <foreach item = "item" collection = "ids" index = "index" open = "(" separator = "," close = ")">
+        #{item}
+        </foreach>
+
+    </select>
+
+
+
+    <!--根据ids查询pidList-->
+    <select id = "listAll" resultMap = "BaseResultMap">
+        select   <include refid = "Base_Column_List"/>
+        from TS_ORG
+
+    </select>
+
+    <!-- 根据id查询 TS_org -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap"
+            parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from TS_ORG
+        where ID = #{deptId}
+    </select>
+
+
+
+</mapper>

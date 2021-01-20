@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.budget.dao.TaskResultEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.budget.entity.TaskResultEO" >
+    <id column="id_" property="id" />
+    <result column="task_id" property="taskId" />
+    <result column="result_name" property="resultName" />
+    <result column="result_type" property="resultType" />
+    <result column="result_description" property="resultDescription" />
+    <result column="create_time" property="createTime" />
+    <result column="ext_info1" property="extInfo1" />
+    <result column="ext_info2" property="extInfo2" />
+    <result column="ext_info3" property="extInfo3" />
+    <result column="ext_info4" property="extInfo4" />
+    <result column="ext_info5" property="extInfo5" />
+    <result column="ext_info6" property="extInfo6" />
+    <result column="del_flag" property="delFlag" />
+    <result column="task_type" property="taskType" />
+  </resultMap>
+
+  <!-- PF_TASK_RESULT table all fields -->
+  <sql id="Base_Column_List" >
+     id_, task_id, result_name, result_type, result_description, create_time, ext_info1, ext_info2, ext_info3, ext_info4, ext_info5, ext_info6, del_flag, task_type
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id_ ${idOperator} #{id}
+      </if>
+      <if test="taskId != null" >
+        and task_id ${taskIdOperator} #{taskId}
+      </if>
+      <if test="resultName != null" >
+        and result_name ${resultNameOperator} #{resultName}
+      </if>
+      <if test="resultType != null" >
+        and result_type ${resultTypeOperator} #{resultType}
+      </if>
+      <if test="resultDescription != null" >
+        and result_description ${resultDescriptionOperator} #{resultDescription}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="extInfo1 != null" >
+        and ext_info1 ${extInfo1Operator} #{extInfo1}
+      </if>
+      <if test="extInfo2 != null" >
+        and ext_info2 ${extInfo2Operator} #{extInfo2}
+      </if>
+      <if test="extInfo3 != null" >
+        and ext_info3 ${extInfo3Operator} #{extInfo3}
+      </if>
+      <if test="extInfo4 != null" >
+        and ext_info4 ${extInfo4Operator} #{extInfo4}
+      </if>
+      <if test="extInfo5 != null" >
+        and ext_info5 ${extInfo5Operator} #{extInfo5}
+      </if>
+      <if test="extInfo6 != null" >
+        and ext_info6 ${extInfo6Operator} #{extInfo6}
+      </if>
+      <if test="delFlag != null" >
+        and del_flag ${delFlagOperator} #{delFlag}
+      </if>
+      <if test="taskType != null" >
+        and task_type ${taskTypeOperator} #{taskType}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.budget.entity.TaskResultEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_PF_TASK_RESULT.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into PF_TASK_RESULT(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{taskId, jdbcType=VARCHAR}, #{resultName, jdbcType=VARCHAR}, #{resultType, jdbcType=VARCHAR}, #{resultDescription, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR}, #{extInfo6, jdbcType=VARCHAR}, #{delFlag, jdbcType=VARCHAR}, #{taskType, jdbcType=INTEGER})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.budget.entity.TaskResultEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_PF_TASK_RESULT.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into PF_TASK_RESULT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id_,</if>
+                <if test="taskId != null" >task_id,</if>
+                <if test="resultName != null" >result_name,</if>
+                <if test="resultType != null" >result_type,</if>
+                <if test="resultDescription != null" >result_description,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="extInfo1 != null" >ext_info1,</if>
+                <if test="extInfo2 != null" >ext_info2,</if>
+                <if test="extInfo3 != null" >ext_info3,</if>
+                <if test="extInfo4 != null" >ext_info4,</if>
+                <if test="extInfo5 != null" >ext_info5,</if>
+                <if test="extInfo6 != null" >ext_info6,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="taskType != null" >task_type,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="taskId != null" >#{taskId, jdbcType=VARCHAR},</if>
+                <if test="resultName != null" >#{resultName, jdbcType=VARCHAR},</if>
+                <if test="resultType != null" >#{resultType, jdbcType=VARCHAR},</if>
+                <if test="resultDescription != null" >#{resultDescription, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="extInfo1 != null" >#{extInfo1, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="extInfo3 != null" >#{extInfo3, jdbcType=VARCHAR},</if>
+                <if test="extInfo4 != null" >#{extInfo4, jdbcType=VARCHAR},</if>
+                <if test="extInfo5 != null" >#{extInfo5, jdbcType=VARCHAR},</if>
+                <if test="extInfo6 != null" >#{extInfo6, jdbcType=VARCHAR},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=VARCHAR},</if>
+                <if test="taskType != null" >#{taskType, jdbcType=INTEGER},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.budget.entity.TaskResultEO" >
+    update PF_TASK_RESULT
+       set  task_id = #{taskId},
+            result_name = #{resultName},
+            result_type = #{resultType},
+            result_description = #{resultDescription},
+            create_time = #{createTime},
+            ext_info1 = #{extInfo1},
+            ext_info2 = #{extInfo2},
+            ext_info3 = #{extInfo3},
+            ext_info4 = #{extInfo4},
+            ext_info5 = #{extInfo5},
+            ext_info6 = #{extInfo6},
+            del_flag = #{delFlag},
+            task_type = #{taskType}
+     where  id_ = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.budget.entity.TaskResultEO" >
+    update PF_TASK_RESULT
+    <set >
+      <if test="taskId != null" >
+        task_id = #{taskId},
+      </if>
+      <if test="resultName != null" >
+        result_name = #{resultName},
+      </if>
+      <if test="resultType != null" >
+        result_type = #{resultType},
+      </if>
+      <if test="resultDescription != null" >
+        result_description = #{resultDescription},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="extInfo1 != null" >
+        ext_info1 = #{extInfo1},
+      </if>
+      <if test="extInfo2 != null" >
+        ext_info2 = #{extInfo2},
+      </if>
+      <if test="extInfo3 != null" >
+        ext_info3 = #{extInfo3},
+      </if>
+      <if test="extInfo4 != null" >
+        ext_info4 = #{extInfo4},
+      </if>
+      <if test="extInfo5 != null" >
+        ext_info5 = #{extInfo5},
+      </if>
+      <if test="extInfo6 != null" >
+        ext_info6 = #{extInfo6},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="taskType != null" >
+        task_type = #{taskType},
+      </if>
+    </set>
+     where id_ = #{id}
+  </update>
+
+  <!-- 根据id查询 PF_TASK_RESULT -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+      from PF_TASK_RESULT
+     where id_ = #{value} and DEL_FLAG is null
+
+  </select>
+
+
+    <!-- 根据id查询 PF_TASK_RESULT -->
+    <select id="selectByTaskId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="Base_Column_List" />
+        from PF_TASK_RESULT
+        where TASK_ID = #{value} and DEL_FLAG is null order by CREATE_TIME asc
+    </select>
+
+  <!-- 删除记录 -->
+  <update id="deleteByPrimaryKey" parameterType="java.lang.String">
+    update PF_TASK_RESULT set DEL_FLAG = '1'
+     where id_ = #{value}
+
+  </update>
+    <delete id="deleteByPrimaryKeys">
+    delete from PF_TASK_RESULT
+     where id_ in
+        <foreach item = "item" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{item}
+        </foreach>
+
+  </delete>
+  <!-- PF_TASK_RESULT 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from PF_TASK_RESULT
+    <include refid="Base_Where_Clause"/> and DEL_FLAG is null
+  </select>
+
+  <!-- 查询PF_TASK_RESULT列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from PF_TASK_RESULT
+			 <include refid="Base_Where_Clause"/> and DEL_FLAG is null
+      <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex} and DEL_FLAG is null
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from PF_TASK_RESULT
+    <include refid="Base_Where_Clause"/> and DEL_FLAG is null
+      <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+    <delete id="deleteAllByTaskId" parameterType="string">
+        delete from PF_TASK_RESULT where task_id=#{taskId}
+    </delete>
+
+
+</mapper>

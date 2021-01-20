@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.smallprogram.dao.ScheduleSupportEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.smallprogram.entity.ScheduleSupportEO" >
+    <id column="id_" property="id" />
+    <result column="del_flag" property="delFlag" />
+    <result column="receive_time" property="receiveTime" />
+    <result column="finished_time" property="finishedTime" />
+    <result column="title" property="title" />
+    <result column="begin_time" property="beginTime" />
+    <result column="end_time" property="endTime" />
+    <result column="address" property="address" />
+    <result column="status" property="status" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="detail" property="detail" />
+    <result column="receive_user_id" property="receiveUserId" />
+    <result column="receive_user_name" property="receiveUserName" />
+    <result column="collected" property="collected" />
+    <result column="create_user_name" property="createUserName" />
+    <result column="top" property="top" />
+    <result column="ext_info" property="extInfo" />
+    <result column="ext_info1" property="extInfo1" />
+    <result column="ext_info2" property="extInfo2" />
+    <result column="ext_info3" property="extInfo3" />
+    <result column="ext_info4" property="extInfo4" />
+    <result column="ext_info5" property="extInfo5" />
+    <result column="date_section" property="dateSection" />
+    <result column="type_" property="type" />
+    <result column="create_time" property="createTime" />
+  </resultMap>
+
+  <!-- TS_SCHEDULE_SUPPORT table all fields -->
+  <sql id="Base_Column_List" >
+     del_flag, receive_time, finished_time, id_, title, begin_time, end_time, address, status, create_user_id, detail, receive_user_id, receive_user_name, collected, create_user_name, top, ext_info, ext_info1, ext_info2, ext_info3, ext_info4, ext_info5, date_section, type_, create_time
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where del_flag != 1
+    <trim suffixOverrides="," >
+      <if test="receiveTime != null" >
+        and receive_time ${receiveTimeOperator} #{receiveTime}
+      </if>
+      <if test="receiveTime1 != null" >
+        and receive_time &gt;= #{receiveTime1}
+      </if>
+      <if test="receiveTime2 != null" >
+        and receive_time &lt;= #{receiveTime2}
+      </if>
+      <if test="finishedTime != null" >
+        and finished_time ${finishedTimeOperator} #{finishedTime}
+      </if>
+      <if test="finishedTime1 != null" >
+        and finished_time &gt;= #{finishedTime1}
+      </if>
+      <if test="finishedTime2 != null" >
+        and finished_time &lt;= #{finishedTime2}
+      </if>
+      <if test="id != null" >
+        and id_ ${idOperator} #{id}
+      </if>
+      <if test="title != null and title != ''" >
+        and title like '%'||#{title}||'%'
+      </if>
+      <if test="beginTime != null" >
+        and begin_time ${beginTimeOperator} #{beginTime}
+      </if>
+      <if test="beginTime1 != null" >
+        and begin_time &gt;= #{beginTime1}
+      </if>
+      <if test="beginTime2 != null" >
+        and begin_time &lt;= #{beginTime2}
+      </if>
+      <if test="endTime != null" >
+        and end_time ${endTimeOperator} #{endTime}
+      </if>
+      <if test="endTime1 != null" >
+        and end_time &gt;= #{endTime1}
+      </if>
+      <if test="endTime2 != null" >
+        and end_time &lt;= #{endTime2}
+      </if>
+      <if test="address != null" >
+        and address ${addressOperator} #{address}
+      </if>
+      <if test="status != null" >
+        and status ${statusOperator} #{status}
+      </if>
+      <if test="createUserId != null" >
+        and create_user_id ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="detail != null" >
+        and detail ${detailOperator} #{detail}
+      </if>
+      <if test="receiveUserId != null" >
+        and receive_user_id ${receiveUserIdOperator} #{receiveUserId}
+      </if>
+      <if test="receiveUserName != null" >
+        and receive_user_name ${receiveUserNameOperator} #{receiveUserName}
+      </if>
+      <if test="collected != null" >
+        and collected ${collectedOperator} #{collected}
+      </if>
+      <if test="createUserName != null" >
+        and create_user_name ${createUserNameOperator} #{createUserName}
+      </if>
+      <if test="top != null" >
+        and top ${topOperator} #{top}
+      </if>
+      <if test="extInfo != null" >
+        and ext_info ${extInfoOperator} #{extInfo}
+      </if>
+      <if test="extInfo1 != null" >
+        and ext_info1 ${extInfo1Operator} #{extInfo1}
+      </if>
+      <if test="extInfo2 != null" >
+        and ext_info2 ${extInfo2Operator} #{extInfo2}
+      </if>
+      <if test="extInfo3 != null" >
+        and ext_info3 ${extInfo3Operator} #{extInfo3}
+      </if>
+      <if test="extInfo4 != null" >
+        and ext_info4 ${extInfo4Operator} #{extInfo4}
+      </if>
+      <if test="extInfo5 != null" >
+        and ext_info5 ${extInfo5Operator} #{extInfo5}
+      </if>
+      <if test="dateSection != null" >
+        and date_section ${dateSectionOperator} #{dateSection}
+      </if>
+      <if test="type != null" >
+        and type_ ${typeOperator} #{type}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.smallprogram.entity.ScheduleSupportEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_TS_SCHEDULE_SUPPORT.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into TS_SCHEDULE_SUPPORT(<include refid="Base_Column_List" />)
+    values (#{delFlag, jdbcType=INTEGER}, #{receiveTime, jdbcType=TIMESTAMP}, #{finishedTime, jdbcType=TIMESTAMP}, #{id, jdbcType=VARCHAR}, #{title, jdbcType=VARCHAR}, #{beginTime, jdbcType=TIMESTAMP}, #{endTime, jdbcType=TIMESTAMP}, #{address, jdbcType=VARCHAR}, #{status, jdbcType=INTEGER}, #{createUserId, jdbcType=VARCHAR}, #{detail, jdbcType=VARCHAR}, #{receiveUserId, jdbcType=VARCHAR}, #{receiveUserName, jdbcType=VARCHAR}, #{collected, jdbcType=INTEGER}, #{createUserName, jdbcType=VARCHAR}, #{top, jdbcType=INTEGER}, #{extInfo, jdbcType=VARCHAR}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR}, #{dateSection, jdbcType=VARCHAR}, #{type, jdbcType=INTEGER}, #{createTime, jdbcType=TIMESTAMP})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.smallprogram.entity.ScheduleSupportEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_TS_SCHEDULE_SUPPORT.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into TS_SCHEDULE_SUPPORT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="receiveTime != null" >receive_time,</if>
+                <if test="finishedTime != null" >finished_time,</if>
+                <if test="id != null" >id_,</if>
+                <if test="title != null" >title,</if>
+                <if test="beginTime != null" >begin_time,</if>
+                <if test="endTime != null" >end_time,</if>
+                <if test="address != null" >address,</if>
+                <if test="status != null" >status,</if>
+                <if test="createUserId != null" >create_user_id,</if>
+                <if test="detail != null" >detail,</if>
+                <if test="receiveUserId != null" >receive_user_id,</if>
+                <if test="receiveUserName != null" >receive_user_name,</if>
+                <if test="collected != null" >collected,</if>
+                <if test="createUserName != null" >create_user_name,</if>
+                <if test="top != null" >top,</if>
+                <if test="extInfo != null" >ext_info,</if>
+                <if test="extInfo1 != null" >ext_info1,</if>
+                <if test="extInfo2 != null" >ext_info2,</if>
+                <if test="extInfo3 != null" >ext_info3,</if>
+                <if test="extInfo4 != null" >ext_info4,</if>
+                <if test="extInfo5 != null" >ext_info5,</if>
+                <if test="dateSection != null" >date_section,</if>
+                <if test="type != null" >type_,</if>
+                <if test="createTime != null" >create_time,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="delFlag != null" >#{delFlag, jdbcType=INTEGER},</if>
+                <if test="receiveTime != null" >#{receiveTime, jdbcType=TIMESTAMP},</if>
+                <if test="finishedTime != null" >#{finishedTime, jdbcType=TIMESTAMP},</if>
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="title != null" >#{title, jdbcType=VARCHAR},</if>
+                <if test="beginTime != null" >#{beginTime, jdbcType=TIMESTAMP},</if>
+                <if test="endTime != null" >#{endTime, jdbcType=TIMESTAMP},</if>
+                <if test="address != null" >#{address, jdbcType=VARCHAR},</if>
+                <if test="status != null" >#{status, jdbcType=INTEGER},</if>
+                <if test="createUserId != null" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="detail != null" >#{detail, jdbcType=VARCHAR},</if>
+                <if test="receiveUserId != null" >#{receiveUserId, jdbcType=VARCHAR},</if>
+                <if test="receiveUserName != null" >#{receiveUserName, jdbcType=VARCHAR},</if>
+                <if test="collected != null" >#{collected, jdbcType=INTEGER},</if>
+                <if test="createUserName != null" >#{createUserName, jdbcType=VARCHAR},</if>
+                <if test="top != null" >#{top, jdbcType=INTEGER},</if>
+                <if test="extInfo != null" >#{extInfo, jdbcType=VARCHAR},</if>
+                <if test="extInfo1 != null" >#{extInfo1, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="extInfo3 != null" >#{extInfo3, jdbcType=VARCHAR},</if>
+                <if test="extInfo4 != null" >#{extInfo4, jdbcType=VARCHAR},</if>
+                <if test="extInfo5 != null" >#{extInfo5, jdbcType=VARCHAR},</if>
+                <if test="dateSection != null" >#{dateSection, jdbcType=VARCHAR},</if>
+                <if test="type != null" >#{type, jdbcType=INTEGER},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.smallprogram.entity.ScheduleSupportEO" >
+    update TS_SCHEDULE_SUPPORT
+       set  del_flag = #{delFlag},
+            receive_time = #{receiveTime},
+            finished_time = #{finishedTime},
+            title = #{title},
+            begin_time = #{beginTime},
+            end_time = #{endTime},
+            address = #{address},
+            status = #{status},
+            create_user_id = #{createUserId},
+            detail = #{detail},
+            receive_user_id = #{receiveUserId},
+            receive_user_name = #{receiveUserName},
+            collected = #{collected},
+            create_user_name = #{createUserName},
+            top = #{top},
+            ext_info = #{extInfo},
+            ext_info1 = #{extInfo1},
+            ext_info2 = #{extInfo2},
+            ext_info3 = #{extInfo3},
+            ext_info4 = #{extInfo4},
+            ext_info5 = #{extInfo5},
+            date_section = #{dateSection},
+            type_ = #{type},
+            create_time = #{createTime}
+     where  id_ = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.smallprogram.entity.ScheduleSupportEO" >
+    update TS_SCHEDULE_SUPPORT
+    <set >
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="receiveTime != null" >
+        receive_time = #{receiveTime},
+      </if>
+      <if test="finishedTime != null" >
+        finished_time = #{finishedTime},
+      </if>
+      <if test="title != null" >
+        title = #{title},
+      </if>
+      <if test="beginTime != null" >
+        begin_time = #{beginTime},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime},
+      </if>
+      <if test="address != null" >
+        address = #{address},
+      </if>
+      <if test="status != null" >
+        status = #{status},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="detail != null" >
+        detail = #{detail},
+      </if>
+      <if test="receiveUserId != null" >
+        receive_user_id = #{receiveUserId},
+      </if>
+      <if test="receiveUserName != null" >
+        receive_user_name = #{receiveUserName},
+      </if>
+      <if test="collected != null" >
+        collected = #{collected},
+      </if>
+      <if test="createUserName != null" >
+        create_user_name = #{createUserName},
+      </if>
+      <if test="top != null" >
+        top = #{top},
+      </if>
+      <if test="extInfo != null" >
+        ext_info = #{extInfo},
+      </if>
+      <if test="extInfo1 != null" >
+        ext_info1 = #{extInfo1},
+      </if>
+      <if test="extInfo2 != null" >
+        ext_info2 = #{extInfo2},
+      </if>
+      <if test="extInfo3 != null" >
+        ext_info3 = #{extInfo3},
+      </if>
+      <if test="extInfo4 != null" >
+        ext_info4 = #{extInfo4},
+      </if>
+      <if test="extInfo5 != null" >
+        ext_info5 = #{extInfo5},
+      </if>
+      <if test="dateSection != null" >
+        date_section = #{dateSection},
+      </if>
+      <if test="type != null" >
+        type_ = #{type},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+    </set>
+     where id_ = #{id}
+  </update>
+
+  <!-- 根据id查询 TS_SCHEDULE_SUPPORT -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+      from TS_SCHEDULE_SUPPORT
+     where id_ = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TS_SCHEDULE_SUPPORT
+     where id_ = #{value}
+
+  </delete>
+
+  <!-- 逻辑删除 -->
+  <update id="logicDelete" parameterType="java.lang.String">
+    update TS_SCHEDULE_SUPPORT
+    SET DEL_FLAG = 1
+    where id_ = #{value}
+  </update>
+
+    <!-- （指定排序）查询TS_SCHEDULE_SUPPORT列表 -->
+    <select id="queryByPageNew" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select <include refid="Base_Column_List" /> from
+        (select tmp_tb.* , rownum rn from
+        (select <include refid="Base_Column_List" /> from TS_SCHEDULE_SUPPORT
+        <include refid="Base_Where_Clause"/>
+         order by top desc, create_time desc
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+  <!-- TS_SCHEDULE_SUPPORT 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from TS_SCHEDULE_SUPPORT
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TS_SCHEDULE_SUPPORT列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from TS_SCHEDULE_SUPPORT
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from TS_SCHEDULE_SUPPORT
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+    <!-- 根据id查询 TS_SCHEDULE_SUPPORT -->
+    <select id="selectBySupportIdAndReceiveUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select tss.ID_ as id_ ,tss.TITLE ,tssu.STATUS as STATUS , tss.CREATE_USER_NAME as  CREATE_USER_NAME,
+        tss.DATE_SECTION as DATE_SECTION,tss.ADDRESS as  address ,tss.DETAIL as DETAIL , tssu.COLLECTED as COLLECTED,
+        tss.CREATE_TIME as CREATE_TIME ,tssu.RECEIVE_USER_NAME as RECEIVE_USER_NAME, tssu.ID_ as  ext_info3
+        from TS_SCHEDULE_SUPPORT tss  left join TS_SCHEDULE_SUPPORT_USER tssu on tss.ID_=tssu.SUPPORT_ID
+
+        where tss.ID_ = #{supportId} and tssu.RECEIVE_USER_ID = #{receiveUserId}
+
+    </select>
+
+
+    <!-- 查询TS_SCHEDULE_SUPPORT列表 -->
+    <select id="queryByPageAll" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select * from
+        (select tmp_tb.* , rownum rn from
+        (select tss.ID_ as id_, tssu.TOP as TOP ,tssu.COLLECTED as COLLECTED,title, ADDRESS, tss.CREATE_TIME as CREATE_TIME , create_user_id, create_user_name, detail, tssu.status as status,
+        ,( select wm_concat(atu.USNAME) from TS_SCHEDULE_SUPPORT atss
+        left join TS_SCHEDULE_SUPPORT_USER atssu on atss.ID_ = atssu.SUPPORT_ID
+        left join TS_USER atu on atu.USID = atssu.RECEIVE_USER_ID
+        where atss.id_ = tss.ID_ and atssu.STATUS not in (-1,-2)
+        ) as ext_info,tssu.ID_ as ext_info3
+        from ( select * from  TS_SCHEDULE_SUPPORT where  DEL_FLAG != 1
+        <if test="title != null and title != ''" >
+            and title like '%'||#{title}||'%'
+        </if>
+        ) tss
+        left join  TS_SCHEDULE_SUPPORT_USER tssu on tss.ID_ = tssu.SUPPORT_ID
+        left join TS_USER tu on tu.USID = tssu.RECEIVE_USER_ID
+        <if test="receiveUserId != null and receiveUserId != ''" >
+            where tssu.RECEIVE_USER_ID = #{receiveUserId}
+        </if>
+        group by tss.ID_ ,tssu.ID_ ,title, tss.CREATE_TIME,ADDRESS ,create_user_id,tssu.TOP , tssu.COLLECTED ,
+        create_user_name ,detail, tssu.status , tssu.RECEIVE_USER_NAME order by tssu.TOP desc, CREATE_TIME desc
+        <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex}
+        )
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <!-- 查询TS_SCHEDULE_SUPPORT列表 -->
+    <select id="queryCountByPageAll" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        select count(distinct tssu.SUPPORT_ID) from (
+        select   distinct (id_), address,title, create_time,
+        create_user_id, create_user_name, detail, del_flag,  status, ext_info,
+        ext_info1, ext_info2, ext_info3, ext_info4, ext_info5
+        from  TS_SCHEDULE_SUPPORT where  DEL_FLAG != 1
+        <if test="title != null and title != ''" >
+            and title like '%'||#{title}||'%'
+        </if>
+        ) tss
+        left join  TS_SCHEDULE_SUPPORT_USER tssu on tss.ID_ = tssu.SUPPORT_ID
+        <if test="receiveUserId != null and receiveUserId != ''" >
+            where tssu.RECEIVE_USER_ID = #{receiveUserId}
+        </if>
+    </select>
+
+    <!-- 查询TS_SCHEDULE_SUPPORT列表 -->
+    <select id="queryByPageWithReceiveUserId" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select * from
+        (select tmp_tb.* , rownum rn from
+        (select  tss.ID_  as id_, tssu.TOP as TOP ,tssu.COLLECTED as COLLECTED ,title, ADDRESS,
+        tss.CREATE_TIME as CREATE_TIME , create_user_id, create_user_name, detail, tssu.status as status,
+        ( select wm_concat(atu.USNAME) from TS_SCHEDULE_SUPPORT atss
+        left join TS_SCHEDULE_SUPPORT_USER atssu on atss.ID_ = atssu.SUPPORT_ID
+        left join TS_USER atu on atu.USID = atssu.RECEIVE_USER_ID
+        where atss.id_ = tss.ID_ and atssu.STATUS not in (-1,-2)
+        ) as ext_info,tssu.ID_ as ext_info3,tssu.RECEIVE_USER_NAME as RECEIVE_USER_NAME ,  tss.DATE_SECTION as DATE_SECTION
+
+        from ( select * from  TS_SCHEDULE_SUPPORT where  DEL_FLAG != 1
+        <if test="title != null and title != ''" >
+            and title like '%'||#{title}||'%'
+        </if>
+        ) tss
+        left join  TS_SCHEDULE_SUPPORT_USER tssu on tss.ID_ = tssu.SUPPORT_ID
+        left join TS_USER tu on tu.USID = tssu.RECEIVE_USER_ID
+        where tssu.RECEIVE_USER_ID = #{receiveUserId} and tssu.status not in (-1,-2)
+        group by tss.ID_ ,tssu.ID_ ,title, tssu.RECEIVE_USER_NAME ,tss.DATE_SECTION ,tss.CREATE_TIME,ADDRESS ,create_user_id,tssu.TOP , tssu.COLLECTED ,
+        create_user_name ,detail, tssu.status order by tssu.TOP  desc, CREATE_TIME desc
+        <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex}
+        )
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <!-- 查询TS_SCHEDULE_SUPPORT列表 -->
+    <select id="queryCountByPageWithReceiveUserId" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        select count(1) from (
+        select * from  TS_SCHEDULE_SUPPORT where  DEL_FLAG != 1
+        <if test="title != null and title != ''" >
+            and title like '%'||#{title}||'%'
+        </if>
+        ) tss
+        left join  TS_SCHEDULE_SUPPORT_USER tssu on tss.ID_ = tssu.SUPPORT_ID
+        where tssu.RECEIVE_USER_ID = #{receiveUserId} and tssu.status not in (-1,-2)
+    </select>
+
+
+    <!-- 根据id查询 TS_SCHEDULE_SUPPORT -->
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select  id_,title, ADDRESS,CREATE_TIME , create_user_id, create_user_name, detail, ( select wm_concat(atu.USNAME) from TS_SCHEDULE_SUPPORT atss
+        left join TS_SCHEDULE_SUPPORT_USER atssu on atss.ID_ = atssu.SUPPORT_ID
+        left join TS_USER atu on atu.USID = atssu.RECEIVE_USER_ID
+        where atss.id_ = tss.ID_ and atssu.STATUS not in (-1,-2)
+        ) as ext_info
+      from TS_SCHEDULE_SUPPORT tss
+      where tss.ID_ = #{value}
+    </select>
+
+    <select id="selectByReceiveUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+      select tss.ID_ as id_, tssu.TOP as ext_info1 ,tssu.COLLECTED as ext_info2 ,title, ADDRESS,
+       tss.CREATE_TIME as CREATE_TIME , create_user_id, create_user_name, detail,  tssu.status as status,
+       ( select wm_concat(atu.USNAME) from TS_SCHEDULE_SUPPORT atss
+               left join TS_SCHEDULE_SUPPORT_USER atssu on atss.ID_ = atssu.SUPPORT_ID
+               left join TS_USER atu on atu.USID = atssu.RECEIVE_USER_ID
+         where atss.id_ = tss.ID_ and atssu.STATUS not in (-1,-2)
+       ) as ext_info,tssu.ID_ as ext_info3
+
+      from TS_SCHEDULE_SUPPORT tss
+      left join  TS_SCHEDULE_SUPPORT_USER tssu on tss.ID_ = tssu.SUPPORT_ID
+      left join TS_USER tu on tu.USID = tssu.RECEIVE_USER_ID
+      where tssu.RECEIVE_USER_ID = #{receiveUserId}
+      group by tss.ID_ ,tssu.ID_,tssu.TOP ,tssu.COLLECTED,title, tss.CREATE_TIME,ADDRESS ,create_user_id,
+       create_user_name ,detail,  tssu.status order by tssu.TOP  desc , tss.CREATE_TIME
+
+    </select>
+
+
+
+
+
+
+</mapper>

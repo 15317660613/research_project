@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.project.dao.WorkProgressEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.research.project.entity.WorkProgressEO" >
+    <id column="id" property="id" />
+    <result column="del_flag" property="delFlag" />
+    <result column="ext1" property="ext1" />
+    <result column="ext2" property="ext2" />
+    <result column="ext3" property="ext3" />
+    <result column="ext4" property="ext4" />
+    <result column="ext5" property="ext5" />
+    <result column="project_id" property="projectId" />
+    <result column="examine_type" property="examineType" />
+    <result column="examine_content" property="examineContent" javaType="string" jdbcType="CLOB"/>
+    <result column="examine_time" property="examineTime" />
+    <result column="examine_description" property="examineDescription" javaType="string" jdbcType="CLOB"/>
+    <result column="actual_examine_time" property="actualExamineTime" />
+    <result column="rectify_description" property="rectifyDescription" javaType="string" jdbcType="CLOB"/>
+    <result column="create_user_id" property="createUserId" />
+    <result column="create_user_name" property="createUserName" />
+    <result column="create_time" property="createTime" />
+    <result column="modify_time" property="modifyTime" />
+    <result column="node_goals" property="nodeGoals" />
+    <result column="APPROVE_COMMENT" property="approveComment"></result>
+    <result column="CHECK_METHOD" property="checkMethod"></result>
+
+      <result column="process_id" property="processId" />
+      <result column="check_user" property="checkUser" />
+      <result column="check_result" property="checkResult"></result>
+      <result column="check_user_id" property="checkUserId"></result>
+      <result column="review_remark" property="reviewRemark" />
+  </resultMap>
+
+  <!-- RS_WORK_PROGRESS table all fields -->
+  <sql id="Base_Column_List" >
+     del_flag, ext1, ext2, ext3, ext4, ext5, id, project_id, examine_type, examine_content, examine_time, examine_description, actual_examine_time, rectify_description, create_user_id, create_user_name, create_time, modify_time,node_goals,APPROVE_COMMENT,CHECK_METHOD,process_id,check_user,check_result,check_user_id,review_remark
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1 and del_flag=0
+    <trim suffixOverrides="," >
+      <if test="ext1 != null" >
+        and ext1 ${ext1Operator} #{ext1}
+      </if>
+      <if test="ext2 != null" >
+        and ext2 ${ext2Operator} #{ext2}
+      </if>
+      <if test="ext3 != null" >
+        and ext3 ${ext3Operator} #{ext3}
+      </if>
+      <if test="ext4 != null" >
+        and ext4 ${ext4Operator} #{ext4}
+      </if>
+      <if test="ext5 != null" >
+        and ext5 ${ext5Operator} #{ext5}
+      </if>
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="projectId != null" >
+        and project_id ${projectIdOperator} #{projectId}
+      </if>
+      <if test="examineType != null" >
+        and examine_type LIKE CONCAT('%',CONCAT(#{examineType},'%'))
+      </if>
+      <if test="examineContent != null" >
+        and examine_content ${examineContentOperator} #{examineContent}
+      </if>
+      <if test="examineTime != null" >
+        and examine_time ${examineTimeOperator} #{examineTime}
+      </if>
+      <if test="examineTime1 != null" >
+        and examine_time &gt;= #{examineTime1}
+      </if>
+      <if test="examineTime2 != null" >
+        and examine_time &lt;= #{examineTime2}
+      </if>
+      <if test="examineDescription != null" >
+        and examine_description ${examineDescriptionOperator} #{examineDescription}
+      </if>
+      <if test="actualExamineTime != null" >
+        and actual_examine_time ${actualExamineTimeOperator} #{actualExamineTime}
+      </if>
+      <if test="actualExamineTime1 != null" >
+        and actual_examine_time &gt;= #{actualExamineTime1}
+      </if>
+      <if test="actualExamineTime2 != null" >
+        and actual_examine_time &lt;= #{actualExamineTime2}
+      </if>
+      <if test="rectifyDescription != null" >
+        and rectify_description ${rectifyDescriptionOperator} #{rectifyDescription}
+      </if>
+      <if test="createUserId != null" >
+        and create_user_id ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="createUserName != null" >
+        and create_user_name ${createUserNameOperator} #{createUserName}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="modifyTime != null" >
+        and modify_time ${modifyTimeOperator} #{modifyTime}
+      </if>
+      <if test="modifyTime1 != null" >
+        and modify_time &gt;= #{modifyTime1}
+      </if>
+      <if test="modifyTime2 != null" >
+        and modify_time &lt;= #{modifyTime2}
+      </if>
+      <if test="approveComment != null">
+        and APPROVE_COMMENT ${approvecommentOperator} #{approveComment}
+      </if>
+      <if test="checkMethod != null">
+        and CHECK_METHOD ${checkMethodOperator} #{checkMethod}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.research.project.entity.WorkProgressEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RS_WORK_PROGRESS.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into RS_WORK_PROGRESS(<include refid="Base_Column_List" />)
+    values (#{delFlag, jdbcType=VARCHAR}, #{ext1, jdbcType=VARCHAR}, #{ext2, jdbcType=VARCHAR}, #{ext3, jdbcType=VARCHAR}, #{ext4, jdbcType=VARCHAR}, #{ext5, jdbcType=VARCHAR}, #{id, jdbcType=VARCHAR}, #{projectId, jdbcType=VARCHAR}, #{examineType, jdbcType=VARCHAR}, #{examineContent, jdbcType=CLOB}, #{examineTime, jdbcType=TIMESTAMP}, #{examineDescription, jdbcType=CLOB}, #{actualExamineTime, jdbcType=TIMESTAMP}, #{rectifyDescription, jdbcType=CLOB}, #{createUserId, jdbcType=VARCHAR}, #{createUserName, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{modifyTime, jdbcType=TIMESTAMP},#{approveComment, jdbcType=VARCHAR},#{checkMethod, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.research.project.entity.WorkProgressEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RS_WORK_PROGRESS.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into RS_WORK_PROGRESS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="ext1 != null" >ext1,</if>
+                <if test="ext2 != null" >ext2,</if>
+                <if test="ext3 != null" >ext3,</if>
+                <if test="ext4 != null" >ext4,</if>
+                <if test="ext5 != null" >ext5,</if>
+                <if test="id != null" >id,</if>
+                <if test="projectId != null" >project_id,</if>
+                <if test="examineType != null" >examine_type,</if>
+                <if test="examineContent != null" >examine_content,</if>
+                <if test="examineTime != null" >examine_time,</if>
+                <if test="examineDescription != null" >examine_description,</if>
+                <if test="actualExamineTime != null" >actual_examine_time,</if>
+                <if test="rectifyDescription != null" >rectify_description,</if>
+                <if test="createUserId != null" >create_user_id,</if>
+                <if test="createUserName != null" >create_user_name,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="modifyTime != null" >modify_time,</if>
+                <if test="approveComment != null">APPROVE_COMMENT,</if>
+                <if test="checkMethod != null">CHECK_METHOD,</if>
+
+                <if test="processId != null" >process_id,</if>
+                <if test="checkUser != null" >check_user,</if>
+                <if test="checkResult != null">check_result,</if>
+                <if test="checkUserId != null">check_user_id,</if>
+                <if test="reviewRemark != null">review_remark</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="delFlag != null" >#{delFlag, jdbcType=VARCHAR},</if>
+                <if test="ext1 != null" >#{ext1, jdbcType=VARCHAR},</if>
+                <if test="ext2 != null" >#{ext2, jdbcType=VARCHAR},</if>
+                <if test="ext3 != null" >#{ext3, jdbcType=VARCHAR},</if>
+                <if test="ext4 != null" >#{ext4, jdbcType=VARCHAR},</if>
+                <if test="ext5 != null" >#{ext5, jdbcType=VARCHAR},</if>
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="projectId != null" >#{projectId, jdbcType=VARCHAR},</if>
+                <if test="examineType != null" >#{examineType, jdbcType=VARCHAR},</if>
+                <if test="examineContent != null" >#{examineContent, jdbcType=CLOB},</if>
+                <if test="examineTime != null" >#{examineTime, jdbcType=TIMESTAMP},</if>
+                <if test="examineDescription != null" >#{examineDescription, jdbcType=CLOB},</if>
+                <if test="actualExamineTime != null" >#{actualExamineTime, jdbcType=TIMESTAMP},</if>
+                <if test="rectifyDescription != null" >#{rectifyDescription, jdbcType=CLOB},</if>
+                <if test="createUserId != null" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="createUserName != null" >#{createUserName, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="modifyTime != null" >#{modifyTime, jdbcType=TIMESTAMP},</if>
+                <if test="approveComment != null">#{approveComment, jdbcType=VARCHAR},</if>
+                <if test="checkMethod != null">#{checkMethod, jdbcType=VARCHAR},</if>
+
+                <if test="processId != null" >#{processId, jdbcType=TIMESTAMP},</if>
+                <if test="checkUser != null" >#{checkUser, jdbcType=TIMESTAMP},</if>
+                <if test="checkResult != null">#{checkResult, jdbcType=VARCHAR},</if>
+                <if test="checkUserId != null">#{checkUserId, jdbcType=VARCHAR},</if>
+                <if test="reviewRemark != null">#{reviewRemark, jdbcType=VARCHAR}</if>
+            </trim>
+  </insert>
+
+
+
+    <!--批量新增-->
+    <insert id = "batchInsertSelective">
+        INSERT ALL
+        <foreach collection = "workProgressEOS" item = "item" index = "index">
+            <if test = "item.id != null">
+                into RS_WORK_PROGRESS
+                <trim prefix="(" suffix=")" suffixOverrides="," >
+                    <if test="item.delFlag != null" >del_flag,</if>
+                    <if test="item.ext1 != null" >ext1,</if>
+                    <if test="item.ext2 != null" >ext2,</if>
+                    <if test="item.ext3 != null" >ext3,</if>
+                    <if test="item.ext4 != null" >ext4,</if>
+                    <if test="item.ext5 != null" >ext5,</if>
+                    <if test="item.id != null" >id,</if>
+                    <if test="item.projectId != null" >project_id,</if>
+                    <if test="item.examineType != null" >examine_type,</if>
+                    <if test="item.examineContent != null" >examine_content,</if>
+                    <if test="item.examineTime != null" >examine_time,</if>
+                    <if test="item.examineDescription != null" >examine_description,</if>
+                    <if test="item.actualExamineTime != null" >actual_examine_time,</if>
+                    <if test="item.rectifyDescription != null" >rectify_description,</if>
+                    <if test="item.createUserId != null" >create_user_id,</if>
+                    <if test="item.createUserName != null" >create_user_name,</if>
+                    <if test="item.createTime != null" >create_time,</if>
+                    <if test="item.modifyTime != null" >modify_time,</if>
+                    <if test="item.nodeGoals != null" >node_goals,</if>
+                    <if test="item.approveComment != null" >APPROVE_COMMENT,</if>
+                    <if test="item.checkMethod != null">CHECK_METHOD,</if>
+
+                    <if test="item.processId != null" >process_id,</if>
+                    <if test="item.checkUser != null" >check_user,</if>
+                    <if test="item.checkResult != null">check_result,</if>
+                    <if test="item.checkUserId != null">check_user_id,</if>
+                    <if test="item.reviewRemark != null" >review_remark,</if>
+                </trim>
+                <trim prefix="values (" suffix=")" suffixOverrides="," >
+                    <if test="item.delFlag != null" >#{item.delFlag, jdbcType=VARCHAR},</if>
+                    <if test="item.ext1 != null" >#{item.ext1, jdbcType=VARCHAR},</if>
+                    <if test="item.ext2 != null" >#{item.ext2, jdbcType=VARCHAR},</if>
+                    <if test="item.ext3 != null" >#{item.ext3, jdbcType=VARCHAR},</if>
+                    <if test="item.ext4 != null" >#{item.ext4, jdbcType=VARCHAR},</if>
+                    <if test="item.ext5 != null" >#{item.ext5, jdbcType=VARCHAR},</if>
+                    <if test="item.id != null" >#{item.id, jdbcType=VARCHAR},</if>
+                    <if test="item.projectId != null" >#{item.projectId, jdbcType=VARCHAR},</if>
+                    <if test="item.examineType != null" >#{item.examineType, jdbcType=VARCHAR},</if>
+                    <if test="item.examineContent != null" >#{item.examineContent, jdbcType=CLOB},</if>
+                    <if test="item.examineTime != null" >#{item.examineTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.examineDescription != null" >#{item.examineDescription, jdbcType=CLOB},</if>
+                    <if test="item.actualExamineTime != null" >#{item.actualExamineTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.rectifyDescription != null" >#{item.rectifyDescription, jdbcType=CLOB},</if>
+                    <if test="item.createUserId != null" >#{item.createUserId, jdbcType=VARCHAR},</if>
+                    <if test="item.createUserName != null" >#{item.createUserName, jdbcType=VARCHAR},</if>
+                    <if test="item.createTime != null" >#{item.createTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.modifyTime != null" >#{item.modifyTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.nodeGoals != null" >#{item.nodeGoals, jdbcType=TIMESTAMP},</if>
+                    <if test="item.approveComment != null" >#{item.approveComment, jdbcType=VARCHAR},</if>
+                    <if test="item.checkMethod != null">#{item.checkMethod, jdbcType=VARCHAR},</if>
+
+                    <if test="item.processId != null" >#{item.processId, jdbcType=TIMESTAMP},</if>
+                    <if test="item.checkUser != null" >#{item.checkUser, jdbcType=TIMESTAMP},</if>
+                    <if test="item.checkResult != null">#{item.checkResult, jdbcType=VARCHAR},</if>
+                    <if test="item.checkUserId != null">#{item.checkUserId, jdbcType=VARCHAR},</if>
+                    <if test="item.reviewRemark != null" >#{item.reviewRemark, jdbcType=VARCHAR},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.research.project.entity.WorkProgressEO" >
+    update RS_WORK_PROGRESS
+       set  del_flag = #{delFlag},
+            ext1 = #{ext1},
+            ext2 = #{ext2},
+            ext3 = #{ext3},
+            ext4 = #{ext4},
+            ext5 = #{ext5},
+            project_id = #{projectId},
+            examine_type = #{examineType},
+            examine_content = #{examineContent},
+            examine_time = #{examineTime},
+            examine_description = #{examineDescription},
+            actual_examine_time = #{actualExamineTime},
+            rectify_description = #{rectifyDescription},
+            create_user_id = #{createUserId},
+            create_user_name = #{createUserName},
+            create_time = #{createTime},
+            modify_time = #{modifyTime},
+            APPROVE_COMMENT=#{approveComment},
+            CHECK_METHOD=#{checkMethod},
+            process_id=#{processId},
+            check_user=#{checkUser},
+            check_result=#{checkResult},
+            check_user_id=#{checkUserId}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.research.project.entity.WorkProgressEO" >
+    update RS_WORK_PROGRESS
+    <set >
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="ext1 != null" >
+        ext1 = #{ext1},
+      </if>
+      <if test="ext2 != null" >
+        ext2 = #{ext2},
+      </if>
+      <if test="ext3 != null" >
+        ext3 = #{ext3},
+      </if>
+      <if test="ext4 != null" >
+        ext4 = #{ext4},
+      </if>
+      <if test="ext5 != null" >
+        ext5 = #{ext5},
+      </if>
+      <if test="projectId != null" >
+        project_id = #{projectId},
+      </if>
+      <if test="examineType != null" >
+        examine_type = #{examineType},
+      </if>
+      <if test="examineContent != null" >
+        examine_content = #{examineContent},
+      </if>
+      <if test="examineTime != null" >
+        examine_time = #{examineTime},
+      </if>
+      <if test="examineDescription != null" >
+        examine_description = #{examineDescription},
+      </if>
+      <if test="actualExamineTime != null" >
+        actual_examine_time = #{actualExamineTime},
+      </if>
+      <if test="rectifyDescription != null" >
+        rectify_description = #{rectifyDescription},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="createUserName != null" >
+        create_user_name = #{createUserName},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime},
+      </if>
+      <if test="approveComment!=null" >
+        APPROVE_COMMENT=#{approveComment},
+      </if>
+      <if test="checkMethod!=null">
+        CHECK_METHOD=#{checkMethod},
+      </if>
+
+        <if test="processId!=null">
+            process_id=#{processId},
+        </if>
+        <if test="checkUser!=null">
+            check_user=#{checkUser},
+        </if>
+        <if test="checkResult!=null">
+            check_result=#{checkResult},
+        </if>
+        <if test="checkUserId!=null">
+            check_user_id=#{checkUserId},
+        </if>
+        <if test="reviewRemark != null" >
+            review_remark=#{reviewRemark},
+        </if>
+    </set>
+     where id = #{id}
+  </update>
+
+    <!--批量逻辑删除用户-->
+    <update id="deleteLogicInBatch" parameterType="java.util.List">
+        update RS_WORK_PROGRESS
+        set del_flag = 1
+        where id in
+        <foreach item="id" collection="list" open="(" separator=","
+                close=")" index="index">
+            #{id}
+        </foreach>
+    </update>
+
+  <!-- 根据id查询 RS_WORK_PROGRESS -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from RS_WORK_PROGRESS
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RS_WORK_PROGRESS
+     where id = #{value}
+
+  </delete>
+
+  <!-- RS_WORK_PROGRESS 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from RS_WORK_PROGRESS
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询RS_WORK_PROGRESS列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from RS_WORK_PROGRESS
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from RS_WORK_PROGRESS
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+    <!--根据项目id删除-->
+    <delete id="deleteByProjectId" parameterType="java.lang.String">
+   	delete  from RS_WORK_PROGRESS
+     where project_id = #{projectId}
+    </delete>
+
+    <!--<update id="deleteByProjectId" parameterType="java.lang.String">
+   	update  RS_WORK_PROGRESS set del_flag=1
+     where project_id = #{projectId}
+
+  </update>-->
+
+<!--    获取RS_WORK_PROGRESS表中需要修改的数据的id值-->
+    <select id="getWorkId" resultMap="BaseResultMap"  parameterType="java.lang.String">
+        SELECT rs.ID FROM RS_WORK_PROGRESS rs WHERE PROJECT_ID=#{id}
+    </select>
+
+</mapper>

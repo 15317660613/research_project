@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.finance.dao.CashflowManagementEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.finance.entity.CashflowManagementEO" >
+    <id column="id" property="id" />
+    <result column="business_gonfig_id" property="businessGonfigId" />
+    <result column="cm_year" property="cmYear" />
+    <result column="cm_month" property="cmMonth" />
+    <result column="flow_in_money" property="flowInMoney" />
+    <result column="flow_out_money" property="flowOutMoney" />
+    <result column="surplus_money" property="surplusMoney" />
+    <result column="create_time" property="createTime" />
+    <result column="update_time" property="updateTime" />
+    <result column="del_flag" property="delFlag" />
+  </resultMap>
+
+  <!-- F_CASHFLOW_MANAGEMENT table all fields -->
+  <sql id="Base_Column_List" >
+     id, business_gonfig_id, cm_year, cm_month, flow_in_money, flow_out_money, surplus_money, create_time, update_time, del_flag
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null and id != ''" >
+        and CM.id ${idOperator} #{id}
+      </if>
+      <if test="businessGonfigId != null and businessGonfigId != ''" >
+        and CM.business_gonfig_id ${businessGonfigIdOperator} #{businessGonfigId}
+      </if>
+        <if test="businessGonfigName != null and businessGonfigName != ''" >
+            and BG.BG_NAME ${businessGonfigNameOperator} #{businessGonfigName}
+        </if>
+      <if test="cmYear != null and cmYear!= ''" >
+        and CM.cm_year ${cmYearOperator} #{cmYear}
+      </if>
+      <if test="cmMonth != null and cmMonth != ''" >
+        and CM.cm_month ${cmMonthOperator} #{cmMonth}
+      </if>
+      <if test="flowInMoney != null and flowInMoney != ''" >
+        and CM.flow_in_money ${flowInMoneyOperator} #{flowInMoney}
+      </if>
+      <if test="flowOutMoney != null and flowOutMoney != ''" >
+        and CM.flow_out_money ${flowOutMoneyOperator} #{flowOutMoney}
+      </if>
+      <if test="surplusMoney != null and surplusMoney !=''" >
+        and CM.surplus_money ${surplusMoneyOperator} #{surplusMoney}
+      </if>
+      <if test="createTime != null and createTime!=''" >
+        and CM.create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null and createTime1 !=''" >
+        and CM.create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null and createTime2!=''" >
+        and CM.create_time &lt;= #{createTime2}
+      </if>
+      <if test="updateTime != null and updateTime !=''" >
+        and CM.update_time ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null and updateTime1!=''" >
+        and CM.update_time &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null and updateTime2 !=''" >
+        and CM.update_time &lt;= #{updateTime2}
+      </if>
+      <if test="delFlag != null and delFlag !=''" >
+        and CM.del_flag ${delFlagOperator} #{delFlag}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.finance.entity.CashflowManagementEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_F_CASHFLOW_MANAGEMENT.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into F_CASHFLOW_MANAGEMENT(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{businessGonfigId, jdbcType=VARCHAR}, #{cmYear, jdbcType=VARCHAR}, #{cmMonth, jdbcType=VARCHAR}, #{flowInMoney, jdbcType=DOUBLE}, #{flowOutMoney, jdbcType=DOUBLE}, #{surplusMoney, jdbcType=DOUBLE}, #{createTime, jdbcType=TIMESTAMP}, #{updateTime, jdbcType=TIMESTAMP}, #{delFlag, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.finance.entity.CashflowManagementEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_F_CASHFLOW_MANAGEMENT.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into F_CASHFLOW_MANAGEMENT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="businessGonfigId != null" >business_gonfig_id,</if>
+                <if test="cmYear != null" >cm_year,</if>
+                <if test="cmMonth != null" >cm_month,</if>
+                <if test="flowInMoney != null" >flow_in_money,</if>
+                <if test="flowOutMoney != null" >flow_out_money,</if>
+                <if test="surplusMoney != null" >surplus_money,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="updateTime != null" >update_time,</if>
+                <if test="delFlag != null" >del_flag,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="businessGonfigId != null" >#{businessGonfigId, jdbcType=VARCHAR},</if>
+                <if test="cmYear != null" >#{cmYear, jdbcType=VARCHAR},</if>
+                <if test="cmMonth != null" >#{cmMonth, jdbcType=VARCHAR},</if>
+                <if test="flowInMoney != null" >#{flowInMoney, jdbcType=DOUBLE},</if>
+                <if test="flowOutMoney != null" >#{flowOutMoney, jdbcType=DOUBLE},</if>
+                <if test="surplusMoney != null" >#{surplusMoney, jdbcType=DOUBLE},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="updateTime != null" >#{updateTime, jdbcType=TIMESTAMP},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.finance.entity.CashflowManagementEO" >
+    update F_CASHFLOW_MANAGEMENT
+       set  business_gonfig_id = #{businessGonfigId},
+            cm_year = #{cmYear},
+            cm_month = #{cmMonth},
+            flow_in_money = #{flowInMoney},
+            flow_out_money = #{flowOutMoney},
+            surplus_money = #{surplusMoney},
+            create_time = #{createTime},
+            update_time = #{updateTime},
+            del_flag = #{delFlag}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.finance.entity.CashflowManagementEO" >
+    update F_CASHFLOW_MANAGEMENT
+    <set >
+      <if test="businessGonfigId != null" >
+        business_gonfig_id = #{businessGonfigId},
+      </if>
+      <if test="cmYear != null" >
+        cm_year = #{cmYear},
+      </if>
+      <if test="cmMonth != null" >
+        cm_month = #{cmMonth},
+      </if>
+      <if test="flowInMoney != null" >
+        flow_in_money = #{flowInMoney},
+      </if>
+      <if test="flowOutMoney != null" >
+        flow_out_money = #{flowOutMoney},
+      </if>
+      <if test="surplusMoney != null" >
+        surplus_money = #{surplusMoney},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 F_CASHFLOW_MANAGEMENT -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT BG.BG_NAME AS businessGonfigName,CM.*
+      FROM F_CASHFLOW_MANAGEMENT CM
+      LEFT JOIN F_BUSINESS_GONFIG BG ON BG.ID = CM.BUSINESS_GONFIG_ID
+      where CM.id = #{value}
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from F_CASHFLOW_MANAGEMENT
+     where id = #{value}
+
+  </delete>
+
+  <!-- F_CASHFLOW_MANAGEMENT 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from F_CASHFLOW_MANAGEMENT CM
+      LEFT JOIN F_BUSINESS_GONFIG BG ON BG.ID = CM.BUSINESS_GONFIG_ID
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询F_CASHFLOW_MANAGEMENT列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select tmp_tc.* from
+		(select tmp_tb.* , rownum rn from
+			(SELECT BG.BG_NAME AS businessGonfigName,CM.*
+              FROM F_CASHFLOW_MANAGEMENT CM
+              LEFT JOIN F_BUSINESS_GONFIG BG ON BG.ID = CM.BUSINESS_GONFIG_ID
+			 <include refid="Base_Where_Clause"/>
+              <if test="sql_filter != null and sql_filter != ''" >
+                  ${sql_filter}
+              </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex}) tmp_tc
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+      SELECT BG.BG_NAME AS businessGonfigName,CM.*
+      FROM F_CASHFLOW_MANAGEMENT CM
+      LEFT JOIN F_BUSINESS_GONFIG BG ON BG.ID = CM.BUSINESS_GONFIG_ID
+    <include refid="Base_Where_Clause"/>
+      <if test="sql_filter != null and sql_filter != ''" >
+          ${sql_filter}
+      </if>
+  </select>
+
+    <select id="queryByBusinessGonfigIdAndYearAndMonth" resultMap="BaseResultMap" parameterType="java.lang.String">
+      SELECT BG.BG_NAME AS businessGonfigName,CM.*
+      FROM F_CASHFLOW_MANAGEMENT CM
+      LEFT JOIN F_BUSINESS_GONFIG BG ON BG.ID = CM.BUSINESS_GONFIG_ID
+      where CM.del_flag = '0'
+      and CM.business_gonfig_id = #{businessGonfigId}
+      and CM.cm_year = #{cmYear}
+      and CM.cm_month = #{cmMonth}
+    </select>
+
+
+    <!-- 根据业务id 年月修改 -->
+    <update id="updateByBusinessGonfigIdAndYearAndMonth" parameterType="com.adc.da.finance.entity.ProfitManagementEO" >
+        update F_CASHFLOW_MANAGEMENT
+        <set >
+             <if test="flowInMoney != null" >
+                flow_in_money = #{flowInMoney},
+            </if>
+            <if test="flowOutMoney != null" >
+                flow_out_money = #{flowOutMoney},
+            </if>
+            <if test="surplusMoney != null" >
+                surplus_money = #{surplusMoney},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where business_gonfig_id = #{businessGonfigId}
+        and cm_year = #{cmYear}
+        and cm_month = #{cmMonth}
+        and del_flag = '0'
+    </update>
+
+</mapper>

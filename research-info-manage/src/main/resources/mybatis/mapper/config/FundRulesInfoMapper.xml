@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.config.dao.FundRulesInfoDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.research.config.entity.FundRulesInfoEO" >
+    <id column="ID" property="fundDetails" />
+    <result column="FUND_TEMPLATE_NAME" property="fundTemplateName" />
+    <result column="BUDGET_ACCOUNT_NAME" property="budgetAccountName" />
+    <result column="CAPPED_BUDGET" property="cappedBudget" />
+    <result column="MODIFIED_FLAG" property="modifiedFlag" />
+    <result column="ALLOW_TRANSFER_FUND" property="allowTransferFund" />
+    <result column="FUND_RULES_ID" property="fundRulesId" />
+  </resultMap>
+
+    <!--根据id查询单条信息-->
+    <select id="selectById" resultMap="BaseResultMap">
+      select A.FUND_TEMPLATE_NAME, B.ID, B.BUDGET_ACCOUNT_NAME, B.CAPPED_BUDGET, B.MODIFIED_FLAG,
+      B.ALLOW_TRANSFER_FUND, B.FUND_RULES_ID
+      from RS_FUND_RULES A join RS_FUND_DETAILS B on A.ID = B.FUND_RULES_ID
+      where A.ID = #{id}
+      and B.DEL_FLAG =0 order by B.ext1 asc
+  </select>
+
+</mapper>

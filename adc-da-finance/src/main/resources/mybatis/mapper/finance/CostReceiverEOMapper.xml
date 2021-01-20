@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.finance.dao.CostReceiverEODao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="com.adc.da.finance.entity.CostReceiverEO">
+        <id column="id" property="id"/>
+        <result column="org_id" property="orgId"/>
+        <result column="org_name" property="orgName"/>
+        <result column="user_ids" property="userIds"/>
+        <result column="user_names" property="userNames"/>
+    </resultMap>
+
+    <!-- F_COST_RECEIVER table all fields -->
+    <sql id="Base_Column_List">
+     id, org_id, org_name, user_ids, user_names
+  </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                and id ${idOperator} #{id}
+            </if>
+            <if test="orgId != null">
+                and org_id ${orgIdOperator} #{orgId}
+            </if>
+            <if test="orgName != null">
+                and org_name ${orgNameOperator} #{orgName}
+            </if>
+            <if test="userIds != null">
+                and user_ids ${userIdsOperator} #{userIds}
+            </if>
+            <if test="userNames != null">
+                and user_names ${userNamesOperator} #{userNames}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="com.adc.da.finance.entity.CostReceiverEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+            SELECT SEQ_F_COST_RECEIVER.NEXTVAL FROM DUAL
+        </selectKey> -->
+        insert into F_COST_RECEIVER(<include refid="Base_Column_List"/>)
+        values (#{id, jdbcType=VARCHAR}, #{orgId, jdbcType=VARCHAR}, #{orgName, jdbcType=VARCHAR}, #{userIds, jdbcType=VARCHAR},
+        #{userNames, jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id="insertSelective" parameterType="com.adc.da.finance.entity.CostReceiverEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_F_COST_RECEIVER.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into F_COST_RECEIVER
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="orgId != null">org_id,</if>
+            <if test="orgName != null">org_name,</if>
+            <if test="userIds != null">user_ids,</if>
+            <if test="userNames != null">user_names,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id, jdbcType=VARCHAR},</if>
+            <if test="orgId != null">#{orgId, jdbcType=VARCHAR},</if>
+            <if test="orgName != null">#{orgName, jdbcType=VARCHAR},</if>
+            <if test="userIds != null">#{userIds, jdbcType=VARCHAR},</if>
+            <if test="userNames != null">#{userNames, jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <!-- 根据pk，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="com.adc.da.finance.entity.CostReceiverEO">
+    update F_COST_RECEIVER
+       set  org_id = #{orgId},
+            org_name = #{orgName},
+            user_ids = #{userIds},
+            user_names = #{userNames}
+     where  id = #{id}
+  </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.finance.entity.CostReceiverEO">
+        update F_COST_RECEIVER
+        <set>
+            <if test="orgId != null">
+                org_id = #{orgId},
+            </if>
+            <if test="orgName != null">
+                org_name = #{orgName},
+            </if>
+            <if test="userIds != null">
+                user_ids = #{userIds},
+            </if>
+            <if test="userNames != null">
+                user_names = #{userNames},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!-- 根据id查询 F_COST_RECEIVER -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from F_COST_RECEIVER
+        where id = #{value}
+
+    </select>
+
+    <!-- 根据id查询 F_COST_RECEIVER -->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from F_COST_RECEIVER
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from F_COST_RECEIVER
+     where id = #{value}
+
+  </delete>
+
+    <!-- F_COST_RECEIVER 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        select count(1) from F_COST_RECEIVER
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- F_COST_RECEIVER 列表总数-->
+    <select id="selectByOrgName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from F_COST_RECEIVER
+        where ORG_NAME = #{orgName}
+    </select>
+
+    <!-- 查询F_COST_RECEIVER列表 -->
+    <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        (select tmp_tb.* , rownum rn from
+        (select
+        <include refid="Base_Column_List"/>
+        from F_COST_RECEIVER
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select
+        <include refid="Base_Column_List"/>
+        from F_COST_RECEIVER
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+    </select>
+
+</mapper>

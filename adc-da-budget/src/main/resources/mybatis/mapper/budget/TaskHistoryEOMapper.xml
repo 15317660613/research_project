@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.budget.dao.TaskHistoryEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.budget.entity.TaskHistoryEO" >
+    <id column="id" property="id" />
+    <result column="task_id" property="taskId" />
+    <result column="task_name" property="taskName" />
+    <result column="project_id" property="projectId" />
+    <result column="budget_id" property="budgetId" />
+    <result column="dept_id" property="deptId" />
+    <result column="member_ids" property="memberIds" />
+    <result column="member_names" property="memberNames" />
+    <result column="plan_start_time" property="planStartTime" />
+    <result column="plan_end_time" property="planEndTime" />
+    <result column="priority" property="priority" />
+    <result column="del_flag" property="delFlag" />
+    <result column="operate_date" property="operateDate" />
+    <result column="operate_time" property="operateTime" />
+    <result column="operate_user" property="operateUser" />
+    <result column="operate_type" property="operateType" />
+  </resultMap>
+
+  <!-- TS_TASK_HISTORY table all fields -->
+  <sql id="Base_Column_List" >
+     id, task_id, task_name, project_id, budget_id, dept_id, member_ids, member_names, plan_start_time, plan_end_time, priority, del_flag, operate_date, operate_time, operate_user, operate_type
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id = #{id}
+      </if>
+      <if test="taskId != null" >
+        and task_id = #{taskId}
+      </if>
+      <if test="taskName != null" >
+        and task_name = #{taskName}
+      </if>
+      <if test="projectId != null" >
+        and project_id = #{projectId}
+      </if>
+      <if test="budgetId != null" >
+        and budget_id = #{budgetId}
+      </if>
+      <if test="deptId != null" >
+        and dept_id = #{deptId}
+      </if>
+      <if test="memberIds != null" >
+        and member_ids = #{memberIds}
+      </if>
+      <if test="memberNames != null" >
+        and member_names = #{memberNames}
+      </if>
+      <if test="planStartTime != null" >
+        and plan_start_time = #{planStartTime}
+      </if>
+      <if test="planStartTime1 != null" >
+        and plan_start_time &gt;= #{planStartTime1}
+      </if>
+      <if test="planStartTime2 != null" >
+        and plan_start_time &lt;= #{planStartTime2}
+      </if>
+      <if test="planEndTime != null" >
+        and plan_end_time = #{planEndTime}
+      </if>
+      <if test="planEndTime1 != null" >
+        and plan_end_time &gt;= #{planEndTime1}
+      </if>
+      <if test="planEndTime2 != null" >
+        and plan_end_time &lt;= #{planEndTime2}
+      </if>
+      <if test="priority != null" >
+        and priority = #{priority}
+      </if>
+      <if test="delFlag != null" >
+        and del_flag = #{delFlag}
+      </if>
+      <if test="operateDate != null" >
+        and operate_date = #{operateDate}
+      </if>
+      <if test="operateDate1 != null" >
+        and operate_date &gt;= #{operateDate1}
+      </if>
+      <if test="operateDate2 != null" >
+        and operate_date &lt;= #{operateDate2}
+      </if>
+      <if test="operateTime != null" >
+        and operate_time = #{operateTime}
+      </if>
+      <if test="operateTime1 != null" >
+        and operate_time &gt;= #{operateTime1}
+      </if>
+      <if test="operateTime2 != null" >
+        and operate_time &lt;= #{operateTime2}
+      </if>
+      <if test="operateUser != null" >
+        and operate_user = #{operateUser}
+      </if>
+      <if test="operateType != null" >
+        and operate_type = #{operateType}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.budget.entity.TaskHistoryEO" >
+     <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_TASK_HISTORY.NEXTVAL FROM DUAL
+    </selectKey>
+      insert into TS_TASK_HISTORY
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+                    <if test="id != null" >id,</if>
+                    <if test="taskId != null" >task_id,</if>
+                    <if test="taskName != null" >task_name,</if>
+                    <if test="projectId != null" >project_id,</if>
+                    <if test="budgetId != null" >budget_id,</if>
+                    <if test="deptId != null" >dept_id,</if>
+                    <if test="memberIds != null" >member_ids,</if>
+                    <if test="memberNames != null" >member_names,</if>
+                    <if test="planStartTime != null" >plan_start_time,</if>
+                    <if test="planEndTime != null" >plan_end_time,</if>
+                    <if test="priority != null" >priority,</if>
+                    <if test="delFlag != null" >del_flag,</if>
+                    <if test="operateDate != null" >operate_date,</if>
+                    <if test="operateTime != null" >operate_time,</if>
+                    <if test="operateUser != null" >operate_user,</if>
+                    <if test="operateType != null" >operate_type,</if>
+                </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides="," >
+                    <if test="id != null" >#{id},</if>
+                    <if test="taskId != null" >#{taskId},</if>
+                    <if test="taskName != null" >#{taskName},</if>
+                    <if test="projectId != null" >#{projectId},</if>
+                    <if test="budgetId != null" >#{budgetId},</if>
+                    <if test="deptId != null" >#{deptId},</if>
+                    <if test="memberIds != null" >#{memberIds},</if>
+                    <if test="memberNames != null" >#{memberNames},</if>
+                    <if test="planStartTime != null" >#{planStartTime},</if>
+                    <if test="planEndTime != null" >#{planEndTime},</if>
+                    <if test="priority != null" >#{priority},</if>
+                    <if test="delFlag != null" >#{delFlag},</if>
+                    <if test="operateDate != null" >#{operateDate},</if>
+                    <if test="operateTime != null" >#{operateTime},</if>
+                    <if test="operateUser != null" >#{operateUser},</if>
+                    <if test="operateType != null" >#{operateType},</if>
+                </trim>
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.budget.entity.TaskHistoryEO" >
+        <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_TASK_HISTORY.NEXTVAL FROM DUAL
+    </selectKey>
+        insert into TS_TASK_HISTORY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="taskId != null" >task_id,</if>
+                <if test="taskName != null" >task_name,</if>
+                <if test="projectId != null" >project_id,</if>
+                <if test="budgetId != null" >budget_id,</if>
+                <if test="deptId != null" >dept_id,</if>
+                <if test="memberIds != null" >member_ids,</if>
+                <if test="memberNames != null" >member_names,</if>
+                <if test="planStartTime != null" >plan_start_time,</if>
+                <if test="planEndTime != null" >plan_end_time,</if>
+                <if test="priority != null" >priority,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="operateDate != null" >operate_date,</if>
+                <if test="operateTime != null" >operate_time,</if>
+                <if test="operateUser != null" >operate_user,</if>
+                <if test="operateType != null" >operate_type,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id},</if>
+                <if test="taskId != null" >#{taskId},</if>
+                <if test="taskName != null" >#{taskName},</if>
+                <if test="projectId != null" >#{projectId},</if>
+                <if test="budgetId != null" >#{budgetId},</if>
+                <if test="deptId != null" >#{deptId},</if>
+                <if test="memberIds != null" >#{memberIds},</if>
+                <if test="memberNames != null" >#{memberNames},</if>
+                <if test="planStartTime != null" >#{planStartTime},</if>
+                <if test="planEndTime != null" >#{planEndTime},</if>
+                <if test="priority != null" >#{priority},</if>
+                <if test="delFlag != null" >#{delFlag},</if>
+                <if test="operateDate != null" >#{operateDate},</if>
+                <if test="operateTime != null" >#{operateTime},</if>
+                <if test="operateUser != null" >#{operateUser},</if>
+                <if test="operateType != null" >#{operateType},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.budget.entity.TaskHistoryEO" >
+    update TS_TASK_HISTORY
+       set  task_id = #{taskId},
+            task_name = #{taskName},
+            project_id = #{projectId},
+            budget_id = #{budgetId},
+            dept_id = #{deptId},
+            member_ids = #{memberIds},
+            member_names = #{memberNames},
+            plan_start_time = #{planStartTime},
+            plan_end_time = #{planEndTime},
+            priority = #{priority},
+            del_flag = #{delFlag},
+            operate_date = #{operateDate},
+            operate_time = #{operateTime},
+            operate_user = #{operateUser},
+            operate_type = #{operateType}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.budget.entity.TaskHistoryEO" >
+    update TS_TASK_HISTORY
+    <set >
+      <if test="taskId != null" >
+        task_id = #{taskId},
+      </if>
+      <if test="taskName != null" >
+        task_name = #{taskName},
+      </if>
+      <if test="projectId != null" >
+        project_id = #{projectId},
+      </if>
+      <if test="budgetId != null" >
+        budget_id = #{budgetId},
+      </if>
+      <if test="deptId != null" >
+        dept_id = #{deptId},
+      </if>
+      <if test="memberIds != null" >
+        member_ids = #{memberIds},
+      </if>
+      <if test="memberNames != null" >
+        member_names = #{memberNames},
+      </if>
+      <if test="planStartTime != null" >
+        plan_start_time = #{planStartTime},
+      </if>
+      <if test="planEndTime != null" >
+        plan_end_time = #{planEndTime},
+      </if>
+      <if test="priority != null" >
+        priority = #{priority},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="operateDate != null" >
+        operate_date = #{operateDate},
+      </if>
+      <if test="operateTime != null" >
+        operate_time = #{operateTime},
+      </if>
+      <if test="operateUser != null" >
+        operate_user = #{operateUser},
+      </if>
+      <if test="operateType != null" >
+        operate_type = #{operateType},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 TS_TASK_HISTORY -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from TS_TASK_HISTORY
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TS_TASK_HISTORY
+     where id = #{value}
+
+  </delete>
+
+  <!-- TS_TASK_HISTORY 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from TS_TASK_HISTORY
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TS_TASK_HISTORY列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from TS_TASK_HISTORY
+			 <include refid="Base_Where_Clause"/>
+			) tmp_tb where rownum &lt;= #{pager.endIndex})
+			where rn &gt;= #{pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from TS_TASK_HISTORY
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+</mapper>

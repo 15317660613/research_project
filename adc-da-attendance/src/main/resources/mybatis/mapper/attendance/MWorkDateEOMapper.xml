@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.attendance.dao.MWorkDateEODao" >
+
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="com.adc.da.attendance.entity.WorkDateEO" >
+        <id column="id" property="id" />
+        <result column="dept" property="dept" />
+        <result column="date_time" property="dateTime" />
+        <result column="week" property="week" />
+        <result column="is_work_date" property="isWorkDate" />
+        <result column="is_public_holiday" property="isPublicHoliday" />
+        <result column="holiday_name" property="holidayName" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, dept, date_time, week, is_work_date, is_public_holiday, holiday_name
+    </sql>
+
+    <select id="selectByBeginAndLast" parameterType="com.adc.da.attendance.entity.ExportDateExcleDTO" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+         FROM WORK_DATE WHERE IS_WORK_DATE ='1' AND DATE_TIME BETWEEN #{startDate} AND #{endDate}
+    </select>
+
+    <select id ="selectAllLstByBeginAndLast" parameterType="com.adc.da.attendance.entity.ExportDateExcleDTO" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM WORK_DATE WHERE  DATE_TIME BETWEEN #{startDate} AND #{endDate} ORDER BY DATE_TIME
+    </select>
+
+</mapper>

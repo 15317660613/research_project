@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.adc.da.statistics.dao.ContractAmountEODao">
+    <!-- Result Map-->
+    <resultMap id = "BaseResultMap" type = "com.adc.da.statistics.entity.ContractAmountEO">
+        <id column = "project_id_" property = "projectId"/>
+        <result column = "contract_no_" property = "contractNo"/>
+        <result column = "business_id_" property = "businessId"/>
+        <result column = "dept_id_" property = "deptId"/>
+        <result column = "contract_amount_" property = "contractAmount"/>
+        <result column = "create_time_" property = "createTime"/>
+        <result column = "project_begin_time_" property = "projectBeginTime"/>
+        <result column = "ext_info_01_" property = "extInfo01"/>
+        <result column = "ext_info_02_" property = "extInfo02"/>
+        <result column = "ext_info_03_" property = "extInfo03"/>
+        <!--<result column = "sum_" property = "sumValue"/>-->
+    </resultMap>
+
+    <!-- ST_CONTRACT_AMOUNT table all fields -->
+    <sql id = "Base_Column_List">
+        project_id_, contract_no_, business_id_, dept_id_, contract_amount_, create_time_, project_begin_time_, ext_info_01_, ext_info_02_, ext_info_03_
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id = "Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides = ",">
+            <if test = "projectId != null">
+                and project_id_ ${projectIdOperator} #{projectId}
+            </if>
+            <if test = "contractNo != null">
+                and contract_no_ ${contractNoOperator} #{contractNo}
+            </if>
+            <if test = "businessId != null">
+                and business_id_ ${businessIdOperator} #{businessId}
+            </if>
+            <if test = "deptId != null">
+                and dept_id_ ${deptIdOperator} #{deptId}
+            </if>
+            <if test = "contractAmount != null">
+                and contract_amount_ ${contractAmountOperator} #{contractAmount}
+            </if>
+            <if test = "createTime != null">
+                and create_time_ ${createTimeOperator} #{createTime}
+            </if>
+            <if test = "createTime1 != null">
+                and create_time_ &gt;= #{createTime1}
+            </if>
+            <if test = "createTime2 != null">
+                and create_time_ &lt;= #{createTime2}
+            </if>
+            <if test = "projectBeginTime != null">
+                and project_begin_time_ ${projectBeginTimeOperator} #{projectBeginTime}
+            </if>
+            <if test = "projectBeginTime1 != null">
+                and project_begin_time_ &gt;= #{projectBeginTime1}
+            </if>
+            <if test = "projectBeginTime2 != null">
+                and project_begin_time_ &lt;= #{projectBeginTime2}
+            </if>
+            <if test = "extInfo01 != null">
+                and ext_info_01_ ${extInfo01Operator} #{extInfo01}
+            </if>
+            <if test = "extInfo02 != null">
+                and ext_info_02_ ${extInfo02Operator} #{extInfo02}
+            </if>
+            <if test = "extInfo03 != null">
+                and ext_info_03_ ${extInfo03Operator} #{extInfo03}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id = "insert" parameterType = "com.adc.da.statistics.entity.ContractAmountEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="project_id_">
+            SELECT SEQ_ST_CONTRACT_AMOUNT.NEXTVAL FROM DUAL
+        </selectKey> -->
+        insert into ST_CONTRACT_AMOUNT(<include refid = "Base_Column_List"/>)
+        values (#{projectId, jdbcType=VARCHAR}, #{contractNo, jdbcType=VARCHAR}, #{businessId, jdbcType=VARCHAR},
+        #{deptId, jdbcType=VARCHAR}, #{contractAmount, jdbcType=DOUBLE}, #{createTime, jdbcType=TIMESTAMP},
+        #{projectBeginTime, jdbcType=TIMESTAMP}, #{extInfo01, jdbcType=VARCHAR}, #{extInfo02, jdbcType=VARCHAR},
+        #{extInfo03, jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id = "insertSelective" parameterType = "com.adc.da.statistics.entity.ContractAmountEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="project_id_">
+        SELECT SEQ_ST_CONTRACT_AMOUNT.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into ST_CONTRACT_AMOUNT
+        <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+            <if test = "projectId != null">project_id_,</if>
+            <if test = "contractNo != null">contract_no_,</if>
+            <if test = "businessId != null">business_id_,</if>
+            <if test = "deptId != null">dept_id_,</if>
+            <if test = "contractAmount != null">contract_amount_,</if>
+            <if test = "createTime != null">create_time_,</if>
+            <if test = "projectBeginTime != null">project_begin_time_,</if>
+            <if test = "extInfo01 != null">ext_info_01_,</if>
+            <if test = "extInfo02 != null">ext_info_02_,</if>
+            <if test = "extInfo03 != null">ext_info_03_,</if>
+        </trim>
+        <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+            <if test = "projectId != null">#{projectId, jdbcType=VARCHAR},</if>
+            <if test = "contractNo != null">#{contractNo, jdbcType=VARCHAR},</if>
+            <if test = "businessId != null">#{businessId, jdbcType=VARCHAR},</if>
+            <if test = "deptId != null">#{deptId, jdbcType=VARCHAR},</if>
+            <if test = "contractAmount != null">#{contractAmount, jdbcType=DOUBLE},</if>
+            <if test = "createTime != null">#{createTime, jdbcType=TIMESTAMP},</if>
+            <if test = "projectBeginTime != null">#{projectBeginTime, jdbcType=TIMESTAMP},</if>
+            <if test = "extInfo01 != null">#{extInfo01, jdbcType=VARCHAR},</if>
+            <if test = "extInfo02 != null">#{extInfo02, jdbcType=VARCHAR},</if>
+            <if test = "extInfo03 != null">#{extInfo03, jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+    <insert id = "insertSelectiveAll" parameterType = "java.util.List">
+        INSERT ALL
+        <foreach collection = "list" item = "item" index = "index">
+            <if test = "item.projectId !=null">
+                into ST_CONTRACT_AMOUNT
+                <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+                    <if test = "item.projectId != null">project_id_,</if>
+                    <if test = "item.contractNo != null">contract_no_,</if>
+                    <if test = "item.businessId != null">business_id_,</if>
+                    <if test = "item.deptId != null">dept_id_,</if>
+                    <if test = "item.contractAmount != null">contract_amount_,</if>
+                    <if test = "item.createTime != null">create_time_,</if>
+                    <if test = "item.projectBeginTime != null">project_begin_time_,</if>
+                    <if test = "item.extInfo01 != null">ext_info_01_,</if>
+                    <if test = "item.extInfo02 != null">ext_info_02_,</if>
+                    <if test = "item.extInfo03 != null">ext_info_03_,</if>
+                </trim>
+                <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+                    <if test = "item.projectId != null">#{item.projectId, jdbcType=VARCHAR},</if>
+                    <if test = "item.contractNo != null">#{item.contractNo, jdbcType=VARCHAR},</if>
+                    <if test = "item.businessId != null">#{item.businessId, jdbcType=VARCHAR},</if>
+                    <if test = "item.deptId != null">#{item.deptId, jdbcType=VARCHAR},</if>
+                    <if test = "item.contractAmount != null">#{item.contractAmount, jdbcType=DOUBLE},</if>
+                    <if test = "item.createTime != null">#{item.createTime, jdbcType=TIMESTAMP},</if>
+                    <if test = "item.projectBeginTime != null">#{item.projectBeginTime, jdbcType=TIMESTAMP},</if>
+                    <if test = "item.extInfo01 != null">#{item.extInfo01, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo02 != null">#{item.extInfo02, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo03 != null">#{item.extInfo03, jdbcType=VARCHAR},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+    <!-- 根据pk，修改记录-->
+    <update id = "updateByPrimaryKey" parameterType = "com.adc.da.statistics.entity.ContractAmountEO">
+        UPDATE ST_CONTRACT_AMOUNT
+        SET contract_no_        = #{contractNo},
+            business_id_        = #{businessId},
+            dept_id_            = #{deptId},
+            contract_amount_    = #{contractAmount},
+            create_time_        = #{createTime},
+            project_begin_time_ = #{projectBeginTime},
+            ext_info_01_        = #{extInfo01},
+            ext_info_02_        = #{extInfo02},
+            ext_info_03_        = #{extInfo03}
+        WHERE project_id_ = #{projectId}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id = "updateByPrimaryKeySelective" parameterType = "com.adc.da.statistics.entity.ContractAmountEO">
+        update ST_CONTRACT_AMOUNT
+        <set>
+            <if test = "contractNo != null">
+                contract_no_ = #{contractNo},
+            </if>
+            <if test = "businessId != null">
+                business_id_ = #{businessId},
+            </if>
+            <if test = "deptId != null">
+                dept_id_ = #{deptId},
+            </if>
+            <if test = "contractAmount != null">
+                contract_amount_ = #{contractAmount},
+            </if>
+            <if test = "createTime != null">
+                create_time_ = #{createTime},
+            </if>
+            <if test = "projectBeginTime != null">
+                project_begin_time_ = #{projectBeginTime},
+            </if>
+            <if test = "extInfo01 != null">
+                ext_info_01_ = #{extInfo01},
+            </if>
+            <if test = "extInfo02 != null">
+                ext_info_02_ = #{extInfo02},
+            </if>
+            <if test = "extInfo03 != null">
+                ext_info_03_ = #{extInfo03},
+            </if>
+        </set>
+        where project_id_ = #{projectId}
+    </update>
+
+    <!-- 根据id查询 ST_CONTRACT_AMOUNT -->
+    <select id = "selectByPrimaryKey" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+        select
+        <include refid = "Base_Column_List"/>
+        from ST_CONTRACT_AMOUNT
+        where project_id_ = #{value}
+
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id = "deleteByPrimaryKey" parameterType = "java.lang.String">
+        DELETE
+        FROM ST_CONTRACT_AMOUNT
+        WHERE project_id_ = #{value}
+
+    </delete>
+
+    <!-- ST_CONTRACT_AMOUNT 列表总数-->
+    <select id = "queryByCount" resultType = "java.lang.Integer" parameterType = "com.adc.da.base.page.BasePage">
+        select count(1) from ST_CONTRACT_AMOUNT
+        <include refid = "Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询ST_CONTRACT_AMOUNT列表 -->
+    <select id = "queryByPage" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from
+        (select tmp_tb.* , rownum rn from
+        (select
+        <include refid = "Base_Column_List"/>
+        from ST_CONTRACT_AMOUNT
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id = "queryByList" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from ST_CONTRACT_AMOUNT
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+    </select>
+
+    <select id = "countProjectByDeptId" resultMap = "BaseResultMap">
+        SELECT count(*) AS ext_info_02_, sum(CONTRACT_AMOUNT_) AS contract_amount_
+        FROM ST_CONTRACT_AMOUNT
+        WHERE DEPT_ID_ IN (SELECT id FROM TS_ORG CONNECT BY PRIOR ID = PARENT_ID START WITH ID = #{deptId})
+          AND ((CREATE_TIME_ BETWEEN #{startTime} AND #{finishTime}))
+    </select>
+
+    <select id = "countProjectByBudgetId" resultMap = "BaseResultMap">
+        SELECT
+        TRUNC(CREATE_TIME_, 'MON') AS CREAE_TIME_,
+        to_char(CREATE_TIME_, 'mm') AS ext_info_01_,
+        count(*) AS ext_info_02_,
+        sum(CONTRACT_AMOUNT_) AS contract_amount_
+        FROM ST_CONTRACT_AMOUNT
+        WHERE (CREATE_TIME_ BETWEEN #{startTime} AND #{finishTime})
+        <if test = "budgetId != null">
+            AND BUSINESS_ID_ = #{budgetId}
+        </if>
+        GROUP BY TRUNC(CREATE_TIME_, 'MON'), to_char(CREATE_TIME_, 'mm')
+    </select>
+
+    <select id = "queryProjectByBudgetId" resultMap = "BaseResultMap">
+        SELECT
+        PROJECT_ID_,
+        CREATE_TIME_,
+        to_char(CREATE_TIME_, 'mm') AS ext_info_01_,
+        CONTRACT_AMOUNT_,
+        EXT_INFO_02_,
+        EXT_INFO_03_
+        FROM ST_CONTRACT_AMOUNT
+        WHERE (CREATE_TIME_ BETWEEN #{startTime} AND #{finishTime})
+        <if test = "budgetId != null">
+            AND BUSINESS_ID_ = #{budgetId}
+        </if>
+        -- GROUP BY TRUNC(CREATE_TIME_, 'MON'), to_char(CREATE_TIME_, 'mm')
+    </select>
+
+    <resultMap id = "DataBoardTreeMap" type = "com.adc.da.statistics.entity.DataBoardTreeEO">
+        <id column = "ID_" property = "id"/>
+        <result column = "NAME_" property = "name"/>
+        <result column = "amount_" property = "amount"/>
+    </resultMap>
+
+    <sql id = "getBudgetTreeBillingSql">
+        SELECT b.ID                        AS ID_,
+               b.PROJECT_NAME              AS NAME_,
+               nvl(sum(INVOICE_AMOUNT), 0) AS amount_
+        FROM TS_BUDGET b
+                 LEFT JOIN ST_CONTRACT_AMOUNT ca ON b.ID = ca.BUSINESS_ID_
+                 LEFT JOIN PF_PROJECT_CONTRACT_INVOICE ci ON ci.PROJECT_ID = ca.PROJECT_ID_
+        WHERE DOMAIN_ID IS NOT NULL
+          AND (b.CREATE_TIME BETWEEN #{startTime} AND #{finishTime})
+          AND ((INVOICE_DATE BETWEEN #{startTime} AND #{finishTime}) OR INVOICE_DATE IS NULL)
+        GROUP BY b.ID, b.PROJECT_NAME
+        ORDER BY amount_ DESC
+    </sql>
+    <!--查询 业务排序-->
+    <sql id = "getBudgetTreeContractAmountSql">
+        SELECT b.ID                          AS ID_,
+               b.PROJECT_NAME                AS NAME_,
+               nvl(sum(CONTRACT_AMOUNT_), 0) AS amount_
+        FROM TS_BUDGET b
+                 LEFT JOIN ST_CONTRACT_AMOUNT ca ON b.ID = ca.BUSINESS_ID_
+        WHERE DOMAIN_ID IS NOT NULL
+          AND (b.CREATE_TIME BETWEEN #{startTime} AND #{finishTime})
+          AND (ca.CREATE_TIME_ BETWEEN #{startTime} AND #{finishTime})
+        GROUP BY b.ID, b.PROJECT_NAME
+        ORDER BY amount_ DESC
+    </sql>
+    <!--查询 部门开票排名-->
+    <sql id = "getBudgetTreeDeptExpenditureSql">
+        SELECT o.ID                      AS ID_,
+               o.ORG_NAME                AS NAME_,
+               nvl(sum(EXPENDITURE_), 0) AS amount_
+        FROM TS_ORG o
+                 LEFT JOIN ST_DATA_BOARD_ORG b
+                           ON o.ID = b.DEPT_ID_
+        WHERE EXPENDITURE_ IS NOT NULL
+          AND YEAR_ = (to_char(#{startTime}, 'yyyy'))
+        GROUP BY o.ID, o.ORG_NAME
+        ORDER BY amount_ DESC
+    </sql>
+    <!--对结果进行筛选-->
+    <sql id = "getBudgetTreeSqlWithListSize">
+        SELECT * FROM
+        (
+        <choose>
+            <when test = 'type == 1'>
+                <include refid = "getBudgetTreeBillingSql"/>
+            </when>
+            <when test = 'type == 2'>
+                <include refid = "getBudgetTreeContractAmountSql"/>
+            </when>
+            <when test = 'type == 4'>
+                <include refid = "getBudgetTreeDeptExpenditureSql"/>
+            </when>
+            <otherwise>
+                <include refid = "getBudgetTreeBillingSql"/>
+            </otherwise>
+        </choose>
+        )t
+        <where>
+            ROWNUM &lt;= #{pageSize}
+        </where>
+    </sql>
+
+    <select id = "getBudgetTree" resultMap = "DataBoardTreeMap">
+        <choose>
+            <when test = 'pageSize == null'>
+                <if test = "type == 1">
+                    <include refid = "getBudgetTreeBillingSql"/>
+                </if>
+                <if test = "type == 2">
+                    <include refid = "getBudgetTreeContractAmountSql"/>
+                </if>
+                <if test = "type == 4">
+                    <include refid = "getBudgetTreeDeptExpenditureSql"/>
+                </if>
+            </when>
+            <otherwise>
+                <include refid = "getBudgetTreeSqlWithListSize"/>
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id = "getMainBoardPieChart" resultMap = "DataBoardTreeMap">
+        <if test = "type == 1">
+            <include refid = "mainBoarPieChartContractAmount"/>
+        </if>
+        <if test = "type == 2">
+            <include refid = "mainBoarPieChartBilling"/>
+        </if>
+        <if test = "type == 4">
+            <include refid = "mainBoarPieChartCredit"/>
+        </if>
+
+    </select>
+
+    <sql id = "mainBoarPieChartContractAmount">
+        SELECT ROOT_ID_ AS ID_,
+        ROOT_NAME_ AS NAME_,
+        sum(CONTRACT_AMOUNT_) AS amount_
+        FROM ST_CONTRACT_AMOUNT st
+        LEFT JOIN (SELECT CONNECT_BY_ROOT id AS ROOT_ID_,
+        CONNECT_BY_ROOT ORG_NAME AS ROOT_NAME_,
+        o.id
+        FROM TS_ORG o
+        CONNECT BY PRIOR o.id = o.PARENT_ID
+        START WITH o.id IN
+        <foreach collection = "deptIds" item = "deptId" separator = "," open = "(" close = ")">
+            #{deptId}
+        </foreach>
+        )t ON t.id = st.DEPT_ID_
+        WHERE ROOT_ID_ IS NOT NULL
+        AND (st.CREATE_TIME_ BETWEEN #{startTime} AND #{finishTime})
+        GROUP BY ROOT_ID_, ROOT_NAME_
+        Order By ID_
+    </sql>
+    <!--开票-->
+    <sql id = "mainBoarPieChartBilling">
+        SELECT ROOT_ID_ AS ID_,
+        ROOT_NAME_ AS NAME_,
+        sum(INVOICE_AMOUNT) AS AMOUNT_
+        FROM ST_CONTRACT_AMOUNT ca
+        LEFT JOIN PF_PROJECT_CONTRACT_INVOICE ci
+        ON ca.PROJECT_ID_ = ci.PROJECT_ID
+        AND ci.INVOICE_AMOUNT IS NOT NULL
+        LEFT JOIN (SELECT CONNECT_BY_ROOT id as ROOT_ID_, CONNECT_BY_ROOT ORG_NAME as ROOT_NAME_, o.id AS D_ID_
+        FROM TS_ORG o
+        CONNECT BY PRIOR o.id = o.PARENT_ID
+        START WITH o.id IN
+        <foreach collection = "deptIds" item = "deptId" separator = "," open = "(" close = ")">
+            #{deptId}
+        </foreach>
+        ) ON D_ID_ = ca.DEPT_ID_
+        WHERE ROOT_ID_ IS NOT NULL
+        AND (ca.CREATE_TIME_ BETWEEN #{startTime} AND #{finishTime})
+        GROUP BY ROOT_ID_, ROOT_NAME_
+        Order By ID_
+    </sql>
+    <!--进账-->
+    <sql id = "mainBoarPieChartCredit">
+        SELECT ROOT_ID_ AS ID_,
+        ROOT_NAME_ AS NAME_,
+        sum(CREDIT_) AS AMOUNT_
+        FROM ST_DATA_BOARD_ORG st
+        LEFT JOIN (SELECT CONNECT_BY_ROOT id as ROOT_ID_,
+        CONNECT_BY_ROOT ORG_NAME as ROOT_NAME_,
+        o.id AS D_ID_
+        FROM TS_ORG o
+        CONNECT BY PRIOR o.id = o.PARENT_ID
+        START WITH o.id IN
+        <foreach collection = "deptIds" item = "deptId" separator = "," open = "(" close = ")">
+            #{deptId}
+        </foreach>
+        )t ON t.D_ID_ = st.DEPT_ID_
+        WHERE ROOT_ID_ IS NOT NULL
+        AND YEAR_ = (to_char(#{startTime}, 'yyyy'))
+        GROUP BY ROOT_ID_, ROOT_NAME_
+        ORDER BY ID_
+    </sql>
+</mapper>

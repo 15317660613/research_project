@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.epis.dao.BuinessCodeDetailInfoEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.epis.entity.BuinessCodeDetailInfoEO" >
+    <id column="id" property="id" />
+    <result column="code_static_id" property="codeStaticId" />
+    <result column="year" property="year" />
+    <result column="week" property="week" />
+    <result column="code_num" property="codeNum" />
+    <result column="create_time" property="createTime" />
+    <result column="modify_time" property="modifyTime" />
+    <result column="create_user" property="createUser" />
+    <result column="create_code_num" property="createCodeNum" />
+    <result column="current_code_num" property="currentCodeNum" />
+  </resultMap>
+
+  <!-- BUINESS_CODE_DETAIL_INFO table all fields -->
+  <sql id="Base_Column_List" >
+     id, code_static_id, year, week, code_num, create_time, modify_time, create_user, create_code_num, current_code_num
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="codeStaticId != null" >
+        and code_static_id ${codeStaticIdOperator} #{codeStaticId}
+      </if>
+      <if test="year != null" >
+        and year ${yearOperator} #{year}
+      </if>
+      <if test="week != null" >
+        and week ${weekOperator} #{week}
+      </if>
+      <if test="codeNum != null" >
+        and code_num ${codeNumOperator} #{codeNum}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="modifyTime != null" >
+        and modify_time ${modifyTimeOperator} #{modifyTime}
+      </if>
+      <if test="modifyTime1 != null" >
+        and modify_time &gt;= #{modifyTime1}
+      </if>
+      <if test="modifyTime2 != null" >
+        and modify_time &lt;= #{modifyTime2}
+      </if>
+      <if test="createUser != null" >
+        and create_user ${createUserOperator} #{createUser}
+      </if>
+      <if test="createCodeNum != null" >
+        and create_code_num ${createCodeNumOperator} #{createCodeNum}
+      </if>
+      <if test="currentCodeNum != null" >
+        and current_code_num ${currentCodeNumOperator} #{currentCodeNum}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.epis.entity.BuinessCodeDetailInfoEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_BUINESS_CODE_DETAIL_INFO.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into BUINESS_CODE_DETAIL_INFO(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{codeStaticId, jdbcType=VARCHAR}, #{year, jdbcType=INTEGER}, #{week, jdbcType=INTEGER}, #{codeNum, jdbcType=INTEGER}, #{createTime, jdbcType=TIMESTAMP}, #{modifyTime, jdbcType=TIMESTAMP}, #{createUser, jdbcType=VARCHAR}, #{createCodeNum, jdbcType=INTEGER}, #{currentCodeNum, jdbcType=INTEGER})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.epis.entity.BuinessCodeDetailInfoEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_BUINESS_CODE_DETAIL_INFO.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into BUINESS_CODE_DETAIL_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="codeStaticId != null" >code_static_id,</if>
+                <if test="year != null" >year,</if>
+                <if test="week != null" >week,</if>
+                <if test="codeNum != null" >code_num,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="modifyTime != null" >modify_time,</if>
+                <if test="createUser != null" >create_user,</if>
+                <if test="createCodeNum != null" >create_code_num,</if>
+                <if test="currentCodeNum != null" >current_code_num,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="codeStaticId != null" >#{codeStaticId, jdbcType=VARCHAR},</if>
+                <if test="year != null" >#{year, jdbcType=INTEGER},</if>
+                <if test="week != null" >#{week, jdbcType=INTEGER},</if>
+                <if test="codeNum != null" >#{codeNum, jdbcType=INTEGER},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="modifyTime != null" >#{modifyTime, jdbcType=TIMESTAMP},</if>
+                <if test="createUser != null" >#{createUser, jdbcType=VARCHAR},</if>
+                <if test="createCodeNum != null" >#{createCodeNum, jdbcType=INTEGER},</if>
+                <if test="currentCodeNum != null" >#{currentCodeNum, jdbcType=INTEGER},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.epis.entity.BuinessCodeDetailInfoEO" >
+    update BUINESS_CODE_DETAIL_INFO
+       set  code_static_id = #{codeStaticId},
+            year = #{year},
+            week = #{week},
+            code_num = #{codeNum},
+            create_time = #{createTime},
+            modify_time = #{modifyTime},
+            create_user = #{createUser},
+            create_code_num = #{createCodeNum},
+            current_code_num = #{currentCodeNum}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.epis.entity.BuinessCodeDetailInfoEO" >
+    update BUINESS_CODE_DETAIL_INFO
+    <set >
+      <if test="codeStaticId != null" >
+        code_static_id = #{codeStaticId},
+      </if>
+      <if test="year != null" >
+        year = #{year},
+      </if>
+      <if test="week != null" >
+        week = #{week},
+      </if>
+      <if test="codeNum != null" >
+        code_num = #{codeNum},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser},
+      </if>
+      <if test="createCodeNum != null" >
+        create_code_num = #{createCodeNum},
+      </if>
+      <if test="currentCodeNum != null" >
+        current_code_num = #{currentCodeNum},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 BUINESS_CODE_DETAIL_INFO -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from BUINESS_CODE_DETAIL_INFO
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from BUINESS_CODE_DETAIL_INFO
+     where id = #{value}
+
+  </delete>
+
+  <!-- BUINESS_CODE_DETAIL_INFO 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from BUINESS_CODE_DETAIL_INFO
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询BUINESS_CODE_DETAIL_INFO列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from BUINESS_CODE_DETAIL_INFO
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from BUINESS_CODE_DETAIL_INFO
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

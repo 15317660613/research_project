@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.ext.sys.userdetail.dao.UserDetailEODao" >
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="com.adc.da.ext.sys.userdetail.entity.UserDetailEO" >
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="update_pwd_time" property="updatePwdTime" />
+        <result column="frozen_flag" property="frozenFlag" />
+    </resultMap>
+
+    <!-- TS_USER_DETAIL table all fields -->
+    <sql id="Base_Column_List" >
+     id, user_id, update_pwd_time, frozen_flag
+  </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides="," >
+            <if test="id != null" >
+                and id ${idOperator} #{id}
+            </if>
+            <if test="userId != null" >
+                and user_id ${userIdOperator} #{userId}
+            </if>
+            <if test="updatePwdTime != null" >
+                and update_pwd_time ${updatePwdTimeOperator} #{updatePwdTime}
+            </if>
+            <if test="updatePwdTime1 != null" >
+                and update_pwd_time &gt;= #{updatePwdTime1}
+            </if>
+            <if test="updatePwdTime2 != null" >
+                and update_pwd_time &lt;= #{updatePwdTime2}
+            </if>
+            <if test="frozenFlag != null" >
+                and frozen_flag ${frozenFlagOperator} #{frozenFlag}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="com.adc.da.ext.sys.userdetail.entity.UserDetailEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+            SELECT SEQ_TS_USER_DETAIL.NEXTVAL FROM DUAL
+        </selectKey> -->
+        insert into TS_USER_DETAIL(<include refid="Base_Column_List" />)
+        values (#{id, jdbcType=VARCHAR}, #{userId, jdbcType=VARCHAR}, #{updatePwdTime, jdbcType=TIMESTAMP}, #{frozenFlag, jdbcType=INTEGER})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id="insertSelective" parameterType="com.adc.da.ext.sys.userdetail.entity.UserDetailEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_USER_DETAIL.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into TS_USER_DETAIL
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >id,</if>
+            <if test="userId != null" >user_id,</if>
+            <if test="updatePwdTime != null" >update_pwd_time,</if>
+            <if test="frozenFlag != null" >frozen_flag,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+            <if test="userId != null" >#{userId, jdbcType=VARCHAR},</if>
+            <if test="updatePwdTime != null" >#{updatePwdTime, jdbcType=TIMESTAMP},</if>
+            <if test="frozenFlag != null" >#{frozenFlag, jdbcType=INTEGER},</if>
+        </trim>
+    </insert>
+
+    <!-- 根据pk，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="com.adc.da.ext.sys.userdetail.entity.UserDetailEO" >
+    update TS_USER_DETAIL
+       set  user_id = #{userId},
+            update_pwd_time = #{updatePwdTime},
+            frozen_flag = #{frozenFlag}
+     where  id = #{id}
+  </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.ext.sys.userdetail.entity.UserDetailEO" >
+        update TS_USER_DETAIL
+        <set >
+            <if test="userId != null" >
+                user_id = #{userId},
+            </if>
+            <if test="updatePwdTime != null" >
+                update_pwd_time = #{updatePwdTime},
+            </if>
+            <if test="frozenFlag != null" >
+                frozen_flag = #{frozenFlag},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!-- 根据id查询 TS_USER_DETAIL -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="Base_Column_List" />
+        from TS_USER_DETAIL
+        where id = #{value}
+
+    </select>
+
+    <!-- 根据id查询 TS_USER_DETAIL -->
+    <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="Base_Column_List" />
+        from TS_USER_DETAIL
+        where user_id = #{userId}
+    </select>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByUserId" parameterType="com.adc.da.ext.sys.userdetail.entity.UserDetailEO" >
+        update TS_USER_DETAIL
+        <set >
+            <if test="updatePwdTime != null" >
+                update_pwd_time = #{updatePwdTime},
+            </if>
+            <if test="frozenFlag != null" >
+                frozen_flag = #{frozenFlag},
+            </if>
+        </set>
+        where user_id = #{userId}
+    </update>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TS_USER_DETAIL
+     where id = #{value}
+  </delete>
+
+
+    <!-- 删除记录 -->
+    <delete id="deleteByUserId" parameterType="java.lang.String">
+    delete from TS_USER_DETAIL
+     where user_id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")" index="index">
+            #{id}
+        </foreach>
+  </delete>
+
+
+    <!-- TS_USER_DETAIL 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        select count(1) from TS_USER_DETAIL
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询TS_USER_DETAIL列表 -->
+    <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select <include refid="Base_Column_List" /> from
+        (select tmp_tb.* , rownum rn from
+        (select <include refid="Base_Column_List" /> from TS_USER_DETAIL
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select <include refid="Base_Column_List"/> from TS_USER_DETAIL
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+            ${pager.orderCondition}
+        </if>
+    </select>
+
+    <update id="updateUserPasswordChangingTime" >
+        update ts_user_detail set update_pwd_time=to_date(#{updatedDate},'yyyy-mm-dd hh24:mi:ss')
+        where user_id=#{userId}
+    </update>
+
+
+    <insert id="saveUserPasswordChangingTime" parameterType="com.adc.da.ext.sys.userdetail.entity.UserDetailEO">
+        insert into ts_user_detail(id,user_id,update_pwd_time,frozen_flag) values(#{id},#{userId},#{updatePwdTime},0)
+    </insert>
+
+
+    <select id="getUserPasswordChangingTime" resultType="string">
+        select update_pwd_time from ts_user_detail where user_id=#{userId}
+    </select>
+
+</mapper>

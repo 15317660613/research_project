@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.smallprogram.dao.ScheduleDetailEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.smallprogram.entity.ScheduleDetailEO" >
+    <id column="id" property="id" />
+    <result column="parent_id" property="parentId" />
+    <result column="begin_time" property="beginTime" />
+    <result column="end_time" property="endTime" />
+    <result column="time_limit" property="timeLimit" />
+    <result column="schedule_detail" property="scheduleDetail" />
+    <result column="order_number" property="orderNumber" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="detail_type" property="detailType" />
+    <result column="del_flag" property="delFlag" />
+    <result column="status" property="status" />
+    <result column="ext_info1" property="extInfo1" />
+    <result column="ext_info2" property="extInfo2" />
+    <result column="ext_info3" property="extInfo3" />
+    <result column="ext_info4" property="extInfo4" />
+    <result column="ext_info5" property="extInfo5" />
+  </resultMap>
+
+  <!-- TS_SCHEDULE_DETAIL table all fields -->
+  <sql id="Base_Column_List" >
+     id, parent_id, begin_time, end_time, time_limit, schedule_detail, order_number, create_user_id, detail_type, del_flag, status, ext_info1, ext_info2, ext_info3, ext_info4, ext_info5
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="parentId != null" >
+        and parent_id ${parentIdOperator} #{parentId}
+      </if>
+      <if test="beginTime != null" >
+        and begin_time ${beginTimeOperator} #{beginTime}
+      </if>
+      <if test="beginTime1 != null" >
+        and begin_time &gt;= #{beginTime1}
+      </if>
+      <if test="beginTime2 != null" >
+        and begin_time &lt;= #{beginTime2}
+      </if>
+      <if test="endTime != null" >
+        and end_time ${endTimeOperator} #{endTime}
+      </if>
+      <if test="endTime1 != null" >
+        and end_time &gt;= #{endTime1}
+      </if>
+      <if test="endTime2 != null" >
+        and end_time &lt;= #{endTime2}
+      </if>
+      <if test="timeLimit != null" >
+        and time_limit ${timeLimitOperator} #{timeLimit}
+      </if>
+      <if test="scheduleDetail != null" >
+        and schedule_detail ${scheduleDetailOperator} #{scheduleDetail}
+      </if>
+      <if test="orderNumber != null" >
+        and order_number ${orderNumberOperator} #{orderNumber}
+      </if>
+      <if test="createUserId != null" >
+        and create_user_id ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="detailType != null" >
+        and detail_type ${detailTypeOperator} #{detailType}
+      </if>
+      <if test="delFlag != null" >
+        and del_flag ${delFlagOperator} #{delFlag}
+      </if>
+      <if test="status != null" >
+        and status ${statusOperator} #{status}
+      </if>
+      <if test="extInfo1 != null" >
+        and ext_info1 ${extInfo1Operator} #{extInfo1}
+      </if>
+      <if test="extInfo2 != null" >
+        and ext_info2 ${extInfo2Operator} #{extInfo2}
+      </if>
+      <if test="extInfo3 != null" >
+        and ext_info3 ${extInfo3Operator} #{extInfo3}
+      </if>
+      <if test="extInfo4 != null" >
+        and ext_info4 ${extInfo4Operator} #{extInfo4}
+      </if>
+      <if test="extInfo5 != null" >
+        and ext_info5 ${extInfo5Operator} #{extInfo5}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.smallprogram.entity.ScheduleDetailEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_SCHEDULE_DETAIL.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into TS_SCHEDULE_DETAIL(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{parentId, jdbcType=VARCHAR}, #{beginTime, jdbcType=TIMESTAMP}, #{endTime, jdbcType=TIMESTAMP}, #{timeLimit, jdbcType=VARCHAR}, #{scheduleDetail, jdbcType=VARCHAR}, #{orderNumber, jdbcType=INTEGER}, #{createUserId, jdbcType=VARCHAR}, #{detailType, jdbcType=INTEGER}, #{delFlag, jdbcType=INTEGER}, #{status, jdbcType=INTEGER}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.smallprogram.entity.ScheduleDetailEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_SCHEDULE_DETAIL.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into TS_SCHEDULE_DETAIL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="parentId != null" >parent_id,</if>
+                <if test="beginTime != null" >begin_time,</if>
+                <if test="endTime != null" >end_time,</if>
+                <if test="timeLimit != null" >time_limit,</if>
+                <if test="scheduleDetail != null" >schedule_detail,</if>
+                <if test="orderNumber != null" >order_number,</if>
+                <if test="createUserId != null" >create_user_id,</if>
+                <if test="detailType != null" >detail_type,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="status != null" >status,</if>
+                <if test="extInfo1 != null" >ext_info1,</if>
+                <if test="extInfo2 != null" >ext_info2,</if>
+                <if test="extInfo3 != null" >ext_info3,</if>
+                <if test="extInfo4 != null" >ext_info4,</if>
+                <if test="extInfo5 != null" >ext_info5,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="parentId != null" >#{parentId, jdbcType=VARCHAR},</if>
+                <if test="beginTime != null" >#{beginTime, jdbcType=TIMESTAMP},</if>
+                <if test="endTime != null" >#{endTime, jdbcType=TIMESTAMP},</if>
+                <if test="timeLimit != null" >#{timeLimit, jdbcType=VARCHAR},</if>
+                <if test="scheduleDetail != null" >#{scheduleDetail, jdbcType=VARCHAR},</if>
+                <if test="orderNumber != null" >#{orderNumber, jdbcType=INTEGER},</if>
+                <if test="createUserId != null" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="detailType != null" >#{detailType, jdbcType=INTEGER},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=INTEGER},</if>
+                <if test="status != null" >#{status, jdbcType=INTEGER},</if>
+                <if test="extInfo1 != null" >#{extInfo1, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="extInfo3 != null" >#{extInfo3, jdbcType=VARCHAR},</if>
+                <if test="extInfo4 != null" >#{extInfo4, jdbcType=VARCHAR},</if>
+                <if test="extInfo5 != null" >#{extInfo5, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.smallprogram.entity.ScheduleDetailEO" >
+    update TS_SCHEDULE_DETAIL
+       set  parent_id = #{parentId},
+            begin_time = #{beginTime},
+            end_time = #{endTime},
+            time_limit = #{timeLimit},
+            schedule_detail = #{scheduleDetail},
+            order_number = #{orderNumber},
+            create_user_id = #{createUserId},
+            detail_type = #{detailType},
+            del_flag = #{delFlag},
+            status = #{status},
+            ext_info1 = #{extInfo1},
+            ext_info2 = #{extInfo2},
+            ext_info3 = #{extInfo3},
+            ext_info4 = #{extInfo4},
+            ext_info5 = #{extInfo5}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.smallprogram.entity.ScheduleDetailEO" >
+    update TS_SCHEDULE_DETAIL
+    <set >
+      <if test="parentId != null" >
+        parent_id = #{parentId},
+      </if>
+      <if test="beginTime != null" >
+        begin_time = #{beginTime},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime},
+      </if>
+      <if test="timeLimit != null" >
+        time_limit = #{timeLimit},
+      </if>
+      <if test="scheduleDetail != null" >
+        schedule_detail = #{scheduleDetail},
+      </if>
+        <if test="timeLimit == null" >
+            time_limit = null ,
+        </if>
+        <if test="scheduleDetail == null" >
+            schedule_detail = null,
+        </if>
+      <if test="orderNumber != null" >
+        order_number = #{orderNumber},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="detailType != null" >
+        detail_type = #{detailType},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="status != null" >
+        status = #{status},
+      </if>
+      <if test="extInfo1 != null" >
+        ext_info1 = #{extInfo1},
+      </if>
+        <if test="extInfo1 == null" >
+            ext_info1 = null ,
+        </if>
+      <if test="extInfo2 != null" >
+        ext_info2 = #{extInfo2},
+      </if>
+      <if test="extInfo3 != null" >
+        ext_info3 = #{extInfo3},
+      </if>
+      <if test="extInfo4 != null" >
+        ext_info4 = #{extInfo4},
+      </if>
+      <if test="extInfo5 != null" >
+        ext_info5 = #{extInfo5},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="removeUpdateFiledByPrimaryKeyList" parameterType="java.util.List" >
+        update TS_SCHEDULE_DETAIL
+        set ext_info4 = '0' ,  ext_info5 = null
+        where id in
+        <foreach item="id" collection="list" open="(" separator=","
+                 close=")" index="index">
+            #{id}
+        </foreach>
+    </update>
+
+  <!-- 根据id查询 TS_SCHEDULE_DETAIL -->
+  <select id="selectByParentId" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+      from TS_SCHEDULE_DETAIL
+     where del_flag=0 and parent_id = #{id}
+      <!-- 可见查全部，不可见查DETAIL_TYPE为0 -->
+      <if test="detailType == 1" >
+          and DETAIL_TYPE = 0
+      </if>
+      order by order_number, TIME_LIMIT
+
+  </select>
+
+  <!-- 根据id查询 TS_SCHEDULE_DETAIL -->
+  <select id="selectByParentIdNew" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+      from TS_SCHEDULE_DETAIL
+     where del_flag=0 and parent_id = #{id}
+      <!-- filter为true查DETAIL_TYPE为0，false则查全部 -->
+      <if test="filter == true" >
+          and DETAIL_TYPE = 0
+      </if>
+    order by BEGIN_TIME
+  </select>
+
+    <select id="selectByParentIdList" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" />
+        from TS_SCHEDULE_DETAIL
+        where del_flag != 1 and parent_id in
+        <foreach item="pid" collection="list" open="(" separator=","
+                 close=")" index="index">
+            #{pid}
+        </foreach>
+    </select>
+
+
+
+
+  <!-- 根据id查询 TS_SCHEDULE_DETAIL -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+      from TS_SCHEDULE_DETAIL
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TS_SCHEDULE_DETAIL
+     where id = #{value}
+
+  </delete>
+
+  <!-- 逻辑删除 -->
+  <update id="logicDelete" parameterType="java.lang.String">
+    update TS_SCHEDULE_DETAIL
+    SET DEL_FLAG = 1
+    where id = #{value}
+  </update>
+
+  <!-- 批量逻辑删除 -->
+  <update id="logicDeleteInBatch" parameterType="java.util.List">
+    update TS_SCHEDULE_DETAIL SET DEL_FLAG = 1
+    where id in
+    <foreach item="ids" collection="list" open="(" separator=","
+               close=")" index="index">
+          #{ids}
+    </foreach>
+  </update>
+
+  <!-- TS_SCHEDULE_DETAIL 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from TS_SCHEDULE_DETAIL
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TS_SCHEDULE_DETAIL列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from TS_SCHEDULE_DETAIL
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from TS_SCHEDULE_DETAIL
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

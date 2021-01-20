@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.epis.dao.BuisnessProjectEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.epis.entity.BuisnessProjectEO" >
+    <id column="id" property="id" />
+    <result column="project_name" property="projectName" />
+    <result column="department_id" property="departmentId" />
+    <result column="production_id" property="productionId" />
+    <result column="create_time" property="createTime" />
+    <result column="create_user" property="createUser" />
+    <result column="modefiy_time" property="modefiyTime" />
+    <result column="compenet_str" property="compenetStr" />
+    <result column="project_type" property="projectType" />
+    <result column="perform_type" property="performType" />
+    <result column="devel_status" property="develStatus" />
+    <result column="project_leader" property="projectLeader" />
+    <result column="project_head" property="projectHead" />
+    <result column="docking_person" property="dockingPerson" />
+  </resultMap>
+
+  <!-- BUISNESS_PROJECT table all fields -->
+  <sql id="Base_Column_List" >
+     id, project_name, department_id, production_id, create_time, create_user, modefiy_time, compenet_str, project_type, perform_type, devel_status, project_leader, project_head, docking_person
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="projectName != null" >
+        and project_name ${projectNameOperator} #{projectName}
+      </if>
+      <if test="departmentId != null" >
+        and department_id ${departmentIdOperator} #{departmentId}
+      </if>
+      <if test="productionId != null" >
+        and production_id ${productionIdOperator} #{productionId}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="createUser != null" >
+        and create_user ${createUserOperator} #{createUser}
+      </if>
+      <if test="modefiyTime != null" >
+        and modefiy_time ${modefiyTimeOperator} #{modefiyTime}
+      </if>
+      <if test="compenetStr != null" >
+        and compenet_str ${compenetStrOperator} #{compenetStr}
+      </if>
+      <if test="projectType != null" >
+        and project_type ${projectTypeOperator} #{projectType}
+      </if>
+      <if test="performType != null" >
+        and perform_type ${performTypeOperator} #{performType}
+      </if>
+      <if test="develStatus != null" >
+        and devel_status ${develStatusOperator} #{develStatus}
+      </if>
+      <if test="projectLeader != null" >
+        and project_leader ${projectLeaderOperator} #{projectLeader}
+      </if>
+      <if test="projectHead != null" >
+        and project_head ${projectHeadOperator} #{projectHead}
+      </if>
+      <if test="dockingPerson != null" >
+        and docking_person ${dockingPersonOperator} #{dockingPerson}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.epis.entity.BuisnessProjectEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_BUISNESS_PROJECT.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into BUISNESS_PROJECT(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{projectName, jdbcType=VARCHAR}, #{departmentId, jdbcType=VARCHAR}, #{productionId, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{createUser, jdbcType=VARCHAR}, #{modefiyTime, jdbcType=VARCHAR}, #{compenetStr, jdbcType=VARCHAR}, #{projectType, jdbcType=VARCHAR}, #{performType, jdbcType=VARCHAR}, #{develStatus, jdbcType=VARCHAR}, #{projectLeader, jdbcType=VARCHAR}, #{projectHead, jdbcType=VARCHAR}, #{dockingPerson, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.epis.entity.BuisnessProjectEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_BUISNESS_PROJECT.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into BUISNESS_PROJECT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="projectName != null" >project_name,</if>
+                <if test="departmentId != null" >department_id,</if>
+                <if test="productionId != null" >production_id,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="createUser != null" >create_user,</if>
+                <if test="modefiyTime != null" >modefiy_time,</if>
+                <if test="compenetStr != null" >compenet_str,</if>
+                <if test="projectType != null" >project_type,</if>
+                <if test="performType != null" >perform_type,</if>
+                <if test="develStatus != null" >devel_status,</if>
+                <if test="projectLeader != null" >project_leader,</if>
+                <if test="projectHead != null" >project_head,</if>
+                <if test="dockingPerson != null" >docking_person,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="projectName != null" >#{projectName, jdbcType=VARCHAR},</if>
+                <if test="departmentId != null" >#{departmentId, jdbcType=VARCHAR},</if>
+                <if test="productionId != null" >#{productionId, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="createUser != null" >#{createUser, jdbcType=VARCHAR},</if>
+                <if test="modefiyTime != null" >#{modefiyTime, jdbcType=VARCHAR},</if>
+                <if test="compenetStr != null" >#{compenetStr, jdbcType=VARCHAR},</if>
+                <if test="projectType != null" >#{projectType, jdbcType=VARCHAR},</if>
+                <if test="performType != null" >#{performType, jdbcType=VARCHAR},</if>
+                <if test="develStatus != null" >#{develStatus, jdbcType=VARCHAR},</if>
+                <if test="projectLeader != null" >#{projectLeader, jdbcType=VARCHAR},</if>
+                <if test="projectHead != null" >#{projectHead, jdbcType=VARCHAR},</if>
+                <if test="dockingPerson != null" >#{dockingPerson, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.epis.entity.BuisnessProjectEO" >
+    update BUISNESS_PROJECT
+       set  project_name = #{projectName},
+            department_id = #{departmentId},
+            production_id = #{productionId},
+            create_time = #{createTime},
+            create_user = #{createUser},
+            modefiy_time = #{modefiyTime},
+            compenet_str = #{compenetStr},
+            project_type = #{projectType},
+            perform_type = #{performType},
+            devel_status = #{develStatus},
+            project_leader = #{projectLeader},
+            project_head = #{projectHead},
+            docking_person = #{dockingPerson}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.epis.entity.BuisnessProjectEO" >
+    update BUISNESS_PROJECT
+    <set >
+      <if test="projectName != null" >
+        project_name = #{projectName},
+      </if>
+      <if test="departmentId != null" >
+        department_id = #{departmentId},
+      </if>
+      <if test="productionId != null" >
+        production_id = #{productionId},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser},
+      </if>
+      <if test="modefiyTime != null" >
+        modefiy_time = #{modefiyTime},
+      </if>
+      <if test="compenetStr != null" >
+        compenet_str = #{compenetStr},
+      </if>
+      <if test="projectType != null" >
+        project_type = #{projectType},
+      </if>
+      <if test="performType != null" >
+        perform_type = #{performType},
+      </if>
+      <if test="develStatus != null" >
+        devel_status = #{develStatus},
+      </if>
+      <if test="projectLeader != null" >
+        project_leader = #{projectLeader},
+      </if>
+      <if test="projectHead != null" >
+        project_head = #{projectHead},
+      </if>
+      <if test="dockingPerson != null" >
+        docking_person = #{dockingPerson},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 BUISNESS_PROJECT -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from BUISNESS_PROJECT
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from BUISNESS_PROJECT
+     where id = #{value}
+
+  </delete>
+
+  <!-- BUISNESS_PROJECT 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from BUISNESS_PROJECT
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询BUISNESS_PROJECT列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from BUISNESS_PROJECT
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from BUISNESS_PROJECT
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

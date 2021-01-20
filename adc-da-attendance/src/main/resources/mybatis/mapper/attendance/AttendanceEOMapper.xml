@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.adc.da.attendance.dao.AttendanceEODao">
+    <!-- Result Map-->
+    <resultMap id = "BaseResultMap" type = "com.adc.da.attendance.entity.AttendanceEO">
+        <id column = "id_" property = "id"/>
+        <result column = "date_" property = "date"/>
+        <result column = "begin_time_" property = "beginTime"/>
+        <result column = "begin_time_int_" property = "beginTimeInt"/>
+        <result column = "end_time_" property = "endTime"/>
+        <result column = "end_time_int_" property = "endTimeInt"/>
+        <result column = "user_code_" property = "userCode"/>
+        <result column = "user_id_" property = "userId"/>
+        <result column = "user_name_" property = "userName"/>
+        <result column = "dept_id_" property = "deptId"/>
+        <result column = "dept_name_" property = "deptName"/>
+        <result column = "source_" property = "source"/>
+        <result column = "remark_" property = "remark"/>
+        <result column = "reason_" property = "reason"/>
+        <result column = "ext_info_01_" property = "extInfo01"/>
+        <result column = "ext_info_02_" property = "extInfo02"/>
+        <result column = "ext_info_03_" property = "extInfo03"/>
+        <result column = "ext_info_04_" property = "extInfo04"/>
+        <result column = "ext_info_05_" property = "extInfo05"/>
+    </resultMap>
+
+    <!-- ST_ATTENDANCE table all fields -->
+    <sql id = "Base_Column_List">
+        id_, date_, begin_time_, begin_time_int_, end_time_, end_time_int_, user_code_, user_id_, user_name_, dept_id_, dept_name_, source_, remark_, reason_, ext_info_01_, ext_info_02_, ext_info_03_, ext_info_04_, ext_info_05_
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id = "Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides = ",">
+            <if test = "id != null">
+                and id_ ${idOperator} #{id}
+            </if>
+            <if test = "date != null">
+                and date_ ${dateOperator} #{date}
+            </if>
+            <if test = "date1 != null">
+                and date_ &gt;= #{date1}
+            </if>
+            <if test = "date2 != null">
+                and date_ &lt;= #{date2}
+            </if>
+            <if test = "beginTime != null">
+                and begin_time_ ${beginTimeOperator} #{beginTime}
+            </if>
+            <if test = "beginTime1 != null">
+                and begin_time_ &gt;= #{beginTime1}
+            </if>
+            <if test = "beginTime2 != null">
+                and begin_time_ &lt;= #{beginTime2}
+            </if>
+            <if test = "beginTimeInt != null">
+                and begin_time_int_ ${beginTimeIntOperator} #{beginTimeInt}
+            </if>
+            <if test = "endTime != null">
+                and end_time_ ${endTimeOperator} #{endTime}
+            </if>
+            <if test = "endTime1 != null">
+                and end_time_ &gt;= #{endTime1}
+            </if>
+            <if test = "endTime2 != null">
+                and end_time_ &lt;= #{endTime2}
+            </if>
+            <if test = "endTimeInt != null">
+                and end_time_int_ ${endTimeIntOperator} #{endTimeInt}
+            </if>
+            <if test = "userCode != null">
+                and user_code_ ${userCodeOperator} #{userCode}
+            </if>
+            <if test = "userId != null">
+                and user_id_ ${userIdOperator} #{userId}
+            </if>
+            <if test = "userName != null">
+                and user_name_ ${userNameOperator} #{userName}
+            </if>
+            <if test = "deptId != null">
+                and dept_id_ ${deptIdOperator} #{deptId}
+            </if>
+            <if test = "deptName != null">
+                and dept_name_ ${deptNameOperator} #{deptName}
+            </if>
+            <if test = "source != null">
+                and source_ ${sourceOperator} #{source}
+            </if>
+            <if test = "remark != null">
+                and remark_ ${remarkOperator} #{remark}
+            </if>
+            <if test = "reason != null">
+                and reason_ ${reasonOperator} #{reason}
+            </if>
+            <if test = "extInfo01 != null">
+                and ext_info_01_ ${extInfo01Operator} #{extInfo01}
+            </if>
+            <if test = "extInfo02 != null">
+                and ext_info_02_ ${extInfo02Operator} #{extInfo02}
+            </if>
+            <if test = "extInfo03 != null">
+                and ext_info_03_ ${extInfo03Operator} #{extInfo03}
+            </if>
+            <if test = "extInfo04 != null">
+                and ext_info_04_ ${extInfo04Operator} #{extInfo04}
+            </if>
+            <if test = "extInfo05 != null">
+                and ext_info_05_ ${extInfo05Operator} #{extInfo05}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id = "insert" parameterType = "com.adc.da.attendance.entity.AttendanceEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+            SELECT SEQ_ST_ATTENDANCE.NEXTVAL FROM DUAL
+        </selectKey> -->
+        insert into ST_ATTENDANCE(<include refid = "Base_Column_List"/>)
+        values (#{id, jdbcType=VARCHAR}, #{date, jdbcType=TIMESTAMP}, #{beginTime, jdbcType=TIMESTAMP},
+        #{beginTimeInt, jdbcType=INTEGER}, #{endTime, jdbcType=TIMESTAMP}, #{endTimeInt, jdbcType=INTEGER},
+        #{userCode, jdbcType=VARCHAR}, #{userId, jdbcType=VARCHAR}, #{userName, jdbcType=VARCHAR},
+        #{deptId, jdbcType=VARCHAR}, #{deptName, jdbcType=VARCHAR}, #{source, jdbcType=VARCHAR},
+        #{remark, jdbcType=VARCHAR}, #{reason, jdbcType=VARCHAR}, #{extInfo01, jdbcType=VARCHAR},
+        #{extInfo02, jdbcType=VARCHAR}, #{extInfo03, jdbcType=VARCHAR}, #{extInfo04, jdbcType=VARCHAR},
+        #{extInfo05, jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id = "insertSelective" parameterType = "com.adc.da.attendance.entity.AttendanceEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_ST_ATTENDANCE.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into ST_ATTENDANCE
+        <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">id_,</if>
+            <if test = "date != null">date_,</if>
+            <if test = "beginTime != null">begin_time_,</if>
+            <if test = "beginTimeInt != null">begin_time_int_,</if>
+            <if test = "endTime != null">end_time_,</if>
+            <if test = "endTimeInt != null">end_time_int_,</if>
+            <if test = "userCode != null">user_code_,</if>
+            <if test = "userId != null">user_id_,</if>
+            <if test = "userName != null">user_name_,</if>
+            <if test = "deptId != null">dept_id_,</if>
+            <if test = "deptName != null">dept_name_,</if>
+            <if test = "source != null">source_,</if>
+            <if test = "remark != null">remark_,</if>
+            <if test = "reason != null">reason_,</if>
+            <if test = "extInfo01 != null">ext_info_01_,</if>
+            <if test = "extInfo02 != null">ext_info_02_,</if>
+            <if test = "extInfo03 != null">ext_info_03_,</if>
+            <if test = "extInfo04 != null">ext_info_04_,</if>
+            <if test = "extInfo05 != null">ext_info_05_,</if>
+        </trim>
+        <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">#{id, jdbcType=VARCHAR},</if>
+            <if test = "date != null">#{date, jdbcType=TIMESTAMP},</if>
+            <if test = "beginTime != null">#{beginTime, jdbcType=TIMESTAMP},</if>
+            <if test = "beginTimeInt != null">#{beginTimeInt, jdbcType=INTEGER},</if>
+            <if test = "endTime != null">#{endTime, jdbcType=TIMESTAMP},</if>
+            <if test = "endTimeInt != null">#{endTimeInt, jdbcType=INTEGER},</if>
+            <if test = "userCode != null">#{userCode, jdbcType=VARCHAR},</if>
+            <if test = "userId != null">#{userId, jdbcType=VARCHAR},</if>
+            <if test = "userName != null">#{userName, jdbcType=VARCHAR},</if>
+            <if test = "deptId != null">#{deptId, jdbcType=VARCHAR},</if>
+            <if test = "deptName != null">#{deptName, jdbcType=VARCHAR},</if>
+            <if test = "source != null">#{source, jdbcType=VARCHAR},</if>
+            <if test = "remark != null">#{remark, jdbcType=VARCHAR},</if>
+            <if test = "reason != null">#{reason, jdbcType=VARCHAR},</if>
+            <if test = "extInfo01 != null">#{extInfo01, jdbcType=VARCHAR},</if>
+            <if test = "extInfo02 != null">#{extInfo02, jdbcType=VARCHAR},</if>
+            <if test = "extInfo03 != null">#{extInfo03, jdbcType=VARCHAR},</if>
+            <if test = "extInfo04 != null">#{extInfo04, jdbcType=VARCHAR},</if>
+            <if test = "extInfo05 != null">#{extInfo05, jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <!--批量插入-->
+    <insert id = "insertSelectiveAll" parameterType = "java.util.List">
+        INSERT ALL
+        <foreach collection = "list" item = "item" index = "index">
+            <if test = "item.id !=null">
+                into ST_ATTENDANCE
+                <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+                    <if test = "item.id != null">id_,</if>
+                    <if test = "item.date != null">date_,</if>
+                    <if test = "item.beginTime != null">begin_time_,</if>
+                    <if test = "item.beginTimeInt != null">begin_time_int_,</if>
+                    <if test = "item.endTime != null">end_time_,</if>
+                    <if test = "item.endTimeInt != null">end_time_int_,</if>
+                    <if test = "item.userCode != null">user_code_,</if>
+                    <if test = "item.userId != null">user_id_,</if>
+                    <if test = "item.userName != null">user_name_,</if>
+                    <if test = "item.deptId != null">dept_id_,</if>
+                    <if test = "item.deptName != null">dept_name_,</if>
+                    <if test = "item.source != null">source_,</if>
+                    <if test = "item.remark != null">remark_,</if>
+                    <if test = "item.reason != null">reason_,</if>
+                    <if test = "item.extInfo01 != null">ext_info_01_,</if>
+                    <if test = "item.extInfo02 != null">ext_info_02_,</if>
+                    <if test = "item.extInfo03 != null">ext_info_03_,</if>
+                    <if test = "item.extInfo04 != null">ext_info_04_,</if>
+                    <if test = "item.extInfo05 != null">ext_info_05_,</if>
+                </trim>
+                <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+                    <if test = "item.id != null">#{item.id, jdbcType=VARCHAR},</if>
+                    <if test = "item.date != null">#{item.date, jdbcType=TIMESTAMP},</if>
+                    <if test = "item.beginTime != null">#{item.beginTime, jdbcType=TIMESTAMP},</if>
+                    <if test = "item.beginTimeInt != null">#{item.beginTimeInt, jdbcType=INTEGER},</if>
+                    <if test = "item.endTime != null">#{item.endTime, jdbcType=TIMESTAMP},</if>
+                    <if test = "item.endTimeInt != null">#{item.endTimeInt, jdbcType=INTEGER},</if>
+                    <if test = "item.userCode != null">#{item.userCode, jdbcType=VARCHAR},</if>
+                    <if test = "item.userId != null">#{item.userId, jdbcType=VARCHAR},</if>
+                    <if test = "item.userName != null">#{item.userName, jdbcType=VARCHAR},</if>
+                    <if test = "item.deptId != null">#{item.deptId, jdbcType=VARCHAR},</if>
+                    <if test = "item.deptName != null">#{item.deptName, jdbcType=VARCHAR},</if>
+                    <if test = "item.source != null">#{item.source, jdbcType=VARCHAR},</if>
+                    <if test = "item.remark != null">#{item.remark, jdbcType=VARCHAR},</if>
+                    <if test = "item.reason != null">#{item.reason, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo01 != null">#{item.extInfo01, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo02 != null">#{item.extInfo02, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo03 != null">#{item.extInfo03, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo04 != null">#{item.extInfo04, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo05 != null">#{item.extInfo05, jdbcType=VARCHAR},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+
+    <!-- 根据pk，修改记录-->
+    <update id = "updateByPrimaryKey" parameterType = "com.adc.da.attendance.entity.AttendanceEO">
+        UPDATE ST_ATTENDANCE
+        SET date_           = #{date},
+            begin_time_     = #{beginTime},
+            begin_time_int_ = #{beginTimeInt},
+            end_time_       = #{endTime},
+            end_time_int_   = #{endTimeInt},
+            user_code_      = #{userCode},
+            user_id_        = #{userId},
+            user_name_      = #{userName},
+            dept_id_        = #{deptId},
+            dept_name_      = #{deptName},
+            source_         = #{source},
+            remark_         = #{remark},
+            reason_         = #{reason},
+            ext_info_01_    = #{extInfo01},
+            ext_info_02_    = #{extInfo02},
+            ext_info_03_    = #{extInfo03},
+            ext_info_04_    = #{extInfo04},
+            ext_info_05_    = #{extInfo05}
+        WHERE id_ = #{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id = "updateByPrimaryKeySelective" parameterType = "com.adc.da.attendance.entity.AttendanceEO">
+        update ST_ATTENDANCE
+        <set>
+            <if test = "date != null">
+                date_ = #{date},
+            </if>
+            <if test = "beginTime != null">
+                begin_time_ = #{beginTime},
+            </if>
+            <if test = "beginTimeInt != null">
+                begin_time_int_ = #{beginTimeInt},
+            </if>
+            <if test = "endTime != null">
+                end_time_ = #{endTime},
+            </if>
+            <if test = "endTimeInt != null">
+                end_time_int_ = #{endTimeInt},
+            </if>
+            <if test = "userCode != null">
+                user_code_ = #{userCode},
+            </if>
+            <if test = "userId != null">
+                user_id_ = #{userId},
+            </if>
+            <if test = "userName != null">
+                user_name_ = #{userName},
+            </if>
+            <if test = "deptId != null">
+                dept_id_ = #{deptId},
+            </if>
+            <if test = "deptName != null">
+                dept_name_ = #{deptName},
+            </if>
+            <if test = "source != null">
+                source_ = #{source},
+            </if>
+            <if test = "remark != null">
+                remark_ = #{remark},
+            </if>
+            <if test = "reason != null">
+                reason_ = #{reason},
+            </if>
+            <if test = "extInfo01 != null">
+                ext_info_01_ = #{extInfo01},
+            </if>
+            <if test = "extInfo02 != null">
+                ext_info_02_ = #{extInfo02},
+            </if>
+            <if test = "extInfo03 != null">
+                ext_info_03_ = #{extInfo03},
+            </if>
+            <if test = "extInfo04 != null">
+                ext_info_04_ = #{extInfo04},
+            </if>
+            <if test = "extInfo05 != null">
+                ext_info_05_ = #{extInfo05},
+            </if>
+        </set>
+        where id_ = #{id}
+    </update>
+
+    <!-- 根据id查询 ST_ATTENDANCE -->
+    <select id = "selectByPrimaryKey" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+        select
+        <include refid = "Base_Column_List"/>
+        from ST_ATTENDANCE
+        where id_ = #{value}
+
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id = "deleteByPrimaryKey" parameterType = "java.lang.String">
+        DELETE
+        FROM ST_ATTENDANCE
+        WHERE id_ = #{value}
+
+    </delete>
+    <!-- 删除记录 -->
+    <delete id = "deleteByTimeArea" parameterType = "java.lang.String">
+        DELETE
+        FROM ST_ATTENDANCE
+        WHERE DATE_ BETWEEN #{beginDate} AND #{endDate}
+    </delete>
+    <!-- ST_ATTENDANCE 列表总数-->
+    <select id = "queryByCount" resultType = "java.lang.Integer" parameterType = "com.adc.da.base.page.BasePage">
+        select count(1) from ST_ATTENDANCE
+        <include refid = "Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询ST_ATTENDANCE列表 -->
+    <select id = "queryByPage" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from
+        (select tmp_tb.* , rownum rn from
+        (select
+        <include refid = "Base_Column_List"/>
+        from ST_ATTENDANCE
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id = "queryByList" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from ST_ATTENDANCE
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+    </select>
+
+</mapper>

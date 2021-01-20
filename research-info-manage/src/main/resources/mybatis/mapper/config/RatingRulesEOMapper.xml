@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.config.dao.RatingRulesEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.research.config.entity.RatingRulesEO" >
+    <id column="id" property="id" />
+    <result column="rating_rules_name" property="ratingRulesName" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="create_user_name" property="createUserName" />
+    <result column="create_time" property="createTime" />
+    <result column="modify_time" property="modifyTime" />
+    <result column="del_flag" property="delFlag" />
+    <result column="ext1" property="ext1" />
+    <result column="ext2" property="ext2" />
+    <result column="ext3" property="ext3" />
+    <result column="ext4" property="ext4" />
+    <result column="ext5" property="ext5" />
+  </resultMap>
+
+  <!-- RS_RATING_RULES table all fields -->
+  <sql id="Base_Column_List" >
+     id, rating_rules_name, create_user_id, create_user_name, create_time, modify_time, del_flag, ext1, ext2, ext3, ext4, ext5
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+        <if test="ratingRulesName != null" >
+            and rating_rules_name ${ratingRulesNameOperator} '%'||#{ratingRulesName}||'%'
+        </if>
+      <if test="createUserId != null" >
+        and create_user_id ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="createUserName != null" >
+        and create_user_name ${createUserNameOperator} #{createUserName}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="modifyTime != null" >
+        and modify_time ${modifyTimeOperator} #{modifyTime}
+      </if>
+      <if test="modifyTime1 != null" >
+        and modify_time &gt;= #{modifyTime1}
+      </if>
+      <if test="modifyTime2 != null" >
+        and modify_time &lt;= #{modifyTime2}
+      </if>
+        and del_flag =0
+      <if test="ext1 != null" >
+        and ext1 ${ext1Operator} #{ext1}
+      </if>
+      <if test="ext2 != null" >
+        and ext2 ${ext2Operator} #{ext2}
+      </if>
+      <if test="ext3 != null" >
+        and ext3 ${ext3Operator} #{ext3}
+      </if>
+      <if test="ext4 != null" >
+        and ext4 ${ext4Operator} #{ext4}
+      </if>
+      <if test="ext5 != null" >
+        and ext5 ${ext5Operator} #{ext5}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.research.config.entity.RatingRulesEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RS_RATING_RULES.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into RS_RATING_RULES(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{ratingRulesName, jdbcType=VARCHAR}, #{createUserId, jdbcType=VARCHAR}, #{createUserName, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{modifyTime, jdbcType=TIMESTAMP}, #{delFlag, jdbcType=INTEGER}, #{ext1, jdbcType=VARCHAR}, #{ext2, jdbcType=VARCHAR}, #{ext3, jdbcType=VARCHAR}, #{ext4, jdbcType=VARCHAR}, #{ext5, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.research.config.entity.RatingRulesEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RS_RATING_RULES.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into RS_RATING_RULES
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="ratingRulesName != null" >rating_rules_name,</if>
+                <if test="createUserId != null" >create_user_id,</if>
+                <if test="createUserName != null" >create_user_name,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="modifyTime != null" >modify_time,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="ext1 != null" >ext1,</if>
+                <if test="ext2 != null" >ext2,</if>
+                <if test="ext3 != null" >ext3,</if>
+                <if test="ext4 != null" >ext4,</if>
+                <if test="ext5 != null" >ext5,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="ratingRulesName != null" >#{ratingRulesName, jdbcType=VARCHAR},</if>
+                <if test="createUserId != null" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="createUserName != null" >#{createUserName, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="modifyTime != null" >#{modifyTime, jdbcType=TIMESTAMP},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=INTEGER},</if>
+                <if test="ext1 != null" >#{ext1, jdbcType=VARCHAR},</if>
+                <if test="ext2 != null" >#{ext2, jdbcType=VARCHAR},</if>
+                <if test="ext3 != null" >#{ext3, jdbcType=VARCHAR},</if>
+                <if test="ext4 != null" >#{ext4, jdbcType=VARCHAR},</if>
+                <if test="ext5 != null" >#{ext5, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.research.config.entity.RatingRulesEO" >
+    update RS_RATING_RULES
+       set  rating_rules_name = #{ratingRulesName},
+            create_user_id = #{createUserId},
+            create_user_name = #{createUserName},
+            create_time = #{createTime},
+            modify_time = #{modifyTime},
+            del_flag = #{delFlag},
+            ext1 = #{ext1},
+            ext2 = #{ext2},
+            ext3 = #{ext3},
+            ext4 = #{ext4},
+            ext5 = #{ext5}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.research.config.entity.RatingRulesEO" >
+    update RS_RATING_RULES
+    <set >
+      <if test="ratingRulesName != null" >
+        rating_rules_name = #{ratingRulesName},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="createUserName != null" >
+        create_user_name = #{createUserName},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="ext1 != null" >
+        ext1 = #{ext1},
+      </if>
+      <if test="ext2 != null" >
+        ext2 = #{ext2},
+      </if>
+      <if test="ext3 != null" >
+        ext3 = #{ext3},
+      </if>
+      <if test="ext4 != null" >
+        ext4 = #{ext4},
+      </if>
+      <if test="ext5 != null" >
+        ext5 = #{ext5},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 RS_RATING_RULES -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from RS_RATING_RULES
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RS_RATING_RULES
+     where id = #{value}
+
+  </delete>
+
+  <!-- RS_RATING_RULES 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from RS_RATING_RULES
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询RS_RATING_RULES列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from RS_RATING_RULES
+			 <include refid="Base_Where_Clause"/>
+
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex}) m
+			where rn &gt;= ${pager.startIndex}
+      order by m.CREATE_TIME desc
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from RS_RATING_RULES
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+  <!--批量删除-->
+  <update id="batchDeleteByIds" parameterType="java.util.List">
+    update RS_RATING_RULES set del_flag = 1 where id in
+      <foreach collection="ids" item="id" open="(" separator="," close=")" index="index">
+        #{id}
+      </foreach>
+  </update>
+
+    <!--批量新增-->
+    <insert id = "batchInsertSelective">
+        INSERT ALL
+        <foreach collection = "ratingRulesEOS" item = "item" index = "index">
+            <if test = "item.id !=null">
+                into RS_RATING_RULES
+                <trim prefix="(" suffix=")" suffixOverrides="," >
+                    <if test="item.id != null" >id,</if>
+                    <if test="item.ratingRulesName != null" >rating_rules_name,</if>
+                    <if test="item.createUserId != null" >create_user_id,</if>
+                    <if test="item.createUserName != null" >create_user_name,</if>
+                    <if test="item.createTime != null" >create_time,</if>
+                    <if test="item.modifyTime != null" >modify_time,</if>
+                    <if test="item.delFlag != null" >del_flag,</if>
+                    <if test="item.ext1 != null" >ext1,</if>
+                    <if test="item.ext2 != null" >ext2,</if>
+                    <if test="item.ext3 != null" >ext3,</if>
+                    <if test="item.ext4 != null" >ext4,</if>
+                    <if test="item.ext5 != null" >ext5,</if>
+                </trim>
+                <trim prefix="values (" suffix=")" suffixOverrides="," >
+                    <if test="item.id != null" >#{item.id, jdbcType=VARCHAR},</if>
+                    <if test="item.ratingRulesName != null" >#{item.ratingRulesName, jdbcType=VARCHAR},</if>
+                    <if test="item.createUserId != null" >#{item.createUserId, jdbcType=VARCHAR},</if>
+                    <if test="item.createUserName != null" >#{item.createUserName, jdbcType=VARCHAR},</if>
+                    <if test="item.createTime != null" >#{item.createTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.modifyTime != null" >#{item.modifyTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.delFlag != null" >#{item.delFlag, jdbcType=INTEGER},</if>
+                    <if test="item.ext1 != null" >#{item.ext1, jdbcType=VARCHAR},</if>
+                    <if test="item.ext2 != null" >#{item.ext2, jdbcType=VARCHAR},</if>
+                    <if test="item.ext3 != null" >#{item.ext3, jdbcType=VARCHAR},</if>
+                    <if test="item.ext4 != null" >#{item.ext4, jdbcType=VARCHAR},</if>
+                    <if test="item.ext5 != null" >#{item.ext5, jdbcType=VARCHAR},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+
+    <select id="findByName" resultType="com.adc.da.research.config.entity.RatingRulesEO">
+        select * from rs_rating_rules where rating_rules_name =#{name}
+    </select>
+
+
+</mapper>

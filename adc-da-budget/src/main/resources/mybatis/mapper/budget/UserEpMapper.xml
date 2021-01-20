@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.adc.da.budget.dao.UserEPDao">
+    <!-- Result Map-->
+    <resultMap id = "BaseResultMap" type = "com.adc.da.budget.entity.UserEPEntity">
+        <id column = "usid" property = "usid"/>
+        <result column = "account" property = "account"/>
+        <result column = "del_flag" property = "delFlag"/>
+        <result column = "password" property = "password"/>
+        <result column = "usname" property = "usname"/>
+        <result column = "ext_info" property = "extInfo"/>
+        <result column = "user_code" property = "userCode"/>
+        <result column = "office_phone" property = "officePhone"/>
+        <result column = "CELLPHONE_NUMBER" property = "cellPhoneNumber"/>
+        <result column = "HOME_ADDRESS" property = "homeAddress"/>
+        <result column = "POSTAL_CODE" property = "postalCode"/>
+        <result column = "EMAIL" property = "email"/>
+        <result column = "CONTACT_ADDRESS" property = "contactAddress"/>
+        <result column = "CREATE_TIME" property = "createTime"/>
+        <result column = "UPDATE_TIME" property = "updateTime"/>
+        <result column = "USER_STATE" property = "userState"/>
+        <result column = "AVATAR" property = "avatar"/>
+    </resultMap>
+
+    <!-- TS_USER table all fields -->
+    <sql id = "Base_Column_List">
+        usid,
+        account,
+        del_flag,
+        password,
+        usname,
+        ext_info,
+        user_code,
+        office_phone,
+        CELLPHONE_NUMBER,
+        HOME_ADDRESS,
+        POSTAL_CODE,
+        EMAIL,
+        CONTACT_ADDRESS,
+        CREATE_TIME,
+        UPDATE_TIME,
+        USER_STATE
+    </sql>
+
+    <!--查询条件-->
+
+    <sql id = "Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides = ",">
+            <if test = "usname != null">
+                and usname = #{usname}
+            </if>
+            <if test = "usid != null">
+                and usid = #{usid}
+            </if>
+        </trim>
+    </sql>
+    <!--确定UserName中的人员是否存在，是否正确-->
+    <select id = "checkUserExist" resultMap = "BaseResultMap">
+        SELECT
+        <include refid = "Base_Column_List"/>
+        FROM
+        TS_USER
+        WHERE
+        DEL_FLAG = 0 and
+        USNAME IN
+        <foreach collection = "array" item = "usName" separator = "," open = "(" close = ")">
+            #{usName}
+        </foreach>
+    </select>
+
+    <!--获取所有用户信息-->
+    <select id = "queryAllUserIdAndName" resultMap = "BaseResultMap">
+        SELECT
+        <include refid = "Base_Column_List"/>
+        FROM
+        TS_USER
+        WHERE
+        DEL_FLAG = 0 and
+        USER_CODE is NOT  NULL
+    </select>
+
+    <select id = "checkUserExistById" resultType = "com.adc.da.budget.entity.UserEPEntity">
+        SELECT
+        <include refid = "Base_Column_List"/>
+        FROM
+        TS_USER
+        WHERE
+        DEL_FLAG = 0 and
+        USID IN
+        <foreach collection = "array" item = "usName" separator = "," open = "(" close = ")">
+            #{usName}
+        </foreach>
+    </select>
+    <select id = "queryUserByName" resultType = "com.adc.da.budget.entity.UserEPEntity"
+            parameterType = "java.lang.String">
+        SELECT
+        <include refid = "Base_Column_List"/>
+        FROM
+        TS_USER
+        WHERE
+        USNAME = #{name}
+    </select>
+
+    <select id = "queryUserByQuery" resultType = "com.adc.da.budget.entity.UserEPEntity"
+            parameterType = "com.adc.da.budget.entity.UserEPEntity">
+        SELECT
+        <include refid = "Base_Column_List"/>
+        FROM
+        TS_USER
+        <include refid = "Base_Where_Clause"/>
+    </select>
+
+    <select id = "queryUserById" resultType = "com.adc.da.budget.entity.UserEPEntity"
+            parameterType = "java.lang.String">
+        SELECT
+        <include refid = "Base_Column_List"/>
+        FROM
+        TS_USER
+        WHERE
+        USID= #{userId}
+    </select>
+
+    <!--查询所有的用户ID-->
+    <select id = "queryAllUsid" resultType = "java.lang.String">
+        SELECT u.usid
+        FROM TS_USER u
+    </select>
+    <select id = "queryProjectAdmin" resultType = "java.lang.String" parameterType = "java.lang.String">
+        SELECT u.usid
+        FROM TS_USER u
+        WHERE u.CONTACT_ADDRESS = #{contactAddress}
+    </select>
+
+    <select id = "querySuperLeader" resultType = "java.lang.String" parameterType = "java.lang.String">
+        SELECT a.usid
+        FROM TS_USER a
+                 LEFT JOIN TR_USER_ROLE b ON a.usid = b.user_id
+                 LEFT JOIN TS_ROLE c ON b.role_id = c.id
+                 LEFT JOIN TR_USER_ORG d ON a.usid = d.user_id
+        WHERE c.name = '部长'
+          AND d.ORG_ID IN (
+            SELECT e.id
+            FROM TS_ORG e
+            START WITH e.id = #{orgId}
+            CONNECT BY e.id = PRIOR e.parent_id
+        )
+    </select>
+
+    <!--查询所有的用户ID-->
+    <!--   -->
+    <!--  用于日报统计，因此被删除的用户也要计算-->
+    <select id = "queryAllUsIdByDeptId" resultType = "java.lang.String">
+        SELECT DISTINCT TR_USER_ORG.USER_ID
+        FROM TR_USER_ORG
+        WHERE ORG_ID IN
+              (SELECT TS_ORG.ID
+               FROM TS_ORG
+               START WITH TS_ORG."ID" = #{orgId}
+               CONNECT BY PRIOR TS_ORG."ID" = TS_ORG.PARENT_ID
+              )
+    </select>
+
+
+    <select id="queryUserIdAndNameByIdList" resultMap="BaseResultMap" parameterType="java.util.List"  >
+        SELECT USID , USNAME  FROM TS_USER WHERE  USID in
+        <foreach  item="item" collection="userIds" index="index"  open="(" separator="," close=")">
+            #{item , jdbcType=VARCHAR}
+        </foreach>
+    </select>
+
+    <select id="queryUserIdAndNameByIds" resultType="java.util.HashMap" parameterType="java.util.List"  >
+        SELECT USID , USNAME  FROM TS_USER WHERE  USID in
+        <foreach  item="item" collection="userIds" index="index"  open="(" separator="," close=")">
+            #{item , jdbcType=VARCHAR}
+        </foreach>
+    </select>
+
+    <select id="queryUserIdByNameByLike" resultType="java.lang.String" parameterType="java.lang.String"  >
+        SELECT USID  FROM TS_USER WHERE  USNAME like #{userName}
+    </select>
+
+    <select id="queryUserIdByNameByNotLike" resultType="java.lang.String" parameterType="java.lang.String"  >
+        SELECT USID  FROM TS_USER WHERE  USNAME not like  #{userName}
+    </select>
+
+    <select id="queryUserIdByNameByEquals" resultType="java.lang.String" parameterType="java.lang.String"  >
+        SELECT USID  FROM TS_USER WHERE  USNAME =  #{userName}
+    </select>
+
+    <select id="queryUserIdByNameByNotEquals" resultType="java.lang.String" parameterType="java.lang.String"  >
+        SELECT USID  FROM TS_USER WHERE  USNAME !=  #{userName}
+    </select>
+    <select id="queryUserIdByNameAndOrgId" resultType="java.lang.String" parameterType="java.lang.String"  >
+        SELECT DISTINCT u.USID
+        FROM TS_USER u
+                 LEFT JOIN TR_USER_ORG ur ON u.USID = ur.USER_ID
+                 RIGHT JOIN(SELECT id, ORG_NAME
+                            FROM TS_ORG
+                            START WITH ID = #{orgId}
+                            CONNECT BY PRIOR ID = PARENT_ID) o ON ur.ORG_ID = o.ID
+        WHERE USNAME = #{userName}
+
+    </select>
+
+    <select id="getEmployeeInfoMapList" resultType="map" >
+            select usid,usname,org1.layer,org1.parent_ids,org1.org_name org_name1,org2.org_name org_name2 ,org3.org_name org_name3,org4.org_name org_name4 ,org5.org_name             org_name5,org6.org_name org_name6
+            from ts_user left join tr_user_org on ts_user.usid=tr_user_org.user_id
+            left join ts_org org1 on tr_user_org.org_id=org1.id
+            left join ts_org org2 on org1.parent_id=org2.id
+            left join ts_org org3 on org2.parent_id=org3.id
+            left join ts_org org4 on org3.parent_id=org4.id
+            left join ts_org org5 on org4.parent_id=org5.id
+            left join ts_org org6 on org5.parent_id=org6.id
+            where org1.layer is not null and org1.parent_ids is not null and ts_user.DEL_FLAG!=1 and
+            ts_user.CONTACT_ADDRESS NOT LIKE '%实习%' and ts_user.USNAME NOT LIKE '%管理员%'
+            order by usid asc
+    </select>
+
+    <select id="getUserNameByUserId" resultType="java.lang.String" parameterType="java.lang.String">
+		select usname from TS_USER t where t.usid = #{usid}
+	</select>
+
+    <select id="getProjectMemberMapById"  resultType="map"  parameterType="java.lang.String">
+        select usid,usname from TS_USER t where t.usid=#{usid}
+    </select>
+
+    <select id="getAllEmpIds" resultType="string">
+        select usid from ts_user
+    </select>
+
+
+</mapper>

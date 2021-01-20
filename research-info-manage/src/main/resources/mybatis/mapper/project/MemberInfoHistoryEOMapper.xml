@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.project.dao.MemberInfoHistoryEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.research.project.entity.MemberInfoHistoryEO" >
+    <id column="id" property="id" />
+    <result column="project_id" property="projectId" />
+    <result column="member_user_id" property="memberUserId" />
+    <result column="undertaking_type_id" property="undertakingTypeId" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="create_user_name" property="createUserName" />
+    <result column="create_time" property="createTime" />
+    <result column="modify_time" property="modifyTime" />
+    <result column="del_flag" property="delFlag" />
+    <result column="ext1" property="ext1" />
+    <result column="ext2" property="ext2" />
+    <result column="ext3" property="ext3" />
+    <result column="ext4" property="ext4" />
+    <result column="ext5" property="ext5" />
+    <result column="dept_id" property="deptId" />
+    <result column="task_division" property="taskDivision" />
+    <result column="work_hours" property="workHours" />
+    <result column="study_abroad_type" property="studyAbroadType" />
+    <result column="sort" property="sort" />
+    <result column="member_profession" property="memberProfession" />
+  </resultMap>
+
+  <!-- RS_MEMBER_INFO_HISTORY table all fields -->
+  <sql id="Base_Column_List" >
+     id, project_id, member_user_id, undertaking_type_id, create_user_id, create_user_name, create_time, modify_time, del_flag, ext1, ext2, ext3, ext4, ext5, dept_id, task_division, work_hours, study_abroad_type, sort, member_profession
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1 and del_flag=0
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="projectId != null" >
+        and project_id ${projectIdOperator} #{projectId}
+      </if>
+      <if test="memberUserId != null" >
+        and member_user_id ${memberUserIdOperator} #{memberUserId}
+      </if>
+      <if test="undertakingTypeId != null" >
+        and undertaking_type_id ${undertakingTypeIdOperator} #{undertakingTypeId}
+      </if>
+      <if test="createUserId != null" >
+        and create_user_id ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="createUserName != null" >
+        and create_user_name ${createUserNameOperator} #{createUserName}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="modifyTime != null" >
+        and modify_time ${modifyTimeOperator} #{modifyTime}
+      </if>
+      <if test="modifyTime1 != null" >
+        and modify_time &gt;= #{modifyTime1}
+      </if>
+      <if test="modifyTime2 != null" >
+        and modify_time &lt;= #{modifyTime2}
+      </if>
+      <if test="delFlag != null" >
+        and del_flag ${delFlagOperator} #{delFlag}
+      </if>
+      <if test="ext1 != null" >
+        and ext1 ${ext1Operator} #{ext1}
+      </if>
+      <if test="ext2 != null" >
+        and ext2 ${ext2Operator} #{ext2}
+      </if>
+      <if test="ext3 != null" >
+        and ext3 ${ext3Operator} #{ext3}
+      </if>
+      <if test="ext4 != null" >
+        and ext4 ${ext4Operator} #{ext4}
+      </if>
+      <if test="ext5 != null" >
+        and ext5 ${ext5Operator} #{ext5}
+      </if>
+      <if test="deptId != null" >
+        and dept_id ${deptIdOperator} #{deptId}
+      </if>
+      <if test="taskDivision != null" >
+        and task_division ${taskDivisionOperator} #{taskDivision}
+      </if>
+      <if test="workHours != null" >
+        and work_hours ${workHoursOperator} #{workHours}
+      </if>
+      <if test="studyAbroadType != null" >
+        and study_abroad_type ${studyAbroadTypeOperator} #{studyAbroadType}
+      </if>
+      <if test="sort != null" >
+        and sort ${sortOperator} #{sort}
+      </if>
+      <if test="memberProfession != null" >
+        and member_profession ${memberProfessionOperator} #{memberProfession}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.research.project.entity.MemberInfoHistoryEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RS_MEMBER_INFO_HISTORY.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into RS_MEMBER_INFO_HISTORY(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{projectId, jdbcType=VARCHAR}, #{memberUserId, jdbcType=VARCHAR}, #{undertakingTypeId, jdbcType=VARCHAR}, #{createUserId, jdbcType=VARCHAR}, #{createUserName, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{modifyTime, jdbcType=TIMESTAMP}, #{delFlag, jdbcType=INTEGER}, #{ext1, jdbcType=VARCHAR}, #{ext2, jdbcType=VARCHAR}, #{ext3, jdbcType=VARCHAR}, #{ext4, jdbcType=VARCHAR}, #{ext5, jdbcType=VARCHAR}, #{deptId, jdbcType=VARCHAR}, #{taskDivision, jdbcType=VARCHAR}, #{workHours, jdbcType=DOUBLE}, #{studyAbroadType, jdbcType=VARCHAR}, #{sort, jdbcType=INTEGER}, #{memberProfession, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.research.project.entity.MemberInfoHistoryEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RS_MEMBER_INFO_HISTORY.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into RS_MEMBER_INFO_HISTORY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="projectId != null" >project_id,</if>
+                <if test="memberUserId != null" >member_user_id,</if>
+                <if test="undertakingTypeId != null" >undertaking_type_id,</if>
+                <if test="createUserId != null" >create_user_id,</if>
+                <if test="createUserName != null" >create_user_name,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="modifyTime != null" >modify_time,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="ext1 != null" >ext1,</if>
+                <if test="ext2 != null" >ext2,</if>
+                <if test="ext3 != null" >ext3,</if>
+                <if test="ext4 != null" >ext4,</if>
+                <if test="ext5 != null" >ext5,</if>
+                <if test="deptId != null" >dept_id,</if>
+                <if test="taskDivision != null" >task_division,</if>
+                <if test="workHours != null" >work_hours,</if>
+                <if test="studyAbroadType != null" >study_abroad_type,</if>
+                <if test="sort != null" >sort,</if>
+                <if test="memberProfession != null" >member_profession,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="projectId != null" >#{projectId, jdbcType=VARCHAR},</if>
+                <if test="memberUserId != null" >#{memberUserId, jdbcType=VARCHAR},</if>
+                <if test="undertakingTypeId != null" >#{undertakingTypeId, jdbcType=VARCHAR},</if>
+                <if test="createUserId != null" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="createUserName != null" >#{createUserName, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="modifyTime != null" >#{modifyTime, jdbcType=TIMESTAMP},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=INTEGER},</if>
+                <if test="ext1 != null" >#{ext1, jdbcType=VARCHAR},</if>
+                <if test="ext2 != null" >#{ext2, jdbcType=VARCHAR},</if>
+                <if test="ext3 != null" >#{ext3, jdbcType=VARCHAR},</if>
+                <if test="ext4 != null" >#{ext4, jdbcType=VARCHAR},</if>
+                <if test="ext5 != null" >#{ext5, jdbcType=VARCHAR},</if>
+                <if test="deptId != null" >#{deptId, jdbcType=VARCHAR},</if>
+                <if test="taskDivision != null" >#{taskDivision, jdbcType=VARCHAR},</if>
+                <if test="workHours != null" >#{workHours, jdbcType=DOUBLE},</if>
+                <if test="studyAbroadType != null" >#{studyAbroadType, jdbcType=VARCHAR},</if>
+                <if test="sort != null" >#{sort, jdbcType=INTEGER},</if>
+                <if test="memberProfession != null" >#{memberProfession, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+    <!--批量新增-->
+    <insert id = "batchInsertSelective">
+        INSERT ALL
+        <foreach collection = "memberInfoEOS" item = "item" index = "index">
+            <if test = "item.id != null">
+                into RS_MEMBER_INFO_HISTORY
+                <trim prefix="(" suffix=")" suffixOverrides="," >
+                    <if test="item.deptId != null" >dept_id,</if>
+                    <if test="item.taskDivision != null" >task_division,</if>
+                    <if test="item.workHours != null" >work_hours,</if>
+                    <if test="item.id != null" >id,</if>
+                    <if test="item.projectId != null" >project_id,</if>
+                    <if test="item.memberUserId != null" >member_user_id,</if>
+                    <if test="item.undertakingTypeId != null" >undertaking_type_id,</if>
+                    <if test="item.createUserId != null" >create_user_id,</if>
+                    <if test="item.createUserName != null" >create_user_name,</if>
+                    <if test="item.createTime != null" >create_time,</if>
+                    <if test="item.modifyTime != null" >modify_time,</if>
+                    <if test="item.delFlag != null" >del_flag,</if>
+
+                    <if test="item.studyAbroadType != null" >study_abroad_type,</if>
+                    <if test="item.sort != null" >sort,</if>
+                    <if test="item.memberProfession != null" >member_profession,</if>
+
+                    <if test="item.ext1 != null" >ext1,</if>
+                    <if test="item.ext2 != null" >ext2,</if>
+                    <if test="item.ext3 != null" >ext3,</if>
+                    <if test="item.ext4 != null" >ext4,</if>
+                    <if test="item.ext5 != null" >ext5,</if>
+                </trim>
+                <trim prefix="values (" suffix=")" suffixOverrides="," >
+                    <if test="item.deptId != null" >#{item.deptId, jdbcType=VARCHAR},</if>
+                    <if test="item.taskDivision != null" >#{item.taskDivision, jdbcType=VARCHAR},</if>
+                    <if test="item.workHours != null" >#{item.workHours, jdbcType=DOUBLE},</if>
+                    <if test="item.id != null" >#{item.id, jdbcType=VARCHAR},</if>
+                    <if test="item.projectId != null" >#{item.projectId, jdbcType=VARCHAR},</if>
+                    <if test="item.memberUserId != null" >#{item.memberUserId, jdbcType=VARCHAR},</if>
+                    <if test="item.undertakingTypeId != null" >#{item.undertakingTypeId, jdbcType=VARCHAR},</if>
+                    <if test="item.createUserId != null" >#{item.createUserId, jdbcType=VARCHAR},</if>
+                    <if test="item.createUserName != null" >#{item.createUserName, jdbcType=VARCHAR},</if>
+                    <if test="item.createTime != null" >#{item.createTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.modifyTime != null" >#{item.modifyTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.delFlag != null" >#{item.delFlag, jdbcType=INTEGER},</if>
+
+                    <if test="item.studyAbroadType != null" >#{item.studyAbroadType, jdbcType=VARCHAR},</if>
+                    <if test="item.sort != null" >#{item.sort, jdbcType=INTEGER},</if>
+                    <if test="item.memberProfession != null" >#{item.memberProfession, jdbcType=VARCHAR},</if>
+
+                    <if test="item.ext1 != null" >#{item.ext1, jdbcType=VARCHAR},</if>
+                    <if test="item.ext2 != null" >#{item.ext2, jdbcType=VARCHAR},</if>
+                    <if test="item.ext3 != null" >#{item.ext3, jdbcType=VARCHAR},</if>
+                    <if test="item.ext4 != null" >#{item.ext4, jdbcType=VARCHAR},</if>
+                    <if test="item.ext5 != null" >#{item.ext5, jdbcType=VARCHAR},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.research.project.entity.MemberInfoHistoryEO" >
+    update RS_MEMBER_INFO_HISTORY
+       set  project_id = #{projectId},
+            member_user_id = #{memberUserId},
+            undertaking_type_id = #{undertakingTypeId},
+            create_user_id = #{createUserId},
+            create_user_name = #{createUserName},
+            create_time = #{createTime},
+            modify_time = #{modifyTime},
+            del_flag = #{delFlag},
+            ext1 = #{ext1},
+            ext2 = #{ext2},
+            ext3 = #{ext3},
+            ext4 = #{ext4},
+            ext5 = #{ext5},
+            dept_id = #{deptId},
+            task_division = #{taskDivision},
+            work_hours = #{workHours},
+            study_abroad_type = #{studyAbroadType},
+            sort = #{sort},
+            member_profession = #{memberProfession}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.research.project.entity.MemberInfoHistoryEO" >
+    update RS_MEMBER_INFO_HISTORY
+    <set >
+      <if test="projectId != null" >
+        project_id = #{projectId},
+      </if>
+      <if test="memberUserId != null" >
+        member_user_id = #{memberUserId},
+      </if>
+      <if test="undertakingTypeId != null" >
+        undertaking_type_id = #{undertakingTypeId},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="createUserName != null" >
+        create_user_name = #{createUserName},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="ext1 != null" >
+        ext1 = #{ext1},
+      </if>
+      <if test="ext2 != null" >
+        ext2 = #{ext2},
+      </if>
+      <if test="ext3 != null" >
+        ext3 = #{ext3},
+      </if>
+      <if test="ext4 != null" >
+        ext4 = #{ext4},
+      </if>
+      <if test="ext5 != null" >
+        ext5 = #{ext5},
+      </if>
+      <if test="deptId != null" >
+        dept_id = #{deptId},
+      </if>
+      <if test="taskDivision != null" >
+        task_division = #{taskDivision},
+      </if>
+      <if test="workHours != null" >
+        work_hours = #{workHours},
+      </if>
+      <if test="studyAbroadType != null" >
+        study_abroad_type = #{studyAbroadType},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort},
+      </if>
+      <if test="memberProfession != null" >
+        member_profession = #{memberProfession},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 RS_MEMBER_INFO_HISTORY -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from RS_MEMBER_INFO_HISTORY
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RS_MEMBER_INFO_HISTORY
+     where id = #{value}
+
+  </delete>
+
+  <!-- RS_MEMBER_INFO_HISTORY 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from RS_MEMBER_INFO_HISTORY
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询RS_MEMBER_INFO_HISTORY列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from RS_MEMBER_INFO_HISTORY
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from RS_MEMBER_INFO_HISTORY
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+    <!--根据项目id删除-->
+    <delete id="deleteByProjectId" parameterType="java.lang.String">
+   	delete  from RS_MEMBER_INFO_HISTORY
+     where project_id = #{projectId}
+
+  </delete>
+    <!--
+    <update id="deleteByProjectId" parameterType="java.lang.String">
+   	update  RS_MEMBER_INFO_HISTORY set del_flag=1
+     where project_id = #{projectId}
+
+  </update>-->
+
+</mapper>

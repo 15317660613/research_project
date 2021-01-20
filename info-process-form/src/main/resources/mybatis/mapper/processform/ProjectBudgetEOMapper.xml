@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.processform.dao.ProjectBudgetEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.processform.entity.ProjectBudgetEO" >
+    <id column="id_" property="id" />
+    <result column="version_" property="version" />
+    <result column="delflag_" property="delflag" />
+    <result column="project_id_" property="projectId" />
+    <result column="project_name_" property="projectName" />
+    <result column="project_baerdept_id_" property="projectBaerdeptId" />
+    <result column="project_baerdept_name_" property="projectBaerdeptName" />
+    <result column="project_manager_id_" property="projectManagerId" />
+    <result column="project_manager_name_" property="projectManagerName" />
+    <result column="project_impl_start_time_" property="projectImplStartTime" />
+    <result column="project_impl_end_time_" property="projectImplEndTime" />
+    <result column="project_budget_sum_" property="projectBudgetSum" />
+    <result column="person_budget_money_sum_" property="personBudgetMoneySum" />
+    <result column="purchase_budget_sum_" property="purchaseBudgetSum" />
+    <result column="dept_cooperat_budget_sum_" property="deptCooperatBudgetSum" />
+    <result column="other_budget_sum_" property="otherBudgetSum" />
+    <result column="project_gross_profitrate_" property="projectGrossProfitrate" />
+    <result column="fit_standard_" property="fitStandard" />
+    <result column="project_contract_amount_" property="projectContractAmount" />
+    <result column="project_price_detail_" property="projectPriceDetail" />
+    <result column="project_work_time_sum_" property="projectWorkTimeSum" />
+    <result column="project_baer_dept_suggest_" property="projectBaerDeptSuggest" />
+    <result column="direct_leader_suggest_" property="directLeaderSuggest" />
+    <result column="finance_dept_suggest_" property="financeDeptSuggest" />
+    <result column="ext_01" property="ext01" />
+    <result column="ext_02" property="ext02" />
+    <result column="ext_03" property="ext03" />
+    <result column="person_budget_time_sum_" property="personBudgetTimeSum" />
+    <result column="ext_04" property="ext04" />
+    <result column="ext_05" property="ext05" />
+    <result column="ext_06" property="ext06" />
+  </resultMap>
+
+  <!-- PF_PROJECT_BUDGET table all fields -->
+  <sql id="Base_Column_List" >
+     version_, delflag_, project_id_, project_name_, project_baerdept_id_, project_baerdept_name_, project_manager_id_, project_manager_name_, project_impl_start_time_, project_impl_end_time_, project_budget_sum_, person_budget_money_sum_, purchase_budget_sum_, dept_cooperat_budget_sum_, other_budget_sum_, project_gross_profitrate_, fit_standard_, project_contract_amount_, project_price_detail_, project_work_time_sum_, project_baer_dept_suggest_, direct_leader_suggest_, finance_dept_suggest_, ext_01, ext_02, ext_03, id_, person_budget_time_sum_, ext_04, ext_05, ext_06
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="version != null" >
+        and version_ ${versionOperator} #{version}
+      </if>
+      <if test="delflag != null" >
+        and delflag_ ${delflagOperator} #{delflag}
+      </if>
+      <if test="projectId != null" >
+        and project_id_ ${projectIdOperator} #{projectId}
+      </if>
+      <if test="projectName != null" >
+        and project_name_ ${projectNameOperator} #{projectName}
+      </if>
+      <if test="projectBaerdeptId != null" >
+        and project_baerdept_id_ ${projectBaerdeptIdOperator} #{projectBaerdeptId}
+      </if>
+      <if test="projectBaerdeptName != null" >
+        and project_baerdept_name_ ${projectBaerdeptNameOperator} #{projectBaerdeptName}
+      </if>
+      <if test="projectManagerId != null" >
+        and project_manager_id_ ${projectManagerIdOperator} #{projectManagerId}
+      </if>
+      <if test="projectManagerName != null" >
+        and project_manager_name_ ${projectManagerNameOperator} #{projectManagerName}
+      </if>
+      <if test="projectImplStartTime != null" >
+        and project_impl_start_time_ ${projectImplStartTimeOperator} #{projectImplStartTime}
+      </if>
+      <if test="projectImplStartTime1 != null" >
+        and project_impl_start_time_ &gt;= #{projectImplStartTime1}
+      </if>
+      <if test="projectImplStartTime2 != null" >
+        and project_impl_start_time_ &lt;= #{projectImplStartTime2}
+      </if>
+      <if test="projectImplEndTime != null" >
+        and project_impl_end_time_ ${projectImplEndTimeOperator} #{projectImplEndTime}
+      </if>
+      <if test="projectImplEndTime1 != null" >
+        and project_impl_end_time_ &gt;= #{projectImplEndTime1}
+      </if>
+      <if test="projectImplEndTime2 != null" >
+        and project_impl_end_time_ &lt;= #{projectImplEndTime2}
+      </if>
+      <if test="projectBudgetSum != null" >
+        and project_budget_sum_ ${projectBudgetSumOperator} #{projectBudgetSum}
+      </if>
+      <if test="personBudgetMoneySum != null" >
+        and person_budget_money_sum_ ${personBudgetMoneySumOperator} #{personBudgetMoneySum}
+      </if>
+      <if test="purchaseBudgetSum != null" >
+        and purchase_budget_sum_ ${purchaseBudgetSumOperator} #{purchaseBudgetSum}
+      </if>
+      <if test="deptCooperatBudgetSum != null" >
+        and dept_cooperat_budget_sum_ ${deptCooperatBudgetSumOperator} #{deptCooperatBudgetSum}
+      </if>
+      <if test="otherBudgetSum != null" >
+        and other_budget_sum_ ${otherBudgetSumOperator} #{otherBudgetSum}
+      </if>
+      <if test="projectGrossProfitrate != null" >
+        and project_gross_profitrate_ ${projectGrossProfitrateOperator} #{projectGrossProfitrate}
+      </if>
+      <if test="fitStandard != null" >
+        and fit_standard_ ${fitStandardOperator} #{fitStandard}
+      </if>
+      <if test="projectContractAmount != null" >
+        and project_contract_amount_ ${projectContractAmountOperator} #{projectContractAmount}
+      </if>
+      <if test="projectPriceDetail != null" >
+        and project_price_detail_ ${projectPriceDetailOperator} #{projectPriceDetail}
+      </if>
+      <if test="projectWorkTimeSum != null" >
+        and project_work_time_sum_ ${projectWorkTimeSumOperator} #{projectWorkTimeSum}
+      </if>
+      <if test="projectBaerDeptSuggest != null" >
+        and project_baer_dept_suggest_ ${projectBaerDeptSuggestOperator} #{projectBaerDeptSuggest}
+      </if>
+      <if test="directLeaderSuggest != null" >
+        and direct_leader_suggest_ ${directLeaderSuggestOperator} #{directLeaderSuggest}
+      </if>
+      <if test="financeDeptSuggest != null" >
+        and finance_dept_suggest_ ${financeDeptSuggestOperator} #{financeDeptSuggest}
+      </if>
+      <if test="ext01 != null" >
+        and ext_01 ${ext01Operator} #{ext01}
+      </if>
+      <if test="ext02 != null" >
+        and ext_02 ${ext02Operator} #{ext02}
+      </if>
+      <if test="ext03 != null" >
+        and ext_03 ${ext03Operator} #{ext03}
+      </if>
+      <if test="id != null" >
+        and id_ ${idOperator} #{id}
+      </if>
+      <if test="personBudgetTimeSum != null" >
+        and person_budget_time_sum_ ${personBudgetTimeSumOperator} #{personBudgetTimeSum}
+      </if>
+      <if test="ext04 != null" >
+        and ext_04 ${ext04Operator} #{ext04}
+      </if>
+      <if test="ext05 != null" >
+        and ext_05 ${ext05Operator} #{ext05}
+      </if>
+      <if test="ext06 != null" >
+        and ext_06 ${ext06Operator} #{ext06}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.processform.entity.ProjectBudgetEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_PF_PROJECT_BUDGET.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into PF_PROJECT_BUDGET(<include refid="Base_Column_List" />)
+    values (#{version, jdbcType=VARCHAR}, #{delflag, jdbcType=INTEGER}, #{projectId, jdbcType=VARCHAR}, #{projectName, jdbcType=VARCHAR}, #{projectBaerdeptId, jdbcType=VARCHAR}, #{projectBaerdeptName, jdbcType=VARCHAR}, #{projectManagerId, jdbcType=VARCHAR}, #{projectManagerName, jdbcType=VARCHAR}, #{projectImplStartTime, jdbcType=TIMESTAMP}, #{projectImplEndTime, jdbcType=TIMESTAMP}, #{projectBudgetSum, jdbcType=FLOAT}, #{personBudgetMoneySum, jdbcType=FLOAT}, #{purchaseBudgetSum, jdbcType=FLOAT}, #{deptCooperatBudgetSum, jdbcType=FLOAT}, #{otherBudgetSum, jdbcType=FLOAT}, #{projectGrossProfitrate, jdbcType=FLOAT}, #{fitStandard, jdbcType=INTEGER}, #{projectContractAmount, jdbcType=FLOAT}, #{projectPriceDetail, jdbcType=VARCHAR}, #{projectWorkTimeSum, jdbcType=FLOAT}, #{projectBaerDeptSuggest, jdbcType=VARCHAR}, #{directLeaderSuggest, jdbcType=VARCHAR}, #{financeDeptSuggest, jdbcType=VARCHAR}, #{ext01, jdbcType=VARCHAR}, #{ext02, jdbcType=VARCHAR}, #{ext03, jdbcType=VARCHAR}, #{id, jdbcType=VARCHAR}, #{personBudgetTimeSum, jdbcType=FLOAT}, #{ext04, jdbcType=VARCHAR}, #{ext05, jdbcType=VARCHAR}, #{ext06, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.processform.entity.ProjectBudgetEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_PF_PROJECT_BUDGET.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into PF_PROJECT_BUDGET
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="version != null" >version_,</if>
+                <if test="delflag != null" >delflag_,</if>
+                <if test="projectId != null" >project_id_,</if>
+                <if test="projectName != null" >project_name_,</if>
+                <if test="projectBaerdeptId != null" >project_baerdept_id_,</if>
+                <if test="projectBaerdeptName != null" >project_baerdept_name_,</if>
+                <if test="projectManagerId != null" >project_manager_id_,</if>
+                <if test="projectManagerName != null" >project_manager_name_,</if>
+                <if test="projectImplStartTime != null" >project_impl_start_time_,</if>
+                <if test="projectImplEndTime != null" >project_impl_end_time_,</if>
+                <if test="projectBudgetSum != null" >project_budget_sum_,</if>
+                <if test="personBudgetMoneySum != null" >person_budget_money_sum_,</if>
+                <if test="purchaseBudgetSum != null" >purchase_budget_sum_,</if>
+                <if test="deptCooperatBudgetSum != null" >dept_cooperat_budget_sum_,</if>
+                <if test="otherBudgetSum != null" >other_budget_sum_,</if>
+                <if test="projectGrossProfitrate != null" >project_gross_profitrate_,</if>
+                <if test="fitStandard != null" >fit_standard_,</if>
+                <if test="projectContractAmount != null" >project_contract_amount_,</if>
+                <if test="projectPriceDetail != null" >project_price_detail_,</if>
+                <if test="projectWorkTimeSum != null" >project_work_time_sum_,</if>
+                <if test="projectBaerDeptSuggest != null" >project_baer_dept_suggest_,</if>
+                <if test="directLeaderSuggest != null" >direct_leader_suggest_,</if>
+                <if test="financeDeptSuggest != null" >finance_dept_suggest_,</if>
+                <if test="ext01 != null" >ext_01,</if>
+                <if test="ext02 != null" >ext_02,</if>
+                <if test="ext03 != null" >ext_03,</if>
+                <if test="id != null" >id_,</if>
+                <if test="personBudgetTimeSum != null" >person_budget_time_sum_,</if>
+                <if test="ext04 != null" >ext_04,</if>
+                <if test="ext05 != null" >ext_05,</if>
+                <if test="ext06 != null" >ext_06,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="version != null" >#{version, jdbcType=VARCHAR},</if>
+                <if test="delflag != null" >#{delflag, jdbcType=INTEGER},</if>
+                <if test="projectId != null" >#{projectId, jdbcType=VARCHAR},</if>
+                <if test="projectName != null" >#{projectName, jdbcType=VARCHAR},</if>
+                <if test="projectBaerdeptId != null" >#{projectBaerdeptId, jdbcType=VARCHAR},</if>
+                <if test="projectBaerdeptName != null" >#{projectBaerdeptName, jdbcType=VARCHAR},</if>
+                <if test="projectManagerId != null" >#{projectManagerId, jdbcType=VARCHAR},</if>
+                <if test="projectManagerName != null" >#{projectManagerName, jdbcType=VARCHAR},</if>
+                <if test="projectImplStartTime != null" >#{projectImplStartTime, jdbcType=TIMESTAMP},</if>
+                <if test="projectImplEndTime != null" >#{projectImplEndTime, jdbcType=TIMESTAMP},</if>
+                <if test="projectBudgetSum != null" >#{projectBudgetSum, jdbcType=FLOAT},</if>
+                <if test="personBudgetMoneySum != null" >#{personBudgetMoneySum, jdbcType=FLOAT},</if>
+                <if test="purchaseBudgetSum != null" >#{purchaseBudgetSum, jdbcType=FLOAT},</if>
+                <if test="deptCooperatBudgetSum != null" >#{deptCooperatBudgetSum, jdbcType=FLOAT},</if>
+                <if test="otherBudgetSum != null" >#{otherBudgetSum, jdbcType=FLOAT},</if>
+                <if test="projectGrossProfitrate != null" >#{projectGrossProfitrate, jdbcType=FLOAT},</if>
+                <if test="fitStandard != null" >#{fitStandard, jdbcType=INTEGER},</if>
+                <if test="projectContractAmount != null" >#{projectContractAmount, jdbcType=FLOAT},</if>
+                <if test="projectPriceDetail != null" >#{projectPriceDetail, jdbcType=VARCHAR},</if>
+                <if test="projectWorkTimeSum != null" >#{projectWorkTimeSum, jdbcType=FLOAT},</if>
+                <if test="projectBaerDeptSuggest != null" >#{projectBaerDeptSuggest, jdbcType=VARCHAR},</if>
+                <if test="directLeaderSuggest != null" >#{directLeaderSuggest, jdbcType=VARCHAR},</if>
+                <if test="financeDeptSuggest != null" >#{financeDeptSuggest, jdbcType=VARCHAR},</if>
+                <if test="ext01 != null" >#{ext01, jdbcType=VARCHAR},</if>
+                <if test="ext02 != null" >#{ext02, jdbcType=VARCHAR},</if>
+                <if test="ext03 != null" >#{ext03, jdbcType=VARCHAR},</if>
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="personBudgetTimeSum != null" >#{personBudgetTimeSum, jdbcType=FLOAT},</if>
+                <if test="ext04 != null" >#{ext04, jdbcType=VARCHAR},</if>
+                <if test="ext05 != null" >#{ext05, jdbcType=VARCHAR},</if>
+                <if test="ext06 != null" >#{ext06, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.processform.entity.ProjectBudgetEO" >
+    update PF_PROJECT_BUDGET
+       set  version_ = #{version},
+            delflag_ = #{delflag},
+            project_id_ = #{projectId},
+            project_name_ = #{projectName},
+            project_baerdept_id_ = #{projectBaerdeptId},
+            project_baerdept_name_ = #{projectBaerdeptName},
+            project_manager_id_ = #{projectManagerId},
+            project_manager_name_ = #{projectManagerName},
+            project_impl_start_time_ = #{projectImplStartTime},
+            project_impl_end_time_ = #{projectImplEndTime},
+            project_budget_sum_ = #{projectBudgetSum},
+            person_budget_money_sum_ = #{personBudgetMoneySum},
+            purchase_budget_sum_ = #{purchaseBudgetSum},
+            dept_cooperat_budget_sum_ = #{deptCooperatBudgetSum},
+            other_budget_sum_ = #{otherBudgetSum},
+            project_gross_profitrate_ = #{projectGrossProfitrate},
+            fit_standard_ = #{fitStandard},
+            project_contract_amount_ = #{projectContractAmount},
+            project_price_detail_ = #{projectPriceDetail},
+            project_work_time_sum_ = #{projectWorkTimeSum},
+            project_baer_dept_suggest_ = #{projectBaerDeptSuggest},
+            direct_leader_suggest_ = #{directLeaderSuggest},
+            finance_dept_suggest_ = #{financeDeptSuggest},
+            ext_01 = #{ext01},
+            ext_02 = #{ext02},
+            ext_03 = #{ext03},
+            person_budget_time_sum_ = #{personBudgetTimeSum},
+            ext_04 = #{ext04},
+            ext_05 = #{ext05},
+            ext_06 = #{ext06}
+     where  id_ = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.processform.entity.ProjectBudgetEO" >
+    update PF_PROJECT_BUDGET
+    <set >
+      <if test="version != null" >
+        version_ = #{version},
+      </if>
+      <if test="delflag != null" >
+        delflag_ = #{delflag},
+      </if>
+      <if test="projectId != null" >
+        project_id_ = #{projectId},
+      </if>
+      <if test="projectName != null" >
+        project_name_ = #{projectName},
+      </if>
+      <if test="projectBaerdeptId != null" >
+        project_baerdept_id_ = #{projectBaerdeptId},
+      </if>
+      <if test="projectBaerdeptName != null" >
+        project_baerdept_name_ = #{projectBaerdeptName},
+      </if>
+      <if test="projectManagerId != null" >
+        project_manager_id_ = #{projectManagerId},
+      </if>
+      <if test="projectManagerName != null" >
+        project_manager_name_ = #{projectManagerName},
+      </if>
+      <if test="projectImplStartTime != null" >
+        project_impl_start_time_ = #{projectImplStartTime},
+      </if>
+      <if test="projectImplEndTime != null" >
+        project_impl_end_time_ = #{projectImplEndTime},
+      </if>
+      <if test="projectBudgetSum != null" >
+        project_budget_sum_ = #{projectBudgetSum},
+      </if>
+      <if test="personBudgetMoneySum != null" >
+        person_budget_money_sum_ = #{personBudgetMoneySum},
+      </if>
+      <if test="purchaseBudgetSum != null" >
+        purchase_budget_sum_ = #{purchaseBudgetSum},
+      </if>
+      <if test="deptCooperatBudgetSum != null" >
+        dept_cooperat_budget_sum_ = #{deptCooperatBudgetSum},
+      </if>
+      <if test="otherBudgetSum != null" >
+        other_budget_sum_ = #{otherBudgetSum},
+      </if>
+      <if test="projectGrossProfitrate != null" >
+        project_gross_profitrate_ = #{projectGrossProfitrate},
+      </if>
+      <if test="fitStandard != null" >
+        fit_standard_ = #{fitStandard},
+      </if>
+      <if test="projectContractAmount != null" >
+        project_contract_amount_ = #{projectContractAmount},
+      </if>
+      <if test="projectPriceDetail != null" >
+        project_price_detail_ = #{projectPriceDetail},
+      </if>
+      <if test="projectWorkTimeSum != null" >
+        project_work_time_sum_ = #{projectWorkTimeSum},
+      </if>
+      <if test="projectBaerDeptSuggest != null" >
+        project_baer_dept_suggest_ = #{projectBaerDeptSuggest},
+      </if>
+      <if test="directLeaderSuggest != null" >
+        direct_leader_suggest_ = #{directLeaderSuggest},
+      </if>
+      <if test="financeDeptSuggest != null" >
+        finance_dept_suggest_ = #{financeDeptSuggest},
+      </if>
+      <if test="ext01 != null" >
+        ext_01 = #{ext01},
+      </if>
+      <if test="ext02 != null" >
+        ext_02 = #{ext02},
+      </if>
+      <if test="ext03 != null" >
+        ext_03 = #{ext03},
+      </if>
+      <if test="personBudgetTimeSum != null" >
+        person_budget_time_sum_ = #{personBudgetTimeSum},
+      </if>
+      <if test="ext04 != null" >
+        ext_04 = #{ext04},
+      </if>
+      <if test="ext05 != null" >
+        ext_05 = #{ext05},
+      </if>
+      <if test="ext06 != null" >
+        ext_06 = #{ext06},
+      </if>
+    </set>
+     where id_ = #{id}
+  </update>
+
+  <!-- 根据id查询 PF_PROJECT_BUDGET -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from PF_PROJECT_BUDGET
+     where id_ = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from PF_PROJECT_BUDGET
+     where id_ = #{value}
+
+  </delete>
+
+  <!-- PF_PROJECT_BUDGET 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from PF_PROJECT_BUDGET
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询PF_PROJECT_BUDGET列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from PF_PROJECT_BUDGET
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from PF_PROJECT_BUDGET
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

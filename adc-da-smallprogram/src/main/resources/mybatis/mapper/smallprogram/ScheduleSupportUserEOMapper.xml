@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.smallprogram.dao.ScheduleSupportUserEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.smallprogram.entity.ScheduleSupportUserEO" >
+    <id column="id_" property="id" />
+    <result column="support_id" property="supportId" />
+    <result column="ext_info" property="extInfo" />
+    <result column="ext_info1" property="extInfo1" />
+    <result column="ext_info2" property="extInfo2" />
+    <result column="ext_info3" property="extInfo3" />
+    <result column="ext_info4" property="extInfo4" />
+    <result column="ext_info5" property="extInfo5" />
+    <result column="type_" property="type" />
+    <result column="status" property="status" />
+    <result column="receive_user_id" property="receiveUserId" />
+    <result column="receive_user_name" property="receiveUserName" />
+    <result column="collected" property="collected" />
+    <result column="top" property="top" />
+    <result column="receive_time" property="receiveTime" />
+    <result column="finished_time" property="finishedTime" />
+    <result column="del_flag" property="delFlag" />
+  </resultMap>
+
+  <!-- TS_SCHEDULE_SUPPORT_USER table all fields -->
+  <sql id="Base_Column_List" >
+     id_, support_id, ext_info, ext_info1, ext_info2, ext_info3, ext_info4, ext_info5, type_, status, receive_user_id, receive_user_name,
+     collected, top, receive_time, finished_time, del_flag
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id_ ${idOperator} #{id}
+      </if>
+      <if test="supportId != null" >
+        and support_id ${supportIdOperator} #{supportId}
+      </if>
+      <if test="extInfo != null" >
+        and ext_info ${extInfoOperator} #{extInfo}
+      </if>
+      <if test="extInfo1 != null" >
+        and ext_info1 ${extInfo1Operator} #{extInfo1}
+      </if>
+      <if test="extInfo2 != null" >
+        and ext_info2 ${extInfo2Operator} #{extInfo2}
+      </if>
+      <if test="extInfo3 != null" >
+        and ext_info3 ${extInfo3Operator} #{extInfo3}
+      </if>
+      <if test="extInfo4 != null" >
+        and ext_info4 ${extInfo4Operator} #{extInfo4}
+      </if>
+      <if test="extInfo5 != null" >
+        and ext_info5 ${extInfo5Operator} #{extInfo5}
+      </if>
+      <if test="type != null" >
+        and type_ ${typeOperator} #{type}
+      </if>
+      <if test="status != null" >
+        and status ${statusOperator} #{status}
+      </if>
+      <if test="receiveUserId != null" >
+        and receive_user_id ${receiveUserIdOperator} #{receiveUserId}
+      </if>
+      <if test="receiveUserName != null" >
+        and receive_user_name ${receiveUserNameOperator} #{receiveUserName}
+      </if>
+      <if test="collected != null" >
+        and collected ${collectedOperator} #{collected}
+      </if>
+      <if test="top != null" >
+        and top ${topOperator} #{top}
+      </if>
+      <if test="receiveTime != null" >
+        and receive_time ${receiveTimeOperator} #{receiveTime}
+      </if>
+      <if test="receiveTime1 != null" >
+        and receive_time &gt;= #{receiveTime1}
+      </if>
+      <if test="receiveTime2 != null" >
+        and receive_time &lt;= #{receiveTime2}
+      </if>
+      <if test="finishedTime != null" >
+        and finished_time ${finishedTimeOperator} #{finishedTime}
+      </if>
+      <if test="finishedTime1 != null" >
+        and finished_time &gt;= #{finishedTime1}
+      </if>
+      <if test="finishedTime2 != null" >
+        and finished_time &lt;= #{finishedTime2}
+      </if>
+      <if test="delFlag != null" >
+        and del_flag ${delFlagOperator} #{delFlag}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.smallprogram.entity.ScheduleSupportUserEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_TS_SCHEDULE_SUPPORT_USER.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into TS_SCHEDULE_SUPPORT_USER(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{supportId, jdbcType=VARCHAR}, #{extInfo, jdbcType=VARCHAR}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR}, #{type, jdbcType=INTEGER}, #{status, jdbcType=INTEGER}, #{receiveUserId, jdbcType=VARCHAR}, #{receiveUserName, jdbcType=VARCHAR}, #{collected, jdbcType=INTEGER}, #{top, jdbcType=INTEGER}, #{receiveTime, jdbcType=TIMESTAMP}, #{finishedTime, jdbcType=TIMESTAMP}, #{delFlag, jdbcType=INTEGER})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.smallprogram.entity.ScheduleSupportUserEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_TS_SCHEDULE_SUPPORT_USER.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into TS_SCHEDULE_SUPPORT_USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id_,</if>
+                <if test="supportId != null" >support_id,</if>
+                <if test="extInfo != null" >ext_info,</if>
+                <if test="extInfo1 != null" >ext_info1,</if>
+                <if test="extInfo2 != null" >ext_info2,</if>
+                <if test="extInfo3 != null" >ext_info3,</if>
+                <if test="extInfo4 != null" >ext_info4,</if>
+                <if test="extInfo5 != null" >ext_info5,</if>
+                <if test="type != null" >type_,</if>
+                <if test="status != null" >status,</if>
+                <if test="receiveUserId != null" >receive_user_id,</if>
+                <if test="receiveUserName != null" >receive_user_name,</if>
+                <if test="collected != null" >collected,</if>
+                <if test="top != null" >top,</if>
+                <if test="receiveTime != null" >receive_time,</if>
+                <if test="finishedTime != null" >finished_time,</if>
+                <if test="delFlag != null" >del_flag,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="supportId != null" >#{supportId, jdbcType=VARCHAR},</if>
+                <if test="extInfo != null" >#{extInfo, jdbcType=VARCHAR},</if>
+                <if test="extInfo1 != null" >#{extInfo1, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="extInfo3 != null" >#{extInfo3, jdbcType=VARCHAR},</if>
+                <if test="extInfo4 != null" >#{extInfo4, jdbcType=VARCHAR},</if>
+                <if test="extInfo5 != null" >#{extInfo5, jdbcType=VARCHAR},</if>
+                <if test="type != null" >#{type, jdbcType=INTEGER},</if>
+                <if test="status != null" >#{status, jdbcType=INTEGER},</if>
+                <if test="receiveUserId != null" >#{receiveUserId, jdbcType=VARCHAR},</if>
+                <if test="receiveUserName != null" >#{receiveUserName, jdbcType=VARCHAR},</if>
+                <if test="collected != null" >#{collected, jdbcType=INTEGER},</if>
+                <if test="top != null" >#{top, jdbcType=INTEGER},</if>
+                <if test="receiveTime != null" >#{receiveTime, jdbcType=TIMESTAMP},</if>
+                <if test="finishedTime != null" >#{finishedTime, jdbcType=TIMESTAMP},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=INTEGER},</if>
+            </trim>
+  </insert>
+
+    <insert id = "insertList" parameterType = "java.util.List">
+        INSERT ALL
+        <foreach collection = "list" item = "item" index = "index">
+            <if test = "item.id !=null">
+                into TS_SCHEDULE_SUPPORT_USER
+                <trim prefix="(" suffix=")" suffixOverrides="," >
+                    <if test="item.id != null" >id_,</if>
+                    <if test="item.supportId != null" >support_id,</if>
+                    <if test="item.extInfo != null" >ext_info,</if>
+                    <if test="item.extInfo1 != null" >ext_info1,</if>
+                    <if test="item.extInfo2 != null" >ext_info2,</if>
+                    <if test="item.extInfo3 != null" >ext_info3,</if>
+                    <if test="item.extInfo4 != null" >ext_info4,</if>
+                    <if test="item.extInfo5 != null" >ext_info5,</if>
+                    <if test="item.type != null" >type_,</if>
+                    <if test="item.status != null" >status,</if>
+                    <if test="item.receiveUserId != null" >receive_user_id,</if>
+                    <if test="item.receiveUserName != null" >receive_user_name,</if>
+                    <if test="item.collected != null" >collected,</if>
+                    <if test="item.top != null" >top,</if>
+                    <if test="item.receiveTime != null" >receive_time,</if>
+                    <if test="item.finishedTime != null" >finished_time,</if>
+                    <if test="item.delFlag != null" >del_flag,</if>
+                </trim>
+                <trim prefix="values (" suffix=")" suffixOverrides="," >
+                    <if test="item.id != null" >#{item.id, jdbcType=VARCHAR},</if>
+                    <if test="item.supportId != null" >#{item.supportId, jdbcType=VARCHAR},</if>
+                    <if test="item.extInfo != null" >#{item.extInfo, jdbcType=VARCHAR},</if>
+                    <if test="item.extInfo1 != null" >#{item.extInfo1, jdbcType=VARCHAR},</if>
+                    <if test="item.extInfo2 != null" >#{item.extInfo2, jdbcType=VARCHAR},</if>
+                    <if test="item.extInfo3 != null" >#{item.extInfo3, jdbcType=VARCHAR},</if>
+                    <if test="item.extInfo4 != null" >#{item.extInfo4, jdbcType=VARCHAR},</if>
+                    <if test="item.extInfo5 != null" >#{item.extInfo5, jdbcType=VARCHAR},</if>
+                    <if test="item.type != null" >#{item.type, jdbcType=INTEGER},</if>
+                    <if test="item.status != null" >#{item.status, jdbcType=INTEGER},</if>
+                    <if test="item.receiveUserId != null" >#{item.receiveUserId, jdbcType=VARCHAR},</if>
+                    <if test="item.receiveUserName != null" >#{item.receiveUserName, jdbcType=VARCHAR},</if>
+                    <if test="item.collected != null" >#{item.collected, jdbcType=INTEGER},</if>
+                    <if test="item.top != null" >#{item.top, jdbcType=INTEGER},</if>
+                    <if test="item.receiveTime != null" >#{item.receiveTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.finishedTime != null" >#{item.finishedTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.delFlag != null" >#{item.delFlag, jdbcType=INTEGER},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.smallprogram.entity.ScheduleSupportUserEO" >
+    update TS_SCHEDULE_SUPPORT_USER
+       set  support_id = #{supportId},
+            ext_info = #{extInfo},
+            ext_info1 = #{extInfo1},
+            ext_info2 = #{extInfo2},
+            ext_info3 = #{extInfo3},
+            ext_info4 = #{extInfo4},
+            ext_info5 = #{extInfo5},
+            type_ = #{type},
+            status = #{status},
+            receive_user_id = #{receiveUserId},
+            receive_user_name = #{receiveUserName},
+            collected = #{collected},
+            top = #{top},
+            receive_time = #{receiveTime},
+            finished_time = #{finishedTime},
+            del_flag = #{delFlag}
+     where  id_ = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.smallprogram.entity.ScheduleSupportUserEO" >
+    update TS_SCHEDULE_SUPPORT_USER
+    <set >
+      <if test="supportId != null" >
+        support_id = #{supportId},
+      </if>
+      <if test="extInfo != null" >
+        ext_info = #{extInfo},
+      </if>
+      <if test="extInfo1 != null" >
+        ext_info1 = #{extInfo1},
+      </if>
+      <if test="extInfo2 != null" >
+        ext_info2 = #{extInfo2},
+      </if>
+      <if test="extInfo3 != null" >
+        ext_info3 = #{extInfo3},
+      </if>
+      <if test="extInfo4 != null" >
+        ext_info4 = #{extInfo4},
+      </if>
+      <if test="extInfo5 != null" >
+        ext_info5 = #{extInfo5},
+      </if>
+      <if test="type != null" >
+        type_ = #{type},
+      </if>
+      <if test="status != null" >
+        status = #{status},
+      </if>
+      <if test="receiveUserId != null" >
+        receive_user_id = #{receiveUserId},
+      </if>
+      <if test="receiveUserName != null" >
+        receive_user_name = #{receiveUserName},
+      </if>
+      <if test="collected != null" >
+        collected = #{collected},
+      </if>
+      <if test="top != null" >
+        top = #{top},
+      </if>
+      <if test="receiveTime != null" >
+        receive_time = #{receiveTime},
+      </if>
+      <if test="finishedTime != null" >
+        finished_time = #{finishedTime},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+    </set>
+     where id_ = #{id}
+  </update>
+
+  <!-- 根据id查询 TS_SCHEDULE_SUPPORT_USER -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+      from TS_SCHEDULE_SUPPORT_USER
+     where id_ = #{value}
+
+  </select>
+    <!-- 根据id查询 TS_SCHEDULE_SUPPORT_USER -->
+    <select id="selectBySupportId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="Base_Column_List" />
+        from TS_SCHEDULE_SUPPORT_USER
+        where SUPPORT_ID = #{value}
+
+    </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TS_SCHEDULE_SUPPORT_USER
+     where id_ = #{value}
+
+  </delete>
+
+  <!-- TS_SCHEDULE_SUPPORT_USER 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from TS_SCHEDULE_SUPPORT_USER
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TS_SCHEDULE_SUPPORT_USER列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from TS_SCHEDULE_SUPPORT_USER
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from TS_SCHEDULE_SUPPORT_USER
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+
+
+
+
+</mapper>

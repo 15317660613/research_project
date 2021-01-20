@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.business.dao.DeptBudgetEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.business.entity.DeptBudgetEO" >
+    <id column="id" property="id" />
+    <result column="year" property="year" />
+    <result column="month" property="month" />
+    <result column="dept_id" property="deptId" />
+    <result column="dept_name" property="deptName" />
+    <result column="actual_contract_amount" property="actualContractAmount" />
+    <result column="actual_ticket_opening" property="actualTicketOpening" />
+    <result column="actual_profit" property="actualProfit" />
+    <result column="actual_cost" property="actualCost" />
+    <result column="office_supplies_expenditure" property="officeSuppliesExpenditure" />
+    <result column="consumables_expenditure" property="consumablesExpenditure" />
+    <result column="travel_expenses" property="travelExpenses" />
+    <result column="invoicing_budget" property="invoicingBudget" />
+    <result column="cost_budget" property="costBudget" />
+    <result column="profit_budget" property="profitBudget" />
+    <result column="ext_info1" property="extInfo1" />
+    <result column="ext_info2" property="extInfo2" />
+    <result column="ext_info3" property="extInfo3" />
+    <result column="ext_info4" property="extInfo4" />
+    <result column="ext_info5" property="extInfo5" />
+    <result column="ext_info6" property="extInfo6" />
+  </resultMap>
+
+  <!-- TS_DEPT_BUDGET table all fields -->
+  <sql id="Base_Column_List" >
+     id, year, month, dept_id, dept_name, actual_contract_amount, actual_ticket_opening, actual_profit, actual_cost, office_supplies_expenditure, consumables_expenditure, travel_expenses, invoicing_budget, cost_budget, profit_budget, ext_info1, ext_info2, ext_info3, ext_info4, ext_info5, ext_info6
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="year != null" >
+        and year ${yearOperator} #{year}
+      </if>
+      <if test="month != null" >
+        and month ${monthOperator} #{month}
+      </if>
+      <if test="deptId != null" >
+        and dept_id ${deptIdOperator} #{deptId}
+      </if>
+      <if test="deptName != null" >
+        and dept_name ${deptNameOperator} #{deptName}
+      </if>
+      <if test="actualContractAmount != null" >
+        and actual_contract_amount ${actualContractAmountOperator} #{actualContractAmount}
+      </if>
+      <if test="actualTicketOpening != null" >
+        and actual_ticket_opening ${actualTicketOpeningOperator} #{actualTicketOpening}
+      </if>
+      <if test="actualProfit != null" >
+        and actual_profit ${actualProfitOperator} #{actualProfit}
+      </if>
+      <if test="actualCost != null" >
+        and actual_cost ${actualCostOperator} #{actualCost}
+      </if>
+      <if test="officeSuppliesExpenditure != null" >
+        and office_supplies_expenditure ${officeSuppliesExpenditureOperator} #{officeSuppliesExpenditure}
+      </if>
+      <if test="consumablesExpenditure != null" >
+        and consumables_expenditure ${consumablesExpenditureOperator} #{consumablesExpenditure}
+      </if>
+      <if test="travelExpenses != null" >
+        and travel_expenses ${travelExpensesOperator} #{travelExpenses}
+      </if>
+      <if test="invoicingBudget != null" >
+        and invoicing_budget ${invoicingBudgetOperator} #{invoicingBudget}
+      </if>
+      <if test="costBudget != null" >
+        and cost_budget ${costBudgetOperator} #{costBudget}
+      </if>
+      <if test="profitBudget != null" >
+        and profit_budget ${profitBudgetOperator} #{profitBudget}
+      </if>
+      <if test="extInfo1 != null" >
+        and ext_info1 ${extInfo1Operator} #{extInfo1}
+      </if>
+      <if test="extInfo2 != null" >
+        and ext_info2 ${extInfo2Operator} #{extInfo2}
+      </if>
+      <if test="extInfo3 != null" >
+        and ext_info3 ${extInfo3Operator} #{extInfo3}
+      </if>
+      <if test="extInfo4 != null" >
+        and ext_info4 ${extInfo4Operator} #{extInfo4}
+      </if>
+      <if test="extInfo5 != null" >
+        and ext_info5 ${extInfo5Operator} #{extInfo5}
+      </if>
+      <if test="extInfo6 != null" >
+        and ext_info6 ${extInfo6Operator} #{extInfo6}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.business.entity.DeptBudgetEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_DEPT_BUDGET.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into TS_DEPT_BUDGET(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{year, jdbcType=VARCHAR}, #{month, jdbcType=VARCHAR}, #{deptId, jdbcType=VARCHAR}, #{deptName, jdbcType=VARCHAR}, #{actualContractAmount, jdbcType=FLOAT}, #{actualTicketOpening, jdbcType=FLOAT}, #{actualProfit, jdbcType=FLOAT}, #{actualCost, jdbcType=FLOAT}, #{officeSuppliesExpenditure, jdbcType=FLOAT}, #{consumablesExpenditure, jdbcType=FLOAT}, #{travelExpenses, jdbcType=FLOAT}, #{invoicingBudget, jdbcType=FLOAT}, #{costBudget, jdbcType=FLOAT}, #{profitBudget, jdbcType=FLOAT}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR}, #{extInfo6, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.business.entity.DeptBudgetEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_DEPT_BUDGET.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into TS_DEPT_BUDGET
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="year != null" >year,</if>
+                <if test="month != null" >month,</if>
+                <if test="deptId != null" >dept_id,</if>
+                <if test="deptName != null" >dept_name,</if>
+                <if test="actualContractAmount != null" >actual_contract_amount,</if>
+                <if test="actualTicketOpening != null" >actual_ticket_opening,</if>
+                <if test="actualProfit != null" >actual_profit,</if>
+                <if test="actualCost != null" >actual_cost,</if>
+                <if test="officeSuppliesExpenditure != null" >office_supplies_expenditure,</if>
+                <if test="consumablesExpenditure != null" >consumables_expenditure,</if>
+                <if test="travelExpenses != null" >travel_expenses,</if>
+                <if test="invoicingBudget != null" >invoicing_budget,</if>
+                <if test="costBudget != null" >cost_budget,</if>
+                <if test="profitBudget != null" >profit_budget,</if>
+                <if test="extInfo1 != null" >ext_info1,</if>
+                <if test="extInfo2 != null" >ext_info2,</if>
+                <if test="extInfo3 != null" >ext_info3,</if>
+                <if test="extInfo4 != null" >ext_info4,</if>
+                <if test="extInfo5 != null" >ext_info5,</if>
+                <if test="extInfo6 != null" >ext_info6,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="year != null" >#{year, jdbcType=VARCHAR},</if>
+                <if test="month != null" >#{month, jdbcType=VARCHAR},</if>
+                <if test="deptId != null" >#{deptId, jdbcType=VARCHAR},</if>
+                <if test="deptName != null" >#{deptName, jdbcType=VARCHAR},</if>
+                <if test="actualContractAmount != null" >#{actualContractAmount, jdbcType=FLOAT},</if>
+                <if test="actualTicketOpening != null" >#{actualTicketOpening, jdbcType=FLOAT},</if>
+                <if test="actualProfit != null" >#{actualProfit, jdbcType=FLOAT},</if>
+                <if test="actualCost != null" >#{actualCost, jdbcType=FLOAT},</if>
+                <if test="officeSuppliesExpenditure != null" >#{officeSuppliesExpenditure, jdbcType=FLOAT},</if>
+                <if test="consumablesExpenditure != null" >#{consumablesExpenditure, jdbcType=FLOAT},</if>
+                <if test="travelExpenses != null" >#{travelExpenses, jdbcType=FLOAT},</if>
+                <if test="invoicingBudget != null" >#{invoicingBudget, jdbcType=FLOAT},</if>
+                <if test="costBudget != null" >#{costBudget, jdbcType=FLOAT},</if>
+                <if test="profitBudget != null" >#{profitBudget, jdbcType=FLOAT},</if>
+                <if test="extInfo1 != null" >#{extInfo1, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="extInfo3 != null" >#{extInfo3, jdbcType=VARCHAR},</if>
+                <if test="extInfo4 != null" >#{extInfo4, jdbcType=VARCHAR},</if>
+                <if test="extInfo5 != null" >#{extInfo5, jdbcType=VARCHAR},</if>
+                <if test="extInfo6 != null" >#{extInfo6, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.business.entity.DeptBudgetEO" >
+    update TS_DEPT_BUDGET
+       set  year = #{year},
+            month = #{month},
+            dept_id = #{deptId},
+            dept_name = #{deptName},
+            actual_contract_amount = #{actualContractAmount},
+            actual_ticket_opening = #{actualTicketOpening},
+            actual_profit = #{actualProfit},
+            actual_cost = #{actualCost},
+            office_supplies_expenditure = #{officeSuppliesExpenditure},
+            consumables_expenditure = #{consumablesExpenditure},
+            travel_expenses = #{travelExpenses},
+            invoicing_budget = #{invoicingBudget},
+            cost_budget = #{costBudget},
+            profit_budget = #{profitBudget},
+            ext_info1 = #{extInfo1},
+            ext_info2 = #{extInfo2},
+            ext_info3 = #{extInfo3},
+            ext_info4 = #{extInfo4},
+            ext_info5 = #{extInfo5},
+            ext_info6 = #{extInfo6}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.business.entity.DeptBudgetEO" >
+    update TS_DEPT_BUDGET
+    <set >
+      <if test="year != null" >
+        year = #{year},
+      </if>
+      <if test="month != null" >
+        month = #{month},
+      </if>
+      <if test="deptId != null" >
+        dept_id = #{deptId},
+      </if>
+      <if test="deptName != null" >
+        dept_name = #{deptName},
+      </if>
+      <if test="actualContractAmount != null" >
+        actual_contract_amount = #{actualContractAmount},
+      </if>
+      <if test="actualTicketOpening != null" >
+        actual_ticket_opening = #{actualTicketOpening},
+      </if>
+      <if test="actualProfit != null" >
+        actual_profit = #{actualProfit},
+      </if>
+      <if test="actualCost != null" >
+        actual_cost = #{actualCost},
+      </if>
+      <if test="officeSuppliesExpenditure != null" >
+        office_supplies_expenditure = #{officeSuppliesExpenditure},
+      </if>
+      <if test="consumablesExpenditure != null" >
+        consumables_expenditure = #{consumablesExpenditure},
+      </if>
+      <if test="travelExpenses != null" >
+        travel_expenses = #{travelExpenses},
+      </if>
+      <if test="invoicingBudget != null" >
+        invoicing_budget = #{invoicingBudget},
+      </if>
+      <if test="costBudget != null" >
+        cost_budget = #{costBudget},
+      </if>
+      <if test="profitBudget != null" >
+        profit_budget = #{profitBudget},
+      </if>
+      <if test="extInfo1 != null" >
+        ext_info1 = #{extInfo1},
+      </if>
+      <if test="extInfo2 != null" >
+        ext_info2 = #{extInfo2},
+      </if>
+      <if test="extInfo3 != null" >
+        ext_info3 = #{extInfo3},
+      </if>
+      <if test="extInfo4 != null" >
+        ext_info4 = #{extInfo4},
+      </if>
+      <if test="extInfo5 != null" >
+        ext_info5 = #{extInfo5},
+      </if>
+      <if test="extInfo6 != null" >
+        ext_info6 = #{extInfo6},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 TS_DEPT_BUDGET -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from TS_DEPT_BUDGET
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TS_DEPT_BUDGET
+     where id = #{value}
+
+  </delete>
+
+  <!-- TS_DEPT_BUDGET 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from TS_DEPT_BUDGET
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TS_DEPT_BUDGET列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from TS_DEPT_BUDGET
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from TS_DEPT_BUDGET
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+    <select id="queryBigDeptProfit" resultType="java.lang.Float" >
+            select sum(ACTUAL_PROFIT) from TS_DEPT_BUDGET where dept_id in
+
+            <foreach  item="item" collection="deptIds" index="index"  open="(" separator="," close=")">
+
+                #{item}
+
+            </foreach>
+            AND year = #{thisYear}
+
+    </select>
+
+    <select id="queryCenterProfit" resultType="java.lang.Float" >
+        select sum(ACTUAL_PROFIT) from TS_DEPT_BUDGET where year = #{thisYear}
+    </select>
+
+
+    <select id="queryCenterContractAmountByYear" resultType="java.lang.Float" >
+        select sum(ACTUAL_CONTRACT_AMOUNT) from TS_DEPT_BUDGET where year = #{thisYear}
+    </select>
+
+    <select id="queryCenterInvoiceAmountByYear" resultType="java.lang.Float" >
+        select sum(ACTUAL_TICKET_OPENING) from TS_DEPT_BUDGET where  year = #{thisYear}
+    </select>
+
+
+    <select id="queryBigDeptContractAmountByYear" resultType="java.lang.Float" >
+        select sum(ACTUAL_CONTRACT_AMOUNT) from TS_DEPT_BUDGET where dept_id in
+
+        <foreach  item="item" collection="deptIds" index="index"  open="(" separator="," close=")">
+
+            #{item}
+
+        </foreach>
+        AND year = #{thisYear}
+
+    </select>
+
+    <select id="queryBigDeptInvoiceAmountByYear" resultType="java.lang.Float" >
+        select sum(ACTUAL_TICKET_OPENING) from TS_DEPT_BUDGET where dept_id in
+
+        <foreach  item="item" collection="deptIds" index="index"  open="(" separator="," close=")">
+
+            #{item}
+
+        </foreach>
+        AND year = #{thisYear}
+
+    </select>
+
+
+    <select id="selectIncomeProfitAndCostByYearAndMonths" resultMap="BaseResultMap" >
+        select dept_id,dept_name,
+        COALESCE(sum(PROFIT_BUDGET),0) as PROFIT_BUDGET  ,
+        COALESCE(sum(ACTUAL_PROFIT),0)  as ACTUAL_PROFIT ,
+        COALESCE(sum(COST_BUDGET),0) as COST_BUDGET  ,
+        COALESCE(sum(ACTUAL_COST),0) as ACTUAL_COST ,
+        COALESCE(sum (INVOICING_BUDGET),0) as INVOICING_BUDGET ,
+        COALESCE(sum(actual_ticket_opening),0) as actual_ticket_opening
+        from TS_DEPT_BUDGET where dept_id in
+        <foreach  item="item" collection="deptIds" index="index"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        and year = #{year} and  month between #{startMonth} and #{endMonth} group by dept_id,dept_name
+    </select>
+
+
+
+
+
+    <select id="queryIncomeProfitAndCostByYearAndMonths" resultType="java.util.Map" >
+        select
+        sum(PROFIT_BUDGET) as profitBudget  ,
+        sum(ACTUAL_PROFIT)  as ActualProfit ,
+         sum(COST_BUDGET) as costBudget  ,
+         sum(ACTUAL_COST) as actualCost ,
+         sum (INVOICING_BUDGET) as invoiceBudget ,
+         sum (ACTUAL_CONTRACT_AMOUNT) as actualContractAmount
+        from TS_DEPT_BUDGET where dept_id = #{deptId}
+        and year = #{year} and  month between #{startMonth} and #{endMonth}
+    </select>
+
+    <select id="queryOfficeCostByYear" resultType="java.util.Map" >
+        select
+          dept_name as deptName , sum(OFFICE_SUPPLIES_EXPENDITURE) as value
+        from TS_DEPT_BUDGET where  year = #{thisYear} group by dept_name
+    </select>
+
+
+    <select id="queryConsumableCostByYear" resultType="java.util.Map" >
+        select
+          dept_name as deptName, sum(CONSUMABLES_EXPENDITURE) as value
+        from TS_DEPT_BUDGET where  year = #{thisYear} group by dept_name
+    </select>
+
+    <select id="queryTravelCostByYear" resultType="java.util.Map" >
+        select
+          dept_name as deptName, sum(TRAVEL_EXPENSES) as value
+        from TS_DEPT_BUDGET where  year = #{thisYear} group by dept_name
+    </select>
+
+    <!-- 分组统计部门支出 即实际支出-->
+    <select id="queryAllCostByYearGroupByDeptId" resultType = "com.adc.da.business.entity.PairEO">
+        SELECT DEPT_ID AS KEY ,  sum(ACTUAL_COST) AS VALUE  FROM TS_DEPT_BUDGET
+        WHERE YEAR = #{year}
+        GROUP BY DEPT_ID
+    </select>
+
+
+
+
+
+
+</mapper>

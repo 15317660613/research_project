@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.knowledge.dao.PrizeEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.knowledge.entity.PrizeEO" >
+    <id column="id_" property="id" />
+    <result column="ext_info1_" property="extInfo1" />
+    <result column="ext_info2_" property="extInfo2" />
+    <result column="ext_info3_" property="extInfo3" />
+    <result column="ext_info4_" property="extInfo4" />
+    <result column="ext_info5_" property="extInfo5" />
+    <result column="ext_info6_" property="extInfo6" />
+    <result column="num_" property="num" />
+    <result column="prize_name_" property="prizeName" />
+    <result column="project_name_" property="projectName" />
+    <result column="level_" property="level" />
+    <result column="prize_time_" property="prizeTime" />
+    <result column="issued_dept_" property="issuedDept" />
+    <result column="belonged_user_name_" property="belongedUserName" />
+    <result column="belonged_user_id_" property="belongedUserId" />
+    <result column="dept_name_" property="deptName" />
+    <result column="dept_id_" property="deptId" />
+    <result column="update_time_" property="updateTime" />
+    <result column="upload_user_name_" property="uploadUserName" />
+    <result column="upload_user_id_" property="uploadUserId" />
+      <result column="auto_number_" property="autoNumber" />
+      <result column="prize_abstract_" property="prizeAbstract" />
+  </resultMap>
+
+  <!-- K_PRIZE table all fields -->
+  <sql id="Base_Column_List" >
+     ext_info1_, ext_info2_, ext_info3_, ext_info4_, ext_info5_, ext_info6_, id_, num_, prize_name_, project_name_, level_, prize_time_, issued_dept_, belonged_user_name_, belonged_user_id_, dept_name_, dept_id_, update_time_, upload_user_name_, upload_user_id_, auto_number_, prize_abstract_
+  </sql>
+
+    <!-- K_PRIZE table all fields -->
+    <sql id="Base_Column_List1" >
+        id_, num_, prize_name_, project_name_, level_, prize_time_, issued_dept_, belonged_user_name_, belonged_user_id_, dept_name_, dept_id_, update_time_, upload_user_name_, upload_user_id_, auto_number_, prize_abstract_
+    </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="extInfo1 != null" >
+        and ext_info1_ ${extInfo1Operator} #{extInfo1}
+      </if>
+      <if test="extInfo2 != null" >
+        and ext_info2_ ${extInfo2Operator} #{extInfo2}
+      </if>
+      <if test="extInfo3 != null" >
+        and ext_info3_ ${extInfo3Operator} #{extInfo3}
+      </if>
+      <if test="extInfo4 != null" >
+        and ext_info4_ ${extInfo4Operator} #{extInfo4}
+      </if>
+      <if test="extInfo5 != null" >
+        and ext_info5_ ${extInfo5Operator} #{extInfo5}
+      </if>
+      <if test="extInfo6 != null" >
+        and ext_info6_ ${extInfo6Operator} #{extInfo6}
+      </if>
+      <if test="id != null" >
+        and id_ ${idOperator} #{id}
+      </if>
+      <if test="num != null" >
+        and num_ ${numOperator} #{num}
+      </if>
+      <if test="prizeName != null" >
+        and prize_name_ ${prizeNameOperator} #{prizeName}
+      </if>
+      <if test="projectName != null" >
+        and project_name_ ${projectNameOperator} #{projectName}
+      </if>
+      <if test="level != null" >
+        and level_ ${levelOperator} #{level}
+      </if>
+      <if test="prizeTime != null" >
+        and prize_time_ ${prizeTimeOperator} #{prizeTime}
+      </if>
+      <if test="prizeTime1 != null" >
+        and prize_time_ &gt;= #{prizeTime1}
+      </if>
+      <if test="prizeTime2 != null" >
+        and prize_time_ &lt;= #{prizeTime2}
+      </if>
+      <if test="issuedDept != null" >
+        and issued_dept_ ${issuedDeptOperator} #{issuedDept}
+      </if>
+      <if test="belongedUserName != null" >
+        and belonged_user_name_ ${belongedUserNameOperator} #{belongedUserName}
+      </if>
+      <if test="belongedUserId != null" >
+        and belonged_user_id_ ${belongedUserIdOperator} #{belongedUserId}
+      </if>
+      <if test="deptName != null" >
+        and dept_name_ ${deptNameOperator} #{deptName}
+      </if>
+      <if test="deptId != null" >
+        and dept_id_ ${deptIdOperator} #{deptId}
+      </if>
+      <if test="updateTime != null" >
+        and update_time_ ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and update_time_ &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and update_time_ &lt;= #{updateTime2}
+      </if>
+      <if test="uploadUserName != null" >
+        and upload_user_name_ ${uploadUserNameOperator} #{uploadUserName}
+      </if>
+      <if test="uploadUserId != null" >
+        and upload_user_id_ ${uploadUserIdOperator} #{uploadUserId}
+      </if>
+    </trim>
+  </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause1">
+        where 1=1
+        <trim suffixOverrides="," >
+
+            <if test="id != null" >
+                and id_ = #{id}
+            </if>
+            <if test="num != null" >
+                and num_ like  CONCAT('%',CONCAT(  #{num},'%'))
+            </if>
+            <if test="prizeName != null" >
+                and prize_name_ like  CONCAT('%',CONCAT(  #{prizeName},'%'))
+            </if>
+            <if test="projectName != null" >
+                and project_name_ like  CONCAT('%',CONCAT(  #{projectName},'%'))
+            </if>
+            <if test="level != null" >
+                and level_ like  CONCAT('%',CONCAT(  #{level},'%'))
+            </if>
+
+            <if test="startPrizeTime != null" >
+                and (to_date(to_char(prize_time_ ,'yyyy-mm-dd'),'yyyy-mm-dd')) &gt;= #{startPrizeTime}
+            </if>
+            <if test="endPrizeTime != null" >
+                and (to_date(to_char(prize_time_ ,'yyyy-mm-dd'),'yyyy-mm-dd')) &lt;= #{endPrizeTime}
+            </if>
+            <if test="issuedDept != null" >
+                and issued_dept_ like  CONCAT('%',CONCAT(  #{issuedDept},'%'))
+            </if>
+            <if test="belongedUserName != null" >
+                and belonged_user_name_ like  CONCAT('%',CONCAT(  #{belongedUserName},'%'))
+            </if>
+            <if test="belongedUserId != null" >
+                and belonged_user_id_ = #{belongedUserId}
+            </if>
+            <if test="deptName != null" >
+                and dept_name_ like  CONCAT('%',CONCAT(  #{deptName},'%'))
+            </if>
+            <if test="deptId != null" >
+                and dept_id_ = #{deptId}
+            </if>
+            <if test="updateTime != null" >
+                and update_time_ = #{updateTime}
+            </if>
+
+            <if test="deptIdList != null" >
+                and dept_id_ in
+                <foreach  item="item" collection="deptIdList" index="index"  open="(" separator="," close=")">
+
+                    #{item}
+
+                </foreach>
+            </if>
+
+            <if test="uploadUserName != null" >
+                and upload_user_name_ like  CONCAT('%',CONCAT(  #{uploadUserName},'%'))
+            </if>
+            <if test="uploadUserId != null" >
+                and upload_user_id_ = #{uploadUserId}
+            </if>
+        </trim>
+    </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.knowledge.entity.PrizeEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_K_PRIZE.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into K_PRIZE(<include refid="Base_Column_List" />)
+    values (#{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR}, #{extInfo6, jdbcType=VARCHAR}, #{id, jdbcType=VARCHAR}, #{num, jdbcType=VARCHAR}, #{prizeName, jdbcType=VARCHAR}, #{projectName, jdbcType=VARCHAR}, #{level, jdbcType=VARCHAR}, #{prizeTime, jdbcType=TIMESTAMP}, #{issuedDept, jdbcType=VARCHAR}, #{belongedUserName, jdbcType=VARCHAR}, #{belongedUserId, jdbcType=VARCHAR}, #{deptName, jdbcType=VARCHAR}, #{deptId, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP}, #{uploadUserName, jdbcType=VARCHAR}, #{uploadUserId, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.knowledge.entity.PrizeEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_K_PRIZE.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into K_PRIZE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="extInfo1 != null" >ext_info1_,</if>
+                <if test="extInfo2 != null" >ext_info2_,</if>
+                <if test="extInfo3 != null" >ext_info3_,</if>
+                <if test="extInfo4 != null" >ext_info4_,</if>
+                <if test="extInfo5 != null" >ext_info5_,</if>
+                <if test="extInfo6 != null" >ext_info6_,</if>
+                <if test="id != null" >id_,</if>
+                <if test="num != null" >num_,</if>
+                <if test="prizeName != null" >prize_name_,</if>
+                <if test="projectName != null" >project_name_,</if>
+                <if test="level != null" >level_,</if>
+                <if test="prizeTime != null" >prize_time_,</if>
+                <if test="issuedDept != null" >issued_dept_,</if>
+                <if test="belongedUserName != null" >belonged_user_name_,</if>
+                <if test="belongedUserId != null" >belonged_user_id_,</if>
+                <if test="deptName != null" >dept_name_,</if>
+                <if test="deptId != null" >dept_id_,</if>
+                <if test="updateTime != null" >update_time_,</if>
+                <if test="uploadUserName != null" >upload_user_name_,</if>
+                <if test="uploadUserId != null" >upload_user_id_,</if>
+                <if test="autoNumber != null" >auto_number_,</if>
+                <if test="prizeAbstract != null" >prize_abstract_,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="extInfo1 != null" >#{extInfo1, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="extInfo3 != null" >#{extInfo3, jdbcType=VARCHAR},</if>
+                <if test="extInfo4 != null" >#{extInfo4, jdbcType=VARCHAR},</if>
+                <if test="extInfo5 != null" >#{extInfo5, jdbcType=VARCHAR},</if>
+                <if test="extInfo6 != null" >#{extInfo6, jdbcType=VARCHAR},</if>
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="num != null" >#{num, jdbcType=VARCHAR},</if>
+                <if test="prizeName != null" >#{prizeName, jdbcType=VARCHAR},</if>
+                <if test="projectName != null" >#{projectName, jdbcType=VARCHAR},</if>
+                <if test="level != null" >#{level, jdbcType=VARCHAR},</if>
+                <if test="prizeTime != null" >#{prizeTime, jdbcType=TIMESTAMP},</if>
+                <if test="issuedDept != null" >#{issuedDept, jdbcType=VARCHAR},</if>
+                <if test="belongedUserName != null" >#{belongedUserName, jdbcType=VARCHAR},</if>
+                <if test="belongedUserId != null" >#{belongedUserId, jdbcType=VARCHAR},</if>
+                <if test="deptName != null" >#{deptName, jdbcType=VARCHAR},</if>
+                <if test="deptId != null" >#{deptId, jdbcType=VARCHAR},</if>
+                <if test="updateTime != null" >#{updateTime, jdbcType=TIMESTAMP},</if>
+                <if test="uploadUserName != null" >#{uploadUserName, jdbcType=VARCHAR},</if>
+                <if test="uploadUserId != null" >#{uploadUserId, jdbcType=VARCHAR},</if>
+                <if test="autoNumber != null" >#{autoNumber, jdbcType=VARCHAR},</if>
+                <if test="prizeAbstract != null" >#{prizeAbstract, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.knowledge.entity.PrizeEO" >
+    update K_PRIZE
+       set  ext_info1_ = #{extInfo1, jdbcType=VARCHAR},
+            ext_info2_ = #{extInfo2, jdbcType=VARCHAR},
+            ext_info3_ = #{extInfo3, jdbcType=VARCHAR},
+            ext_info4_ = #{extInfo4, jdbcType=VARCHAR},
+            ext_info5_ = #{extInfo5, jdbcType=VARCHAR},
+            ext_info6_ = #{extInfo6, jdbcType=VARCHAR},
+            num_ = #{num, jdbcType=VARCHAR},
+            prize_name_ = #{prizeName, jdbcType=VARCHAR},
+            project_name_ = #{projectName, jdbcType=VARCHAR},
+            level_ = #{level, jdbcType=VARCHAR},
+            prize_time_ = #{prizeTime, jdbcType=TIMESTAMP},
+            issued_dept_ = #{issuedDept, jdbcType=VARCHAR},
+            belonged_user_name_ = #{belongedUserName, jdbcType=VARCHAR},
+            belonged_user_id_ = #{belongedUserId, jdbcType=VARCHAR},
+            dept_name_ = #{deptName, jdbcType=VARCHAR},
+            dept_id_ = #{deptId, jdbcType=VARCHAR},
+            update_time_ = #{updateTime, jdbcType=TIMESTAMP},
+            upload_user_name_ = #{uploadUserName, jdbcType=VARCHAR},
+            upload_user_id_ = #{uploadUserId, jdbcType=VARCHAR},
+            prize_abstract_ = #{prizeAbstract, jdbcType=VARCHAR}
+     where  id_ = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.knowledge.entity.PrizeEO" >
+    update K_PRIZE
+    <set >
+      <if test="extInfo1 != null" >
+        ext_info1_ = #{extInfo1},
+      </if>
+      <if test="extInfo2 != null" >
+        ext_info2_ = #{extInfo2},
+      </if>
+      <if test="extInfo3 != null" >
+        ext_info3_ = #{extInfo3},
+      </if>
+      <if test="extInfo4 != null" >
+        ext_info4_ = #{extInfo4},
+      </if>
+      <if test="extInfo5 != null" >
+        ext_info5_ = #{extInfo5},
+      </if>
+      <if test="extInfo6 != null" >
+        ext_info6_ = #{extInfo6},
+      </if>
+      <if test="num != null" >
+        num_ = #{num},
+      </if>
+      <if test="prizeName != null" >
+        prize_name_ = #{prizeName},
+      </if>
+      <if test="projectName != null" >
+        project_name_ = #{projectName},
+      </if>
+      <if test="level != null" >
+        level_ = #{level},
+      </if>
+      <if test="prizeTime != null" >
+        prize_time_ = #{prizeTime},
+      </if>
+      <if test="issuedDept != null" >
+        issued_dept_ = #{issuedDept},
+      </if>
+      <if test="belongedUserName != null" >
+        belonged_user_name_ = #{belongedUserName},
+      </if>
+      <if test="belongedUserId != null" >
+        belonged_user_id_ = #{belongedUserId},
+      </if>
+      <if test="deptName != null" >
+        dept_name_ = #{deptName},
+      </if>
+      <if test="deptId != null" >
+        dept_id_ = #{deptId},
+      </if>
+      <if test="updateTime != null" >
+        update_time_ = #{updateTime},
+      </if>
+      <if test="uploadUserName != null" >
+        upload_user_name_ = #{uploadUserName},
+      </if>
+      <if test="uploadUserId != null" >
+        upload_user_id_ = #{uploadUserId},
+      </if>
+        <if test="abstract != null" >
+            prize_abstract_ = #{prizeAbstract},
+        </if>
+    </set>
+     where id_ = #{id}
+  </update>
+
+  <!-- 根据id查询 K_PRIZE -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from K_PRIZE
+     where id_ = #{value}
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from K_PRIZE
+     where id_ = #{value}
+
+  </delete>
+
+  <!-- K_PRIZE 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from K_PRIZE
+    <include refid="Base_Where_Clause1"/>
+  </select>
+
+    <select id="queryByMyCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        select count(1) from K_PRIZE
+        <include refid="Base_Where_Clause1"/>
+    </select>
+
+  <!-- 查询K_PRIZE列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from K_PRIZE
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+    <!-- 查询K_PRIZE列表 -->
+    <select id="queryByMyPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select <include refid="Base_Column_List1" /> from
+        (select tmp_tb.* , rownum rn from
+        (select <include refid="Base_Column_List1" /> from K_PRIZE
+        <include refid="Base_Where_Clause1"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from K_PRIZE
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+    <select id="queryPrizeByPrizeIdsIn" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List1"/> from K_PRIZE
+        where ID_ in
+        <foreach item="it" collection="prizeIdList" open="(" separator=","
+                 close=")" index="index">
+            #{it}
+        </foreach>
+
+    </select>
+</mapper>

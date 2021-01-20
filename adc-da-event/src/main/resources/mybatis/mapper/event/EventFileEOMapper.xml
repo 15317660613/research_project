@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.event.dao.EventFileEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.event.entity.EventFileEO" >
+    <result column="event_id_" property="eventId" />
+    <result column="file_id_" property="fileId" />
+  </resultMap>
+
+  <!-- WR_EVENT_FILE table all fields -->
+  <sql id="Base_Column_List" >
+     event_id_, file_id_
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="eventId != null" >
+        and event_id_ ${eventIdOperator} #{eventId}
+      </if>
+      <if test="fileId != null" >
+        and file_id_ ${fileIdOperator} #{fileId}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.event.entity.EventFileEO" >
+    insert into WR_EVENT_FILE(<include refid="Base_Column_List" />)
+    values (#{eventId, jdbcType=VARCHAR}, #{fileId, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.event.entity.EventFileEO" >
+        insert into WR_EVENT_FILE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="eventId != null" >event_id_,</if>
+                <if test="fileId != null" >file_id_,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="eventId != null" >#{eventId, jdbcType=VARCHAR},</if>
+                <if test="fileId != null" >#{fileId, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- WR_EVENT_FILE 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from WR_EVENT_FILE
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+    <!-- 根据eventID查找fileID-->
+    <select id="selectByEventId" resultType="java.lang.String" parameterType="java.lang.String">
+        select file_id_ from WR_EVENT_FILE
+        where event_id_ = #{value}
+    </select>
+
+    <!-- 根据fileID查找eventID-->
+    <select id="selectByFileId" resultType="java.lang.String" parameterType="java.lang.String">
+        select event_id_ from WR_EVENT_FILE
+        where file_id_ = #{value}
+    </select>
+
+
+  <!-- 查询WR_EVENT_FILE列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from WR_EVENT_FILE
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from WR_EVENT_FILE
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

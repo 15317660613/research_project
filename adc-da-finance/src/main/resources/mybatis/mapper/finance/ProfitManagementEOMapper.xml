@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.finance.dao.ProfitManagementEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.finance.entity.ProfitManagementEO" >
+    <id column="id" property="id" />
+    <result column="business_gonfig_id" property="businessGonfigId" />
+    <result column="pm_year" property="pmYear" />
+    <result column="pm_month" property="pmMonth" />
+    <result column="cost_money" property="costMoney" />
+    <result column="income_money" property="incomeMoney" />
+    <result column="profit_money" property="profitMoney" />
+    <result column="profit_margin" property="profitMargin" />
+    <result column="create_time" property="createTime" />
+    <result column="update_time" property="updateTime" />
+    <result column="del_flag" property="delFlag" />
+  </resultMap>
+
+  <!-- F_PROFIT_MANAGEMENT table all fields -->
+  <sql id="Base_Column_List" >
+     id, business_gonfig_id, pm_year, pm_month, cost_money, income_money, profit_money, profit_margin, create_time, update_time, del_flag
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null and id != ''" >
+        and PM.id ${idOperator} #{id}
+      </if>
+      <if test="businessGonfigId != null and businessGonfigId != ''" >
+        and PM.business_gonfig_id ${businessGonfigIdOperator} #{businessGonfigId}
+      </if>
+        <if test="businessGonfigName != null and businessGonfigName != ''" >
+            and BG.BG_NAME ${businessGonfigNameOperator} #{businessGonfigName}
+        </if>
+      <if test="pmYear != null and pmYear != ''" >
+        and PM.pm_year ${pmYearOperator} #{pmYear}
+      </if>
+      <if test="pmMonth != null and pmMonth != ''" >
+        and PM.pm_month ${pmMonthOperator} #{pmMonth}
+      </if>
+      <if test="costMoney != null and costMoney != ''" >
+        and PM.cost_money ${costMoneyOperator} #{costMoney}
+      </if>
+      <if test="incomeMoney != null and incomeMoney != ''" >
+        and PM.income_money ${incomeMoneyOperator} #{incomeMoney}
+      </if>
+      <if test="profitMoney != null and profitMoney != ''" >
+        and PM.profit_money ${profitMoneyOperator} #{profitMoney}
+      </if>
+      <if test="profitMargin != null and profitMargin != ''" >
+        and PM.profit_margin ${profitMarginOperator} #{profitMargin}
+      </if>
+      <if test="createTime != null and createTime != ''" >
+        and PM.create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null and createTime1 != ''" >
+        and PM.create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null and createTime2 != ''" >
+        and PM.create_time &lt;= #{createTime2}
+      </if>
+      <if test="updateTime != null and updateTime != ''" >
+        and PM.update_time ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null and updateTime1 != ''" >
+        and PM.update_time &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null and updateTime2 != ''" >
+        and PM.update_time &lt;= #{updateTime2}
+      </if>
+      <if test="delFlag != null and delFlag != ''" >
+        and PM.del_flag ${delFlagOperator} #{delFlag}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.finance.entity.ProfitManagementEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_F_PROFIT_MANAGEMENT.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into F_PROFIT_MANAGEMENT(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{businessGonfigId, jdbcType=VARCHAR}, #{pmYear, jdbcType=VARCHAR}, #{pmMonth, jdbcType=VARCHAR}, #{costMoney, jdbcType=INTEGER}, #{incomeMoney, jdbcType=INTEGER}, #{profitMoney, jdbcType=INTEGER}, #{profitMargin, jdbcType=INTEGER}, #{createTime, jdbcType=TIMESTAMP}, #{updateTime, jdbcType=TIMESTAMP}, #{delFlag, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.finance.entity.ProfitManagementEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_F_PROFIT_MANAGEMENT.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into F_PROFIT_MANAGEMENT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="businessGonfigId != null" >business_gonfig_id,</if>
+                <if test="pmYear != null" >pm_year,</if>
+                <if test="pmMonth != null" >pm_month,</if>
+                <if test="costMoney != null" >cost_money,</if>
+                <if test="incomeMoney != null" >income_money,</if>
+                <if test="profitMoney != null" >profit_money,</if>
+                <if test="profitMargin != null" >profit_margin,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="updateTime != null" >update_time,</if>
+                <if test="delFlag != null" >del_flag,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="businessGonfigId != null" >#{businessGonfigId, jdbcType=VARCHAR},</if>
+                <if test="pmYear != null" >#{pmYear, jdbcType=VARCHAR},</if>
+                <if test="pmMonth != null" >#{pmMonth, jdbcType=VARCHAR},</if>
+                <if test="costMoney != null" >#{costMoney, jdbcType=INTEGER},</if>
+                <if test="incomeMoney != null" >#{incomeMoney, jdbcType=INTEGER},</if>
+                <if test="profitMoney != null" >#{profitMoney, jdbcType=INTEGER},</if>
+                <if test="profitMargin != null" >#{profitMargin, jdbcType=INTEGER},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="updateTime != null" >#{updateTime, jdbcType=TIMESTAMP},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+    <insert id="insertList" parameterType="java.util.List">
+        INSERT ALL
+        <foreach collection="list" item="item" index="index">
+            <if test="item.id !=null">
+                INTO F_PROFIT_MANAGEMENT
+                <trim prefix="(" suffix=")" suffixOverrides=",">
+                    <if test="item.id != null">id,</if>
+                    <if test="item.businessGonfigId != null">business_gonfig_id,</if>
+                    <if test="item.pmYear != null">pm_year,</if>
+                    <if test="item.pmMonth != null">pm_month,</if>
+                    <if test="item.costMoney != null">cost_money,</if>
+                    <if test="item.incomeMoney != null">income_money,</if>
+                    <if test="item.profitMoney != null">profit_money,</if>
+                    <if test="item.profitMargin != null">profit_margin,</if>
+                    <if test="item.createTime != null">create_time,</if>
+                    <if test="item.updateTime != null">update_time,</if>
+                    <if test="item.delFlag != null">del_flag,</if>
+                </trim>
+                <trim prefix="values (" suffix=")" suffixOverrides=",">
+                    <if test="item.id != null">#{item.id, jdbcType=VARCHAR},</if>
+                    <if test="item.businessGonfigId != null">#{item.businessGonfigId, jdbcType=VARCHAR},</if>
+                    <if test="item.pmYear != null">#{item.pmYear, jdbcType=VARCHAR},</if>
+                    <if test="item.pmMonth != null">#{item.pmMonth, jdbcType=VARCHAR},</if>
+                    <if test="item.costMoney != null">#{item.costMoney, jdbcType=INTEGER},</if>
+                    <if test="item.incomeMoney != null">#{item.incomeMoney, jdbcType=INTEGER},</if>
+                    <if test="item.profitMoney != null">#{item.profitMoney, jdbcType=INTEGER},</if>
+                    <if test="item.profitMargin != null">#{item.profitMargin, jdbcType=INTEGER},</if>
+                    <if test="item.createTime != null">#{item.createTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.updateTime != null">#{item.updateTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.delFlag != null">#{item.delFlag, jdbcType=VARCHAR},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+
+    <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.finance.entity.ProfitManagementEO" >
+    update F_PROFIT_MANAGEMENT
+       set  business_gonfig_id = #{businessGonfigId},
+            pm_year = #{pmYear},
+            pm_month = #{pmMonth},
+            cost_money = #{costMoney},
+            income_money = #{incomeMoney},
+            profit_money = #{profitMoney},
+            profit_margin = #{profitMargin},
+            create_time = #{createTime},
+            update_time = #{updateTime},
+            del_flag = #{delFlag}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.finance.entity.ProfitManagementEO" >
+    update F_PROFIT_MANAGEMENT
+    <set >
+      <if test="businessGonfigId != null" >
+        business_gonfig_id = #{businessGonfigId},
+      </if>
+      <if test="pmYear != null" >
+        pm_year = #{pmYear},
+      </if>
+      <if test="pmMonth != null" >
+        pm_month = #{pmMonth},
+      </if>
+      <if test="costMoney != null" >
+        cost_money = #{costMoney},
+      </if>
+      <if test="incomeMoney != null" >
+        income_money = #{incomeMoney},
+      </if>
+      <if test="profitMoney != null" >
+        profit_money = #{profitMoney},
+      </if>
+      <if test="profitMargin != null" >
+        profit_margin = #{profitMargin},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 F_PROFIT_MANAGEMENT -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+      SELECT BG.BG_NAME AS businessGonfigName,PM.*
+      FROM F_PROFIT_MANAGEMENT PM
+      LEFT JOIN F_BUSINESS_GONFIG BG ON BG.ID = PM.BUSINESS_GONFIG_ID
+      WHERE PM.id = #{value}
+      AND PM.DEL_FLAG = '0'
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from F_PROFIT_MANAGEMENT
+     where id = #{value}
+
+  </delete>
+
+    <!-- 逻辑删除记录 -->
+    <delete id="deleteByBusinessIdAndYearAndMonth" parameterType="java.lang.String">
+    delete from F_PROFIT_MANAGEMENT
+     where BUSINESS_GONFIG_ID = #{businessId} and PM_YEAR = #{pmYear} and PM_MONTH = #{pmMonth}
+
+  </delete>
+
+
+    <!-- F_PROFIT_MANAGEMENT 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from F_PROFIT_MANAGEMENT PM
+      LEFT JOIN F_BUSINESS_GONFIG BG ON BG.ID = PM.BUSINESS_GONFIG_ID
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询F_PROFIT_MANAGEMENT列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select tmp_tc.* from
+		(select tmp_tb.* , rownum rn from
+			(SELECT BG.BG_NAME AS businessGonfigName,PM.*
+              FROM F_PROFIT_MANAGEMENT PM
+              LEFT JOIN F_BUSINESS_GONFIG BG ON BG.ID = PM.BUSINESS_GONFIG_ID
+			  <include refid="Base_Where_Clause"/>
+              <if test="sql_filter != null and sql_filter != ''" >
+                  ${sql_filter}
+              </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex}) tmp_tc
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+      SELECT BG.BG_NAME AS businessGonfigName,PM.*
+      FROM F_PROFIT_MANAGEMENT PM
+      LEFT JOIN F_BUSINESS_GONFIG BG ON BG.ID = PM.BUSINESS_GONFIG_ID
+      <include refid="Base_Where_Clause"/>
+      <if test="sql_filter != null and sql_filter != ''" >
+          ${sql_filter}
+      </if>
+  </select>
+    <select id="queryByBusinessGonfigIdAndYearAndMonth" resultMap="BaseResultMap" parameterType="java.lang.String">
+      SELECT BG.BG_NAME AS businessGonfigName,PM.*
+      FROM F_PROFIT_MANAGEMENT PM
+      LEFT JOIN F_BUSINESS_GONFIG BG ON BG.ID = PM.BUSINESS_GONFIG_ID
+      where pm.del_flag = '0'
+      and pm.business_gonfig_id = #{businessGonfigId}
+      and pm.pm_year = #{pmYear}
+      and pm_month = #{pmMonth}
+    </select>
+
+
+    <!-- 根据业务id 年月修改 -->
+    <update id="updateByBusinessGonfigIdAndYearAndMonth" parameterType="com.adc.da.finance.entity.ProfitManagementEO" >
+        update F_PROFIT_MANAGEMENT
+        <set >
+            <if test="costMoney != null" >
+                cost_money = #{costMoney},
+            </if>
+            <if test="incomeMoney != null" >
+                income_money = #{incomeMoney},
+            </if>
+            <if test="profitMoney != null" >
+                profit_money = #{profitMoney},
+            </if>
+            <if test="profitMargin != null" >
+                profit_margin = #{profitMargin},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime},
+            </if>
+            <if test="delFlag != null" >
+                del_flag = #{delFlag},
+            </if>
+        </set>
+        where business_gonfig_id = #{businessGonfigId}
+        and  pm_year = #{pmYear}
+        and pm_month = #{pmMonth}
+        and del_flag = '0'
+    </update>
+
+</mapper>

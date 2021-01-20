@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.epis.dao.BuisnessPersionInputEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.epis.entity.BuisnessPersionInputEO" >
+    <id column="humaninput_id" property="humaninputId" />
+    <result column="project_id" property="projectId" />
+    <result column="year" property="year" />
+    <result column="week" property="week" />
+    <result column="input_number" property="inputNumber" />
+    <result column="admin_input_number" property="adminInputNumber" />
+    <result column="update_input" property="updateInput" />
+    <result column="opations_input_number" property="opationsInputNumber" />
+    <result column="creattime" property="creattime" />
+    <result column="updatetime" property="updatetime" />
+    <result column="admin" property="admin" />
+  </resultMap>
+
+  <!-- BUISNESS_PERSION_INPUT table all fields -->
+  <sql id="Base_Column_List" >
+     humaninput_id, project_id, year, week, input_number, admin_input_number, update_input, opations_input_number, creattime, updatetime, admin
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="humaninputId != null" >
+        and humaninput_id ${humaninputIdOperator} #{humaninputId}
+      </if>
+      <if test="projectId != null" >
+        and project_id ${projectIdOperator} #{projectId}
+      </if>
+      <if test="year != null" >
+        and year ${yearOperator} #{year}
+      </if>
+      <if test="week != null" >
+        and week ${weekOperator} #{week}
+      </if>
+      <if test="inputNumber != null" >
+        and input_number ${inputNumberOperator} #{inputNumber}
+      </if>
+      <if test="adminInputNumber != null" >
+        and admin_input_number ${adminInputNumberOperator} #{adminInputNumber}
+      </if>
+      <if test="updateInput != null" >
+        and update_input ${updateInputOperator} #{updateInput}
+      </if>
+      <if test="opationsInputNumber != null" >
+        and opations_input_number ${opationsInputNumberOperator} #{opationsInputNumber}
+      </if>
+      <if test="creattime != null" >
+        and creattime ${creattimeOperator} #{creattime}
+      </if>
+      <if test="creattime1 != null" >
+        and creattime &gt;= #{creattime1}
+      </if>
+      <if test="creattime2 != null" >
+        and creattime &lt;= #{creattime2}
+      </if>
+      <if test="updatetime != null" >
+        and updatetime ${updatetimeOperator} #{updatetime}
+      </if>
+      <if test="updatetime1 != null" >
+        and updatetime &gt;= #{updatetime1}
+      </if>
+      <if test="updatetime2 != null" >
+        and updatetime &lt;= #{updatetime2}
+      </if>
+      <if test="admin != null" >
+        and admin ${adminOperator} #{admin}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.epis.entity.BuisnessPersionInputEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="humaninput_id">
+        SELECT SEQ_BUISNESS_PERSION_INPUT.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into BUISNESS_PERSION_INPUT(<include refid="Base_Column_List" />)
+    values (#{humaninputId, jdbcType=VARCHAR}, #{projectId, jdbcType=VARCHAR}, #{year, jdbcType=INTEGER}, #{week, jdbcType=INTEGER}, #{inputNumber, jdbcType=FLOAT}, #{adminInputNumber, jdbcType=FLOAT}, #{updateInput, jdbcType=FLOAT}, #{opationsInputNumber, jdbcType=FLOAT}, #{creattime, jdbcType=TIMESTAMP}, #{updatetime, jdbcType=TIMESTAMP}, #{admin, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.epis.entity.BuisnessPersionInputEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="humaninput_id">
+        SELECT SEQ_BUISNESS_PERSION_INPUT.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into BUISNESS_PERSION_INPUT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="humaninputId != null" >humaninput_id,</if>
+                <if test="projectId != null" >project_id,</if>
+                <if test="year != null" >year,</if>
+                <if test="week != null" >week,</if>
+                <if test="inputNumber != null" >input_number,</if>
+                <if test="adminInputNumber != null" >admin_input_number,</if>
+                <if test="updateInput != null" >update_input,</if>
+                <if test="opationsInputNumber != null" >opations_input_number,</if>
+                <if test="creattime != null" >creattime,</if>
+                <if test="updatetime != null" >updatetime,</if>
+                <if test="admin != null" >admin,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="humaninputId != null" >#{humaninputId, jdbcType=VARCHAR},</if>
+                <if test="projectId != null" >#{projectId, jdbcType=VARCHAR},</if>
+                <if test="year != null" >#{year, jdbcType=INTEGER},</if>
+                <if test="week != null" >#{week, jdbcType=INTEGER},</if>
+                <if test="inputNumber != null" >#{inputNumber, jdbcType=FLOAT},</if>
+                <if test="adminInputNumber != null" >#{adminInputNumber, jdbcType=FLOAT},</if>
+                <if test="updateInput != null" >#{updateInput, jdbcType=FLOAT},</if>
+                <if test="opationsInputNumber != null" >#{opationsInputNumber, jdbcType=FLOAT},</if>
+                <if test="creattime != null" >#{creattime, jdbcType=TIMESTAMP},</if>
+                <if test="updatetime != null" >#{updatetime, jdbcType=TIMESTAMP},</if>
+                <if test="admin != null" >#{admin, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.epis.entity.BuisnessPersionInputEO" >
+    update BUISNESS_PERSION_INPUT
+       set  project_id = #{projectId},
+            year = #{year},
+            week = #{week},
+            input_number = #{inputNumber},
+            admin_input_number = #{adminInputNumber},
+            update_input = #{updateInput},
+            opations_input_number = #{opationsInputNumber},
+            creattime = #{creattime},
+            updatetime = #{updatetime},
+            admin = #{admin}
+     where  humaninput_id = #{humaninputId}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.epis.entity.BuisnessPersionInputEO" >
+    update BUISNESS_PERSION_INPUT
+    <set >
+      <if test="projectId != null" >
+        project_id = #{projectId},
+      </if>
+      <if test="year != null" >
+        year = #{year},
+      </if>
+      <if test="week != null" >
+        week = #{week},
+      </if>
+      <if test="inputNumber != null" >
+        input_number = #{inputNumber},
+      </if>
+      <if test="adminInputNumber != null" >
+        admin_input_number = #{adminInputNumber},
+      </if>
+      <if test="updateInput != null" >
+        update_input = #{updateInput},
+      </if>
+      <if test="opationsInputNumber != null" >
+        opations_input_number = #{opationsInputNumber},
+      </if>
+      <if test="creattime != null" >
+        creattime = #{creattime},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime},
+      </if>
+      <if test="admin != null" >
+        admin = #{admin},
+      </if>
+    </set>
+     where humaninput_id = #{humaninputId}
+  </update>
+
+  <!-- 根据id查询 BUISNESS_PERSION_INPUT -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from BUISNESS_PERSION_INPUT
+     where humaninput_id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from BUISNESS_PERSION_INPUT
+     where humaninput_id = #{value}
+
+  </delete>
+
+  <!-- BUISNESS_PERSION_INPUT 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from BUISNESS_PERSION_INPUT
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询BUISNESS_PERSION_INPUT列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from BUISNESS_PERSION_INPUT
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from BUISNESS_PERSION_INPUT
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.adc.da.category.dao.MyModelCategoryEODao">
+    <!-- Result Map-->
+    <resultMap id = "BaseResultMap" type = "com.adc.da.category.entity.MyModelCategoryEO">
+        <result column = "category_id_" property = "categoryId"/>
+        <result column = "proc_def_key_" property = "procDefKey"/>
+        <result column = "start_time_" property = "startTime"/>
+        <result column = "ext_info_1_" property = "extInfo1"/>
+        <result column = "ext_info_2_" property = "extInfo2"/>
+        <result column = "name_" property = "categoryName"/>
+    </resultMap>
+
+    <!-- ACT_TR_MODEL_CATEGORY table all fields -->
+    <sql id = "Base_Column_List">
+        category_id_, proc_def_key_, start_time_
+        <!--  , ext_info_1_, ext_info_2_ -->
+    </sql>
+    <sql id = "Base_Column_List_New">
+        <include refid = "Base_Column_List"/>
+        , name_
+    </sql>
+    <!-- 查询条件 -->
+    <sql id = "Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides = ",">
+            <if test = "categoryId != null">
+                and category_id_ ${categoryIdOperator} #{categoryId}
+            </if>
+            <if test = "procDefKey != null">
+                and proc_def_key_ ${procDefKeyOperator} #{procDefKey}
+            </if>
+            <if test = "startTime != null">
+                and start_time_ ${startTimeOperator} #{startTime}
+            </if>
+            <if test = "startTime1 != null">
+                and start_time_ &gt;= #{startTime1}
+            </if>
+            <if test = "startTime2 != null">
+                and start_time_ &lt;= #{startTime2}
+            </if>
+            <if test = "extInfo1 != null">
+                and ext_info_1_ ${extInfo1Operator} #{extInfo1}
+            </if>
+            <if test = "extInfo2 != null">
+                and ext_info_2_ ${extInfo2Operator} #{extInfo2}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id = "insert" parameterType = "com.adc.da.category.entity.MyModelCategoryEO">
+        insert into ACT_TR_MODEL_CATEGORY(<include
+            refid = "Base_Column_List"/>) values (#{categoryId, jdbcType=VARCHAR}, #{procDefKey, jdbcType=VARCHAR}, #{startTime, jdbcType=TIMESTAMP}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id = "insertSelective" parameterType = "com.adc.da.category.entity.MyModelCategoryEO">
+        insert into ACT_TR_MODEL_CATEGORY
+        <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+            <if test = "categoryId != null">category_id_,</if>
+            <if test = "procDefKey != null">proc_def_key_,</if>
+            <if test = "startTime != null">start_time_,</if>
+            <if test = "extInfo1 != null">ext_info_1_,</if>
+            <if test = "extInfo2 != null">ext_info_2_,</if>
+        </trim>
+        <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+            <if test = "categoryId != null">#{categoryId, jdbcType=VARCHAR},</if>
+            <if test = "procDefKey != null">#{procDefKey, jdbcType=VARCHAR},</if>
+            <if test = "startTime != null">#{startTime, jdbcType=TIMESTAMP},</if>
+            <if test = "extInfo1 != null">#{extInfo1, jdbcType=VARCHAR},</if>
+            <if test = "extInfo2 != null">#{extInfo2, jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <!-- ACT_TR_MODEL_CATEGORY 列表总数-->
+    <select id = "queryByCount" resultType = "java.lang.Integer" parameterType = "com.adc.da.base.page.BasePage">
+        select count(1) from ACT_TR_MODEL_CATEGORY
+        <include refid = "Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询ACT_TR_MODEL_CATEGORY列表 -->
+    <select id = "queryByPage" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from (select tmp_tb.* , rownum rn from (select
+        <include refid = "Base_Column_List"/>
+        from ACT_TR_MODEL_CATEGORY
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex}) where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id = "queryByList" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List_New"/>
+        from ACT_TR_MODEL_CATEGORY mc left join ACT_TS_CATEGORY c on mc.CATEGORY_ID_=c.ID_
+
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+    </select>
+
+</mapper>

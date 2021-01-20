@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.project.dao.ProjectScheduleEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.project.entity.ProjectScheduleEO" >
+    <id column="id" property="id" />
+    <result column="project_type" property="projectType" />
+    <result column="mark" property="mark" />
+    <result column="project_name" property="projectName" />
+    <result column="completion" property="completion" />
+    <result column="implementation" property="implementation" />
+    <result column="department" property="department" />
+    <result column="remark" property="remark" />
+    <result column="create_time" property="createTime" />
+    <result column="ext_info1" property="extInfo1" />
+    <result column="ext_info2" property="extInfo2" />
+    <result column="ext_info3" property="extInfo3" />
+    <result column="ext_info4" property="extInfo4" />
+    <result column="ext_info5" property="extInfo5" />
+    <result column="year" property="year" />
+    <result column="month" property="month" />
+  </resultMap>
+
+  <!-- PROJECT_SCHEDULE table all fields -->
+  <sql id="Base_Column_List" >
+     id, project_type, mark, project_name, completion, implementation, department, remark, create_time, ext_info1, ext_info2, ext_info3, ext_info4, ext_info5, year, month
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="projectType != null" >
+        and project_type ${projectTypeOperator} #{projectType}
+      </if>
+      <if test="mark != null" >
+        and mark ${markOperator} #{mark}
+      </if>
+      <if test="projectName != null" >
+        and project_name ${projectNameOperator} #{projectName}
+      </if>
+      <if test="completion != null" >
+        and completion ${completionOperator} #{completion}
+      </if>
+      <if test="implementation != null" >
+        and implementation ${implementationOperator} #{implementation}
+      </if>
+      <if test="department != null" >
+        and department ${departmentOperator} #{department}
+      </if>
+      <if test="remark != null" >
+        and remark ${remarkOperator} #{remark}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="extInfo1 != null" >
+        and ext_info1 ${extInfo1Operator} #{extInfo1}
+      </if>
+      <if test="extInfo2 != null" >
+        and ext_info2 ${extInfo2Operator} #{extInfo2}
+      </if>
+      <if test="extInfo3 != null" >
+        and ext_info3 ${extInfo3Operator} #{extInfo3}
+      </if>
+      <if test="extInfo4 != null" >
+        and ext_info4 ${extInfo4Operator} #{extInfo4}
+      </if>
+      <if test="extInfo5 != null" >
+        and ext_info5 ${extInfo5Operator} #{extInfo5}
+      </if>
+      <if test="year != null" >
+        and year ${yearOperator} #{year}
+      </if>
+      <if test="month != null" >
+        and month ${monthOperator} #{month}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.project.entity.ProjectScheduleEO" >
+    <!-- <selectKey resultType="java.lang.String" project="BEFORE" keyProperty="id">
+        SELECT SEQ_PROJECT_SCHEDULE.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into PROJECT_SCHEDULE(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{projectType, jdbcType=VARCHAR}, #{mark, jdbcType=VARCHAR}, #{projectName, jdbcType=VARCHAR}, #{completion, jdbcType=VARCHAR}, #{implementation, jdbcType=VARCHAR}, #{department, jdbcType=VARCHAR}, #{remark, jdbcType=VARCHAR}, #{createTime, jdbcType=VARCHAR}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR}, #{year, jdbcType=VARCHAR}, #{month, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.project.entity.ProjectScheduleEO" >
+        <!-- <selectKey resultType="java.lang.String" project="BEFORE" keyProperty="id">
+        SELECT SEQ_PROJECT_SCHEDULE.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into PROJECT_SCHEDULE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="projectType != null" >project_type,</if>
+                <if test="mark != null" >mark,</if>
+                <if test="projectName != null" >project_name,</if>
+                <if test="completion != null" >completion,</if>
+                <if test="implementation != null" >implementation,</if>
+                <if test="department != null" >department,</if>
+                <if test="remark != null" >remark,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="extInfo1 != null" >ext_info1,</if>
+                <if test="extInfo2 != null" >ext_info2,</if>
+                <if test="extInfo3 != null" >ext_info3,</if>
+                <if test="extInfo4 != null" >ext_info4,</if>
+                <if test="extInfo5 != null" >ext_info5,</if>
+                <if test="year != null" >year,</if>
+                <if test="month != null" >month,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="projectType != null" >#{projectType, jdbcType=VARCHAR},</if>
+                <if test="mark != null" >#{mark, jdbcType=VARCHAR},</if>
+                <if test="projectName != null" >#{projectName, jdbcType=VARCHAR},</if>
+                <if test="completion != null" >#{completion, jdbcType=VARCHAR},</if>
+                <if test="implementation != null" >#{implementation, jdbcType=VARCHAR},</if>
+                <if test="department != null" >#{department, jdbcType=VARCHAR},</if>
+                <if test="remark != null" >#{remark, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=VARCHAR},</if>
+                <if test="extInfo1 != null" >#{extInfo1, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="extInfo3 != null" >#{extInfo3, jdbcType=VARCHAR},</if>
+                <if test="extInfo4 != null" >#{extInfo4, jdbcType=VARCHAR},</if>
+                <if test="extInfo5 != null" >#{extInfo5, jdbcType=VARCHAR},</if>
+                <if test="year != null" >#{year, jdbcType=VARCHAR},</if>
+                <if test="month != null" >#{month, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.project.entity.ProjectScheduleEO" >
+    update PROJECT_SCHEDULE
+       set  project_type = #{projectType},
+            mark = #{mark},
+            project_name = #{projectName},
+            completion = #{completion},
+            implementation = #{implementation},
+            department = #{department},
+            remark = #{remark},
+            ext_info1 = #{extInfo1},
+            ext_info2 = #{extInfo2},
+            ext_info3 = #{extInfo3},
+            ext_info4 = #{extInfo4},
+            ext_info5 = #{extInfo5},
+            year = #{year},
+            month = #{month}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.project.entity.ProjectScheduleEO" >
+    update PROJECT_SCHEDULE
+    <set >
+      <if test="projectType != null" >
+        project_type = #{projectType},
+      </if>
+      <if test="mark != null" >
+        mark = #{mark},
+      </if>
+      <if test="projectName != null" >
+        project_name = #{projectName},
+      </if>
+      <if test="completion != null" >
+        completion = #{completion},
+      </if>
+      <if test="implementation != null" >
+        implementation = #{implementation},
+      </if>
+      <if test="department != null" >
+        department = #{department},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="extInfo1 != null" >
+        ext_info1 = #{extInfo1},
+      </if>
+      <if test="extInfo2 != null" >
+        ext_info2 = #{extInfo2},
+      </if>
+      <if test="extInfo3 != null" >
+        ext_info3 = #{extInfo3},
+      </if>
+      <if test="extInfo4 != null" >
+        ext_info4 = #{extInfo4},
+      </if>
+      <if test="extInfo5 != null" >
+        ext_info5 = #{extInfo5},
+      </if>
+      <if test="year != null" >
+        year = #{year},
+      </if>
+      <if test="month != null" >
+        month = #{month},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 PROJECT_SCHEDULE -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from PROJECT_SCHEDULE
+     where id = #{value}
+
+  </select>
+    <!-- 根据DeptProTypeAndProcessInstId查询 PROJECT_SCHEDULE -->
+    <select id="selectByDeptProTypeAndProcessInstId" resultMap="BaseResultMap" >
+        select <include refid="Base_Column_List" />
+        from PROJECT_SCHEDULE
+        where department = #{0} and ext_info2 = #{1} and project_type = #{2} and ext_info1 = #{3}
+        order by create_time
+    </select>
+
+    <!-- 根据selectProTypeAndProcessInstId查询 PROJECT_SCHEDULE -->
+    <select id="selectByProTypeAndProcessInstId" resultMap="BaseResultMap" >
+        select <include refid="Base_Column_List" />
+        from PROJECT_SCHEDULE
+        where project_type = #{0} and ext_info2 = #{1} and ext_info1 = #{2}
+        order by create_time
+    </select>
+
+
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from PROJECT_SCHEDULE
+     where id = #{value}
+
+  </delete>
+
+  <!-- PROJECT_SCHEDULE 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from PROJECT_SCHEDULE
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询PROJECT_SCHEDULE列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from PROJECT_SCHEDULE
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from PROJECT_SCHEDULE
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

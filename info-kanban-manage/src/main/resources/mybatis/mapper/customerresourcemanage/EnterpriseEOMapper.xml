@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.customerresourcemanage.dao.EnterpriseEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.customerresourcemanage.entity.EnterpriseEO" >
+    <id column="id" property="id" />
+    <result column="enterprise_name" property="enterpriseName" />
+    <result column="enterprise_type" property="enterpriseType" />
+    <result column="enterprise_domain" property="enterpriseDomain" />
+    <result column="enterprise_province" property="enterpriseProvince" />
+    <result column="enterprise_province_id" property="enterpriseProvinceId"/>
+    <result column="enterprise_address" property="enterpriseAddress" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="create_user_name" property="createUserName" />
+    <result column="create_time" property="createTime" />
+    <result column="update_time" property="updateTime" />
+    <result column="del_flag" property="delFlag" />
+    <result column="ext1" property="ext1" />
+    <result column="ext2" property="ext2" />
+    <result column="ext3" property="ext3" />
+    <result column="ext4" property="ext4" />
+    <result column="ext5" property="ext5" />
+  </resultMap>
+
+  <!-- DB_ENTERPRISE table all fields -->
+  <sql id="Base_Column_List" >
+     id, enterprise_name, enterprise_type, enterprise_domain, enterprise_province, enterprise_address, create_user_id, create_user_name, create_time, update_time, del_flag, ext1, ext2, ext3, ext4, ext5,ENTERPRISE_PROVINCE_ID
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1 and del_flag='0'
+    <trim suffixOverrides="," >
+      <if test="id != null and id != ''" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="enterpriseName != null and enterpriseName != ''" >
+        and enterprise_name ${enterpriseNameOperator} #{enterpriseName}
+      </if>
+      <if test="enterpriseType != null and enterpriseName != ''" >
+        and enterprise_type ${enterpriseTypeOperator} #{enterpriseType}
+      </if>
+      <if test="enterpriseDomain != null and enterpriseDomain != ''" >
+        and enterprise_domain ${enterpriseDomainOperator} #{enterpriseDomain}
+      </if>
+      <if test="enterpriseProvince != null and enterpriseProvince != ''" >
+        and enterprise_province ${enterpriseProvinceOperator} #{enterpriseProvince}
+      </if>
+      <if test="enterpriseAddress != null and enterpriseAddress != ''" >
+        and enterprise_address ${enterpriseAddressOperator} #{enterpriseAddress}
+      </if>
+      <if test="createUserId != null and createUserId != ''" >
+        and create_user_id ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="createUserName != null and createUserName != ''" >
+        and create_user_name ${createUserNameOperator} #{createUserName}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null and createTime1 != ''" >
+        and create_time &gt;= to_date(#{createTime1},'yyyy-mm-dd,hh24:mi:ss')
+      </if>
+      <if test="createTime2 != null and createTime2 != ''" >
+        and create_time &lt;= to_date(#{createTime2},'yyyy-mm-dd,hh24:mi:ss')
+      </if>
+      <if test="updateTime != null and updateTime != ''" >
+        and update_time ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null and updateTime1 != ''" >
+        and update_time &gt;= to_date(#{updateTime1},'yyyy-mm-dd,hh24:mi:ss')
+      </if>
+      <if test="updateTime2 != null and updateTime2 != ''" >
+        and update_time &lt;= to_date(#{updateTime2},'yyyy-mm-dd,hh24:mi:ss')
+      </if>
+      <if test="delFlag != null and delFlag != ''" >
+        and del_flag ${delFlagOperator} #{delFlag}
+      </if>
+      <if test="ext1 != null and ext1 != ''" >
+        and ext1 ${ext1Operator} #{ext1}
+      </if>
+      <if test="ext2 != null and ext2 != ''" >
+        and ext2 ${ext2Operator} #{ext2}
+      </if>
+      <if test="ext3 != null and ext3 != ''" >
+        and ext3 ${ext3Operator} #{ext3}
+      </if>
+      <if test="ext4 != null and ext4 != ''" >
+        and ext4 ${ext4Operator} #{ext4}
+      </if>
+      <if test="ext5 != null and ext5 != ''" >
+        and ext5 ${ext5Operator} #{ext5}
+      </if>
+      <if test="enterpriseProvinceId != null and enterpriseProvinceId != ''">
+          and enterprise_province_id ${enterpriseProvinceIdOperator} #{enterpriseProvinceId}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.customerresourcemanage.entity.EnterpriseEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_DB_ENTERPRISE.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into DB_ENTERPRISE(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{enterpriseName, jdbcType=VARCHAR}, #{enterpriseType, jdbcType=VARCHAR}, #{enterpriseDomain, jdbcType=VARCHAR}, #{enterpriseProvince, jdbcType=VARCHAR}, #{enterpriseAddress, jdbcType=VARCHAR}, #{createUserId, jdbcType=VARCHAR}, #{createUserName, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{updateTime, jdbcType=TIMESTAMP}, #{delFlag, jdbcType=VARCHAR}, #{ext1, jdbcType=VARCHAR}, #{ext2, jdbcType=VARCHAR}, #{ext3, jdbcType=VARCHAR}, #{ext4, jdbcType=VARCHAR}, #{ext5, jdbcType=VARCHAR},#{enterpriseProvinceId, jdbcType=INTEGER})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.customerresourcemanage.entity.EnterpriseEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_DB_ENTERPRISE.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into DB_ENTERPRISE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null and id != ''" >id,</if>
+                <if test="enterpriseName != null and enterpriseName != ''" >enterprise_name,</if>
+                <if test="enterpriseType != null and enterpriseType != ''" >enterprise_type,</if>
+                <if test="enterpriseDomain != null and enterpriseDomain != ''" >enterprise_domain,</if>
+                <if test="enterpriseProvince != null and enterpriseProvince != ''" >enterprise_province,</if>
+                <if test="enterpriseAddress != null and enterpriseAddress != ''" >enterprise_address,</if>
+                <if test="createUserId != null and createUserId != ''" >create_user_id,</if>
+                <if test="createUserName != null and createUserName != ''" >create_user_name,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="updateTime != null" >update_time,</if>
+                <if test="delFlag != null and delFlag != ''" >del_flag,</if>
+                <if test="ext1 != null and ext1 != ''" >ext1,</if>
+                <if test="ext2 != null and ext2 != ''" >ext2,</if>
+                <if test="ext3 != null and ext3 != ''" >ext3,</if>
+                <if test="ext4 != null and ext4 != ''" >ext4,</if>
+                <if test="ext5 != null and ext5 != ''" >ext5,</if>
+                <if test="enterpriseProvinceId != null" >enterprise_province_id,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null and id != ''" >#{id, jdbcType=VARCHAR},</if>
+                <if test="enterpriseName != null and enterpriseName != ''" >#{enterpriseName, jdbcType=VARCHAR},</if>
+                <if test="enterpriseType != null and enterpriseType != ''" >#{enterpriseType, jdbcType=VARCHAR},</if>
+                <if test="enterpriseDomain != null and enterpriseDomain != ''" >#{enterpriseDomain, jdbcType=VARCHAR},</if>
+                <if test="enterpriseProvince != null and enterpriseProvince != ''" >#{enterpriseProvince, jdbcType=VARCHAR},</if>
+                <if test="enterpriseAddress != null and enterpriseAddress != ''" >#{enterpriseAddress, jdbcType=VARCHAR},</if>
+                <if test="createUserId != null and createUserId != ''" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="createUserName != null and createUserName != ''" >#{createUserName, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="updateTime != null" >#{updateTime, jdbcType=TIMESTAMP},</if>
+                <if test="delFlag != null and delFlag != ''" >#{delFlag, jdbcType=VARCHAR},</if>
+                <if test="ext1 != null and ext1 != ''" >#{ext1, jdbcType=VARCHAR},</if>
+                <if test="ext2 != null and ext2 != ''" >#{ext2, jdbcType=VARCHAR},</if>
+                <if test="ext3 != null and ext3 != ''" >#{ext3, jdbcType=VARCHAR},</if>
+                <if test="ext4 != null and ext4 != ''" >#{ext4, jdbcType=VARCHAR},</if>
+                <if test="ext5 != null and ext5 != ''" >#{ext5, jdbcType=VARCHAR},</if>
+                <if test="enterpriseProvinceId != null" >#{enterpriseProvinceId,jdbcType=INTEGER},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.customerresourcemanage.entity.EnterpriseEO" >
+    update DB_ENTERPRISE
+       set  enterprise_name = #{enterpriseName},
+            enterprise_type = #{enterpriseType},
+            enterprise_domain = #{enterpriseDomain},
+            enterprise_province = #{enterpriseProvince},
+            <if test="enterpriseProvinceId == null or enterpriseProvinceId == ''">enterprise_province_id = NULL, </if>
+      <if test="enterpriseProvinceId != null and enterpriseProvinceId != ''">enterprise_province_id = #{enterpriseProvinceId},</if>
+
+            enterprise_address = #{enterpriseAddress},
+            create_user_id = #{createUserId},
+            create_user_name = #{createUserName},
+      <if test="createTime == null">create_time = NULL, </if>
+      <if test="createTime != null"> create_time = #{createTime}, </if>
+            update_time = #{updateTime},
+            del_flag = #{delFlag}
+       where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.customerresourcemanage.entity.EnterpriseEO" >
+    update DB_ENTERPRISE
+    <set >
+      <if test="enterpriseName != null and enterpriseName != ''" >
+        enterprise_name = #{enterpriseName},
+      </if>
+      <if test="enterpriseType != null and enterpriseType != ''" >
+        enterprise_type = #{enterpriseType},
+      </if>
+      <if test="enterpriseDomain != null and enterpriseDomain != ''" >
+        enterprise_domain = #{enterpriseDomain},
+      </if>
+      <if test="enterpriseProvince != null and enterpriseProvince != ''" >
+        enterprise_province = #{enterpriseProvince},
+      </if>
+      <if test="enterpriseAddress != null and enterpriseAddress != ''" >
+        enterprise_address = #{enterpriseAddress},
+      </if>
+      <if test="createUserId != null and createUserId != ''" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="createUserName != null and createUserName != ''" >
+        create_user_name = #{createUserName},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+      <if test="delFlag != null and delFlag != ''" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="ext1 != null and ext1 != ''" >
+        ext1 = #{ext1},
+      </if>
+      <if test="ext2 != null and ext2 != ''" >
+        ext2 = #{ext2},
+      </if>
+      <if test="ext3 != null and ext3 != ''" >
+        ext3 = #{ext3},
+      </if>
+      <if test="ext4 != null and ext4 != ''" >
+        ext4 = #{ext4},
+      </if>
+      <if test="ext5 != null and ext5 != ''" >
+        ext5 = #{ext5},
+      </if>
+        <if test="enterpriseProvinceId != null" >
+            enterprise_province_id = #{enterpriseProvinceId},
+        </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 DB_ENTERPRISE -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+      select
+      <include refid="Base_Column_List"/>
+      from DB_ENTERPRISE
+     where id = #{value}
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from DB_ENTERPRISE
+     where id = #{value}
+
+  </delete>
+
+    <update id="logicDeleteByPrimaryKey" parameterType="java.lang.String">
+        update DB_ENTERPRISE set del_flag = '1' where id = #{id}
+    </update>
+
+    <update id="batchLogicDeleteByPrimaryKeys" parameterType="java.util.List">
+        update DB_ENTERPRISE set del_flag = '1' where id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")" index="index">
+            #{id}
+        </foreach>
+    </update>
+
+
+  <!-- DB_ENTERPRISE 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from DB_ENTERPRISE
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询DB_ENTERPRISE列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select u.* from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from DB_ENTERPRISE
+			 <include refid="Base_Where_Clause"/>
+			 <if test="sql_filter != null and sql_filter != ''" >
+			 	${sql_filter}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})u
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from DB_ENTERPRISE
+    <include refid="Base_Where_Clause"/>
+      <if test="sql_filter != null and sql_filter != ''" >
+          ${sql_filter}
+      </if>
+  </select>
+
+    <select id="findEnterpriseByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="Base_Column_List"/> from DB_ENTERPRISE where del_flag = '0'
+        <if test="enterpriseName != null and enterpriseName != ''" >
+            and enterprise_name = #{enterpriseName}
+        </if>
+    </select>
+
+    <select id="queryAll" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select
+        <include refid="Base_Column_List"/>
+        from DB_ENTERPRISE
+    </select>
+
+</mapper>

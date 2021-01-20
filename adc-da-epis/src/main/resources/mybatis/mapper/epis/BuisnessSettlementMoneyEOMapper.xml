@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.epis.dao.BuisnessSettlementMoneyEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.epis.entity.BuisnessSettlementMoneyEO" >
+    <id column="id" property="id" />
+    <result column="settle_time" property="settleTime" />
+    <result column="batch_num" property="batchNum" />
+    <result column="finished_status" property="finishedStatus" />
+    <result column="create_time" property="createTime" />
+    <result column="modify_time" property="modifyTime" />
+    <result column="create_user" property="createUser" />
+    <result column="integral_id" property="integralId" />
+    <result column="note" property="note" />
+    <result column="invoice_money" property="invoiceMoney" />
+    <result column="money" property="money" />
+    <result column="settlement_money" property="settlementMoney" />
+  </resultMap>
+
+  <!-- BUISNESS_SETTLEMENT_MONEY table all fields -->
+  <sql id="Base_Column_List" >
+     settle_time, batch_num, finished_status, create_time, modify_time, create_user, integral_id, note, invoice_money, id, money, settlement_money
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="settleTime != null" >
+        and settle_time ${settleTimeOperator} #{settleTime}
+      </if>
+      <if test="settleTime1 != null" >
+        and settle_time &gt;= #{settleTime1}
+      </if>
+      <if test="settleTime2 != null" >
+        and settle_time &lt;= #{settleTime2}
+      </if>
+      <if test="batchNum != null" >
+        and batch_num ${batchNumOperator} #{batchNum}
+      </if>
+      <if test="finishedStatus != null" >
+        and finished_status ${finishedStatusOperator} #{finishedStatus}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="modifyTime != null" >
+        and modify_time ${modifyTimeOperator} #{modifyTime}
+      </if>
+      <if test="modifyTime1 != null" >
+        and modify_time &gt;= #{modifyTime1}
+      </if>
+      <if test="modifyTime2 != null" >
+        and modify_time &lt;= #{modifyTime2}
+      </if>
+      <if test="createUser != null" >
+        and create_user ${createUserOperator} #{createUser}
+      </if>
+      <if test="integralId != null" >
+        and integral_id ${integralIdOperator} #{integralId}
+      </if>
+      <if test="note != null" >
+        and note ${noteOperator} #{note}
+      </if>
+      <if test="invoiceMoney != null" >
+        and invoice_money ${invoiceMoneyOperator} #{invoiceMoney}
+      </if>
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="money != null" >
+        and money ${moneyOperator} #{money}
+      </if>
+      <if test="settlementMoney != null" >
+        and settlement_money ${settlementMoneyOperator} #{settlementMoney}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.epis.entity.BuisnessSettlementMoneyEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_BUISNESS_SETTLEMENT_MONEY.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into BUISNESS_SETTLEMENT_MONEY(<include refid="Base_Column_List" />)
+    values (#{settleTime, jdbcType=TIMESTAMP}, #{batchNum, jdbcType=INTEGER}, #{finishedStatus, jdbcType=INTEGER}, #{createTime, jdbcType=TIMESTAMP}, #{modifyTime, jdbcType=TIMESTAMP}, #{createUser, jdbcType=VARCHAR}, #{integralId, jdbcType=VARCHAR}, #{note, jdbcType=VARCHAR}, #{invoiceMoney, jdbcType=FLOAT}, #{id, jdbcType=VARCHAR}, #{money, jdbcType=FLOAT}, #{settlementMoney, jdbcType=FLOAT})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.epis.entity.BuisnessSettlementMoneyEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_BUISNESS_SETTLEMENT_MONEY.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into BUISNESS_SETTLEMENT_MONEY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="settleTime != null" >settle_time,</if>
+                <if test="batchNum != null" >batch_num,</if>
+                <if test="finishedStatus != null" >finished_status,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="modifyTime != null" >modify_time,</if>
+                <if test="createUser != null" >create_user,</if>
+                <if test="integralId != null" >integral_id,</if>
+                <if test="note != null" >note,</if>
+                <if test="invoiceMoney != null" >invoice_money,</if>
+                <if test="id != null" >id,</if>
+                <if test="money != null" >money,</if>
+                <if test="settlementMoney != null" >settlement_money,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="settleTime != null" >#{settleTime, jdbcType=TIMESTAMP},</if>
+                <if test="batchNum != null" >#{batchNum, jdbcType=INTEGER},</if>
+                <if test="finishedStatus != null" >#{finishedStatus, jdbcType=INTEGER},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="modifyTime != null" >#{modifyTime, jdbcType=TIMESTAMP},</if>
+                <if test="createUser != null" >#{createUser, jdbcType=VARCHAR},</if>
+                <if test="integralId != null" >#{integralId, jdbcType=VARCHAR},</if>
+                <if test="note != null" >#{note, jdbcType=VARCHAR},</if>
+                <if test="invoiceMoney != null" >#{invoiceMoney, jdbcType=FLOAT},</if>
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="money != null" >#{money, jdbcType=FLOAT},</if>
+                <if test="settlementMoney != null" >#{settlementMoney, jdbcType=FLOAT},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.epis.entity.BuisnessSettlementMoneyEO" >
+    update BUISNESS_SETTLEMENT_MONEY
+       set  settle_time = #{settleTime},
+            batch_num = #{batchNum},
+            finished_status = #{finishedStatus},
+            create_time = #{createTime},
+            modify_time = #{modifyTime},
+            create_user = #{createUser},
+            integral_id = #{integralId},
+            note = #{note},
+            invoice_money = #{invoiceMoney},
+            money = #{money},
+            settlement_money = #{settlementMoney}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.epis.entity.BuisnessSettlementMoneyEO" >
+    update BUISNESS_SETTLEMENT_MONEY
+    <set >
+      <if test="settleTime != null" >
+        settle_time = #{settleTime},
+      </if>
+      <if test="batchNum != null" >
+        batch_num = #{batchNum},
+      </if>
+      <if test="finishedStatus != null" >
+        finished_status = #{finishedStatus},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser},
+      </if>
+      <if test="integralId != null" >
+        integral_id = #{integralId},
+      </if>
+      <if test="note != null" >
+        note = #{note},
+      </if>
+      <if test="invoiceMoney != null" >
+        invoice_money = #{invoiceMoney},
+      </if>
+      <if test="money != null" >
+        money = #{money},
+      </if>
+      <if test="settlementMoney != null" >
+        settlement_money = #{settlementMoney},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 BUISNESS_SETTLEMENT_MONEY -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from BUISNESS_SETTLEMENT_MONEY
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from BUISNESS_SETTLEMENT_MONEY
+     where id = #{value}
+
+  </delete>
+
+  <!-- BUISNESS_SETTLEMENT_MONEY 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from BUISNESS_SETTLEMENT_MONEY
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询BUISNESS_SETTLEMENT_MONEY列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from BUISNESS_SETTLEMENT_MONEY
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from BUISNESS_SETTLEMENT_MONEY
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

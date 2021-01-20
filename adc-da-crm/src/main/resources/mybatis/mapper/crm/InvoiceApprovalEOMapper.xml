@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.crm.dao.InvoiceApprovalEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.crm.entity.InvoiceApprovalEO" >
+    <id column="id" property="id" />
+    <result column="contract_name" property="contractName" />
+    <result column="contract_amount" property="contractAmount" />
+    <result column="invoice_amount" property="invoiceAmount" />
+    <result column="platform" property="platform" />
+    <result column="block" property="block" />
+    <result column="invoice_type" property="invoiceType" />
+    <result column="cost_name" property="costName" />
+    <result column="pay_company" property="payCompany" />
+    <result column="receiver" property="receiver" />
+    <result column="tel" property="tel" />
+    <result column="company" property="company" />
+    <result column="address" property="address" />
+    <result column="invoice_company" property="invoiceCompany" />
+    <result column="test" property="test" />
+    <result column="meter" property="meter" />
+    <result column="out_no" property="outNo" />
+    <result column="approval_view" property="approvalView" />
+    <result column="del_flag" property="delFlag" />
+    <result column="created_time" property="createdTime" />
+    <result column="created_user" property="createdUser" />
+    <result column="modified_time2" property="modifiedTime2" />
+    <result column="modified_user2" property="modifiedUser2" />
+    <result column="apply_data" property="applyData" />
+    <result column="doc_no" property="docNo" />
+    <result column="apply_user" property="applyUser" />
+    <result column="apply_dept" property="applyDept" />
+    <result column="contract_no" property="contractNo" />
+  </resultMap>
+
+  <!-- INVOICE_APPROVAL table all fields -->
+  <sql id="Base_Column_List" >
+     contract_name, contract_amount, invoice_amount, platform, block, invoice_type, cost_name, pay_company, receiver, tel, company, address, invoice_company, test, meter, out_no, approval_view, del_flag, created_time, created_user, modified_time2, modified_user2, id, apply_data, doc_no, apply_user, apply_dept, contract_no
+  </sql>
+  <!-- INVOICE_APPROVAL table all fields -->
+  <sql id="CRM_Column_List" >
+     contract_name, contract_amount, invoice_amount, platform, block, invoice_type, cost_name, pay_company, receiver, tel, company, address, invoice_company, test, meter, out_no, approval_view, del_flag, created_time, created_user, modified_time2, modified_user2, id, apply_data, doc_no, apply_user, apply_dept, contract_no
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="contractName != null" >
+        and contract_name ${contractNameOperator} #{contractName}
+      </if>
+      <if test="contractAmount != null" >
+        and contract_amount ${contractAmountOperator} #{contractAmount}
+      </if>
+      <if test="invoiceAmount != null" >
+        and invoice_amount ${invoiceAmountOperator} #{invoiceAmount}
+      </if>
+      <if test="platform != null" >
+        and platform ${platformOperator} #{platform}
+      </if>
+      <if test="block != null" >
+        and block ${blockOperator} #{block}
+      </if>
+      <if test="invoiceType != null" >
+        and invoice_type ${invoiceTypeOperator} #{invoiceType}
+      </if>
+      <if test="costName != null" >
+        and cost_name ${costNameOperator} #{costName}
+      </if>
+      <if test="payCompany != null" >
+        and pay_company ${payCompanyOperator} #{payCompany}
+      </if>
+      <if test="receiver != null" >
+        and receiver ${receiverOperator} #{receiver}
+      </if>
+      <if test="tel != null" >
+        and tel ${telOperator} #{tel}
+      </if>
+      <if test="company != null" >
+        and company ${companyOperator} #{company}
+      </if>
+      <if test="address != null" >
+        and address ${addressOperator} #{address}
+      </if>
+      <if test="invoiceCompany != null" >
+        and invoice_company ${invoiceCompanyOperator} #{invoiceCompany}
+      </if>
+      <if test="test != null" >
+        and test ${testOperator} #{test}
+      </if>
+      <if test="meter != null" >
+        and meter ${meterOperator} #{meter}
+      </if>
+      <if test="outNo != null" >
+        and out_no ${outNoOperator} #{outNo}
+      </if>
+      <if test="approvalView != null" >
+        and approval_view ${approvalViewOperator} #{approvalView}
+      </if>
+      <if test="createdTime != null" >
+        and created_time ${createdTimeOperator} #{createdTime}
+      </if>
+      <if test="createdTime1 != null" >
+        and created_time &gt;= #{createdTime1}
+      </if>
+      <if test="createdTime2 != null" >
+        and created_time &lt;= #{createdTime2}
+      </if>
+      <if test="createdUser != null" >
+        and created_user ${createdUserOperator} #{createdUser}
+      </if>
+      <if test="modifiedTime2 != null" >
+        and modified_time2 ${modifiedTime2Operator} #{modifiedTime2}
+      </if>
+      <if test="modifiedTime21 != null" >
+        and modified_time2 &gt;= #{modifiedTime21}
+      </if>
+      <if test="modifiedTime22 != null" >
+        and modified_time2 &lt;= #{modifiedTime22}
+      </if>
+      <if test="modifiedUser2 != null" >
+        and modified_user2 ${modifiedUser2Operator} #{modifiedUser2}
+      </if>
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="applyData != null" >
+        and apply_data ${applyDataOperator} #{applyData}
+      </if>
+      <if test="applyData1 != null" >
+        and apply_data &gt;= #{applyData1}
+      </if>
+      <if test="applyData2 != null" >
+        and apply_data &lt;= #{applyData2}
+      </if>
+      <if test="docNo != null" >
+        and doc_no ${docNoOperator} #{docNo}
+      </if>
+      <if test="applyUser != null" >
+        and apply_user ${applyUserOperator} #{applyUser}
+      </if>
+      <if test="applyDept != null" >
+        and apply_dept ${applyDeptOperator} #{applyDept}
+      </if>
+      <if test="contractNo != null" >
+        and contract_no ${contractNoOperator} #{contractNo}
+      </if>
+        and del_flag = '0'
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.crm.entity.InvoiceApprovalEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_INVOICE_APPROVAL.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into INVOICE_APPROVAL(<include refid="Base_Column_List" />)
+    values (#{contractName, jdbcType=VARCHAR}, #{contractAmount, jdbcType=VARCHAR}, #{invoiceAmount, jdbcType=VARCHAR}, #{platform, jdbcType=VARCHAR}, #{block, jdbcType=VARCHAR}, #{invoiceType, jdbcType=VARCHAR}, #{costName, jdbcType=VARCHAR}, #{payCompany, jdbcType=VARCHAR}, #{receiver, jdbcType=VARCHAR}, #{tel, jdbcType=VARCHAR}, #{company, jdbcType=VARCHAR}, #{address, jdbcType=VARCHAR}, #{invoiceCompany, jdbcType=VARCHAR}, #{test, jdbcType=VARCHAR}, #{meter, jdbcType=VARCHAR}, #{outNo, jdbcType=VARCHAR}, #{approvalView, jdbcType=VARCHAR}, #{delFlag, jdbcType=VARCHAR}, #{createdTime, jdbcType=TIMESTAMP}, #{createdUser, jdbcType=VARCHAR}, #{modifiedTime2, jdbcType=TIMESTAMP}, #{modifiedUser2, jdbcType=VARCHAR}, #{id, jdbcType=VARCHAR}, #{applyData, jdbcType=TIMESTAMP}, #{docNo, jdbcType=VARCHAR}, #{applyUser, jdbcType=VARCHAR}, #{applyDept, jdbcType=VARCHAR}, #{contractNo, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.crm.entity.InvoiceApprovalEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_INVOICE_APPROVAL.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into INVOICE_APPROVAL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="contractName != null" >contract_name,</if>
+                <if test="contractAmount != null" >contract_amount,</if>
+                <if test="invoiceAmount != null" >invoice_amount,</if>
+                <if test="platform != null" >platform,</if>
+                <if test="block != null" >block,</if>
+                <if test="invoiceType != null" >invoice_type,</if>
+                <if test="costName != null" >cost_name,</if>
+                <if test="payCompany != null" >pay_company,</if>
+                <if test="receiver != null" >receiver,</if>
+                <if test="tel != null" >tel,</if>
+                <if test="company != null" >company,</if>
+                <if test="address != null" >address,</if>
+                <if test="invoiceCompany != null" >invoice_company,</if>
+                <if test="test != null" >test,</if>
+                <if test="meter != null" >meter,</if>
+                <if test="outNo != null" >out_no,</if>
+                <if test="approvalView != null" >approval_view,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="createdTime != null" >created_time,</if>
+                <if test="createdUser != null" >created_user,</if>
+                <if test="modifiedTime2 != null" >modified_time2,</if>
+                <if test="modifiedUser2 != null" >modified_user2,</if>
+                <if test="id != null" >id,</if>
+                <if test="applyData != null" >apply_data,</if>
+                <if test="docNo != null" >doc_no,</if>
+                <if test="applyUser != null" >apply_user,</if>
+                <if test="applyDept != null" >apply_dept,</if>
+                <if test="contractNo != null" >contract_no,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="contractName != null" >#{contractName, jdbcType=VARCHAR},</if>
+                <if test="contractAmount != null" >#{contractAmount, jdbcType=VARCHAR},</if>
+                <if test="invoiceAmount != null" >#{invoiceAmount, jdbcType=VARCHAR},</if>
+                <if test="platform != null" >#{platform, jdbcType=VARCHAR},</if>
+                <if test="block != null" >#{block, jdbcType=VARCHAR},</if>
+                <if test="invoiceType != null" >#{invoiceType, jdbcType=VARCHAR},</if>
+                <if test="costName != null" >#{costName, jdbcType=VARCHAR},</if>
+                <if test="payCompany != null" >#{payCompany, jdbcType=VARCHAR},</if>
+                <if test="receiver != null" >#{receiver, jdbcType=VARCHAR},</if>
+                <if test="tel != null" >#{tel, jdbcType=VARCHAR},</if>
+                <if test="company != null" >#{company, jdbcType=VARCHAR},</if>
+                <if test="address != null" >#{address, jdbcType=VARCHAR},</if>
+                <if test="invoiceCompany != null" >#{invoiceCompany, jdbcType=VARCHAR},</if>
+                <if test="test != null" >#{test, jdbcType=VARCHAR},</if>
+                <if test="meter != null" >#{meter, jdbcType=VARCHAR},</if>
+                <if test="outNo != null" >#{outNo, jdbcType=VARCHAR},</if>
+                <if test="approvalView != null" >#{approvalView, jdbcType=VARCHAR},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=VARCHAR},</if>
+                <if test="createdTime != null" >#{createdTime, jdbcType=TIMESTAMP},</if>
+                <if test="createdUser != null" >#{createdUser, jdbcType=VARCHAR},</if>
+                <if test="modifiedTime2 != null" >#{modifiedTime2, jdbcType=TIMESTAMP},</if>
+                <if test="modifiedUser2 != null" >#{modifiedUser2, jdbcType=VARCHAR},</if>
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="applyData != null" >#{applyData, jdbcType=TIMESTAMP},</if>
+                <if test="docNo != null" >#{docNo, jdbcType=VARCHAR},</if>
+                <if test="applyUser != null" >#{applyUser, jdbcType=VARCHAR},</if>
+                <if test="applyDept != null" >#{applyDept, jdbcType=VARCHAR},</if>
+                <if test="contractNo != null" >#{contractNo, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.crm.entity.InvoiceApprovalEO" >
+    update INVOICE_APPROVAL
+       set  contract_name = #{contractName},
+            contract_amount = #{contractAmount},
+            invoice_amount = #{invoiceAmount},
+            platform = #{platform},
+            block = #{block},
+            invoice_type = #{invoiceType},
+            cost_name = #{costName},
+            pay_company = #{payCompany},
+            receiver = #{receiver},
+            tel = #{tel},
+            company = #{company},
+            address = #{address},
+            invoice_company = #{invoiceCompany},
+            test = #{test},
+            meter = #{meter},
+            out_no = #{outNo},
+            approval_view = #{approvalView},
+            del_flag = #{delFlag},
+            created_time = #{createdTime},
+            created_user = #{createdUser},
+            modified_time2 = #{modifiedTime2},
+            modified_user2 = #{modifiedUser2},
+            apply_data = #{applyData},
+            doc_no = #{docNo},
+            apply_user = #{applyUser},
+            apply_dept = #{applyDept},
+            contract_no = #{contractNo}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.crm.entity.InvoiceApprovalEO" >
+    update INVOICE_APPROVAL
+    <set >
+      <if test="contractName != null" >
+        contract_name = #{contractName},
+      </if>
+      <if test="contractAmount != null" >
+        contract_amount = #{contractAmount},
+      </if>
+      <if test="invoiceAmount != null" >
+        invoice_amount = #{invoiceAmount},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform},
+      </if>
+      <if test="block != null" >
+        block = #{block},
+      </if>
+      <if test="invoiceType != null" >
+        invoice_type = #{invoiceType},
+      </if>
+      <if test="costName != null" >
+        cost_name = #{costName},
+      </if>
+      <if test="payCompany != null" >
+        pay_company = #{payCompany},
+      </if>
+      <if test="receiver != null" >
+        receiver = #{receiver},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel},
+      </if>
+      <if test="company != null" >
+        company = #{company},
+      </if>
+      <if test="address != null" >
+        address = #{address},
+      </if>
+      <if test="invoiceCompany != null" >
+        invoice_company = #{invoiceCompany},
+      </if>
+      <if test="test != null" >
+        test = #{test},
+      </if>
+      <if test="meter != null" >
+        meter = #{meter},
+      </if>
+      <if test="outNo != null" >
+        out_no = #{outNo},
+      </if>
+      <if test="approvalView != null" >
+        approval_view = #{approvalView},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+      <if test="createdUser != null" >
+        created_user = #{createdUser},
+      </if>
+      <if test="modifiedTime2 != null" >
+        modified_time2 = #{modifiedTime2},
+      </if>
+      <if test="modifiedUser2 != null" >
+        modified_user2 = #{modifiedUser2},
+      </if>
+      <if test="applyData != null" >
+        apply_data = #{applyData},
+      </if>
+      <if test="docNo != null" >
+        doc_no = #{docNo},
+      </if>
+      <if test="applyUser != null" >
+        apply_user = #{applyUser},
+      </if>
+      <if test="applyDept != null" >
+        apply_dept = #{applyDept},
+      </if>
+      <if test="contractNo != null" >
+        contract_no = #{contractNo},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 INVOICE_APPROVAL -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from INVOICE_APPROVAL
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from INVOICE_APPROVAL
+     where id = #{value}
+
+  </delete>
+
+  <!-- INVOICE_APPROVAL 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from INVOICE_APPROVAL
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询INVOICE_APPROVAL列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from INVOICE_APPROVAL
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <!-- 查询INVOICE_APPROVAL列表 -->
+  <select id="queryCRMListByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="CRM_Column_List" /> from INVOICE_APPROVAL
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from INVOICE_APPROVAL
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+    <update id="updateByPrimaryKeyAndDelFlag">
+        update INVOICE_APPROVAL set del_flag=#{delFlag} where id=#{primaryKey}
+    </update>
+
+</mapper>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.dao.EndBaseEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.research.entity.EndBaseEO" >
+    <id column="proc_business_key_" property="procBusinessKey" />
+    <result column="research_project_id_" property="researchProjectId" />
+    <result column="rs_file_id_" property="rsFileId" />
+    <result column="update_date_" property="updateDate" />
+    <result column="version_" property="version" />
+    <result column="ext_info_1_" property="extInfo1" />
+    <result column="ext_info_2_" property="extInfo2" />
+    <result column="ext_info_3_" property="extInfo3" />
+  </resultMap>
+
+  <!-- RS_END_BASE table all fields -->
+  <sql id="Base_Column_List" >
+     proc_business_key_, research_project_id_, rs_file_id_, update_date_, version_, ext_info_1_, ext_info_2_, ext_info_3_
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="procBusinessKey != null" >
+        and proc_business_key_ ${procBusinessKeyOperator} #{procBusinessKey}
+      </if>
+      <if test="researchProjectId != null" >
+        and research_project_id_ ${researchProjectIdOperator} #{researchProjectId}
+      </if>
+      <if test="rsFileId != null" >
+        and rs_file_id_ ${rsFileIdOperator} #{rsFileId}
+      </if>
+      <if test="updateDate != null" >
+        and update_date_ ${updateDateOperator} #{updateDate}
+      </if>
+      <if test="updateDate1 != null" >
+        and update_date_ &gt;= #{updateDate1}
+      </if>
+      <if test="updateDate2 != null" >
+        and update_date_ &lt;= #{updateDate2}
+      </if>
+      <if test="version != null" >
+        and version_ ${versionOperator} #{version}
+      </if>
+      <if test="extInfo1 != null" >
+        and ext_info_1_ ${extInfo1Operator} #{extInfo1}
+      </if>
+      <if test="extInfo2 != null" >
+        and ext_info_2_ ${extInfo2Operator} #{extInfo2}
+      </if>
+      <if test="extInfo3 != null" >
+        and ext_info_3_ ${extInfo3Operator} #{extInfo3}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.research.entity.EndBaseEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="proc_business_key_">
+        SELECT SEQ_RS_END_BASE.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into RS_END_BASE(<include refid="Base_Column_List" />)
+    values (#{procBusinessKey, jdbcType=VARCHAR}, #{researchProjectId, jdbcType=VARCHAR}, #{rsFileId, jdbcType=VARCHAR}, #{updateDate, jdbcType=TIMESTAMP}, #{version, jdbcType=INTEGER}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.research.entity.EndBaseEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="proc_business_key_">
+        SELECT SEQ_RS_END_BASE.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into RS_END_BASE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="procBusinessKey != null" >proc_business_key_,</if>
+                <if test="researchProjectId != null" >research_project_id_,</if>
+                <if test="rsFileId != null" >rs_file_id_,</if>
+                <if test="updateDate != null" >update_date_,</if>
+                <if test="version != null" >version_,</if>
+                <if test="extInfo1 != null" >ext_info_1_,</if>
+                <if test="extInfo2 != null" >ext_info_2_,</if>
+                <if test="extInfo3 != null" >ext_info_3_,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="procBusinessKey != null" >#{procBusinessKey, jdbcType=VARCHAR},</if>
+                <if test="researchProjectId != null" >#{researchProjectId, jdbcType=VARCHAR},</if>
+                <if test="rsFileId != null" >#{rsFileId, jdbcType=VARCHAR},</if>
+                <if test="updateDate != null" >#{updateDate, jdbcType=TIMESTAMP},</if>
+                <if test="version != null" >#{version, jdbcType=INTEGER},</if>
+                <if test="extInfo1 != null" >#{extInfo1, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="extInfo3 != null" >#{extInfo3, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.research.entity.EndBaseEO" >
+    update RS_END_BASE
+       set  research_project_id_ = #{researchProjectId},
+            rs_file_id_ = #{rsFileId},
+            update_date_ = #{updateDate},
+            version_ = #{version},
+            ext_info_1_ = #{extInfo1},
+            ext_info_2_ = #{extInfo2},
+            ext_info_3_ = #{extInfo3}
+     where  proc_business_key_ = #{procBusinessKey}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.research.entity.EndBaseEO" >
+    update RS_END_BASE
+    <set >
+      <if test="researchProjectId != null" >
+        research_project_id_ = #{researchProjectId},
+      </if>
+      <if test="rsFileId != null" >
+        rs_file_id_ = #{rsFileId},
+      </if>
+      <if test="updateDate != null" >
+        update_date_ = #{updateDate},
+      </if>
+      <if test="version != null" >
+        version_ = #{version},
+      </if>
+      <if test="extInfo1 != null" >
+        ext_info_1_ = #{extInfo1},
+      </if>
+      <if test="extInfo2 != null" >
+        ext_info_2_ = #{extInfo2},
+      </if>
+      <if test="extInfo3 != null" >
+        ext_info_3_ = #{extInfo3},
+      </if>
+    </set>
+     where proc_business_key_ = #{procBusinessKey}
+  </update>
+
+  <!-- 根据id查询 RS_END_BASE -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from RS_END_BASE
+     where proc_business_key_ = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RS_END_BASE
+     where proc_business_key_ = #{value}
+
+  </delete>
+
+  <!-- RS_END_BASE 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from RS_END_BASE
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询RS_END_BASE列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from RS_END_BASE
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from RS_END_BASE
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

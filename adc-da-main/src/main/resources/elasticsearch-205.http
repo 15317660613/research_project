@@ -1,0 +1,547 @@
+POST 192.168.5.205:9200/financial
+###
+POST 192.168.5.205:9200/financial_prd/Daily/_search
+Content-Type: application/json
+
+{"query" : {
+             "bool" : {
+
+               "must_not" : {
+                 "term" : {
+                   "delFlag" : true
+                 }
+               }
+             }
+           }
+}
+###
+POST 192.168.5.205:9200/financial_prd/Daily/4YWHGRRBZR/_update
+Content-Type: application/json
+
+{"doc" : {
+        "workDescription": "每日早晨会"
+    }
+}
+###
+#POST 192.168.5.205:9200/financial/project/_search
+POST 192.168.5.205:19200/financial_prd/project/_search
+Content-Type: application/json
+
+{"query" : {
+  "bool" : {
+    "must" : [ {
+      "term" : {
+        "projectYear" : 2020
+      }
+    }, {
+      "term" : {
+        "projectType" : 0
+      }
+    }, {
+      "terms" : {
+        "budgetId" : [ "LAHPU9AATE", "LRKPUXSRYU", "ZCUJKT69N4", "KY3FGQ6G82", "Q8MDBECYZ6", "WGWA4U92AE", "NZPB54BE3E", "EYYDUCRHWZ", "8UPVXAKS3G", "QY3HSVR336", "CYHD5HVUA8", "RG3SNX6FAC", "9WAHRL9LP8", "496BDTR84G", "L6TD8S9N7Z", "77X6HA94V9", "L4K4G7D9RY", "9V3P3HBP6A", "AYB3E8DX7Q", "B9P2ZS2TF2", "7FA3HCAMK4", "XPG8HP6P3R", "4HSVGKVDAY", "YG989GB3BR", "UQDUFXTGEE", "TLVG7NP7Z7", "Y6WCHDVRLN", "Q7ZSSQ8WQZ", "9EBK5ZKDYN", "NB6LM2R3SZ", "32LHVKQDDS", "GGPUKDDJMJ", "FESK7P4WWG", "MS7GMXLACY", "34F4D75HFC", "D75H4AYY3W", "7B588S4K95", "D4TN3WDMXH", "VQG7R435HU", "NYV6GJQRS7", "68ETMSN84D", "NF7K73HKSK", "ZQ7EUJFFEQ", "YGDJV4VWJP", "KXZD6C2MD3", "BTJFMGPSGQ", "4H5SGJLZDC", "SR965A6F4E", "F4PBU2A4WA", "CLMC9V83AF", "UCLFLJQGVN", "T8RT8T784L", "66QNN27Y96", "BY3WSZRNDF", "7W2PZHKSFW", "C32Y2K8ZMD", "26XV74ZQ5D", "2CPPU5ETNH", "35H2XP8YST", "3F8DYGK826", "EQXQC6YYEN", "Z3R393VHT8", "HT6DQXR2FD", "ZUCKXCU2PQ", "4MKQ2RNHMZ", "W6VASDDZJ4", "XCRLQH6NR8", "P7UKZBH9E5", "CFXFNSGL3K", "RDEYNEAUAE", "SLFZYFBY36", "PBMRYYZLL2", "ZT6AF5YZUN", "QVFP8P864X", "VQ3QS3KB7J", "4MGRNGD2BV", "WRRHX6QKH9", "YCP9559JBP", "UVS2WWJ3TR", "AN8M22SVZJ", "GW5SSVC9P6", "YZU76KSQDE", "3QJ8ZMUB9P", "ZHX8PTH6BC", "CAYWFYJW6G", "BRLS53CB49", "92F6SDURKM", "GZQ4EJYW34", "UPFNZR3WGG", "K4EZ4W8KXG", "CLMQSRU5RY", "PBUGM4D3W4", "X2BBYDMQXF", "VYTZNP4JD4" ]
+      }
+    } ],
+    "must_not" : {
+      "term" : {
+        "delFlag" : true
+      }
+    }
+  }
+},
+  "from": 0,
+  "size": 0,
+  "aggs": {
+    "partyB": {
+      "terms": {
+        "field": "business"
+      }
+    }
+  }
+}
+###
+POST 192.168.5.205:19200/financial_prd/project/_search?size=10000
+Content-Type: application/json
+
+{
+  "query":{"bool" : {
+    "must" : [ {
+      "term" : {
+        "projectType" : 0
+      }
+    }, {
+      "terms" : {
+        "budgetId" : [ "LAHPU9AATE", "LRKPUXSRYU", "ZCUJKT69N4", "KY3FGQ6G82", "Q8MDBECYZ6", "WGWA4U92AE", "NZPB54BE3E", "EYYDUCRHWZ", "8UPVXAKS3G", "QY3HSVR336", "CYHD5HVUA8", "RG3SNX6FAC", "9WAHRL9LP8", "496BDTR84G", "L6TD8S9N7Z", "77X6HA94V9", "L4K4G7D9RY", "9V3P3HBP6A", "AYB3E8DX7Q", "B9P2ZS2TF2", "7FA3HCAMK4", "XPG8HP6P3R", "4HSVGKVDAY", "YG989GB3BR", "UQDUFXTGEE", "TLVG7NP7Z7", "Y6WCHDVRLN", "Q7ZSSQ8WQZ", "9EBK5ZKDYN", "NB6LM2R3SZ", "32LHVKQDDS", "GGPUKDDJMJ", "FESK7P4WWG", "MS7GMXLACY", "34F4D75HFC", "D75H4AYY3W", "7B588S4K95", "D4TN3WDMXH", "VQG7R435HU", "NYV6GJQRS7", "68ETMSN84D", "NF7K73HKSK", "ZQ7EUJFFEQ", "YGDJV4VWJP", "KXZD6C2MD3", "BTJFMGPSGQ", "4H5SGJLZDC", "SR965A6F4E", "F4PBU2A4WA", "CLMC9V83AF", "UCLFLJQGVN", "T8RT8T784L", "66QNN27Y96", "BY3WSZRNDF", "7W2PZHKSFW", "C32Y2K8ZMD", "26XV74ZQ5D", "2CPPU5ETNH", "35H2XP8YST", "3F8DYGK826", "EQXQC6YYEN", "Z3R393VHT8", "HT6DQXR2FD", "ZUCKXCU2PQ", "4MKQ2RNHMZ", "W6VASDDZJ4", "XCRLQH6NR8", "P7UKZBH9E5", "CFXFNSGL3K", "RDEYNEAUAE", "SLFZYFBY36", "PBMRYYZLL2", "ZT6AF5YZUN", "QVFP8P864X", "VQ3QS3KB7J", "4MGRNGD2BV", "WRRHX6QKH9", "YCP9559JBP", "UVS2WWJ3TR", "AN8M22SVZJ", "GW5SSVC9P6", "YZU76KSQDE", "3QJ8ZMUB9P", "ZHX8PTH6BC", "CAYWFYJW6G", "BRLS53CB49", "92F6SDURKM", "GZQ4EJYW34", "UPFNZR3WGG", "K4EZ4W8KXG", "CLMQSRU5RY", "PBUGM4D3W4", "X2BBYDMQXF", "VYTZNP4JD4" ]
+      }
+    } ],
+    "must_not" : [ {
+      "term" : {
+        "delFlag" : true
+      }
+    }, {
+      "bool" : {
+        "should" : [ {
+          "term" : {
+            "contractNo" : ""
+          }
+        }, {
+          "bool" : {
+            "must_not" : {
+              "exists" : {
+                "field" : "contractNo"
+              }
+            }
+          }
+        } ]
+      }
+    } ]
+  }
+  }
+}
+####
+POST 192.168.5.205:19300/financial_prd/project/_doc
+Content-Type: application/json
+{}
+###
+#POST 192.168.5.205:9200/financial/project/_search
+POST 192.168.5.205:9200/financial/project/_search
+Content-Type: application/json
+
+{"query" : {
+             "bool" : {
+               "must" : [ {
+                 "bool" : {
+                   "should" : [ {
+                     "term" : {
+                       "name" : "合同名称1xz21"
+                     }
+                   }, {
+                     "terms" : {
+                       "memberNames" : [ "xz2" ]
+                     }
+                   } ]
+                 }
+               }, {
+                 "bool" : {
+                   "should" : [ {
+                     "terms" : {
+                       "projectLeaderId" : [ "N9PQK6QPHG" ]
+                     }
+                   }, {
+                     "terms" : {
+                       "projectMemberIds" : [ "N9PQK6QPHG" ]
+                     }
+                   } ]
+                 }
+               },{
+                                  "bool" : {
+                                    "should" : [ {
+                                      "term" : {
+                                        "projectType" : 0
+                                      }
+                                    } ]
+                                  }
+                                }],
+                                                 "must_not" : {
+                                                   "term" : {
+                                                     "delFlag" : true
+                                                   }
+                                                 }
+             }
+           }
+}
+###
+POST 192.168.5.205:9200/financial_prd/project/VCZAGXC5LV/_update
+Content-Type: application/json
+
+{"doc" : {
+         //"budgetId": "SH2FVFAKAU"
+         "delFlag" : true
+    }
+}
+###
+POST 192.168.5.205:9200/financial/project/B7YPGU49SX/_update
+Content-Type: application/json
+
+{"doc" : {
+          "budgetId": "MS7GMXLACY",
+          "budgetDomainId": "201811250003",
+          "budget": "CAGDS系统技术支持与推广",
+          "businessId": "AWgnL8ArRknjKpC4IgKd",
+         "business": "数据业务",
+         "startTime": 1546272000000,
+         "projectStartTime": 1546272000000,
+         "createTime": 1572413614436,
+         "modifyTime": 1572413614436,
+         "businessCreateUserId": "48Z6GKCD8R",
+         "contractAmount": 120000.0,
+         "contractAmountStr": "120000",
+         "projectBeginTime": 1546272000000,
+         "projectEndTime": 1577721600000
+    }
+}
+###
+ POST 192.168.5.205:9200/financial_prd/UserWithProjects/_search
+ Content-Type: application/json
+ ###
+ {"query" : {
+              "bool" : {
+                "must" : {
+                  "match" : {
+                   // "name" : "技术咨询服务合同"
+                  //"budgetId" : "VAALBWMD74"
+                  "id":"EKPBMKZ3TG"
+                  }
+                }
+ //               ,
+ //               "must_not" : {
+ //                 "term" : {
+ //                   "delFlag" : true
+ //                 }
+ //               }
+              }
+            }
+ }
+###
+POST 192.168.5.205:9200/financial_prd/project/_search
+Content-Type: application/json
+
+ {"query" : {
+              "bool" : {
+                "must" : {
+                  "match" : {
+                    "name" : "检测所报告管理平台-客车"
+                  //"budgetId" : "VAALBWMD74"
+                 // "id":"EKPBMKZ3TG"
+                  }
+                }
+ //               ,
+ //               "must_not" : {
+ //                 "term" : {
+ //                   "delFlag" : true
+ //                 }
+ //               }
+              }
+            }
+ }
+###
+POST 192.168.5.205:9200/financial_prd/UserWithProjects/5TTDW7VVHL/_update
+Content-Type: application/json
+
+{"doc" : {
+         "projectIds": [
+                     "U3A9FW8A8Q",
+                     "QWCHJF4LNQ",
+                     "UFD3U7RZTQ",
+                     "AXHJZL94V2",
+                     "JN4QHV8A2N",
+                     "E4HX97EGVS",
+                     "J5YHY4YNHB",
+                     "WACDG5VDJZ",
+                     "CUSY88TR49",
+                     "UWX6F9FVJG",
+                     "HDRCXQJK83",
+                     "5GJCUA6EDX",
+                     "5MRDF8SAXH",
+                     "MWJJM8XQYG",
+                     "Q3K9L6N84K",
+                     "MTPADKAB82",
+                     "BE26XNFXGB",
+                     "XHFHVNGXZQ",
+                     "U8KUUK49WT",
+                     "YXPGED88PK",
+                     "ARCGXW5TB5",
+                     "6CWLR76BQY",
+                     "CVEVS9REHF",
+                     "HEBZKZ4BVV",
+                     "XZTAKYAZ42",
+                     "7Y8VT4C7XL",
+                     "AZJR5QJ2S3",
+                     "RV5SE3F7VW",
+                     "YLESF3PNVY",
+                     "FJTCFLKMKN",
+                     "X3SDDSKEEA",
+                     "G45JSTF8A5",
+                     "4HDGC83GBL",
+                     "K9RLCMPVWN",
+                     "E5VZ959TPM",
+                     "ZE5BZV5BWN",
+                     "F95AJGHHWP",
+                     "BAT39W2Z3D",
+                     "42RQW4Y646",
+                     "NSPEPLK8MA",
+                     "H5FQK9VHWA",
+                     "UWFQ3ELX8Y",
+                     "DBCEM8HSRN",
+                     "5UJVYHRRJE",
+                     "ZJRFYTY5YV",
+                     "MM9PHE3P46",
+                     "2425NHTTFV",
+                     "YDM4ZVDJKH",
+                     "3EBRQK7ZGS",
+                     "HQHTQNFA79",
+                     "C555BGMQN8",
+                     "QTA553FCT8",
+                     "NLG28Y8BTS",
+                     "PWDJBMB3R6",
+                     "2VCZ9E7SLA",
+                     "8Y48DUA4MF",
+                     "JUFHVKXBHV",
+                     "KYDRLWXR7B",
+                     "J2ERGAGK5M",
+                     "NFGKS8QRCU",
+                     "EGVTYXCHPN",
+                     "N34PDJBNDM",
+                     "L288NSK5TN",
+                     "XJTE5LL3RT",
+                     "ZEUNMDHGES",
+                     "EBQ4FQ2V7P",
+                     "XJMQHT4UBQ",
+                     "M6JLDJ7CXH",
+                     "Q9V7YX2ZPA",
+                     "PT9J2FYD6H",
+                     "WDZY8W4KHF",
+                     "8EAVZDFKVV",
+                     "UGHN4HXJ93",
+                     "5ZWEACLRWT",
+                     "BCDNSGXENP",
+                     "VFUV2P5K5N",
+                     "8TPGA3Y9JZ",
+                     "M8EV2S5G7H",
+                     "CS8J9J76CB",
+                     "7D2KNPNX92",
+                     "LJ5M85Y2BJ",
+                     "2M53SF93NN",
+                     "FT26B36ZDW",
+                     "9AC3S2Q6MW",
+                     "EN7LUKCDTE",
+                     "ZSAQYE37UY",
+                     "R8Y6WD8YM8",
+                     "M2U4UMYTYT",
+                     "P7YTPUV7CQ",
+                     "6UZ6Y46M3K",
+                     "VM4YPZMF35",
+                     "X6VXDYUFNR",
+                     "TNP9V8TV8L",
+                     "5GTEVQJ4CM",
+                     "WYGDD3L9TU",
+                     "6NZ95ZGZKB",
+                     "AX3KXFKL5E",
+                     "97N9EPSR4J",
+                     "MSWRBDFA2M",
+                     "7BT6UBUEPS",
+                     "AMLV9T88VX",
+                     "PERBU7CFU8",
+                     "JAENK8LVSB",
+                     "6FFXMT2T5M",
+                     "YPG4URAPM5",
+                     "3ELM23UJ2F",
+                     "26CNADVJU3",
+                     "83R85DF9WG",
+                     "2UCS8MYXF4",
+                     "2T8F7QZD87",
+                     "RYJ3W9K6PD",
+                     "N86895PXKS",
+                     "BSC47PWZJZ",
+                     "7EU8RVAL7N",
+                     "L4VJUEGE8X",
+                     "J5QDHPSTMG",
+                     "Y7C2UDVPUL",
+                     "TQYMFWXFPU",
+                     "LYKUL7Z7GG",
+                     "RDEMEKMAJQ",
+                     "D782WCNTK3",
+                     "7C6SDP52F4"
+                   ]
+         //"delFlag" : true
+    }
+}
+###
+POST 192.168.5.205:9200/financial/UserWithProjects/_search
+Content-Type: application/json
+
+{"query" : {
+             "bool" : {
+               "must" : {
+                 "match" : {
+                  // "name" : "技术咨询服务合同"
+                 //"budgetId" : "VAALBWMD74"
+                 "userId":"6WN4K7ULXV"
+                 }
+               }
+//               ,
+//               "must_not" : {
+//                 "term" : {
+//                   "delFlag" : true
+//                 }
+//               }
+             }
+           }
+}
+###
+DELETE 192.168.5.205:9200/financial/project/T8CQHMR67Q
+Content-Type: application/json
+
+###POST 192.168.5.205:9200/financial_prd/project/_search
+POST 192.168.5.205:9200/financial_prd/project/_search
+Content-Type: application/json
+
+{"query" : {
+             "bool" : {
+
+               "must_not" : [  {
+                 "exists" : {
+                   "field" : "budgetId"
+                 }
+               } ]
+
+             }
+           }
+}
+###
+POST 192.168.5.205:9200/financial/childtask/_search
+Content-Type: application/json
+###
+{"query" : {
+             "bool" : {
+               "must" : {
+                 "match" : {
+                   //"name" : "型式认证技术参数管理系统技术开发合同"
+                 //"budgetId" : "CKX7KPCRQX"
+                 "projectId":"T8CQHMR67Q"
+                 }
+               }
+//               ,
+//               "must_not" : {
+//                 "term" : {
+//                   "delFlag" : true
+//                 }
+//               }
+             }
+           }
+}
+###
+POST 192.168.5.205:9200/financial/Task/cc10cbc8-9415-4bf2-b83c-cbb49d26f99a/_update
+Content-Type: application/json
+
+{"doc" : {
+        "budgetId": "LGKG8MLE2A"
+       //"projectId":"EGW6WH54D4"
+    }
+}
+###
+DELETE 192.168.5.205:9200/financial/Task/_search
+
+###
+POST 192.168.5.205:9200/financial/budget/_search
+Content-Type: application/json
+
+{"query" : {
+             "bool" : {
+               "must" : {
+                 "match" : {
+                   "name" : "测完就删"
+                 }
+               }
+             }
+           }
+}
+###
+POST 192.168.5.205:9200/financial/UserWithProjects/_mappings
+Content-Type: application/json
+
+{
+"UserWithProjects": {
+        "properties": {
+          "businessIds": {
+            "type": "string"
+          },
+          "childTaskIds": {
+            "type": "string"
+          },
+          "projectIds": {
+            "type": "string"
+          },
+          "taskIds": {
+            "type": "string",
+            "index": "not_analyzed"
+          },
+          "userId": {
+            "type": "string"
+          }
+        }
+      }
+}
+###
+GET 192.168.5.205:9200/financial/_search
+###
+POST 192.168.5.205:9200/financial/businessStatistics
+Content-Type: application/json
+###
+{
+          "id": "F34CLUWXWS",
+          "businessId": "AWGD7AAMF4",
+          "projectAllWorkTime": 4.0,
+          "projectStatistics": [
+            {
+              "id": "QLA467CLUW",
+              "name": "汽车零部件数据业务模式研究",
+              "workTime": 4.0
+            }
+          ],
+          "type": "week"
+        }
+###
+POST 192.168.5.205:19200/financial/Task/_mappings
+Content-Type: application/json
+
+{   "Task": {
+        "properties": {
+            "priority": {
+                "type": "string",
+                "index": "not_analyzed"
+            }
+        }
+    }
+}
+###
+POST 192.168.5.205:19200/financial/business
+Content-Type: application/json
+
+//{   "id": "AWg1JgkcbX48KBo7TRSM",
+//    "name": "外部架构业务",
+//    "createTime": 1547079911700,
+//    "modifyTime": 1547102266623
+//}
+//{   "id": "AWgrAb2EbX48KBo7TRRn",
+//    "name": "智能业务",
+//    "createTime": 1546909760894,
+//    "modifyTime": 1551666132590
+//}
+//{   "id": "AWgnL_YcRknjKpC4IgKf",
+//    "name": "汽车业务",
+//    "createTime": 1546845681180,
+//    "modifyTime": 1546845681180
+//}
+//{   "id": "AWgnL9WLRknjKpC4IgKe",
+//    "name": "咨询业务",
+//    "createTime": 1546845672842,
+//    "modifyTime": 1546845672842
+//}
+{   "id": "AWgnL8ArRknjKpC4IgKd",
+    "name": "数据业务",
+    "createTime": 1546845667371,
+    "modifyTime": 1546845667371
+}
+//{   "id": "AWgnL6uPRknjKpC4IgKc",
+//    "name": "软件业务",
+//    "createTime": 1546845662094,
+//    "modifyTim/{   "id": "AWgnL5McRknjKpC4IgKb",
+                //    "name": "综合业务",
+                //    "createTime": 1546845655806,
+                //    "modifyTime": 1546845655806
+                //}
+
+                ###e": 1546845662094
+//}
+/

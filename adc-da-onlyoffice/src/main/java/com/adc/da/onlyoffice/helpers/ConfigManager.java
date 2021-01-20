@@ -1,0 +1,64 @@
+/*
+ *
+ * (c) Copyright Ascensio System Limited 2010-2018
+ *
+ * The MIT License (MIT)
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+*/
+
+
+package com.adc.da.onlyoffice.helpers;
+
+import java.io.InputStream;
+import java.util.Properties;
+
+public class ConfigManager {
+
+    private static Properties properties;
+
+    private ConfigManager(){
+
+    }
+
+    static {
+        init();
+    }
+
+    private static void init() {
+        try {
+            properties = new Properties();
+            Thread localThread = Thread.currentThread();
+            InputStream stream = localThread.getContextClassLoader().getResourceAsStream("settings.properties");
+            properties.load(stream);
+        }
+        catch (Exception ex) {
+            properties = null;
+        }
+    }
+
+    public static String getProperty(String name) {
+        if (properties == null) {
+            return "";
+        }
+        String property = properties.getProperty(name);
+        return property == null ? "" : property;
+    }
+}

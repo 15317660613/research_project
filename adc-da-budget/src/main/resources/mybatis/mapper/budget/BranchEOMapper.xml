@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.budget.dao.BranchDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.budget.entity.BranchEO" >
+    <id column="id" property="id" />
+    <result column="branch_name" property="branchName" />
+  </resultMap>
+
+  <select id="queryAll" resultMap="BaseResultMap">
+      select id, branch_name from BRANCH
+  </select>
+
+</mapper>

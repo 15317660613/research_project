@@ -1,0 +1,2244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.project.dao.ProjectDataEODao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="com.adc.da.research.project.entity.ProjectDataEO">
+        <id column="id" property="id"/>
+        <result column="research_target" property="researchTarget"/>
+        <result column="research_content" property="researchContent"/>
+        <result column="project_code" property="projectCode"/>
+        <result column="project_name" property="projectName"/>
+        <result column="project_type_id" property="projectTypeId"/>
+        <result column="project_type_name" property="projectTypeName"/>
+        <result column="project_source" property="projectSource"/>
+        <result column="project_class" property="projectClass"/>
+        <result column="project_leader" property="projectLeader"/>
+        <result column="technical_director" property="technicalDirector"/>
+        <result column="subject_director" property="subjectDirector"/>
+        <result column="undertaking_id" property="undertakingId"/>
+        <result column="undertaking_name" property="undertakingName"/>
+        <!--<result column="company_name" property="reportingUnitId" />-->
+        <!--申报单位-->
+        <result column="reporting_unit_name" property="reportingUnitName"/>
+        <result column="reporting_unit_id" property="reportingUnitId"/>
+        <result column="lead_unit" property="leadUnit"/>
+        <result column="participate_unit" property="participateUnit"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="dept_name" property="deptName"/>
+        <result column="total_funding" property="totalFunding"/>
+        <result column="expected_expenditure" property="expectedExpenditure"/>
+        <result column="state_funding" property="stateFunding"/>
+        <result column="center_budget_apply" property="centerBudgetApply"/>
+        <result column="self_funded" property="selfFunded"/>
+        <result column="other_funded" property="otherFunded"/>
+        <result column="project_status" property="projectStatus"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="application_time" property="applicationTime"/>
+        <result column="project_time" property="projectTime"/>
+        <result column="change_time" property="changeTime"/>
+        <result column="project_applicant_id" property="projectApplicantId"/>
+        <result column="project_applicant_name" property="projectApplicantName"/>
+        <result column="project_overview" property="projectOverview"/>
+        <result column="research_indicators" property="researchIndicators"/>
+        <result column="remark" property="remark"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="ext1" property="ext1"/>
+        <result column="ext2" property="ext2"/>
+        <result column="ext3" property="ext3"/>
+        <result column="ext4" property="ext4"/>
+        <result column="ext5" property="ext5"/>
+        <result column="stage_name" property="stageName"/>
+        <result column="stage_id" property="stageId"/>
+        <result column="implementation_id" property="implementationId"/>
+        <result column="reasons_rejection" property="reasonsRejection"/>
+
+        <result column="financial_document" property="financialDocument"/>
+        <result column="property_changes" property="propertyChanges"/>
+        <result column="change_status" property="changeStatus"/>
+        <result column="fund_template_id" property="fundTemplateId"/>
+        <result column="contract_template" property="contractTemplate"/>
+    </resultMap>
+
+    <resultMap id="BaseFundsResultMap" type="com.adc.da.research.project.entity.ProjectDataEO">
+        <id column="id" property="id"/>
+        <result column="research_target" property="researchTarget"/>
+        <result column="research_content" property="researchContent"/>
+        <result column="project_code" property="projectCode"/>
+        <result column="project_name" property="projectName"/>
+        <result column="project_type_id" property="projectTypeId"/>
+        <result column="project_type_name" property="projectTypeName"/>
+        <result column="project_source" property="projectSource"/>
+        <result column="project_class" property="projectClass"/>
+        <result column="project_leader" property="projectLeader"/>
+        <result column="technical_director" property="technicalDirector"/>
+        <result column="subject_director" property="subjectDirector"/>
+        <result column="undertaking_id" property="undertakingId"/>
+        <result column="undertaking_name" property="undertakingName"/>
+        <result column="BUDGETSUM" property="budgetsum" />
+        <!--<result column="company_name" property="reportingUnitId" />-->
+        <!--申报单位-->
+        <result column="reporting_unit_name" property="reportingUnitName"/>
+        <result column="reporting_unit_id" property="reportingUnitId"/>
+        <result column="lead_unit" property="leadUnit"/>
+        <result column="participate_unit" property="participateUnit"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="dept_name" property="deptName"/>
+        <result column="total_funding" property="totalFunding"/>
+        <result column="expected_expenditure" property="expectedExpenditure"/>
+        <result column="state_funding" property="stateFunding"/>
+        <result column="center_budget_apply" property="centerBudgetApply"/>
+        <result column="self_funded" property="selfFunded"/>
+        <result column="other_funded" property="otherFunded"/>
+        <result column="project_status" property="projectStatus"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="application_time" property="applicationTime"/>
+        <result column="project_time" property="projectTime"/>
+        <result column="change_time" property="changeTime"/>
+        <result column="project_applicant_id" property="projectApplicantId"/>
+        <result column="project_applicant_name" property="projectApplicantName"/>
+        <result column="project_overview" property="projectOverview"/>
+        <result column="research_indicators" property="researchIndicators"/>
+        <result column="remark" property="remark"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="ext1" property="ext1"/>
+        <result column="ext2" property="ext2"/>
+        <result column="ext3" property="ext3"/>
+        <result column="ext4" property="ext4"/>
+        <result column="ext5" property="ext5"/>
+        <result column="stage_name" property="stageName"/>
+        <result column="stage_id" property="stageId"/>
+        <result column="implementation_id" property="implementationId"/>
+        <result column="reasons_rejection" property="reasonsRejection"/>
+
+        <result column="financial_document" property="financialDocument"/>
+        <result column="property_changes" property="propertyChanges"/>
+        <result column="change_status" property="changeStatus"/>
+        <result column="fund_template_id" property="fundTemplateId"/>
+        <result column="contract_template" property="contractTemplate"/>
+    </resultMap>
+
+    <resultMap id="ProjectDataContractInfoMap" type="com.adc.da.research.project.entity.ProjectDataContractInfoEO">
+        <id column="id" property="id"/>
+        <result column="research_target" property="researchTarget"/>
+        <result column="research_content" property="researchContent"/>
+        <result column="project_code" property="projectCode"/>
+        <result column="project_name" property="projectName"/>
+        <result column="project_type_id" property="projectTypeId"/>
+        <result column="project_type_name" property="projectTypeName"/>
+        <result column="project_source" property="projectSource"/>
+        <result column="project_class" property="projectClass"/>
+        <result column="project_leader" property="projectLeader"/>
+        <result column="technical_director" property="technicalDirector"/>
+        <result column="subject_director" property="subjectDirector"/>
+        <result column="undertaking_id" property="undertakingId"/>
+        <result column="undertaking_name" property="undertakingName"/>
+        <!--<result column="company_name" property="reportingUnitId" />-->
+        <!--申报单位-->
+        <result column="reporting_unit_name" property="reportingUnitName"/>
+        <result column="reporting_unit_id" property="reportingUnitId"/>
+        <result column="lead_unit" property="leadUnit"/>
+        <result column="participate_unit" property="participateUnit"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="dept_name" property="deptName"/>
+        <result column="total_funding" property="totalFunding"/>
+        <result column="expected_expenditure" property="expectedExpenditure"/>
+        <result column="state_funding" property="stateFunding"/>
+        <result column="center_budget_apply" property="centerBudgetApply"/>
+        <result column="self_funded" property="selfFunded"/>
+        <result column="other_funded" property="otherFunded"/>
+        <result column="project_status" property="projectStatus"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="application_time" property="applicationTime"/>
+        <result column="project_time" property="projectTime"/>
+        <result column="change_time" property="changeTime"/>
+        <result column="project_applicant_id" property="projectApplicantId"/>
+        <result column="project_applicant_name" property="projectApplicantName"/>
+        <result column="project_overview" property="projectOverview"/>
+        <result column="research_indicators" property="researchIndicators"/>
+        <result column="remark" property="remark"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="ext1" property="ext1"/>
+        <result column="ext2" property="ext2"/>
+        <result column="ext3" property="ext3"/>
+        <result column="ext4" property="ext4"/>
+        <result column="ext5" property="ext5"/>
+        <result column="stage_name" property="stageName"/>
+        <result column="stage_id" property="stageId"/>
+        <result column="implementation_id" property="implementationId"/>
+        <result column="reasons_rejection" property="reasonsRejection"/>
+
+        <result column="project_id" property="projectId"/>
+        <result column="partya_name" property="partyaName"/>
+        <result column="partya_user" property="partyaUser"/>
+        <result column="partya_tel" property="partyaTel"/>
+        <result column="partya_email" property="partyaEmail"/>
+        <result column="partyb_name" property="partybName"/>
+        <result column="partyb_user" property="partybUser"/>
+        <result column="partyb_dept" property="partybDept"/>
+        <result column="partyb_tel" property="partybTel"/>
+        <result column="PARTYB_MOBILE" property="partybMobile"/>
+        <result column="partyb_email" property="partybEmail"/>
+        <result column="partyb_fax" property="partybFax"/>
+        <result column="partyc_name" property="partycName"/>
+        <result column="partyc_user" property="partycUser"/>
+        <result column="research_contact" property="researchContact"/>
+        <result column="partyc_tel" property="partycTel"/>
+        <result column="partyc_email" property="partycEmail"/>
+        <result column="partyc_fax" property="partycFax"/>
+    </resultMap>
+    <!-- RS_PROJECT_DATA table all fields -->
+    <sql id="Base_Column_List">
+     research_target, research_content, id, project_code, project_name, project_type_id, project_source, project_class,
+     project_leader, technical_director, subject_director, undertaking_id, reporting_unit_id, lead_unit, participate_unit,
+      dept_id, total_funding, expected_expenditure, state_funding, center_budget_apply, self_funded, other_funded, project_status,
+       start_time, end_time, application_time, project_time, change_time, project_applicant_id, project_applicant_name,
+        project_overview, research_indicators, remark, del_flag, ext1, ext2, ext3, ext4, ext5,reasons_rejection
+  </sql>
+    <sql id="Base_Column_All_List">
+    	id,project_code, project_name,project_type_id, project_source, project_class, project_leader, technical_director, subject_director, undertaking_id, reporting_unit_id, lead_unit, participate_unit, dept_id, total_funding, expected_expenditure, state_funding, center_budget_apply, self_funded, other_funded, project_status, start_time,end_time, application_time, project_time,change_time, project_applicant_id, project_applicant_name, project_overview, research_indicators,remark, del_flag, ext1,ext2, ext3, ext4,ext5,reasons_rejection ,stage_name , stage_id ,implementation_id , reporting_unit_name , dept_name , undertaking_name , project_type_name,financial_document,property_changes,change_status,fund_template_id,contract_template
+    </sql>
+
+    <sql id="Base_Column_AS_List">
+     pa.id, pa.project_code, pa.project_name, pa.project_type_id, pa.project_source, pa.project_class, pa.project_leader, pa.technical_director, pa.subject_director, pa.undertaking_id, pa.reporting_unit_id, pa.lead_unit, pa.participate_unit, pa.dept_id, pa.total_funding, pa.expected_expenditure, pa.state_funding, pa.center_budget_apply, pa.self_funded, pa.other_funded, pa.project_status, pa.start_time, pa.end_time, pa.application_time, pa.project_time, pa.change_time, pa.project_applicant_id, pa.project_applicant_name, pa.project_overview, pa.research_indicators, pa.remark, pa.del_flag, pa.ext1, pa.ext2, pa.ext3, pa.ext4, pa.ext5,pa.reasons_rejection,pa.research_target,pa.research_content,pa.financial_document,pa.property_changes,pa.change_status,pa.fund_template_id,pa.contract_template
+    </sql>
+    <sql id="Project_Data_Contract_Info">
+     co.project_id, co.partya_name, co.partya_user, co.partya_tel, co.partya_email, co.partyb_name, co.partyb_user, co.partyb_dept,
+     co.partyb_tel, co.PARTYB_MOBILE, co.partyb_email, co.partyb_fax, co.partyc_name, co.partyc_user, co.research_contact, co.partyc_tel,
+     co.partyc_email, co.partyc_fax
+    </sql>
+
+    <sql id="Base_Column_AS_RPD_List">
+      rpd.id  as   id,
+       rpd.research_target  as   research_target,
+      rpd.research_content  as   research_content,
+      rpd.project_code  as   project_code,
+      rpd.project_name  as  project_name ,
+      rpd.project_type_id  as  project_type_id ,
+      rpd.project_source  as  project_source ,
+      rpd.project_class  as  project_class ,
+      rpd.project_leader  as  project_leader ,
+      rpd.technical_director  as  technical_director ,
+      rpd.subject_director  as  subject_director ,
+      rpd.undertaking_id  as  undertaking_id ,
+      rpd.reporting_unit_id  as  reporting_unit_id ,
+      rpd.lead_unit  as  lead_unit ,
+      rpd.participate_unit  as  participate_unit ,
+      rpd.dept_id  as  dept_id ,
+      rpd.total_funding  as total_funding  ,
+      rpd.expected_expenditure  as expected_expenditure  ,
+      rpd.state_funding  as  state_funding ,
+      rpd.center_budget_apply  as  center_budget_apply ,
+      rpd.self_funded  as  self_funded ,
+      rpd.other_funded  as  other_funded ,
+      rpd.project_status  as  project_status ,
+      rpd.start_time  as  start_time ,
+      rpd.end_time  as  end_time ,
+      rpd.application_time  as  application_time ,
+      rpd.project_time  as  project_time ,
+      rpd.change_time  as  change_time ,
+      rpd.project_applicant_id  as  project_applicant_id ,
+      rpd.project_applicant_name  as  project_applicant_name ,
+      rpd.project_overview  as  project_overview ,
+      rpd.research_indicators  as  research_indicators ,
+      rpd.remark  as  remark ,
+      rpd.del_flag  as  del_flag ,
+      rpd.ext1  as  ext1 ,
+      rpd.ext2  as  ext2 ,
+      rpd.ext3  as  ext3 ,
+      rpd.ext4  as  ext4 ,
+      rpd.ext5 as ext5
+  </sql>
+    <!-- 查询条件 -->
+    <sql id="Base_Where_AS_Clause">
+
+        <trim suffixOverrides=",">
+            <if test="researchTarget != null">
+                and pa.research_target ${researchTargetOperator} #{researchTarget}
+            </if>
+            <if test="researchContent != null">
+                and pa.research_content ${researchContentOperator} #{researchContent}
+            </if>
+            <if test="id != null">
+                and pa.id ${idOperator} #{id}
+            </if>
+            <if test="projectCode != null">
+
+                and lower (pa.project_code) LIKE lower (CONCAT('%',CONCAT(#{projectCode},'%')))
+            </if>
+            <if test="projectName != null">
+                and lower (pa.project_name) LIKE lower (CONCAT('%',CONCAT(#{projectName},'%')))
+            </if>
+            <if test="projectTypeId != null">
+                and pa.project_type_id LIKE CONCAT('%',CONCAT(#{projectTypeId},'%'))
+            </if>
+            <if test="projectSource != null">
+                and lower (pa.project_source) LIKE CONCAT('%',CONCAT(#{projectSource},'%'))
+            </if>
+            <if test="projectClass != null">
+                and lower (pa.project_class) LIKE CONCAT('%',CONCAT(#{projectClass},'%'))
+            </if>
+            <if test="projectLeader != null">
+                and pa.project_leader ${projectLeaderOperator} #{projectLeader}
+            </if>
+            <if test="technicalDirector != null">
+                and pa.technical_director LIKE CONCAT('%',CONCAT(#{technicalDirector},'%'))
+            </if>
+            <if test="subjectDirector != null">
+                and pa.subject_director ${subjectDirectorOperator} #{subjectDirector}
+            </if>
+            <if test="undertakingId != null">
+                and pa.undertaking_id LIKE CONCAT('%',CONCAT(#{undertakingId},'%'))
+            </if>
+            <if test="reportingUnitId != null">
+                and lower (pa.reporting_unit_id) LIKE CONCAT('%',CONCAT(#{reportingUnitId},'%'))
+            </if>
+            <if test="reportingUnitName != null">
+                and rsc.company_name LIKE CONCAT('%',CONCAT(#{reportingUnitName},'%'))
+            </if>
+            <if test="leadUnit != null">
+                and pa.lead_unit ${leadUnitOperator} #{leadUnit}
+            </if>
+            <if test="participateUnit != null">
+                and pa.participate_unit ${participateUnitOperator} #{participateUnit}
+            </if>
+            <if test="deptId != null">
+                and pa.dept_id ${deptIdOperator} #{deptId}
+            </if>
+            <if test="budgetsumBefore != null">
+                and  pa.budgetsum &gt;= #{budgetsumBefore}
+            </if>
+            <if test="budgetsumEnd != null">
+                and  pa.budgetsum &lt;= #{budgetsumEnd}
+            </if>
+            <if test="totalFundingStart != null">
+                and pa.total_funding &gt;=  #{totalFundingStart}
+            </if>
+            <if test="totalFundingEnd != null">
+                and pa.total_funding &lt;= #{totalFundingEnd}
+            </if>
+            <if test="expectedExpenditureBefore != null">
+                and pa.expected_expenditure &gt;= #{expectedExpenditureBefore}
+            </if>
+            <if test="expectedExpenditureEnd != null">
+                and pa.expected_expenditure &lt;= #{expectedExpenditureEnd}
+            </if>
+            <if test="stateFundingBefore != null">
+                and pa.state_funding &gt;= #{stateFundingBefore}
+            </if>
+            <if test="stateFundingEnd != null">
+                and pa.state_funding &lt;= #{stateFundingEnd}
+            </if>
+            <if test="centerBudgetApplyBefore != null">
+                and pa.center_budget_apply &gt;= #{centerBudgetApplyBefore}
+            </if>
+            <if test="centerBudgetApplyEnd != null">
+                and pa.center_budget_apply &lt;= #{centerBudgetApplyEnd}
+            </if>
+            <if test="selfFundedBefore != null">
+                and pa.self_funded &gt;= #{selfFundedBefore}
+            </if>
+            <if test="selfFundedEnd != null">
+                and pa.self_funded &lt;= #{selfFundedEnd}
+            </if>
+            <if test="otherFundedBefore != null">
+                and pa.other_funded &gt;= #{otherFundedBefore}
+            </if>
+            <if test="otherFundedEnd != null">
+                and pa.other_funded &lt;= #{otherFundedEnd}
+            </if>
+            <if test="projectStatus != null">
+                and pa.project_status ${projectStatusOperator} #{projectStatus}
+            </if>
+            <if test="startTime != null">
+                and pa.start_time ${startTimeOperator} #{startTime}
+            </if>
+            <if test="startTime1 != null">
+                and pa.start_time &gt;= #{startTime1}
+            </if>
+            <if test="startTime2 != null">
+                and pa.start_time &lt;= #{startTime2}
+            </if>
+            <if test="endTime != null">
+                and pa.end_time ${endTimeOperator} #{endTime}
+            </if>
+            <if test="endTime1 != null">
+                and pa.end_time &gt;= #{endTime1}
+            </if>
+            <if test="endTime2 != null">
+                and pa.end_time &lt;= #{endTime2}
+            </if>
+            <if test="applicationTime != null">
+                and pa.application_time ${applicationTimeOperator} #{applicationTime}
+            </if>
+            <if test="applicationTime1 != null">
+                and pa.application_time &gt;= to_date(#{applicationTime1},'yyyy-MM-dd')
+            </if>
+            <if test="applicationTime2 != null">
+                and pa.application_time &lt;= to_date(#{applicationTime2},'yyyy-MM-dd')
+            </if>
+            <if test="projectTime != null">
+                and pa.project_time ${projectTimeOperator} #{projectTime}
+            </if>
+            <if test="projectTime1 != null">
+                and pa.project_time &gt;= #{projectTime1}
+            </if>
+            <if test="projectTime2 != null">
+                and pa.project_time &lt;= #{projectTime2}
+            </if>
+            <if test="changeTime != null">
+                and pa.change_time ${changeTimeOperator} #{changeTime}
+            </if>
+            <if test="changeTime1 != null">
+                and pa.change_time &gt;= #{changeTime1}
+            </if>
+            <if test="changeTime2 != null">
+                and pa.change_time &lt;= #{changeTime2}
+            </if>
+            <if test="projectApplicantId != null">
+                and pa.project_applicant_id ${projectApplicantIdOperator} #{projectApplicantId}
+            </if>
+            <if test="projectApplicantName != null">
+                and pa.project_applicant_name ${projectApplicantNameOperator} #{projectApplicantName}
+            </if>
+            <if test="projectOverview != null">
+                and pa.project_overview ${projectOverviewOperator} #{projectOverview}
+            </if>
+            <if test="researchIndicators != null">
+                and pa.research_indicators ${researchIndicatorsOperator} #{researchIndicators}
+            </if>
+            <if test="remark != null">
+                and pa.remark ${remarkOperator} #{remark}
+            </if>
+            and pa.del_flag = 0
+            <if test="ext1 != null">
+                and pa.ext1 ${ext1Operator} #{ext1}
+            </if>
+            <if test="ext2 != null">
+                and pa.ext2 ${ext2Operator} #{ext2}
+            </if>
+            <if test="ext3 != null">
+                and pa.ext3 ${ext3Operator} #{ext3}
+            </if>
+            <if test="ext4 != null">
+                and pa.ext4 ${ext4Operator} #{ext4}
+            </if>
+            <if test="ext5 != null">
+                and pa.ext5 ${ext5Operator} #{ext5}
+            </if>
+            <if test="changeStatus != null">
+                and pa.change_status LIKE CONCAT('%',CONCAT(#{changeStatus},'%'))
+            </if>
+            <if test="propertyChanges != null">
+                and pa.property_changes LIKE CONCAT('%',CONCAT(#{propertyChanges},'%'))
+            </if>
+            <if test="stageName != null">
+                and prs.stage_name LIKE CONCAT('%',CONCAT(#{stageName},'%'))
+            </if>
+           <!-- <if test="expertUserId != null">
+                and rsj.expert_user_id LIKE CONCAT('%',CONCAT(#{expertUserId},'%'))
+            </if>-->
+            and imp.status = 1
+        </trim>
+    </sql>
+
+    <!--联合RS_CONTRACT_INFO查询条件-->
+    <sql id="Base_Where_ConTract_info">
+        <trim suffixOverrides=",">
+            <if test="researchTarget != null">
+                and pa.research_target ${researchTargetOperator} #{researchTarget}
+            </if>
+            <if test="researchContent != null">
+                and pa.research_content ${researchContentOperator} #{researchContent}
+            </if>
+            <if test="id != null">
+                and pa.id ${idOperator} #{id}
+            </if>
+            <if test="projectCode != null">
+
+                and lower (pa.project_code) LIKE CONCAT('%',CONCAT(#{projectCode},'%'))
+            </if>
+            <if test="projectName != null">
+                and lower (pa.project_name) LIKE CONCAT('%',CONCAT(#{projectName},'%'))
+            </if>
+            <if test="projectTypeId != null">
+                and pa.project_type_id LIKE CONCAT('%',CONCAT(#{projectTypeId},'%'))
+            </if>
+            <if test="projectSource != null">
+                and lower (pa.project_source) LIKE CONCAT('%',CONCAT(#{projectSource},'%'))
+            </if>
+            <if test="projectClass != null">
+                and lower (pa.project_class) LIKE CONCAT('%',CONCAT(#{projectClass},'%'))
+            </if>
+            <if test="projectLeader != null">
+                and pa.project_leader ${projectLeaderOperator} #{projectLeader}
+            </if>
+            <if test="technicalDirector != null">
+                and pa.technical_director LIKE CONCAT('%',CONCAT(#{technicalDirector},'%'))
+            </if>
+            <if test="subjectDirector != null">
+                and pa.subject_director ${subjectDirectorOperator} #{subjectDirector}
+            </if>
+            <if test="undertakingId != null">
+                and pa.undertaking_id LIKE CONCAT('%',CONCAT(#{undertakingId},'%'))
+            </if>
+            <if test="reportingUnitId != null">
+                and lower (pa.reporting_unit_id) LIKE CONCAT('%',CONCAT(#{reportingUnitId},'%'))
+            </if>
+            <if test="reportingUnitName != null">
+                and rsc.company_name LIKE CONCAT('%',CONCAT(#{reportingUnitName},'%'))
+            </if>
+            <if test="leadUnit != null">
+                and pa.lead_unit ${leadUnitOperator} #{leadUnit}
+            </if>
+            <if test="participateUnit != null">
+                and pa.participate_unit ${participateUnitOperator} #{participateUnit}
+            </if>
+            <if test="deptId != null">
+                and pa.dept_id ${deptIdOperator} #{deptId}
+            </if>
+            <if test="totalFunding != null">
+                and pa.total_funding ${totalFundingOperator} #{totalFunding}
+            </if>
+            <if test="expectedExpenditureBefore != null">
+                and pa.expected_expenditure &gt;= #{expectedExpenditureBefore}
+            </if>
+            <if test="expectedExpenditureEnd != null">
+                and pa.expected_expenditure &lt;= #{expectedExpenditureEnd}
+            </if>
+            <if test="stateFundingBefore != null">
+                and pa.state_funding &gt;= #{stateFundingBefore}
+            </if>
+            <if test="stateFundingEnd != null">
+                and pa.state_funding &lt;= #{stateFundingEnd}
+            </if>
+            <if test="centerBudgetApplyBefore != null">
+                and pa.center_budget_apply &gt;= #{centerBudgetApplyBefore}
+            </if>
+            <if test="centerBudgetApplyEnd != null">
+                and pa.center_budget_apply &lt;= #{centerBudgetApplyEnd}
+            </if>
+            <if test="selfFundedBefore != null">
+                and pa.self_funded &gt;= #{selfFundedBefore}
+            </if>
+            <if test="selfFundedEnd != null">
+                and pa.self_funded &lt;= #{selfFundedEnd}
+            </if>
+            <if test="otherFundedBefore != null">
+                and pa.other_funded &gt;= #{otherFundedBefore}
+            </if>
+            <if test="otherFundedEnd != null">
+                and pa.other_funded &lt;= #{otherFundedEnd}
+            </if>
+            <if test="projectStatus != null">
+                and pa.project_status ${projectStatusOperator} #{projectStatus}
+            </if>
+            <if test="startTime != null">
+                and pa.start_time ${startTimeOperator} #{startTime}
+            </if>
+            <if test="startTime1 != null">
+                and pa.start_time &gt;= #{startTime1}
+            </if>
+            <if test="startTime2 != null">
+                and pa.start_time &lt;= #{startTime2}
+            </if>
+            <if test="endTime != null">
+                and pa.end_time ${endTimeOperator} #{endTime}
+            </if>
+            <if test="endTime1 != null">
+                and pa.end_time &gt;= #{endTime1}
+            </if>
+            <if test="endTime2 != null">
+                and pa.end_time &lt;= #{endTime2}
+            </if>
+            <if test="applicationTime != null">
+                and pa.application_time ${applicationTimeOperator} #{applicationTime}
+            </if>
+            <if test="applicationTime1 != null">
+                and pa.application_time &gt;= to_date(#{applicationTime1},'yyyy-MM-dd')
+            </if>
+            <if test="applicationTime2 != null">
+                and pa.application_time &lt;= to_date(#{applicationTime2},'yyyy-MM-dd')
+            </if>
+            <if test="projectTime != null">
+                and pa.project_time ${projectTimeOperator} #{projectTime}
+            </if>
+            <if test="projectTime1 != null">
+                and pa.project_time &gt;= #{projectTime1}
+            </if>
+            <if test="projectTime2 != null">
+                and pa.project_time &lt;= #{projectTime2}
+            </if>
+            <if test="changeTime != null">
+                and pa.change_time ${changeTimeOperator} #{changeTime}
+            </if>
+            <if test="changeTime1 != null">
+                and pa.change_time &gt;= #{changeTime1}
+            </if>
+            <if test="changeTime2 != null">
+                and pa.change_time &lt;= #{changeTime2}
+            </if>
+            <if test="projectApplicantId != null">
+                and pa.project_applicant_id ${projectApplicantIdOperator} #{projectApplicantId}
+            </if>
+            <if test="projectApplicantName != null">
+                and pa.project_applicant_name ${projectApplicantNameOperator} #{projectApplicantName}
+            </if>
+            <if test="projectOverview != null">
+                and pa.project_overview ${projectOverviewOperator} #{projectOverview}
+            </if>
+            <if test="researchIndicators != null">
+                and pa.research_indicators ${researchIndicatorsOperator} #{researchIndicators}
+            </if>
+            <if test="remark != null">
+                and pa.remark ${remarkOperator} #{remark}
+            </if>
+            and pa.del_flag = 0
+            <if test="ext1 != null">
+                and pa.ext1 ${ext1Operator} #{ext1}
+            </if>
+            <if test="ext2 != null">
+                and pa.ext2 ${ext2Operator} #{ext2}
+            </if>
+            <if test="ext3 != null">
+                and pa.ext3 ${ext3Operator} #{ext3}
+            </if>
+            <if test="ext4 != null">
+                and pa.ext4 ${ext4Operator} #{ext4}
+            </if>
+            <if test="ext5 != null">
+                and pa.ext5 ${ext5Operator} #{ext5}
+            </if>
+            <if test="stageName != null">
+                and prs.stage_name LIKE CONCAT('%',CONCAT(#{stageName},'%'))
+            </if>
+            <if test="partyaName != null">
+                and co.partya_name ${partyaNameOperator} #{partyaName}
+            </if>
+            <if test="partyaUser != null">
+                and co.partya_user ${partyaUserOperator} #{partyaUser}
+            </if>
+            <if test="partyaTel != null">
+                and co.partya_tel ${partyaTelOperator} #{partyaTel}
+            </if>
+            <if test="partyaEmail != null">
+                and co.partya_email ${partyaEmailOperator} #{partyaEmail}
+            </if>
+            <if test="partybName != null">
+                and co.partyb_name ${partybNameOperator} #{partybName}
+            </if>
+            <if test="partybUser != null">
+                and co.partyb_user ${partybUserOperator} #{partybUser}
+            </if>
+            <if test="partybDept != null">
+                and co.partyb_dept ${partybDeptOperator} #{partybDept}
+            </if>
+            <if test="partybTel != null">
+                and co.partyb_tel ${partybTelOperator} #{partybTel}
+            </if>
+            <if test="partybMobile != null">
+                and co.PARTYB_MOBILE ${partybMobileOperator} #{partybMobile}
+            </if>
+            <if test="partybEmail != null">
+                and co.partyb_email ${partybEmailOperator} #{partybEmail}
+            </if>
+            <if test="partybFax != null">
+                and co.partyb_fax ${partybFaxOperator} #{partybFax}
+            </if>
+            <if test="partycName != null">
+                and co.partyc_name ${partycNameOperator} #{partycName}
+            </if>
+            <if test="partycUser != null">
+                and co.partyc_user ${partycUserOperator} #{partycUser}
+            </if>
+            <if test="researchContact != null">
+                and co.research_contact ${researchContactOperator} #{researchContact}
+            </if>
+            <if test="partycTel != null">
+                and co.partyc_tel ${partycTelOperator} #{partycTel}
+            </if>
+            <if test="partycEmail != null">
+                and co.partyc_email ${partycEmailOperator} #{partycEmail}
+            </if>
+            <if test="partycFax != null">
+                and co.partyc_fax ${partycFaxOperator} #{partycFax}
+            </if>
+            and co.del_flag=0
+        </trim>
+    </sql>
+    <!--联合查询条件-->
+
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                and id ${idOperator} #{id}
+            </if>
+            <if test="projectCode != null">
+
+                and lower (project_code) LIKE lower(CONCAT('%',CONCAT(#{projectCode},'%')))
+            </if>
+            <if test="projectName != null">
+                and lower (project_name) LIKE CONCAT('%',CONCAT(#{projectName},'%'))
+            </if>
+            <if test="projectTypeId != null">
+                and lower (project_type_id) LIKE CONCAT('%',CONCAT(#{projectTypeId},'%'))
+            </if>
+            <if test="projectSource != null">
+                and lower (project_source) LIKE CONCAT('%',CONCAT(#{projectSource},'%'))
+            </if>
+            <if test="projectClass != null">
+                and lower (project_class) LIKE CONCAT('%',CONCAT(#{projectClass},'%'))
+            </if>
+            <if test="projectLeader != null">
+                and project_leader ${projectLeaderOperator} #{projectLeader}
+            </if>
+            <if test="technicalDirector != null">
+                and lower (technical_director) LIKE CONCAT('%',CONCAT(#{technicalDirector},'%'))
+            </if>
+            <if test="subjectDirector != null">
+                and subject_director ${subjectDirectorOperator} #{subjectDirector}
+            </if>
+            <if test="undertakingId != null">
+                and lower (undertaking_id) LIKE CONCAT('%',CONCAT(#{undertakingId},'%'))
+            </if>
+            <if test="reportingUnitId != null">
+                and lower (reporting_unit_id) LIKE CONCAT('%',CONCAT(#{reportingUnitId},'%'))
+            </if>
+            <if test="leadUnit != null">
+                and lead_unit ${leadUnitOperator} #{leadUnit}
+            </if>
+            <if test="participateUnit != null">
+                and participate_unit ${participateUnitOperator} #{participateUnit}
+            </if>
+            <if test="deptId != null">
+                and dept_id ${deptIdOperator} #{deptId}
+            </if>
+            <if test="totalFunding != null">
+                and total_funding ${totalFundingOperator} #{totalFunding}
+            </if>
+            <if test="expectedExpenditureBefore != null">
+                and expected_expenditure &gt;= #{expectedExpenditureBefore}
+            </if>
+            <if test="expectedExpenditureEnd != null">
+                and expected_expenditure &lt;= #{expectedExpenditureEnd}
+            </if>
+            <if test="stateFundingBefore != null">
+                and state_funding &gt;= #{stateFundingBefore}
+            </if>
+            <if test="stateFundingEnd != null">
+                and state_funding &lt;= #{stateFundingEnd}
+            </if>
+            <if test="centerBudgetApplyBefore != null">
+                and center_budget_apply &gt;= #{centerBudgetApplyBefore}
+            </if>
+            <if test="centerBudgetApplyEnd != null">
+                and center_budget_apply &lt;= #{centerBudgetApplyEnd}
+            </if>
+            <if test="selfFundedBefore != null">
+                and self_funded &gt;= #{selfFundedBefore}
+            </if>
+            <if test="selfFundedEnd != null">
+                and self_funded &lt;= #{selfFundedEnd}
+            </if>
+            <if test="otherFundedBefore != null">
+                and other_funded &gt;= #{otherFundedBefore}
+            </if>
+            <if test="otherFundedEnd != null">
+                and other_funded &lt;= #{otherFundedEnd}
+            </if>
+            <if test="projectStatus != null">
+                and project_status ${projectStatusOperator} #{projectStatus}
+            </if>
+            <if test="startTime != null">
+                and start_time ${startTimeOperator} #{startTime}
+            </if>
+            <if test="startTime1 != null">
+                and start_time &gt;= #{startTime1}
+            </if>
+            <if test="startTime2 != null">
+                and start_time &lt;= #{startTime2}
+            </if>
+            <if test="endTime != null">
+                and end_time ${endTimeOperator} #{endTime}
+            </if>
+            <if test="endTime1 != null">
+                and end_time &gt;= #{endTime1}
+            </if>
+            <if test="endTime2 != null">
+                and end_time &lt;= #{endTime2}
+            </if>
+            <if test="applicationTime != null">
+                and application_time ${applicationTimeOperator} #{applicationTime}
+            </if>
+            <if test="applicationTime1 != null">
+                and application_time &gt;= #{applicationTime1}
+            </if>
+            <if test="applicationTime2 != null">
+                and application_time &lt;= #{applicationTime2}
+            </if>
+            <if test="projectTime != null">
+                and project_time ${projectTimeOperator} #{projectTime}
+            </if>
+            <if test="projectTime1 != null">
+                and project_time &gt;= #{projectTime1}
+            </if>
+            <if test="projectTime2 != null">
+                and project_time &lt;= #{projectTime2}
+            </if>
+            <if test="changeTime != null">
+                and change_time ${changeTimeOperator} #{changeTime}
+            </if>
+            <if test="changeTime1 != null">
+                and change_time &gt;= #{changeTime1}
+            </if>
+            <if test="changeTime2 != null">
+                and change_time &lt;= #{changeTime2}
+            </if>
+            <if test="projectApplicantId != null">
+                and project_applicant_id ${projectApplicantIdOperator} #{projectApplicantId}
+            </if>
+            <if test="projectApplicantName != null">
+                and project_applicant_name ${projectApplicantNameOperator} #{projectApplicantName}
+            </if>
+            <if test="projectOverview != null">
+                and project_overview ${projectOverviewOperator} #{projectOverview}
+            </if>
+            <if test="researchIndicators != null">
+                and research_indicators ${researchIndicatorsOperator} #{researchIndicators}
+            </if>
+            <if test="remark != null">
+                and remark ${remarkOperator} #{remark}
+            </if>
+            <if test="delFlag != null">
+                and del_flag ${delFlagOperator} #{delFlag}
+            </if>
+            <if test="ext1 != null">
+                and ext1 ${ext1Operator} #{ext1}
+            </if>
+            <if test="ext2 != null">
+                and ext2 ${ext2Operator} #{ext2}
+            </if>
+            <if test="ext3 != null">
+                and ext3 ${ext3Operator} #{ext3}
+            </if>
+            <if test="ext4 != null">
+                and ext4 ${ext4Operator} #{ext4}
+            </if>
+            <if test="ext5 != null">
+                and ext5 ${ext5Operator} #{ext5}
+            </if>
+        </trim>
+    </sql>
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="com.adc.da.research.project.entity.ProjectDataEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+            SELECT SEQ_RS_PROJECT_DATA.NEXTVAL FROM DUAL
+        </selectKey> -->
+        insert into RS_PROJECT_DATA(<include refid="Base_Column_List"/>)
+        values (#{researchTarget, jdbcType=VARCHAR}, #{researchContent, jdbcType=VARCHAR}, #{id, jdbcType=VARCHAR},
+        #{projectCode, jdbcType=VARCHAR}, #{projectName, jdbcType=VARCHAR}, #{projectTypeId, jdbcType=VARCHAR},
+        #{projectSource, jdbcType=VARCHAR}, #{projectClass, jdbcType=VARCHAR}, #{projectLeader, jdbcType=VARCHAR},
+        #{technicalDirector, jdbcType=VARCHAR}, #{subjectDirector, jdbcType=VARCHAR},
+        #{undertakingId, jdbcType=VARCHAR}, #{reportingUnitId, jdbcType=VARCHAR}, #{leadUnit, jdbcType=VARCHAR},
+        #{participateUnit, jdbcType=VARCHAR}, #{deptId, jdbcType=VARCHAR}, #{totalFunding, jdbcType=DOUBLE},
+        #{expectedExpenditure, jdbcType=DOUBLE}, #{stateFunding, jdbcType=DOUBLE},
+        #{centerBudgetApply, jdbcType=DOUBLE}, #{selfFunded, jdbcType=DOUBLE}, #{otherFunded, jdbcType=DOUBLE},
+        #{projectStatus, jdbcType=VARCHAR}, #{startTime, jdbcType=TIMESTAMP}, #{endTime, jdbcType=TIMESTAMP},
+        #{applicationTime, jdbcType=TIMESTAMP}, #{projectTime, jdbcType=TIMESTAMP}, #{changeTime, jdbcType=TIMESTAMP},
+        #{projectApplicantId, jdbcType=VARCHAR}, #{projectApplicantName, jdbcType=VARCHAR},
+        #{projectOverview, jdbcType=VARCHAR}, #{researchIndicators, jdbcType=VARCHAR}, #{remark, jdbcType=VARCHAR},
+        #{delFlag, jdbcType=INTEGER}, #{ext1, jdbcType=VARCHAR}, #{ext2, jdbcType=VARCHAR},
+        #{ext3, jdbcType=VARCHAR}, #{ext4, jdbcType=VARCHAR},
+        #{ext5, jdbcType=VARCHAR},#{reasonsRejection, jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id="insertSelective" parameterType="com.adc.da.research.project.entity.ProjectDataEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RS_PROJECT_DATA.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into RS_PROJECT_DATA
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="researchTarget != null">research_target,</if>
+            <if test="researchContent != null">research_content,</if>
+            <if test="id != null">id,</if>
+            <if test="projectCode != null">project_code,</if>
+            <if test="projectName != null">project_name,</if>
+            <if test="projectTypeId != null">project_type_id,</if>
+            <if test="projectSource != null">project_source,</if>
+            <if test="projectClass != null">project_class,</if>
+            <if test="projectLeader != null">project_leader,</if>
+            <if test="technicalDirector != null">technical_director,</if>
+            <if test="subjectDirector != null">subject_director,</if>
+            <if test="undertakingId != null">undertaking_id,</if>
+            <if test="reportingUnitId != null">reporting_unit_id,</if>
+            <if test="leadUnit != null">lead_unit,</if>
+            <if test="participateUnit != null">participate_unit,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="totalFunding != null">total_funding,</if>
+            <if test="expectedExpenditure != null">expected_expenditure,</if>
+            <if test="stateFunding != null">state_funding,</if>
+            <if test="centerBudgetApply != null">center_budget_apply,</if>
+            <if test="selfFunded != null">self_funded,</if>
+            <if test="otherFunded != null">other_funded,</if>
+            <if test="projectStatus != null">project_status,</if>
+            <if test="startTime != null">start_time,</if>
+            <if test="endTime != null">end_time,</if>
+            <if test="applicationTime != null">application_time,</if>
+            <if test="projectTime != null">project_time,</if>
+            <if test="changeTime != null">change_time,</if>
+            <if test="projectApplicantId != null">project_applicant_id,</if>
+            <if test="projectApplicantName != null">project_applicant_name,</if>
+            <if test="projectOverview != null">project_overview,</if>
+            <if test="researchIndicators != null">research_indicators,</if>
+            <if test="remark != null">remark,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="ext1 != null">ext1,</if>
+            <if test="ext2 != null">ext2,</if>
+            <if test="ext3 != null">ext3,</if>
+            <if test="ext4 != null">ext4,</if>
+            <if test="ext5 != null">ext5,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="researchTarget != null">#{researchTarget, jdbcType=VARCHAR},</if>
+            <if test="researchContent != null">#{researchContent, jdbcType=VARCHAR},</if>
+            <if test="id != null">#{id, jdbcType=VARCHAR},</if>
+            <if test="projectCode != null">#{projectCode, jdbcType=VARCHAR},</if>
+            <if test="projectName != null">#{projectName, jdbcType=VARCHAR},</if>
+            <if test="projectTypeId != null">#{projectTypeId, jdbcType=VARCHAR},</if>
+            <if test="projectSource != null">#{projectSource, jdbcType=VARCHAR},</if>
+            <if test="projectClass != null">#{projectClass, jdbcType=VARCHAR},</if>
+            <if test="projectLeader != null">#{projectLeader, jdbcType=VARCHAR},</if>
+            <if test="technicalDirector != null">#{technicalDirector, jdbcType=VARCHAR},</if>
+            <if test="subjectDirector != null">#{subjectDirector, jdbcType=VARCHAR},</if>
+            <if test="undertakingId != null">#{undertakingId, jdbcType=VARCHAR},</if>
+            <if test="reportingUnitId != null">#{reportingUnitId, jdbcType=VARCHAR},</if>
+            <if test="leadUnit != null">#{leadUnit, jdbcType=VARCHAR},</if>
+            <if test="participateUnit != null">#{participateUnit, jdbcType=VARCHAR},</if>
+            <if test="deptId != null">#{deptId, jdbcType=VARCHAR},</if>
+            <if test="totalFunding != null">#{totalFunding, jdbcType=DOUBLE},</if>
+            <if test="expectedExpenditure != null">#{expectedExpenditure, jdbcType=DOUBLE},</if>
+            <if test="stateFunding != null">#{stateFunding, jdbcType=DOUBLE},</if>
+            <if test="centerBudgetApply != null">#{centerBudgetApply, jdbcType=DOUBLE},</if>
+            <if test="selfFunded != null">#{selfFunded, jdbcType=DOUBLE},</if>
+            <if test="otherFunded != null">#{otherFunded, jdbcType=DOUBLE},</if>
+            <if test="projectStatus != null">#{projectStatus, jdbcType=VARCHAR},</if>
+            <if test="startTime != null">#{startTime, jdbcType=TIMESTAMP},</if>
+            <if test="endTime != null">#{endTime, jdbcType=TIMESTAMP},</if>
+            <if test="applicationTime != null">#{applicationTime, jdbcType=TIMESTAMP},</if>
+            <if test="projectTime != null">#{projectTime, jdbcType=TIMESTAMP},</if>
+            <if test="changeTime != null">#{changeTime, jdbcType=TIMESTAMP},</if>
+            <if test="projectApplicantId != null">#{projectApplicantId, jdbcType=VARCHAR},</if>
+            <if test="projectApplicantName != null">#{projectApplicantName, jdbcType=VARCHAR},</if>
+            <if test="projectOverview != null">#{projectOverview, jdbcType=VARCHAR},</if>
+            <if test="researchIndicators != null">#{researchIndicators, jdbcType=VARCHAR},</if>
+            <if test="remark != null">#{remark, jdbcType=VARCHAR},</if>
+            <if test="delFlag != null">#{delFlag, jdbcType=INTEGER},</if>
+            <if test="ext1 != null">#{ext1, jdbcType=VARCHAR},</if>
+            <if test="ext2 != null">#{ext2, jdbcType=VARCHAR},</if>
+            <if test="ext3 != null">#{ext3, jdbcType=VARCHAR},</if>
+            <if test="ext4 != null">#{ext4, jdbcType=VARCHAR},</if>
+            <if test="ext5 != null">#{ext5, jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <!-- 根据pk，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="com.adc.da.research.project.entity.ProjectDataEO">
+    update RS_PROJECT_DATA
+       set  research_target = #{researchTarget},
+            research_content = #{researchContent},
+            project_code = #{projectCode},
+            project_name = #{projectName},
+            project_type_id = #{projectTypeId},
+            project_source = #{projectSource},
+            project_class = #{projectClass},
+            project_leader = #{projectLeader},
+            technical_director = #{technicalDirector},
+            subject_director = #{subjectDirector},
+            undertaking_id = #{undertakingId},
+            reporting_unit_id = #{reportingUnitId},
+            lead_unit = #{leadUnit},
+            participate_unit = #{participateUnit},
+            dept_id = #{deptId},
+            total_funding = #{totalFunding},
+            expected_expenditure = #{expectedExpenditure},
+            state_funding = #{stateFunding},
+            center_budget_apply = #{centerBudgetApply},
+            self_funded = #{selfFunded},
+            other_funded = #{otherFunded},
+            project_status = #{projectStatus},
+            start_time = #{startTime},
+            end_time = #{endTime},
+            application_time = #{applicationTime},
+            project_time = #{projectTime},
+            change_time = #{changeTime},
+            project_applicant_id = #{projectApplicantId},
+            project_applicant_name = #{projectApplicantName},
+            project_overview = #{projectOverview},
+            research_indicators = #{researchIndicators},
+            remark = #{remark},
+            del_flag = #{delFlag},
+            ext1 = #{ext1},
+            ext2 = #{ext2},
+            ext3 = #{ext3},
+            ext4 = #{ext4},
+            ext5 = #{ext5}
+     where  id = #{id}
+  </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.research.project.entity.ProjectDataEO">
+        update RS_PROJECT_DATA
+        <set>
+            <if test="researchTarget != null">
+                research_target = #{researchTarget},
+            </if>
+            <if test="researchContent != null">
+                research_content = #{researchContent},
+            </if>
+            <if test="projectCode != null">
+                project_code = #{projectCode},
+            </if>
+            <if test="projectName != null">
+                project_name = #{projectName},
+            </if>
+            <if test="projectTypeId != null">
+                project_type_id = #{projectTypeId},
+            </if>
+            <if test="projectSource != null">
+                project_source = #{projectSource},
+            </if>
+            <if test="projectClass != null">
+                project_class = #{projectClass},
+            </if>
+            <if test="projectLeader != null">
+                project_leader = #{projectLeader},
+            </if>
+            <if test="technicalDirector != null">
+                technical_director = #{technicalDirector},
+            </if>
+            <if test="subjectDirector != null">
+                subject_director = #{subjectDirector},
+            </if>
+            <if test="undertakingId != null">
+                undertaking_id = #{undertakingId},
+            </if>
+            <if test="reportingUnitId != null">
+                reporting_unit_id = #{reportingUnitId},
+            </if>
+            <if test="leadUnit != null">
+                lead_unit = #{leadUnit},
+            </if>
+            <if test="participateUnit != null">
+                participate_unit = #{participateUnit},
+            </if>
+            <if test="deptId != null">
+                dept_id = #{deptId},
+            </if>
+            <if test="totalFunding != null">
+                total_funding = #{totalFunding},
+            </if>
+            <if test="expectedExpenditure != null">
+                expected_expenditure = #{expectedExpenditure},
+            </if>
+            <if test="stateFunding != null">
+                state_funding = #{stateFunding},
+            </if>
+            <if test="centerBudgetApply != null">
+                center_budget_apply = #{centerBudgetApply},
+            </if>
+            <if test="selfFunded != null">
+                self_funded = #{selfFunded},
+            </if>
+            <if test="otherFunded != null">
+                other_funded = #{otherFunded},
+            </if>
+            <if test="projectStatus != null">
+                project_status = #{projectStatus},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime},
+            </if>
+            <if test="applicationTime != null">
+                application_time = #{applicationTime},
+            </if>
+            <if test="projectTime != null">
+                project_time = #{projectTime},
+            </if>
+            <if test="changeTime != null">
+                change_time = #{changeTime},
+            </if>
+            <if test="projectApplicantId != null">
+                project_applicant_id = #{projectApplicantId},
+            </if>
+            <if test="projectApplicantName != null">
+                project_applicant_name = #{projectApplicantName},
+            </if>
+            <if test="projectOverview != null">
+                project_overview = #{projectOverview},
+            </if>
+            <if test="researchIndicators != null">
+                research_indicators = #{researchIndicators},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag},
+            </if>
+            <if test="ext1 != null">
+                ext1 = #{ext1},
+            </if>
+            <if test="ext2 != null">
+                ext2 = #{ext2},
+            </if>
+            <if test="ext3 != null">
+                ext3 = #{ext3},
+            </if>
+            <if test="ext4 != null">
+                ext4 = #{ext4},
+            </if>
+            <if test="ext5 != null">
+                ext5 = #{ext5},
+            </if>
+            <if test="reasonsRejection != null">
+                reasons_rejection = #{reasonsRejection},
+            </if>
+
+            <if test="financialDocument != null">
+                financial_document = #{financialDocument},
+            </if>
+            <if test="propertyChanges != null">
+                property_changes = #{propertyChanges},
+            </if>
+            <if test="changeStatus != null">
+                change_status = #{changeStatus},
+            </if>
+            <if test="fundTemplateId != null">
+                fund_template_id = #{fundTemplateId},
+            </if>
+            <if test="contractTemplate != null">
+                contract_template = #{contractTemplate},
+            </if>
+
+
+
+        </set>
+        where id = #{id}
+    </update>
+
+    <!-- 根据id查询 RS_PROJECT_DATA -->
+    <select id="selectByProjectId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_AS_List"/>
+        ,prs.stage_name stage_name, prs.id stage_id,imp.id implementation_id,
+        rsc.company_name as reporting_unit_name,
+        org.ORG_NAME as dept_name,
+        dicp.DIC_TYPE_NAME as project_type_name,
+        dic.DIC_TYPE_NAME as undertaking_name
+        from RS_PROJECT_DATA pa
+        inner join rs_implementation_proc imp on pa.id=imp.project_id
+        inner join rs_process_stage prs on prs.id=imp.procee_stage_id
+        inner join rs_company rsc on rsc.id=pa.reporting_unit_id
+        left join TS_ORG org on org.id = pa.dept_id
+        left join TS_DICTYPE dic on pa.undertaking_id = dic.id
+        left join TS_DICTYPE dicp on pa.project_type_id = dicp.id
+        where pa.id = #{id} and imp.status = 1
+
+    </select>
+    <!-- 根据id查询 RS_PROJECT_DATA -->
+    <select id="selectProjectDataCount" resultType="int" parameterType="java.lang.String">
+    select count(1)
+    from RS_PROJECT_DATA
+    where id = #{id}
+  </select>
+
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+   select rpd.id as id, max( rpd.research_target ) as research_target, max( rpd.research_content ) as research_content, max(rpd.project_code ) as project_code,
+       max( rpd.project_name ) as project_name , max( rpd.project_type_id ) as project_type_id , max(rpd.project_source ) as project_source ,
+       max( rpd.project_class ) as project_class , max( rpd.project_leader ) as project_leader , max(rpd.technical_director ) as technical_director ,
+       max( rpd.subject_director ) as subject_director , max(rpd.undertaking_id ) as undertaking_id , max( rpd.reporting_unit_id ) as reporting_unit_id ,
+       max(rpd.lead_unit ) as lead_unit , max( rpd.participate_unit ) as participate_unit , max(rpd.dept_id ) as dept_id , max( rpd.total_funding ) as total_funding ,
+       max( rpd.expected_expenditure ) as expected_expenditure , max(rpd.state_funding ) as state_funding , max( rpd.center_budget_apply ) as center_budget_apply ,
+       max( rpd.self_funded ) as self_funded , max(rpd.other_funded ) as other_funded , max( rpd.project_status ) as project_status , max( rpd.start_time ) as start_time ,
+       max(rpd.end_time ) as end_time , max( rpd.application_time ) as application_time , max( rpd.project_time ) as project_time , max(rpd.change_time ) as change_time ,
+       max( rpd.project_applicant_id ) as project_applicant_id , max(rpd.project_applicant_name ) as project_applicant_name , max( rpd.project_overview ) as project_overview ,
+       max(rpd.research_indicators ) as research_indicators , max( rpd.remark ) as remark , max( rpd.del_flag ) as del_flag , max(rpd.ext1 ) as ext1 , max( rpd.ext2 ) as ext2 ,
+       max( rpd.ext3 ) as ext3 , max( rpd.ext4 ) as ext4 , max( rpd.ext5 ) as ext5, max(dic.DIC_TYPE_NAME ) as project_type_name, max( rsc.company_name ) as reporting_unit_name,
+       max( org.ORG_NAME ) as dept_name, max(dic1.DIC_TYPE_NAME ) as undertaking_name, max( imp.END_TIME ), max( stage.STAGE_NAME ) as STAGE_NAME, max( stage.id ) as stage_id
+    from RS_PROJECT_DATA rpd LEFT JOIN  RS_JUDGE_INFO  rji on rpd.id = rji.PROJECT_ID
+    left join TS_DICTYPE dic on rpd.project_type_id = dic.id
+    left join rs_company rsc on rsc.id = rpd.reporting_unit_id
+    left join TS_ORG org on org.id = rpd.dept_id
+    left join TS_DICTYPE dic1 on rpd.undertaking_id = dic1.id
+    left join rs_implementation_proc imp on rpd.id = imp.project_id
+    left join rs_process_stage stage on stage.id = imp.procee_stage_id
+    where rpd.id = #{value} group by rpd.ID
+  </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RS_PROJECT_DATA
+     where id = #{value}
+
+  </delete>
+    <!--如果不是技术领导人，就用当前登录人查询-->
+    <select id="declarePage4TipsCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        select count( DISTINCT rpd.id) from RS_PROJECT_DATA rpd
+        LEFT JOIN RS_JUDGE_INFO rji on rpd.id = rji.PROJECT_ID
+        left join TS_DICTYPE dic on rpd.project_type_id = dic.id
+        left join rs_company rsc on rsc.id = rpd.reporting_unit_id
+        left join TS_ORG org on org.id = rpd.dept_id
+        left join TS_DICTYPE dic1 on rpd.undertaking_id = dic1.id
+        left join rs_implementation_proc imp on rpd.id = imp.project_id
+        left join rs_process_stage stage on stage.id = imp.procee_stage_id
+        <where>
+            rpd.del_flag = 0
+            <if test="loginUserId != null">
+                and (rpd.TECHNICAL_DIRECTOR like '%'||#{loginUserId}||'%' or rji.EXPERT_USER_ID = #{loginUserId})
+            </if>
+            <if test="totalFundingStart != null and totalFundingEnd != null">
+                and rpd.TOTAL_FUNDING between #{totalFundingStart} and #{totalFundingEnd}
+            </if>
+            <if test="projectCode != null">
+                and rpd.PROJECT_CODE like '%'||#{projectCode}||'%'
+            </if>
+            <if test="projectName != null">
+                and rpd.PROJECT_NAME like '%'||#{projectName}||'%'
+            </if>
+            <if test="projectTypeId != null">
+                and rpd.PROJECT_TYPE_ID = #{projectTypeId}
+            </if>
+            <!--
+             private String expectedExpenditureBefore;
+            private String expectedExpenditureEnd;
+            -->
+            <if test="expectedExpenditureBefore != null and expectedExpenditureEnd != null">
+                and rpd.EXPECTED_EXPENDITURE between #{expectedExpenditureBefore} and #{expectedExpenditureEnd}
+            </if>
+            <if test="technicalDirector != null">
+                and rpd.TECHNICAL_DIRECTOR like '%'||#{technicalDirector}||'%'
+            </if>
+            <!--
+            private String stateFundingBefore;
+            private String stateFundingEnd;
+            -->
+            <if test="stateFundingBefore != null and stateFundingEnd != null">
+                and rpd.STATE_FUNDING between #{stateFundingBefore} and #{stateFundingEnd}
+            </if>
+            <!--
+              private String centerBudgetApplyBefore;
+              private String centerBudgetApplyEnd;
+           -->
+            <if test="centerBudgetApplyBefore != null and centerBudgetApplyEnd != null">
+                and rpd.CENTER_BUDGET_APPLY between #{centerBudgetApplyBefore} and #{centerBudgetApplyEnd}
+            </if>
+            <!--
+                  private String selfFundedBefore;
+                  private String selfFundedEnd;
+            -->
+            <if test="selfFundedBefore != null and selfFundedEnd != null">
+                and rpd.SELF_FUNDED between #{selfFundedBefore} and #{selfFundedEnd}
+            </if>
+            <!--
+                    private String otherFundedBefore;
+                    private String otherFundedEnd;
+            -->
+            <if test="otherFundedBefore != null and otherFundedEnd != null">
+                and rpd.OTHER_FUNDED between #{otherFundedBefore} and #{otherFundedEnd}
+            </if>
+
+            <if test="reportingUnitName != null">
+                and rsc.company_name like '%'||#{reportingUnitName}||'%'
+            </if>
+            <if test="stageName != null">
+                and stage.STAGE_NAME like '%'||#{stageName}||'%'
+            </if>
+            <!--
+                        private String applicationTime1;
+                        private String applicationTime2;
+            -->
+            <if test="applicationTime1 != null and applicationTime2 != null">
+                and rpd.APPLICATION_TIME between to_date(#{applicationTime1} || ' 00:00:00','yyyy-MM-dd HH24:MI:SS') and
+                to_date(#{applicationTime2} || ' 23:59:59','yyyy-MM-dd HH24:MI:SS')
+            </if>
+        </where>
+    </select>
+
+    <!-- 查询RS_PROJECT_DATA列表 -->
+    <select id="declarePage4Tips" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select
+        research_target, research_content, id, project_code, project_name, project_type_id,project_type_name,
+        project_source, project_class,
+        project_leader, technical_director, subject_director, undertaking_id,undertaking_name,reporting_unit_id,
+        reporting_unit_name,lead_unit, participate_unit,
+        dept_id,dept_name, total_funding, expected_expenditure, state_funding, center_budget_apply, self_funded,
+        other_funded, project_status,
+        start_time, end_time, application_time, project_time, change_time, project_applicant_id, project_applicant_name,
+        project_overview, research_indicators, remark, del_flag, ext1, ext2, ext3, ext4, ext5,STAGE_NAME,STAGE_ID
+        from
+        (select tmp_tb.* , rownum rn from
+        (select DISTINCT rpd.id as projectId,
+        rpd.id as id,
+        rpd.research_target as research_target,
+        rpd.research_content as research_content,
+        rpd.project_code as project_code,
+        rpd.project_name as project_name ,
+        rpd.project_type_id as project_type_id ,
+        rpd.project_source as project_source ,
+        rpd.project_class as project_class ,
+        rpd.project_leader as project_leader ,
+        rpd.technical_director as technical_director ,
+        rpd.subject_director as subject_director ,
+        rpd.undertaking_id as undertaking_id ,
+        rpd.reporting_unit_id as reporting_unit_id ,
+        rpd.lead_unit as lead_unit ,
+        rpd.participate_unit as participate_unit ,
+        rpd.dept_id as dept_id ,
+        rpd.total_funding as total_funding ,
+        rpd.expected_expenditure as expected_expenditure ,
+        rpd.state_funding as state_funding ,
+        rpd.center_budget_apply as center_budget_apply ,
+        rpd.self_funded as self_funded ,
+        rpd.other_funded as other_funded ,
+        rpd.project_status as project_status ,
+        rpd.start_time as start_time ,
+        rpd.end_time as end_time ,
+        rpd.application_time as application_time ,
+        rpd.project_time as project_time ,
+        rpd.change_time as change_time ,
+        rpd.project_applicant_id as project_applicant_id ,
+        rpd.project_applicant_name as project_applicant_name ,
+        rpd.project_overview as project_overview ,
+        rpd.research_indicators as research_indicators ,
+        rpd.remark as remark ,
+        rpd.del_flag as del_flag ,
+        rpd.ext1 as ext1 ,
+        rpd.ext2 as ext2 ,
+        rpd.ext3 as ext3 ,
+        rpd.ext4 as ext4 ,
+        rpd.ext5 as ext5,
+        dic.DIC_TYPE_NAME as project_type_name,
+        rsc.company_name as reporting_unit_name,
+        org.ORG_NAME as dept_name,
+        dic1.DIC_TYPE_NAME as undertaking_name,
+        stage.STAGE_NAME as STAGE_NAME,
+        stage.id as stage_id
+        from RS_PROJECT_DATA rpd LEFT JOIN RS_JUDGE_INFO rji on rpd.id = rji.PROJECT_ID
+        left join TS_DICTYPE dic on rpd.project_type_id = dic.id
+        left join rs_company rsc on rsc.id = rpd.reporting_unit_id
+        left join TS_ORG org on org.id = rpd.dept_id
+        left join TS_DICTYPE dic1 on rpd.undertaking_id = dic1.id
+        left join rs_implementation_proc imp on rpd.id = imp.project_id and
+        imp.status=1
+        left join rs_process_stage stage on stage.id = imp.procee_stage_id
+        <where>
+            rpd.del_flag = 0
+            <if test="loginUserId != null">
+                and (rpd.TECHNICAL_DIRECTOR like '%'||#{loginUserId}||'%' or rji.EXPERT_USER_ID = #{loginUserId})
+            </if>
+            <if test="totalFundingStart != null and totalFundingEnd != null">
+                and rpd.TOTAL_FUNDING between #{totalFundingStart} and #{totalFundingEnd}
+            </if>
+            <if test="projectCode != null">
+                and rpd.PROJECT_CODE like '%'||#{projectCode}||'%'
+            </if>
+            <if test="projectName != null">
+                and rpd.PROJECT_NAME like '%'||#{projectName}||'%'
+            </if>
+            <if test="projectTypeId != null">
+                and rpd.PROJECT_TYPE_ID = #{projectTypeId}
+            </if>
+            <!--
+             private String expectedExpenditureBefore;
+            private String expectedExpenditureEnd;
+            -->
+            <if test="expectedExpenditureBefore != null and expectedExpenditureEnd != null">
+                and rpd.EXPECTED_EXPENDITURE between #{expectedExpenditureBefore} and #{expectedExpenditureEnd}
+            </if>
+            <if test="technicalDirector != null">
+                and rpd.TECHNICAL_DIRECTOR like '%'||#{technicalDirector}||'%'
+            </if>
+            <!--
+            private String stateFundingBefore;
+            private String stateFundingEnd;
+            -->
+            <if test="stateFundingBefore != null and stateFundingEnd != null">
+                and rpd.STATE_FUNDING between #{stateFundingBefore} and #{stateFundingEnd}
+            </if>
+            <!--
+              private String centerBudgetApplyBefore;
+              private String centerBudgetApplyEnd;
+           -->
+            <if test="centerBudgetApplyBefore != null and centerBudgetApplyEnd != null">
+                and rpd.CENTER_BUDGET_APPLY between #{centerBudgetApplyBefore} and #{centerBudgetApplyEnd}
+            </if>
+            <!--
+                  private String selfFundedBefore;
+                  private String selfFundedEnd;
+            -->
+            <if test="selfFundedBefore != null and selfFundedEnd != null">
+                and rpd.SELF_FUNDED between #{selfFundedBefore} and #{selfFundedEnd}
+            </if>
+            <!--
+                    private String otherFundedBefore;
+                    private String otherFundedEnd;
+            -->
+            <if test="otherFundedBefore != null and otherFundedEnd != null">
+                and rpd.OTHER_FUNDED between #{otherFundedBefore} and #{otherFundedEnd}
+            </if>
+
+            <if test="reportingUnitName != null">
+                and rsc.company_name like '%'||#{reportingUnitName}||'%'
+            </if>
+            <if test="stageName != null">
+                and stage.STAGE_NAME like '%'||#{stageName}||'%'
+            </if>
+            <!--
+                        private String applicationTime1;
+                        private String applicationTime2;
+            -->
+            <if test="applicationTime1 != null and applicationTime2 != null">
+                and rpd.APPLICATION_TIME between to_date(#{applicationTime1} || ' 00:00:00','yyyy-MM-dd HH24:MI:SS') and
+                to_date(#{applicationTime2} || ' 23:59:59','yyyy-MM-dd HH24:MI:SS')
+            </if>
+        </where>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+
+    <!-- RS_PROJECT_DATA 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        with DETALTEMP as (SELECT SUM(BUDGET_AMOUNT) BUDGETSUM,PROJECT_ID FROM RS_BUDGET_DETAIL
+        WHERE BUDGET_YEAR =(select extract(year from sysdate) from dual) GROUP BY PROJECT_ID)
+        select count(1) from RS_PROJECT_DATA pa inner join rs_implementation_proc imp on pa.id=imp.project_id and
+        imp.status=1
+        inner join rs_process_stage prs on prs.id=imp.procee_stage_id
+        inner join rs_company rsc on rsc.id=pa.reporting_unit_id
+        LEFT JOIN DETALTEMP DT
+        ON DT.PROJECT_ID=pa.ID
+        where pa.del_flag = 0
+        <include refid="Base_Where_AS_Clause"/>
+    </select>
+
+    <!-- 查询RS_PROJECT_DATA列表 -->
+    <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        with DETALTEMP as (SELECT SUM(BUDGET_AMOUNT) BUDGETSUM,PROJECT_ID FROM RS_BUDGET_DETAIL
+        WHERE BUDGET_YEAR =(select extract(year from sysdate) from dual) GROUP BY PROJECT_ID)
+        select
+        <include refid="Base_Column_All_List"/>
+        from
+        (select tmp_tb.* , rownum rn from
+        (select
+        <include refid="Base_Column_AS_List"/>
+        ,prs.stage_name stage_name, prs.id stage_id,imp.id implementation_id,
+        rsc.company_name as reporting_unit_name,
+        org.ORG_NAME as dept_name,
+        dic.DIC_TYPE_NAME as undertaking_name,
+        dicp.DIC_TYPE_NAME as project_type_name
+        from RS_PROJECT_DATA  pa
+        inner join rs_implementation_proc imp on pa.id=imp.project_id
+        inner join rs_process_stage prs on prs.id=imp.procee_stage_id
+        inner join rs_company rsc on rsc.id=pa.reporting_unit_id
+        left join TS_ORG org on org.id = pa.dept_id
+        left join TS_DICTYPE dic on pa.undertaking_id = dic.id
+        left join TS_DICTYPE dicp on pa.project_type_id = dicp.id
+        LEFT JOIN DETALTEMP DT
+        ON DT.PROJECT_ID=pa.ID
+        where pa.del_flag = 0
+        <include refid="Base_Where_AS_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+
+        where rn &gt;= ${pager.startIndex}
+
+    </select>
+
+
+    <!-- 查询项目申报列表总数-->
+    <select id="queryDeclareByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        select count(1) from RS_PROJECT_DATA pa inner join rs_implementation_proc imp on pa.id=imp.project_id and
+        imp.status=1
+        inner join rs_process_stage prs on prs.id=imp.procee_stage_id
+        inner join rs_company rsc on rsc.id=pa.reporting_unit_id
+        where pa.del_flag = 0  and prs.stage_name!='项目执行' and prs.stage_name!='立项签约' and prs.stage_name!='验收结项'
+        <include refid="Base_Where_AS_Clause"/>
+    </select>
+    <!-- 查询项目申报列表 -->
+    <select id="queryDeclareByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select
+        <include refid="Base_Column_All_List"/>
+        from
+        (select tmp_tb.* , rownum rn from
+        (select
+        <include refid="Base_Column_AS_List"/>
+        ,prs.stage_name stage_name, prs.id stage_id,imp.id implementation_id,
+        rsc.company_name as reporting_unit_name,
+        org.ORG_NAME as dept_name,
+        dic.DIC_TYPE_NAME as undertaking_name,
+        dicp.DIC_TYPE_NAME as project_type_name
+        from RS_PROJECT_DATA  pa
+        inner join rs_implementation_proc imp on pa.id=imp.project_id
+        inner join rs_process_stage prs on prs.id=imp.procee_stage_id
+        inner join rs_company rsc on rsc.id=pa.reporting_unit_id
+        left join TS_ORG org on org.id = pa.dept_id
+        left join TS_DICTYPE dic on pa.undertaking_id = dic.id
+        left join TS_DICTYPE dicp on pa.project_type_id = dicp.id
+
+        where pa.del_flag = 0  and prs.stage_name!='项目执行' and prs.stage_name!='立项签约' and prs.stage_name!='验收结项'
+        <include refid="Base_Where_AS_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+
+        where rn &gt;= ${pager.startIndex}
+
+    </select>
+
+    <!-- 查询 变更RS_PROJECT_DATA列表 -->
+    <select id="queryByChangePage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+
+        select
+        <include refid="Base_Column_All_List"/>
+        from
+        (select tmp_tb.* , rownum rn from
+        (select
+        <include refid="Base_Column_AS_List"/>
+        ,prs.stage_name stage_name, prs.id stage_id,imp.id implementation_id,
+        rsc.company_name as reporting_unit_name,
+        org.ORG_NAME as dept_name,
+        dic.DIC_TYPE_NAME as undertaking_name,
+        dicp.DIC_TYPE_NAME as project_type_name
+        from RS_PROJECT_DATA  pa
+        inner join rs_implementation_proc imp on pa.id=imp.project_id
+        inner join rs_process_stage prs on prs.id=imp.procee_stage_id
+        inner join rs_company rsc on rsc.id=pa.reporting_unit_id
+        left join TS_ORG org on org.id = pa.dept_id
+        left join TS_DICTYPE dic on pa.undertaking_id = dic.id
+        left join TS_DICTYPE dicp on pa.project_type_id = dicp.id
+        where pa.del_flag = 0
+        <include refid="Base_Where_AS_Clause"/>  and pa.change_status is not null
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select
+        <include refid="Base_Column_AS_List"/>
+        ,prs.stage_name stage_name, prs.id stage_id,imp.id implementation_id,
+        rsc.company_name as reporting_unit_name,
+        org.ORG_NAME as dept_name,
+        dic.DIC_TYPE_NAME as undertaking_name,
+        dicp.DIC_TYPE_NAME as project_type_name
+        from RS_PROJECT_DATA  pa
+        inner join rs_implementation_proc imp on pa.id=imp.project_id
+        inner join rs_process_stage prs on prs.id=imp.procee_stage_id
+        inner join rs_company rsc on rsc.id=pa.reporting_unit_id
+        left join TS_ORG org on org.id = pa.dept_id
+        left join TS_DICTYPE dic on pa.undertaking_id = dic.id
+        left join TS_DICTYPE dicp on pa.project_type_id = dicp.id
+        where pa.del_flag = 0
+        <include refid="Base_Where_AS_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+    </select>
+
+    <update id="updateProjectStatusByProjectId">
+        update rs_project_data set project_status=#{projectStatus} where id=#{id}
+    </update>
+
+    <select id="getIdByName" resultType="java.lang.String">
+        select ID from RS_COMPANY where COMPANY_NAME = #{reportingUnitName}
+    </select>
+
+    <!--   获取项目终止的页面信息-->
+    <select id="getSuspendPage" resultMap="BaseResultMap"  parameterType="com.adc.da.base.page.BasePage">
+
+        select
+        <include refid="Base_Column_All_List"/>
+        from
+        (select tmp_tb.* , rownum rn from
+        (select  pa.id, pa.project_code, pa.project_name, pa.project_type_id, pa.project_source, pa.project_class, pa.project_leader, pa.technical_director,
+        pa.subject_director, pa.undertaking_id, pa.reporting_unit_id, pa.lead_unit, pa.participate_unit, pa.dept_id, pa.total_funding, pa.expected_expenditure,
+        pa.state_funding, pa.center_budget_apply, pa.self_funded, pa.other_funded, rsa.SUSPEND_STAGE project_status, pa.start_time, pa.end_time, pa.application_time, pa.project_time, pa.change_time, pa.project_applicant_id, pa.project_applicant_name, pa.project_overview, pa.research_indicators, pa.remark, pa.del_flag,
+        pa.ext1, pa.ext2, pa.ext3, pa.ext4, pa.ext5,pa.reasons_rejection,pa.research_target,pa.research_content,pa.financial_document,pa.property_changes,pa.change_status,pa.fund_template_id,pa.contract_template
+        ,prs.stage_name stage_name, prs.id stage_id,imp.id implementation_id,
+        rsc.company_name as reporting_unit_name,
+        org.ORG_NAME as dept_name,
+        dic.DIC_TYPE_NAME as undertaking_name,
+        dicp.DIC_TYPE_NAME as project_type_name
+        from RS_PROJECT_DATA  pa
+        inner join rs_implementation_proc imp on pa.id=imp.project_id
+        inner join rs_process_stage prs on prs.id=imp.procee_stage_id
+        inner join rs_company rsc on rsc.id=pa.reporting_unit_id
+        left join TS_ORG org on org.id = pa.dept_id
+        left join TS_DICTYPE dic on pa.undertaking_id = dic.id
+        left join TS_DICTYPE dicp on pa.project_type_id = dicp.id
+        inner JOIN RS_SUSPEND_APP rsa ON pa.id=rsa.PROJECT_ID
+        where pa.del_flag = 0 and  rsa.del_flag = 0
+        <include refid="Base_Where_AS_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex} )
+
+        where rn &gt;= ${pager.startIndex}
+
+    </select>
+
+    <!-- 查询RS_PROJECT_DATA列表 -->
+    <select id="queryByPageForFunds" resultMap="BaseFundsResultMap" parameterType="com.adc.da.base.page.BasePage">
+        with DETALTEMP as (SELECT SUM(BUDGET_AMOUNT) BUDGETSUM,PROJECT_ID FROM RS_BUDGET_DETAIL
+        WHERE BUDGET_YEAR =(select extract(year from sysdate) from dual) GROUP BY PROJECT_ID)
+        select research_target, research_content, id, project_code, project_name, project_type_id, project_source
+        , project_class, project_leader, technical_director, subject_director, undertaking_id, reporting_unit_id
+        , lead_unit, participate_unit, dept_id, total_funding, expected_expenditure, state_funding
+        , center_budget_apply, self_funded, other_funded, project_status, start_time, end_time, application_time
+        , project_time, change_time, project_applicant_id, project_applicant_name, project_overview
+        , research_indicators, remark, del_flag, ext1, ext2, ext3, ext4, ext5,reasons_rejection,project_type_name
+        ,dept_name,reporting_unit_name,BUDGETSUM from
+        (select tmp_tb.* , rownum rn from
+        (select RPD.research_target, RPD.research_content, RPD.id, RPD.project_code, RPD.project_name
+        , RPD.project_type_id, RPD.project_source, RPD.project_class, RPD.project_leader, RPD.technical_director
+        , RPD.subject_director, RPD.undertaking_id, RPD.reporting_unit_id, RPD.lead_unit, RPD.participate_unit
+        , RPD.dept_id, RPD.total_funding, RPD.expected_expenditure, RPD.state_funding, RPD.center_budget_apply
+        , RPD.self_funded, RPD.other_funded, RPD.project_status, RPD.start_time, RPD.end_time, RPD.application_time
+        , RPD.project_time, RPD.change_time, RPD.project_applicant_id, RPD.project_applicant_name
+        , RPD.project_overview, RPD.research_indicators, RPD.remark, RPD.del_flag, RPD.ext1, RPD.ext2
+        , RPD.ext3, RPD.ext4, RPD.ext5,RPD.reasons_rejection,dicp.DIC_TYPE_NAME as project_type_name
+        ,org.ORG_NAME as dept_name,rsc.company_name as reporting_unit_name,DT.BUDGETSUM from RS_PROJECT_DATA RPD
+        LEFT JOIN TS_DICTYPE dicp
+        ON RPD.project_type_id = dicp.id
+        LEFT JOIN TS_ORG org
+        ON org.id = RPD.dept_id
+        LEFT JOIN rs_company rsc
+        ON rsc.id=RPD.reporting_unit_id
+        LEFT JOIN DETALTEMP DT
+        ON DT.PROJECT_ID=RPD.ID
+        where RPD.del_flag=0
+        <if test="projectTimeBegin != null and projectTimeBegin!=''">
+            and to_char(project_time,'yyyy-mm-dd') &gt;= #{projectTimeBegin}
+        </if>
+        <if test="projectTimeEnd != null and projectTimeEnd !=''">
+            and to_char(project_time,'yyyy-mm-dd') &lt;= #{projectTimeEnd}
+        </if>
+        <if test="totalFundingStart != null and totalFundingStart!=''">
+            and total_funding &gt;=  #{totalFundingStart}
+        </if>
+        <if test="reportingUnitName != null and reportingUnitName!=''">
+            and rsc.company_name LIKE CONCAT('%',CONCAT(#{reportingUnitName},'%'))
+        </if>
+        <if test="totalFundingEnd != null and totalFundingEnd!=''">
+            and total_funding &lt;= #{totalFundingEnd}
+        </if>
+        <if test="id != null and id!=''">
+            and RPD.id ${idOperator} #{id}
+        </if>
+        <if test="projectCode != null and projectCode!=''">
+
+            and lower (project_code) LIKE lower(CONCAT('%',CONCAT(#{projectCode},'%')))
+        </if>
+        <if test="projectName != null and projectName !=''">
+            and lower (project_name) LIKE lower(CONCAT('%',CONCAT(#{projectName},'%')))
+        </if>
+        <if test="projectTypeId != null and projectTypeId!=''">
+            and lower (dicp.DIC_TYPE_NAME) LIKE CONCAT('%',CONCAT(#{projectTypeId},'%'))
+        </if>
+        <if test="projectSource != null and projectSource !=''">
+            and lower (project_source) LIKE CONCAT('%',CONCAT(#{projectSource},'%'))
+        </if>
+        <if test="projectClass != null and projectClass!=''">
+            and lower (project_class) LIKE CONCAT('%',CONCAT(#{projectClass},'%'))
+        </if>
+        <if test="projectLeader != null and projectLeader!=''">
+            and project_leader ${projectLeaderOperator} #{projectLeader}
+        </if>
+        <if test="technicalDirector != null and technicalDirector!=''">
+            and technical_director LIKE CONCAT('%',CONCAT(#{technicalDirector},'%'))
+        </if>
+        <if test="subjectDirector != null and subjectDirector !=''">
+            and lower (subject_director) LIKE CONCAT('%',CONCAT(#{subjectDirector},'%'))
+        </if>
+        <if test="budgetsumBefore != null and budgetsumBefore!=''">
+            and budgetsum &gt;= #{budgetsumBefore}
+        </if>
+        <if test="budgetsumEnd != null and budgetsumEnd !=''">
+            and budgetsum &lt;= #{budgetsumEnd}
+        </if>
+        <if test="undertakingId != null and undertakingId !=''">
+            and lower (undertaking_id) LIKE CONCAT('%',CONCAT(#{undertakingId},'%'))
+        </if>
+        <if test="reportingUnitId != null and reportingUnitId !=''">
+            and lower (reporting_unit_id) LIKE CONCAT('%',CONCAT(#{reportingUnitId},'%'))
+        </if>
+        <if test="leadUnit != null and leadUnit !=''">
+            and lead_unit ${leadUnitOperator} #{leadUnit}
+        </if>
+        <if test="participateUnit != null and participateUnit !=''">
+            and participate_unit ${participateUnitOperator} #{participateUnit}
+        </if>
+        <if test="deptId != null and deptId !=''">
+            and dept_id ${deptIdOperator} #{deptId}
+        </if>
+        <if test="totalFunding != null and totalFunding !=''">
+            and total_funding ${totalFundingOperator} #{totalFunding}
+        </if>
+        <if test="expectedExpenditureBefore != null and expectedExpenditureBefore !=''">
+            and expected_expenditure &gt;= #{expectedExpenditureBefore}
+        </if>
+        <if test="expectedExpenditureEnd != null and expectedExpenditureEnd !=''">
+            and expected_expenditure &lt;= #{expectedExpenditureEnd}
+        </if>
+        <if test="stateFundingBefore != null and stateFundingBefore !=''">
+            and state_funding &gt;= #{stateFundingBefore}
+        </if>
+        <if test="stateFundingEnd != null and stateFundingEnd!=''">
+            and state_funding &lt;= #{stateFundingEnd}
+        </if>
+        <if test="centerBudgetApplyBefore != null and centerBudgetApplyBefore !=''">
+            and center_budget_apply &gt;= #{centerBudgetApplyBefore}
+        </if>
+        <if test="centerBudgetApplyEnd != null and centerBudgetApplyEnd !=''">
+            and center_budget_apply &lt;= #{centerBudgetApplyEnd}
+        </if>
+        <if test="selfFundedBefore != null and selfFundedBefore !=''">
+            and self_funded &gt;= #{selfFundedBefore}
+        </if>
+        <if test="selfFundedEnd != null and selfFundedEnd !=''">
+            and self_funded &lt;= #{selfFundedEnd}
+        </if>
+        <if test="otherFundedBefore != null and otherFundedBefore !=''">
+            and other_funded &gt;= #{otherFundedBefore}
+        </if>
+        <if test="otherFundedEnd != null and otherFundedEnd !=''">
+            and other_funded &lt;= #{otherFundedEnd}
+        </if>
+        <if test="projectStatus != null and projectStatus !=''">
+            and project_status ${projectStatusOperator} #{projectStatus}
+        </if>
+        <if test="startTime != null and startTime !=''">
+            and start_time ${startTimeOperator} #{startTime}
+        </if>
+        <if test="startTime1 != null and startTime1 !=''">
+            and start_time &gt;= #{startTime1}
+        </if>
+        <if test="startTime2 != null and startTime2 !=''">
+            and start_time &lt;= #{startTime2}
+        </if>
+        <if test="endTime != null and endTime !=''">
+            and end_time ${endTimeOperator} #{endTime}
+        </if>
+        <if test="endTime1 != null and endTime1 !=''">
+            and end_time &gt;= #{endTime1}
+        </if>
+        <if test="endTime2 != null and endTime2 !=''">
+            and end_time &lt;= #{endTime2}
+        </if>
+        <if test="applicationTime != null and applicationTime!=''">
+            and application_time ${applicationTimeOperator} #{applicationTime}
+        </if>
+        <if test="applicationTime1 != null and applicationTime1 !=''">
+            and application_time &gt;= #{applicationTime1}
+        </if>
+        <if test="applicationTime2 != null and applicationTime2 !=''">
+            and application_time &lt;= #{applicationTime2}
+        </if>
+        <if test="projectTime != null and projectTime !=''">
+            and project_time ${projectTimeOperator} #{projectTime}
+        </if>
+        <if test="projectTime1 != null and projectTime1 !=''">
+            and project_time &gt;= #{projectTime1}
+        </if>
+        <if test="projectTime2 != null and projectTime2 !=''">
+            and project_time &lt;= #{projectTime2}
+        </if>
+        <if test="changeTime != null and changeTime !=''">
+            and change_time ${changeTimeOperator} #{changeTime}
+        </if>
+        <if test="changeTime1 != null and changeTime1 !=''">
+            and change_time &gt;= #{changeTime1}
+        </if>
+        <if test="changeTime2 != null and changeTime2 !=''">
+            and change_time &lt;= #{changeTime2}
+        </if>
+        <if test="projectApplicantId != null and projectApplicantId!=''">
+            and project_applicant_id ${projectApplicantIdOperator} #{projectApplicantId}
+        </if>
+        <if test="projectApplicantName != null and projectApplicantName!=''">
+            and project_applicant_name ${projectApplicantNameOperator} #{projectApplicantName}
+        </if>
+        <if test="projectOverview != null and projectOverview !=''">
+            and project_overview ${projectOverviewOperator} #{projectOverview}
+        </if>
+        <if test="researchIndicators != null and researchIndicators !=''">
+            and research_indicators ${researchIndicatorsOperator} #{researchIndicators}
+        </if>
+        <if test="remark != null and remark!=''">
+            and remark ${remarkOperator} #{remark}
+        </if>
+        <if test="delFlag != null and delFlag!=''">
+            and del_flag ${delFlagOperator} #{delFlag}
+        </if>
+        <if test="ext1 != null and ext1 !=''">
+            and ext1 ${ext1Operator} #{ext1}
+        </if>
+        <if test="ext2 != null and ext2 !=''">
+            and ext2 ${ext2Operator} #{ext2}
+        </if>
+        <if test="ext3 != null and ext3 !=''">
+            and ext3 ${ext3Operator} #{ext3}
+        </if>
+        <if test="ext4 != null and ext4 !=''">
+            and ext4 ${ext4Operator} #{ext4}
+        </if>
+        <if test="ext5 != null and ext5 !=''">
+            and ext5 ${ext5Operator} #{ext5}
+        </if>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ORDER BY RPD.PROJECT_NAME
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+
+    <!-- RS_PROJECT_DATA 列表总数-->
+    <select id="queryByCountForFunds" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        with DETALTEMP as (SELECT SUM(BUDGET_AMOUNT) BUDGETSUM,PROJECT_ID FROM RS_BUDGET_DETAIL
+        WHERE BUDGET_YEAR =(select extract(year from sysdate) from dual) GROUP BY PROJECT_ID)
+        select count(1) from RS_PROJECT_DATA RPD
+        LEFT JOIN TS_DICTYPE dicp
+        ON RPD.project_type_id = dicp.id
+        LEFT JOIN TS_ORG org
+        ON org.id = RPD.dept_id
+        LEFT JOIN rs_company rsc
+        ON rsc.id=RPD.reporting_unit_id
+        LEFT JOIN DETALTEMP DT
+        ON DT.PROJECT_ID=RPD.ID
+        where RPD.del_flag=0
+
+        <if test="projectTimeBegin != null and projectTimeBegin!=''">
+            and to_char(project_time,'yyyy-mm-dd') &gt;= #{projectTimeBegin}
+        </if>
+        <if test="projectTimeEnd != null and projectTimeEnd !=''">
+            and to_char(project_time,'yyyy-mm-dd') &lt;= #{projectTimeEnd}
+        </if>
+        <if test="totalFundingStart != null and totalFundingStart!=''">
+            and total_funding &gt;=  #{totalFundingStart}
+        </if>
+        <if test="reportingUnitName != null and reportingUnitName!=''">
+            and rsc.company_name LIKE CONCAT('%',CONCAT(#{reportingUnitName},'%'))
+        </if>
+        <if test="totalFundingEnd != null and totalFundingEnd!=''">
+            and total_funding &lt;= #{totalFundingEnd}
+        </if>
+        <if test="id != null and id!=''">
+            and RPD.id ${idOperator} #{id}
+        </if>
+        <if test="projectCode != null and projectCode!=''">
+
+            and lower (project_code) LIKE lower(CONCAT('%',CONCAT(#{projectCode},'%')))
+        </if>
+        <if test="projectName != null and projectName !=''">
+            and lower (project_name) LIKE lower(CONCAT('%',CONCAT(#{projectName},'%')))
+        </if>
+        <if test="projectTypeId != null and projectTypeId!=''">
+            and lower (dicp.DIC_TYPE_NAME) LIKE CONCAT('%',CONCAT(#{projectTypeId},'%'))
+        </if>
+        <if test="projectSource != null and projectSource !=''">
+            and lower (project_source) LIKE CONCAT('%',CONCAT(#{projectSource},'%'))
+        </if>
+        <if test="projectClass != null and projectClass!=''">
+            and lower (project_class) LIKE CONCAT('%',CONCAT(#{projectClass},'%'))
+        </if>
+        <if test="projectLeader != null and projectLeader!=''">
+            and project_leader ${projectLeaderOperator} #{projectLeader}
+        </if>
+        <if test="technicalDirector != null and technicalDirector!=''">
+            and technical_director LIKE CONCAT('%',CONCAT(#{technicalDirector},'%'))
+        </if>
+        <if test="subjectDirector != null and subjectDirector !=''">
+            and lower (subject_director) LIKE CONCAT('%',CONCAT(#{subjectDirector},'%'))
+        </if>
+        <if test="budgetsumBefore != null and budgetsumBefore!=''">
+            and budgetsum &gt;= #{budgetsumBefore}
+        </if>
+        <if test="budgetsumEnd != null and budgetsumEnd !=''">
+            and budgetsum &lt;= #{budgetsumEnd}
+        </if>
+        <if test="undertakingId != null and undertakingId !=''">
+            and lower (undertaking_id) LIKE CONCAT('%',CONCAT(#{undertakingId},'%'))
+        </if>
+        <if test="reportingUnitId != null and reportingUnitId !=''">
+            and lower (reporting_unit_id) LIKE CONCAT('%',CONCAT(#{reportingUnitId},'%'))
+        </if>
+        <if test="leadUnit != null and leadUnit !=''">
+            and lead_unit ${leadUnitOperator} #{leadUnit}
+        </if>
+        <if test="participateUnit != null and participateUnit !=''">
+            and participate_unit ${participateUnitOperator} #{participateUnit}
+        </if>
+        <if test="deptId != null and deptId !=''">
+            and dept_id ${deptIdOperator} #{deptId}
+        </if>
+        <if test="totalFunding != null and totalFunding !=''">
+            and total_funding ${totalFundingOperator} #{totalFunding}
+        </if>
+        <if test="expectedExpenditureBefore != null and expectedExpenditureBefore !=''">
+            and expected_expenditure &gt;= #{expectedExpenditureBefore}
+        </if>
+        <if test="expectedExpenditureEnd != null and expectedExpenditureEnd !=''">
+            and expected_expenditure &lt;= #{expectedExpenditureEnd}
+        </if>
+        <if test="stateFundingBefore != null and stateFundingBefore !=''">
+            and state_funding &gt;= #{stateFundingBefore}
+        </if>
+        <if test="stateFundingEnd != null and stateFundingEnd!=''">
+            and state_funding &lt;= #{stateFundingEnd}
+        </if>
+        <if test="centerBudgetApplyBefore != null and centerBudgetApplyBefore !=''">
+            and center_budget_apply &gt;= #{centerBudgetApplyBefore}
+        </if>
+        <if test="centerBudgetApplyEnd != null and centerBudgetApplyEnd !=''">
+            and center_budget_apply &lt;= #{centerBudgetApplyEnd}
+        </if>
+        <if test="selfFundedBefore != null and selfFundedBefore !=''">
+            and self_funded &gt;= #{selfFundedBefore}
+        </if>
+        <if test="selfFundedEnd != null and selfFundedEnd !=''">
+            and self_funded &lt;= #{selfFundedEnd}
+        </if>
+        <if test="otherFundedBefore != null and otherFundedBefore !=''">
+            and other_funded &gt;= #{otherFundedBefore}
+        </if>
+        <if test="otherFundedEnd != null and otherFundedEnd !=''">
+            and other_funded &lt;= #{otherFundedEnd}
+        </if>
+        <if test="projectStatus != null and projectStatus !=''">
+            and project_status ${projectStatusOperator} #{projectStatus}
+        </if>
+        <if test="startTime != null and startTime !=''">
+            and start_time ${startTimeOperator} #{startTime}
+        </if>
+        <if test="startTime1 != null and startTime1 !=''">
+            and start_time &gt;= #{startTime1}
+        </if>
+        <if test="startTime2 != null and startTime2 !=''">
+            and start_time &lt;= #{startTime2}
+        </if>
+        <if test="endTime != null and endTime !=''">
+            and end_time ${endTimeOperator} #{endTime}
+        </if>
+        <if test="endTime1 != null and endTime1 !=''">
+            and end_time &gt;= #{endTime1}
+        </if>
+        <if test="endTime2 != null and endTime2 !=''">
+            and end_time &lt;= #{endTime2}
+        </if>
+        <if test="applicationTime != null and applicationTime!=''">
+            and application_time ${applicationTimeOperator} #{applicationTime}
+        </if>
+        <if test="applicationTime1 != null and applicationTime1 !=''">
+            and application_time &gt;= #{applicationTime1}
+        </if>
+        <if test="applicationTime2 != null and applicationTime2 !=''">
+            and application_time &lt;= #{applicationTime2}
+        </if>
+        <if test="projectTime != null and projectTime !=''">
+            and project_time ${projectTimeOperator} #{projectTime}
+        </if>
+        <if test="projectTime1 != null and projectTime1 !=''">
+            and project_time &gt;= #{projectTime1}
+        </if>
+        <if test="projectTime2 != null and projectTime2 !=''">
+            and project_time &lt;= #{projectTime2}
+        </if>
+        <if test="changeTime != null and changeTime !=''">
+            and change_time ${changeTimeOperator} #{changeTime}
+        </if>
+        <if test="changeTime1 != null and changeTime1 !=''">
+            and change_time &gt;= #{changeTime1}
+        </if>
+        <if test="changeTime2 != null and changeTime2 !=''">
+            and change_time &lt;= #{changeTime2}
+        </if>
+        <if test="projectApplicantId != null and projectApplicantId!=''">
+            and project_applicant_id ${projectApplicantIdOperator} #{projectApplicantId}
+        </if>
+        <if test="projectApplicantName != null and projectApplicantName!=''">
+            and project_applicant_name ${projectApplicantNameOperator} #{projectApplicantName}
+        </if>
+        <if test="projectOverview != null and projectOverview !=''">
+            and project_overview ${projectOverviewOperator} #{projectOverview}
+        </if>
+        <if test="researchIndicators != null and researchIndicators !=''">
+            and research_indicators ${researchIndicatorsOperator} #{researchIndicators}
+        </if>
+        <if test="remark != null and remark!=''">
+            and remark ${remarkOperator} #{remark}
+        </if>
+        <if test="delFlag != null and delFlag!=''">
+            and del_flag ${delFlagOperator} #{delFlag}
+        </if>
+        <if test="ext1 != null and ext1 !=''">
+            and ext1 ${ext1Operator} #{ext1}
+        </if>
+        <if test="ext2 != null and ext2 !=''">
+            and ext2 ${ext2Operator} #{ext2}
+        </if>
+        <if test="ext3 != null and ext3 !=''">
+            and ext3 ${ext3Operator} #{ext3}
+        </if>
+        <if test="ext4 != null and ext4 !=''">
+            and ext4 ${ext4Operator} #{ext4}
+        </if>
+        <if test="ext5 != null and ext5 !=''">
+            and ext5 ${ext5Operator} #{ext5}
+        </if>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+    </select>
+
+    <select id="queryByListForFunds" resultMap="BaseFundsResultMap" parameterType="com.adc.da.base.page.BasePage">
+        with DETALTEMP as (SELECT SUM(BUDGET_AMOUNT) BUDGETSUM,PROJECT_ID FROM RS_BUDGET_DETAIL
+        WHERE BUDGET_YEAR =(select extract(year from sysdate) from dual) GROUP BY PROJECT_ID)
+        select RPD.research_target, RPD.research_content, RPD.id, RPD.project_code, RPD.project_name
+        , RPD.project_type_id, RPD.project_source, RPD.project_class, RPD.project_leader, RPD.technical_director
+        , RPD.subject_director, RPD.undertaking_id, RPD.reporting_unit_id, RPD.lead_unit, RPD.participate_unit
+        , RPD.dept_id, RPD.total_funding, RPD.expected_expenditure, RPD.state_funding, RPD.center_budget_apply
+        , RPD.self_funded, RPD.other_funded, RPD.project_status, RPD.start_time, RPD.end_time, RPD.application_time
+        , RPD.project_time, RPD.change_time, RPD.project_applicant_id, RPD.project_applicant_name
+        , RPD.project_overview, RPD.research_indicators, RPD.remark, RPD.del_flag, RPD.ext1, RPD.ext2
+        , RPD.ext3, RPD.ext4, RPD.ext5,RPD.reasons_rejection,dicp.DIC_TYPE_NAME as project_type_name
+        ,org.ORG_NAME as dept_name,rsc.company_name as reporting_unit_name,BUDGETSUM from RS_PROJECT_DATA RPD
+        LEFT JOIN TS_DICTYPE dicp
+        ON RPD.project_type_id = dicp.id
+        LEFT JOIN TS_ORG org
+        ON org.id = RPD.dept_id
+        LEFT JOIN rs_company rsc
+        ON rsc.id=RPD.reporting_unit_id
+        LEFT JOIN DETALTEMP DT
+        ON DT.PROJECT_ID=RPD.ID
+        where RPD.del_flag=0
+        <if test="projectTimeBegin != null and projectTimeBegin!=''">
+            and to_char(project_time,'yyyy-mm-dd') &gt;= #{projectTimeBegin}
+        </if>
+        <if test="projectTimeEnd != null and projectTimeEnd !=''">
+            and to_char(project_time,'yyyy-mm-dd') &lt;= #{projectTimeEnd}
+        </if>
+        <if test="totalFundingStart != null and totalFundingStart!=''">
+            and total_funding &gt;=  #{totalFundingStart}
+        </if>
+        <if test="reportingUnitName != null and reportingUnitName!=''">
+            and rsc.company_name LIKE CONCAT('%',CONCAT(#{reportingUnitName},'%'))
+        </if>
+        <if test="totalFundingEnd != null and totalFundingEnd!=''">
+            and total_funding &lt;= #{totalFundingEnd}
+        </if>
+        <if test="id != null and id!=''">
+            and RPD.id ${idOperator} #{id}
+        </if>
+        <if test="projectCode != null and projectCode!=''">
+
+            and lower (project_code) LIKE lower(CONCAT('%',CONCAT(#{projectCode},'%')))
+        </if>
+        <if test="projectName != null and projectName !=''">
+            and lower (project_name) LIKE lower(CONCAT('%',CONCAT(#{projectName},'%')))
+        </if>
+        <if test="projectTypeId != null and projectTypeId!=''">
+            and lower (dicp.DIC_TYPE_NAME) LIKE CONCAT('%',CONCAT(#{projectTypeId},'%'))
+        </if>
+        <if test="projectSource != null and projectSource !=''">
+            and lower (project_source) LIKE CONCAT('%',CONCAT(#{projectSource},'%'))
+        </if>
+        <if test="projectClass != null and projectClass!=''">
+            and lower (project_class) LIKE CONCAT('%',CONCAT(#{projectClass},'%'))
+        </if>
+        <if test="projectLeader != null and projectLeader!=''">
+            and project_leader ${projectLeaderOperator} #{projectLeader}
+        </if>
+        <if test="technicalDirector != null and technicalDirector!=''">
+            and technical_director LIKE CONCAT('%',CONCAT(#{technicalDirector},'%'))
+        </if>
+        <if test="subjectDirector != null and subjectDirector !=''">
+            and lower (subject_director) LIKE CONCAT('%',CONCAT(#{subjectDirector},'%'))
+        </if>
+        <if test="budgetsumBefore != null and budgetsumBefore!=''">
+            and budgetsum &gt;= #{budgetsumBefore}
+        </if>
+        <if test="budgetsumEnd != null and budgetsumEnd !=''">
+            and budgetsum &lt;= #{budgetsumEnd}
+        </if>
+        <if test="undertakingId != null and undertakingId !=''">
+            and lower (undertaking_id) LIKE CONCAT('%',CONCAT(#{undertakingId},'%'))
+        </if>
+        <if test="reportingUnitId != null and reportingUnitId !=''">
+            and lower (reporting_unit_id) LIKE CONCAT('%',CONCAT(#{reportingUnitId},'%'))
+        </if>
+        <if test="leadUnit != null and leadUnit !=''">
+            and lead_unit ${leadUnitOperator} #{leadUnit}
+        </if>
+        <if test="participateUnit != null and participateUnit !=''">
+            and participate_unit ${participateUnitOperator} #{participateUnit}
+        </if>
+        <if test="deptId != null and deptId !=''">
+            and dept_id ${deptIdOperator} #{deptId}
+        </if>
+        <if test="totalFunding != null and totalFunding !=''">
+            and total_funding ${totalFundingOperator} #{totalFunding}
+        </if>
+        <if test="expectedExpenditureBefore != null and expectedExpenditureBefore !=''">
+            and expected_expenditure &gt;= #{expectedExpenditureBefore}
+        </if>
+        <if test="expectedExpenditureEnd != null and expectedExpenditureEnd !=''">
+            and expected_expenditure &lt;= #{expectedExpenditureEnd}
+        </if>
+        <if test="stateFundingBefore != null and stateFundingBefore !=''">
+            and state_funding &gt;= #{stateFundingBefore}
+        </if>
+        <if test="stateFundingEnd != null and stateFundingEnd!=''">
+            and state_funding &lt;= #{stateFundingEnd}
+        </if>
+        <if test="centerBudgetApplyBefore != null and centerBudgetApplyBefore !=''">
+            and center_budget_apply &gt;= #{centerBudgetApplyBefore}
+        </if>
+        <if test="centerBudgetApplyEnd != null and centerBudgetApplyEnd !=''">
+            and center_budget_apply &lt;= #{centerBudgetApplyEnd}
+        </if>
+        <if test="selfFundedBefore != null and selfFundedBefore !=''">
+            and self_funded &gt;= #{selfFundedBefore}
+        </if>
+        <if test="selfFundedEnd != null and selfFundedEnd !=''">
+            and self_funded &lt;= #{selfFundedEnd}
+        </if>
+        <if test="otherFundedBefore != null and otherFundedBefore !=''">
+            and other_funded &gt;= #{otherFundedBefore}
+        </if>
+        <if test="otherFundedEnd != null and otherFundedEnd !=''">
+            and other_funded &lt;= #{otherFundedEnd}
+        </if>
+        <if test="projectStatus != null and projectStatus !=''">
+            and project_status ${projectStatusOperator} #{projectStatus}
+        </if>
+        <if test="startTime != null and startTime !=''">
+            and start_time ${startTimeOperator} #{startTime}
+        </if>
+        <if test="startTime1 != null and startTime1 !=''">
+            and start_time &gt;= #{startTime1}
+        </if>
+        <if test="startTime2 != null and startTime2 !=''">
+            and start_time &lt;= #{startTime2}
+        </if>
+        <if test="endTime != null and endTime !=''">
+            and end_time ${endTimeOperator} #{endTime}
+        </if>
+        <if test="endTime1 != null and endTime1 !=''">
+            and end_time &gt;= #{endTime1}
+        </if>
+        <if test="endTime2 != null and endTime2 !=''">
+            and end_time &lt;= #{endTime2}
+        </if>
+        <if test="applicationTime != null and applicationTime!=''">
+            and application_time ${applicationTimeOperator} #{applicationTime}
+        </if>
+        <if test="applicationTime1 != null and applicationTime1 !=''">
+            and application_time &gt;= #{applicationTime1}
+        </if>
+        <if test="applicationTime2 != null and applicationTime2 !=''">
+            and application_time &lt;= #{applicationTime2}
+        </if>
+        <if test="projectTime != null and projectTime !=''">
+            and project_time ${projectTimeOperator} #{projectTime}
+        </if>
+        <if test="projectTime1 != null and projectTime1 !=''">
+            and project_time &gt;= #{projectTime1}
+        </if>
+        <if test="projectTime2 != null and projectTime2 !=''">
+            and project_time &lt;= #{projectTime2}
+        </if>
+        <if test="changeTime != null and changeTime !=''">
+            and change_time ${changeTimeOperator} #{changeTime}
+        </if>
+        <if test="changeTime1 != null and changeTime1 !=''">
+            and change_time &gt;= #{changeTime1}
+        </if>
+        <if test="changeTime2 != null and changeTime2 !=''">
+            and change_time &lt;= #{changeTime2}
+        </if>
+        <if test="projectApplicantId != null and projectApplicantId!=''">
+            and project_applicant_id ${projectApplicantIdOperator} #{projectApplicantId}
+        </if>
+        <if test="projectApplicantName != null and projectApplicantName!=''">
+            and project_applicant_name ${projectApplicantNameOperator} #{projectApplicantName}
+        </if>
+        <if test="projectOverview != null and projectOverview !=''">
+            and project_overview ${projectOverviewOperator} #{projectOverview}
+        </if>
+        <if test="researchIndicators != null and researchIndicators !=''">
+            and research_indicators ${researchIndicatorsOperator} #{researchIndicators}
+        </if>
+        <if test="remark != null and remark!=''">
+            and remark ${remarkOperator} #{remark}
+        </if>
+        <if test="delFlag != null and delFlag!=''">
+            and del_flag ${delFlagOperator} #{delFlag}
+        </if>
+        <if test="ext1 != null and ext1 !=''">
+            and ext1 ${ext1Operator} #{ext1}
+        </if>
+        <if test="ext2 != null and ext2 !=''">
+            and ext2 ${ext2Operator} #{ext2}
+        </if>
+        <if test="ext3 != null and ext3 !=''">
+            and ext3 ${ext3Operator} #{ext3}
+        </if>
+        <if test="ext4 != null and ext4 !=''">
+            and ext4 ${ext4Operator} #{ext4}
+        </if>
+        <if test="ext5 != null and ext5 !=''">
+            and ext5 ${ext5Operator} #{ext5}
+        </if>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ORDER BY RPD.PROJECT_NAME
+    </select>
+
+    <select id="getProjectContractInfo" parameterType="com.adc.da.base.page.BasePage"
+            resultMap="ProjectDataContractInfoMap">
+        select<include refid="Base_Column_AS_List"/>,
+        <include refid="Project_Data_Contract_Info"/>,
+        dicp.DIC_TYPE_NAME AS project_type_name,
+        dicp.DIC_TYPE_NAME AS undertakingName,
+        org.ORG_NAME AS dept_name,
+        rsc.company_name AS reporting_unit_name
+        from
+        RS_PROJECT_DATA pa
+        LEFT JOIN RS_CONTRACT_INFO co ON pa.id = co.PROJECT_ID
+        LEFT JOIN TS_DICTYPE dicp ON pa.project_type_id = dicp.id
+        LEFT JOIN TS_DICTYPE dicp ON pa.UNDERTAKING_ID = dicp.id
+        LEFT JOIN TS_ORG org ON org.id = pa.dept_id
+        LEFT JOIN rs_company rsc ON rsc.id = pa.reporting_unit_id
+        where 1 = 1
+        <include refid="Base_Where_ConTract_info"/>
+
+    </select>
+</mapper>

@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.adc.da.budget.dao.OrgListDao">
+    <!-- Result Map-->
+    <resultMap id = "BaseResultMap" type = "com.adc.da.sys.entity.OrgEO">
+        <id column = "id" property = "id"/>
+        <result column = "del_flag" property = "delFlag"/>
+        <result column = "org_name" property = "name"/>
+        <result column = "org_desc" property = "orgDesc"/>
+        <result column = "org_code" property = "orgCode"/>
+        <result column = "org_type" property = "orgType"/>
+        <result column = "parent_id" property = "parentId"/>
+        <result column = "parent_ids" property = "parentIds"/>
+        <result column = "is_show" property = "isShow"/>
+        <result column = "remarks" property = "remarks"/>
+    </resultMap>
+
+
+    <select id = "queryOrgEOByOrgId" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+        SELECT
+        <include refid = "Base_Column_List"/>
+        FROM TS_ORG
+        WHERE DEL_FLAG = 0 and ID = #{0}
+    </select>
+
+    <select id = "queryChildOrgByOrgId" resultMap = "BaseResultMap1" parameterType = "java.lang.String">
+        SELECT *
+        FROM TS_ORG T
+        WHERE T.PARENT_ID = #{orgId}
+    </select>
+
+
+    <select id = "queryOrgIdByUid" resultType = "java.lang.String" parameterType = "java.lang.String">
+        SELECT ORG_ID
+        FROM TR_USER_ORG
+        WHERE USER_ID = #{userId}
+    </select>
+
+
+    <!-- TS_ORG table all fields -->
+    <sql id = "Base_Column_List">
+        id, del_flag, org_name, org_desc,org_code,parent_id, parent_ids, is_show, remarks
+    </sql>
+
+    <sql id = "Base_Column_List1">
+        id, del_flag, org_name, org_desc,org_code,parent_id, parent_ids, is_show, remarks,user_id,org_id
+    </sql>
+    <sql id = "Base_Column_Lista">
+        TS_ORG.id, TS_ORG.del_flag, TS_ORG.org_name, TS_ORG.org_desc,TS_ORG.org_code,TS_ORG.org_type,TS_ORG.parent_id, TS_ORG.parent_ids, TS_ORG.is_show, TS_ORG.remarks
+    </sql>
+    <resultMap id = "BaseResultMap1" type = "com.adc.da.budget.entity.StatisticsEntity">
+        <id column = "id" property = "id"/>
+        <result column = "del_flag" property = "delFlag"/>
+        <result column = "org_name" property = "orgName"/>
+        <result column = "org_desc" property = "orgDesc"/>
+        <result column = "org_code" property = "orgCode"/>
+        <result column = "org_type" property = "orgType"/>
+        <result column = "parent_id" property = "parentId"/>
+        <result column = "parent_ids" property = "parentIds"/>
+        <result column = "is_show" property = "isShow"/>
+        <result column = "remarks" property = "remarks"/>
+        <result column = "user_id" property = "userId"/>
+        <result column = "org_id" property = "orgId"/>
+    </resultMap>
+
+    <select id = "listAllOrgWithDeleted" resultMap = "BaseResultMap">
+        SELECT
+        <include refid = "Base_Column_List"/>
+        FROM TS_ORG
+       order by WEIGHT
+    </select>
+
+    <select id = "listAllOrg" resultMap = "BaseResultMap">
+        SELECT
+        <include refid = "Base_Column_List"/>
+        FROM TS_ORG
+        WHERE DEL_FLAG = 0 order by WEIGHT
+    </select>
+
+    <select id = "selectOrgEOByIdList" resultMap = "BaseResultMap">
+        SELECT
+        <include refid = "Base_Column_List"/>
+        FROM TS_ORG
+        WHERE DEL_FLAG = 0 and ID in
+        <foreach item="id" collection="list" open="(" separator=","
+                 close=")" index="index">
+            #{id}
+        </foreach>
+    </select>
+
+    <select id = "queryOrgByName" resultMap = "BaseResultMap1" parameterType = "java.lang.String">
+        SELECT *
+        FROM TS_ORG T
+        WHERE T.ORG_NAME LIKE #{orgName}
+    </select>
+
+    <select id = "queryEmpByOrgTree" resultMap = "BaseResultMap1" parameterType = "java.lang.String">
+        SELECT DISTINCT A.USER_ID
+        FROM TR_USER_ORG A
+        WHERE A.ORG_ID IN (
+            SELECT B."ID"
+            FROM TS_ORG B
+            START WITH B."ID" = #{orgId}
+            CONNECT BY PRIOR B."ID" = B.PARENT_ID
+        )
+    </select>
+
+    <select id = "queryChildEmp" resultMap = "BaseResultMap1" parameterType = "java.lang.String">
+        SELECT *
+        FROM TS_ORG T
+        WHERE T.PARENT_ID = #{orgId}
+          AND T.ORG_NAME LIKE '%部'
+    </select>
+
+    <select id = "queryChildGroup" resultMap = "BaseResultMap1" parameterType = "java.lang.String">
+        SELECT * FROM TS_ORG T
+        <where>
+            AND T.ORG_NAME LIKE '%组'
+            <if test = "orgId != null">AND T.PARENT_ID = #{orgId}</if>
+        </where>
+    </select>
+
+    <select id = "queryEmpByOrgId" resultType = "java.lang.String" parameterType = "java.lang.String">
+        SELECT T.USER_ID
+        FROM TR_USER_ORG T
+        WHERE T.ORG_ID = #{orgId}
+    </select>
+
+    <select id = "queryOrgByUserId" resultMap = "BaseResultMap1" parameterType = "java.lang.String">
+        SELECT *
+        FROM TR_USER_ORG T
+                 LEFT JOIN TS_ORG P ON T.ORG_ID = P."ID"
+        WHERE T.USER_ID = #{userId}
+          AND P.DEL_FLAG = '0'
+    </select>
+
+    <select id = "querygGroupByUserId" resultMap = "BaseResultMap1" parameterType = "java.lang.String">
+        SELECT *
+        FROM TR_USER_ORG T
+                 LEFT JOIN TS_ORG P ON T.ORG_ID = P."ID"
+        WHERE T.USER_ID = #{userId}
+          AND P.DEL_FLAG = '0'
+          AND P.ORG_NAME LIKE '%组'
+    </select>
+
+    <select id = "queryAllChildGroups" resultMap = "BaseResultMap1" parameterType = "java.lang.String">
+        SELECT *
+        FROM TS_ORG T
+        WHERE INSTR(T.PARENT_IDS, #{orgId}) > 0
+          AND T.DEL_FLAG = '0'
+    </select>
+
+    <select id = "queryGroupEmps" resultType = "java.lang.String" parameterType = "java.lang.String">
+        SELECT M.USER_ID
+        FROM TR_USER_ORG M
+        WHERE M.ORG_ID IN (
+            SELECT DISTINCT(T.ID)
+            FROM TS_ORG T
+            WHERE T.PARENT_ID = #{orgId}
+              AND T.ORG_NAME LIKE '%组%'
+        )
+    </select>
+
+    <select id = "queryOrgName" resultType = "java.lang.String" parameterType = "java.lang.String">
+        SELECT T.ORG_NAME
+        FROM TS_ORG T
+        WHERE T."ID" = #{orgId}
+    </select>
+
+    <!-- 根据id查询 组织机构 -->
+    <select id = "queryByParentId" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+        select
+        <include refid = "Base_Column_Lista"/>
+        from TS_ORG
+        where parent_id = #{parentId} AND del_flag != 1 order by WEIGHT
+    </select>
+
+
+    <resultMap id = "ResultMapUserList" type = "com.adc.da.budget.entity.StatisticsEntity">
+        <result column = "USNAME" property = "userName"/>
+        <result column = "USID" property = "userId"/>
+    </resultMap>
+
+
+    <!--根据组织机构id和用户name查询用户-->
+    <!--    @author Lee Kwanho 李坤澔-->
+    <!--    date 2019-05-27-->
+    <select id = "queryUserByDepIdAndUserName" resultMap = "ResultMapUserList" parameterType = "java.lang.String">
+
+        SELECT USID, USNAME
+        FROM TS_USER
+        WHERE USNAME = #{userName}
+          AND DEL_FLAG = '0'
+          AND USID IN (
+            SELECT DISTINCT A.USER_ID
+            FROM TR_USER_ORG A
+            WHERE A.ORG_ID IN (
+                SELECT B."ID"
+                FROM TS_ORG B
+                START WITH B."ID" = #{orgId}
+                CONNECT BY PRIOR B."ID" = B.PARENT_ID
+            )
+        )
+    </select>
+
+
+    <select id = "queryDepEmps" resultType = "java.lang.String" parameterType = "java.lang.String">
+        SELECT M.USER_ID
+        FROM TR_USER_ORG M
+        WHERE M.ORG_ID IN (
+            SELECT DISTINCT(T.ID)
+            FROM TS_ORG T
+            WHERE T.PARENT_ID = #{orgId}
+              AND T.ORG_NAME LIKE '%部%'
+        )
+    </select>
+
+    <select id = "queryEmpByGropId" resultType = "java.lang.String" parameterType = "java.lang.String">
+        SELECT p.USER_ID
+        FROM TR_USER_ORG p
+        WHERE p.ORG_ID IN (
+            SELECT t."ID"
+            FROM TS_ORG t
+            START WITH t.id = #{orgId}
+            CONNECT BY t.id = PRIOR t.PARENT_ID
+                   AND t.ORG_NAME LIKE '%组')
+    </select>
+
+
+    <!-- 20190326 add by liqiuhsi -->
+    <!-- 查询所有部门 -->
+    <select id = "queryAllDeps" resultMap = "BaseResultMap1" parameterType = "java.lang.String">
+        SELECT *
+        FROM TS_ORG t
+        WHERE t.ORG_NAME LIKE '%部'
+          AND t.ORG_NAME NOT LIKE '%本部%'
+          AND t.DEL_FLAG = '0'
+    </select>
+    <!-- 查询所有大组 -->
+    <select id = "queryAllGroups" resultMap = "BaseResultMap1" parameterType = "java.lang.String">
+        SELECT *
+        FROM TS_ORG t
+        WHERE t.ORG_NAME LIKE '%组'
+          AND t.DEL_FLAG = '0'
+          AND t.PARENT_ID NOT IN (
+            SELECT DISTINCT(p."ID")
+            FROM TS_ORG p
+            WHERE p.ORG_NAME LIKE '%组'
+        )
+    </select>
+
+    <select id = "queryAdcOrgId" resultType = "java.lang.String" parameterType = "java.lang.String">
+        SELECT t.id
+        FROM TS_ORG t
+        WHERE t.org_name = #{name}
+    </select>
+
+    <select id = "getOrgEOByPidAsc" resultMap = "BaseResultMap">
+        SELECT *
+        FROM TS_ORG
+        WHERE PARENT_ID = #{parentId}
+          AND DEL_FLAG != 1
+        ORDER BY WEIGHT  ASC
+    </select>
+
+    <select id = "getOrgEOByPid" resultType = "java.lang.String">
+        SELECT id
+        FROM TS_ORG
+        WHERE parent_id = #{parentId}
+          AND del_flag != 1
+    </select>
+
+    <select id = "getAllOrgIdByPid" resultType = "java.lang.String">
+        SELECT id
+        FROM TS_ORG
+        START WITH TS_ORG."ID" = #{parentId}
+               AND del_flag != 1
+        CONNECT BY PRIOR TS_ORG."ID" = TS_ORG.PARENT_ID
+    </select>
+
+
+    <!--    根据组织机构pid和组织机构模糊查询-->
+    <select id = "queryOrgByNameAndPid" resultMap = "BaseResultMap1">
+        SELECT ID,ORG_NAME,PARENT_ID FROM TS_ORG T
+        <where>
+            del_flag != 1
+            and
+            ORG_NAME like #{orgName}
+            and
+            PARENT_ID = #{parentId}
+        </where>
+    </select>
+
+    <!--    根据组织机构名称获取组织机构信息-->
+    <select id = "getOrgEOByName" resultMap = "BaseResultMap">
+        select
+        t.id,t.PARENT_ID,t.ORG_NAME
+        from TS_ORG t
+        <where>
+            del_flag != 1
+            and
+            t.org_name = #{orgName}
+        </where>
+
+    </select>
+
+
+    <resultMap id = "BaseResultMapWhitLevel" type = "com.adc.da.budget.entity.OrgWithLevelEO" extends = "BaseResultMap">
+        <id column = "id" property = "id"/>
+        <result column = "ORG_LEAF" property = "leaf"/>
+        <result column = "ORG_LEVEL" property = "level"/>
+        <result column = "USER_ID" property = "userId"/>
+        <result column = "ORG_ID" property = "id"/>
+    </resultMap>
+
+    <!--查询用户所在组织，同时根据level降序排列-->
+    <select id = "getUserOrgWhitLeafAndLev" resultMap = "BaseResultMapWhitLevel" parameterType = "java.lang.String">
+        SELECT USER_ID, ORG_ID, ORG_NAME,PARENT_IDS, org.ORG_LEVEL,org.ORG_LEAF
+        FROM TR_USER_ORG UORG
+        LEFT JOIN (
+        SELECT id, ORG_NAME, connect_by_isleaf ORG_LEAF, LEVEL ORG_LEVEL, PARENT_IDS
+        FROM TS_ORG B
+        START WITH B."ID" = (SELECT id FROM ts_org WHERE parent_id = '0' AND rownum = 1)
+        CONNECT BY PRIOR B."ID" = B.PARENT_ID
+        ORDER BY ORG_LEVEL DESC
+        ) ORG ON ORG.ID = UORG.ORG_ID
+        <where>USER_ID =#{id}</where>
+    </select>
+
+    <select id = "getMinUserOrgIdInfo" resultMap = "BaseResultMapWhitLevel">
+        SELECT *
+        FROM (SELECT ROW_NUMBER() OVER (PARTITION BY USER_ID ORDER BY ORG_LEVEL DESC) rn,
+                     test1.*
+              FROM (SELECT USER_ID, ORG_ID, ORG_NAME, PARENT_IDS, org.ORG_LEVEL, org.ORG_LEAF
+                    FROM TR_USER_ORG UORG
+                             LEFT JOIN (
+                        SELECT id, ORG_NAME, connect_by_isleaf ORG_LEAF, LEVEL ORG_LEVEL, PARENT_IDS
+                        FROM TS_ORG B
+                        START WITH B."ID" = (SELECT id FROM ts_org WHERE parent_id = '0' AND rownum = 1)
+                        CONNECT BY PRIOR B."ID" = B.PARENT_ID
+                        ORDER BY ORG_LEVEL DESC
+                    ) ORG ON ORG.ID = UORG.ORG_ID) test1)
+        WHERE rn = 1
+    </select>
+    <!--    -->
+    <select id = "getOrgAndSubOrgIds" resultType = "java.lang.String">
+        SELECT ID
+        FROM TS_ORG
+        START WITH ID = #{orgId}
+        CONNECT BY PRIOR ID = PARENT_ID
+    </select>
+
+    <!--过滤数据资源中心领导 USW7ASDVED -->
+    <select id = "getOrgAndSubOrgIdsWithLevel" resultMap = "BaseResultMapWhitLevel">
+        SELECT CONNECT_BY_ISLEAF AS ORG_LEAF, LEVEL AS ORG_LEVEL, t.*
+        FROM TS_ORG t
+        CONNECT BY PRIOR ID = PARENT_ID AND DEL_FLAG != 1 and id != 'USW7ASDVED' and LEVEL &lt; 4
+        <if test = "topNodeId != null">
+            START WITH id = #{topNodeId}
+        </if>
+        <if test = "topNodeId == null">
+            START WITH id = 'MH8JQV5TSN'
+        </if>
+        ORDER SIBLINGS BY WEIGHT
+
+    </select>
+</mapper>

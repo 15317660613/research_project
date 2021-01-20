@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.dao.InfoEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.research.entity.InfoEO" >
+    <id column="research_project_id_" property="researchProjectId" />
+    <result column="research_project_name_" property="researchProjectName" />
+    <result column="research_project_property_id_" property="researchProjectPropertyId" />
+    <result column="cooperation_department_name_" property="cooperationDepartmentName" />
+    <result column="own_department_name_" property="ownDepartmentName" />
+    <result column="own_department_id_" property="ownDepartmentId" />
+    <result column="own_platform_name_" property="ownPlatformName" />
+    <result column="own_platform_id_" property="ownPlatformId" />
+    <result column="research_project_type_id_" property="researchProjectTypeId" />
+    <result column="research_project_type_name_" property="researchProjectTypeName" />
+    <result column="research_project_begin_time_" property="researchProjectBeginTime" />
+    <result column="research_project_end_time_" property="researchProjectEndTime" />
+    <result column="business_id_" property="businessId" />
+    <result column="business_name_" property="businessName" />
+    <result column="ext_info_1_" property="extInfo1" />
+    <result column="ext_info_2_" property="extInfo2" />
+    <result column="ext_info_3_" property="extInfo3" />
+    <result column="ext_info_4_" property="extInfo4" />
+    <result column="ext_info_5_" property="extInfo5" />
+    <result column="ext_info_6_" property="extInfo6" />
+  </resultMap>
+
+  <!-- RS_PROJECT_INFO table all fields -->
+  <sql id="Base_Column_List" >
+     research_project_id_, research_project_name_, research_project_property_id_, cooperation_department_name_, own_department_name_, own_department_id_, own_platform_name_, own_platform_id_, research_project_type_id_, research_project_type_name_, research_project_begin_time_, research_project_end_time_, business_id_, business_name_, ext_info_1_, ext_info_2_, ext_info_3_, ext_info_4_, ext_info_5_, ext_info_6_
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="researchProjectId != null" >
+        and research_project_id_ ${researchProjectIdOperator} #{researchProjectId}
+      </if>
+      <if test="researchProjectName != null" >
+        and research_project_name_ ${researchProjectNameOperator} #{researchProjectName}
+      </if>
+      <if test="researchProjectPropertyId != null" >
+        and research_project_property_id_ ${researchProjectPropertyIdOperator} #{researchProjectPropertyId}
+      </if>
+      <if test="cooperationDepartmentName != null" >
+        and cooperation_department_name_ ${cooperationDepartmentNameOperator} #{cooperationDepartmentName}
+      </if>
+      <if test="ownDepartmentName != null" >
+        and own_department_name_ ${ownDepartmentNameOperator} #{ownDepartmentName}
+      </if>
+      <if test="ownDepartmentId != null" >
+        and own_department_id_ ${ownDepartmentIdOperator} #{ownDepartmentId}
+      </if>
+      <if test="ownPlatformName != null" >
+        and own_platform_name_ ${ownPlatformNameOperator} #{ownPlatformName}
+      </if>
+      <if test="ownPlatformId != null" >
+        and own_platform_id_ ${ownPlatformIdOperator} #{ownPlatformId}
+      </if>
+      <if test="researchProjectTypeId != null" >
+        and research_project_type_id_ ${researchProjectTypeIdOperator} #{researchProjectTypeId}
+      </if>
+      <if test="researchProjectTypeName != null" >
+        and research_project_type_name_ ${researchProjectTypeNameOperator} #{researchProjectTypeName}
+      </if>
+      <if test="researchProjectBeginTime != null" >
+        and research_project_begin_time_ ${researchProjectBeginTimeOperator} #{researchProjectBeginTime}
+      </if>
+      <if test="researchProjectBeginTime1 != null" >
+        and research_project_begin_time_ &gt;= #{researchProjectBeginTime1}
+      </if>
+      <if test="researchProjectBeginTime2 != null" >
+        and research_project_begin_time_ &lt;= #{researchProjectBeginTime2}
+      </if>
+      <if test="researchProjectEndTime != null" >
+        and research_project_end_time_ ${researchProjectEndTimeOperator} #{researchProjectEndTime}
+      </if>
+      <if test="researchProjectEndTime1 != null" >
+        and research_project_end_time_ &gt;= #{researchProjectEndTime1}
+      </if>
+      <if test="researchProjectEndTime2 != null" >
+        and research_project_end_time_ &lt;= #{researchProjectEndTime2}
+      </if>
+      <if test="businessId != null" >
+        and business_id_ ${businessIdOperator} #{businessId}
+      </if>
+      <if test="businessName != null" >
+        and business_name_ ${businessNameOperator} #{businessName}
+      </if>
+      <if test="extInfo1 != null" >
+        and ext_info_1_ ${extInfo1Operator} #{extInfo1}
+      </if>
+      <if test="extInfo2 != null" >
+        and ext_info_2_ ${extInfo2Operator} #{extInfo2}
+      </if>
+      <if test="extInfo3 != null" >
+        and ext_info_3_ ${extInfo3Operator} #{extInfo3}
+      </if>
+      <if test="extInfo4 != null" >
+        and ext_info_4_ ${extInfo4Operator} #{extInfo4}
+      </if>
+      <if test="extInfo5 != null" >
+        and ext_info_5_ ${extInfo5Operator} #{extInfo5}
+      </if>
+      <if test="extInfo6 != null" >
+        and ext_info_6_ ${extInfo6Operator} #{extInfo6}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.research.entity.InfoEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="research_project_id_">
+        SELECT SEQ_RS_PROJECT_INFO.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into RS_PROJECT_INFO(<include refid="Base_Column_List" />)
+    values (#{researchProjectId, jdbcType=VARCHAR}, #{researchProjectName, jdbcType=VARCHAR}, #{researchProjectPropertyId, jdbcType=VARCHAR}, #{cooperationDepartmentName, jdbcType=VARCHAR}, #{ownDepartmentName, jdbcType=VARCHAR}, #{ownDepartmentId, jdbcType=VARCHAR}, #{ownPlatformName, jdbcType=VARCHAR}, #{ownPlatformId, jdbcType=VARCHAR}, #{researchProjectTypeId, jdbcType=VARCHAR}, #{researchProjectTypeName, jdbcType=VARCHAR}, #{researchProjectBeginTime, jdbcType=TIMESTAMP}, #{researchProjectEndTime, jdbcType=TIMESTAMP}, #{businessId, jdbcType=VARCHAR}, #{businessName, jdbcType=VARCHAR}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR}, #{extInfo6, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.research.entity.InfoEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="research_project_id_">
+        SELECT SEQ_RS_PROJECT_INFO.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into RS_PROJECT_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="researchProjectId != null" >research_project_id_,</if>
+                <if test="researchProjectName != null" >research_project_name_,</if>
+                <if test="researchProjectPropertyId != null" >research_project_property_id_,</if>
+                <if test="cooperationDepartmentName != null" >cooperation_department_name_,</if>
+                <if test="ownDepartmentName != null" >own_department_name_,</if>
+                <if test="ownDepartmentId != null" >own_department_id_,</if>
+                <if test="ownPlatformName != null" >own_platform_name_,</if>
+                <if test="ownPlatformId != null" >own_platform_id_,</if>
+                <if test="researchProjectTypeId != null" >research_project_type_id_,</if>
+                <if test="researchProjectTypeName != null" >research_project_type_name_,</if>
+                <if test="researchProjectBeginTime != null" >research_project_begin_time_,</if>
+                <if test="researchProjectEndTime != null" >research_project_end_time_,</if>
+                <if test="businessId != null" >business_id_,</if>
+                <if test="businessName != null" >business_name_,</if>
+                <if test="extInfo1 != null" >ext_info_1_,</if>
+                <if test="extInfo2 != null" >ext_info_2_,</if>
+                <if test="extInfo3 != null" >ext_info_3_,</if>
+                <if test="extInfo4 != null" >ext_info_4_,</if>
+                <if test="extInfo5 != null" >ext_info_5_,</if>
+                <if test="extInfo6 != null" >ext_info_6_,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="researchProjectId != null" >#{researchProjectId, jdbcType=VARCHAR},</if>
+                <if test="researchProjectName != null" >#{researchProjectName, jdbcType=VARCHAR},</if>
+                <if test="researchProjectPropertyId != null" >#{researchProjectPropertyId, jdbcType=VARCHAR},</if>
+                <if test="cooperationDepartmentName != null" >#{cooperationDepartmentName, jdbcType=VARCHAR},</if>
+                <if test="ownDepartmentName != null" >#{ownDepartmentName, jdbcType=VARCHAR},</if>
+                <if test="ownDepartmentId != null" >#{ownDepartmentId, jdbcType=VARCHAR},</if>
+                <if test="ownPlatformName != null" >#{ownPlatformName, jdbcType=VARCHAR},</if>
+                <if test="ownPlatformId != null" >#{ownPlatformId, jdbcType=VARCHAR},</if>
+                <if test="researchProjectTypeId != null" >#{researchProjectTypeId, jdbcType=VARCHAR},</if>
+                <if test="researchProjectTypeName != null" >#{researchProjectTypeName, jdbcType=VARCHAR},</if>
+                <if test="researchProjectBeginTime != null" >#{researchProjectBeginTime, jdbcType=TIMESTAMP},</if>
+                <if test="researchProjectEndTime != null" >#{researchProjectEndTime, jdbcType=TIMESTAMP},</if>
+                <if test="businessId != null" >#{businessId, jdbcType=VARCHAR},</if>
+                <if test="businessName != null" >#{businessName, jdbcType=VARCHAR},</if>
+                <if test="extInfo1 != null" >#{extInfo1, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="extInfo3 != null" >#{extInfo3, jdbcType=VARCHAR},</if>
+                <if test="extInfo4 != null" >#{extInfo4, jdbcType=VARCHAR},</if>
+                <if test="extInfo5 != null" >#{extInfo5, jdbcType=VARCHAR},</if>
+                <if test="extInfo6 != null" >#{extInfo6, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.research.entity.InfoEO" >
+    update RS_PROJECT_INFO
+       set  research_project_name_ = #{researchProjectName},
+            research_project_property_id_ = #{researchProjectPropertyId},
+            cooperation_department_name_ = #{cooperationDepartmentName},
+            own_department_name_ = #{ownDepartmentName},
+            own_department_id_ = #{ownDepartmentId},
+            own_platform_name_ = #{ownPlatformName},
+            own_platform_id_ = #{ownPlatformId},
+            research_project_type_id_ = #{researchProjectTypeId},
+            research_project_type_name_ = #{researchProjectTypeName},
+            research_project_begin_time_ = #{researchProjectBeginTime},
+            research_project_end_time_ = #{researchProjectEndTime},
+            business_id_ = #{businessId},
+            business_name_ = #{businessName},
+            ext_info_1_ = #{extInfo1},
+            ext_info_2_ = #{extInfo2},
+            ext_info_3_ = #{extInfo3},
+            ext_info_4_ = #{extInfo4},
+            ext_info_5_ = #{extInfo5},
+            ext_info_6_ = #{extInfo6}
+     where  research_project_id_ = #{researchProjectId}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.research.entity.InfoEO" >
+    update RS_PROJECT_INFO
+    <set >
+      <if test="researchProjectName != null" >
+        research_project_name_ = #{researchProjectName},
+      </if>
+      <if test="researchProjectPropertyId != null" >
+        research_project_property_id_ = #{researchProjectPropertyId},
+      </if>
+      <if test="cooperationDepartmentName != null" >
+        cooperation_department_name_ = #{cooperationDepartmentName},
+      </if>
+      <if test="ownDepartmentName != null" >
+        own_department_name_ = #{ownDepartmentName},
+      </if>
+      <if test="ownDepartmentId != null" >
+        own_department_id_ = #{ownDepartmentId},
+      </if>
+      <if test="ownPlatformName != null" >
+        own_platform_name_ = #{ownPlatformName},
+      </if>
+      <if test="ownPlatformId != null" >
+        own_platform_id_ = #{ownPlatformId},
+      </if>
+      <if test="researchProjectTypeId != null" >
+        research_project_type_id_ = #{researchProjectTypeId},
+      </if>
+      <if test="researchProjectTypeName != null" >
+        research_project_type_name_ = #{researchProjectTypeName},
+      </if>
+      <if test="researchProjectBeginTime != null" >
+        research_project_begin_time_ = #{researchProjectBeginTime},
+      </if>
+      <if test="researchProjectEndTime != null" >
+        research_project_end_time_ = #{researchProjectEndTime},
+      </if>
+      <if test="businessId != null" >
+        business_id_ = #{businessId},
+      </if>
+      <if test="businessName != null" >
+        business_name_ = #{businessName},
+      </if>
+      <if test="extInfo1 != null" >
+        ext_info_1_ = #{extInfo1},
+      </if>
+      <if test="extInfo2 != null" >
+        ext_info_2_ = #{extInfo2},
+      </if>
+      <if test="extInfo3 != null" >
+        ext_info_3_ = #{extInfo3},
+      </if>
+      <if test="extInfo4 != null" >
+        ext_info_4_ = #{extInfo4},
+      </if>
+      <if test="extInfo5 != null" >
+        ext_info_5_ = #{extInfo5},
+      </if>
+      <if test="extInfo6 != null" >
+        ext_info_6_ = #{extInfo6},
+      </if>
+    </set>
+     where research_project_id_ = #{researchProjectId}
+  </update>
+
+  <!-- 根据id查询 RS_PROJECT_INFO -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+      from RS_PROJECT_INFO
+     where research_project_id_ = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RS_PROJECT_INFO
+     where research_project_id_ = #{value}
+
+  </delete>
+
+  <!-- RS_PROJECT_INFO 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from RS_PROJECT_INFO
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询RS_PROJECT_INFO列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from RS_PROJECT_INFO
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+    <!-- 查询RS_PROJECT_INFO列表 -->
+    <select id="queryPendingProcess" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select <include refid="Base_Column_List" /> from
+        (select tmp_tb.* , rownum rn from
+        (select <include refid="Base_Column_List" /> from RS_PROJECT_INFO
+        WHERE 1=1
+          and EXT_INFO_4_ in (0,2)
+          AND EXT_INFO_1_ =  #{extInfo1}
+            ORDER BY EXT_INFO_5_ DESC
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+    <!-- RS_PROJECT_INFO 列表总数-->
+    <select id="countPendingProcess" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        select count(1) from RS_PROJECT_INFO
+        WHERE 1=1
+          and EXT_INFO_4_ in (0,2)
+          AND EXT_INFO_1_ =  #{extInfo1}
+    </select>
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from RS_PROJECT_INFO
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

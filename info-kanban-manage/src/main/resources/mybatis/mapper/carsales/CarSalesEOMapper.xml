@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.carsales.dao.CarSalesEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.carsales.entity.CarSalesEO" >
+    <id column="id" property="id" />
+    <result column="enterprise_id" property="enterpriseId" />
+    <result column="month_sales" property="monthSales" />
+    <result column="growth_rate" property="growthRate" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="create_user_name" property="createUserName" />
+    <result column="update_time" property="updateTime" />
+    <result column="del_flag" property="delFlag" />
+    <result column="ext1" property="ext1" />
+    <result column="ext2" property="ext2" />
+    <result column="ext3" property="ext3" />
+    <result column="ext4" property="ext4" />
+    <result column="ext5" property="ext5" />
+  </resultMap>
+
+  <!-- DB_CAR_SALES table all fields -->
+  <sql id="Base_Column_List" >
+     id, enterprise_id, month_sales, growth_rate, create_user_id, create_user_name, update_time, del_flag, ext1, ext2, ext3, ext4, ext5
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1 and cs.del_flag = '0'
+    <trim suffixOverrides="," >
+      <if test="id != null and id != ''" >
+        and cs.id ${idOperator} #{id}
+      </if>
+      <if test="enterpriseId != null and enterpriseId != ''" >
+        and cs.enterprise_id ${enterpriseIdOperator} #{enterpriseId}
+      </if>
+      <if test="monthSales != null and monthSales != ''" >
+        and cs.month_sales ${monthSalesOperator} #{monthSales}
+      </if>
+      <if test="growthRate != null and growthRate != ''" >
+        and cs.growth_rate ${growthRateOperator} #{growthRate}
+      </if>
+      <if test="createUserId != null and createUserId != ''" >
+        and cs.create_user_id ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="createUserName != null and createUserName != ''" >
+        and cs.create_user_name ${createUserNameOperator} #{createUserName}
+      </if>
+      <if test="updateTime != null and updateTime != ''" >
+        and cs.update_time ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null and updateTime1 != ''" >
+        and cs.update_time &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null and updateTime2 != ''" >
+        and cs.update_time &lt;= #{updateTime2}
+      </if>
+      <if test="delFlag != null and delFlag != ''" >
+        and cs.del_flag ${delFlagOperator} #{delFlag}
+      </if>
+      <if test="ext1 != null and ext1 != ''" >
+        and cs.ext1 ${ext1Operator} #{ext1}
+      </if>
+      <if test="ext2 != null and ext2 != ''" >
+        and cs.ext2 ${ext2Operator} #{ext2}
+      </if>
+      <if test="ext3 != null and ext3 != ''" >
+        and cs.ext3 ${ext3Operator} #{ext3}
+      </if>
+      <if test="ext4 != null and ext4 != ''" >
+        and cs.ext4 ${ext4Operator} #{ext4}
+      </if>
+      <if test="ext5 != null and ext5 != ''" >
+        and cs.ext5 ${ext5Operator} #{ext5}
+      </if>
+      <if test="enterpriseName != null and enterpriseName != ''">
+          and e.enterprise_name ${enterpriseNameOperator} #{enterpriseName}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.carsales.entity.CarSalesEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_DB_CAR_SALES.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into DB_CAR_SALES(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{enterpriseId, jdbcType=VARCHAR}, #{monthSales, jdbcType=INTEGER}, #{growthRate, jdbcType=VARCHAR}, #{createUserId, jdbcType=VARCHAR}, #{createUserName, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP}, #{delFlag, jdbcType=VARCHAR}, #{ext1, jdbcType=VARCHAR}, #{ext2, jdbcType=VARCHAR}, #{ext3, jdbcType=VARCHAR}, #{ext4, jdbcType=VARCHAR}, #{ext5, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.carsales.entity.CarSalesEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_DB_CAR_SALES.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into DB_CAR_SALES
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null and id != ''" >id,</if>
+                <if test="enterpriseId != null and enterpriseId != ''" >enterprise_id,</if>
+                <if test="monthSales != null" >month_sales,</if>
+                <if test="growthRate != null and growthRate != ''" >growth_rate,</if>
+                <if test="createUserId != null and createUserId != ''" >create_user_id,</if>
+                <if test="createUserName != null and createUserName != ''" >create_user_name,</if>
+                <if test="updateTime != null" >update_time,</if>
+                <if test="delFlag != null and delFlag != ''" >del_flag,</if>
+                <if test="ext1 != null and ext1 != ''" >ext1,</if>
+                <if test="ext2 != null and ext2 != ''" >ext2,</if>
+                <if test="ext3 != null and ext3 != ''" >ext3,</if>
+                <if test="ext4 != null and ext4 != ''" >ext4,</if>
+                <if test="ext5 != null and ext5 != ''" >ext5,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null and id != ''" >#{id, jdbcType=VARCHAR},</if>
+                <if test="enterpriseId != null and enterpriseId != ''" >#{enterpriseId, jdbcType=VARCHAR},</if>
+                <if test="monthSales != null" >#{monthSales, jdbcType=INTEGER},</if>
+                <if test="growthRate != null and growthRate != ''" >#{growthRate, jdbcType=VARCHAR},</if>
+                <if test="createUserId != null and createUserId != ''" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="createUserName != null and createUserName != ''" >#{createUserName, jdbcType=VARCHAR},</if>
+                <if test="updateTime != null" >#{updateTime, jdbcType=TIMESTAMP},</if>
+                <if test="delFlag != null and delFlag != ''" >#{delFlag, jdbcType=VARCHAR},</if>
+                <if test="ext1 != null and ext1 != ''" >#{ext1, jdbcType=VARCHAR},</if>
+                <if test="ext2 != null and ext2 != ''" >#{ext2, jdbcType=VARCHAR},</if>
+                <if test="ext3 != null and ext3 != ''" >#{ext3, jdbcType=VARCHAR},</if>
+                <if test="ext4 != null and ext4 != ''" >#{ext4, jdbcType=VARCHAR},</if>
+                <if test="ext5 != null and ext5 != ''" >#{ext5, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.carsales.entity.CarSalesEO" >
+    update DB_CAR_SALES
+       set  enterprise_id = #{enterpriseId},
+            month_sales = #{monthSales},
+            growth_rate = #{growthRate},
+            create_user_id = #{createUserId},
+            create_user_name = #{createUserName},
+            update_time = #{updateTime},
+            del_flag = #{delFlag},
+            ext1 = #{ext1},
+            ext2 = #{ext2},
+            ext3 = #{ext3},
+            ext4 = #{ext4},
+            ext5 = #{ext5}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.carsales.entity.CarSalesEO" >
+    update DB_CAR_SALES
+    <set >
+      <if test="enterpriseId != null and enterpriseId != ''" >
+        enterprise_id = #{enterpriseId},
+      </if>
+      <if test="monthSales != null" >
+        month_sales = #{monthSales},
+      </if>
+      <if test="growthRate != null and growthRate != ''" >
+        growth_rate = #{growthRate},
+      </if>
+      <if test="createUserId != null and createUserId != ''" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="createUserName != null and createUserName != ''" >
+        create_user_name = #{createUserName},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+      <if test="delFlag != null and delFlag != ''" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="ext1 != null and ext1 != ''" >
+        ext1 = #{ext1},
+      </if>
+      <if test="ext2 != null and ext2 != ''" >
+        ext2 = #{ext2},
+      </if>
+      <if test="ext3 != null and ext3 != ''" >
+        ext3 = #{ext3},
+      </if>
+      <if test="ext4 != null and ext4 != ''" >
+        ext4 = #{ext4},
+      </if>
+      <if test="ext5 != null and ext5 != ''" >
+        ext5 = #{ext5},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 DB_CAR_SALES -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select cs.*,e.ENTERPRISE_NAME AS enterpriseName
+      from DB_CAR_SALES cs LEFT JOIN DB_ENTERPRISE e ON e."ID" = CS.ENTERPRISE_ID
+     where cs.id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from DB_CAR_SALES
+     where id = #{value}
+
+  </delete>
+
+    <update id="logicDeleteByPrimaryKey" parameterType="java.lang.String">
+        update DB_CAR_SALES set del_flag = '1' where id = #{id}
+    </update>
+
+    <update id="batchLogicDeleteByIds" parameterType="java.util.List">
+        update DB_CAR_SALES set del_flag = '1' where id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")" index="index">
+            #{id}
+        </foreach>
+    </update>
+
+    <update id="batchDeleteAll">
+        update DB_CAR_SALES set del_flag = '1'
+    </update>
+
+  <!-- DB_CAR_SALES 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from DB_CAR_SALES cs
+      LEFT JOIN DB_ENTERPRISE e ON e."ID" = cs.ENTERPRISE_ID
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询DB_CAR_SALES列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select tmp_all.* from
+		(select tmp_tb.* , rownum rn from
+			(select cs.*,e.ENTERPRISE_NAME AS enterpriseName from DB_CAR_SALES cs
+                LEFT JOIN DB_ENTERPRISE e ON e."ID" = cs.ENTERPRISE_ID
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex}) tmp_all
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select cs.*,e.ENTERPRISE_NAME AS enterpriseName from DB_CAR_SALES cs
+      LEFT JOIN DB_ENTERPRISE e ON e."ID" = cs.ENTERPRISE_ID
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+    <select id="carSalesRanking" resultMap="BaseResultMap">
+        select e.ENTERPRISE_NAME AS enterpriseName,"SUM"(CS.MONTH_SALES) AS monthSales
+        from DB_CAR_SALES cs LEFT JOIN DB_ENTERPRISE e ON e."ID" = cs.ENTERPRISE_ID
+        WHERE CS.DEL_FLAG = '0'
+        GROUP BY e.ENTERPRISE_NAME
+        ORDER BY monthSales DESC
+    </select>
+
+</mapper>

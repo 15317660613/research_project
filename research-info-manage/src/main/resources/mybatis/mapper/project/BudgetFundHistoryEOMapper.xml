@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.project.dao.BudgetFundHistoryEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.research.project.entity.BudgetFundHistoryEO" >
+    <id column="id" property="id" />
+    <result column="change_user" property="changeUser" />
+    <result column="change_user_id" property="changeUserId" />
+    <result column="project_id" property="projectId" />
+    <result column="budget_type" property="budgetType" />
+    <result column="budget_year" property="budgetYear" />
+    <result column="budget_amount" property="budgetAmount" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="create_user_name" property="createUserName" />
+    <result column="create_time" property="createTime" />
+    <result column="modify_time" property="modifyTime" />
+    <result column="del_flag" property="delFlag" />
+    <result column="ext1" property="ext1" />
+    <result column="ext2" property="ext2" />
+    <result column="ext3" property="ext3" />
+    <result column="ext4" property="ext4" />
+    <result column="ext5" property="ext5" />
+    <result column="depreciation" property="depreciation" />
+    <result column="STAFF_COSTS" property="staffCosts" />
+    <result column="remark" property="remark" />
+  </resultMap>
+
+    <!-- BaseResultCompareMap-->
+    <resultMap id="BaseResultCompareMap" type="com.adc.da.research.project.vo.BudgetFundVO" >
+        <id column="id" property="id" />
+        <result column="project_id" property="projectId" />
+        <result column="budget_type" property="budgetType" />
+        <result column="budget_year" property="budgetYear" />
+        <result column="budget_amount" property="budgetAmount" />
+        <result column="create_user_id" property="createUserId" />
+        <result column="create_user_name" property="createUserName" />
+        <result column="create_time" property="createTime" />
+        <result column="modify_time" property="modifyTime" />
+        <result column="del_flag" property="delFlag" />
+        <result column="ext1" property="ext1" />
+        <result column="ext2" property="ext2" />
+        <result column="ext3" property="ext3" />
+        <result column="ext4" property="ext4" />
+        <result column="ext5" property="ext5" />
+        <result column="depreciation" property="depreciation" />
+        <result column="STAFF_COSTS" property="staffCosts" />
+        <result column="remark" property="remark" />
+        <result column="change_user" property="changeUser" />
+        <result column="change_user_id" property="changeUserId" />
+    </resultMap>
+
+  <!-- RS_BUDGET_FUND_HISTORY table all fields -->
+  <sql id="Base_Column_List" >
+     change_user, change_user_id, id, project_id, budget_type, budget_year, budget_amount, create_user_id, create_user_name, create_time, modify_time, del_flag, ext1, ext2, ext3, ext4, ext5,DEPRECIATION,STAFF_COSTS,REMARK
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1 and del_flag =0
+    <trim suffixOverrides="," >
+      <if test="changeUser != null" >
+        and change_user ${changeUserOperator} #{changeUser}
+      </if>
+      <if test="changeUserId != null" >
+        and change_user_id ${changeUserIdOperator} #{changeUserId}
+      </if>
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="projectId != null" >
+        and project_id ${projectIdOperator} #{projectId}
+      </if>
+      <if test="budgetType != null" >
+        and budget_type ${budgetTypeOperator} #{budgetType}
+      </if>
+      <if test="budgetYear != null" >
+        and budget_year ${budgetYearOperator} #{budgetYear}
+      </if>
+      <if test="budgetAmount != null" >
+        and budget_amount ${budgetAmountOperator} #{budgetAmount}
+      </if>
+      <if test="createUserId != null" >
+        and create_user_id ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="createUserName != null" >
+        and create_user_name ${createUserNameOperator} #{createUserName}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="modifyTime != null" >
+        and modify_time ${modifyTimeOperator} #{modifyTime}
+      </if>
+      <if test="modifyTime1 != null" >
+        and modify_time &gt;= #{modifyTime1}
+      </if>
+      <if test="modifyTime2 != null" >
+        and modify_time &lt;= #{modifyTime2}
+      </if>
+      <if test="ext1 != null" >
+        and ext1 ${ext1Operator} #{ext1}
+      </if>
+      <if test="ext2 != null" >
+        and ext2 ${ext2Operator} #{ext2}
+      </if>
+      <if test="ext3 != null" >
+        and ext3 ${ext3Operator} #{ext3}
+      </if>
+      <if test="ext4 != null" >
+        and ext4 ${ext4Operator} #{ext4}
+      </if>
+      <if test="ext5 != null" >
+        and ext5 ${ext5Operator} #{ext5}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.research.project.entity.BudgetFundHistoryEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RS_BUDGET_FUND_HISTORY.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into RS_BUDGET_FUND_HISTORY(<include refid="Base_Column_List" />)
+    values (#{changeUser, jdbcType=VARCHAR}, #{changeUserId, jdbcType=VARCHAR}, #{id, jdbcType=VARCHAR}, #{projectId, jdbcType=VARCHAR}, #{budgetType, jdbcType=VARCHAR}, #{budgetYear, jdbcType=VARCHAR}, #{budgetAmount, jdbcType=DOUBLE}, #{createUserId, jdbcType=VARCHAR}, #{createUserName, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{modifyTime, jdbcType=TIMESTAMP}, #{delFlag, jdbcType=VARCHAR}, #{ext1, jdbcType=VARCHAR}, #{ext2, jdbcType=VARCHAR}, #{ext3, jdbcType=VARCHAR}, #{ext4, jdbcType=VARCHAR}, #{ext5, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.research.project.entity.BudgetFundHistoryEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RS_BUDGET_FUND_HISTORY.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into RS_BUDGET_FUND_HISTORY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="changeUser != null" >change_user,</if>
+                <if test="changeUserId != null" >change_user_id,</if>
+                <if test="id != null" >id,</if>
+                <if test="projectId != null" >project_id,</if>
+                <if test="budgetType != null" >budget_type,</if>
+                <if test="budgetYear != null" >budget_year,</if>
+                <if test="budgetAmount != null" >budget_amount,</if>
+                <if test="createUserId != null" >create_user_id,</if>
+                <if test="createUserName != null" >create_user_name,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="modifyTime != null" >modify_time,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="ext1 != null" >ext1,</if>
+                <if test="ext2 != null" >ext2,</if>
+                <if test="ext3 != null" >ext3,</if>
+                <if test="ext4 != null" >ext4,</if>
+                <if test="ext5 != null" >ext5,</if>
+                <if test="depreciation != null" >depreciation,</if>
+                <if test="staffCosts != null" >STAFF_COSTS,</if>
+                <if test="remark != null" >remark,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="changeUser != null" >#{changeUser, jdbcType=VARCHAR},</if>
+                <if test="changeUserId != null" >#{changeUserId, jdbcType=VARCHAR},</if>
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="projectId != null" >#{projectId, jdbcType=VARCHAR},</if>
+                <if test="budgetType != null" >#{budgetType, jdbcType=VARCHAR},</if>
+                <if test="budgetYear != null" >#{budgetYear, jdbcType=VARCHAR},</if>
+                <if test="budgetAmount != null" >#{budgetAmount, jdbcType=DOUBLE},</if>
+                <if test="createUserId != null" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="createUserName != null" >#{createUserName, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="modifyTime != null" >#{modifyTime, jdbcType=TIMESTAMP},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=VARCHAR},</if>
+                <if test="ext1 != null" >#{ext1, jdbcType=VARCHAR},</if>
+                <if test="ext2 != null" >#{ext2, jdbcType=VARCHAR},</if>
+                <if test="ext3 != null" >#{ext3, jdbcType=VARCHAR},</if>
+                <if test="ext4 != null" >#{ext4, jdbcType=VARCHAR},</if>
+                <if test="ext5 != null" >#{ext5, jdbcType=VARCHAR},</if>
+                <if test="depreciation != null" >#{depreciation, jdbcType=DOUBLE},</if>
+                <if test="staffCosts != null" >#{staffCosts, jdbcType=DOUBLE},</if>
+                <if test="remark != null" >#{remark, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+    <!--批量新增-->
+    <insert id = "batchInsertSelective" parameterType="java.util.List" >
+        INSERT ALL
+        <foreach collection = "budgetFundHistoryEOS" item = "item" index = "index">
+            <if test = "item.id != null">
+                into RS_BUDGET_FUND_HISTORY
+                <trim prefix="(" suffix=")" suffixOverrides="," >
+                    <if test="item.changeUser != null" >change_user,</if>
+                    <if test="item.changeUserId != null" >change_user_id,</if>
+                    <if test="item.id != null" >id,</if>
+                    <if test="item.projectId != null" >project_id,</if>
+                    <if test="item.budgetType != null" >budget_type,</if>
+                    <if test="item.budgetYear != null" >budget_year,</if>
+                    <if test="item.budgetAmount != null" >budget_amount,</if>
+                    <if test="item.createUserId != null" >create_user_id,</if>
+                    <if test="item.createUserName != null" >create_user_name,</if>
+                    <if test="item.createTime != null" >create_time,</if>
+                    <if test="item.modifyTime != null" >modify_time,</if>
+                    <if test="item.delFlag != null" >del_flag,</if>
+                    <if test="item.ext1 != null" >ext1,</if>
+                    <if test="item.ext2 != null" >ext2,</if>
+                    <if test="item.ext3 != null" >ext3,</if>
+                    <if test="item.ext4 != null" >ext4,</if>
+                    <if test="item.ext5 != null" >ext5,</if>
+                    <if test="item.depreciation != null" >depreciation,</if>
+                    <if test="item.staffCosts != null" >STAFF_COSTS,</if>
+                    <if test="item.remark != null" >remark,</if>
+                </trim>
+                <trim prefix="values (" suffix=")" suffixOverrides="," >
+                    <if test="item.changeUser != null" >#{item.changeUser, jdbcType=VARCHAR},</if>
+                    <if test="item.changeUserId != null" >#{item.changeUserId, jdbcType=VARCHAR},</if>
+                    <if test="item.id != null" >#{item.id, jdbcType=VARCHAR},</if>
+                    <if test="item.projectId != null" >#{item.projectId, jdbcType=VARCHAR},</if>
+                    <if test="item.budgetType != null" >#{item.budgetType, jdbcType=VARCHAR},</if>
+                    <if test="item.budgetYear != null" >#{item.budgetYear, jdbcType=VARCHAR},</if>
+                    <if test="item.budgetAmount != null" >#{item.budgetAmount, jdbcType=DOUBLE},</if>
+                    <if test="item.createUserId != null" >#{item.createUserId, jdbcType=VARCHAR},</if>
+                    <if test="item.createUserName != null" >#{item.createUserName, jdbcType=VARCHAR},</if>
+                    <if test="item.createTime != null" >#{item.createTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.modifyTime != null" >#{item.modifyTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.delFlag != null" >#{item.delFlag, jdbcType=VARCHAR},</if>
+                    <if test="item.ext1 != null" >#{item.ext1, jdbcType=VARCHAR},</if>
+                    <if test="item.ext2 != null" >#{item.ext2, jdbcType=VARCHAR},</if>
+                    <if test="item.ext3 != null" >#{item.ext3, jdbcType=VARCHAR},</if>
+                    <if test="item.ext4 != null" >#{item.ext4, jdbcType=VARCHAR},</if>
+                    <if test="item.ext5 != null" >#{item.ext5, jdbcType=VARCHAR},</if>
+                    <if test="item.depreciation != null" >#{item.depreciation, jdbcType=DOUBLE},</if>
+                    <if test="item.staffCosts != null" >#{item.staffCosts, jdbcType=DOUBLE},</if>
+                    <if test="item.remark != null" >#{item.remark, jdbcType=VARCHAR},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.research.project.entity.BudgetFundHistoryEO" >
+    update RS_BUDGET_FUND_HISTORY
+       set  change_user = #{changeUser},
+            change_user_id = #{changeUserId},
+            project_id = #{projectId},
+            budget_type = #{budgetType},
+            budget_year = #{budgetYear},
+            budget_amount = #{budgetAmount},
+            create_user_id = #{createUserId},
+            create_user_name = #{createUserName},
+            create_time = #{createTime},
+            modify_time = #{modifyTime},
+            del_flag = #{delFlag},
+            ext1 = #{ext1},
+            ext2 = #{ext2},
+            ext3 = #{ext3},
+            ext4 = #{ext4},
+            ext5 = #{ext5}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.research.project.entity.BudgetFundHistoryEO" >
+    update RS_BUDGET_FUND_HISTORY
+    <set >
+      <if test="changeUser != null" >
+        change_user = #{changeUser},
+      </if>
+      <if test="changeUserId != null" >
+        change_user_id = #{changeUserId},
+      </if>
+      <if test="projectId != null" >
+        project_id = #{projectId},
+      </if>
+      <if test="budgetType != null" >
+        budget_type = #{budgetType},
+      </if>
+      <if test="budgetYear != null" >
+        budget_year = #{budgetYear},
+      </if>
+      <if test="budgetAmount != null" >
+        budget_amount = #{budgetAmount},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="createUserName != null" >
+        create_user_name = #{createUserName},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="ext1 != null" >
+        ext1 = #{ext1},
+      </if>
+      <if test="ext2 != null" >
+        ext2 = #{ext2},
+      </if>
+      <if test="ext3 != null" >
+        ext3 = #{ext3},
+      </if>
+      <if test="ext4 != null" >
+        ext4 = #{ext4},
+      </if>
+      <if test="ext5 != null" >
+        ext5 = #{ext5},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 RS_BUDGET_FUND_HISTORY -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from RS_BUDGET_FUND_HISTORY
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RS_BUDGET_FUND_HISTORY
+     where id = #{value}
+
+  </delete>
+
+  <!-- RS_BUDGET_FUND_HISTORY 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from RS_BUDGET_FUND_HISTORY
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询RS_BUDGET_FUND_HISTORY列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from RS_BUDGET_FUND_HISTORY
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from RS_BUDGET_FUND_HISTORY
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+    <select id="queryByCompareList" resultMap="BaseResultCompareMap" parameterType="com.adc.da.base.page.BasePage">
+        select <include refid="Base_Column_List"/> from RS_BUDGET_FUND_HISTORY
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+            ${pager.orderCondition}
+        </if>
+    </select>
+
+    <!--根据项目id删除-->
+    <delete id="deleteByProjectId" parameterType="java.lang.String">
+   	    delete  from RS_BUDGET_FUND_HISTORY where project_id = #{projectId}
+    </delete>
+
+</mapper>

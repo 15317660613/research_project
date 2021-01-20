@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.project.dao.ResearchProjectMenuEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.research.project.entity.ResearchProjectMenuEO" >
+    <id column="id_" property="id" />
+    <result column="urlhref" property="urlhref" />
+    <result column="parenturl" property="parenturl" />
+    <result column="ext_info_1_" property="extInfo1" />
+    <result column="ext_info_2_" property="extInfo2" />
+    <result column="name_" property="name" />
+    <result column="parent_id_" property="parentId" />
+    <result column="href_" property="href" />
+    <result column="icon_" property="icon" />
+    <result column="remarks_" property="remarks" />
+    <result column="sort_" property="sort" />
+    <result column="del_flag_" property="delFlag" />
+  </resultMap>
+
+  <!-- RS_RESEARCH_PROJECT_MENU table all fields -->
+  <sql id="Base_Column_List" >
+     urlhref, parenturl, ext_info_1_, ext_info_2_, id_, name_, parent_id_, href_, icon_, remarks_, sort_, del_flag_
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="urlhref != null" >
+        and urlhref ${urlhrefOperator} #{urlhref}
+      </if>
+      <if test="parenturl != null" >
+        and parenturl ${parenturlOperator} #{parenturl}
+      </if>
+      <if test="extInfo1 != null" >
+        and ext_info_1_ ${extInfo1Operator} #{extInfo1}
+      </if>
+      <if test="extInfo2 != null" >
+        and ext_info_2_ ${extInfo2Operator} #{extInfo2}
+      </if>
+      <if test="id != null" >
+        and id_ ${idOperator} #{id}
+      </if>
+      <if test="name != null" >
+        and name_ ${nameOperator} #{name}
+      </if>
+      <if test="parentId != null" >
+        and parent_id_ ${parentIdOperator} #{parentId}
+      </if>
+      <if test="href != null" >
+        and href_ ${hrefOperator} #{href}
+      </if>
+      <if test="icon != null" >
+        and icon_ ${iconOperator} #{icon}
+      </if>
+      <if test="remarks != null" >
+        and remarks_ ${remarksOperator} #{remarks}
+      </if>
+      <if test="sort != null" >
+        and sort_ ${sortOperator} #{sort}
+      </if>
+      <if test="delFlag != null" >
+        and del_flag_ =0
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.research.project.entity.ResearchProjectMenuEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_RS_RESEARCH_PROJECT_MENU.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into RS_RESEARCH_PROJECT_MENU(<include refid="Base_Column_List" />)
+    values (#{urlhref, jdbcType=VARCHAR}, #{parenturl, jdbcType=VARCHAR}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{id, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, #{parentId, jdbcType=VARCHAR}, #{href, jdbcType=VARCHAR}, #{icon, jdbcType=VARCHAR}, #{remarks, jdbcType=VARCHAR}, #{sort, jdbcType=VARCHAR}, #{delFlag, jdbcType=INTEGER})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.research.project.entity.ResearchProjectMenuEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_RS_RESEARCH_PROJECT_MENU.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into RS_RESEARCH_PROJECT_MENU
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="urlhref != null" >urlhref,</if>
+                <if test="parenturl != null" >parenturl,</if>
+                <if test="extInfo1 != null" >ext_info_1_,</if>
+                <if test="extInfo2 != null" >ext_info_2_,</if>
+                <if test="id != null" >id_,</if>
+                <if test="name != null" >name_,</if>
+                <if test="parentId != null" >parent_id_,</if>
+                <if test="href != null" >href_,</if>
+                <if test="icon != null" >icon_,</if>
+                <if test="remarks != null" >remarks_,</if>
+                <if test="sort != null" >sort_,</if>
+                <if test="delFlag != null" >del_flag_,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="urlhref != null" >#{urlhref, jdbcType=VARCHAR},</if>
+                <if test="parenturl != null" >#{parenturl, jdbcType=VARCHAR},</if>
+                <if test="extInfo1 != null" >#{extInfo1, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="name != null" >#{name, jdbcType=VARCHAR},</if>
+                <if test="parentId != null" >#{parentId, jdbcType=VARCHAR},</if>
+                <if test="href != null" >#{href, jdbcType=VARCHAR},</if>
+                <if test="icon != null" >#{icon, jdbcType=VARCHAR},</if>
+                <if test="remarks != null" >#{remarks, jdbcType=VARCHAR},</if>
+                <if test="sort != null" >#{sort, jdbcType=VARCHAR},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=INTEGER},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.research.project.entity.ResearchProjectMenuEO" >
+    update RS_RESEARCH_PROJECT_MENU
+       set  urlhref = #{urlhref},
+            parenturl = #{parenturl},
+            ext_info_1_ = #{extInfo1},
+            ext_info_2_ = #{extInfo2},
+            name_ = #{name},
+            parent_id_ = #{parentId},
+            href_ = #{href},
+            icon_ = #{icon},
+            remarks_ = #{remarks},
+            sort_ = #{sort},
+            del_flag_ = #{delFlag}
+     where  id_ = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.research.project.entity.ResearchProjectMenuEO" >
+    update RS_RESEARCH_PROJECT_MENU
+    <set >
+      <if test="urlhref != null" >
+        urlhref = #{urlhref},
+      </if>
+      <if test="parenturl != null" >
+        parenturl = #{parenturl},
+      </if>
+      <if test="extInfo1 != null" >
+        ext_info_1_ = #{extInfo1},
+      </if>
+      <if test="extInfo2 != null" >
+        ext_info_2_ = #{extInfo2},
+      </if>
+      <if test="name != null" >
+        name_ = #{name},
+      </if>
+      <if test="parentId != null" >
+        parent_id_ = #{parentId},
+      </if>
+      <if test="href != null" >
+        href_ = #{href},
+      </if>
+      <if test="icon != null" >
+        icon_ = #{icon},
+      </if>
+      <if test="remarks != null" >
+        remarks_ = #{remarks},
+      </if>
+      <if test="sort != null" >
+        sort_ = #{sort},
+      </if>
+      <if test="delFlag != null" >
+        del_flag_ = #{delFlag},
+      </if>
+    </set>
+     where id_ = #{id}
+  </update>
+
+  <!-- 根据id查询 RS_RESEARCH_PROJECT_MENU -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from RS_RESEARCH_PROJECT_MENU
+     where id_ = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RS_RESEARCH_PROJECT_MENU
+     where id_ = #{value}
+
+  </delete>
+
+  <!-- RS_RESEARCH_PROJECT_MENU 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from RS_RESEARCH_PROJECT_MENU
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询RS_RESEARCH_PROJECT_MENU列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from RS_RESEARCH_PROJECT_MENU
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from RS_RESEARCH_PROJECT_MENU
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

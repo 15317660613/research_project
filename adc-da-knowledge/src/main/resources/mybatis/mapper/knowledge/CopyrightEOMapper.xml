@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.knowledge.dao.CopyrightEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.knowledge.entity.CopyrightEO" >
+    <id column="id_" property="id" />
+    <result column="ext_info1_" property="extInfo1" />
+    <result column="ext_info2_" property="extInfo2" />
+    <result column="ext_info3_" property="extInfo3" />
+    <result column="ext_info4_" property="extInfo4" />
+    <result column="ext_info5_" property="extInfo5" />
+    <result column="ext_info6_" property="extInfo6" />
+    <result column="software_name_" property="softwareName" />
+    <result column="copyright_type_" property="copyrightType" />
+    <result column="apply_date_" property="applyDate" />
+    <result column="register_date_" property="registerDate" />
+    <result column="register_num_" property="registerNum" />
+    <result column="state_" property="state" />
+    <result column="belong_user_id_" property="belongUserId" />
+    <result column="dept_name_" property="deptName" />
+    <result column="dept_id_" property="deptId" />
+    <result column="upload_user_name_" property="uploadUserName" />
+    <result column="upload_user_id_" property="uploadUserId" />
+    <result column="update_time_" property="updateTime" />
+    <result column="num_" property="num" />
+    <result column="belong_user_name_" property="belongUserName" />
+      <result column="auto_number_" property="autoNumber" />
+  </resultMap>
+
+  <!-- K_COPYRIGHT table all fields -->
+  <sql id="Base_Column_List" >
+     ext_info1_, ext_info2_, ext_info3_, ext_info4_, ext_info5_, ext_info6_, id_, software_name_, copyright_type_, apply_date_, register_date_, register_num_, state_, belong_user_id_, dept_name_, dept_id_, upload_user_name_, upload_user_id_, update_time_, num_, belong_user_name_, auto_number_
+  </sql>
+
+    <!-- K_COPYRIGHT table all fields -->
+    <sql id="Base_Column_List1" >
+        id_, software_name_, copyright_type_, apply_date_, register_date_, register_num_, state_, belong_user_id_, dept_name_, dept_id_, upload_user_name_, upload_user_id_, update_time_, num_, belong_user_name_, auto_number_
+    </sql>
+
+
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="extInfo1 != null" >
+        and ext_info1_ ${extInfo1Operator} #{extInfo1}
+      </if>
+      <if test="extInfo2 != null" >
+        and ext_info2_ ${extInfo2Operator} #{extInfo2}
+      </if>
+      <if test="extInfo3 != null" >
+        and ext_info3_ ${extInfo3Operator} #{extInfo3}
+      </if>
+      <if test="extInfo4 != null" >
+        and ext_info4_ ${extInfo4Operator} #{extInfo4}
+      </if>
+      <if test="extInfo5 != null" >
+        and ext_info5_ ${extInfo5Operator} #{extInfo5}
+      </if>
+      <if test="extInfo6 != null" >
+        and ext_info6_ ${extInfo6Operator} #{extInfo6}
+      </if>
+      <if test="id != null" >
+        and id_ ${idOperator} #{id}
+      </if>
+      <if test="softwareName != null" >
+        and software_name_ ${softwareNameOperator} #{softwareName}
+      </if>
+      <if test="copyrightType != null" >
+        and copyright_type_ ${copyrightTypeOperator} #{copyrightType}
+      </if>
+      <if test="applyDate != null" >
+        and apply_date_ ${applyDateOperator} #{applyDate}
+      </if>
+      <if test="applyDate1 != null" >
+        and apply_date_ &gt;= #{applyDate1}
+      </if>
+      <if test="applyDate2 != null" >
+        and apply_date_ &lt;= #{applyDate2}
+      </if>
+      <if test="registerDate != null" >
+        and register_date_ ${registerDateOperator} #{registerDate}
+      </if>
+      <if test="registerDate1 != null" >
+        and register_date_ &gt;= #{registerDate1}
+      </if>
+      <if test="registerDate2 != null" >
+        and register_date_ &lt;= #{registerDate2}
+      </if>
+      <if test="registerNum != null" >
+        and register_num_ ${registerNumOperator} #{registerNum}
+      </if>
+      <if test="state != null" >
+        and state_ ${stateOperator} #{state}
+      </if>
+      <if test="belongUserId != null" >
+        and belong_user_id_ ${belongUserIdOperator} #{belongUserId}
+      </if>
+      <if test="deptName != null" >
+        and dept_name_ ${deptNameOperator} #{deptName}
+      </if>
+      <if test="deptId != null" >
+        and dept_id_ ${deptIdOperator} #{deptId}
+      </if>
+      <if test="uploadUserName != null" >
+        and upload_user_name_ ${uploadUserNameOperator} #{uploadUserName}
+      </if>
+      <if test="uploadUserId != null" >
+        and upload_user_id_ ${uploadUserIdOperator} #{uploadUserId}
+      </if>
+      <if test="updateTime != null" >
+        and update_time_ ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and update_time_ &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and update_time_ &lt;= #{updateTime2}
+      </if>
+      <if test="num != null" >
+        and num_ ${numOperator} #{num}
+      </if>
+      <if test="belongUserName != null" >
+        and belong_user_name_ ${belongUserNameOperator} #{belongUserName}
+      </if>
+    </trim>
+  </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause1">
+        where 1=1
+        <trim suffixOverrides="," >
+            <if test="id != null" >
+                and id_ = #{id}
+            </if>
+            <if test="softwareName != null" >
+                and software_name_ like  CONCAT('%',CONCAT(  #{softwareName},'%'))
+            </if>
+            <if test="copyrightType != null" >
+                and copyright_type_ like  CONCAT('%',CONCAT(  #{copyrightType},'%'))
+            </if>
+            <if test="startApplyDate != null" >
+                and (to_date(to_char(apply_date_ ,'yyyy-mm-dd'),'yyyy-mm-dd')) &gt;= #{startApplyDate}
+            </if>
+            <if test="endApplyDate != null" >
+                and (to_date(to_char(apply_date_ ,'yyyy-mm-dd'),'yyyy-mm-dd')) &lt;= #{endApplyDate}
+            </if>
+
+            <if test="startRegisterDate != null" >
+                and (to_date(to_char(register_date_ ,'yyyy-mm-dd'),'yyyy-mm-dd')) &gt;= #{startRegisterDate}
+            </if>
+            <if test="endRegisterDate != null" >
+                and (to_date(to_char(register_date_ ,'yyyy-mm-dd'),'yyyy-mm-dd')) &lt;= #{endRegisterDate}
+            </if>
+            <if test="registerNum != null" >
+                and register_num_ like  CONCAT('%',CONCAT(  #{registerNum},'%'))
+            </if>
+            <if test="state != null" >
+                and state_ like  CONCAT('%',CONCAT(  #{state},'%'))
+            </if>
+            <if test="belongUserId != null" >
+                and belong_user_id_ = #{belongUserId}
+            </if>
+            <if test="deptName != null" >
+                and dept_name_ like  CONCAT('%',CONCAT(  #{deptName},'%'))
+            </if>
+            <if test="deptId != null" >
+                and dept_id_ = #{deptId}
+            </if>
+
+            <if test="deptIdList != null" >
+                and dept_id_ in
+                <foreach  item="item" collection="deptIdList" index="index"  open="(" separator="," close=")">
+
+                    #{item}
+
+                </foreach>
+            </if>
+
+            <if test="uploadUserName != null" >
+                and upload_user_name_ like  CONCAT('%',CONCAT(  #{uploadUserName},'%'))
+            </if>
+            <if test="uploadUserId != null" >
+                and upload_user_id_ = #{uploadUserId}
+            </if>
+            <if test="updateTime != null" >
+                and update_time_ = #{updateTime}
+            </if>
+            <if test="num != null" >
+                and num_ like  CONCAT('%',CONCAT(  #{num},'%'))
+            </if>
+            <if test="belongUserName != null" >
+                and belong_user_name_ like  CONCAT('%',CONCAT(  #{belongUserName},'%'))
+            </if>
+        </trim>
+    </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.knowledge.entity.CopyrightEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_K_COPYRIGHT.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into K_COPYRIGHT(<include refid="Base_Column_List" />)
+    values (#{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR}, #{extInfo6, jdbcType=VARCHAR}, #{id, jdbcType=VARCHAR}, #{softwareName, jdbcType=VARCHAR}, #{copyrightType, jdbcType=VARCHAR}, #{applyDate, jdbcType=TIMESTAMP}, #{registerDate, jdbcType=TIMESTAMP}, #{registerNum, jdbcType=VARCHAR}, #{state, jdbcType=VARCHAR}, #{belongUserId, jdbcType=VARCHAR}, #{deptName, jdbcType=VARCHAR}, #{deptId, jdbcType=VARCHAR}, #{uploadUserName, jdbcType=VARCHAR}, #{uploadUserId, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP}, #{num, jdbcType=VARCHAR}, #{belongUserName, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.knowledge.entity.CopyrightEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_K_COPYRIGHT.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into K_COPYRIGHT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="extInfo1 != null" >ext_info1_,</if>
+                <if test="extInfo2 != null" >ext_info2_,</if>
+                <if test="extInfo3 != null" >ext_info3_,</if>
+                <if test="extInfo4 != null" >ext_info4_,</if>
+                <if test="extInfo5 != null" >ext_info5_,</if>
+                <if test="extInfo6 != null" >ext_info6_,</if>
+                <if test="id != null" >id_,</if>
+                <if test="softwareName != null" >software_name_,</if>
+                <if test="copyrightType != null" >copyright_type_,</if>
+                <if test="applyDate != null" >apply_date_,</if>
+                <if test="registerDate != null" >register_date_,</if>
+                <if test="registerNum != null" >register_num_,</if>
+                <if test="state != null" >state_,</if>
+                <if test="belongUserId != null" >belong_user_id_,</if>
+                <if test="deptName != null" >dept_name_,</if>
+                <if test="deptId != null" >dept_id_,</if>
+                <if test="uploadUserName != null" >upload_user_name_,</if>
+                <if test="uploadUserId != null" >upload_user_id_,</if>
+                <if test="updateTime != null" >update_time_,</if>
+                <if test="num != null" >num_,</if>
+                <if test="belongUserName != null" >belong_user_name_,</if>
+                <if test="autoNumber != null" >auto_number_,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="extInfo1 != null" >#{extInfo1, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="extInfo3 != null" >#{extInfo3, jdbcType=VARCHAR},</if>
+                <if test="extInfo4 != null" >#{extInfo4, jdbcType=VARCHAR},</if>
+                <if test="extInfo5 != null" >#{extInfo5, jdbcType=VARCHAR},</if>
+                <if test="extInfo6 != null" >#{extInfo6, jdbcType=VARCHAR},</if>
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="softwareName != null" >#{softwareName, jdbcType=VARCHAR},</if>
+                <if test="copyrightType != null" >#{copyrightType, jdbcType=VARCHAR},</if>
+                <if test="applyDate != null" >#{applyDate, jdbcType=TIMESTAMP},</if>
+                <if test="registerDate != null" >#{registerDate, jdbcType=TIMESTAMP},</if>
+                <if test="registerNum != null" >#{registerNum, jdbcType=VARCHAR},</if>
+                <if test="state != null" >#{state, jdbcType=VARCHAR},</if>
+                <if test="belongUserId != null" >#{belongUserId, jdbcType=VARCHAR},</if>
+                <if test="deptName != null" >#{deptName, jdbcType=VARCHAR},</if>
+                <if test="deptId != null" >#{deptId, jdbcType=VARCHAR},</if>
+                <if test="uploadUserName != null" >#{uploadUserName, jdbcType=VARCHAR},</if>
+                <if test="uploadUserId != null" >#{uploadUserId, jdbcType=VARCHAR},</if>
+                <if test="updateTime != null" >#{updateTime, jdbcType=TIMESTAMP},</if>
+                <if test="num != null" >#{num, jdbcType=VARCHAR},</if>
+                <if test="belongUserName != null" >#{belongUserName, jdbcType=VARCHAR},</if>
+                <if test="autoNumber != null" >#{autoNumber, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+    <insert id = "insertList" parameterType = "java.util.List">
+        INSERT ALL
+        <foreach collection = "list" item = "item" index = "index">
+            <if test = "item.id !=null">
+                INTO K_COPYRIGHT
+                <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+                    <if test = "item.id != null">id,</if>
+                    <if test = "item.softwareName != null">software_name_,</if>
+                    <if test = "item.copyrightType != null">copyright_type_,</if>
+                    <if test = "item.applyDate != null">apply_date_,</if>
+                    <if test= "item.registerDate != null" >register_date_,</if>
+                    <if test= "item.registerNum != null" >register_num_,</if>
+                    <if test= "item.state != null" >state_,</if>
+                    <if test= "item.belongUserId != null" >belong_user_id_,</if>
+                    <if test= "item.deptName != null" >dept_name_,</if>
+                    <if test= "item.deptId != null" >dept_id_,</if>
+                    <if test= "item.uploadUserName != null" >upload_user_name_,</if>
+                    <if test= "item.uploadUserId != null" >upload_user_id_,</if>
+                    <if test= "item.updateTime != null" >update_time_,</if>
+                    <if test= "item.num != null" >num_,</if>
+                    <if test= "item.belongUserName != null" >belong_user_name_,</if>
+                </trim>
+                <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+                    <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                    <if test="softwareName != null" >#{softwareName, jdbcType=VARCHAR},</if>
+                    <if test="copyrightType != null" >#{copyrightType, jdbcType=VARCHAR},</if>
+                    <if test="applyDate != null" >#{applyDate, jdbcType=TIMESTAMP},</if>
+                    <if test="registerDate != null" >#{registerDate, jdbcType=TIMESTAMP},</if>
+                    <if test="registerNum != null" >#{registerNum, jdbcType=VARCHAR},</if>
+                    <if test="state != null" >#{state, jdbcType=VARCHAR},</if>
+                    <if test="belongUserId != null" >#{belongUserId, jdbcType=VARCHAR},</if>
+                    <if test="deptName != null" >#{deptName, jdbcType=VARCHAR},</if>
+                    <if test="deptId != null" >#{deptId, jdbcType=VARCHAR},</if>
+                    <if test="uploadUserName != null" >#{uploadUserName, jdbcType=VARCHAR},</if>
+                    <if test="uploadUserId != null" >#{uploadUserId, jdbcType=VARCHAR},</if>
+                    <if test="updateTime != null" >#{updateTime, jdbcType=TIMESTAMP},</if>
+                    <if test="num != null" >#{num, jdbcType=VARCHAR},</if>
+                    <if test="belongUserName != null" >#{belongUserName, jdbcType=VARCHAR},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.knowledge.entity.CopyrightEO" >
+    update K_COPYRIGHT
+       set  ext_info1_ = #{extInfo1, jdbcType=VARCHAR},
+            ext_info2_ = #{extInfo2, jdbcType=VARCHAR},
+            ext_info3_ = #{extInfo3, jdbcType=VARCHAR},
+            ext_info4_ = #{extInfo4, jdbcType=VARCHAR},
+            ext_info5_ = #{extInfo5, jdbcType=VARCHAR},
+            ext_info6_ = #{extInfo6, jdbcType=VARCHAR},
+            software_name_ = #{softwareName, jdbcType=VARCHAR},
+            copyright_type_ = #{copyrightType, jdbcType=VARCHAR},
+            apply_date_ = #{applyDate, jdbcType=TIMESTAMP},
+            register_date_ = #{registerDate, jdbcType=TIMESTAMP},
+            register_num_ = #{registerNum, jdbcType=VARCHAR},
+            state_ = #{state, jdbcType=VARCHAR},
+            belong_user_id_ = #{belongUserId, jdbcType=VARCHAR},
+            dept_name_ = #{deptName, jdbcType=VARCHAR},
+            dept_id_ = #{deptId, jdbcType=VARCHAR},
+            upload_user_name_ = #{uploadUserName, jdbcType=VARCHAR},
+            upload_user_id_ = #{uploadUserId, jdbcType=VARCHAR},
+            update_time_ = #{updateTime, jdbcType=TIMESTAMP},
+            num_ = #{num, jdbcType=VARCHAR},
+            belong_user_name_ = #{belongUserName, jdbcType=VARCHAR}
+     where  id_ = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.knowledge.entity.CopyrightEO" >
+    update K_COPYRIGHT
+    <set >
+      <if test="extInfo1 != null" >
+        ext_info1_ = #{extInfo1},
+      </if>
+      <if test="extInfo2 != null" >
+        ext_info2_ = #{extInfo2},
+      </if>
+      <if test="extInfo3 != null" >
+        ext_info3_ = #{extInfo3},
+      </if>
+      <if test="extInfo4 != null" >
+        ext_info4_ = #{extInfo4},
+      </if>
+      <if test="extInfo5 != null" >
+        ext_info5_ = #{extInfo5},
+      </if>
+      <if test="extInfo6 != null" >
+        ext_info6_ = #{extInfo6},
+      </if>
+      <if test="softwareName != null" >
+        software_name_ = #{softwareName},
+      </if>
+      <if test="copyrightType != null" >
+        copyright_type_ = #{copyrightType},
+      </if>
+      <if test="applyDate != null" >
+        apply_date_ = #{applyDate},
+      </if>
+      <if test="registerDate != null" >
+        register_date_ = #{registerDate},
+      </if>
+      <if test="registerNum != null" >
+        register_num_ = #{registerNum},
+      </if>
+      <if test="state != null" >
+        state_ = #{state},
+      </if>
+      <if test="belongUserId != null" >
+        belong_user_id_ = #{belongUserId},
+      </if>
+      <if test="deptName != null" >
+        dept_name_ = #{deptName},
+      </if>
+      <if test="deptId != null" >
+        dept_id_ = #{deptId},
+      </if>
+      <if test="uploadUserName != null" >
+        upload_user_name_ = #{uploadUserName},
+      </if>
+      <if test="uploadUserId != null" >
+        upload_user_id_ = #{uploadUserId},
+      </if>
+      <if test="updateTime != null" >
+        update_time_ = #{updateTime},
+      </if>
+      <if test="num != null" >
+        num_ = #{num},
+      </if>
+      <if test="belongUserName != null" >
+        belong_user_name_ = #{belongUserName},
+      </if>
+    </set>
+     where id_ = #{id}
+  </update>
+
+  <!-- 根据id查询 K_COPYRIGHT -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+      from K_COPYRIGHT
+     where id_ = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from K_COPYRIGHT
+     where id_ = #{value}
+
+  </delete>
+
+  <!-- K_COPYRIGHT 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from K_COPYRIGHT
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+    <select id="queryByMyCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        select count(1) from K_COPYRIGHT
+        <include refid="Base_Where_Clause1"/>
+    </select>
+
+  <!-- 查询K_COPYRIGHT列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from K_COPYRIGHT
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+    <!-- 查询K_COPYRIGHT列表 -->
+    <select id="queryByMyPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select <include refid="Base_Column_List1" /> from
+        (select tmp_tb.* , rownum rn from
+        (select <include refid="Base_Column_List1" /> from K_COPYRIGHT
+        <include refid="Base_Where_Clause1"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from K_COPYRIGHT
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+    <select id="queryCopyrightByCopyrightIdsIn" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List1"/> from K_COPYRIGHT
+        where ID_ in
+        <foreach item="it" collection="copyrightIdList" open="(" separator=","
+                 close=")" index="index">
+            #{it}
+        </foreach>
+
+    </select>
+</mapper>

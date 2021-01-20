@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.epis.dao.BuisnessPersionInfoEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.epis.entity.BuisnessPersionInfoEO" >
+    <id column="personnel_id" property="personnelId" />
+    <result column="personnel_name" property="personnelName" />
+    <result column="personnel_native" property="personnelNative" />
+    <result column="personnel_hrsf" property="personnelHrsf" />
+    <result column="personnel_uschool" property="personnelUschool" />
+    <result column="personnel_uschooltype" property="personnelUschooltype" />
+    <result column="personnel_mschool" property="personnelMschool" />
+    <result column="personnel_mschooltype" property="personnelMschooltype" />
+    <result column="personnel_plandscape" property="personnelPlandscape" />
+    <result column="personnel_rtime" property="personnelRtime" />
+    <result column="personnel_starttime" property="personnelStarttime" />
+    <result column="personnel_type" property="personnelType" />
+    <result column="personnel_endtime" property="personnelEndtime" />
+    <result column="creationtime" property="creationtime" />
+    <result column="creationname" property="creationname" />
+    <result column="updatetime" property="updatetime" />
+  </resultMap>
+
+  <!-- BUISNESS_PERSION_INFO table all fields -->
+  <sql id="Base_Column_List" >
+     personnel_id, personnel_name, personnel_native, personnel_hrsf, personnel_uschool, personnel_uschooltype, personnel_mschool, personnel_mschooltype, personnel_plandscape, personnel_rtime, personnel_starttime, personnel_type, personnel_endtime, creationtime, creationname, updatetime
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="personnelId != null" >
+        and personnel_id ${personnelIdOperator} #{personnelId}
+      </if>
+      <if test="personnelName != null" >
+        and personnel_name ${personnelNameOperator} #{personnelName}
+      </if>
+      <if test="personnelNative != null" >
+        and personnel_native ${personnelNativeOperator} #{personnelNative}
+      </if>
+      <if test="personnelHrsf != null" >
+        and personnel_hrsf ${personnelHrsfOperator} #{personnelHrsf}
+      </if>
+      <if test="personnelUschool != null" >
+        and personnel_uschool ${personnelUschoolOperator} #{personnelUschool}
+      </if>
+      <if test="personnelUschooltype != null" >
+        and personnel_uschooltype ${personnelUschooltypeOperator} #{personnelUschooltype}
+      </if>
+      <if test="personnelMschool != null" >
+        and personnel_mschool ${personnelMschoolOperator} #{personnelMschool}
+      </if>
+      <if test="personnelMschooltype != null" >
+        and personnel_mschooltype ${personnelMschooltypeOperator} #{personnelMschooltype}
+      </if>
+      <if test="personnelPlandscape != null" >
+        and personnel_plandscape ${personnelPlandscapeOperator} #{personnelPlandscape}
+      </if>
+      <if test="personnelRtime != null" >
+        and personnel_rtime ${personnelRtimeOperator} #{personnelRtime}
+      </if>
+      <if test="personnelStarttime != null" >
+        and personnel_starttime ${personnelStarttimeOperator} #{personnelStarttime}
+      </if>
+      <if test="personnelStarttime1 != null" >
+        and personnel_starttime &gt;= #{personnelStarttime1}
+      </if>
+      <if test="personnelStarttime2 != null" >
+        and personnel_starttime &lt;= #{personnelStarttime2}
+      </if>
+      <if test="personnelType != null" >
+        and personnel_type ${personnelTypeOperator} #{personnelType}
+      </if>
+      <if test="personnelEndtime != null" >
+        and personnel_endtime ${personnelEndtimeOperator} #{personnelEndtime}
+      </if>
+      <if test="personnelEndtime1 != null" >
+        and personnel_endtime &gt;= #{personnelEndtime1}
+      </if>
+      <if test="personnelEndtime2 != null" >
+        and personnel_endtime &lt;= #{personnelEndtime2}
+      </if>
+      <if test="creationtime != null" >
+        and creationtime ${creationtimeOperator} #{creationtime}
+      </if>
+      <if test="creationtime1 != null" >
+        and creationtime &gt;= #{creationtime1}
+      </if>
+      <if test="creationtime2 != null" >
+        and creationtime &lt;= #{creationtime2}
+      </if>
+      <if test="creationname != null" >
+        and creationname ${creationnameOperator} #{creationname}
+      </if>
+      <if test="updatetime != null" >
+        and updatetime ${updatetimeOperator} #{updatetime}
+      </if>
+      <if test="updatetime1 != null" >
+        and updatetime &gt;= #{updatetime1}
+      </if>
+      <if test="updatetime2 != null" >
+        and updatetime &lt;= #{updatetime2}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.epis.entity.BuisnessPersionInfoEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="personnel_id">
+        SELECT SEQ_BUISNESS_PERSION_INFO.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into BUISNESS_PERSION_INFO(<include refid="Base_Column_List" />)
+    values (#{personnelId, jdbcType=VARCHAR}, #{personnelName, jdbcType=VARCHAR}, #{personnelNative, jdbcType=VARCHAR}, #{personnelHrsf, jdbcType=VARCHAR}, #{personnelUschool, jdbcType=VARCHAR}, #{personnelUschooltype, jdbcType=INTEGER}, #{personnelMschool, jdbcType=VARCHAR}, #{personnelMschooltype, jdbcType=INTEGER}, #{personnelPlandscape, jdbcType=INTEGER}, #{personnelRtime, jdbcType=VARCHAR}, #{personnelStarttime, jdbcType=TIMESTAMP}, #{personnelType, jdbcType=INTEGER}, #{personnelEndtime, jdbcType=TIMESTAMP}, #{creationtime, jdbcType=TIMESTAMP}, #{creationname, jdbcType=VARCHAR}, #{updatetime, jdbcType=TIMESTAMP})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.epis.entity.BuisnessPersionInfoEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="personnel_id">
+        SELECT SEQ_BUISNESS_PERSION_INFO.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into BUISNESS_PERSION_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="personnelId != null" >personnel_id,</if>
+                <if test="personnelName != null" >personnel_name,</if>
+                <if test="personnelNative != null" >personnel_native,</if>
+                <if test="personnelHrsf != null" >personnel_hrsf,</if>
+                <if test="personnelUschool != null" >personnel_uschool,</if>
+                <if test="personnelUschooltype != null" >personnel_uschooltype,</if>
+                <if test="personnelMschool != null" >personnel_mschool,</if>
+                <if test="personnelMschooltype != null" >personnel_mschooltype,</if>
+                <if test="personnelPlandscape != null" >personnel_plandscape,</if>
+                <if test="personnelRtime != null" >personnel_rtime,</if>
+                <if test="personnelStarttime != null" >personnel_starttime,</if>
+                <if test="personnelType != null" >personnel_type,</if>
+                <if test="personnelEndtime != null" >personnel_endtime,</if>
+                <if test="creationtime != null" >creationtime,</if>
+                <if test="creationname != null" >creationname,</if>
+                <if test="updatetime != null" >updatetime,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="personnelId != null" >#{personnelId, jdbcType=VARCHAR},</if>
+                <if test="personnelName != null" >#{personnelName, jdbcType=VARCHAR},</if>
+                <if test="personnelNative != null" >#{personnelNative, jdbcType=VARCHAR},</if>
+                <if test="personnelHrsf != null" >#{personnelHrsf, jdbcType=VARCHAR},</if>
+                <if test="personnelUschool != null" >#{personnelUschool, jdbcType=VARCHAR},</if>
+                <if test="personnelUschooltype != null" >#{personnelUschooltype, jdbcType=INTEGER},</if>
+                <if test="personnelMschool != null" >#{personnelMschool, jdbcType=VARCHAR},</if>
+                <if test="personnelMschooltype != null" >#{personnelMschooltype, jdbcType=INTEGER},</if>
+                <if test="personnelPlandscape != null" >#{personnelPlandscape, jdbcType=INTEGER},</if>
+                <if test="personnelRtime != null" >#{personnelRtime, jdbcType=VARCHAR},</if>
+                <if test="personnelStarttime != null" >#{personnelStarttime, jdbcType=TIMESTAMP},</if>
+                <if test="personnelType != null" >#{personnelType, jdbcType=INTEGER},</if>
+                <if test="personnelEndtime != null" >#{personnelEndtime, jdbcType=TIMESTAMP},</if>
+                <if test="creationtime != null" >#{creationtime, jdbcType=TIMESTAMP},</if>
+                <if test="creationname != null" >#{creationname, jdbcType=VARCHAR},</if>
+                <if test="updatetime != null" >#{updatetime, jdbcType=TIMESTAMP},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.epis.entity.BuisnessPersionInfoEO" >
+    update BUISNESS_PERSION_INFO
+       set  personnel_name = #{personnelName},
+            personnel_native = #{personnelNative},
+            personnel_hrsf = #{personnelHrsf},
+            personnel_uschool = #{personnelUschool},
+            personnel_uschooltype = #{personnelUschooltype},
+            personnel_mschool = #{personnelMschool},
+            personnel_mschooltype = #{personnelMschooltype},
+            personnel_plandscape = #{personnelPlandscape},
+            personnel_rtime = #{personnelRtime},
+            personnel_starttime = #{personnelStarttime},
+            personnel_type = #{personnelType},
+            personnel_endtime = #{personnelEndtime},
+            creationtime = #{creationtime},
+            creationname = #{creationname},
+            updatetime = #{updatetime}
+     where  personnel_id = #{personnelId}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.epis.entity.BuisnessPersionInfoEO" >
+    update BUISNESS_PERSION_INFO
+    <set >
+      <if test="personnelName != null" >
+        personnel_name = #{personnelName},
+      </if>
+      <if test="personnelNative != null" >
+        personnel_native = #{personnelNative},
+      </if>
+      <if test="personnelHrsf != null" >
+        personnel_hrsf = #{personnelHrsf},
+      </if>
+      <if test="personnelUschool != null" >
+        personnel_uschool = #{personnelUschool},
+      </if>
+      <if test="personnelUschooltype != null" >
+        personnel_uschooltype = #{personnelUschooltype},
+      </if>
+      <if test="personnelMschool != null" >
+        personnel_mschool = #{personnelMschool},
+      </if>
+      <if test="personnelMschooltype != null" >
+        personnel_mschooltype = #{personnelMschooltype},
+      </if>
+      <if test="personnelPlandscape != null" >
+        personnel_plandscape = #{personnelPlandscape},
+      </if>
+      <if test="personnelRtime != null" >
+        personnel_rtime = #{personnelRtime},
+      </if>
+      <if test="personnelStarttime != null" >
+        personnel_starttime = #{personnelStarttime},
+      </if>
+      <if test="personnelType != null" >
+        personnel_type = #{personnelType},
+      </if>
+      <if test="personnelEndtime != null" >
+        personnel_endtime = #{personnelEndtime},
+      </if>
+      <if test="creationtime != null" >
+        creationtime = #{creationtime},
+      </if>
+      <if test="creationname != null" >
+        creationname = #{creationname},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime},
+      </if>
+    </set>
+     where personnel_id = #{personnelId}
+  </update>
+
+  <!-- 根据id查询 BUISNESS_PERSION_INFO -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from BUISNESS_PERSION_INFO
+     where personnel_id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from BUISNESS_PERSION_INFO
+     where personnel_id = #{value}
+
+  </delete>
+
+  <!-- BUISNESS_PERSION_INFO 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from BUISNESS_PERSION_INFO
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询BUISNESS_PERSION_INFO列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from BUISNESS_PERSION_INFO
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from BUISNESS_PERSION_INFO
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

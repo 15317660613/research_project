@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.epis.dao.BuinessPersonnaltimedataEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.epis.entity.BuinessPersonnaltimedataEO" >
+    <id column="timedata_id" property="timedataId" />
+    <result column="peoject_id" property="peojectId" />
+    <result column="personnal_id" property="personnalId" />
+    <result column="timedata_mouth" property="timedataMouth" />
+    <result column="timedata_actoal" property="timedataActoal" />
+    <result column="timedata_normal" property="timedataNormal" />
+    <result column="input_type" property="inputType" />
+    <result column="creattime" property="creattime" />
+    <result column="updatetime" property="updatetime" />
+    <result column="creatuser" property="creatuser" />
+  </resultMap>
+
+  <!-- BUINESS_PERSONNALTIMEDATA table all fields -->
+  <sql id="Base_Column_List" >
+     timedata_id, peoject_id, personnal_id, timedata_mouth, timedata_actoal, timedata_normal, input_type, creattime, updatetime, creatuser
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="timedataId != null" >
+        and timedata_id ${timedataIdOperator} #{timedataId}
+      </if>
+      <if test="peojectId != null" >
+        and peoject_id ${peojectIdOperator} #{peojectId}
+      </if>
+      <if test="personnalId != null" >
+        and personnal_id ${personnalIdOperator} #{personnalId}
+      </if>
+      <if test="timedataMouth != null" >
+        and timedata_mouth ${timedataMouthOperator} #{timedataMouth}
+      </if>
+      <if test="timedataMouth1 != null" >
+        and timedata_mouth &gt;= #{timedataMouth1}
+      </if>
+      <if test="timedataMouth2 != null" >
+        and timedata_mouth &lt;= #{timedataMouth2}
+      </if>
+      <if test="timedataActoal != null" >
+        and timedata_actoal ${timedataActoalOperator} #{timedataActoal}
+      </if>
+      <if test="timedataNormal != null" >
+        and timedata_normal ${timedataNormalOperator} #{timedataNormal}
+      </if>
+      <if test="inputType != null" >
+        and input_type ${inputTypeOperator} #{inputType}
+      </if>
+      <if test="creattime != null" >
+        and creattime ${creattimeOperator} #{creattime}
+      </if>
+      <if test="creattime1 != null" >
+        and creattime &gt;= #{creattime1}
+      </if>
+      <if test="creattime2 != null" >
+        and creattime &lt;= #{creattime2}
+      </if>
+      <if test="updatetime != null" >
+        and updatetime ${updatetimeOperator} #{updatetime}
+      </if>
+      <if test="updatetime1 != null" >
+        and updatetime &gt;= #{updatetime1}
+      </if>
+      <if test="updatetime2 != null" >
+        and updatetime &lt;= #{updatetime2}
+      </if>
+      <if test="creatuser != null" >
+        and creatuser ${creatuserOperator} #{creatuser}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.epis.entity.BuinessPersonnaltimedataEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="timedata_id">
+        SELECT SEQ_BUINESS_PERSONNALTIMEDATA.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into BUINESS_PERSONNALTIMEDATA(<include refid="Base_Column_List" />)
+    values (#{timedataId, jdbcType=VARCHAR}, #{peojectId, jdbcType=VARCHAR}, #{personnalId, jdbcType=VARCHAR}, #{timedataMouth, jdbcType=TIMESTAMP}, #{timedataActoal, jdbcType=INTEGER}, #{timedataNormal, jdbcType=INTEGER}, #{inputType, jdbcType=VARCHAR}, #{creattime, jdbcType=TIMESTAMP}, #{updatetime, jdbcType=TIMESTAMP}, #{creatuser, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.epis.entity.BuinessPersonnaltimedataEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="timedata_id">
+        SELECT SEQ_BUINESS_PERSONNALTIMEDATA.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into BUINESS_PERSONNALTIMEDATA
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="timedataId != null" >timedata_id,</if>
+                <if test="peojectId != null" >peoject_id,</if>
+                <if test="personnalId != null" >personnal_id,</if>
+                <if test="timedataMouth != null" >timedata_mouth,</if>
+                <if test="timedataActoal != null" >timedata_actoal,</if>
+                <if test="timedataNormal != null" >timedata_normal,</if>
+                <if test="inputType != null" >input_type,</if>
+                <if test="creattime != null" >creattime,</if>
+                <if test="updatetime != null" >updatetime,</if>
+                <if test="creatuser != null" >creatuser,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="timedataId != null" >#{timedataId, jdbcType=VARCHAR},</if>
+                <if test="peojectId != null" >#{peojectId, jdbcType=VARCHAR},</if>
+                <if test="personnalId != null" >#{personnalId, jdbcType=VARCHAR},</if>
+                <if test="timedataMouth != null" >#{timedataMouth, jdbcType=TIMESTAMP},</if>
+                <if test="timedataActoal != null" >#{timedataActoal, jdbcType=INTEGER},</if>
+                <if test="timedataNormal != null" >#{timedataNormal, jdbcType=INTEGER},</if>
+                <if test="inputType != null" >#{inputType, jdbcType=VARCHAR},</if>
+                <if test="creattime != null" >#{creattime, jdbcType=TIMESTAMP},</if>
+                <if test="updatetime != null" >#{updatetime, jdbcType=TIMESTAMP},</if>
+                <if test="creatuser != null" >#{creatuser, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.epis.entity.BuinessPersonnaltimedataEO" >
+    update BUINESS_PERSONNALTIMEDATA
+       set  peoject_id = #{peojectId},
+            personnal_id = #{personnalId},
+            timedata_mouth = #{timedataMouth},
+            timedata_actoal = #{timedataActoal},
+            timedata_normal = #{timedataNormal},
+            input_type = #{inputType},
+            creattime = #{creattime},
+            updatetime = #{updatetime},
+            creatuser = #{creatuser}
+     where  timedata_id = #{timedataId}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.epis.entity.BuinessPersonnaltimedataEO" >
+    update BUINESS_PERSONNALTIMEDATA
+    <set >
+      <if test="peojectId != null" >
+        peoject_id = #{peojectId},
+      </if>
+      <if test="personnalId != null" >
+        personnal_id = #{personnalId},
+      </if>
+      <if test="timedataMouth != null" >
+        timedata_mouth = #{timedataMouth},
+      </if>
+      <if test="timedataActoal != null" >
+        timedata_actoal = #{timedataActoal},
+      </if>
+      <if test="timedataNormal != null" >
+        timedata_normal = #{timedataNormal},
+      </if>
+      <if test="inputType != null" >
+        input_type = #{inputType},
+      </if>
+      <if test="creattime != null" >
+        creattime = #{creattime},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime},
+      </if>
+      <if test="creatuser != null" >
+        creatuser = #{creatuser},
+      </if>
+    </set>
+     where timedata_id = #{timedataId}
+  </update>
+
+  <!-- 根据id查询 BUINESS_PERSONNALTIMEDATA -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from BUINESS_PERSONNALTIMEDATA
+     where timedata_id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from BUINESS_PERSONNALTIMEDATA
+     where timedata_id = #{value}
+
+  </delete>
+
+  <!-- BUINESS_PERSONNALTIMEDATA 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from BUINESS_PERSONNALTIMEDATA
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询BUINESS_PERSONNALTIMEDATA列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from BUINESS_PERSONNALTIMEDATA
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from BUINESS_PERSONNALTIMEDATA
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

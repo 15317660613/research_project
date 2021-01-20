@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.adc.da.knowledge.dao.PaperEODao">
+    <!-- Result Map-->
+    <resultMap id = "BaseResultMap" type = "com.adc.da.knowledge.entity.PaperEO">
+        <id column = "id_" property = "id"/>
+        <result column = "name_" property = "name"/>
+        <result column = "published_journals_" property = "publishedJournals"/>
+        <result column = "published_time_" property = "publishedTime"/>
+        <result column = "published_issue_" property = "publishedIssue"/>
+        <result column = "keywords_" property = "keywords"/>
+        <result column = "index_" property = "index"/>
+        <result column = "company_" property = "company"/>
+        <result column = "author_user_names_" property = "authorUserNames"/>
+        <result column = "dept_id_" property = "deptId"/>
+        <result column = "upload_user_name_" property = "uploadUserName"/>
+        <result column = "update_time_" property = "updateTime"/>
+        <result column = "paper_abstract_" property = "paperAbstract"/>
+        <result column = "dept_name_" property = "deptName"/>
+        <result column = "upload_user_id_" property = "uploadUserId"/>
+        <result column = "author_user_ids_" property = "authorUserIds"/>
+        <result column = "security_level_" property = "securityLevel"/>
+        <result column = "ext_info1_" property = "extInfo1"/>
+        <result column = "ext_info2_" property = "extInfo2"/>
+        <result column = "ext_info3_" property = "extInfo3"/>
+        <result column = "ext_info4_" property = "extInfo4"/>
+        <result column = "num_" property = "num"/>
+        <result column = "ext_info5_" property = "extInfo5"/>
+        <result column = "ext_info6_" property = "extInfo6"/>
+        <result column = "auto_number_" property = "autoNumber"/>
+    </resultMap>
+
+    <!-- K_PAPER table all fields -->
+    <sql id = "Base_Column_List">
+        id_, name_, published_journals_, published_time_, published_issue_, keywords_, index_, company_, author_user_names_, dept_id_, upload_user_name_, update_time_, paper_abstract_, dept_name_, upload_user_id_, author_user_ids_, security_level_, ext_info1_, ext_info2_, ext_info3_, ext_info4_, num_, ext_info5_, ext_info6_, auto_number_
+    </sql>
+
+    <!-- K_PAPER table all fields -->
+    <sql id = "Base_Column_List1">
+        id_, name_, published_journals_, published_time_, published_issue_, keywords_, index_, company_, author_user_names_, dept_id_, upload_user_name_, update_time_, paper_abstract_, dept_name_, upload_user_id_, author_user_ids_, security_level_, num_, auto_number_
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id = "Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides = ",">
+            <if test = "id != null">
+                and id_ ${idOperator} #{id}
+            </if>
+            <if test = "name != null">
+                and name_ ${nameOperator} #{name}
+            </if>
+            <if test = "publishedJournals != null">
+                and published_journals_ ${publishedJournalsOperator} #{publishedJournals}
+            </if>
+            <if test = "publishedTime != null">
+                and published_time_ ${publishedTimeOperator} #{publishedTime}
+            </if>
+            <if test = "publishedTime1 != null">
+                and published_time_ &gt;= #{publishedTime1}
+            </if>
+            <if test = "publishedTime2 != null">
+                and published_time_ &lt;= #{publishedTime2}
+            </if>
+            <if test = "publishedIssue != null">
+                and published_issue_ ${publishedIssueOperator} #{publishedIssue}
+            </if>
+            <if test = "keywords != null">
+                and keywords_ ${keywordsOperator} #{keywords}
+            </if>
+            <if test = "index != null">
+                and index_ ${indexOperator} #{index}
+            </if>
+            <if test = "company != null">
+                and company_ ${companyOperator} #{company}
+            </if>
+            <if test = "authorUserNames != null">
+                and author_user_names_ ${authorUserNamesOperator} #{authorUserNames}
+            </if>
+            <if test = "deptId != null">
+                and dept_id_ ${deptIdOperator} #{deptId}
+            </if>
+            <if test = "uploadUserName != null">
+                and upload_user_name_ ${uploadUserNameOperator} #{uploadUserName}
+            </if>
+            <if test = "updateTime != null">
+                and update_time_ ${updateTimeOperator} #{updateTime}
+            </if>
+            <if test = "updateTime1 != null">
+                and update_time_ &gt;= #{updateTime1}
+            </if>
+            <if test = "updateTime2 != null">
+                and update_time_ &lt;= #{updateTime2}
+            </if>
+            <if test = "paperAbstract != null">
+                and paper_abstract_ ${paperAbstractOperator} #{paperAbstract}
+            </if>
+            <if test = "deptName != null">
+                and dept_name_ ${deptNameOperator} #{deptName}
+            </if>
+            <if test = "uploadUserId != null">
+                and upload_user_id_ ${uploadUserIdOperator} #{uploadUserId}
+            </if>
+            <if test = "authorUserIds != null">
+                and author_user_ids_ ${authorUserIdsOperator} #{authorUserIds}
+            </if>
+            <if test = "securityLevel != null">
+                and security_level_ ${securityLevelOperator} #{securityLevel}
+            </if>
+            <if test = "extInfo1 != null">
+                and ext_info1_ ${extInfo1Operator} #{extInfo1}
+            </if>
+            <if test = "extInfo2 != null">
+                and ext_info2_ ${extInfo2Operator} #{extInfo2}
+            </if>
+            <if test = "extInfo3 != null">
+                and ext_info3_ ${extInfo3Operator} #{extInfo3}
+            </if>
+            <if test = "extInfo4 != null">
+                and ext_info4_ ${extInfo4Operator} #{extInfo4}
+            </if>
+            <if test = "num != null">
+                and num_ ${numOperator} #{num}
+            </if>
+            <if test = "extInfo5 != null">
+                and ext_info5_ ${extInfo5Operator} #{extInfo5}
+            </if>
+            <if test = "extInfo6 != null">
+                and ext_info6_ ${extInfo6Operator} #{extInfo6}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id = "Base_Where_Clause1">
+        where 1=1
+        <trim suffixOverrides = ",">
+            <if test = "id != null">
+                and id_ = #{id}
+            </if>
+            <if test = "name != null">
+                and name_ like '%'||#{name,jdbcType=VARCHAR}||'%'
+            </if>
+            <if test = "publishedJournals != null">
+                and published_journals_ like CONCAT('%',CONCAT(#{publishedJournals},'%'))
+            </if>
+            <if test = "startPublishedTime != null">
+                and (to_date(to_char(published_time_ ,'yyyy-mm-dd'),'yyyy-mm-dd')) &gt;= #{startPublishedTime}
+            </if>
+            <if test = "endPublishedTime != null">
+                and (to_date(to_char(published_time_ ,'yyyy-mm-dd'),'yyyy-mm-dd')) &lt;= #{endPublishedTime}
+            </if>
+            <if test = "publishedIssue != null">
+                and published_issue_ like CONCAT('%',CONCAT(#{publishedIssue},'%'))
+            </if>
+            <if test = "keywords != null">
+                and keywords_ like CONCAT('%',CONCAT( #{keywords},'%'))
+            </if>
+            <if test = "index != null">
+                and index_ like '%'||#{index ,jdbcType=VARCHAR}||'%'
+            </if>
+            <if test = "company != null">
+                and company_ like CONCAT('%',CONCAT( #{company},'%'))
+            </if>
+            <if test = "authorUserNames != null">
+                and author_user_names_ like CONCAT('%',CONCAT( #{authorUserNames},'%'))
+            </if>
+            <if test = "deptId != null">
+                and dept_id_ = #{deptId}
+            </if>
+
+            <if test = "deptIdList != null">
+                and dept_id_ in
+                <foreach item = "item" collection = "deptIdList" index = "orgIdIndex" open = "(" separator = ","
+                        close =
+                        ")">
+
+                    #{item}
+
+                </foreach>
+            </if>
+            <if test = "uploadUserName != null">
+                and upload_user_name_ like CONCAT('%',CONCAT( #{uploadUserName},'%'))
+            </if>
+            <if test = "updateTime != null">
+                and update_time_ = #{updateTime}
+            </if>
+            <if test = "paperAbstract != null">
+                and paper_abstract_ like CONCAT('%',CONCAT( #{paperAbstract},'%'))
+            </if>
+            <if test = "deptName != null">
+                and dept_name_ like CONCAT('%',CONCAT( #{deptName},'%'))
+            </if>
+            <if test = "uploadUserId != null">
+                and upload_user_id_ like CONCAT('%',CONCAT(#{uploadUserId},'%'))
+            </if>
+            <if test = "authorUserIds != null">
+                and author_user_ids_ like CONCAT('%',CONCAT(#{authorUserIds},'%'))
+            </if>
+            <if test = "securityLevel != null">
+                and security_level_ like CONCAT('%',CONCAT(#{securityLevel},'%'))
+            </if>
+            <if test = "num != null">
+                and num_ = #{num}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id = "insert" parameterType = "com.adc.da.knowledge.entity.PaperEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+            SELECT SEQ_K_PAPER.NEXTVAL FROM DUAL
+        </selectKey> -->
+        insert into K_PAPER(<include refid = "Base_Column_List"/>)
+        values (#{id, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, #{publishedJournals, jdbcType=VARCHAR},
+        #{publishedTime, jdbcType=TIMESTAMP}, #{publishedIssue, jdbcType=VARCHAR}, #{keywords, jdbcType=VARCHAR},
+        #{index, jdbcType=VARCHAR}, #{company, jdbcType=VARCHAR}, #{authorUserNames, jdbcType=VARCHAR},
+        #{deptId, jdbcType=VARCHAR}, #{uploadUserName, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP},
+        #{paperAbstract, jdbcType=VARCHAR}, #{deptName, jdbcType=VARCHAR}, #{uploadUserId, jdbcType=VARCHAR},
+        #{authorUserIds, jdbcType=VARCHAR}, #{securityLevel, jdbcType=VARCHAR}, #{extInfo1, jdbcType=VARCHAR},
+        #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR},
+        #{num, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR}, #{extInfo6, jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id = "insertSelective" parameterType = "com.adc.da.knowledge.entity.PaperEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_K_PAPER.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into K_PAPER
+        <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">id_,</if>
+            <if test = "name != null">name_,</if>
+            <if test = "publishedJournals != null">published_journals_,</if>
+            <if test = "publishedTime != null">published_time_,</if>
+            <if test = "publishedIssue != null">published_issue_,</if>
+            <if test = "keywords != null">keywords_,</if>
+            <if test = "index != null">index_,</if>
+            <if test = "company != null">company_,</if>
+            <if test = "authorUserNames != null">author_user_names_,</if>
+            <if test = "deptId != null">dept_id_,</if>
+            <if test = "uploadUserName != null">upload_user_name_,</if>
+            <if test = "updateTime != null">update_time_,</if>
+            <if test = "paperAbstract != null">paper_abstract_,</if>
+            <if test = "deptName != null">dept_name_,</if>
+            <if test = "uploadUserId != null">upload_user_id_,</if>
+            <if test = "authorUserIds != null">author_user_ids_,</if>
+            <if test = "securityLevel != null">security_level_,</if>
+            <if test = "extInfo1 != null">ext_info1_,</if>
+            <if test = "extInfo2 != null">ext_info2_,</if>
+            <if test = "extInfo3 != null">ext_info3_,</if>
+            <if test = "extInfo4 != null">ext_info4_,</if>
+            <if test = "num != null">num_,</if>
+            <if test = "extInfo5 != null">ext_info5_,</if>
+            <if test = "extInfo6 != null">ext_info6_,</if>
+            <if test = "autoNumber != null">auto_number_,</if>
+        </trim>
+        <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">#{id, jdbcType=VARCHAR},</if>
+            <if test = "name != null">#{name, jdbcType=VARCHAR},</if>
+            <if test = "publishedJournals != null">#{publishedJournals, jdbcType=VARCHAR},</if>
+            <if test = "publishedTime != null">#{publishedTime, jdbcType=TIMESTAMP},</if>
+            <if test = "publishedIssue != null">#{publishedIssue, jdbcType=VARCHAR},</if>
+            <if test = "keywords != null">#{keywords, jdbcType=VARCHAR},</if>
+            <if test = "index != null">#{index, jdbcType=VARCHAR},</if>
+            <if test = "company != null">#{company, jdbcType=VARCHAR},</if>
+            <if test = "authorUserNames != null">#{authorUserNames, jdbcType=VARCHAR},</if>
+            <if test = "deptId != null">#{deptId, jdbcType=VARCHAR},</if>
+            <if test = "uploadUserName != null">#{uploadUserName, jdbcType=VARCHAR},</if>
+            <if test = "updateTime != null">#{updateTime, jdbcType=TIMESTAMP},</if>
+            <if test = "paperAbstract != null">#{paperAbstract, jdbcType=VARCHAR},</if>
+            <if test = "deptName != null">#{deptName, jdbcType=VARCHAR},</if>
+            <if test = "uploadUserId != null">#{uploadUserId, jdbcType=VARCHAR},</if>
+            <if test = "authorUserIds != null">#{authorUserIds, jdbcType=VARCHAR},</if>
+            <if test = "securityLevel != null">#{securityLevel, jdbcType=VARCHAR},</if>
+            <if test = "extInfo1 != null">#{extInfo1, jdbcType=VARCHAR},</if>
+            <if test = "extInfo2 != null">#{extInfo2, jdbcType=VARCHAR},</if>
+            <if test = "extInfo3 != null">#{extInfo3, jdbcType=VARCHAR},</if>
+            <if test = "extInfo4 != null">#{extInfo4, jdbcType=VARCHAR},</if>
+            <if test = "num != null">#{num, jdbcType=VARCHAR},</if>
+            <if test = "extInfo5 != null">#{extInfo5, jdbcType=VARCHAR},</if>
+            <if test = "extInfo6 != null">#{extInfo6, jdbcType=VARCHAR},</if>
+            <if test = "autoNumber != null">#{autoNumber, jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <!-- 根据pk，修改记录-->
+    <update id = "updateByPrimaryKey" parameterType = "com.adc.da.knowledge.entity.PaperEO">
+        UPDATE K_PAPER
+        SET name_               = #{name, jdbcType=VARCHAR},
+            published_journals_ = #{publishedJournals, jdbcType=VARCHAR},
+            published_time_     = #{publishedTime, jdbcType=TIMESTAMP},
+            published_issue_    = #{publishedIssue, jdbcType=VARCHAR},
+            keywords_           = #{keywords, jdbcType=VARCHAR},
+            index_              = #{index, jdbcType=VARCHAR},
+            company_            = #{company, jdbcType=VARCHAR},
+            author_user_names_  = #{authorUserNames, jdbcType=VARCHAR},
+            dept_id_            = #{deptId, jdbcType=VARCHAR},
+            upload_user_name_   = #{uploadUserName, jdbcType=VARCHAR},
+            update_time_        = #{updateTime, jdbcType=TIMESTAMP},
+            paper_abstract_     = #{paperAbstract, jdbcType=VARCHAR},
+            dept_name_          = #{deptName, jdbcType=VARCHAR},
+            upload_user_id_     = #{uploadUserId, jdbcType=VARCHAR},
+            author_user_ids_    = #{authorUserIds, jdbcType=VARCHAR},
+            security_level_     = #{securityLevel, jdbcType=VARCHAR},
+            ext_info1_          = #{extInfo1, jdbcType=VARCHAR},
+            ext_info2_          = #{extInfo2, jdbcType=VARCHAR},
+            ext_info3_          = #{extInfo3, jdbcType=VARCHAR},
+            ext_info4_          = #{extInfo4, jdbcType=VARCHAR},
+            num_                = #{num, jdbcType=VARCHAR},
+            ext_info5_          = #{extInfo5, jdbcType=VARCHAR},
+            ext_info6_          = #{extInfo6, jdbcType=VARCHAR}
+        WHERE id_ = #{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id = "updateByPrimaryKeySelective" parameterType = "com.adc.da.knowledge.entity.PaperEO">
+        update K_PAPER
+        <set>
+            <if test = "name != null">
+                name_ = #{name},
+            </if>
+            <if test = "publishedJournals != null">
+                published_journals_ = #{publishedJournals},
+            </if>
+            <if test = "publishedTime != null">
+                published_time_ = #{publishedTime},
+            </if>
+            <if test = "publishedIssue != null">
+                published_issue_ = #{publishedIssue},
+            </if>
+            <if test = "keywords != null">
+                keywords_ = #{keywords},
+            </if>
+            <if test = "index != null">
+                index_ = #{index},
+            </if>
+            <if test = "company != null">
+                company_ = #{company},
+            </if>
+            <if test = "authorUserNames != null">
+                author_user_names_ = #{authorUserNames},
+            </if>
+            <if test = "deptId != null">
+                dept_id_ = #{deptId},
+            </if>
+            <if test = "uploadUserName != null">
+                upload_user_name_ = #{uploadUserName},
+            </if>
+            <if test = "updateTime != null">
+                update_time_ = #{updateTime},
+            </if>
+            <if test = "paperAbstract != null">
+                paper_abstract_ = #{paperAbstract},
+            </if>
+            <if test = "deptName != null">
+                dept_name_ = #{deptName},
+            </if>
+            <if test = "uploadUserId != null">
+                upload_user_id_ = #{uploadUserId},
+            </if>
+            <if test = "authorUserIds != null">
+                author_user_ids_ = #{authorUserIds},
+            </if>
+            <if test = "securityLevel != null">
+                security_level_ = #{securityLevel},
+            </if>
+            <if test = "extInfo1 != null">
+                ext_info1_ = #{extInfo1},
+            </if>
+            <if test = "extInfo2 != null">
+                ext_info2_ = #{extInfo2},
+            </if>
+            <if test = "extInfo3 != null">
+                ext_info3_ = #{extInfo3},
+            </if>
+            <if test = "extInfo4 != null">
+                ext_info4_ = #{extInfo4},
+            </if>
+            <if test = "num != null">
+                num_ = #{num},
+            </if>
+            <if test = "extInfo5 != null">
+                ext_info5_ = #{extInfo5},
+            </if>
+            <if test = "extInfo6 != null">
+                ext_info6_ = #{extInfo6},
+            </if>
+        </set>
+        where id_ = #{id}
+    </update>
+
+    <!-- 根据id查询 K_PAPER -->
+    <select id = "selectByPrimaryKey" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+        select
+        <include refid = "Base_Column_List"/>
+        from K_PAPER
+        where id_ = #{value}
+
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id = "deleteByPrimaryKey" parameterType = "java.lang.String">
+        DELETE
+        FROM K_PAPER
+        WHERE id_ = #{value}
+
+    </delete>
+
+    <!-- K_PAPER 列表总数-->
+    <select id = "queryByCount" resultType = "java.lang.Integer" parameterType = "com.adc.da.base.page.BasePage">
+        select count(1) from K_PAPER
+        <include refid = "Base_Where_Clause"/>
+    </select>
+
+    <select id = "queryByMyCount" resultType = "java.lang.Integer" parameterType = "com.adc.da.base.page.BasePage">
+        select count(1) from K_PAPER
+        <include refid = "Base_Where_Clause1"/>
+    </select>
+
+    <!-- 查询K_PAPER列表 -->
+    <select id = "queryByPage" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from
+        (select tmp_tb.* , rownum rn from
+        (select
+        <include refid = "Base_Column_List"/>
+        from K_PAPER
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <!-- 查询K_PAPER列表 -->
+    <select id = "queryByMyPage" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List1"/>
+        from
+        (select tmp_tb.* , rownum rn from
+        (select
+        <include refid = "Base_Column_List1"/>
+        from K_PAPER
+        <include refid = "Base_Where_Clause1"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id = "queryByList" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from K_PAPER
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+    </select>
+
+    <select id = "queryPaperByPaperIdsIn" resultMap = "BaseResultMap">
+        select
+        <include refid = "Base_Column_List1"/>
+        from K_PAPER
+        where ID_ in
+        <foreach item = "it" collection = "paperIdList" open = "(" separator = ","
+                close = ")" index = "index">
+            #{it}
+        </foreach>
+
+    </select>
+
+</mapper>

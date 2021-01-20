@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.progress.dao.ProjectBudgetChangeEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.progress.entity.ProjectBudgetChangeEO" >
+    <id column="id" property="id" />
+    <result column="person_cost" property="personCost" />
+    <result column="purchase_cost" property="purchaseCost" />
+    <result column="cooperation_cost" property="cooperationCost" />
+    <result column="other_cost" property="otherCost" />
+    <result column="amount_count" property="amountCount" />
+    <result column="change_version" property="changeVersion" />
+    <result column="ext_info1" property="extInfo1" />
+    <result column="ext_info2" property="extInfo2" />
+    <result column="ext_info3" property="extInfo3" />
+    <result column="ext_info4" property="extInfo4" />
+    <result column="ext_info5" property="extInfo5" />
+    <result column="project_name" property="projectName" />
+    <result column="project_id" property="projectId" />
+  </resultMap>
+
+  <!-- PR_PROJECT_BUDGET_CHANGE table all fields -->
+  <sql id="Base_Column_List" >
+     id, person_cost, purchase_cost, cooperation_cost, other_cost, amount_count, change_version, ext_info1, ext_info2, ext_info3, ext_info4, ext_info5, project_name, project_id
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="personCost != null" >
+        and person_cost ${personCostOperator} #{personCost}
+      </if>
+      <if test="purchaseCost != null" >
+        and purchase_cost ${purchaseCostOperator} #{purchaseCost}
+      </if>
+      <if test="cooperationCost != null" >
+        and cooperation_cost ${cooperationCostOperator} #{cooperationCost}
+      </if>
+      <if test="otherCost != null" >
+        and other_cost ${otherCostOperator} #{otherCost}
+      </if>
+      <if test="amountCount != null" >
+        and amount_count ${amountCountOperator} #{amountCount}
+      </if>
+      <if test="changeVersion != null" >
+        and change_version ${changeVersionOperator} #{changeVersion}
+      </if>
+      <if test="extInfo1 != null" >
+        and ext_info1 ${extInfo1Operator} #{extInfo1}
+      </if>
+      <if test="extInfo2 != null" >
+        and ext_info2 ${extInfo2Operator} #{extInfo2}
+      </if>
+      <if test="extInfo3 != null" >
+        and ext_info3 ${extInfo3Operator} #{extInfo3}
+      </if>
+      <if test="extInfo4 != null" >
+        and ext_info4 ${extInfo4Operator} #{extInfo4}
+      </if>
+      <if test="extInfo5 != null" >
+        and ext_info5 ${extInfo5Operator} #{extInfo5}
+      </if>
+      <if test="projectName != null" >
+        and project_name ${projectNameOperator} #{projectName}
+      </if>
+      <if test="projectId != null" >
+        and project_id ${projectIdOperator} #{projectId}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.progress.entity.ProjectBudgetChangeEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_PR_PROJECT_BUDGET_CHANGE.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into PR_PROJECT_BUDGET_CHANGE(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{personCost, jdbcType=FLOAT}, #{purchaseCost, jdbcType=FLOAT}, #{cooperationCost, jdbcType=FLOAT}, #{otherCost, jdbcType=FLOAT}, #{amountCount, jdbcType=FLOAT}, #{changeVersion, jdbcType=INTEGER}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR}, #{projectName, jdbcType=VARCHAR}, #{projectId, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.progress.entity.ProjectBudgetChangeEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_PR_PROJECT_BUDGET_CHANGE.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into PR_PROJECT_BUDGET_CHANGE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="personCost != null" >person_cost,</if>
+                <if test="purchaseCost != null" >purchase_cost,</if>
+                <if test="cooperationCost != null" >cooperation_cost,</if>
+                <if test="otherCost != null" >other_cost,</if>
+                <if test="amountCount != null" >amount_count,</if>
+                <if test="changeVersion != null" >change_version,</if>
+                <if test="extInfo1 != null" >ext_info1,</if>
+                <if test="extInfo2 != null" >ext_info2,</if>
+                <if test="extInfo3 != null" >ext_info3,</if>
+                <if test="extInfo4 != null" >ext_info4,</if>
+                <if test="extInfo5 != null" >ext_info5,</if>
+                <if test="projectName != null" >project_name,</if>
+                <if test="projectId != null" >project_id,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="personCost != null" >#{personCost, jdbcType=FLOAT},</if>
+                <if test="purchaseCost != null" >#{purchaseCost, jdbcType=FLOAT},</if>
+                <if test="cooperationCost != null" >#{cooperationCost, jdbcType=FLOAT},</if>
+                <if test="otherCost != null" >#{otherCost, jdbcType=FLOAT},</if>
+                <if test="amountCount != null" >#{amountCount, jdbcType=FLOAT},</if>
+                <if test="changeVersion != null" >#{changeVersion, jdbcType=INTEGER},</if>
+                <if test="extInfo1 != null" >#{extInfo1, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="extInfo3 != null" >#{extInfo3, jdbcType=VARCHAR},</if>
+                <if test="extInfo4 != null" >#{extInfo4, jdbcType=VARCHAR},</if>
+                <if test="extInfo5 != null" >#{extInfo5, jdbcType=VARCHAR},</if>
+                <if test="projectName != null" >#{projectName, jdbcType=VARCHAR},</if>
+                <if test="projectId != null" >#{projectId, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.progress.entity.ProjectBudgetChangeEO" >
+    update PR_PROJECT_BUDGET_CHANGE
+       set  person_cost = #{personCost},
+            purchase_cost = #{purchaseCost},
+            cooperation_cost = #{cooperationCost},
+            other_cost = #{otherCost},
+            amount_count = #{amountCount},
+            change_version = #{changeVersion},
+            ext_info1 = #{extInfo1},
+            ext_info2 = #{extInfo2},
+            ext_info3 = #{extInfo3},
+            ext_info4 = #{extInfo4},
+            ext_info5 = #{extInfo5},
+            project_name = #{projectName},
+            project_id = #{projectId}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.progress.entity.ProjectBudgetChangeEO" >
+    update PR_PROJECT_BUDGET_CHANGE
+    <set >
+      <if test="personCost != null" >
+        person_cost = #{personCost},
+      </if>
+      <if test="purchaseCost != null" >
+        purchase_cost = #{purchaseCost},
+      </if>
+      <if test="cooperationCost != null" >
+        cooperation_cost = #{cooperationCost},
+      </if>
+      <if test="otherCost != null" >
+        other_cost = #{otherCost},
+      </if>
+      <if test="amountCount != null" >
+        amount_count = #{amountCount},
+      </if>
+      <if test="changeVersion != null" >
+        change_version = #{changeVersion},
+      </if>
+      <if test="extInfo1 != null" >
+        ext_info1 = #{extInfo1},
+      </if>
+      <if test="extInfo2 != null" >
+        ext_info2 = #{extInfo2},
+      </if>
+      <if test="extInfo3 != null" >
+        ext_info3 = #{extInfo3},
+      </if>
+      <if test="extInfo4 != null" >
+        ext_info4 = #{extInfo4},
+      </if>
+      <if test="extInfo5 != null" >
+        ext_info5 = #{extInfo5},
+      </if>
+      <if test="projectName != null" >
+        project_name = #{projectName},
+      </if>
+      <if test="projectId != null" >
+        project_id = #{projectId},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 PR_PROJECT_BUDGET_CHANGE -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from PR_PROJECT_BUDGET_CHANGE
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from PR_PROJECT_BUDGET_CHANGE
+     where id = #{value}
+
+  </delete>
+
+  <!-- PR_PROJECT_BUDGET_CHANGE 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from PR_PROJECT_BUDGET_CHANGE
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询PR_PROJECT_BUDGET_CHANGE列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from PR_PROJECT_BUDGET_CHANGE
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from PR_PROJECT_BUDGET_CHANGE
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+
+
+    <!-- 根据id查询 PR_PROJECT_BUDGET_CHANGE -->
+    <select id="selectByProjectId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="Base_Column_List" />
+        from PR_PROJECT_BUDGET_CHANGE
+        where PROJECT_ID = #{0}
+
+    </select>
+
+
+
+</mapper>

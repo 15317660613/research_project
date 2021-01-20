@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.adc.da.category.dao.MyCategoryEODao">
+    <!-- Result Map-->
+    <resultMap id = "BaseResultMap" type = "com.adc.da.category.entity.MyCategoryEO">
+        <id column = "id_" property = "id"/>
+        <result column = "name_" property = "name"/>
+        <result column = "create_time_" property = "createTime"/>
+        <result column = "del_flag_" property = "delFlag"/>
+        <result column = "ext_info_1_" property = "extInfo1"/>
+        <result column = "ext_info_2_" property = "extInfo2"/>
+    </resultMap>
+
+    <!-- ACT_TS_CATEGORY table all fields -->
+    <sql id = "Base_Column_List">
+        id_, name_, create_time_, del_flag_, ext_info_1_, ext_info_2_
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id = "Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides = ",">
+            <if test = "id != null">
+                and id_ ${idOperator} #{id}
+            </if>
+            <if test = "name != null">
+                and name_ ${nameOperator} #{name}
+            </if>
+            <if test = "createTime != null">
+                and create_time_ ${createTimeOperator} #{createTime}
+            </if>
+            <if test = "createTime1 != null">
+                and create_time_ &gt;= #{createTime1}
+            </if>
+            <if test = "createTime2 != null">
+                and create_time_ &lt;= #{createTime2}
+            </if>
+            <if test = "delFlag != null">
+                and del_flag_ ${delFlagOperator} #{delFlag}
+            </if>
+            <if test = "extInfo1 != null">
+                and ext_info_1_ ${extInfo1Operator} #{extInfo1}
+            </if>
+            <if test = "extInfo2 != null">
+                and ext_info_2_ ${extInfo2Operator} #{extInfo2}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id = "insert" parameterType = "com.adc.da.category.entity.MyCategoryEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+            SELECT SEQ_ACT_TS_CATEGORY.NEXTVAL FROM DUAL
+        </selectKey> -->INSERT INTO ACT_TS_CATEGORY (<include
+            refid = "Base_Column_List"/>) values (#{id, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{delFlag, jdbcType=INTEGER}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id = "insertSelective" parameterType = "com.adc.da.category.entity.MyCategoryEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_ACT_TS_CATEGORY.NEXTVAL FROM DUAL
+    </selectKey> -->insert into ACT_TS_CATEGORY
+        <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">id_,</if>
+            <if test = "name != null">name_,</if>
+            <if test = "createTime != null">create_time_,</if>
+            <if test = "delFlag != null">del_flag_,</if>
+            <if test = "extInfo1 != null">ext_info_1_,</if>
+            <if test = "extInfo2 != null">ext_info_2_,</if>
+        </trim>
+        <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">#{id, jdbcType=VARCHAR},</if>
+            <if test = "name != null">#{name, jdbcType=VARCHAR},</if>
+            <if test = "createTime != null">#{createTime, jdbcType=TIMESTAMP},</if>
+            <if test = "delFlag != null">#{delFlag, jdbcType=INTEGER},</if>
+            <if test = "extInfo1 != null">#{extInfo1, jdbcType=VARCHAR},</if>
+            <if test = "extInfo2 != null">#{extInfo2, jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <!-- 根据pk，修改记录-->
+    <update id = "updateByPrimaryKey" parameterType = "com.adc.da.category.entity.MyCategoryEO">
+        UPDATE ACT_TS_CATEGORY
+        SET name_        = #{name},
+            create_time_ = #{createTime},
+            del_flag_    = #{delFlag},
+            ext_info_1_  = #{extInfo1},
+            ext_info_2_  = #{extInfo2}
+        WHERE id_ = #{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id = "updateByPrimaryKeySelective" parameterType = "com.adc.da.category.entity.MyCategoryEO">
+        update ACT_TS_CATEGORY
+        <set>
+            <if test = "name != null">
+                name_ = #{name},
+            </if>
+            <if test = "createTime != null">
+                create_time_ = #{createTime},
+            </if>
+            <if test = "delFlag != null">
+                del_flag_ = #{delFlag},
+            </if>
+            <if test = "extInfo1 != null">
+                ext_info_1_ = #{extInfo1},
+            </if>
+            <if test = "extInfo2 != null">
+                ext_info_2_ = #{extInfo2},
+            </if>
+        </set>
+        where id_ = #{id}
+    </update>
+
+    <!-- 根据id查询 ACT_TS_CATEGORY -->
+    <select id = "selectByPrimaryKey" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+        select
+        <include refid = "Base_Column_List"/>
+        from ACT_TS_CATEGORY where id_ = #{value}
+
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id = "deleteByPrimaryKey" parameterType = "java.lang.String">
+        DELETE
+        FROM ACT_TS_CATEGORY
+        WHERE id_ = #{value}
+
+    </delete>
+
+    <!-- ACT_TS_CATEGORY 列表总数-->
+    <select id = "queryByCount" resultType = "java.lang.Integer" parameterType = "com.adc.da.base.page.BasePage">
+        select count(1) from ACT_TS_CATEGORY
+        <include refid = "Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询ACT_TS_CATEGORY列表 -->
+    <select id = "queryByPage" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from (select tmp_tb.* , rownum rn from (select
+        <include refid = "Base_Column_List"/>
+        from ACT_TS_CATEGORY
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex}) where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id = "queryByList" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from ACT_TS_CATEGORY
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+    </select>
+
+</mapper>

@@ -1,0 +1,13 @@
+pdf
+doc
+docx
+xlsx
+xls
+zip
+rar
+jpg
+jpeg
+png
+gif
+ppt
+pptx

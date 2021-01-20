@@ -1,0 +1,17 @@
+/verifyCode
+/smallprogram
+/smallProgram
+sys/file
+budget/project/getPadProjectContractAmount
+exchangeplan/exchangePlan/pad
+customerresourcemanage/contacts
+pad/padOperationManage
+sys/sync
+dataSync
+user/supplierRegistry
+updatePassword
+updateUserInfo
+userMenu
+api/sys/user/getUserByRoleCode
+/service
+/financialEditor

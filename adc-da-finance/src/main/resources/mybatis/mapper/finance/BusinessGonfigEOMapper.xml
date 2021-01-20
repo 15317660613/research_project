@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.finance.dao.BusinessGonfigEODao" >
+    <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.finance.entity.BusinessGonfigEO" >
+    <id column="id" property="id"/>
+    <result column="bg_name" property="bgName" />
+    <result column="bg_number" property="bgNumber" />
+    <result column="depart_id" property="departId" />
+    <result column="depart_name" property="departName" />
+    <result column="bg_status" property="bgStatus" />
+    <result column="create_time" property="createTime" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="create_user_name" property="createUserName" />
+    <result column="update_time" property="updateTime" />
+    <result column="update_user_id" property="updateUserId" />
+    <result column="update_user_name" property="updateUserName" />
+    <result column="del_flag" property="delFlag" />
+      <result column="bg_type" property="bgType"/>
+  </resultMap>
+
+  <!-- F_BUSINESS_GONFIG table all fields -->
+  <sql id="Base_Column_List" >
+     id, bg_name, bg_number, depart_id, depart_name, bg_status, create_time, create_user_id, create_user_name, update_time, update_user_id, update_user_name, del_flag,bg_type
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null and id != ''" >
+        and bg.id ${idOperator} #{id}
+      </if>
+      <if test="bgName != null and bgName != ''" >
+        and bg.bg_name ${bgNameOperator} #{bgName}
+      </if>
+      <if test="bgNumber != null and bgNumber != ''" >
+        and bg.bg_number ${bgNumberOperator} #{bgNumber}
+      </if>
+      <if test="departId != null and departId != ''" >
+        and bg.depart_id ${departIdOperator} #{departId}
+      </if>
+      <if test="departName != null and departName != ''" >
+        and bg.depart_name ${departNameOperator} #{departName}
+      </if>
+      <if test="bgStatus != null and bgStatus != ''" >
+        and bg.bg_status ${bgStatusOperator} #{bgStatus}
+      </if>
+      <if test="createTime != null and createTime != ''" >
+        and bg.create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null and createTime1 != ''" >
+        and bg.create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null and createTime2 != ''" >
+        and bg.create_time &lt;= #{createTime2}
+      </if>
+      <if test="createUserId != null and createUserId != ''" >
+        and bg.create_user_id ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="createUserName != null and createUserName != ''" >
+        and bg.create_user_name ${createUserNameOperator} #{createUserName}
+      </if>
+      <if test="updateTime != null and updateTime != ''" >
+        and bg.update_time ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null and updateTime1 != ''" >
+        and bg.update_time &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null and updateTime2 != ''" >
+        and bg.update_time &lt;= #{updateTime2}
+      </if>
+      <if test="updateUserId != null and updateUserId != ''" >
+        and bg.update_user_id ${updateUserIdOperator} #{updateUserId}
+      </if>
+      <if test="updateUserName != null and updateUserName != ''" >
+        and bg.update_user_name ${updateUserNameOperator} #{updateUserName}
+      </if>
+      <if test="delFlag != null and delFlag != ''" >
+        and bg.del_flag ${delFlagOperator} #{delFlag}
+      </if>
+      <if test="bgType != null and bgType != ''">
+          and bg.bg_type ${bgTypeOperator} #{bgType}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.finance.entity.BusinessGonfigEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_F_BUSINESS_GONFIG.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into F_BUSINESS_GONFIG(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{bgName, jdbcType=VARCHAR}, #{bgNumber, jdbcType=VARCHAR}, #{departId, jdbcType=VARCHAR}, #{departName, jdbcType=VARCHAR}, #{bgStatus, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{createUserId, jdbcType=VARCHAR}, #{createUserName, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP}, #{updateUserId, jdbcType=VARCHAR}, #{updateUserName, jdbcType=VARCHAR}, #{delFlag, jdbcType=VARCHAR},#{bgType,jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.finance.entity.BusinessGonfigEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_F_BUSINESS_GONFIG.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into F_BUSINESS_GONFIG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="bgName != null" >bg_name,</if>
+                <if test="bgNumber != null" >bg_number,</if>
+                <if test="departId != null" >depart_id,</if>
+                <if test="departName != null" >depart_name,</if>
+                <if test="bgStatus != null" >bg_status,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="createUserId != null" >create_user_id,</if>
+                <if test="createUserName != null" >create_user_name,</if>
+                <if test="updateTime != null" >update_time,</if>
+                <if test="updateUserId != null" >update_user_id,</if>
+                <if test="updateUserName != null" >update_user_name,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="bgType != null" >bg_type,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="bgName != null" >#{bgName, jdbcType=VARCHAR},</if>
+                <if test="bgNumber != null" >#{bgNumber, jdbcType=VARCHAR},</if>
+                <if test="departId != null" >#{departId, jdbcType=VARCHAR},</if>
+                <if test="departName != null" >#{departName, jdbcType=VARCHAR},</if>
+                <if test="bgStatus != null" >#{bgStatus, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="createUserId != null" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="createUserName != null" >#{createUserName, jdbcType=VARCHAR},</if>
+                <if test="updateTime != null" >#{updateTime, jdbcType=TIMESTAMP},</if>
+                <if test="updateUserId != null" >#{updateUserId, jdbcType=VARCHAR},</if>
+                <if test="updateUserName != null" >#{updateUserName, jdbcType=VARCHAR},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=VARCHAR},</if>
+                <if test="bgType != null" >#{bgType, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.finance.entity.BusinessGonfigEO" >
+    update F_BUSINESS_GONFIG
+       set  bg_name = #{bgName},
+            bg_number = #{bgNumber},
+            depart_id = #{departId},
+            depart_name = #{departName},
+            bg_status = #{bgStatus},
+            create_time = #{createTime},
+            create_user_id = #{createUserId},
+            create_user_name = #{createUserName},
+            update_time = #{updateTime},
+            update_user_id = #{updateUserId},
+            update_user_name = #{updateUserName},
+            del_flag = #{delFlag},
+            bg_type = #{bgType}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.finance.entity.BusinessGonfigEO" >
+    update F_BUSINESS_GONFIG
+    <set >
+      <if test="bgName != null" >
+        bg_name = #{bgName},
+      </if>
+      <if test="bgNumber != null" >
+        bg_number = #{bgNumber},
+      </if>
+      <if test="departId != null" >
+        depart_id = #{departId},
+      </if>
+      <if test="departName != null" >
+        depart_name = #{departName},
+      </if>
+      <if test="bgStatus != null" >
+        bg_status = #{bgStatus},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="createUserName != null" >
+        create_user_name = #{createUserName},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId},
+      </if>
+      <if test="updateUserName != null" >
+        update_user_name = #{updateUserName},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="bgType != null">
+          bg_type = #{bgType}
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 F_BUSINESS_GONFIG -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+      select
+      <include refid="Base_Column_List"/>
+      from F_BUSINESS_GONFIG
+     where id = #{value}
+
+  </select>
+
+
+    <!-- 根据suerId查询 F_BUSINESS_GONFIG -->
+    <select id="getBusinessListByLoginUser" resultMap="BaseResultMap">
+        select fbg.ID as ID ,fbg.BG_NAME as bg_name
+        from F_BUSINESS_GONFIG fbg left join F_COST_RECEIVER fcr on fcr.ORG_ID = fbg.DEPART_ID
+        where fcr.USER_IDS like CONCAT('%',CONCAT(#{userId},'%'))
+    </select>
+
+    <!-- 查询F_BUSINESS_GONFIG列表 -->
+    <select id="getBusinessPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select tmp_tc.* from
+        (select tmp_tb.* , rownum rn from
+        (SELECT fbg.*,DIC.DIC_TYPE_NAME AS bgStatusName FROM F_BUSINESS_GONFIG fbg
+        left join F_COST_RECEIVER fcr on fcr.ORG_ID = fbg.DEPART_ID
+        LEFT JOIN TS_DICTYPE dic ON fbg.BG_STATUS = dic.ID
+            where fcr.USER_IDS like CONCAT('%',CONCAT(#{userId},'%')) and fbg.del_flag != '1' and dic.DIC_TYPE_NAME = '进行'
+        <if test="bgName != null and bgName != ''">
+            and fbg.BG_NAME like CONCAT('%',CONCAT(#{bgName},'%'))
+        </if>
+        <if test="bgType != null and bgType != ''">
+            and fbg.bg_type = #{bgType}
+        </if>
+        ORDER BY fbg.bg_type desc ,dic.dic_type_code asc ,NLSSORT(fbg.BG_NAME,'NLS_SORT = SCHINESE_PINYIN_M') asc
+        ) tmp_tb where rownum &lt;= ${pager.endIndex}) tmp_tc
+        where rn &gt;= ${pager.startIndex}
+    </select>
+    <!-- 查询F_BUSINESS_GONFIG列表 -->
+    <select id="getBusinessPageCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+       select count(1) from
+        (SELECT fbg.ID as ID ,fbg.BG_NAME as bg_name FROM F_BUSINESS_GONFIG fbg
+        left join F_COST_RECEIVER fcr on fcr.ORG_ID = fbg.DEPART_ID
+        LEFT JOIN TS_DICTYPE dic ON fbg.BG_STATUS = dic.ID
+            where fcr.USER_IDS like CONCAT('%',CONCAT(#{userId},'%')) and fbg.del_flag != '1' and dic.DIC_TYPE_NAME = '进行'
+        <if test="bgName != null and bgName != ''">
+            and fbg.BG_NAME like CONCAT('%',CONCAT(#{bgName},'%'))
+        </if>
+        <if test="bgType != null and bgType != ''">
+            and fbg.bg_type = #{bgType}
+        </if>
+            )
+    </select>
+
+
+    <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from F_BUSINESS_GONFIG
+     where id = #{value}
+
+  </delete>
+    <!-- 逻辑删除记录 -->
+    <update id="logicDelete" parameterType="java.util.List">
+        update F_BUSINESS_GONFIG set del_flag = '1' where id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")" index="index">
+        #{id}
+    </foreach>
+    </update>
+
+  <!-- F_BUSINESS_GONFIG 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from F_BUSINESS_GONFIG bg
+      LEFT JOIN TS_DICTYPE dic ON BG.BG_STATUS = DIC."ID"
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询F_BUSINESS_GONFIG列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select tmp_tc.* from
+		(select tmp_tb.* , rownum rn from
+			(SELECT bg.*,DIC.DIC_TYPE_NAME AS bgStatusName FROM F_BUSINESS_GONFIG bg
+              LEFT JOIN TS_DICTYPE dic ON BG.BG_STATUS = DIC."ID"
+			 <include refid="Base_Where_Clause"/>
+			 <if test="sql_filter != null and sql_filter != ''" >
+			 	${sql_filter}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex}) tmp_tc
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+      SELECT bg.*,DIC.DIC_TYPE_NAME AS bgStatusName FROM F_BUSINESS_GONFIG bg
+      LEFT JOIN TS_DICTYPE dic ON BG.BG_STATUS = DIC."ID"
+    <include refid="Base_Where_Clause"/>
+      <if test="sql_filter != null and sql_filter != ''" >
+          ${sql_filter}
+      </if>
+  </select>
+
+    <select id="getBusinessGonfigEOByBgNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from F_BUSINESS_GONFIG
+        where del_flag = '0' and BG_NUMBER = #{bgNumber}
+    </select>
+
+    <select id="getBusinessGonfigEOByBgName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from F_BUSINESS_GONFIG
+        where del_flag = '0' and BG_NAME = #{bgName}
+    </select>
+
+    <select id="getBusinessGonfigEOByBgNameAndBgType" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from F_BUSINESS_GONFIG
+        where del_flag = '0' and BG_NAME = #{bgName} and BG_TYPE = #{bgType}
+    </select>
+
+</mapper>

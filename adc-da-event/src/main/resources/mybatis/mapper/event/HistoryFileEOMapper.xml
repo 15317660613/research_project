@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.event.dao.HistoryFileEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.event.entity.HistoryFileEO" >
+    <id column="id_" property="id" />
+    <result column="file_id_" property="fileId" />
+    <result column="file_path_" property="filePath" />
+    <result column="editor_id_" property="editorId" />
+    <result column="editor_name_" property="editorName" />
+    <result column="edit_time_" property="editTime" />
+  </resultMap>
+
+  <!-- WR_HISTORY_FILE table all fields -->
+  <sql id="Base_Column_List" >
+     id_, file_id_, file_path_, editor_id_, editor_name_, edit_time_
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id_ ${idOperator} #{id}
+      </if>
+      <if test="fileId != null" >
+        and file_id_ ${fileIdOperator} #{fileId}
+      </if>
+      <if test="filePath != null" >
+        and file_path_ ${filePathOperator} #{filePath}
+      </if>
+      <if test="editorId != null" >
+        and editor_id_ ${editorIdOperator} #{editorId}
+      </if>
+      <if test="editorName != null" >
+        and editor_name_ ${editorNameOperator} #{editorName}
+      </if>
+      <if test="editTime != null" >
+        and edit_time_ ${editTimeOperator} #{editTime}
+      </if>
+      <if test="editTime1 != null" >
+        and edit_time_ &gt;= #{editTime1}
+      </if>
+      <if test="editTime2 != null" >
+        and edit_time_ &lt;= #{editTime2}
+      </if>
+    </trim>
+  </sql>
+
+    <!-- 自定义查询条件 -->
+   <sql id="Base_Where_Clause1">
+        where 1=1
+        <trim suffixOverrides="," >
+            <if test="id != null" >
+                and id_ = #{id}
+            </if>
+            <if test="fileId != null" >
+                and file_id_ = #{fileId}
+            </if>
+            <if test="filePath != null" >
+                and file_path_ = #{filePath}
+            </if>
+            <if test="editorId != null" >
+                and editor_id_ = #{editorId}
+            </if>
+            <if test="editorName != null" >
+                and editor_name_ = #{editorName}
+            </if>
+            <if test="editTime != null" >
+                and edit_time_ = #{editTime}
+            </if>
+            <if test="startEditTime != null" >
+                and edit_time_ &gt;= #{startEditTime}
+            </if>
+            <if test="endEditTime != null" >
+                and edit_time_ &lt;= #{endEditTime}
+            </if>
+        </trim>
+   </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.event.entity.HistoryFileEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_WR_HISTORY_FILE.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into WR_HISTORY_FILE(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{fileId, jdbcType=VARCHAR}, #{filePath, jdbcType=VARCHAR}, #{editorId, jdbcType=VARCHAR}, #{editorName, jdbcType=VARCHAR}, #{editTime, jdbcType=TIMESTAMP})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.event.entity.HistoryFileEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_WR_HISTORY_FILE.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into WR_HISTORY_FILE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id_,</if>
+                <if test="fileId != null" >file_id_,</if>
+                <if test="filePath != null" >file_path_,</if>
+                <if test="editorId != null" >editor_id_,</if>
+                <if test="editorName != null" >editor_name_,</if>
+                <if test="editTime != null" >edit_time_,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="fileId != null" >#{fileId, jdbcType=VARCHAR},</if>
+                <if test="filePath != null" >#{filePath, jdbcType=VARCHAR},</if>
+                <if test="editorId != null" >#{editorId, jdbcType=VARCHAR},</if>
+                <if test="editorName != null" >#{editorName, jdbcType=VARCHAR},</if>
+                <if test="editTime != null" >#{editTime, jdbcType=TIMESTAMP},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.event.entity.HistoryFileEO" >
+    update WR_HISTORY_FILE
+       set  file_id_ = #{fileId},
+            file_path_ = #{filePath},
+            editor_id_ = #{editorId},
+            editor_name_ = #{editorName},
+            edit_time_ = #{editTime}
+     where  id_ = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.event.entity.HistoryFileEO" >
+    update WR_HISTORY_FILE
+    <set >
+      <if test="fileId != null" >
+        file_id_ = #{fileId},
+      </if>
+      <if test="filePath != null" >
+        file_path_ = #{filePath},
+      </if>
+      <if test="editorId != null" >
+        editor_id_ = #{editorId},
+      </if>
+      <if test="editorName != null" >
+        editor_name_ = #{editorName},
+      </if>
+      <if test="editTime != null" >
+        edit_time_ = #{editTime},
+      </if>
+    </set>
+     where id_ = #{id}
+  </update>
+
+  <!-- 根据id查询 WR_HISTORY_FILE -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from WR_HISTORY_FILE
+     where id_ = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from WR_HISTORY_FILE
+     where id_ = #{value}
+
+  </delete>
+
+  <!-- 删除多个记录 -->
+  <delete id="selectByPrimaryKeyList">
+    delete from WR_HISTORY_FILE where id_ in
+    <foreach collection="array" open="(" separator="," close=")" item="id">
+        #{id}
+    </foreach>
+  </delete>
+
+  <!-- WR_HISTORY_FILE 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from WR_HISTORY_FILE
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询WR_HISTORY_FILE列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from WR_HISTORY_FILE
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+    <!-- 自定义 查询WR_HISTORY_FILE列表 -->
+  <select id="queryByMyPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select <include refid="Base_Column_List" /> from
+        (select tmp_tb.* , rownum rn from
+        (select <include refid="Base_Column_List" /> from WR_HISTORY_FILE
+        <include refid="Base_Where_Clause1"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+  </select>
+
+
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from WR_HISTORY_FILE
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns = "http://maven.apache.org/POM/4.0.0" xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation = "http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>adc-da</artifactId>
+        <groupId>com.adc</groupId>
+        <version>2.2.0</version>
+    </parent>
+
+    <artifactId>adc-da-ssologin</artifactId>
+    <version>2.2.0</version>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+
+        <!--adc-da-version-->
+        <adc-da-sys.version>2.3.2-SNAPSHOT</adc-da-sys.version>
+        <adc-da-util.version>2.3.3-SNAPSHOT</adc-da-util.version>
+        <adc-da-base.version>RELEASE</adc-da-base.version>
+        <adc-da-swagger.version>RELEASE</adc-da-swagger.version>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>adc</id>
+            <url>http://60.247.58.121:8182/nexus/content/groups/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>thirdparty</id>
+            <name>Nexus Thirdparty Repository</name>
+            <url>http://60.247.58.121:8182/nexus/content/repositories/thirdparty/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>User Project SNAPSHOTS</name>
+            <url>http://60.247.58.121:8182/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.adc</groupId>
+            <artifactId>adc-da-base</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.adc</groupId>
+            <artifactId>adc-da-swagger</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.adc</groupId>
+            <artifactId>adc-da-util</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jackson-annotations</artifactId>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.adc</groupId>
+            <artifactId>adc-da-sys</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>adc-da-util</artifactId>
+                    <groupId>com.adc</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-context</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+        </dependency>
+
+        <!-- SECURITY begin -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-ehcache</artifactId>
+        </dependency>
+
+        <!--<dependency>-->
+        <!--<groupId>org.jasig.cas.client</groupId>-->
+        <!--<artifactId>cas-client-core</artifactId>-->
+        <!--<version>3.2.2</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--&lt;!&ndash; for Optional SAML ticket validation: &ndash;&gt;-->
+        <!--<groupId>commons-codec</groupId>-->
+        <!--<artifactId>commons-codec</artifactId>-->
+        <!--<optional>true</optional>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--&lt;!&ndash; for Optional SAML ticket validation: &ndash;&gt;-->
+        <!--<groupId>org.opensaml</groupId>-->
+        <!--<artifactId>opensaml</artifactId>-->
+        <!--<version>1.1</version>-->
+        <!--<scope>runtime</scope>-->
+        <!--<optional>true</optional>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--&lt;!&ndash; for Optional SAML ticket validation: &ndash;&gt;-->
+        <!--<groupId>org.apache.santuario</groupId>-->
+        <!--<artifactId>xmlsec</artifactId>-->
+        <!--<version>1.4.3</version>-->
+        <!--<scope>runtime</scope>-->
+        <!--<optional>true</optional>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-cas</artifactId>
+        </dependency>
+        <!--SECURITY end-->
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <compilerVersion>${java.version}</compilerVersion>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

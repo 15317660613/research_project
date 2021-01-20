@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.epis.dao.BuisnessTravelEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.epis.entity.BuisnessTravelEO" >
+    <id column="travel_id" property="travelId" />
+    <result column="travel_project_meetings" property="travelProjectMeetings" />
+    <result column="travel_cause" property="travelCause" />
+    <result column="personnal_id" property="personnalId" />
+    <result column="evectiontime" property="evectiontime" />
+    <result column="remarke" property="remarke" />
+    <result column="creattime" property="creattime" />
+    <result column="update" property="update" />
+    <result column="admin" property="admin" />
+  </resultMap>
+
+  <!-- BUISNESS_TRAVEL table all fields -->
+  <sql id="Base_Column_List" >
+     travel_id, travel_project_meetings, travel_cause, personnal_id, evectiontime, remarke, creattime, update, admin
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="travelId != null" >
+        and travel_id ${travelIdOperator} #{travelId}
+      </if>
+      <if test="travelProjectMeetings != null" >
+        and travel_project_meetings ${travelProjectMeetingsOperator} #{travelProjectMeetings}
+      </if>
+      <if test="travelCause != null" >
+        and travel_cause ${travelCauseOperator} #{travelCause}
+      </if>
+      <if test="personnalId != null" >
+        and personnal_id ${personnalIdOperator} #{personnalId}
+      </if>
+      <if test="evectiontime != null" >
+        and evectiontime ${evectiontimeOperator} #{evectiontime}
+      </if>
+      <if test="evectiontime1 != null" >
+        and evectiontime &gt;= #{evectiontime1}
+      </if>
+      <if test="evectiontime2 != null" >
+        and evectiontime &lt;= #{evectiontime2}
+      </if>
+      <if test="remarke != null" >
+        and remarke ${remarkeOperator} #{remarke}
+      </if>
+      <if test="creattime != null" >
+        and creattime ${creattimeOperator} #{creattime}
+      </if>
+      <if test="creattime1 != null" >
+        and creattime &gt;= #{creattime1}
+      </if>
+      <if test="creattime2 != null" >
+        and creattime &lt;= #{creattime2}
+      </if>
+      <if test="update != null" >
+        and update ${updateOperator} #{update}
+      </if>
+      <if test="update1 != null" >
+        and update &gt;= #{update1}
+      </if>
+      <if test="update2 != null" >
+        and update &lt;= #{update2}
+      </if>
+      <if test="admin != null" >
+        and admin ${adminOperator} #{admin}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.epis.entity.BuisnessTravelEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="travel_id">
+        SELECT SEQ_BUISNESS_TRAVEL.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into BUISNESS_TRAVEL(<include refid="Base_Column_List" />)
+    values (#{travelId, jdbcType=VARCHAR}, #{travelProjectMeetings, jdbcType=VARCHAR}, #{travelCause, jdbcType=VARCHAR}, #{personnalId, jdbcType=VARCHAR}, #{evectiontime, jdbcType=TIMESTAMP}, #{remarke, jdbcType=VARCHAR}, #{creattime, jdbcType=TIMESTAMP}, #{update, jdbcType=TIMESTAMP}, #{admin, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.epis.entity.BuisnessTravelEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="travel_id">
+        SELECT SEQ_BUISNESS_TRAVEL.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into BUISNESS_TRAVEL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="travelId != null" >travel_id,</if>
+                <if test="travelProjectMeetings != null" >travel_project_meetings,</if>
+                <if test="travelCause != null" >travel_cause,</if>
+                <if test="personnalId != null" >personnal_id,</if>
+                <if test="evectiontime != null" >evectiontime,</if>
+                <if test="remarke != null" >remarke,</if>
+                <if test="creattime != null" >creattime,</if>
+                <if test="update != null" >update,</if>
+                <if test="admin != null" >admin,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="travelId != null" >#{travelId, jdbcType=VARCHAR},</if>
+                <if test="travelProjectMeetings != null" >#{travelProjectMeetings, jdbcType=VARCHAR},</if>
+                <if test="travelCause != null" >#{travelCause, jdbcType=VARCHAR},</if>
+                <if test="personnalId != null" >#{personnalId, jdbcType=VARCHAR},</if>
+                <if test="evectiontime != null" >#{evectiontime, jdbcType=TIMESTAMP},</if>
+                <if test="remarke != null" >#{remarke, jdbcType=VARCHAR},</if>
+                <if test="creattime != null" >#{creattime, jdbcType=TIMESTAMP},</if>
+                <if test="update != null" >#{update, jdbcType=TIMESTAMP},</if>
+                <if test="admin != null" >#{admin, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.epis.entity.BuisnessTravelEO" >
+    update BUISNESS_TRAVEL
+       set  travel_project_meetings = #{travelProjectMeetings},
+            travel_cause = #{travelCause},
+            personnal_id = #{personnalId},
+            evectiontime = #{evectiontime},
+            remarke = #{remarke},
+            creattime = #{creattime},
+            update = #{update},
+            admin = #{admin}
+     where  travel_id = #{travelId}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.epis.entity.BuisnessTravelEO" >
+    update BUISNESS_TRAVEL
+    <set >
+      <if test="travelProjectMeetings != null" >
+        travel_project_meetings = #{travelProjectMeetings},
+      </if>
+      <if test="travelCause != null" >
+        travel_cause = #{travelCause},
+      </if>
+      <if test="personnalId != null" >
+        personnal_id = #{personnalId},
+      </if>
+      <if test="evectiontime != null" >
+        evectiontime = #{evectiontime},
+      </if>
+      <if test="remarke != null" >
+        remarke = #{remarke},
+      </if>
+      <if test="creattime != null" >
+        creattime = #{creattime},
+      </if>
+      <if test="update != null" >
+        update = #{update},
+      </if>
+      <if test="admin != null" >
+        admin = #{admin},
+      </if>
+    </set>
+     where travel_id = #{travelId}
+  </update>
+
+  <!-- 根据id查询 BUISNESS_TRAVEL -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from BUISNESS_TRAVEL
+     where travel_id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from BUISNESS_TRAVEL
+     where travel_id = #{value}
+
+  </delete>
+
+  <!-- BUISNESS_TRAVEL 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from BUISNESS_TRAVEL
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询BUISNESS_TRAVEL列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from BUISNESS_TRAVEL
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from BUISNESS_TRAVEL
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

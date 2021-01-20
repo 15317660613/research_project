@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.personnel.dao.ExpertUserInfoEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.research.personnel.entity.ExpertUserInfoEO" >
+    <id column="id" property="id" />
+    <result column="expert_type_id" property="expertTypeId" />
+    <result column="user_id" property="userId" />
+    <result column="user_name" property="userName" />
+    <result column="company_name" property="companyName" />
+    <result column="expert_group_id" property="expertGroupId" />
+    <result column="resume" property="resume" />
+    <result column="research_direction" property="researchDirection" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="create_user_name" property="createUserName" />
+    <result column="create_time" property="createTime" />
+    <result column="modify_time" property="modifyTime" />
+    <result column="del_flag" property="delFlag" />
+    <result column="ext1" property="ext1" />
+    <result column="ext2" property="ext2" />
+    <result column="ext3" property="ext3" />
+    <result column="ext4" property="ext4" />
+    <result column="ext5" property="ext5" />
+    <result column="expert_group_name" property="expertGroupName" />
+  </resultMap>
+
+  <!-- RS_EXPERT_USER_INFO table all fields -->
+  <sql id="Base_Column_List" >
+     expert_type_id, id, user_id, user_name, company_name, expert_group_id, resume, research_direction, create_user_id, create_user_name, create_time, modify_time, del_flag, ext1, ext2, ext3, ext4, ext5
+  </sql>
+    <sql id="Base_Column_AS_List" >
+     A.expert_type_id,  A.id, A.user_id, A.user_name, A.company_name, A.expert_group_id, A.resume, A.research_direction, A.create_user_id, A.create_user_name, A.create_time, A.modify_time, A.del_flag, A.ext1, A.ext2, A.ext3, A.ext4, A.ext5
+  </sql>
+    <!-- 联合查询条件 -->
+    <sql id="Base_Where_AS_Clause">
+
+    <trim suffixOverrides="," >
+      <if test="expertTypeId != null" >
+        and A.expert_type_id ${expertTypeIdOperator} #{expertTypeId}
+      </if>
+      <if test="id != null" >
+        and A.id ${idOperator} #{id}
+      </if>
+      <if test="userId != null" >
+        and A.user_id ${userIdOperator} #{userId}
+      </if>
+      <if test="userName != null" >
+        and A.user_name LIKE   CONCAT('%',CONCAT(#{userName},'%'))
+      </if>
+      <if test="companyName != null" >
+        and A.company_name ${companyNameOperator} #{companyName}
+      </if>
+      <if test="expertGroupId != null" >
+        and A.expert_group_id ${expertGroupIdOperator} #{expertGroupId}
+      </if>
+      <if test="resume != null" >
+        and A.resume ${resumeOperator} #{resume}
+      </if>
+      <if test="researchDirection != null" >
+        and A.research_direction ${researchDirectionOperator} #{researchDirection}
+      </if>
+      <if test="createUserId != null" >
+        and A.create_user_id ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="createUserName != null" >
+        and A.create_user_name ${createUserNameOperator} #{createUserName}
+      </if>
+      <if test="createTime != null" >
+        and A.create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and A.create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and A.create_time &lt;= #{createTime2}
+      </if>
+      <if test="modifyTime != null" >
+        and A.modify_time ${modifyTimeOperator} #{modifyTime}
+      </if>
+      <if test="modifyTime1 != null" >
+        and A.modify_time &gt;= #{modifyTime1}
+      </if>
+      <if test="modifyTime2 != null" >
+        and A.modify_time &lt;= #{modifyTime2}
+      </if>
+
+      <if test="ext1 != null" >
+        and A.ext1 ${ext1Operator} #{ext1}
+      </if>
+      <if test="ext2 != null" >
+        and A.ext2 ${ext2Operator} #{ext2}
+      </if>
+      <if test="ext3 != null" >
+        and A.ext3 ${ext3Operator} #{ext3}
+      </if>
+      <if test="ext4 != null" >
+        and A.ext4 ${ext4Operator} #{ext4}
+      </if>
+      <if test="ext5 != null" >
+        and A.ext5 ${ext5Operator} #{ext5}
+      </if>
+        <if test="expertGroupName != null" >
+            and C.expert_group_name LIKE   CONCAT('%',CONCAT(#{expertGroupName},'%'))
+        </if>
+    </trim>
+  </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where del_flag =0
+        <trim suffixOverrides="," >
+            <if test="expertTypeId != null" >
+                and expert_type_id ${expertTypeIdOperator} #{expertTypeId}
+            </if>
+            <if test="id != null" >
+                and id ${idOperator} #{id}
+            </if>
+            <if test="userId != null" >
+                and user_id ${userIdOperator} #{userId}
+            </if>
+            <if test="userName != null" >
+                and user_name ${userNameOperator} #{userName}
+            </if>
+            <if test="companyName != null" >
+                and company_name ${companyNameOperator} #{companyName}
+            </if>
+            <if test="expertGroupId != null" >
+                and expert_group_id ${expertGroupIdOperator} #{expertGroupId}
+            </if>
+            <if test="resume != null" >
+                and resume ${resumeOperator} #{resume}
+            </if>
+            <if test="researchDirection != null" >
+                and research_direction ${researchDirectionOperator} #{researchDirection}
+            </if>
+            <if test="createUserId != null" >
+                and create_user_id ${createUserIdOperator} #{createUserId}
+            </if>
+            <if test="createUserName != null" >
+                and create_user_name ${createUserNameOperator} #{createUserName}
+            </if>
+            <if test="createTime != null" >
+                and create_time ${createTimeOperator} #{createTime}
+            </if>
+            <if test="createTime1 != null" >
+                and create_time &gt;= #{createTime1}
+            </if>
+            <if test="createTime2 != null" >
+                and create_time &lt;= #{createTime2}
+            </if>
+            <if test="modifyTime != null" >
+                and modify_time ${modifyTimeOperator} #{modifyTime}
+            </if>
+            <if test="modifyTime1 != null" >
+                and modify_time &gt;= #{modifyTime1}
+            </if>
+            <if test="modifyTime2 != null" >
+                and modify_time &lt;= #{modifyTime2}
+            </if>
+            <if test="ext1 != null" >
+                and ext1 ${ext1Operator} #{ext1}
+            </if>
+            <if test="ext2 != null" >
+                and ext2 ${ext2Operator} #{ext2}
+            </if>
+            <if test="ext3 != null" >
+                and ext3 ${ext3Operator} #{ext3}
+            </if>
+            <if test="ext4 != null" >
+                and ext4 ${ext4Operator} #{ext4}
+            </if>
+            <if test="ext5 != null" >
+                and ext5 ${ext5Operator} #{ext5}
+            </if>
+        </trim>
+    </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.research.personnel.entity.ExpertUserInfoEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RS_EXPERT_USER_INFO.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into RS_EXPERT_USER_INFO(<include refid="Base_Column_List" />)
+    values (#{expertTypeId, jdbcType=VARCHAR}, #{id, jdbcType=VARCHAR}, #{userId, jdbcType=VARCHAR}, #{userName, jdbcType=VARCHAR}, #{companyName, jdbcType=VARCHAR}, #{expertGroupId, jdbcType=VARCHAR}, #{resume, jdbcType=VARCHAR}, #{researchDirection, jdbcType=VARCHAR}, #{createUserId, jdbcType=VARCHAR}, #{createUserName, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{modifyTime, jdbcType=TIMESTAMP}, #{delFlag, jdbcType=INTEGER}, #{ext1, jdbcType=VARCHAR}, #{ext2, jdbcType=VARCHAR}, #{ext3, jdbcType=VARCHAR}, #{ext4, jdbcType=VARCHAR}, #{ext5, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.research.personnel.entity.ExpertUserInfoEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RS_EXPERT_USER_INFO.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into RS_EXPERT_USER_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="expertTypeId != null" >expert_type_id,</if>
+                <if test="id != null" >id,</if>
+                <if test="userId != null" >user_id,</if>
+                <if test="userName != null" >user_name,</if>
+                <if test="companyName != null" >company_name,</if>
+                <if test="expertGroupId != null" >expert_group_id,</if>
+                <if test="resume != null" >resume,</if>
+                <if test="researchDirection != null" >research_direction,</if>
+                <if test="createUserId != null" >create_user_id,</if>
+                <if test="createUserName != null" >create_user_name,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="modifyTime != null" >modify_time,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="ext1 != null" >ext1,</if>
+                <if test="ext2 != null" >ext2,</if>
+                <if test="ext3 != null" >ext3,</if>
+                <if test="ext4 != null" >ext4,</if>
+                <if test="ext5 != null" >ext5,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="expertTypeId != null" >#{expertTypeId, jdbcType=VARCHAR},</if>
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="userId != null" >#{userId, jdbcType=VARCHAR},</if>
+                <if test="userName != null" >#{userName, jdbcType=VARCHAR},</if>
+                <if test="companyName != null" >#{companyName, jdbcType=VARCHAR},</if>
+                <if test="expertGroupId != null" >#{expertGroupId, jdbcType=VARCHAR},</if>
+                <if test="resume != null" >#{resume, jdbcType=VARCHAR},</if>
+                <if test="researchDirection != null" >#{researchDirection, jdbcType=VARCHAR},</if>
+                <if test="createUserId != null" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="createUserName != null" >#{createUserName, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="modifyTime != null" >#{modifyTime, jdbcType=TIMESTAMP},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=INTEGER},</if>
+                <if test="ext1 != null" >#{ext1, jdbcType=VARCHAR},</if>
+                <if test="ext2 != null" >#{ext2, jdbcType=VARCHAR},</if>
+                <if test="ext3 != null" >#{ext3, jdbcType=VARCHAR},</if>
+                <if test="ext4 != null" >#{ext4, jdbcType=VARCHAR},</if>
+                <if test="ext5 != null" >#{ext5, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.research.personnel.entity.ExpertUserInfoEO" >
+    update RS_EXPERT_USER_INFO
+       set  expert_type_id = #{expertTypeId},
+            user_id = #{userId},
+            user_name = #{userName},
+            company_name = #{companyName},
+            expert_group_id = #{expertGroupId},
+            resume = #{resume},
+            research_direction = #{researchDirection},
+            create_user_id = #{createUserId},
+            create_user_name = #{createUserName},
+            create_time = #{createTime},
+            modify_time = #{modifyTime},
+            del_flag = #{delFlag},
+            ext1 = #{ext1},
+            ext2 = #{ext2},
+            ext3 = #{ext3},
+            ext4 = #{ext4},
+            ext5 = #{ext5}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.research.personnel.entity.ExpertUserInfoEO" >
+    update RS_EXPERT_USER_INFO
+    <set >
+      <if test="expertTypeId != null" >
+        expert_type_id = #{expertTypeId},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName},
+      </if>
+      <if test="companyName != null" >
+        company_name = #{companyName},
+      </if>
+      <if test="expertGroupId != null" >
+        expert_group_id = #{expertGroupId},
+      </if>
+      <if test="resume != null" >
+        resume = #{resume},
+      </if>
+      <if test="researchDirection != null" >
+        research_direction = #{researchDirection},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="createUserName != null" >
+        create_user_name = #{createUserName},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="ext1 != null" >
+        ext1 = #{ext1},
+      </if>
+      <if test="ext2 != null" >
+        ext2 = #{ext2},
+      </if>
+      <if test="ext3 != null" >
+        ext3 = #{ext3},
+      </if>
+      <if test="ext4 != null" >
+        ext4 = #{ext4},
+      </if>
+      <if test="ext5 != null" >
+        ext5 = #{ext5},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 RS_EXPERT_USER_INFO -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from RS_EXPERT_USER_INFO
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RS_EXPERT_USER_INFO
+     where id = #{value}
+
+  </delete>
+
+  <!-- RS_EXPERT_USER_INFO 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from RS_EXPERT_USER_INFO
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询RS_EXPERT_USER_INFO列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from RS_EXPERT_USER_INFO
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from RS_EXPERT_USER_INFO
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+
+    <!--批量删除研究人员信息-->
+    <update id="batchDelete" parameterType="java.util.List">
+        update RS_EXPERT_USER_INFO set del_flag = 1 where id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")" index="index">
+            #{id}
+        </foreach>
+    </update>
+
+    <!--批量删除专家组与人员关系表-->
+    <delete id="batchDeleteGroupUser" parameterType="java.util.List">
+        delete from TR_GROUP_USER  where USER_ID in
+        <foreach collection="ids" item="id" open="(" separator="," close=")" index="index">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--查询绑定的信息-->
+    <select id="getBindUserInfoList" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="Base_Column_List" />
+        from RS_EXPERT_USER_INFO
+        where id
+        in (
+        select tgu.USER_ID
+        from TR_GROUP_USER tgu
+        where tgu.EXPERT_GROUP_ID = #{expertGroupId}
+        )
+        and del_flag =0
+    </select>
+    <!--查询未绑定的信息-->
+    <select id="getUnBindUserInfoList" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="Base_Column_List" />
+        from RS_EXPERT_USER_INFO
+        where id
+        not in (
+        select tgu.USER_ID
+        from TR_GROUP_USER tgu
+        where tgu.EXPERT_GROUP_ID = #{expertGroupId}
+        )
+        and del_flag =0
+    </select>
+    <!--删除原绑定信息-->
+    <delete id="deleteBindUser" parameterType="java.lang.String">
+        delete
+        from TR_GROUP_USER
+        where EXPERT_GROUP_ID = #{expertGroupId}
+    </delete>
+    <!--新增绑定信息-->
+    <insert id="saveBindUser">
+		INSERT INTO TR_GROUP_USER(ID, EXPERT_GROUP_ID, USER_ID) VALUES (#{id},#{expertGroupId}, #{expertUserId})
+	</insert>
+
+
+    <resultMap id="BaseResultMapTemp" type="com.adc.da.research.personnel.vo.ExpertUserInfoVO" >
+        <result column="ID" property="id" />
+        <result column="USNAME" property="selectPersonnel" />
+        <result column="CELLPHONE_NUMBER" property="cellphoneNumber" />
+        <result column="GENDER" property="gender" />
+        <result column="IDENTITY_NUMBER" property="identityNumber" />
+        <result column="BIRTH_DATE" property="birthDate" />
+        <result column="LAST_DEGREE" property="lastDegree" />
+        <result column="FINAL_DEGREE" property="finalDegree" />
+        <result column="JOB_TITLE" property="jobTitle" />
+<!--        <result column="EXPERT_GROUP_NAME" property="expertGroupName" />-->
+        <result column="USER_NAME" property="userName" />
+        <result column="EXPERT_TYPE_ID" property="expertTypeId" />
+        <result column="COMPANY_NAME" property="companyName" />
+        <result column="RESUME" property="resume" />
+        <result column="RESEARCH_DIRECTION" property="researchDirection" />
+    </resultMap>
+
+
+    <!--根据id查询单条信息-->
+    <select id="selectInfoById" resultMap="BaseResultMapTemp">
+      SELECT A.ID,D.USNAME,D.CELLPHONE_NUMBER, D.GENDER, D.IDENTITY_NUMBER, D.BIRTH_DATE, D.LAST_DEGREE, D.FINAL_DEGREE,
+       D.JOB_TITLE,
+       A.USER_NAME, A.EXPERT_TYPE_ID, A.COMPANY_NAME, A.RESUME, A.RESEARCH_DIRECTION
+      FROM RS_EXPERT_USER_INFO A
+	  JOIN TS_USER D ON A.USER_ID = D.USID
+      where A.ID = #{id}
+  </select>
+
+
+    <insert id="insertInfo">
+      insert into TR_GROUP_USER(ID,EXPERT_GROUP_ID,USER_ID)
+      values (#{id, jdbcType=VARCHAR}, #{expertGroupId, jdbcType=VARCHAR}, #{userId, jdbcType=VARCHAR})
+    </insert>
+
+
+    <!-- RS_EXPERT_USER_INFO 列表总数-->
+    <select id="queryByExpertGroupCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        select count(1) from RS_EXPERT_USER_INFO   A inner JOIN TR_GROUP_USER B ON A.ID = B.USER_ID left JOIN RS_EXPERT_GROUP_INFO C ON C.ID = B.EXPERT_GROUP_ID where A.del_flag =0
+        <include refid="Base_Where_AS_Clause"/>
+    </select>
+    <!-- 查询RS_EXPERT_USER_INFO列表关联专家组 -->
+    <select id="queryByExpertGroupPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select <include refid="Base_Column_List" /> ,expert_group_name from
+        (select tmp_tb.* , rownum rn from
+        (select <include refid="Base_Column_AS_List" /> ,C.expert_group_name  from RS_EXPERT_USER_INFO  A
+
+        <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+            ${pager.orderCondition}
+        </if>
+        inner JOIN TR_GROUP_USER B ON A.ID = B.USER_ID
+        left JOIN RS_EXPERT_GROUP_INFO C ON  C.ID = B.EXPERT_GROUP_ID
+        where A.del_flag =0
+        <include refid="Base_Where_AS_Clause"/>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+
+</mapper>

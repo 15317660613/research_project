@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.event.dao.EventEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.event.entity.EventEO" >
+    <id column="id_" property="id" />
+    <result column="create_user_id_" property="createUserId" />
+    <result column="create_user_name_" property="createUserName" />
+    <result column="create_time_" property="createTime" />
+    <result column="event_title_" property="eventTitle" />
+    <result column="send_flag_" property="sendFlag" />
+    <result column="del_flag_" property="delFlag" />
+    <result column="ext_info1_" property="extInfo1" />
+    <result column="ext_info2_" property="extInfo2" />
+    <result column="ext_info3_" property="extInfo3" />
+    <result column="ext_info4_" property="extInfo4" />
+    <result column="ext_info5_" property="extInfo5" />
+    <result column="ext_info6_" property="extInfo6" />
+  </resultMap>
+
+    <!--<resultMap id="BaseResultMapVO" type="com.adc.da.event.vo.EventVO" >-->
+        <!--<id column="id_" property="id" />-->
+        <!--<result column="create_user_id_" property="createUserId" />-->
+        <!--<result column="receive_user_id_" property="receiveUserId" />-->
+        <!--<result column="create_user_name_" property="createUserName" />-->
+        <!--<result column="create_time_" property="createTime" />-->
+        <!--<result column="event_title_" property="eventTitle" />-->
+        <!--<result column="send_flag_" property="sendFlag" />-->
+        <!--<result column="del_flag_" property="delFlag" />-->
+        <!--<result column="ext_info1_" property="extInfo1" />-->
+        <!--<result column="ext_info2_" property="extInfo2" />-->
+        <!--<result column="ext_info3_" property="extInfo3" />-->
+        <!--<result column="ext_info4_" property="extInfo4" />-->
+        <!--<result column="ext_info5_" property="extInfo5" />-->
+        <!--<result column="ext_info6_" property="extInfo6" />-->
+    <!--</resultMap>-->
+
+
+  <!-- WR_EVENT table all fields -->
+  <sql id="Base_Column_List" >
+     id_, create_user_id_, create_user_name_, create_time_, event_title_, send_flag_, del_flag_, ext_info1_, ext_info2_, ext_info3_, ext_info4_, ext_info5_, ext_info6_
+  </sql>
+
+    <!-- WR_EVENT table all fields -->
+    <sql id="Base_Column_List1" >
+     id_, create_user_id_, create_user_name_, create_time_, event_title_, send_flag_, del_flag_
+  </sql>
+
+    <!--&lt;!&ndash; WR_EVENT table all fields &ndash;&gt;-->
+    <!--<sql id="Base_Column_List1" >-->
+     <!--id_, create_user_id_, create_user_name_, create_time_, event_title_, send_flag_, del_flag_ , receive_user_id_-->
+  <!--</sql>-->
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id_ ${idOperator} #{id}
+      </if>
+      <if test="createUserId != null" >
+        and create_user_id_ ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="createUserName != null" >
+        and create_user_name_ ${createUserNameOperator} #{createUserName}
+      </if>
+      <if test="createTime != null" >
+        and create_time_ ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time_ &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time_ &lt;= #{createTime2}
+      </if>
+      <if test="eventTitle != null" >
+        and event_title_ ${eventTitleOperator} #{eventTitle}
+      </if>
+      <if test="sendFlag != null" >
+        and send_flag_ ${sendFlagOperator} #{sendFlag}
+      </if>
+      <if test="delFlag != null" >
+        and del_flag_ ${delFlagOperator} 0
+      </if>
+    </trim>
+  </sql>
+
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause_dingQiang">
+        where 1=2
+        <if test="userId != null">
+            or create_user_id_ = #{userId}
+        </if>
+        <if test="userId != null">
+            or receive_user_id_ = #{userId}
+        </if>
+    </sql>
+
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause1">
+        where 1=1
+        <trim suffixOverrides="," >
+            <if test="id != null" >
+                and id_ = #{id}
+            </if>
+            <if test="createUserId != null" >
+                and create_user_id_ = #{createUserId}
+            </if>
+            <if test="createUserName != null" >
+                and create_user_name_ like  CONCAT('%',CONCAT(  #{createUserName},'%'))
+            </if>
+            <if test="startCreateTime != null" >
+                and create_time_ &gt;= #{startCreateTime}
+            </if>
+            <if test="endCreateTime != null" >
+                and create_time_ &lt;= #{endCreateTime}
+            </if>
+            <if test="eventTitle != null" >
+                and event_title_ like  CONCAT('%',CONCAT(   #{eventTitle},'%'))
+            </if>
+            <if test="sendFlag != null" >
+                and send_flag_ = #{sendFlag}
+            </if>
+            <if test="delFlag != null" >
+                and del_flag_ = 0
+            </if>
+        </trim>
+    </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.event.entity.EventEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_WR_EVENT.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into WR_EVENT(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{createUserId, jdbcType=VARCHAR}, #{createUserName, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{eventTitle, jdbcType=VARCHAR}, #{sendFlag, jdbcType=INTEGER}, #{delFlag, jdbcType=INTEGER}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR}, #{extInfo6, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.event.entity.EventEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_WR_EVENT.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into WR_EVENT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id_,</if>
+                <if test="createUserId != null" >create_user_id_,</if>
+                <if test="createUserName != null" >create_user_name_,</if>
+                <if test="createTime != null" >create_time_,</if>
+                <if test="eventTitle != null" >event_title_,</if>
+                <if test="sendFlag != null" >send_flag_,</if>
+                <if test="delFlag != null" >del_flag_,</if>
+                <if test="extInfo1 != null" >ext_info1_,</if>
+                <if test="extInfo2 != null" >ext_info2_,</if>
+                <if test="extInfo3 != null" >ext_info3_,</if>
+                <if test="extInfo4 != null" >ext_info4_,</if>
+                <if test="extInfo5 != null" >ext_info5_,</if>
+                <if test="extInfo6 != null" >ext_info6_,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="createUserId != null" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="createUserName != null" >#{createUserName, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="eventTitle != null" >#{eventTitle, jdbcType=VARCHAR},</if>
+                <if test="sendFlag != null" >#{sendFlag, jdbcType=INTEGER},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=INTEGER},</if>
+                <if test="extInfo1 != null" >#{extInfo1, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="extInfo3 != null" >#{extInfo3, jdbcType=VARCHAR},</if>
+                <if test="extInfo4 != null" >#{extInfo4, jdbcType=VARCHAR},</if>
+                <if test="extInfo5 != null" >#{extInfo5, jdbcType=VARCHAR},</if>
+                <if test="extInfo6 != null" >#{extInfo6, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.event.entity.EventEO" >
+    update WR_EVENT
+       set  create_user_id_ = #{createUserId},
+            create_user_name_ = #{createUserName},
+            create_time_ = #{createTime},
+            event_title_ = #{eventTitle},
+            send_flag_ = #{sendFlag},
+            del_flag_ = #{delFlag},
+            ext_info1_ = #{extInfo1},
+            ext_info2_ = #{extInfo2},
+            ext_info3_ = #{extInfo3},
+            ext_info4_ = #{extInfo4},
+            ext_info5_ = #{extInfo5},
+            ext_info6_ = #{extInfo6}
+     where  id_ = #{id}
+  </update>
+
+
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.event.entity.EventEO" >
+    update WR_EVENT
+    <set >
+      <if test="createUserId != null" >
+        create_user_id_ = #{createUserId},
+      </if>
+      <if test="createUserName != null" >
+        create_user_name_ = #{createUserName},
+      </if>
+      <if test="createTime != null" >
+        create_time_ = #{createTime},
+      </if>
+      <if test="eventTitle != null" >
+        event_title_ = #{eventTitle},
+      </if>
+      <if test="sendFlag != null" >
+        send_flag_ = #{sendFlag},
+      </if>
+      <if test="delFlag != null" >
+        del_flag_ = #{delFlag},
+      </if>
+      <if test="extInfo1 != null" >
+        ext_info1_ = #{extInfo1},
+      </if>
+      <if test="extInfo2 != null" >
+        ext_info2_ = #{extInfo2},
+      </if>
+      <if test="extInfo3 != null" >
+        ext_info3_ = #{extInfo3},
+      </if>
+      <if test="extInfo4 != null" >
+        ext_info4_ = #{extInfo4},
+      </if>
+      <if test="extInfo5 != null" >
+        ext_info5_ = #{extInfo5},
+      </if>
+      <if test="extInfo6 != null" >
+        ext_info6_ = #{extInfo6},
+      </if>
+    </set>
+     where id_ = #{id}
+  </update>
+
+    <!-- 根据id查询 WR_EVENT -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="Base_Column_List" />
+        from WR_EVENT
+        where id_ = #{value} and del_flag_ = 0
+
+  </select>
+
+    <!-- 根据创建人id查询 WR_EVENT -->
+  <select id="selectByCreateUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="Base_Column_List" />
+        from WR_EVENT
+        where create_user_id_ = #{value} and del_flag_ = 0
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from WR_EVENT
+     where id_ = #{value}
+
+  </delete>
+
+    <!-- 根据pk，删除记录，将del_flag_置为1-->
+  <update id="delByPrimaryKey" parameterType="java.lang.String" >
+       update WR_EVENT
+       set  del_flag_= 1 where  id_ = #{value}
+  </update>
+
+    <!-- 根据pk，将send_flag_记录置为1-->
+  <update id="setSendFlagById" parameterType="java.lang.String" >
+       update WR_EVENT
+       set  send_flag_= 1 where  id_ = #{value}
+  </update>
+
+
+  <!-- WR_EVENT 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from WR_EVENT
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询WR_EVENT列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from WR_EVENT
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+    <!-- 自定义查询WR_EVENT列表 -->
+   <select id="queryByMyPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select <include refid="Base_Column_List1" /> from
+        (select tmp_tb.* , rownum rn from
+        (select <include refid="Base_Column_List1" /> from WR_EVENT
+        <include refid="Base_Where_Clause1"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}  ORDER BY create_time_ DESC
+    </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from WR_EVENT
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+    <!-- 自定义查询WR_EVENT列表 -->
+    <select id="queryBySearchPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select <include refid="Base_Column_List1" /> from
+        (select tmp_tb.* , rownum rn from
+        (select e.* from WR_EVENT e inner join WR_EVENT_RECEIVE  er on e.ID_ = er.EVENT_ID_
+        <include refid="Base_Where_Clause_dingQiang"/>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+
+    <!-- WR_EVENT 列表总数-->
+    <select id="queryBySearchPageCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        select count(1) from WR_EVENT e inner join WR_EVENT_RECEIVE  er on e.ID_ = er.EVENT_ID_
+        <include refid="Base_Where_Clause_dingQiang"/>
+    </select>
+
+
+    <!-- 自定义查询WR_EVENT列表 -->
+    <select id="queryDoneBySearchPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select <include refid="Base_Column_List1" /> from
+        (select tmp_tb.* , rownum rn from
+        (select <include refid="Base_Column_List1" /> from  WR_EVENT e inner join (select  * from WR_EVENT_RECEIVE where  STATE_ = 1)  er on e.ID_ = er.EVENT_ID_
+        <include refid="Base_Where_Clause_dingQiang"/>
+        ORDER BY create_time_ DESC
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <!-- 自定义查询WR_EVENT列表 -->
+    <select id="queryToDoBySearchPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select <include refid="Base_Column_List1" /> from
+        (select tmp_tb.* , rownum rn from
+        (select <include refid="Base_Column_List1" /> from  WR_EVENT e inner join (select  * from WR_EVENT_RECEIVE where  STATE_ = 0)  er on e.ID_ = er.EVENT_ID_
+        <include refid="Base_Where_Clause_dingQiang"/>
+        ORDER BY create_time_ DESC
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <!-- 根据eventId和state查询WR_EVENT_RECEIVE 列表-->
+    <select id="selectCountByEventName" resultType="java.lang.Integer" >
+        select count(1) from WR_EVENT e
+        left join WR_EVENT_RECEIVE er on e.ID_=er.EVENT_ID_
+        where e.EVENT_TITLE_ = #{eventName} and er.EXT_INFO1_=#{queryFlag} and er.DEL_FLAG_!=1 and e.DEL_FLAG_ != 1
+  </select>
+
+</mapper>

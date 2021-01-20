@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.statistics.dao.BusinessWorktimeEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.statistics.entity.BusinessWorktimeEO" >
+    <id column="id" property="id" />
+    <result column="business_id" property="businessId" />
+    <result column="daily_time" property="dailyTime" />
+    <result column="create_time" property="createTime" />
+    <result column="worktime" property="worktime" />
+    <result column="department_id" property="departmentId" />
+    <result column="extinfo1" property="extinfo1" />
+    <result column="extinfo2" property="extinfo2" />
+    <result column="extinfo3" property="extinfo3" />
+    <result column="extinfo4" property="extinfo4" />
+    <result column="extinfo5" property="extinfo5" />
+    <result column="extinfo6" property="extinfo6" />
+    <result column="year" property="year" />
+    <result column="month" property="month" />
+  </resultMap>
+
+    <resultMap id = "BaseResultMap1" type = "com.adc.da.budget.entity.StatisticsEntity">
+        <result column = "org_name" property = "orgName"/>
+        <result column = "org_id" property = "orgId"/>
+        <result column = "work_Time" property = "workTime"/>
+    </resultMap>
+
+    <resultMap id="BaseResultMap2" type="com.adc.da.budget.entity.Statistics">
+        <result column = "worktime" property = "workTime"/>
+        <result column = "project_name" property = "name"/>
+        <result column = "business_id" property = "id"/>
+    </resultMap>
+
+  <!-- ST_BUSINESS_WORKTIME table all fields -->
+  <sql id="Base_Column_List" >
+     id, business_id, daily_time, create_time, worktime, department_id, extinfo1, extinfo2, extinfo3, extinfo4, extinfo5, extinfo6, year, month
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="businessId != null" >
+        and business_id ${businessIdOperator} #{businessId}
+      </if>
+      <if test="dailyTime != null" >
+        and daily_time ${dailyTimeOperator} #{dailyTime}
+      </if>
+      <if test="dailyTime1 != null" >
+        and daily_time &gt;= #{dailyTime1}
+      </if>
+      <if test="dailyTime2 != null" >
+        and daily_time &lt;= #{dailyTime2}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="worktime != null" >
+        and worktime ${worktimeOperator} #{worktime}
+      </if>
+      <if test="departmentId != null" >
+        and department_id ${departmentIdOperator} #{departmentId}
+      </if>
+      <if test="extinfo1 != null" >
+        and extinfo1 ${extinfo1Operator} #{extinfo1}
+      </if>
+      <if test="extinfo2 != null" >
+        and extinfo2 ${extinfo2Operator} #{extinfo2}
+      </if>
+      <if test="extinfo3 != null" >
+        and extinfo3 ${extinfo3Operator} #{extinfo3}
+      </if>
+      <if test="extinfo4 != null" >
+        and extinfo4 ${extinfo4Operator} #{extinfo4}
+      </if>
+      <if test="extinfo5 != null" >
+        and extinfo5 ${extinfo5Operator} #{extinfo5}
+      </if>
+      <if test="extinfo6 != null" >
+        and extinfo6 ${extinfo6Operator} #{extinfo6}
+      </if>
+      <if test="year != null" >
+        and year ${yearOperator} #{year}
+      </if>
+      <if test="month != null" >
+        and month ${monthOperator} #{month}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.statistics.entity.BusinessWorktimeEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_ST_BUSINESS_WORKTIME.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into ST_BUSINESS_WORKTIME(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{businessId, jdbcType=VARCHAR}, #{dailyTime, jdbcType=TIMESTAMP}, #{createTime, jdbcType=TIMESTAMP}, #{worktime, jdbcType=FLOAT}, #{departmentId, jdbcType=VARCHAR}, #{extinfo1, jdbcType=VARCHAR}, #{extinfo2, jdbcType=VARCHAR}, #{extinfo3, jdbcType=VARCHAR}, #{extinfo4, jdbcType=VARCHAR}, #{extinfo5, jdbcType=VARCHAR}, #{extinfo6, jdbcType=VARCHAR}, #{year, jdbcType=VARCHAR}, #{month, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.statistics.entity.BusinessWorktimeEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_ST_BUSINESS_WORKTIME.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into ST_BUSINESS_WORKTIME
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="businessId != null" >business_id,</if>
+                <if test="dailyTime != null" >daily_time,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="worktime != null" >worktime,</if>
+                <if test="departmentId != null" >department_id,</if>
+                <if test="extinfo1 != null" >extinfo1,</if>
+                <if test="extinfo2 != null" >extinfo2,</if>
+                <if test="extinfo3 != null" >extinfo3,</if>
+                <if test="extinfo4 != null" >extinfo4,</if>
+                <if test="extinfo5 != null" >extinfo5,</if>
+                <if test="extinfo6 != null" >extinfo6,</if>
+                <if test="year != null" >year,</if>
+                <if test="month != null" >month,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="businessId != null" >#{businessId, jdbcType=VARCHAR},</if>
+                <if test="dailyTime != null" >#{dailyTime, jdbcType=TIMESTAMP},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="worktime != null" >#{worktime, jdbcType=FLOAT},</if>
+                <if test="departmentId != null" >#{departmentId, jdbcType=VARCHAR},</if>
+                <if test="extinfo1 != null" >#{extinfo1, jdbcType=VARCHAR},</if>
+                <if test="extinfo2 != null" >#{extinfo2, jdbcType=VARCHAR},</if>
+                <if test="extinfo3 != null" >#{extinfo3, jdbcType=VARCHAR},</if>
+                <if test="extinfo4 != null" >#{extinfo4, jdbcType=VARCHAR},</if>
+                <if test="extinfo5 != null" >#{extinfo5, jdbcType=VARCHAR},</if>
+                <if test="extinfo6 != null" >#{extinfo6, jdbcType=VARCHAR},</if>
+                <if test="year != null" >#{year, jdbcType=VARCHAR},</if>
+                <if test="month != null" >#{month, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+    <insert id = "insertSelectiveAll" parameterType = "java.util.List">
+        INSERT ALL
+        <foreach collection = "list" item = "item" index = "index">
+            <if test = "item.id !=null">
+                into ST_BUSINESS_WORKTIME
+                <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+                    <if test = "item.id != null">id,</if>
+                    <if test = "item.businessId != null">business_id,</if>
+                    <if test = "item.dailyTime != null">daily_time,</if>
+                    <if test = "item.createTime != null">create_time,</if>
+                    <if test = "item.worktime != null">worktime,</if>
+                    <if test = "item.departmentId != null">department_id,</if>
+                    <if test = "item.year != null">year,</if>
+                    <if test = "item.month != null">month,</if>
+                </trim>
+                <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+                    <if test = "item.id != null">#{item.id, jdbcType=VARCHAR},</if>
+                    <if test = "item.businessId != null">#{item.businessId, jdbcType=VARCHAR},</if>
+                    <if test = "item.dailyTime != null">#{item.dailyTime, jdbcType=TIMESTAMP},</if>
+                    <if test = "item.createTime != null">#{item.createTime, jdbcType=TIMESTAMP},</if>
+                    <if test = "item.worktime != null">#{item.worktime, jdbcType=FLOAT},</if>
+                    <if test = "item.departmentId != null">#{item.departmentId, jdbcType=VARCHAR},</if>
+                    <if test = "item.year != null">#{item.year, jdbcType=VARCHAR},</if>
+                    <if test = "item.month != null">#{item.month, jdbcType=VARCHAR},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.statistics.entity.BusinessWorktimeEO" >
+    update ST_BUSINESS_WORKTIME
+       set  business_id = #{businessId},
+            daily_time = #{dailyTime},
+            create_time = #{createTime},
+            worktime = #{worktime},
+            department_id = #{departmentId},
+            extinfo1 = #{extinfo1},
+            extinfo2 = #{extinfo2},
+            extinfo3 = #{extinfo3},
+            extinfo4 = #{extinfo4},
+            extinfo5 = #{extinfo5},
+            extinfo6 = #{extinfo6},
+            year = #{year},
+            month = #{month}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.statistics.entity.BusinessWorktimeEO" >
+    update ST_BUSINESS_WORKTIME
+    <set >
+      <if test="businessId != null" >
+        business_id = #{businessId},
+      </if>
+      <if test="dailyTime != null" >
+        daily_time = #{dailyTime},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="worktime != null" >
+        worktime = #{worktime},
+      </if>
+      <if test="departmentId != null" >
+        department_id = #{departmentId},
+      </if>
+      <if test="extinfo1 != null" >
+        extinfo1 = #{extinfo1},
+      </if>
+      <if test="extinfo2 != null" >
+        extinfo2 = #{extinfo2},
+      </if>
+      <if test="extinfo3 != null" >
+        extinfo3 = #{extinfo3},
+      </if>
+      <if test="extinfo4 != null" >
+        extinfo4 = #{extinfo4},
+      </if>
+      <if test="extinfo5 != null" >
+        extinfo5 = #{extinfo5},
+      </if>
+      <if test="extinfo6 != null" >
+        extinfo6 = #{extinfo6},
+      </if>
+      <if test="year != null" >
+        year = #{year},
+      </if>
+      <if test="month != null" >
+        month = #{month},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 ST_BUSINESS_WORKTIME -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from ST_BUSINESS_WORKTIME
+     where id = #{value}
+
+  </select>
+
+    <!-- 根据id查询 ST_BUSINESS_WORKTIME -->
+    <select id="getManDayByMonth" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select business_id,year,month, sum(worktime) as worktime
+        from ST_BUSINESS_WORKTIME
+        where business_id = #{id} and year = #{year}
+        group by business_id, year, month order by month
+    </select>
+
+    <!-- 根据id查询 ST_BUSINESS_WORKTIME -->
+    <select id="getWorkTimeByOrg" resultMap="BaseResultMap1" parameterType="java.lang.String">
+        select A.*,B.org_name from (select DEPARTMENT_ID as org_id,sum(worktime) as work_time
+        from ST_BUSINESS_WORKTIME
+        where DEPARTMENT_ID in
+        <foreach item="orgId" collection="orgIds" open="(" separator=","
+                 close=")" index="index">
+            #{orgId}
+        </foreach>
+        and DAILY_TIME between #{startTime} and #{finishTime}
+        group by DEPARTMENT_ID) A
+        left join TS_ORG B ON A.org_id=B.ID
+    </select>
+
+    <select id="getWorkTimeByOrgIds" resultMap="BaseResultMap1" parameterType="java.lang.String">
+        select sum(worktime) as work_time
+        from ST_BUSINESS_WORKTIME
+        where DEPARTMENT_ID in
+        <foreach item="orgId" collection="orgIds" open="(" separator=","
+                 close=")" index="index">
+            #{orgId}
+        </foreach>
+        and DAILY_TIME between #{startTime} and #{finishTime}
+    </select>
+
+    <select id="getBusWorkTimeByOrgIds" resultMap="BaseResultMap2" parameterType="java.lang.String">
+        select a.worktime ,b.project_name,b.id
+        from (select count(*),Business_id, sum(worktime) as worktime
+        from ST_BUSINESS_WORKTIME
+        where DEPARTMENT_ID in
+        <foreach item="orgId" collection="orgIds" open="(" separator=","
+                 close=")" index="index">
+            #{orgId}
+        </foreach>
+        and DAILY_TIME between #{startTime} and #{finishTime}
+        GROUP BY BUSINESS_ID) a
+        left join TS_BUDGET b
+        on a.business_id = b.id
+    </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ST_BUSINESS_WORKTIME
+     where id = #{value}
+
+  </delete>
+
+    <!-- 删除记录 -->
+
+
+    <update id="deleteAll">
+        truncate table ST_BUSINESS_WORKTIME
+    </update>
+    <!-- ST_BUSINESS_WORKTIME 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from ST_BUSINESS_WORKTIME
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询ST_BUSINESS_WORKTIME列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from ST_BUSINESS_WORKTIME
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from ST_BUSINESS_WORKTIME
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

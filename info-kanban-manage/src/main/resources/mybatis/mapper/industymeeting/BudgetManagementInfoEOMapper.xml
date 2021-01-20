@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.industymeeting.dao.BudgetManagementInfoEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.industymeeting.entity.BudgetManagementInfoEO" >
+    <id column="id" property="id" />
+    <result column="headquarters_id" property="headquartersId" />
+    <result column="department_id" property="departmentId" />
+    <result column="year" property="year" />
+    <result column="ouput_target" property="ouputTarget" />
+    <result column="update_time" property="updateTime" />
+    <result column="update_user_id" property="updateUserId" />
+    <result column="del_flag" property="delFlag" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="create_time" property="createTime" />
+  </resultMap>
+
+  <!-- BUDGET_MANAGEMENT_INFO table all fields -->
+  <sql id="Base_Column_List" >
+    id, headquarters_id, department_id, year, ouput_target, update_time, update_user_id, del_flag, create_user_id, create_time
+  </sql>
+
+  <sql id="Base_Column_List2" >
+    info.id as id, info.headquarters_id as headquarters_id, info.department_id as department_id, info.year as year, info.ouput_target as ouput_target, info.update_time as update_time,
+     info.update_user_id as update_user_id, info.create_time as create_time, info.create_user_id as create_user_id, info.del_flag as del_flag, org0.ORG_NAME as headquarters, org1.ORG_NAME as department, u0.usname as createUser, u1.usname as updateUser
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="headquartersId != null" >
+        and headquarters_id ${headquartersIdOperator} #{headquartersId}
+      </if>
+      <if test="departmentId != null" >
+        and department_id ${departmentIdOperator} #{departmentId}
+      </if>
+      <if test="year != null" >
+        and year ${yearOperator} #{year}
+      </if>
+      <if test="ouputTarget != null" >
+        and ouput_target ${ouputTargetOperator} #{ouputTarget}
+      </if>
+      <if test="updateTime != null" >
+        and update_time ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and update_time &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and update_time &lt;= #{updateTime2}
+      </if>
+      <if test="updateUserId != null" >
+        and update_user_id ${updateUserIdOperator} #{updateUserId}
+      </if>
+      <if test="delFlag != null" >
+        and del_flag ${delFlagOperator} #{delFlag}
+      </if>
+      <if test="createUserId != null" >
+        and create_user_id ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.industymeeting.entity.BudgetManagementInfoEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_BUDGET_MANAGEMENT_INFO.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into BUDGET_MANAGEMENT_INFO(<include refid="Base_Column_List" />)
+      values (#{id, jdbcType=VARCHAR}, #{headquartersId, jdbcType=VARCHAR}, #{departmentId, jdbcType=VARCHAR}, #{year, jdbcType=VARCHAR},
+      #{ouputTarget, jdbcType=DECIMAL}, #{updateTime, jdbcType=TIMESTAMP}, #{updateUserId, jdbcType=VARCHAR}, #{delFlag, jdbcType=INTEGER},
+      #{createUserId, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.industymeeting.entity.BudgetManagementInfoEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_BUDGET_MANAGEMENT_INFO.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into BUDGET_MANAGEMENT_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="headquartersId != null" >headquarters_id,</if>
+                <if test="departmentId != null" >department_id,</if>
+                <if test="year != null" >year,</if>
+                <if test="ouputTarget != null" >ouput_target,</if>
+                <if test="updateTime != null" >update_time,</if>
+                <if test="updateUserId != null" >update_user_id,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="createUserId != null" >create_user_id,</if>
+                <if test="createTime != null" >create_time,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="headquartersId != null" >#{headquartersId, jdbcType=VARCHAR},</if>
+                <if test="departmentId != null" >#{departmentId, jdbcType=VARCHAR},</if>
+                <if test="year != null" >#{year, jdbcType=VARCHAR},</if>
+        <if test="ouputTarget != null">#{ouputTarget, jdbcType=DECIMAL},</if>
+                <if test="updateTime != null" >#{updateTime, jdbcType=TIMESTAMP},</if>
+                <if test="updateUserId != null" >#{updateUserId, jdbcType=VARCHAR},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=INTEGER},</if>
+                <if test="createUserId != null" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.industymeeting.entity.BudgetManagementInfoEO" >
+    update BUDGET_MANAGEMENT_INFO
+       set  headquarters_id = #{headquartersId},
+            department_id = #{departmentId},
+            year = #{year},
+            ouput_target = #{ouputTarget},
+            update_time = #{updateTime},
+            update_user_id = #{updateUserId},
+            del_flag = #{delFlag},
+            create_user_id = #{createUserId},
+            create_time = #{createTime}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.industymeeting.entity.BudgetManagementInfoEO" >
+    update BUDGET_MANAGEMENT_INFO
+    <set >
+      <if test="headquartersId != null" >
+        headquarters_id = #{headquartersId},
+      </if>
+      <if test="departmentId != null" >
+        department_id = #{departmentId},
+      </if>
+      <if test="year != null" >
+        year = #{year},
+      </if>
+      <if test="ouputTarget != null" >
+        ouput_target = #{ouputTarget},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 BUDGET_MANAGEMENT_INFO -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+      select
+      <include refid="Base_Column_List"/>
+      from BUDGET_MANAGEMENT_INFO
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from BUDGET_MANAGEMENT_INFO
+     where id = #{value}
+
+  </delete>
+
+  <!--批量逻辑删除-->
+  <update id="deleteLogicInBatch" parameterType="java.util.List">
+    update BUDGET_MANAGEMENT_INFO set del_flag = 1
+      where id in
+      <foreach item="id" collection="list" open="(" separator="," close=")" index="index">
+          #{id}
+      </foreach>
+  </update>
+
+  <!--逻辑清空-->
+  <update id="empty">
+    update BUDGET_MANAGEMENT_INFO set del_flag = 1
+  </update>
+
+  <!-- BUDGET_MANAGEMENT_INFO 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from BUDGET_MANAGEMENT_INFO
+    <include refid="Base_Where_Clause"/>
+    and del_flag != 1
+  </select>
+
+  <!-- 查询BUDGET_MANAGEMENT_INFO列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" />, headquarters, department, createUser, updateUser from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List2" />
+			 from BUDGET_MANAGEMENT_INFO info
+             LEFT JOIN TS_ORG org0 on info.HEADQUARTERS_ID = org0.ID
+             LEFT JOIN TS_ORG org1 on info.DEPARTMENT_ID = org1.ID
+             LEFT JOIN TS_USER u0 on info.CREATE_USER_ID = u0.usid
+             LEFT JOIN TS_USER u1 on info.UPDATE_USER_ID = u1.usid
+			 <include refid="Base_Where_Clause"/>
+             and info.del_flag != 1
+             <if test="sql_filter != null and sql_filter != ''" >
+                ${sql_filter}
+             </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List2"/>
+    from BUDGET_MANAGEMENT_INFO info
+    LEFT JOIN TS_ORG org0 on info.HEADQUARTERS_ID = org0.ID
+    LEFT JOIN TS_ORG org1 on info.DEPARTMENT_ID = org1.ID
+    LEFT JOIN TS_USER u0 on info.CREATE_USER_ID = u0.usid
+    LEFT JOIN TS_USER u1 on info.UPDATE_USER_ID = u1.usid
+    <include refid="Base_Where_Clause"/>
+    and info.del_flag != 1
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+		${pager.orderCondition}
+    </if>
+  </select>
+
+    <select id="selectByYear" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from BUDGET_MANAGEMENT_INFO
+        where YEAR = #{year}
+        and del_flag != 1
+
+    </select>
+
+
+</mapper>

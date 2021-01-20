@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.smallprogram.dao.UserOrgDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="com.adc.da.smallprogram.entity.UserOrgEO">
+        <id column="usid" property="usid"/>
+        <result column="account" property="account"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="password" property="password"/>
+        <result column="usname" property="usname"/>
+        <result column="ext_info" property="extInfo"/>
+        <result column="user_code" property="userCode"/>
+        <result column="office_phone" property="officePhone"/>
+        <result column="CELLPHONE_NUMBER" property="cellPhoneNumber"/>
+        <result column="HOME_ADDRESS" property="homeAddress"/>
+        <result column="POSTAL_CODE" property="postalCode"/>
+        <result column="EMAIL" property="email"/>
+        <result column="CONTACT_ADDRESS" property="contactAddress"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="USER_STATE" property="userState"/>
+        <result column="ORG_ID" property="orgId"/>
+        <result column="ORG_NAME" property="orgName"/>
+        <result column="ORG_ABB" property="orgABB"/>
+    </resultMap>
+
+    <!-- TS_USER table all fields -->
+    <sql id="Base_Column_List">
+        t.usid,
+        t.account,
+        t.del_flag,
+        t.password,
+        t.usname,
+        t.ext_info,
+        t.user_code,
+        t.office_phone,
+        t.CELLPHONE_NUMBER,
+        t.HOME_ADDRESS,
+        t.POSTAL_CODE,
+        t.EMAIL,
+        t.CONTACT_ADDRESS,
+        t.CREATE_TIME,
+        t.UPDATE_TIME,
+        t.USER_STATE
+    </sql>
+
+    <!-- TS_USER table all fields -->
+    <sql id="Base_Column_List1">
+		usid, account, del_flag, password, usname, user_code,office_phone,CELLPHONE_NUMBER,
+		HOME_ADDRESS,POSTAL_CODE,EMAIL,CONTACT_ADDRESS,CREATE_TIME,UPDATE_TIME,USER_STATE,
+		ext_info
+	</sql>
+
+    <select id="queryUserLeaders" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT * FROM (
+            SELECT * FROM TS_USER  T LEFT JOIN TR_USER_ORG P ON T.USID = P.USER_ID
+            WHERE P.ORG_ID =#{orgId} and t.DEL_FLAG='0'
+            order by TO_NUMBER(T.EXT_INFO) desc,t.ACCOUNT asc
+        )
+        WHERE ROWNUM  &lt; '11'
+    </select>
+
+    <select id="queryChildOrg" resultMap="BaseResultMap" parameterType="java.lang.String">
+       SELECT A.ID  AS ORG_ID ,A.ORG_NAME,A.ORG_ABB
+       FROM TS_ORG A
+       WHERE
+        A.PARENT_ID=#{orgId}
+       AND
+		  A.ORG_NAME not like '%组' AND A.IS_SHOW !=1
+	   AND
+	      A.DEL_FLAG !=1
+       order by A.WEIGHT
+    </select>
+
+    <select id="queryUserNum" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT
+	      COUNT(DISTINCT USER_ID)
+        FROM
+            TR_USER_ROLE trur
+            left JOIN TS_USER tu on tu.USID = trur.USER_ID
+        WHERE
+            trur.USER_ID IN (
+        SELECT
+            A.USER_ID
+        FROM
+            TR_USER_ORG A
+        WHERE
+            A.ORG_ID IN ( SELECT ID FROM TS_ORG B START WITH B.ID = #{orgId} CONNECT BY PRIOR B.ID = B.PARENT_ID ))
+            AND trur.ROLE_ID IN (SELECT tsr.id FROM TS_ROLE tsr WHERE tsr.EXT_INFO IN ('ZHU_REN','CHIEF_ENGINEER','DEPUTY_DIRECTOR','ZONG_JIAN','BEN_BU_ZHANG','BIZ_TECHNICAL_DIRECTOR',
+            'BU_ZHANG','ASSISTANT_MINISTER','DEPUTY_MINISTER','TECHNICAL_DIRECTOR') )
+            and (tu.EXTINFO2 is null or  tu.EXTINFO2 != 1)
+    </select>
+
+    <select id="queryUserNumNew" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT
+        count (1)
+        FROM (
+        SELECT distinct (usid)
+        from TS_USER a
+        left JOIN TR_USER_ORG b on a.USID = b.USER_ID
+        left join TS_ORG c on c.ID = b.ORG_ID
+        left join TR_USER_ROLE d on d.USER_ID = a.USID
+        left join TS_ROLE e on d.ROLE_ID = e.ID
+        where  e.EXT_INFO IN ('ZHU_REN','CHIEF_ENGINEER','DEPUTY_DIRECTOR','ZONG_JIAN','BEN_BU_ZHANG','BIZ_TECHNICAL_DIRECTOR','BU_ZHANG','ASSISTANT_MINISTER','DEPUTY_MINISTER','TECHNICAL_DIRECTOR')
+        and a.DEL_FLAG != '1'
+        and (a.EXTINFO2 is null or  a.EXTINFO2 != 1)
+        <if test="orgId != null" >
+            and c.ID  IN (
+            SELECT ID FROM TS_ORG CONNECT BY PRIOR id = PARENT_ID START WITH ID = #{orgId}
+            )
+        </if>
+        )
+    </select>
+
+
+    <select id="queryAdcNum" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT
+	      COUNT(DISTINCT USER_ID)
+        FROM
+            TR_USER_ROLE trur
+            left JOIN TS_USER tu on tu.USID = trur.USER_ID
+        WHERE
+            trur.USER_ID IN (
+        SELECT
+            A.USER_ID
+        FROM
+            TR_USER_ORG A
+        WHERE
+            A.ORG_ID IN ( SELECT ID FROM TS_ORG B START WITH B.ID = #{orgId} CONNECT BY PRIOR B.ID = B.PARENT_ID ))  and (tu.EXTINFO2 is null or  tu.EXTINFO2 != 1)
+
+    </select>
+
+
+    <select id="findUserByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+       SELECT
+	    DISTINCT u.*
+        FROM
+            TS_USER u
+            LEFT JOIN TR_USER_ROLE tur ON u.USID = tur.USER_ID
+        WHERE
+            tur.ROLE_ID IN (
+        SELECT
+            t.id
+        FROM
+            TS_ROLE t
+        WHERE
+            t.EXT_INFO IN ('ZHU_REN','CHIEF_ENGINEER','DEPUTY_DIRECTOR','ZONG_JIAN','BEN_BU_ZHANG','BIZ_TECHNICAL_DIRECTOR','BU_ZHANG','ASSISTANT_MINISTER','DEPUTY_MINISTER','TECHNICAL_DIRECTOR'))
+            AND u.USNAME LIKE #{username} and (u.EXTINFO2 is null or  u.EXTINFO2 != 1)
+    </select>
+
+    <select id="findUserByKeyword" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+        distinct(usid), account,del_flag, password, usname, user_code,office_phone,CELLPHONE_NUMBER,
+        HOME_ADDRESS,POSTAL_CODE,EMAIL,CONTACT_ADDRESS,CREATE_TIME,UPDATE_TIME,USER_STATE,EXT_INFO
+
+        FROM (
+        SELECT  usid, account, a.del_flag, password, usname, user_code,office_phone,CELLPHONE_NUMBER,
+        HOME_ADDRESS,POSTAL_CODE,EMAIL,CONTACT_ADDRESS,CREATE_TIME,UPDATE_TIME,USER_STATE,a.EXT_INFO, ORG_NAME
+        from TS_USER a
+        INNER JOIN TR_USER_ORG b on a.USID = b.USER_ID
+        inner join TS_ORG c on c.ID = b.ORG_ID
+        inner join TR_USER_ROLE d on d.USER_ID = a.USID
+        inner join TS_ROLE e on d.ROLE_ID = e.ID
+        where  e.EXT_INFO IN
+        ('ZHU_REN','CHIEF_ENGINEER','DEPUTY_DIRECTOR','ZONG_JIAN','BEN_BU_ZHANG','BIZ_TECHNICAL_DIRECTOR','BU_ZHANG','ASSISTANT_MINISTER','DEPUTY_MINISTER','TECHNICAL_DIRECTOR')
+        and a.DEL_FLAG != '1'
+        and a.EXTINFO2 != 1
+        <if test="orgId != null" >
+          and c.ID  IN (
+            SELECT ID FROM TS_ORG CONNECT BY PRIOR id = PARENT_ID START WITH ID = #{orgId}
+            )
+        </if>
+        )where  ORG_NAME like #{keyword} or USNAME like #{keyword}
+    </select>
+
+    <select id="findUserByKeywordBigDeptLeader" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+        distinct(usid), account,del_flag, password, usname, user_code,office_phone,CELLPHONE_NUMBER,
+        HOME_ADDRESS,POSTAL_CODE,EMAIL,CONTACT_ADDRESS,CREATE_TIME,UPDATE_TIME,USER_STATE,EXT_INFO
+
+        FROM (
+        SELECT  usid, account, a.del_flag, password, usname, user_code,office_phone,CELLPHONE_NUMBER,
+        HOME_ADDRESS,POSTAL_CODE,EMAIL,CONTACT_ADDRESS,CREATE_TIME,UPDATE_TIME,USER_STATE,a.EXT_INFO, ORG_NAME
+        from TS_USER a
+        INNER JOIN TR_USER_ORG b on a.USID = b.USER_ID
+        inner join TS_ORG c on c.ID = b.ORG_ID
+        inner join TR_USER_ROLE d on d.USER_ID = a.USID
+        inner join TS_ROLE e on d.ROLE_ID = e.ID
+        where e.EXT_INFO in ('DEPUTY_DIRECTOR','ZONG_JIAN','BEN_BU_ZHANG','BIZ_TECHNICAL_DIRECTOR') and a.DEL_FLAG != '1' and c.ID = #{orgId} and  (a.EXTINFO2 is null or  a.EXTINFO2 != 1)
+        )
+    </select>
+
+    <select id="findUserByKeywordSmallDeptLeader" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+        distinct(usid), account,del_flag, password, usname, user_code,office_phone,CELLPHONE_NUMBER,
+        HOME_ADDRESS,POSTAL_CODE,EMAIL,CONTACT_ADDRESS,CREATE_TIME,UPDATE_TIME,USER_STATE,EXT_INFO
+
+        FROM (
+        SELECT  usid, account, a.del_flag, password, usname, user_code,office_phone,CELLPHONE_NUMBER,
+        HOME_ADDRESS,POSTAL_CODE,EMAIL,CONTACT_ADDRESS,CREATE_TIME,UPDATE_TIME,USER_STATE,a.EXT_INFO, ORG_NAME
+        from TS_USER a
+        INNER JOIN TR_USER_ORG b on a.USID = b.USER_ID
+        inner join TS_ORG c on c.ID = b.ORG_ID
+        inner join TR_USER_ROLE d on d.USER_ID = a.USID
+        inner join TS_ROLE e on d.ROLE_ID = e.ID
+        where  e.EXT_INFO  in ('BU_ZHANG','ASSISTANT_MINISTER','DEPUTY_MINISTER','TECHNICAL_DIRECTOR') and a.DEL_FLAG != '1' and c.ID = #{orgId} and (a.EXTINFO2 is null or  a.EXTINFO2 != 1)
+      )
+    </select>
+
+    <select id="findUserByKeywordADCLeader" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+        distinct(usid), account,del_flag, password, usname, user_code,office_phone,CELLPHONE_NUMBER,
+        HOME_ADDRESS,POSTAL_CODE,EMAIL,CONTACT_ADDRESS,CREATE_TIME,UPDATE_TIME,USER_STATE,EXT_INFO
+
+        FROM (
+        SELECT  usid, account, a.del_flag, password, usname, user_code,office_phone,CELLPHONE_NUMBER,
+        HOME_ADDRESS,POSTAL_CODE,EMAIL,CONTACT_ADDRESS,CREATE_TIME,UPDATE_TIME,USER_STATE,a.EXT_INFO, ORG_NAME
+        from TS_USER a
+        INNER JOIN TR_USER_ORG b on a.USID = b.USER_ID
+        inner join TS_ORG c on c.ID = b.ORG_ID
+        inner join TR_USER_ROLE d on d.USER_ID = a.USID
+        inner join TS_ROLE e on d.ROLE_ID = e.ID
+        where  e.EXT_INFO  in ('ZHU_REN','CHIEF_ENGINEER') and a.DEL_FLAG != '1' and c.ID = #{orgId} and (a.EXTINFO2 is null or  a.EXTINFO2 != 1)
+      )
+    </select>
+<!-- and e.USER_STATE != 2 不可查-->
+
+
+
+    <select id="findAllUser" resultMap="BaseResultMap">
+        SELECT
+	    DISTINCT u.*
+        FROM
+            TS_USER u
+            LEFT JOIN TR_USER_ROLE tur ON u.USID = tur.USER_ID
+        WHERE
+            tur.ROLE_ID IN (
+        SELECT
+            t.id
+        FROM
+            TS_ROLE t
+        WHERE
+            t.EXT_INFO IN ('ZHU_REN','CHIEF_ENGINEER','DEPUTY_DIRECTOR','ZONG_JIAN','BEN_BU_ZHANG','BIZ_TECHNICAL_DIRECTOR','BU_ZHANG','ASSISTANT_MINISTER','DEPUTY_MINISTER','TECHNICAL_DIRECTOR'))
+            and (u.EXTINFO2 is null or  u.EXTINFO2 != 1)
+    </select>
+
+    <select id="queryAllUserByOrgId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            TS_USER t
+        WHERE
+            USID IN (
+        SELECT
+            trur.USER_ID
+        FROM
+            TR_USER_ROLE trur
+        WHERE
+            trur.USER_ID IN (
+        SELECT
+            A.USER_ID
+        FROM
+            TR_USER_ORG A
+        WHERE
+            A.ORG_ID IN ( SELECT ID FROM TS_ORG B WHERE B.ID = #{orgId}))
+            AND trur.ROLE_ID IN (
+        SELECT
+            tsr.id
+        FROM
+            TS_ROLE tsr
+        WHERE
+            tsr.EXT_INFO IN ('BU_ZHANG','ASSISTANT_MINISTER','DEPUTY_MINISTER','TECHNICAL_DIRECTOR'))
+            )
+            AND t.DEL_FLAG !='1' and (t.EXTINFO2 is null or t.EXTINFO2 != 1)
+            ORDER BY TO_NUMBER(T.EXT_INFO) DESC,t.ACCOUNT
+    </select>
+
+    <select id="queryAllAdcUserByOrgId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        TS_USER t
+        WHERE
+        USID IN (
+        SELECT
+        trur.USER_ID
+        FROM
+        TR_USER_ROLE trur
+        WHERE
+        trur.USER_ID IN (
+        SELECT
+        A.USER_ID
+        FROM
+        TR_USER_ORG A
+        WHERE
+        A.ORG_ID IN ( SELECT ID FROM TS_ORG B START WITH B.ID = #{orgId} CONNECT BY PRIOR B.ID = B.PARENT_ID ))
+        )
+        AND t.DEL_FLAG !='1' and (t.EXTINFO2 is null or t.EXTINFO2 != 1)
+        ORDER BY TO_NUMBER(T.EXT_INFO) DESC,t.ACCOUNT
+    </select>
+
+    <!-- 查询部门领导中的部长及部长助理 带排序 -->
+    <select id="queryDepLeader" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT  p.usid,p.usname,p.ext_info  FROM  TS_USER P
+        LEFT JOIN TR_USER_ORG A ON P .usid = A .USER_ID
+        LEFT JOIN TR_USER_ROLE b ON A .USER_ID = b.USER_ID
+        LEFT JOIN TS_ROLE c ON b.role_id = c. ID
+        WHERE
+            A .ORG_ID IN (
+                SELECT
+                    T ."ID"
+                FROM
+                    TS_ORG T
+                WHERE
+                    T .ORG_NAME LIKE '%部'
+                    and t.ORG_NAME not like '%本部%'
+            )
+        AND A .ORG_ID = #{orgId}
+        AND c. EXT_INFO IN ('BU_ZHANG','ASSISTANT_MINISTER','DEPUTY_MINISTER','TECHNICAL_DIRECTOR')
+        AND c.DEL_FLAG = '0'
+        and (P.EXTINFO2 is null or P.EXTINFO2 != 1)
+        ORDER BY
+            TO_NUMBER (P.EXT_INFO) DESC,
+            P. ACCOUNT ASC
+    </select>
+
+    <!-- 查询员工关联的所有角色 -->
+    <select id="queryRoleByUser" resultType="java.lang.String" parameterType="java.lang.String">
+        SELECT t."NAME" FROM  TS_ROLE T
+        LEFT JOIN TR_USER_ROLE P ON T ."ID" = P .ROLE_ID
+        WHERE P .USER_ID = #{userId}
+    </select>
+
+    <!-- 查询员工关联的所有角色 -->
+    <select id="queryOrgNameByOrgId" resultType="java.lang.String" parameterType="java.lang.String">
+        SELECT ORG_NAME FROM  TS_ORG
+        WHERE ID = #{orgId}
+    </select>
+
+
+    <!-- 查询员工关联的所有角色 -->
+    <select id="queryOrgParentIdsByOrgId" resultType="java.lang.String" parameterType="java.lang.String">
+        SELECT PARENT_IDS FROM  TS_ORG
+        WHERE ID = #{orgId}
+    </select>
+
+</mapper>

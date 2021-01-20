@@ -1,0 +1,695 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.statics.dao.SStaticOperationAmountEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.statics.entity.SStaticOperationAmountEO" >
+    <id column="id" property="id" />
+    <result column="is_bigorg" property="isBigorg" />
+    <result column="department_name" property="departmentName" />
+    <result column="department_id" property="departmentId" />
+    <result column="area" property="area" />
+    <result column="province" property="province" />
+    <result column="year" property="year" />
+    <result column="month" property="month" />
+    <result column="amount" property="amount" />
+    <result column="amount_type" property="amountType" />
+    <result column="growth_rate" property="growthRate" />
+    <result column="createuser_id" property="createuserId" />
+    <result column="createuser_name" property="createuserName" />
+    <result column="create_time" property="createTime" />
+    <result column="updater_id" property="updaterId" />
+    <result column="updater_name" property="updaterName" />
+    <result column="update_time" property="updateTime" />
+    <result column="del_flag" property="delFlag" />
+    <result column="ext_info1" property="extInfo1" />
+    <result column="ext_info2" property="extInfo2" />
+    <result column="ext_info3" property="extInfo3" />
+    <result column="ext_info4" property="extInfo4" />
+  </resultMap>
+
+  <!-- S_STATIC_OPERATION_AMOUNT table all fields -->
+  <sql id="Base_Column_List" >
+     is_bigorg, department_name, department_id, area, province, id, year, month, amount, amount_type, growth_rate, createuser_id, createuser_name, create_time, updater_id, updater_name, update_time, del_flag, ext_info1, ext_info2, ext_info3, ext_info4
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="isBigorg != null" >
+        and is_bigorg ${isBigorgOperator} #{isBigorg}
+      </if>
+      <if test="departmentName != null" >
+        and department_name ${departmentNameOperator} #{departmentName}
+      </if>
+      <if test="departmentId != null" >
+        and department_id ${departmentIdOperator} #{departmentId}
+      </if>
+      <if test="area != null" >
+        and area ${areaOperator} #{area}
+      </if>
+      <if test="province != null" >
+        and province ${provinceOperator} #{province}
+      </if>
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="year != null" >
+        and year ${yearOperator} #{year}
+      </if>
+      <if test="month != null" >
+        and month ${monthOperator} #{month}
+      </if>
+      <if test="amount != null" >
+        and amount ${amountOperator} #{amount}
+      </if>
+      <if test="amountType != null" >
+        and amount_type ${amountTypeOperator} #{amountType}
+      </if>
+      <if test="growthRate != null" >
+        and growth_rate ${growthRateOperator} #{growthRate}
+      </if>
+      <if test="createuserId != null" >
+        and createuser_id ${createuserIdOperator} #{createuserId}
+      </if>
+      <if test="createuserName != null" >
+        and createuser_name ${createuserNameOperator} #{createuserName}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="updaterId != null" >
+        and updater_id ${updaterIdOperator} #{updaterId}
+      </if>
+      <if test="updaterName != null" >
+        and updater_name ${updaterNameOperator} #{updaterName}
+      </if>
+      <if test="updateTime != null" >
+        and update_time ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and update_time &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and update_time &lt;= #{updateTime2}
+      </if>
+      <if test="delFlag != null" >
+        and del_flag ${delFlagOperator} #{delFlag}
+      </if>
+      <if test="extInfo1 != null" >
+        and ext_info1 ${extInfo1Operator} #{extInfo1}
+      </if>
+      <if test="extInfo2 != null" >
+        and ext_info2 ${extInfo2Operator} #{extInfo2}
+      </if>
+      <if test="extInfo3 != null" >
+        and ext_info3 ${extInfo3Operator} #{extInfo3}
+      </if>
+      <if test="extInfo4 != null" >
+        and ext_info4 ${extInfo4Operator} #{extInfo4}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.statics.entity.SStaticOperationAmountEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_S_STATIC_OPERATION_AMOUNT.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into S_STATIC_OPERATION_AMOUNT(<include refid="Base_Column_List" />)
+    values (#{isBigorg, jdbcType=INTEGER}, #{departmentName, jdbcType=VARCHAR}, #{departmentId, jdbcType=VARCHAR}, #{area, jdbcType=VARCHAR}, #{province, jdbcType=VARCHAR}, #{id, jdbcType=VARCHAR}, #{year, jdbcType=VARCHAR}, #{month, jdbcType=VARCHAR}, #{amount, jdbcType=DOUBLE}, #{amountType, jdbcType=INTEGER}, #{growthRate, jdbcType=DOUBLE}, #{createuserId, jdbcType=VARCHAR}, #{createuserName, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{updaterId, jdbcType=VARCHAR}, #{updaterName, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP}, #{delFlag, jdbcType=INTEGER}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.statics.entity.SStaticOperationAmountEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_S_STATIC_OPERATION_AMOUNT.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into S_STATIC_OPERATION_AMOUNT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="isBigorg != null" >is_bigorg,</if>
+                <if test="departmentName != null" >department_name,</if>
+                <if test="departmentId != null" >department_id,</if>
+                <if test="area != null" >area,</if>
+                <if test="province != null" >province,</if>
+                <if test="id != null" >id,</if>
+                <if test="year != null" >year,</if>
+                <if test="month != null" >month,</if>
+                <if test="amount != null" >amount,</if>
+                <if test="amountType != null" >amount_type,</if>
+                <if test="growthRate != null" >growth_rate,</if>
+                <if test="createuserId != null" >createuser_id,</if>
+                <if test="createuserName != null" >createuser_name,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="updaterId != null" >updater_id,</if>
+                <if test="updaterName != null" >updater_name,</if>
+                <if test="updateTime != null" >update_time,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="extInfo1 != null" >ext_info1,</if>
+                <if test="extInfo2 != null" >ext_info2,</if>
+                <if test="extInfo3 != null" >ext_info3,</if>
+                <if test="extInfo4 != null" >ext_info4,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="isBigorg != null" >#{isBigorg, jdbcType=INTEGER},</if>
+                <if test="departmentName != null" >#{departmentName, jdbcType=VARCHAR},</if>
+                <if test="departmentId != null" >#{departmentId, jdbcType=VARCHAR},</if>
+                <if test="area != null" >#{area, jdbcType=VARCHAR},</if>
+                <if test="province != null" >#{province, jdbcType=VARCHAR},</if>
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="year != null" >#{year, jdbcType=VARCHAR},</if>
+                <if test="month != null" >#{month, jdbcType=VARCHAR},</if>
+                <if test="amount != null" >#{amount, jdbcType=DOUBLE},</if>
+                <if test="amountType != null" >#{amountType, jdbcType=INTEGER},</if>
+                <if test="growthRate != null" >#{growthRate, jdbcType=DOUBLE},</if>
+                <if test="createuserId != null" >#{createuserId, jdbcType=VARCHAR},</if>
+                <if test="createuserName != null" >#{createuserName, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="updaterId != null" >#{updaterId, jdbcType=VARCHAR},</if>
+                <if test="updaterName != null" >#{updaterName, jdbcType=VARCHAR},</if>
+                <if test="updateTime != null" >#{updateTime, jdbcType=TIMESTAMP},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=INTEGER},</if>
+                <if test="extInfo1 != null" >#{extInfo1, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="extInfo3 != null" >#{extInfo3, jdbcType=VARCHAR},</if>
+                <if test="extInfo4 != null" >#{extInfo4, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+    <insert id="insertList" parameterType="java.util.List">
+        INSERT ALL
+        <foreach collection="list" item="item" index="index">
+            <if test="item.id !=null">
+                INTO F_SALARY_MANAGEMENT
+                <trim prefix="(" suffix=")" suffixOverrides=",">
+                    <if test="item.isBigorg != null" >is_bigorg,</if>
+                    <if test="item.departmentName != null" >department_name,</if>
+                    <if test="item.departmentId != null" >department_id,</if>
+                    <if test="item.area != null" >area,</if>
+                    <if test="item.province != null" >province,</if>
+                    <if test="item.id != null" >id,</if>
+                    <if test="item.year != null" >year,</if>
+                    <if test="item.month != null" >month,</if>
+                    <if test="item.amount != null" >amount,</if>
+                    <if test="item.amountType != null" >amount_type,</if>
+                    <if test="item.growthRate != null" >growth_rate,</if>
+                    <if test="item.createuserId != null" >createuser_id,</if>
+                    <if test="item.createuserName != null" >createuser_name,</if>
+                    <if test="item.createTime != null" >create_time,</if>
+                    <if test="item.updaterId != null" >updater_id,</if>
+                    <if test="item.updaterName != null" >updater_name,</if>
+                    <if test="item.updateTime != null" >update_time,</if>
+                    <if test="item.delFlag != null" >del_flag,</if>
+                    <if test="item.extInfo1 != null" >ext_info1,</if>
+                    <if test="item.extInfo2 != null" >ext_info2,</if>
+                    <if test="item.extInfo3 != null" >ext_info3,</if>
+                    <if test="item.extInfo4 != null" >ext_info4,</if>
+                </trim>
+                <trim prefix="values (" suffix=")" suffixOverrides=",">
+                    <if test="item.isBigorg != null" >#{item.isBigorg, jdbcType=INTEGER},</if>
+                    <if test="item.departmentName != null" >#{item.departmentName, jdbcType=VARCHAR},</if>
+                    <if test="item.departmentId != null" >#{item.departmentId, jdbcType=VARCHAR},</if>
+                    <if test="item.area != null" >#{item.area, jdbcType=VARCHAR},</if>
+                    <if test="item.province != null" >#{item.province, jdbcType=VARCHAR},</if>
+                    <if test="item.id != null" >#{item.id, jdbcType=VARCHAR},</if>
+                    <if test="item.year != null" >#{item.year, jdbcType=VARCHAR},</if>
+                    <if test="item.month != null" >#{item.month, jdbcType=VARCHAR},</if>
+                    <if test="item.amount != null" >#{item.amount, jdbcType=DOUBLE},</if>
+                    <if test="item.amountType != null" >#{item.amountType, jdbcType=INTEGER},</if>
+                    <if test="item.growthRate != null" >#{item.growthRate, jdbcType=DOUBLE},</if>
+                    <if test="item.createuserId != null" >#{item.createuserId, jdbcType=VARCHAR},</if>
+                    <if test="item.createuserName != null" >#{item.createuserName, jdbcType=VARCHAR},</if>
+                    <if test="item.createTime != null" >#{item.createTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.updaterId != null" >#{item.updaterId, jdbcType=VARCHAR},</if>
+                    <if test="item.updaterName != null" >#{item.updaterName, jdbcType=VARCHAR},</if>
+                    <if test="item.updateTime != null" >#{item.updateTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.delFlag != null" >#{item.delFlag, jdbcType=INTEGER},</if>
+                    <if test="item.extInfo1 != null" >#{item.extInfo1, jdbcType=VARCHAR},</if>
+                    <if test="item.extInfo2 != null" >#{item.extInfo2, jdbcType=VARCHAR},</if>
+                    <if test="item.extInfo3 != null" >#{item.extInfo3, jdbcType=VARCHAR},</if>
+                    <if test="item.extInfo4 != null" >#{item.extInfo4, jdbcType=VARCHAR},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.statics.entity.SStaticOperationAmountEO" >
+    update S_STATIC_OPERATION_AMOUNT
+       set  is_bigorg = #{isBigorg},
+            department_name = #{departmentName},
+            department_id = #{departmentId},
+            area = #{area},
+            province = #{province},
+            year = #{year},
+            month = #{month},
+            amount = #{amount},
+            amount_type = #{amountType},
+            growth_rate = #{growthRate},
+            createuser_id = #{createuserId},
+            createuser_name = #{createuserName},
+            create_time = #{createTime},
+            updater_id = #{updaterId},
+            updater_name = #{updaterName},
+            update_time = #{updateTime},
+            del_flag = #{delFlag},
+            ext_info1 = #{extInfo1},
+            ext_info2 = #{extInfo2},
+            ext_info3 = #{extInfo3},
+            ext_info4 = #{extInfo4}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.statics.entity.SStaticOperationAmountEO" >
+    update S_STATIC_OPERATION_AMOUNT
+    <set >
+      <if test="isBigorg != null" >
+        is_bigorg = #{isBigorg},
+      </if>
+      <if test="departmentName != null" >
+        department_name = #{departmentName},
+      </if>
+      <if test="departmentId != null" >
+        department_id = #{departmentId},
+      </if>
+      <if test="area != null" >
+        area = #{area},
+      </if>
+      <if test="province != null" >
+        province = #{province},
+      </if>
+      <if test="year != null" >
+        year = #{year},
+      </if>
+      <if test="month != null" >
+        month = #{month},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount},
+      </if>
+      <if test="amountType != null" >
+        amount_type = #{amountType},
+      </if>
+      <if test="growthRate != null" >
+        growth_rate = #{growthRate},
+      </if>
+      <if test="createuserId != null" >
+        createuser_id = #{createuserId},
+      </if>
+      <if test="createuserName != null" >
+        createuser_name = #{createuserName},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="updaterId != null" >
+        updater_id = #{updaterId},
+      </if>
+      <if test="updaterName != null" >
+        updater_name = #{updaterName},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="extInfo1 != null" >
+        ext_info1 = #{extInfo1},
+      </if>
+      <if test="extInfo2 != null" >
+        ext_info2 = #{extInfo2},
+      </if>
+      <if test="extInfo3 != null" >
+        ext_info3 = #{extInfo3},
+      </if>
+      <if test="extInfo4 != null" >
+        ext_info4 = #{extInfo4},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 S_STATIC_OPERATION_AMOUNT -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from S_STATIC_OPERATION_AMOUNT
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from S_STATIC_OPERATION_AMOUNT
+     where id = #{value}
+
+  </delete>
+
+  <!-- S_STATIC_OPERATION_AMOUNT 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from S_STATIC_OPERATION_AMOUNT
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询S_STATIC_OPERATION_AMOUNT列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from S_STATIC_OPERATION_AMOUNT
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+            order by S_STATIC_OPERATION_AMOUNT.area
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from S_STATIC_OPERATION_AMOUNT
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+    <select id="queryDashboard" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" />
+        from S_STATIC_OPERATION_AMOUNT
+        where year = #{year} and amount_type = #{amountType}
+        <if test="delFlag != null">
+            and DEL_FLAG = #{delFlag}
+        </if>
+    </select>
+
+    <select id="findByProjectYearAndProjectTypeAndDelFlagNot" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" />
+        from S_STATIC_OPERATION_AMOUNT
+        where year = #{year} and amount_type = #{amountType}
+        <if test="delFlag != null">
+            and DEL_FLAG = #{delFlag}
+        </if>
+    </select>
+
+
+    <select id="findByProjectAmountStatics" resultType="com.adc.da.statics.vo.StaticOperationAmountVO">
+        SELECT
+            s.PROVINCE province,
+            s.AREA area,
+            nvl(round(sum(case when s.ID is null then 0 else s.AMOUNT end)/1,2),0) amount,
+            nvl(round(sum(case when s.ID is null then 0 else s.GROWTH_RATE end),2),0) rate
+        FROM S_STATIC_OPERATION_AMOUNT s WHERE s.amount_type = #{amountType} and s.year = #{year} and s.DEL_FLAG = 0 and s.IS_BIGORG = 0
+        GROUP BY s.PROVINCE,s.AREA
+    </select>
+    <select id="findByProjectAmountAreaStatics" resultType="com.adc.da.statics.vo.StaticOperationAmountVO">
+       SELECT
+            s.AREA area,
+            sum(round((case when s.ID is null then 0 else s.AMOUNT / 1 end),2)) amount,
+            sum(s.GROWTH_RATE) rate,
+            max(s.YEAR) year
+        from S_STATIC_OPERATION_AMOUNT s where s.amount_type = #{amountType} and s.year = #{year} and s.DEL_FLAG = 0 and s.IS_BIGORG = 0
+        group by s.AREA
+        order by s.AREA desc
+    </select>
+
+    <select id="findByProjectAmountDeptStatics" resultType="com.adc.da.statics.vo.StaticOperationAmountDeptVO">
+        select s.DEPARTMENT_ID departmentId, s.DEPARTMENT_NAME departmentName, nvl(round(s.AMOUNT,2),0) amount,nvl(round(all_amount.total_amount,2),0) yearAmount, nvl(round(budget.OUPUT_TARGET,2),0) budget
+        from S_STATIC_OPERATION_AMOUNT s
+        left join (SELECT DEPARTMENT_ID, sum(AMOUNT) total_amount FROM S_STATIC_OPERATION_AMOUNT where YEAR = #{year} GROUP BY DEPARTMENT_ID) all_amount on s.DEPARTMENT_ID = all_amount.DEPARTMENT_ID
+        left join (select DEPARTMENT_ID, sum(OUPUT_TARGET) OUPUT_TARGET from BUDGET_MANAGEMENT_INFO where YEAR = #{year} and DEL_FLAG = 0 GROUP BY DEPARTMENT_ID) budget on budget.DEPARTMENT_ID = s.DEPARTMENT_ID
+        where s.YEAR = #{year} and s.MONTH = #{month} and s.DEL_FLAG = 0 and s.amount_type = #{amountType}
+    </select>
+
+
+    <select id="findByProjectYearAndDelFlagNot" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" />
+        from S_STATIC_OPERATION_AMOUNT
+        where year = #{year}
+        <if test="delFlag != null">
+            and DEL_FLAG = #{delFlag}
+        </if>
+        <if test="amountType != null">
+            and amount_type = #{amountType}
+        </if>
+        <if test=" isBigorg != null">
+            and is_bigorg = #{isBigorg}
+        </if>
+        order by department_id, year desc
+    </select>
+
+
+    <select id="selectByYearAndMonth" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" />
+        from S_STATIC_OPERATION_AMOUNT
+        where year = #{year}
+        <if test="month != null">
+            and month = #{month}
+        </if>
+        <if test="delFlag != null">
+            and DEL_FLAG = 0
+        </if>
+    </select>
+
+
+    <select id="selectByYear" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" />
+        from S_STATIC_OPERATION_AMOUNT
+        where year = #{year}
+        <if test="delFlag != null">
+            and DEL_FLAG = 0
+        </if>
+    </select>
+
+    <select id="queryDashboardTop" resultType="com.adc.da.dashboard.vo.ContractDashBoardHeaderVO">
+        	select
+            round(sum((case when a.AMOUNT_TYPE = 111 then a.amount else 0 end) ) /1, 2) yearContractAmount,
+            round(sum((case when a.AMOUNT_TYPE = 112 then a.amount else 0 end) ) /1, 2) yearInvoiceAmount,
+            round(sum((case when a.AMOUNT_TYPE = 113 then a.amount else 0 end) ) /1, 2) yearIncomeAmount,
+            round(sum((case when a.AMOUNT_TYPE = 101 then a.amount else 0 end) ) /1, 2) monthContractAmount,
+            round(sum((case when a.AMOUNT_TYPE = 102 then a.amount else 0 end) ) /1, 2) monthInvoiceAmount,
+            round(sum((case when a.AMOUNT_TYPE = 103 then a.amount else 0 end) ) /1, 2) monthIncomeAmount,
+            round(sum((case when a.AMOUNT_TYPE = 114 then a.amount else 0 end) ) /1, 2) receivableAmount
+        from S_STATIC_OPERATION_AMOUNT a
+        where IS_BIGORG = 0 and DEL_FLAG = 0 and AMOUNT_TYPE = 111 or AMOUNT_TYPE = 112 or AMOUNT_TYPE = 113 or AMOUNT_TYPE = 101 or AMOUNT_TYPE = 102 or AMOUNT_TYPE = 103
+				or AMOUNT_TYPE = 114
+    </select>
+
+    <select id="queryDashboardTopVo" resultType="com.adc.da.statics.vo.StaticOperationDashBoardHeaderVO">
+        select
+            round(sum((case when b.AMOUNT_TYPE = 111 then b.amount else 0 end) ) /1, 2) yearContractAmount,
+            round(sum((case when b.AMOUNT_TYPE = 112 then b.amount else 0 end) ) /1, 2) yearInvoiceAmount,
+            round(sum((case when b.AMOUNT_TYPE = 113 then b.amount else 0 end) ) /1, 2) yearIncomeAmount,
+            round(sum((case when b.AMOUNT_TYPE = 101 then a.amount else 0 end) ) /1, 2) monthContractAmount,
+            round(sum((case when b.AMOUNT_TYPE = 102 then a.amount else 0 end) ) /1, 2) monthInvoiceAmount,
+            round(sum((case when b.AMOUNT_TYPE = 103 then a.amount else 0 end) ) /1, 2) monthIncomeAmount,
+            round(sum((case when b.AMOUNT_TYPE = 114 then b.amount else 0 end) ) /1, 2) receivableAmount
+        from S_STATIC_OPERATION_AMOUNT a
+        left join (SELECT AMOUNT_TYPE, sum(AMOUNT) amount FROM S_STATIC_OPERATION_AMOUNT where YEAR = #{year} and IS_BIGORG = 0 and DEL_FLAG = 0 GROUP BY AMOUNT_TYPE) b ON a.AMOUNT_TYPE=b.AMOUNT_TYPE
+        where YEAR = #{year} and MONTH = #{month} and IS_BIGORG = 0 and DEL_FLAG = 0
+    </select>
+
+    <select id="queryDashboardTopMap" resultType="map">
+        select
+            round(sum((case when b.AMOUNT_TYPE = 111 then b.amount else 0 end) ) /1, 2) yearContractAmount,
+            round(sum((case when b.AMOUNT_TYPE = 112 then b.amount else 0 end) ) /1, 2) yearInvoiceAmount,
+            round(sum((case when b.AMOUNT_TYPE = 113 then b.amount else 0 end) ) /1, 2) yearIncomeAmount,
+            round(sum((case when b.AMOUNT_TYPE = 101 then a.amount else 0 end) ) /1, 2) monthContractAmount,
+            round(sum((case when b.AMOUNT_TYPE = 102 then a.amount else 0 end) ) /1, 2) monthInvoiceAmount,
+            round(sum((case when b.AMOUNT_TYPE = 103 then a.amount else 0 end) ) /1, 2) monthIncomeAmount,
+            round(sum((case when b.AMOUNT_TYPE = 114 then b.amount else 0 end) ) /1, 2) receivableAmount
+        from S_STATIC_OPERATION_AMOUNT a
+        left join (SELECT AMOUNT_TYPE, sum(AMOUNT) amount FROM S_STATIC_OPERATION_AMOUNT where YEAR = #{year} and IS_BIGORG = 0 and DEL_FLAG = 0 GROUP BY AMOUNT_TYPE) b ON a.AMOUNT_TYPE=b.AMOUNT_TYPE
+        where YEAR = #{year} and MONTH = #{month} and IS_BIGORG = 0 and DEL_FLAG = 0
+    </select>
+
+    <select id="queryDashBoardBody" resultType="com.adc.da.statics.vo.StaticOperationAmountVO">
+        select a.year, a.month, nvl(round(sum(a.amount)/1,2),0) amount, nvl(round(sum(b.tm)/1,2),0) lastAmount, nvl(round(sum(a.GROWTH_RATE),2),0) rate
+        from S_STATIC_OPERATION_AMOUNT a
+        left join (select t.month, sum(t.amount) tm from S_STATIC_OPERATION_AMOUNT t where t.AMOUNT_TYPE = #{amountType} and t.year = #{lastYear} and t.IS_BIGORG = 0 and t.DEL_FLAG = 0 group by t.month) b on a.month = b.month
+        where a.AMOUNT_TYPE = #{amountType} and a.year = #{year}
+        group by a.month, a.year
+        order by a.month
+    </select>
+
+    <select id="queryChartDataYear" resultType="com.adc.da.statics.vo.StaticOperationAmountChartVO">
+	SELECT
+            s.DEPARTMENT_NAME departmentName,
+						s.EXT_INFO1,
+            nvl( round( sum( CASE WHEN s.ID IS NULL THEN 0 ELSE s.AMOUNT END ) / 1, 2 ), 0 ) amount,
+            nvl( round( sum( CASE WHEN s.ID IS NULL THEN 0 ELSE b.AMOUNT END ) / 1, 2 ), 0 ) lastAmount,
+            nvl( round( sum( CASE WHEN s.ID IS NULL THEN 0 ELSE s.GROWTH_RATE END ), 2 ), 0 ) rate
+        FROM
+            S_STATIC_OPERATION_AMOUNT s
+            LEFT JOIN (
+            SELECT
+                sum( t.AMOUNT ) AMOUNT,
+                t.DEPARTMENT_NAME
+            FROM
+                S_STATIC_OPERATION_AMOUNT t
+            WHERE
+                AMOUNT_TYPE = #{amountType}
+                AND IS_BIGORG = 1
+                AND year = #{lastYear}
+            GROUP BY
+                DEPARTMENT_NAME
+            ) b ON s.DEPARTMENT_NAME = b.DEPARTMENT_NAME
+        WHERE
+            s.AMOUNT_TYPE = #{amountType}
+            AND s.IS_BIGORG = 1
+            AND s.year = #{year}
+        GROUP BY
+            s.DEPARTMENT_NAME,s.EXT_INFO1
+				ORDER BY s.EXT_INFO1
+    </select>
+
+    <select id="queryOrgAll" resultMap="BaseResultMap">
+        select department_name
+        from S_STATIC_OPERATION_AMOUNT
+        where DEL_FLAG = 0
+    </select>
+
+    <select id="queryBigName" resultMap="BaseResultMap">
+        select department_name
+        from S_STATIC_OPERATION_AMOUNT
+        where DEL_FLAG = 0
+        <if test=" isBigorg != null">
+            and is_bigorg = #{isBigorg}
+        </if>
+        <if test="amountType != null">
+            and amount_type = #{amountType}
+        </if>
+        <if test="month != null">
+            and month = #{month}
+        </if>
+        <if test="year != null">
+            and year = #{year}
+        </if>
+    </select>
+
+    <select id="queryDeptChartDataList" resultType="com.adc.da.statics.vo.StaticOperationOrgContractInvoiceVO">
+          select
+	          a.DEPARTMENT_NAME orgName,
+						a.EXT_INFO1,
+            round(sum((case when a.AMOUNT_TYPE = 240 then a.amount else 0 end) ) /1, 2) monthContractAmount,
+            round(sum((case when a.AMOUNT_TYPE = 241 then a.amount else 0 end) ) /1, 2) allContractAmount,
+						nvl( round( sum( CASE WHEN a.ID IS NULL THEN 0 ELSE a.GROWTH_RATE END ), 2 ), 0 ) finishedRate,
+						nvl( round( sum( CASE WHEN a.ID IS NULL THEN 0 ELSE a.IS_BIGORG END ), 2 ), 0 ) isBigOrg
+        from S_STATIC_OPERATION_AMOUNT a
+        where  a.DEL_FLAG = 0
+				and a.AMOUNT_TYPE = 240 or a.AMOUNT_TYPE = 241
+				GROUP BY a.DEPARTMENT_NAME,a.EXT_INFO1,a.IS_BIGORG
+				order by cast(a.EXT_INFO1 as int)
+    </select>
+
+    <select id="queryCompanyBusiness" resultType="com.adc.da.statics.vo.StaticOperationCompanyVO">
+select
+            s.DEPARTMENT_NAME orgName,
+						s.EXT_INFO1,
+            nvl(round(sum((case when s.AMOUNT_TYPE = 311 then s.amount else 0 end) ) /1, 2),0) yearContractAmount,
+            nvl(round(sum((case when s.AMOUNT_TYPE = 312 then s.amount else 0 end) ) /1, 2),0) yearInvoiceAmount,
+            nvl(round(sum((case when s.AMOUNT_TYPE = 313 then s.amount else 0 end) ) /1, 2),0) yearIncomeAmount
+        from S_STATIC_OPERATION_AMOUNT s
+        where s.YEAR = #{year} and s.DEL_FLAG = 0 and s.IS_BIGORG = 0 and s.AMOUNT_TYPE = 311 or s.AMOUNT_TYPE = 312 or s.AMOUNT_TYPE = 313
+				GROUP BY s.DEPARTMENT_NAME,s.EXT_INFO1
+				ORDER BY s.EXT_INFO1
+    </select>
+
+    <select id="queryCompanyContract" resultType="com.adc.da.statics.vo.StaticOperationCompanyVO">
+         SELECT * from (select
+            s.DEPARTMENT_NAME orgName,
+            nvl(round(sum((case when s.AMOUNT_TYPE = 320 then s.amount else 0 end) ) /1, 2),0) yearContractAmount
+        from S_STATIC_OPERATION_AMOUNT s
+        where s.YEAR = #{year} and s.DEL_FLAG = 0 and s.IS_BIGORG = 0 and s.AMOUNT_TYPE = 320
+				GROUP BY  s.DEPARTMENT_NAME
+				ORDER BY yearContractAmount desc) where ROWNUM &lt; 11
+    </select>
+
+
+
+    <select id="querySalesVolumeVO" resultType="com.adc.da.statics.vo.StaticOperationCompanyVO">
+        SELECT
+            s.DEPARTMENT_NAME orgName,
+            nvl(
+            round( sum( ( CASE WHEN s.AMOUNT_TYPE = 330 THEN s.amount ELSE 0 END ) ) / 1, 2 ),
+            0
+            ) salesvolume,
+            nvl( round( sum( CASE WHEN s.ID IS NULL THEN 0 ELSE s.GROWTH_RATE END ), 2 ), 0 ) GDPrate
+        FROM
+            S_STATIC_OPERATION_AMOUNT s
+        WHERE
+            s.YEAR = #{year}
+            AND s.MONTH = #{month}
+            AND s.DEL_FLAG = 0
+            AND s.IS_BIGORG = 0
+            AND s.AMOUNT_TYPE = 330
+        GROUP BY
+            s.DEPARTMENT_NAME
+        ORDER BY
+            salesvolume DESC
+    </select>
+
+
+    <select id="queryDepartmentVO" resultType="com.adc.da.statics.vo.StaticOperationCompanyVO">
+    SELECT * from ( select
+    s.DEPARTMENT_NAME orgName,
+    nvl(round(sum((case when s.AMOUNT_TYPE = 340 then s.amount else 0 end) ) /1, 2),0) yearReceivableAmount,
+	nvl(round(sum(case when s.ID is null then 0 else s.GROWTH_RATE end),2),0) GDPrate
+    from S_STATIC_OPERATION_AMOUNT s
+    where s.YEAR = #{year} and s.DEL_FLAG = 0 and s.AMOUNT_TYPE = 340 and s.IS_BIGORG = 0
+    GROUP BY  s.DEPARTMENT_NAME
+    ORDER BY yearReceivableAmount desc) where ROWNUM &lt; 11
+    </select>
+
+    <select id="queryCompanyVO" resultType="com.adc.da.statics.vo.StaticOperationCompanyVO">
+        SELECT  * FROM
+
+        (select
+        s.DEPARTMENT_NAME orgName,
+        nvl(round(sum((case when s.AMOUNT_TYPE = 350 then s.amount else 0 end) ) /1, 2),0) yearReceivableAmount
+        from S_STATIC_OPERATION_AMOUNT s
+        where s.YEAR = #{year} and s.DEL_FLAG = 0 and s.IS_BIGORG = 0 and s.AMOUNT_TYPE = 350
+        GROUP BY  s.DEPARTMENT_NAME
+        ORDER BY yearReceivableAmount desc)
+
+        WHERE rownum &lt; 11
+    </select>
+
+    <update id="logicDeleteByPrimaryKeys" parameterType="java.util.List">
+        update S_STATIC_OPERATION_AMOUNT set del_flag = 1
+        where id in
+        <foreach collection="list" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </update>
+
+
+    <select id="queryPageVO" resultMap="BaseResultMap" parameterType="com.adc.da.statics.page.SStaticOperationAmountEOPage">
+        select * from
+        (select tmp_tb.* , rownum rn from
+        (select <include refid="Base_Column_List" /> from (select <include refid="Base_Column_List" /> from S_STATIC_OPERATION_AMOUNT  where DEL_FLAG != 1)  S_STATIC_OPERATION_AMOUNT
+        <where>
+            <if test="tempTypeId != null and tempTypeId != ''" >
+                FILE_TEMPLATE_TABLE.temp_type_id = #{tempTypeId}
+            </if>
+            <if test="tempName != null and tempName != ''" >
+                and FILE_TEMPLATE_TABLE.TEMP_NAME like '%'||#{tempName}||'%'
+            </if>
+            <if test="tempCode != null and tempCode != ''" >
+                and FILE_TEMPLATE_TABLE.TEMP_CODE like '%'||#{tempCode}||'%'
+            </if>
+        </where>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex} )
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+</mapper>

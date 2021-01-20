@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.adc.da.budget.dao.MyProjectContractInvoiceEODao">
+    <!-- Result Map-->
+    <resultMap id = "BaseResultMap" type = "com.adc.da.budget.entity.ProjectContractInvoiceEO">
+        <id column = "id" property = "id"/>
+        <result column = "project_id" property = "projectId"/>
+        <result column = "contract_id" property = "contractId"/>
+        <result column = "contract_amount" property = "contractAmount"/>
+        <result column = "invoice_date" property = "invoiceDate"/>
+        <result column = "invoice_amount" property = "invoiceAmount"/>
+        <result column = "recieve_money_date" property = "recieveMoneyDate"/>
+        <result column = "ext_01" property = "ext01"/>
+        <result column = "ext_02" property = "ext02"/>
+        <result column = "ext_03" property = "ext03"/>
+        <result column = "ext_04" property = "ext04"/>
+        <result column = "ext_05" property = "ext05"/>
+        <result column = "ext_06" property = "ext06"/>
+        <result column = "delflag" property = "delflag"/>
+        <result column="has_contract_flag" property="hasContractFlag" />
+        <result column="invoice_no" property="invoiceNo" />
+        <result column="contract_apply_date" property="contractApplyDate" />
+        <result column="area_manager_name" property="areaManagerName" />
+        <result column="area_manager_id" property="areaManagerId" />
+        <result column="contract_filed_flag" property="contractFiledFlag" />
+        <result column="contract_name" property="contractName" />
+        <result column="estimate_return_date" property="estimateReturnDate" />
+        <result column="contains_instrumentation_flag" property="containsInstrumentationFlag" />
+        <result column="out_storehouse_no" property="outStorehouseNo" />
+        <result column="belong_dept_id" property="belongDeptId" />
+        <result column="belong_dept_name" property="belongDeptName" />
+        <result column="contract_invoice" property="contractInvoice" />
+        <result column="remark" property="remark" />
+        <result column="invoice_number" property="invoiceNumber" />
+        <result column="business_opportunity_no" property="businessOpportunityNo" />
+        <result column="business_opportunity_name" property="businessOpportunityName" />
+        <result column="project_no" property="projectNo" />
+        <result column="project_name" property="projectName" />
+        <result column="business_dept_id" property="businessDeptId" />
+        <result column="business_dept_name" property="businessDeptName" />
+        <result column="project_manager_id" property="projectManagerId" />
+        <result column="project_manager_name" property="projectManagerName" />
+        <result column="actual_invoice_amount" property="actualInvoiceAmount" />
+        <result column="actual_invoice_date" property="actualInvoiceDate" />
+        <result column="change_invoice_date" property="changeInvoiceDate" />
+        <result column="change_invoice_amount" property="changeInvoiceAmount" />
+        <result column="back_invoice_date" property="backInvoiceDate" />
+        <result column="back_invoice_amount" property="backInvoiceAmount" />
+        <result column="origin_invoice_amount" property="originInvoiceAmount" />
+        <result column="advance_invoice_flag" property="advanceInvoiceFlag" />
+        <result column="advance_invoice_reason" property="advanceInvoiceReason" />
+        <result column="invoice_type" property="invoiceType" />
+        <!--下面两个字段 只做查询处理时使用-->
+        <result column="year" property="year" />
+        <result column="month" property="month" />
+    </resultMap>
+
+    <!-- PF_PROJECT_CONTRACT_INVOICE table all fields -->
+    <!--<sql id = "Base_Column_List">-->
+        <!--id, project_id, contract_id, contract_amount, invoice_date, invoice_amount, recieve_money_date, ext_01, ext_02, ext_03, ext_04, ext_05, ext_06, delflag-->
+    <!--</sql>-->
+    <sql id = "Base_Column_List">
+        id, project_id, contract_id, contract_amount, invoice_date, invoice_amount, recieve_money_date, ext_01,
+        ext_02, ext_03, ext_04, ext_05, ext_06, delflag, has_contract_flag, invoice_no, contract_apply_date,
+        area_manager_name, area_manager_id, contract_filed_flag, contract_name, estimate_return_date,
+         contains_instrumentation_flag, out_storehouse_no, belong_dept_id, belong_dept_name,
+          contract_invoice, remark, invoice_number, business_opportunity_no,
+           business_opportunity_name, project_no, project_name, business_dept_id,
+            business_dept_name, project_manager_id, project_manager_name,
+            actual_invoice_amount, actual_invoice_date, change_invoice_date,
+            change_invoice_amount, back_invoice_date, back_invoice_amount,
+            origin_invoice_amount, advance_invoice_flag, advance_invoice_reason, invoice_type
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id = "Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides = ",">
+            <if test = "id != null">
+                and id ${idOperator} #{id}
+            </if>
+            <if test = "projectId != null">
+                and project_id ${projectIdOperator} #{projectId}
+            </if>
+            <if test = "contractId != null">
+                and contract_id ${contractIdOperator} #{contractId}
+            </if>
+            <if test = "contractAmount != null">
+                and contract_amount ${contractAmountOperator} #{contractAmount}
+            </if>
+            <if test = "invoiceDate != null">
+                and invoice_date ${invoiceDateOperator} #{invoiceDate}
+            </if>
+            <if test = "invoiceDate1 != null">
+                and invoice_date &gt;= #{invoiceDate1}
+            </if>
+            <if test = "invoiceDate2 != null">
+                and invoice_date &lt;= #{invoiceDate2}
+            </if>
+            <if test = "invoiceAmount != null">
+                and invoice_amount ${invoiceAmountOperator} #{invoiceAmount}
+            </if>
+            <if test = "recieveMoneyDate != null">
+                and recieve_money_date ${recieveMoneyDateOperator} #{recieveMoneyDate}
+            </if>
+            <if test = "recieveMoneyDate1 != null">
+                and recieve_money_date &gt;= #{recieveMoneyDate1}
+            </if>
+            <if test = "recieveMoneyDate2 != null">
+                and recieve_money_date &lt;= #{recieveMoneyDate2}
+            </if>
+            <if test = "ext01 != null">
+                and ext_01 ${ext01Operator} #{ext01}
+            </if>
+            <if test = "ext02 != null">
+                and ext_02 ${ext02Operator} #{ext02}
+            </if>
+            <if test = "ext03 != null">
+                and ext_03 ${ext03Operator} #{ext03}
+            </if>
+            <if test = "ext04 != null">
+                and ext_04 ${ext04Operator} #{ext04}
+            </if>
+            <if test = "ext05 != null">
+                and ext_05 ${ext05Operator} #{ext05}
+            </if>
+            <if test = "ext06 != null">
+                and ext_06 ${ext06Operator} #{ext06}
+            </if>
+            <if test = "delflag != null">
+                and delflag ${delflagOperator} #{delflag}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id = "insert" parameterType = "com.adc.da.processform.entity.ProjectContractInvoiceEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+            SELECT SEQ_PF_PROJECT_CONTRACT_INVOICE.NEXTVAL FROM DUAL
+        </selectKey> -->insert into PF_PROJECT_CONTRACT_INVOICE(<include
+            refid = "Base_Column_List"/>) values (#{id, jdbcType=VARCHAR}, #{projectId, jdbcType=VARCHAR}, #{contractId, jdbcType=VARCHAR}, #{contractAmount, jdbcType=FLOAT}, #{invoiceDate, jdbcType=TIMESTAMP}, #{invoiceAmount, jdbcType=FLOAT}, #{recieveMoneyDate, jdbcType=TIMESTAMP}, #{ext01, jdbcType=VARCHAR}, #{ext02, jdbcType=VARCHAR}, #{ext03, jdbcType=VARCHAR}, #{ext04, jdbcType=VARCHAR}, #{ext05, jdbcType=VARCHAR}, #{ext06, jdbcType=VARCHAR}, #{delflag, jdbcType=INTEGER})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id = "insertSelective" parameterType = "com.adc.da.processform.entity.ProjectContractInvoiceEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_PF_PROJECT_CONTRACT_INVOICE.NEXTVAL FROM DUAL
+    </selectKey> -->insert into PF_PROJECT_CONTRACT_INVOICE
+        <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">id,</if>
+            <if test = "projectId != null">project_id,</if>
+            <if test = "contractId != null">contract_id,</if>
+            <if test = "contractAmount != null">contract_amount,</if>
+            <if test = "invoiceDate != null">invoice_date,</if>
+            <if test = "invoiceAmount != null">invoice_amount,</if>
+            <if test = "recieveMoneyDate != null">recieve_money_date,</if>
+            <if test = "ext01 != null">ext_01,</if>
+            <if test = "ext02 != null">ext_02,</if>
+            <if test = "ext03 != null">ext_03,</if>
+            <if test = "ext04 != null">ext_04,</if>
+            <if test = "ext05 != null">ext_05,</if>
+            <if test = "ext06 != null">ext_06,</if>
+            <if test = "delflag != null">delflag,</if>
+        </trim>
+        <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">#{id, jdbcType=VARCHAR},</if>
+            <if test = "projectId != null">#{projectId, jdbcType=VARCHAR},</if>
+            <if test = "contractId != null">#{contractId, jdbcType=VARCHAR},</if>
+            <if test = "contractAmount != null">#{contractAmount, jdbcType=FLOAT},</if>
+            <if test = "invoiceDate != null">#{invoiceDate, jdbcType=TIMESTAMP},</if>
+            <if test = "invoiceAmount != null">#{invoiceAmount, jdbcType=FLOAT},</if>
+            <if test = "recieveMoneyDate != null">#{recieveMoneyDate, jdbcType=TIMESTAMP},</if>
+            <if test = "ext01 != null">#{ext01, jdbcType=VARCHAR},</if>
+            <if test = "ext02 != null">#{ext02, jdbcType=VARCHAR},</if>
+            <if test = "ext03 != null">#{ext03, jdbcType=VARCHAR},</if>
+            <if test = "ext04 != null">#{ext04, jdbcType=VARCHAR},</if>
+            <if test = "ext05 != null">#{ext05, jdbcType=VARCHAR},</if>
+            <if test = "ext06 != null">#{ext06, jdbcType=VARCHAR},</if>
+            <if test = "delflag != null">#{delflag, jdbcType=INTEGER},</if>
+        </trim>
+    </insert>
+    <insert id = "insertSelectiveAll" parameterType = "java.util.List">
+        INSERT ALL
+        <foreach collection = "list" item = "item" index = "index">
+            <if test = "item.id !=null">
+                into PF_PROJECT_CONTRACT_INVOICE
+                <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+                    <if test = "item.id != null">id,</if>
+                    <if test = "item.projectId != null">project_id,</if>
+                    <if test = "item.contractId != null">contract_id,</if>
+                    <if test = "item.contractAmount != null">contract_amount,</if>
+                    <if test = "item.invoiceDate != null">invoice_date,</if>
+                    <if test = "item.invoiceAmount != null">invoice_amount,</if>
+                    <if test = "item.recieveMoneyDate != null">recieve_money_date,</if>
+                    <if test = "item.delflag != null">delflag,</if>
+                </trim>
+                <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+                    <if test = "item.id != null">#{item.id, jdbcType=VARCHAR},</if>
+                    <if test = "item.projectId != null">#{item.projectId, jdbcType=VARCHAR},</if>
+                    <if test = "item.contractId != null">#{item.contractId, jdbcType=VARCHAR},</if>
+                    <if test = "item.contractAmount != null">#{item.contractAmount, jdbcType=FLOAT},</if>
+                    <if test = "item.invoiceDate != null">#{item.invoiceDate, jdbcType=TIMESTAMP},</if>
+                    <if test = "item.invoiceAmount != null">#{item.invoiceAmount, jdbcType=FLOAT},</if>
+                    <if test = "item.recieveMoneyDate != null">#{item.recieveMoneyDate, jdbcType=TIMESTAMP},</if>
+                    <if test = "item.delflag != null">#{item.delflag, jdbcType=INTEGER},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+
+    <!-- 根据pk，修改记录-->
+    <update id = "updateByPrimaryKey" parameterType = "com.adc.da.processform.entity.ProjectContractInvoiceEO">
+        UPDATE PF_PROJECT_CONTRACT_INVOICE
+        SET project_id         = #{projectId},
+            contract_id        = #{contractId},
+            contract_amount    = #{contractAmount},
+            invoice_date       = #{invoiceDate},
+            invoice_amount     = #{invoiceAmount},
+            recieve_money_date = #{recieveMoneyDate},
+            ext_01             = #{ext01},
+            ext_02             = #{ext02},
+            ext_03             = #{ext03},
+            ext_04             = #{ext04},
+            ext_05             = #{ext05},
+            ext_06             = #{ext06},
+            delflag            = #{delflag}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id = "updateByPrimaryKeySelective" parameterType = "com.adc.da.processform.entity.ProjectContractInvoiceEO">
+        update PF_PROJECT_CONTRACT_INVOICE
+        <set>
+            <if test = "projectId != null">
+                project_id = #{projectId},
+            </if>
+            <if test = "contractId != null">
+                contract_id = #{contractId},
+            </if>
+            <if test = "contractAmount != null">
+                contract_amount = #{contractAmount},
+            </if>
+            <if test = "invoiceDate != null">
+                invoice_date = #{invoiceDate},
+            </if>
+            <if test = "invoiceAmount != null">
+                invoice_amount = #{invoiceAmount},
+            </if>
+            <if test = "recieveMoneyDate != null">
+                recieve_money_date = #{recieveMoneyDate},
+            </if>
+            <if test = "ext01 != null">
+                ext_01 = #{ext01},
+            </if>
+            <if test = "ext02 != null">
+                ext_02 = #{ext02},
+            </if>
+            <if test = "ext03 != null">
+                ext_03 = #{ext03},
+            </if>
+            <if test = "ext04 != null">
+                ext_04 = #{ext04},
+            </if>
+            <if test = "ext05 != null">
+                ext_05 = #{ext05},
+            </if>
+            <if test = "ext06 != null">
+                ext_06 = #{ext06},
+            </if>
+            <if test = "delflag != null">
+                delflag = #{delflag},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!-- 根据id查询 PF_PROJECT_CONTRACT_INVOICE -->
+    <select id = "selectByPrimaryKey" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+        select
+        <include refid = "Base_Column_List"/>
+        from PF_PROJECT_CONTRACT_INVOICE where id = #{value} and delflag != 1
+
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id = "deleteByPrimaryKey" parameterType = "java.lang.String">
+        UPDATE PF_PROJECT_CONTRACT_INVOICE
+        SET delflag = 1
+        WHERE id = #{value}
+
+    </delete>
+
+
+    <!-- PF_PROJECT_CONTRACT_INVOICE 列表总数-->
+    <select id = "queryByContractId" resultMap = "BaseResultMap" >
+        select
+        <include refid = "Base_Column_List"/>
+        from PF_PROJECT_CONTRACT_INVOICE
+        where contract_id = #{contractId}
+        and delflag != 1
+    </select>
+
+    <!-- PF_PROJECT_CONTRACT_INVOICE 列表总数-->
+    <select id = "queryByProjectId" resultMap = "BaseResultMap" >
+        select
+        <include refid = "Base_Column_List"/>
+        from PF_PROJECT_CONTRACT_INVOICE
+        where project_id = #{projectId}
+        and delflag != 1
+    </select>
+
+
+
+
+
+
+
+    <!-- PF_PROJECT_CONTRACT_INVOICE 列表总数-->
+    <select id = "queryByCount" resultType = "java.lang.Integer" parameterType = "com.adc.da.base.page.BasePage">
+        select count(1) from PF_PROJECT_CONTRACT_INVOICE
+        <include refid = "Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询PF_PROJECT_CONTRACT_INVOICE列表 -->
+    <select id = "queryByPage" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from (select tmp_tb.* , rownum rn from (select
+        <include refid = "Base_Column_List"/>
+        from PF_PROJECT_CONTRACT_INVOICE
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex}) where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id = "queryByList" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from PF_PROJECT_CONTRACT_INVOICE
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+    </select>
+
+    <select id="queryCurrentYearInvoiceAmountByContractId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT CONTRACT_ID as contractId,sum(invoice_amount) AS invoiceAmountTemp
+        FROM PF_PROJECT_CONTRACT_INVOICE WHERE DELFLAG != 1 AND CONTRACT_ID = #{contractId}
+        <if test="invoiceDateStart != null and invoiceDateStart != ''" >
+            and INVOICE_DATE &gt;= to_date(#{invoiceDateStart},'yyyy-mm-dd,hh24:mi:ss')
+        </if>
+        <if test="invoiceDateEnd != null and invoiceDateEnd != ''" >
+            and INVOICE_DATE &lt;= to_date(#{invoiceDateEnd},'yyyy-mm-dd,hh24:mi:ss')
+        </if>
+        GROUP BY CONTRACT_ID
+    </select>
+
+
+    <select id="queryCurrentYearInvoiceAmountByProjectIdList" resultType="java.lang.Double">
+        SELECT sum(invoice_amount)
+        FROM PF_PROJECT_CONTRACT_INVOICE WHERE PROJECT_ID in
+        <foreach collection="list" item="it" separator="," open="(" close=")">
+            #{it}
+        </foreach>
+        <if test="invoiceDateStart != null and invoiceDateStart != ''">
+            and INVOICE_DATE &gt;= to_date(#{invoiceDateStart},'yyyy-mm-dd,hh24:mi:ss')
+        </if>
+        <if test="invoiceDateEnd != null and invoiceDateEnd != ''">
+            and INVOICE_DATE &lt;= to_date(#{invoiceDateEnd},'yyyy-mm-dd,hh24:mi:ss')
+        </if>
+    </select>
+    <!-- 根据id查询 PF_PROJECT_CONTRACT_INVOICE -->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from PF_PROJECT_CONTRACT_INVOICE where delflag != 1
+
+    </select>
+    <select id="selectByYear" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from PF_PROJECT_CONTRACT_INVOICE
+        where to_number(to_char(INVOICE_DATE,'yyyy')) = #{year}
+        and delflag != 1
+    </select>
+
+
+
+</mapper>

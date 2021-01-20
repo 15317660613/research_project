@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.crm.dao.SalesVlaueEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.crm.entity.SalesVlaueEO" >
+    <id column="id" property="id" />
+    <result column="area_manager_id" property="areaManagerId" />
+    <result column="dept_id" property="deptId" />
+    <result column="year" property="year" />
+    <result column="task" property="task" />
+    <result column="contract_complete" property="contractComplete" />
+    <result column="contract_rate" property="contractRate" />
+    <result column="invoice_complete" property="invoiceComplete" />
+    <result column="invoice_rate" property="invoiceRate" />
+    <result column="del_flag" property="delFlag" />
+    <result column="created_time" property="createdTime" />
+    <result column="created_user" property="createdUser" />
+    <result column="modified_time2" property="modifiedTime2" />
+    <result column="modified_user2" property="modifiedUser2" />
+  </resultMap>
+
+  <!-- SALES_VLAUE table all fields -->
+  <sql id="Base_Column_List" >
+     id, area_manager_id, dept_id, year, task, contract_complete, contract_rate, invoice_complete, invoice_rate, del_flag, created_time, created_user, modified_time2, modified_user2
+  </sql>
+ <!-- SALES_VLAUE table all fields -->
+  <sql id="CRM_Column_List" >
+     id, (select u.usname from TS_USER u where u.usid = area_manager_id) as area_manager_id, (select org.org_name from TS_ORG org where id = dept_id) as dept_id, year, task, contract_complete, contract_rate, invoice_complete, invoice_rate, del_flag, created_time, created_user, modified_time2, modified_user2
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="areaManagerId != null" >
+        and area_manager_id ${areaManagerIdOperator} #{areaManagerId}
+      </if>
+      <if test="deptId != null" >
+        and dept_id ${deptIdOperator} #{deptId}
+      </if>
+      <if test="year != null" >
+        and year ${yearOperator} #{year}
+      </if>
+      <if test="task != null" >
+        and task ${taskOperator} #{task}
+      </if>
+      <if test="contractComplete != null" >
+        and contract_complete ${contractCompleteOperator} #{contractComplete}
+      </if>
+      <if test="contractRate != null" >
+        and contract_rate ${contractRateOperator} #{contractRate}
+      </if>
+      <if test="invoiceComplete != null" >
+        and invoice_complete ${invoiceCompleteOperator} #{invoiceComplete}
+      </if>
+      <if test="invoiceRate != null" >
+        and invoice_rate ${invoiceRateOperator} #{invoiceRate}
+      </if>
+      <if test="createdTime != null" >
+        and created_time ${createdTimeOperator} #{createdTime}
+      </if>
+      <if test="createdTime1 != null" >
+        and created_time &gt;= #{createdTime1}
+      </if>
+      <if test="createdTime2 != null" >
+        and created_time &lt;= #{createdTime2}
+      </if>
+      <if test="createdUser != null" >
+        and created_user ${createdUserOperator} #{createdUser}
+      </if>
+      <if test="modifiedTime2 != null" >
+        and modified_time2 ${modifiedTime2Operator} #{modifiedTime2}
+      </if>
+      <if test="modifiedTime21 != null" >
+        and modified_time2 &gt;= #{modifiedTime21}
+      </if>
+      <if test="modifiedTime22 != null" >
+        and modified_time2 &lt;= #{modifiedTime22}
+      </if>
+      <if test="modifiedUser2 != null" >
+        and modified_user2 ${modifiedUser2Operator} #{modifiedUser2}
+      </if>
+        and del_flag = '0'
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.crm.entity.SalesVlaueEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_SALES_VLAUE.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into SALES_VLAUE(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{areaManagerId, jdbcType=VARCHAR}, #{deptId, jdbcType=VARCHAR}, #{year, jdbcType=VARCHAR}, #{task, jdbcType=VARCHAR}, #{contractComplete, jdbcType=VARCHAR}, #{contractRate, jdbcType=VARCHAR}, #{invoiceComplete, jdbcType=VARCHAR}, #{invoiceRate, jdbcType=VARCHAR}, #{delFlag, jdbcType=VARCHAR}, #{createdTime, jdbcType=TIMESTAMP}, #{createdUser, jdbcType=VARCHAR}, #{modifiedTime2, jdbcType=TIMESTAMP}, #{modifiedUser2, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.crm.entity.SalesVlaueEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_SALES_VLAUE.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into SALES_VLAUE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="areaManagerId != null" >area_manager_id,</if>
+                <if test="deptId != null" >dept_id,</if>
+                <if test="year != null" >year,</if>
+                <if test="task != null" >task,</if>
+                <if test="contractComplete != null" >contract_complete,</if>
+                <if test="contractRate != null" >contract_rate,</if>
+                <if test="invoiceComplete != null" >invoice_complete,</if>
+                <if test="invoiceRate != null" >invoice_rate,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="createdTime != null" >created_time,</if>
+                <if test="createdUser != null" >created_user,</if>
+                <if test="modifiedTime2 != null" >modified_time2,</if>
+                <if test="modifiedUser2 != null" >modified_user2,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="areaManagerId != null" >#{areaManagerId, jdbcType=VARCHAR},</if>
+                <if test="deptId != null" >#{deptId, jdbcType=VARCHAR},</if>
+                <if test="year != null" >#{year, jdbcType=VARCHAR},</if>
+                <if test="task != null" >#{task, jdbcType=VARCHAR},</if>
+                <if test="contractComplete != null" >#{contractComplete, jdbcType=VARCHAR},</if>
+                <if test="contractRate != null" >#{contractRate, jdbcType=VARCHAR},</if>
+                <if test="invoiceComplete != null" >#{invoiceComplete, jdbcType=VARCHAR},</if>
+                <if test="invoiceRate != null" >#{invoiceRate, jdbcType=VARCHAR},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=VARCHAR},</if>
+                <if test="createdTime != null" >#{createdTime, jdbcType=TIMESTAMP},</if>
+                <if test="createdUser != null" >#{createdUser, jdbcType=VARCHAR},</if>
+                <if test="modifiedTime2 != null" >#{modifiedTime2, jdbcType=TIMESTAMP},</if>
+                <if test="modifiedUser2 != null" >#{modifiedUser2, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.crm.entity.SalesVlaueEO" >
+    update SALES_VLAUE
+       set  area_manager_id = #{areaManagerId},
+            dept_id = #{deptId},
+            year = #{year},
+            task = #{task},
+            contract_complete = #{contractComplete},
+            contract_rate = #{contractRate},
+            invoice_complete = #{invoiceComplete},
+            invoice_rate = #{invoiceRate},
+            del_flag = #{delFlag},
+            created_time = #{createdTime},
+            created_user = #{createdUser},
+            modified_time2 = #{modifiedTime2},
+            modified_user2 = #{modifiedUser2}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.crm.entity.SalesVlaueEO" >
+    update SALES_VLAUE
+    <set >
+      <if test="areaManagerId != null" >
+        area_manager_id = #{areaManagerId},
+      </if>
+      <if test="deptId != null" >
+        dept_id = #{deptId},
+      </if>
+      <if test="year != null" >
+        year = #{year},
+      </if>
+      <if test="task != null" >
+        task = #{task},
+      </if>
+      <if test="contractComplete != null" >
+        contract_complete = #{contractComplete},
+      </if>
+      <if test="contractRate != null" >
+        contract_rate = #{contractRate},
+      </if>
+      <if test="invoiceComplete != null" >
+        invoice_complete = #{invoiceComplete},
+      </if>
+      <if test="invoiceRate != null" >
+        invoice_rate = #{invoiceRate},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+      <if test="createdUser != null" >
+        created_user = #{createdUser},
+      </if>
+      <if test="modifiedTime2 != null" >
+        modified_time2 = #{modifiedTime2},
+      </if>
+      <if test="modifiedUser2 != null" >
+        modified_user2 = #{modifiedUser2},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 SALES_VLAUE -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from SALES_VLAUE
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from SALES_VLAUE
+     where id = #{value}
+
+  </delete>
+
+  <!-- SALES_VLAUE 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from SALES_VLAUE
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询SALES_VLAUE列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from SALES_VLAUE
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+
+  <!-- 查询SALES_VLAUE列表 -->
+  <select id="queryCRMListByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="CRM_Column_List" /> from SALES_VLAUE
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from SALES_VLAUE
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+    <update id="updateByPrimaryKeyAndDelFlag">
+        update SALES_VLAUE set del_flag=#{delFlag} where id=#{primaryKey}
+    </update>
+
+</mapper>

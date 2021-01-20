@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.exchangeplan.dao.ExchangePlanEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.exchangeplan.entity.ExchangePlanEO" >
+    <id column="id" property="id" />
+    <result column="ep_date" property="epDate" />
+    <result column="ep_form" property="epForm" />
+    <result column="ep_enterprise" property="epEnterprise" />
+    <result column="ep_exchange_domain" property="epExchangeDomain" />
+    <result column="ep_leader_name" property="epLeaderName" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="create_user_name" property="createUserName" />
+    <result column="create_time" property="createTime" />
+    <result column="del_flag" property="delFlag" />
+    <result column="ext1" property="ext1" />
+    <result column="ext2" property="ext2" />
+    <result column="ext3" property="ext3" />
+    <result column="ext4" property="ext4" />
+    <result column="ext5" property="ext5" />
+  </resultMap>
+
+  <!-- DB_EXCHANGE_PLAN table all fields -->
+  <sql id="Base_Column_List" >
+     id, ep_date, ep_form, ep_enterprise, ep_exchange_domain, ep_leader_name, create_user_id, create_user_name, create_time, del_flag, ext1, ext2, ext3, ext4, ext5
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1 and del_flag='0'
+    <trim suffixOverrides="," >
+      <if test="id != null and id != ''" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="epDate != null and epDate != ''" >
+        and ep_date ${epDateOperator} to_date(#{epDate},'yyyy-mm-dd,hh24:mi:ss')
+      </if>
+      <if test="epDate1 != null and epDate1 != ''" >
+        and ep_date &gt;= to_date(#{epDate1},'yyyy-mm-dd,hh24:mi:ss')
+      </if>
+      <if test="epDate2 != null and epDate2 != ''" >
+        and ep_date &lt;= to_date(#{epDate2},'yyyy-mm-dd,hh24:mi:ss')
+      </if>
+      <if test="epForm != null and epForm != ''" >
+        and ep_form ${epFormOperator} #{epForm}
+      </if>
+      <if test="epEnterprise != null and epEnterprise != ''" >
+        and ep_enterprise ${epEnterpriseOperator} #{epEnterprise}
+      </if>
+      <if test="epExchangeDomain != null and epExchangeDomain != ''" >
+        and ep_exchange_domain ${epExchangeDomainOperator} #{epExchangeDomain}
+      </if>
+      <if test="epLeaderName != null and epLeaderName != ''" >
+        and ep_leader_name ${epLeaderNameOperator} #{epLeaderName}
+      </if>
+      <if test="createUserId != null and createUserId != ''" >
+        and create_user_id ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="createUserName != null and createUserName != ''" >
+        and create_user_name ${createUserNameOperator} #{createUserName}
+      </if>
+      <if test="createTime != null and createTime != ''" >
+        and create_time ${createTimeOperator} to_date(#{createTime},'yyyy-mm-dd,hh24:mi:ss')
+      </if>
+      <if test="createTime1 != null and createTime1 != ''" >
+        and create_time &gt;= to_date(#{createTime1},'yyyy-mm-dd,hh24:mi:ss')
+      </if>
+      <if test="createTime2 != null and createTime2 != ''" >
+        and create_time &lt;= to_date(#{createTime2},'yyyy-mm-dd,hh24:mi:ss')
+      </if>
+      <if test="delFlag != null and delFlag != ''" >
+        and del_flag ${delFlagOperator} #{delFlag}
+      </if>
+      <if test="ext1 != null and ext1 != ''" >
+        and ext1 ${ext1Operator} #{ext1}
+      </if>
+      <if test="ext2 != null and ext2 != ''" >
+        and ext2 ${ext2Operator} #{ext2}
+      </if>
+      <if test="ext3 != null and ext3 != ''" >
+        and ext3 ${ext3Operator} #{ext3}
+      </if>
+      <if test="ext4 != null and ext4 != ''" >
+        and ext4 ${ext4Operator} #{ext4}
+      </if>
+      <if test="ext5 != null and ext5 != ''" >
+        and ext5 ${ext5Operator} #{ext5}
+      </if>
+    </trim>
+  </sql>
+
+    <!--逻辑删除近期交流会议信息-->
+    <update id="logicDeleteByPrimaryKey" parameterType="java.lang.String">
+        update DB_EXCHANGE_PLAN set del_flag = '1' where id = #{id}
+    </update>
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.exchangeplan.entity.ExchangePlanEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_DB_EXCHANGE_PLAN.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into DB_EXCHANGE_PLAN(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{epDate, jdbcType=TIMESTAMP}, #{epForm, jdbcType=VARCHAR}, #{epEnterprise, jdbcType=VARCHAR}, #{epExchangeDomain, jdbcType=VARCHAR}, #{epLeaderName, jdbcType=VARCHAR}, #{createUserId, jdbcType=VARCHAR}, #{createUserName, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{delFlag, jdbcType=VARCHAR}, #{ext1, jdbcType=VARCHAR}, #{ext2, jdbcType=VARCHAR}, #{ext3, jdbcType=VARCHAR}, #{ext4, jdbcType=VARCHAR}, #{ext5, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.exchangeplan.entity.ExchangePlanEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_DB_EXCHANGE_PLAN.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into DB_EXCHANGE_PLAN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null and id != ''" >id,</if>
+                <if test="epDate != null" >ep_date,</if>
+                <if test="epForm != null and epForm != ''" >ep_form,</if>
+                <if test="epEnterprise != null and epEnterprise != ''" >ep_enterprise,</if>
+                <if test="epExchangeDomain != null and epExchangeDomain != ''" >ep_exchange_domain,</if>
+                <if test="epLeaderName != null and epLeaderName != ''" >ep_leader_name,</if>
+                <if test="createUserId != null and createUserId != ''" >create_user_id,</if>
+                <if test="createUserName != null and createUserName != ''" >create_user_name,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="delFlag != null and delFlag != ''" >del_flag,</if>
+                <if test="ext1 != null and ext1 != ''" >ext1,</if>
+                <if test="ext2 != null and ext2 != ''" >ext2,</if>
+                <if test="ext3 != null and ext3 != ''" >ext3,</if>
+                <if test="ext4 != null and ext4 != ''" >ext4,</if>
+                <if test="ext5 != null and ext5 != ''" >ext5,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null and id != ''" >#{id, jdbcType=VARCHAR},</if>
+                <if test="epDate != null" >#{epDate, jdbcType=TIMESTAMP},</if>
+                <if test="epForm != null and epForm != ''" >#{epForm, jdbcType=VARCHAR},</if>
+                <if test="epEnterprise != null and epEnterprise != ''" >#{epEnterprise, jdbcType=VARCHAR},</if>
+                <if test="epExchangeDomain != null and epExchangeDomain != ''" >#{epExchangeDomain, jdbcType=VARCHAR},</if>
+                <if test="epLeaderName != null and epLeaderName != ''" >#{epLeaderName, jdbcType=VARCHAR},</if>
+                <if test="createUserId != null and createUserId != ''" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="createUserName != null and createUserName != ''" >#{createUserName, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="delFlag != null and delFlag != ''" >#{delFlag, jdbcType=VARCHAR},</if>
+                <if test="ext1 != null and ext1 != ''" >#{ext1, jdbcType=VARCHAR},</if>
+                <if test="ext2 != null and ext2 != ''" >#{ext2, jdbcType=VARCHAR},</if>
+                <if test="ext3 != null and ext3 != ''" >#{ext3, jdbcType=VARCHAR},</if>
+                <if test="ext4 != null and ext4 != ''" >#{ext4, jdbcType=VARCHAR},</if>
+                <if test="ext5 != null and ext5 != ''" >#{ext5, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.exchangeplan.entity.ExchangePlanEO" >
+    update DB_EXCHANGE_PLAN
+       set  ep_date = #{epDate},
+            ep_form = #{epForm},
+            ep_enterprise = #{epEnterprise},
+            ep_exchange_domain = #{epExchangeDomain},
+            ep_leader_name = #{epLeaderName},
+            create_user_id = #{createUserId},
+            create_user_name = #{createUserName},
+            create_time = #{createTime},
+            del_flag = #{delFlag},
+            ext1 = #{ext1},
+            ext2 = #{ext2},
+            ext3 = #{ext3},
+            ext4 = #{ext4},
+            ext5 = #{ext5}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.exchangeplan.entity.ExchangePlanEO" >
+    update DB_EXCHANGE_PLAN
+    <set >
+      <if test="epDate != null" >
+        ep_date = #{epDate},
+      </if>
+      <if test="epForm != null and epForm != ''" >
+        ep_form = #{epForm},
+      </if>
+      <if test="epEnterprise != null and epEnterprise != ''" >
+        ep_enterprise = #{epEnterprise},
+      </if>
+      <if test="epExchangeDomain != null and epExchangeDomain != ''" >
+        ep_exchange_domain = #{epExchangeDomain},
+      </if>
+      <if test="epLeaderName != null and epLeaderName != ''" >
+        ep_leader_name = #{epLeaderName},
+      </if>
+      <if test="createUserId != null and createUserId != ''" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="createUserName != null and createUserName != ''" >
+        create_user_name = #{createUserName},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="delFlag != null and delFlag != ''" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="ext1 != null and ext1 != ''" >
+        ext1 = #{ext1},
+      </if>
+      <if test="ext2 != null" >
+        ext2 = #{ext2},
+      </if>
+      <if test="ext3 != null and ext3 != ''" >
+        ext3 = #{ext3},
+      </if>
+      <if test="ext4 != null and ext4 != ''" >
+        ext4 = #{ext4},
+      </if>
+      <if test="ext5 != null and ext5 != ''" >
+        ext5 = #{ext5},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 DB_EXCHANGE_PLAN -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from DB_EXCHANGE_PLAN
+     where id = #{value}
+
+  </select>
+    <select id="getCurrentExchangePlanList" resultMap="BaseResultMap" parameterType="java.util.Date">
+        select <include refid="Base_Column_List" />
+        from DB_EXCHANGE_PLAN
+        where EP_DATE >= #{date} and del_flag='0'
+        order by EP_DATE asc
+
+    </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from DB_EXCHANGE_PLAN
+     where id = #{value}
+
+  </delete>
+    <!-- 删除记录 -->
+    <delete id="logicDeleteByPrimaryKeys" >
+      update DB_EXCHANGE_PLAN set del_flag = '1'
+      where id in
+        <foreach item = "id" collection = "ids" open = "(" separator = "," close = ")" index = "index">
+            #{id}
+        </foreach>
+    </delete>
+
+
+  <!-- DB_EXCHANGE_PLAN 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from DB_EXCHANGE_PLAN
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询DB_EXCHANGE_PLAN列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from DB_EXCHANGE_PLAN
+			 <include refid="Base_Where_Clause"/>
+             <if test="sql_filter != null and sql_filter != ''" >
+                 ${sql_filter}
+             </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from DB_EXCHANGE_PLAN
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

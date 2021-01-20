@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.crm.dao.ProjectClosureApprovalEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.crm.entity.ProjectClosureApprovalEO" >
+    <result column="id" property="id" />
+    <result column="projecr_manager_id" property="projecrManagerId" />
+    <result column="dept_id" property="deptId" />
+    <result column="end_date" property="endDate" />
+    <result column="project_id" property="projectId" />
+    <result column="project_number" property="projectNumber" />
+    <result column="project_name" property="projectName" />
+    <result column="discription" property="discription" />
+    <result column="achievement_file" property="achievementFile" />
+    <result column="pro_period" property="proPeriod" />
+    <result column="dept_head_opinion" property="deptHeadOpinion" />
+    <result column="leader_opinion" property="leaderOpinion" />
+    <result column="del_flag" property="delFlag" />
+    <result column="created_time" property="createdTime" />
+    <result column="created_user" property="createdUser" />
+    <result column="modified_time" property="modifiedTime" />
+    <result column="modified_user" property="modifiedUser" />
+    <result column="check_status" property="checkStatus" />
+  </resultMap>
+
+  <!-- PROJECT_CLOSURE_APPROVAL table all fields -->
+  <sql id="Base_Column_List" >
+     id, projecr_manager_id, dept_id, end_date, project_id, project_number, project_name, discription, achievement_file, pro_period, dept_head_opinion, leader_opinion, del_flag, created_time, created_user, modified_time, modified_user, check_status
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="projecrManagerId != null" >
+        and projecr_manager_id ${projecrManagerIdOperator} #{projecrManagerId}
+      </if>
+      <if test="deptId != null" >
+        and dept_id ${deptIdOperator} #{deptId}
+      </if>
+      <if test="endDate != null" >
+        and end_date ${endDateOperator} #{endDate}
+      </if>
+      <if test="endDate1 != null" >
+        and end_date &gt;= #{endDate1}
+      </if>
+      <if test="endDate2 != null" >
+        and end_date &lt;= #{endDate2}
+      </if>
+      <if test="projectId != null" >
+        and project_id ${projectIdOperator} #{projectId}
+      </if>
+      <if test="projectNumber != null" >
+        and project_number ${projectNumberOperator} #{projectNumber}
+      </if>
+      <if test="projectName != null" >
+        and project_name ${projectNameOperator} #{projectName}
+      </if>
+      <if test="discription != null" >
+        and discription ${discriptionOperator} #{discription}
+      </if>
+      <if test="achievementFile != null" >
+        and achievement_file ${achievementFileOperator} #{achievementFile}
+      </if>
+      <if test="proPeriod != null" >
+        and pro_period ${proPeriodOperator} #{proPeriod}
+      </if>
+      <if test="deptHeadOpinion != null" >
+        and dept_head_opinion ${deptHeadOpinionOperator} #{deptHeadOpinion}
+      </if>
+      <if test="leaderOpinion != null" >
+        and leader_opinion ${leaderOpinionOperator} #{leaderOpinion}
+      </if>
+
+      <if test="createdTime != null" >
+        and created_time ${createdTimeOperator} #{createdTime}
+      </if>
+      <if test="createdTime1 != null" >
+        and created_time &gt;= #{createdTime1}
+      </if>
+      <if test="createdTime2 != null" >
+        and created_time &lt;= #{createdTime2}
+      </if>
+      <if test="createdUser != null" >
+        and created_user ${createdUserOperator} #{createdUser}
+      </if>
+      <if test="modifiedTime != null" >
+        and modified_time ${modifiedTimeOperator} #{modifiedTime}
+      </if>
+      <if test="modifiedTime1 != null" >
+        and modified_time &gt;= #{modifiedTime1}
+      </if>
+      <if test="modifiedTime2 != null" >
+        and modified_time &lt;= #{modifiedTime2}
+      </if>
+      <if test="modifiedUser != null" >
+        and modified_user ${modifiedUserOperator} #{modifiedUser}
+      </if>
+      <if test="checkStatus != null" >
+        and check_status ${checkStatusOperator} #{checkStatus}
+      </if>
+        and del_flag = '0'
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.crm.entity.ProjectClosureApprovalEO" >
+    insert into PROJECT_CLOSURE_APPROVAL(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{projecrManagerId, jdbcType=VARCHAR}, #{deptId, jdbcType=VARCHAR}, #{endDate, jdbcType=TIMESTAMP}, #{projectId, jdbcType=VARCHAR}, #{projectNumber, jdbcType=VARCHAR}, #{projectName, jdbcType=VARCHAR}, #{discription, jdbcType=CLOB}, #{achievementFile, jdbcType=VARCHAR}, #{proPeriod, jdbcType=VARCHAR}, #{deptHeadOpinion, jdbcType=VARCHAR}, #{leaderOpinion, jdbcType=VARCHAR}, #{delFlag, jdbcType=VARCHAR}, #{createdTime, jdbcType=TIMESTAMP}, #{createdUser, jdbcType=VARCHAR}, #{modifiedTime, jdbcType=TIMESTAMP}, #{modifiedUser, jdbcType=VARCHAR}, #{checkStatus, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.crm.entity.ProjectClosureApprovalEO" >
+        insert into PROJECT_CLOSURE_APPROVAL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="projecrManagerId != null" >projecr_manager_id,</if>
+                <if test="deptId != null" >dept_id,</if>
+                <if test="endDate != null" >end_date,</if>
+                <if test="projectId != null" >project_id,</if>
+                <if test="projectNumber != null" >project_number,</if>
+                <if test="projectName != null" >project_name,</if>
+                <if test="discription != null" >discription,</if>
+                <if test="achievementFile != null" >achievement_file,</if>
+                <if test="proPeriod != null" >pro_period,</if>
+                <if test="deptHeadOpinion != null" >dept_head_opinion,</if>
+                <if test="leaderOpinion != null" >leader_opinion,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="createdTime != null" >created_time,</if>
+                <if test="createdUser != null" >created_user,</if>
+                <if test="modifiedTime != null" >modified_time,</if>
+                <if test="modifiedUser != null" >modified_user,</if>
+                <if test="checkStatus != null" >check_status,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="projecrManagerId != null" >#{projecrManagerId, jdbcType=VARCHAR},</if>
+                <if test="deptId != null" >#{deptId, jdbcType=VARCHAR},</if>
+                <if test="endDate != null" >#{endDate, jdbcType=TIMESTAMP},</if>
+                <if test="projectId != null" >#{projectId, jdbcType=VARCHAR},</if>
+                <if test="projectNumber != null" >#{projectNumber, jdbcType=VARCHAR},</if>
+                <if test="projectName != null" >#{projectName, jdbcType=VARCHAR},</if>
+                <if test="discription != null" >#{discription, jdbcType=CLOB},</if>
+                <if test="achievementFile != null" >#{achievementFile, jdbcType=VARCHAR},</if>
+                <if test="proPeriod != null" >#{proPeriod, jdbcType=VARCHAR},</if>
+                <if test="deptHeadOpinion != null" >#{deptHeadOpinion, jdbcType=VARCHAR},</if>
+                <if test="leaderOpinion != null" >#{leaderOpinion, jdbcType=VARCHAR},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=VARCHAR},</if>
+                <if test="createdTime != null" >#{createdTime, jdbcType=TIMESTAMP},</if>
+                <if test="createdUser != null" >#{createdUser, jdbcType=VARCHAR},</if>
+                <if test="modifiedTime != null" >#{modifiedTime, jdbcType=TIMESTAMP},</if>
+                <if test="modifiedUser != null" >#{modifiedUser, jdbcType=VARCHAR},</if>
+                <if test="checkStatus != null" >#{checkStatus, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- PROJECT_CLOSURE_APPROVAL 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from PROJECT_CLOSURE_APPROVAL
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询PROJECT_CLOSURE_APPROVAL列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from PROJECT_CLOSURE_APPROVAL
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+    <!-- PROJECT_CLOSURE_APPROVAL table all fields -->
+    <sql id="CRM_Column_List" >
+     id, (select u.usname from TS_USER u where u.usid = projecr_manager_id) as projecr_manager_id, (select org.org_name from TS_ORG org where id = dept_id) as dept_id, end_date, project_id, project_number, project_name, discription, achievement_file, pro_period, dept_head_opinion, leader_opinion, del_flag, created_time, created_user, modified_time, modified_user, check_status
+  </sql>
+    <!-- 查询PROJECT_CLOSURE_APPROVAL列表 -->
+    <select id="queryCRMListByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select <include refid="Base_Column_List" /> from
+        (select tmp_tb.* , rownum rn from
+        (select <include refid="CRM_Column_List" /> from PROJECT_CLOSURE_APPROVAL
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from PROJECT_CLOSURE_APPROVAL
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+    <update id="updateByPrimaryKeyAndDelFlag">
+        update PROJECT_CLOSURE_APPROVAL set del_flag=#{delFlag} where id=#{primaryKey}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.crm.entity.ProjectClosureApprovalEO" >
+        update PROJECT_CLOSURE_APPROVAL
+        <set >
+            <if test="projecrManagerId != null" >
+                projecr_manager_id = #{projecrManagerId},
+            </if>
+            <if test="deptId != null" >
+                dept_id = #{deptId},
+            </if>
+            <if test="endDate != null" >
+                end_date = #{endDate},
+            </if>
+            <if test="projectId != null" >
+                project_id = #{projectId},
+            </if>
+            <if test="projectNumber != null" >
+                project_number = #{projectNumber},
+            </if>
+            <if test="projectName != null" >
+                project_name = #{projectName},
+            </if>
+            <if test="discription != null" >
+                discription = #{discription},
+            </if>
+            <if test="achievementFile != null" >
+                achievement_file = #{achievementFile},
+            </if>
+            <if test="proPeriod != null" >
+                pro_period = #{proPeriod},
+            </if>
+            <if test="deptHeadOpinion != null" >
+                dept_head_opinion = #{deptHeadOpinion},
+            </if>
+            <if test="leaderOpinion != null" >
+                leader_opinion = #{leaderOpinion},
+            </if>
+            <if test="delFlag != null" >
+                del_flag = #{delFlag},
+            </if>
+            <if test="createdTime != null" >
+                created_time = #{createdTime},
+            </if>
+            <if test="createdUser != null" >
+                created_user = #{createdUser},
+            </if>
+            <if test="modifiedTime != null" >
+                modified_time = #{modifiedTime},
+            </if>
+            <if test="modifiedUser != null" >
+                modified_user = #{modifiedUser},
+            </if>
+            <if test="checkStatus != null" >
+                check_status = #{checkStatus},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+</mapper>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.personnel.dao.ExpertUserInfoTempDao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.research.personnel.entity.ExpertUserInfoListEO" >
+    <id column="id" property="id" />
+    <result column="expert_type_id" property="expertTypeId" />
+    <result column="user_id" property="userId" />
+    <result column="user_name" property="userName" />
+    <result column="company_name" property="companyName" />
+<!--    <result column="expert_group_id" property="expertGroupId" />-->
+    <result column="resume" property="resume" />
+    <result column="research_direction" property="researchDirection" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="create_user_name" property="createUserName" />
+    <result column="create_time" property="createTime" />
+    <result column="modify_time" property="modifyTime" />
+    <result column="del_flag" property="delFlag" />
+    <result column="usid" property="userId" />
+    <result column="resume" property="resume" />
+    <result column="gender" property="gender" />
+    <result column="identity_number" property="identityNumber" />
+    <result column="birth_date" property="birthDate" />
+    <result column="final_degree" property="finalDegree" />
+    <result column="cellphone_number" property="cellphoneNumber" />
+    <result column="last_degree" property="lastDegree" />
+    <result column="job_title" property="jobTitle" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List" >
+     A.expert_type_id, A.id, A.user_id, A.user_name, A.company_name, A.expert_group_id, A.resume, A.research_direction,
+     A.create_user_id, A.create_user_name, A.create_time, A.modify_time, A.del_flag, B.usid,B.gender,B.identity_number,
+     B.birth_date,B.final_degree,B.cellphone_number,B.last_degree,B.job_title
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where A.del_flag =0
+    <trim suffixOverrides="," >
+
+      <if test="userName != null" >
+        and A.user_name ${userNameOperator} '%'||#{userName}||'%'
+      </if>
+      <if test="companyName != null" >
+        and A.company_name ${companyNameOperator} '%'||#{companyName}||'%'
+      </if>
+
+      <if test="jobTitle != null" >
+        and B.JOB_TITLE ${jobTitleOperator} #{jobTitle}
+      </if>
+      <if test="lastDegree != null" >
+        and B.last_degree ${lastDegreeOperator} '%'||#{lastDegree}||'%'
+      </if>
+      <if test="expertGroupName != null" >
+        and ID IN ( SELECT USER_ID FROM TR_GROUP_USER D JOIN RS_EXPERT_GROUP_INFO C ON C.ID = D.EXPERT_GROUP_ID WHERE C.EXPERT_GROUP_NAME LIKE '%'||#{expertGroupName}||'%' )
+      </if>
+    </trim>
+  </sql>
+
+
+  <!-- RS_EXPERT_USER_INFO 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from RS_EXPERT_USER_INFO A join TS_USER B on A.USER_ID = B.USID
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询RS_EXPERT_USER_INFO列表 -->
+  <select id="queryByPage"  resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select * from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" />
+			from RS_EXPERT_USER_INFO A
+			join TS_USER B on A.USER_ID = B.USID
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+
+  <!-- 查询RS_EXPERT_USER_INFO列表 -->
+  <select id="queryByList"  resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+      select <include refid="Base_Column_List" /> from RS_EXPERT_USER_INFO A join TS_USER B on A.USER_ID = B.USID
+      <include refid="Base_Where_Clause"/>
+      <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+        ${pager.orderCondition}
+      </if>
+  </select>
+
+  <select id="selectByIdS" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List" /> from RS_EXPERT_USER_INFO A join TS_USER B on A.USER_ID = B.USID
+      where A.id
+      in
+      <foreach collection="array" item="Id" open="(" close=")" separator=",">
+          #{Id}
+      </foreach>
+  </select>
+
+
+</mapper>

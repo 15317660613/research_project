@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.project.dao.RContractInfoEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.research.project.entity.RContractInfoEO" >
+    <id column="id" property="id" />
+    <result column="project_id" property="projectId" />
+    <result column="partya_name" property="partyaName" />
+    <result column="partya_user" property="partyaUser" />
+    <result column="partya_tel" property="partyaTel" />
+    <result column="partya_email" property="partyaEmail" />
+    <result column="partyb_name" property="partybName" />
+    <result column="partyb_user" property="partybUser" />
+    <result column="partyb_dept" property="partybDept" />
+    <result column="partyb_tel" property="partybTel" />
+    <result column="PARTYB_MOBILE" property="partybMobile" />
+    <result column="partyb_email" property="partybEmail" />
+    <result column="partyb_fax" property="partybFax" />
+    <result column="partyc_name" property="partycName" />
+    <result column="partyc_user" property="partycUser" />
+    <result column="research_contact" property="researchContact" />
+    <result column="partyc_tel" property="partycTel" />
+    <result column="partyc_email" property="partycEmail" />
+    <result column="partyc_fax" property="partycFax" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="create_user_name" property="createUserName" />
+    <result column="create_time" property="createTime" />
+    <result column="modify_time" property="modifyTime" />
+    <result column="del_flag" property="delFlag" />
+    <result column="ext1" property="ext1" />
+    <result column="ext2" property="ext2" />
+    <result column="ext3" property="ext3" />
+    <result column="ext4" property="ext4" />
+    <result column="ext5" property="ext5" />
+  </resultMap>
+
+  <!-- RS_CONTRACT_INFO table all fields -->
+  <sql id="Base_Column_List" >
+     id, project_id, partya_name, partya_user, partya_tel, partya_email, partyb_name, partyb_user, partyb_dept,
+     partyb_tel, PARTYB_MOBILE, partyb_email, partyb_fax, partyc_name, partyc_user, research_contact, partyc_tel,
+     partyc_email, partyc_fax, create_user_id, create_user_name, create_time, modify_time, del_flag, ext1, ext2, ext3, ext4, ext5
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="projectId != null" >
+        and project_id ${projectIdOperator} #{projectId}
+      </if>
+      <if test="partyaName != null" >
+        and partya_name ${partyaNameOperator} #{partyaName}
+      </if>
+      <if test="partyaUser != null" >
+        and partya_user ${partyaUserOperator} #{partyaUser}
+      </if>
+      <if test="partyaTel != null" >
+        and partya_tel ${partyaTelOperator} #{partyaTel}
+      </if>
+      <if test="partyaEmail != null" >
+        and partya_email ${partyaEmailOperator} #{partyaEmail}
+      </if>
+      <if test="partybName != null" >
+        and partyb_name ${partybNameOperator} #{partybName}
+      </if>
+      <if test="partybUser != null" >
+        and partyb_user ${partybUserOperator} #{partybUser}
+      </if>
+      <if test="partybDept != null" >
+        and partyb_dept ${partybDeptOperator} #{partybDept}
+      </if>
+      <if test="partybTel != null" >
+        and partyb_tel ${partybTelOperator} #{partybTel}
+      </if>
+      <if test="partybMobile != null" >
+        and PARTYB_MOBILE ${partybMobileOperator} #{partybMobile}
+      </if>
+      <if test="partybEmail != null" >
+        and partyb_email ${partybEmailOperator} #{partybEmail}
+      </if>
+      <if test="partybFax != null" >
+        and partyb_fax ${partybFaxOperator} #{partybFax}
+      </if>
+      <if test="partycName != null" >
+        and partyc_name ${partycNameOperator} #{partycName}
+      </if>
+      <if test="partycUser != null" >
+        and partyc_user ${partycUserOperator} #{partycUser}
+      </if>
+      <if test="researchContact != null" >
+        and research_contact ${researchContactOperator} #{researchContact}
+      </if>
+      <if test="partycTel != null" >
+        and partyc_tel ${partycTelOperator} #{partycTel}
+      </if>
+      <if test="partycEmail != null" >
+        and partyc_email ${partycEmailOperator} #{partycEmail}
+      </if>
+      <if test="partycFax != null" >
+        and partyc_fax ${partycFaxOperator} #{partycFax}
+      </if>
+      <if test="createUserId != null" >
+        and create_user_id ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="createUserName != null" >
+        and create_user_name ${createUserNameOperator} #{createUserName}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="modifyTime != null" >
+        and modify_time ${modifyTimeOperator} #{modifyTime}
+      </if>
+      <if test="modifyTime1 != null" >
+        and modify_time &gt;= #{modifyTime1}
+      </if>
+      <if test="modifyTime2 != null" >
+        and modify_time &lt;= #{modifyTime2}
+      </if>
+      <if test="delFlag == null" >
+        and del_flag=0
+      </if>
+      <if test="ext1 != null" >
+        and ext1 ${ext1Operator} #{ext1}
+      </if>
+      <if test="ext2 != null" >
+        and ext2 ${ext2Operator} #{ext2}
+      </if>
+      <if test="ext3 != null" >
+        and ext3 ${ext3Operator} #{ext3}
+      </if>
+      <if test="ext4 != null" >
+        and ext4 ${ext4Operator} #{ext4}
+      </if>
+      <if test="ext5 != null" >
+        and ext5 ${ext5Operator} #{ext5}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.research.project.entity.RContractInfoEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RS_CONTRACT_INFO.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into RS_CONTRACT_INFO(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{projectId, jdbcType=VARCHAR}, #{partyaName, jdbcType=VARCHAR}, #{partyaUser, jdbcType=VARCHAR}, #{partyaTel, jdbcType=VARCHAR}, #{partyaEmail, jdbcType=VARCHAR}, #{partybName, jdbcType=VARCHAR}, #{partybUser, jdbcType=VARCHAR}, #{partybDept, jdbcType=VARCHAR}, #{partybTel, jdbcType=VARCHAR}, #{partybMobile, jdbcType=VARCHAR}, #{partybEmail, jdbcType=VARCHAR}, #{partybFax, jdbcType=VARCHAR}, #{partycName, jdbcType=VARCHAR}, #{partycUser, jdbcType=VARCHAR}, #{researchContact, jdbcType=VARCHAR}, #{partycTel, jdbcType=VARCHAR}, #{partycEmail, jdbcType=VARCHAR}, #{partycFax, jdbcType=VARCHAR}, #{createUserId, jdbcType=VARCHAR}, #{createUserName, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{modifyTime, jdbcType=TIMESTAMP}, #{delFlag, jdbcType=INTEGER}, #{ext1, jdbcType=VARCHAR}, #{ext2, jdbcType=VARCHAR}, #{ext3, jdbcType=VARCHAR}, #{ext4, jdbcType=VARCHAR}, #{ext5, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.research.project.entity.RContractInfoEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RS_CONTRACT_INFO.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into RS_CONTRACT_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="projectId != null" >project_id,</if>
+                <if test="partyaName != null" >partya_name,</if>
+                <if test="partyaUser != null" >partya_user,</if>
+                <if test="partyaTel != null" >partya_tel,</if>
+                <if test="partyaEmail != null" >partya_email,</if>
+                <if test="partybName != null" >partyb_name,</if>
+                <if test="partybUser != null" >partyb_user,</if>
+                <if test="partybDept != null" >partyb_dept,</if>
+                <if test="partybTel != null" >partyb_tel,</if>
+                <if test="partybMobile != null" >PARTYB_MOBILE,</if>
+                <if test="partybEmail != null" >partyb_email,</if>
+                <if test="partybFax != null" >partyb_fax,</if>
+                <if test="partycName != null" >partyc_name,</if>
+                <if test="partycUser != null" >partyc_user,</if>
+                <if test="researchContact != null" >research_contact,</if>
+                <if test="partycTel != null" >partyc_tel,</if>
+                <if test="partycEmail != null" >partyc_email,</if>
+                <if test="partycFax != null" >partyc_fax,</if>
+                <if test="createUserId != null" >create_user_id,</if>
+                <if test="createUserName != null" >create_user_name,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="modifyTime != null" >modify_time,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="ext1 != null" >ext1,</if>
+                <if test="ext2 != null" >ext2,</if>
+                <if test="ext3 != null" >ext3,</if>
+                <if test="ext4 != null" >ext4,</if>
+                <if test="ext5 != null" >ext5,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="projectId != null" >#{projectId, jdbcType=VARCHAR},</if>
+                <if test="partyaName != null" >#{partyaName, jdbcType=VARCHAR},</if>
+                <if test="partyaUser != null" >#{partyaUser, jdbcType=VARCHAR},</if>
+                <if test="partyaTel != null" >#{partyaTel, jdbcType=VARCHAR},</if>
+                <if test="partyaEmail != null" >#{partyaEmail, jdbcType=VARCHAR},</if>
+                <if test="partybName != null" >#{partybName, jdbcType=VARCHAR},</if>
+                <if test="partybUser != null" >#{partybUser, jdbcType=VARCHAR},</if>
+                <if test="partybDept != null" >#{partybDept, jdbcType=VARCHAR},</if>
+                <if test="partybTel != null" >#{partybTel, jdbcType=VARCHAR},</if>
+                <if test="partybMobile != null" >#{partybMobile, jdbcType=VARCHAR},</if>
+                <if test="partybEmail != null" >#{partybEmail, jdbcType=VARCHAR},</if>
+                <if test="partybFax != null" >#{partybFax, jdbcType=VARCHAR},</if>
+                <if test="partycName != null" >#{partycName, jdbcType=VARCHAR},</if>
+                <if test="partycUser != null" >#{partycUser, jdbcType=VARCHAR},</if>
+                <if test="researchContact != null" >#{researchContact, jdbcType=VARCHAR},</if>
+                <if test="partycTel != null" >#{partycTel, jdbcType=VARCHAR},</if>
+                <if test="partycEmail != null" >#{partycEmail, jdbcType=VARCHAR},</if>
+                <if test="partycFax != null" >#{partycFax, jdbcType=VARCHAR},</if>
+                <if test="createUserId != null" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="createUserName != null" >#{createUserName, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="modifyTime != null" >#{modifyTime, jdbcType=TIMESTAMP},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=INTEGER},</if>
+                <if test="ext1 != null" >#{ext1, jdbcType=VARCHAR},</if>
+                <if test="ext2 != null" >#{ext2, jdbcType=VARCHAR},</if>
+                <if test="ext3 != null" >#{ext3, jdbcType=VARCHAR},</if>
+                <if test="ext4 != null" >#{ext4, jdbcType=VARCHAR},</if>
+                <if test="ext5 != null" >#{ext5, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.research.project.entity.RContractInfoEO" >
+    update RS_CONTRACT_INFO
+       set  project_id = #{projectId},
+            partya_name = #{partyaName},
+            partya_user = #{partyaUser},
+            partya_tel = #{partyaTel},
+            partya_email = #{partyaEmail},
+            partyb_name = #{partybName},
+            partyb_user = #{partybUser},
+            partyb_dept = #{partybDept},
+            partyb_tel = #{partybTel},
+            PARTYB_MOBILE = #{partybMobile},
+            partyb_email = #{partybEmail},
+            partyb_fax = #{partybFax},
+            partyc_name = #{partycName},
+            partyc_user = #{partycUser},
+            research_contact = #{researchContact},
+            partyc_tel = #{partycTel},
+            partyc_email = #{partycEmail},
+            partyc_fax = #{partycFax},
+            create_user_id = #{createUserId},
+            create_user_name = #{createUserName},
+            create_time = #{createTime},
+            modify_time = #{modifyTime},
+            del_flag = #{delFlag},
+            ext1 = #{ext1},
+            ext2 = #{ext2},
+            ext3 = #{ext3},
+            ext4 = #{ext4},
+            ext5 = #{ext5}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.research.project.entity.RContractInfoEO" >
+    update RS_CONTRACT_INFO
+    <set >
+      <if test="projectId != null" >
+        project_id = #{projectId},
+      </if>
+      <if test="partyaName != null" >
+        partya_name = #{partyaName},
+      </if>
+      <if test="partyaUser != null" >
+        partya_user = #{partyaUser},
+      </if>
+      <if test="partyaTel != null" >
+        partya_tel = #{partyaTel},
+      </if>
+      <if test="partyaEmail != null" >
+        partya_email = #{partyaEmail},
+      </if>
+      <if test="partybName != null" >
+        partyb_name = #{partybName},
+      </if>
+      <if test="partybUser != null" >
+        partyb_user = #{partybUser},
+      </if>
+      <if test="partybDept != null" >
+        partyb_dept = #{partybDept},
+      </if>
+      <if test="partybTel != null" >
+        partyb_tel = #{partybTel},
+      </if>
+      <if test="partybMobile != null" >
+          PARTYB_MOBILE = #{partybMobile},
+       </if>
+      <if test="partybEmail != null" >
+        partyb_email = #{partybEmail},
+      </if>
+      <if test="partybFax != null" >
+        partyb_fax = #{partybFax},
+      </if>
+      <if test="partycName != null" >
+        partyc_name = #{partycName},
+      </if>
+      <if test="partycUser != null" >
+        partyc_user = #{partycUser},
+      </if>
+      <if test="researchContact != null" >
+        research_contact = #{researchContact},
+      </if>
+      <if test="partycTel != null" >
+        partyc_tel = #{partycTel},
+      </if>
+      <if test="partycEmail != null" >
+        partyc_email = #{partycEmail},
+      </if>
+      <if test="partycFax != null" >
+        partyc_fax = #{partycFax},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="createUserName != null" >
+        create_user_name = #{createUserName},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="ext1 != null" >
+        ext1 = #{ext1},
+      </if>
+      <if test="ext2 != null" >
+        ext2 = #{ext2},
+      </if>
+      <if test="ext3 != null" >
+        ext3 = #{ext3},
+      </if>
+      <if test="ext4 != null" >
+        ext4 = #{ext4},
+      </if>
+      <if test="ext5 != null" >
+        ext5 = #{ext5},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateRContractInfoEOByProjectId" parameterType="com.adc.da.research.project.entity.RContractInfoEO" >
+        update RS_CONTRACT_INFO
+        <set>
+            <if test="partyaName != null" >
+                partya_name = #{partyaName},
+            </if>
+            <if test="partyaUser != null" >
+                partya_user = #{partyaUser},
+            </if>
+            <if test="partyaTel != null" >
+                partya_tel = #{partyaTel},
+            </if>
+            <if test="partyaEmail != null" >
+                partya_email = #{partyaEmail},
+            </if>
+            <if test="partybName != null" >
+                partyb_name = #{partybName},
+            </if>
+            <if test="partybUser != null" >
+                partyb_user = #{partybUser},
+            </if>
+            <if test="partybDept != null" >
+                partyb_dept = #{partybDept},
+            </if>
+            <if test="partybTel != null" >
+                partyb_tel = #{partybTel},
+            </if>
+            <if test="partybMobile != null" >
+                PARTYB_MOBILE = #{partybMobile},
+            </if>
+            <if test="partybEmail != null" >
+                partyb_email = #{partybEmail},
+            </if>
+            <if test="partybFax != null" >
+                partyb_fax = #{partybFax},
+            </if>
+            <if test="partycName != null" >
+                partyc_name = #{partycName},
+            </if>
+            <if test="partycUser != null" >
+                partyc_user = #{partycUser},
+            </if>
+            <if test="researchContact != null" >
+                research_contact = #{researchContact},
+            </if>
+            <if test="partycTel != null" >
+                partyc_tel = #{partycTel},
+            </if>
+            <if test="partycEmail != null" >
+                partyc_email = #{partycEmail},
+            </if>
+            <if test="partycFax != null" >
+                partyc_fax = #{partycFax},
+            </if>
+            <if test="createUserId != null" >
+                create_user_id = #{createUserId},
+            </if>
+            <if test="createUserName != null" >
+                create_user_name = #{createUserName},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime},
+            </if>
+            <if test="modifyTime != null" >
+                modify_time = #{modifyTime},
+            </if>
+            <if test="delFlag != null" >
+                del_flag = #{delFlag},
+            </if>
+            <if test="ext1 != null" >
+                ext1 = #{ext1},
+            </if>
+            <if test="ext2 != null" >
+                ext2 = #{ext2},
+            </if>
+            <if test="ext3 != null" >
+                ext3 = #{ext3},
+            </if>
+            <if test="ext4 != null" >
+                ext4 = #{ext4},
+            </if>
+            <if test="ext5 != null" >
+                ext5 = #{ext5},
+            </if>
+        </set>
+        where PROJECT_ID = #{projectId}
+    </update>
+
+  <!-- 根据id查询 RS_CONTRACT_INFO -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from RS_CONTRACT_INFO
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RS_CONTRACT_INFO
+     where id = #{value}
+
+  </delete>
+
+  <!-- RS_CONTRACT_INFO 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from RS_CONTRACT_INFO
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询RS_CONTRACT_INFO列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from RS_CONTRACT_INFO
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from RS_CONTRACT_INFO
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+    <!--根据项目id删除-->
+    <update id="deleteByProjectId" parameterType="java.lang.String">
+   	update  RS_CONTRACT_INFO set del_flag=1
+     where project_id = #{projectId}
+
+  </update>
+
+</mapper>

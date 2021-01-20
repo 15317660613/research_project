@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.smallprogram.dao.ScheduleTypeEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.smallprogram.entity.ScheduleTypeEO" >
+    <id column="id" property="id" />
+    <result column="type_name" property="typeName" />
+    <result column="type_describe" property="typeDescribe" />
+    <result column="del_flag" property="delFlag" />
+    <result column="create_time" property="createTime" />
+    <result column="update_time" property="updateTime" />
+  </resultMap>
+
+  <!-- TS_SCHEDULE_TYPE table all fields -->
+  <sql id="Base_Column_List" >
+     id, type_name, type_describe, del_flag, create_time, update_time
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id = #{id}
+      </if>
+      <if test="typeName != null" >
+        and type_name = #{typeName}
+      </if>
+      <if test="typeDescribe != null" >
+        and type_describe = #{typeDescribe}
+      </if>
+      <if test="delFlag != null" >
+        and del_flag = #{delFlag}
+      </if>
+      <if test="createTime != null" >
+        and create_time = #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="updateTime != null" >
+        and update_time = #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and update_time &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and update_time &lt;= #{updateTime2}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.smallprogram.entity.ScheduleTypeEO" >
+     <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_SCHEDULE_TYPE.NEXTVAL FROM DUAL
+    </selectKey>
+      insert into TS_SCHEDULE_TYPE
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+                    <if test="id != null" >id,</if>
+                    <if test="typeName != null" >type_name,</if>
+                    <if test="typeDescribe != null" >type_describe,</if>
+                    <if test="delFlag != null" >del_flag,</if>
+                    <if test="createTime != null" >create_time,</if>
+                    <if test="updateTime != null" >update_time,</if>
+                </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides="," >
+                    <if test="id != null" >#{id},</if>
+                    <if test="typeName != null" >#{typeName},</if>
+                    <if test="typeDescribe != null" >#{typeDescribe},</if>
+                    <if test="delFlag != null" >#{delFlag},</if>
+                    <if test="createTime != null" >#{createTime},</if>
+                    <if test="updateTime != null" >#{updateTime},</if>
+                </trim>
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.smallprogram.entity.ScheduleTypeEO" >
+        <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_SCHEDULE_TYPE.NEXTVAL FROM DUAL
+    </selectKey>
+        insert into TS_SCHEDULE_TYPE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="typeName != null" >type_name,</if>
+                <if test="typeDescribe != null" >type_describe,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="updateTime != null" >update_time,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id},</if>
+                <if test="typeName != null" >#{typeName},</if>
+                <if test="typeDescribe != null" >#{typeDescribe},</if>
+                <if test="delFlag != null" >#{delFlag},</if>
+                <if test="createTime != null" >#{createTime},</if>
+                <if test="updateTime != null" >#{updateTime},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.smallprogram.entity.ScheduleTypeEO" >
+    update TS_SCHEDULE_TYPE
+       set  type_name = #{typeName},
+            type_describe = #{typeDescribe},
+            del_flag = #{delFlag},
+            create_time = #{createTime},
+            update_time = #{updateTime}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.smallprogram.entity.ScheduleTypeEO" >
+    update TS_SCHEDULE_TYPE
+    <set >
+      <if test="typeName != null" >
+        type_name = #{typeName},
+      </if>
+      <if test="typeDescribe != null" >
+        type_describe = #{typeDescribe},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 TS_SCHEDULE_TYPE -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from TS_SCHEDULE_TYPE
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+ <!-- <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TS_SCHEDULE_TYPE
+     where id = #{value}
+  </delete>-->
+
+    <!-- 删除记录 -->
+    <update id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    update TS_SCHEDULE_TYPE
+       set  del_flag = '1'
+     where  id = #{value}
+  </update>
+
+  <!-- TS_SCHEDULE_TYPE 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from TS_SCHEDULE_TYPE
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TS_SCHEDULE_TYPE列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from TS_SCHEDULE_TYPE
+			 <include refid="Base_Where_Clause"/>
+			) tmp_tb where rownum &lt;= #{pager.endIndex})
+			where rn &gt;= #{pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from TS_SCHEDULE_TYPE
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+</mapper>

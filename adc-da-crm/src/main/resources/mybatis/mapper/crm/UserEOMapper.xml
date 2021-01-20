@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.crm.dao.UserDao">
+    <!-- Result Map -->
+    <resultMap id="BaseResultMap" type="com.adc.da.sys.entity.UserEO">
+        <id column="usid" property="usid"/>
+        <result column="account" property="account"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="password" property="password"/>
+        <result column="usname" property="usname"/>
+        <result column="ext_info" property="extInfo"/>
+        <result column="user_code" property="userCode"/>
+        <result column="office_phone" property="officePhone"/>
+        <result column="CELLPHONE_NUMBER" property="cellPhoneNumber"/>
+        <result column="HOME_ADDRESS" property="homeAddress"/>
+        <result column="POSTAL_CODE" property="postalCode"/>
+        <result column="EMAIL" property="email"/>
+        <result column="CONTACT_ADDRESS" property="contactAddress"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="USER_STATE" property="userState"/>
+        <result column="AVATAR" property="avatar"/>
+    </resultMap>
+
+    <!-- TS_USER table all fields -->
+    <sql id="Base_Column_List">
+		usid, account, del_flag, password, usname, ext_info,user_code,office_phone,CELLPHONE_NUMBER,
+		HOME_ADDRESS,POSTAL_CODE,EMAIL,CONTACT_ADDRESS,CREATE_TIME,UPDATE_TIME
+	</sql>
+
+
+    <!-- Result Map -->
+    <resultMap id="BaseResultMap_dingQiang" type="com.adc.da.sys.entity.UserEO">
+        <id column="usid" property="usid"/>
+        <result column="account" property="account"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="password" property="password"/>
+        <result column="usname" property="usname"/>
+        <result column="user_code" property="userCode"/>
+        <result column="office_phone" property="officePhone"/>
+        <result column="CELLPHONE_NUMBER" property="cellPhoneNumber"/>
+        <result column="HOME_ADDRESS" property="homeAddress"/>
+        <result column="POSTAL_CODE" property="postalCode"/>
+        <result column="EMAIL" property="email"/>
+        <result column="CONTACT_ADDRESS" property="contactAddress"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="USER_STATE" property="userState"/>
+        <result column="AVATAR" property="avatar"/>
+        <result column="ext_info" property="extInfo"/>
+        <result column="extInfo2" property="extInfo2"/>
+        <result column="extInfo3" property="extInfo3"/>
+        <result column="extInfo4" property="extInfo4"/>
+        <result column="extInfo5" property="extInfo5"/>
+    </resultMap>
+
+    <!-- TS_USER table all fields -->
+    <sql id="Base_Column_List_dingQiang">
+		usid, account, del_flag, usname, user_code,office_phone,CELLPHONE_NUMBER,
+		HOME_ADDRESS,POSTAL_CODE,EMAIL,CONTACT_ADDRESS,CREATE_TIME,UPDATE_TIME,USER_STATE,
+		ext_info, extInfo2, extInfo3, extInfo4, extInfo5
+	</sql>
+
+
+
+
+
+
+
+    <!-- TS_ORG table all fields -->
+    <sql id="Base_Column_ListOrg">
+        id, del_flag, org_name, org_desc,org_code,parent_id, parent_ids, is_show, remarks
+    </sql>
+
+    <resultMap id="UserRoleMap" extends="BaseResultMap" type="com.adc.da.sys.entity.UserEO">
+        <collection property="roleEOList" ofType="com.adc.da.sys.entity.RoleEO">
+            <id column="id" property="id"/>
+            <result column="data_scope" property="dataScope"/>
+            <result column="r_delFlag" property="delFlag"/>
+            <result column="is_default" property="isDefault"/>
+            <result column="name" property="name"/>
+            <result column="remarks" property="remarks"/>
+            <result column="r_extInfo" property="extInfo"/>
+        </collection>
+        <collection property="orgEOList" ofType="com.adc.da.sys.entity.OrgEO">
+            <id column="org_id" property="id"/>
+            <result column="org_name" property="name"/>
+            <result column="org_desc" property="orgDesc"/>
+            <result column="org_code" property="orgCode"/>
+            <result column="org_type" property="orgType"/>
+            <result column="org_parent_id" property="parentId"/>
+            <result column="org_remarks" property="remarks"/>
+            <result column="org_isshow" property="isShow"/>
+            <result column="org_delFlag" property="delFlag"/>
+            <result column="org_parentIds" property="parentIds"/>
+        </collection>
+    </resultMap>
+    <!--根据部门Id查询-->
+    <select id="selectByOrgIdAndUsName" resultMap="BaseResultMap" >
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        TS_USER u
+        WHERE
+        u.USID IN ( SELECT uorg.user_id FROM TR_USER_ORG uorg WHERE uorg.ORG_ID IN
+        <foreach collection="orgIds" item="orgId" separator="," open="(" close=")">
+            #{orgId}
+        </foreach>
+        )
+        and u.del_flag != 1
+        <if test="usname!=null">
+            and u.usname like '%'||#{usname}||'%'
+        </if>
+        ORDER BY
+        u.EXT_INFO DESC,
+        u.ACCOUNT ASC
+    </select>
+
+
+    <select id="queryOrgIdByUid" resultType="java.lang.String" parameterType="java.lang.String">
+        SELECT ORG_ID FROM TR_USER_ORG
+        WHERE USER_ID=#{userId}
+    </select>
+
+
+    <select id="listAllOrg" resultMap="BaseResultMap1">
+        SELECT <include refid="Base_Column_ListOrg"/>
+        FROM TS_ORG
+        WHERE DEL_FLAG = 0
+    </select>
+
+
+    <!--<select id="queryBigDeptUserIds" resultType="java.lang.String" >-->
+        <!--SELECT c.USID-->
+        <!--FROM TS_ORG a-->
+        <!--inner join  TR_USER_ORG b on a.ID = b.ORG_ID-->
+        <!--inner Join TS_USER c  on  b.USER_ID = c.USID-->
+        <!--WHERE  c.ext_info >= 11000-->
+    <!--</select>-->
+
+    <!--<select id="queryCenterUserIds" resultType="java.lang.String" >-->
+        <!--SELECT c.USID-->
+        <!--FROM TS_ORG a-->
+        <!--inner join  TR_USER_ORG b on a.ID = b.ORG_ID-->
+        <!--inner Join TS_USER c  on  b.USER_ID = c.USID-->
+        <!--WHERE a.ORG_NAME LIKE '%数据资源中心' and c.ext_info > 15000-->
+    <!--</select>-->
+
+
+    <!--<select id="queryUserEOByUserIds" resultMap="BaseResultMap_dingQiang" >-->
+        <!--SELECT-->
+        <!--<include refid="Base_Column_List_dingQiang"/>-->
+        <!--FROM-->
+        <!--TS_USER u-->
+        <!--WHERE u.USID in-->
+
+        <!--<foreach  item="item" collection="userIdList" index="index"  open="(" separator="," close=")">-->
+
+            <!--#{item}-->
+
+        <!--</foreach>-->
+
+    <!--</select>-->
+
+
+    <select id="queryUserEOByUserIds" resultMap="BaseResultMap_dingQiang" >
+        SELECT
+        <include refid="Base_Column_List_dingQiang"/>
+        FROM
+        TS_USER u
+        WHERE  u.ext_info >= 11000
+
+    </select>
+
+    <select id="queryUserByUserId" resultMap="BaseResultMap_dingQiang" >
+        SELECT
+        <include refid="Base_Column_List_dingQiang"/>
+        FROM
+        TS_USER u
+        WHERE  u.usid = #{usid}
+
+    </select>
+
+
+
+
+
+
+
+
+
+
+    <resultMap id="BaseResultMap1" type="com.adc.da.sys.entity.OrgEO">
+        <id column="id" property="id"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="org_name" property="name"/>
+        <result column="org_desc" property="orgDesc"/>
+        <result column="org_code" property="orgCode"/>
+        <result column="org_type" property="orgType"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="parent_ids" property="parentIds"/>
+        <result column="is_show" property="isShow"/>
+        <result column="remarks" property="remarks"/>
+    </resultMap>
+
+
+
+</mapper>

@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.adc.da.progress.dao.ProjectNameEODao">
+    <!-- Result Map-->
+    <resultMap id = "BaseResultMap" type = "com.adc.da.progress.entity.ProjectNameEO">
+        <id column = "id_" property = "id"/>
+        <result column = "ext_info_6_" property = "extInfo6"/>
+        <result column = "stage_order_id_" property = "stageOrderId"/>
+        <result column = "proc_name_" property = "procName"/>
+        <result column = "proc_def_key_" property = "procDefKey"/>
+        <result column = "del_flag_" property = "delFlag"/>
+        <result column = "ext_info_1_" property = "extInfo1"/>
+        <result column = "ext_info_2_" property = "extInfo2"/>
+        <result column = "ext_info_3_" property = "extInfo3"/>
+        <result column = "ext_info_4_" property = "extInfo4"/>
+        <result column = "ext_info_5_" property = "extInfo5"/>
+    </resultMap>
+
+    <!-- PR_PROJECT_NAME table all fields -->
+    <sql id = "Base_Column_List">
+        ext_info_6_, id_, stage_order_id_, proc_name_, proc_def_key_, del_flag_, ext_info_1_, ext_info_2_, ext_info_3_, ext_info_4_, ext_info_5_
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id = "Base_Where_Clause">
+        where 1=1
+        and del_flag_ != '1'
+        <trim suffixOverrides = ",">
+            <if test = "extInfo6 != null">
+                and ext_info_6_ ${extInfo6Operator} #{extInfo6}
+            </if>
+            <if test = "id != null">
+                and id_ ${idOperator} #{id}
+            </if>
+            <if test = "stageOrderId != null">
+                and stage_order_id_ ${stageOrderIdOperator} #{stageOrderId}
+            </if>
+            <if test = "stageOrderIds != null">
+                and stage_order_id_ in
+                <foreach item = "item" collection = "stageOrderIds" open = "(" separator = "," close = ")"
+                        index = "index">
+                    #{item}
+                </foreach>
+            </if>
+            <if test = "procName != null">
+                and proc_name_ ${procNameOperator} #{procName}
+            </if>
+            <if test = "procDefKey != null">
+                and proc_def_key_ ${procDefKeyOperator} #{procDefKey}
+            </if>
+            <if test = "delFlag != null">
+                and del_flag_ ${delFlagOperator} #{delFlag}
+            </if>
+            <if test = "extInfo1 != null">
+                and ext_info_1_ ${extInfo1Operator} #{extInfo1}
+            </if>
+            <if test = "extInfo2 != null">
+                and ext_info_2_ ${extInfo2Operator} #{extInfo2}
+            </if>
+            <if test = "extInfo3 != null">
+                and ext_info_3_ ${extInfo3Operator} #{extInfo3}
+            </if>
+            <if test = "extInfo4 != null">
+                and ext_info_4_ ${extInfo4Operator} #{extInfo4}
+            </if>
+            <if test = "extInfo5 != null">
+                and ext_info_5_ ${extInfo5Operator} #{extInfo5}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id = "insert" parameterType = "com.adc.da.progress.entity.ProjectNameEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+            SELECT SEQ_PR_PROJECT_NAME.NEXTVAL FROM DUAL
+        </selectKey> -->insert into PR_PROJECT_NAME(<include
+            refid = "Base_Column_List"/>) values (#{extInfo6, jdbcType=VARCHAR}, #{id, jdbcType=VARCHAR}, #{stageOrderId, jdbcType=VARCHAR}, #{procName, jdbcType=VARCHAR}, #{procDefKey, jdbcType=VARCHAR}, #{delFlag, jdbcType=VARCHAR}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=INTEGER}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id = "insertSelective" parameterType = "com.adc.da.progress.entity.ProjectNameEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_PR_PROJECT_NAME.NEXTVAL FROM DUAL
+    </selectKey> -->insert into PR_PROJECT_NAME
+        <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+            <if test = "extInfo6 != null">ext_info_6_,</if>
+            <if test = "id != null">id_,</if>
+            <if test = "stageOrderId != null">stage_order_id_,</if>
+            <if test = "procName != null">proc_name_,</if>
+            <if test = "procDefKey != null">proc_def_key_,</if>
+            <if test = "delFlag != null">del_flag_,</if>
+            <if test = "extInfo1 != null">ext_info_1_,</if>
+            <if test = "extInfo2 != null">ext_info_2_,</if>
+            <if test = "extInfo3 != null">ext_info_3_,</if>
+            <if test = "extInfo4 != null">ext_info_4_,</if>
+            <if test = "extInfo5 != null">ext_info_5_,</if>
+        </trim>
+        <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+            <if test = "extInfo6 != null">#{extInfo6, jdbcType=VARCHAR},</if>
+            <if test = "id != null">#{id, jdbcType=VARCHAR},</if>
+            <if test = "stageOrderId != null">#{stageOrderId, jdbcType=VARCHAR},</if>
+            <if test = "procName != null">#{procName, jdbcType=VARCHAR},</if>
+            <if test = "procDefKey != null">#{procDefKey, jdbcType=VARCHAR},</if>
+            <if test = "delFlag != null">#{delFlag, jdbcType=VARCHAR},</if>
+            <if test = "extInfo1 != null">#{extInfo1, jdbcType=VARCHAR},</if>
+            <if test = "extInfo2 != null">#{extInfo2, jdbcType=INTEGER},</if>
+            <if test = "extInfo3 != null">#{extInfo3, jdbcType=VARCHAR},</if>
+            <if test = "extInfo4 != null">#{extInfo4, jdbcType=VARCHAR},</if>
+            <if test = "extInfo5 != null">#{extInfo5, jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <!-- 根据pk，修改记录-->
+    <update id = "updateByPrimaryKey" parameterType = "com.adc.da.progress.entity.ProjectNameEO">
+        UPDATE PR_PROJECT_NAME
+        SET ext_info_6_     = #{extInfo6},
+            stage_order_id_ = #{stageOrderId},
+            proc_name_      = #{procName},
+            proc_def_key_   = #{procDefKey},
+            del_flag_       = #{delFlag},
+            ext_info_1_     = #{extInfo1},
+            ext_info_2_     = #{extInfo2},
+            ext_info_3_     = #{extInfo3},
+            ext_info_4_     = #{extInfo4},
+            ext_info_5_     = #{extInfo5}
+        WHERE id_ = #{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id = "updateByPrimaryKeySelective" parameterType = "com.adc.da.progress.entity.ProjectNameEO">
+        update PR_PROJECT_NAME
+        <set>
+            <if test = "extInfo6 != null">
+                ext_info_6_ = #{extInfo6},
+            </if>
+            <if test = "stageOrderId != null">
+                stage_order_id_ = #{stageOrderId},
+            </if>
+            <if test = "procName != null">
+                proc_name_ = #{procName},
+            </if>
+            <if test = "procDefKey != null">
+                proc_def_key_ = #{procDefKey},
+            </if>
+            <if test = "delFlag != null">
+                del_flag_ = #{delFlag},
+            </if>
+            <if test = "extInfo1 != null">
+                ext_info_1_ = #{extInfo1},
+            </if>
+            <if test = "extInfo2 != null">
+                ext_info_2_ = #{extInfo2},
+            </if>
+            <if test = "extInfo3 != null">
+                ext_info_3_ = #{extInfo3},
+            </if>
+            <if test = "extInfo4 != null">
+                ext_info_4_ = #{extInfo4},
+            </if>
+            <if test = "extInfo5 != null">
+                ext_info_5_ = #{extInfo5},
+            </if>
+        </set>
+        where id_ = #{id}
+    </update>
+
+    <!-- 根据id查询 PR_PROJECT_NAME -->
+    <select id = "selectByPrimaryKey" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+        select
+        <include refid = "Base_Column_List"/>
+        from PR_PROJECT_NAME where id_ = #{value} and del_flag_ != '1'
+
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id = "deleteByPrimaryKey" parameterType = "java.lang.String">
+        UPDATE PR_PROJECT_NAME
+        SET del_flag_ = '1'
+        WHERE id_ = #{value}
+
+    </delete>
+
+    <!-- 逻辑删除记录 -->
+    <update id="deleteByPrimaryKeysInFlag" parameterType="java.util.List">
+        update PR_PROJECT_NAME set del_flag_ = '1'
+        where id_ in
+        <foreach item="id_" collection="list" open="(" separator=","
+                 close=")" index="index">
+            #{id_}
+        </foreach>
+    </update>
+
+  <!-- PR_PROJECT_NAME 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from PR_PROJECT_NAME
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+    <!-- 查询PR_PROJECT_NAME列表 -->
+    <select id = "queryByPage" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from (select tmp_tb.* , rownum rn from (select
+        <include refid = "Base_Column_List"/>
+        from PR_PROJECT_NAME
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex}) where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id = "queryByList" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from PR_PROJECT_NAME
+        <include refid = "Base_Where_Clause"/>
+
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+
+    </select>
+
+
+
+    <!--&lt;!&ndash; 根据id查询 PR_PROJECT_NAME &ndash;&gt;-->
+    <!--<select id = "selectByProjectId" resultMap = "BaseResultMap" parameterType = "java.lang.String">-->
+        <!--select-->
+        <!--<include refid = "Base_Column_List"/>-->
+        <!--from PR_PROJECT_NAME where pr = #{value} and del_flag_ != '1'-->
+
+    <!--</select>-->
+
+</mapper>

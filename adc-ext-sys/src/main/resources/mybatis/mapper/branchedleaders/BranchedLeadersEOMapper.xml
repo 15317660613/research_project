@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.ext.sys.branchedleaders.dao.BranchedLeadersEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.ext.sys.branchedleaders.entity.BranchedLeadersEO" >
+    <id column="id" property="id" />
+    <result column="org_id" property="orgId" />
+    <result column="user_id" property="userId" />
+    <result column="user_name" property="userName" />
+    <result column="config_type" property="configType" />
+    <result column="user_map" property="userMap" />
+    <result column="assiantant_ids" property="assiantantIds" />
+    <result column="assiantant_names" property="assiantantNames" />
+    <result column="contracts_manager_ids" property="contractsManagerIds" />
+    <result column="contracts_managers" property="contractsManagers" />
+  </resultMap>
+
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap2" type="com.adc.da.ext.sys.branchedleaders.entity.BranchedLeadersEO" >
+        <id column="bid" property="id" />
+        <result column="org_id" property="orgId" />
+        <result column="user_id" property="userId" />
+        <result column="user_name" property="userName" />
+        <result column="config_type" property="configType" />
+        <result column="user_map" property="userMap" />
+        <result column="assiantant_ids" property="assiantantIds" />
+        <result column="assiantant_names" property="assiantantNames" />
+        <result column="contracts_manager_ids" property="contractsManagerIds" />
+        <result column="contracts_managers" property="contractsManagers" />
+        <result column="org_name" property="orgName" />
+    </resultMap>
+
+    <resultMap id = "BaseResultMapOrg" type = "com.adc.da.sys.entity.OrgEO">
+        <id column = "id" property = "id"/>
+        <result column = "del_flag" property = "delFlag"/>
+        <result column = "org_name" property = "name"/>
+        <result column = "org_desc" property = "orgDesc"/>
+        <result column = "org_code" property = "orgCode"/>
+        <result column = "org_type" property = "orgType"/>
+        <result column = "parent_id" property = "parentId"/>
+        <result column = "parent_ids" property = "parentIds"/>
+        <result column = "is_show" property = "isShow"/>
+        <result column = "remarks" property = "remarks"/>
+    </resultMap>
+
+    <resultMap id = "ResultMapUserList" type = "com.adc.da.budget.entity.StatisticsEntity">
+        <result column = "USNAME" property = "userName"/>
+        <result column = "USID" property = "userId"/>
+    </resultMap>
+
+  <!-- TS_BRANCHED_LEADERS table all fields -->
+  <sql id="Base_Column_List" >
+     id, org_id, user_id, user_name, config_type, user_map, assiantant_ids, assiantant_names, contracts_manager_ids, contracts_managers
+  </sql>
+
+    <!-- TS_BRANCHED_LEADERS table all fields  and ts_org.org_name-->
+    <sql id="Base_Column_List2" >
+     bid, org_id, user_id, user_name, config_type, user_map, assiantant_ids, assiantant_names, contracts_manager_ids, contracts_managers,org_name
+  </sql>
+
+    <sql id="Base_Column_List3" >
+     TS_BRANCHED_LEADERS.id bid, org_id, user_id, user_name, config_type, user_map, assiantant_ids, assiantant_names, contracts_manager_ids, contracts_managers,org_name
+  </sql>
+
+    <sql id = "Base_Column_List_org">
+        id, del_flag, org_name, org_desc,org_code,parent_id, parent_ids, is_show, remarks
+    </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="orgId != null" >
+        and org_id ${orgIdOperator} #{orgId}
+      </if>
+      <if test="userId != null" >
+        and user_id ${userIdOperator} #{userId}
+      </if>
+      <if test="userName != null" >
+        and user_name ${userNameOperator} #{userName}
+      </if>
+      <if test="configType != null" >
+        and config_type ${configTypeOperator} #{configType}
+      </if>
+      <if test="userMap != null" >
+        and user_map ${userMapOperator} #{userMap}
+      </if>
+      <if test="assiantantIds != null" >
+        and assiantant_ids ${assiantantIdsOperator} #{assiantantIds}
+      </if>
+      <if test="assiantantNames != null" >
+        and assiantant_names ${assiantantNamesOperator} #{assiantantNames}
+      </if>
+      <if test="contractsManagerIds != null" >
+        and contracts_manager_ids ${contractsManagerIdsOperator} #{contractsManagerIds}
+      </if>
+      <if test="contractsManagers != null" >
+        and contracts_managers ${contractsManagersOperator} #{contractsManagers}
+      </if>
+    </trim>
+  </sql>
+
+
+
+
+
+    <!-- 查询条件2 -->
+    <sql id="Base_Where_Clause2">
+        where 1=1 and TS_BRANCHED_LEADERS.org_id=ts_org.id
+        <trim suffixOverrides="," >
+            <if test="id != null" >
+                and id ${idOperator} #{id}
+            </if>
+            <if test="orgId != null" >
+                and org_id ${orgIdOperator} #{orgId}
+            </if>
+
+            <if test="orgName != null" >
+                and org_name like concat(concat('%',#{orgName,jdbcType=VARCHAR}),'%')
+            </if>
+
+            <if test="userId != null" >
+                and user_id ${userIdOperator} #{userId}
+            </if>
+            <if test="userName != null" >
+                and user_name ${userNameOperator} #{userName}
+            </if>
+            <if test="configType != null" >
+                and config_type ${configTypeOperator} #{configType}
+            </if>
+            <if test="userMap != null" >
+                and user_map ${userMapOperator} #{userMap}
+            </if>
+            <if test="assiantantIds != null" >
+                and assiantant_ids ${assiantantIdsOperator} #{assiantantIds}
+            </if>
+            <if test="assiantantNames != null" >
+                and assiantant_names ${assiantantNamesOperator} #{assiantantNames}
+            </if>
+            <if test="contractsManagerIds != null" >
+                and contracts_manager_ids ${contractsManagerIdsOperator} #{contractsManagerIds}
+            </if>
+            <if test="contractsManagers != null" >
+                and contracts_managers ${contractsManagersOperator} #{contractsManagers}
+            </if>
+        </trim>
+    </sql>
+
+
+
+
+
+
+
+    <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.ext.sys.branchedleaders.entity.BranchedLeadersEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_BRANCHED_LEADERS.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into TS_BRANCHED_LEADERS(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{orgId, jdbcType=VARCHAR}, #{userId, jdbcType=VARCHAR}, #{userName, jdbcType=VARCHAR}, #{configType, jdbcType=VARCHAR}, #{userMap, jdbcType=VARCHAR}, #{assiantantIds, jdbcType=VARCHAR}, #{assiantantNames, jdbcType=VARCHAR}, #{contractsManagerIds, jdbcType=VARCHAR}, #{contractsManagers, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.ext.sys.branchedleaders.entity.BranchedLeadersEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_BRANCHED_LEADERS.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into TS_BRANCHED_LEADERS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="orgId != null" >org_id,</if>
+                <if test="userId != null" >user_id,</if>
+                <if test="userName != null" >user_name,</if>
+                <if test="configType != null" >config_type,</if>
+                <if test="userMap != null" >user_map,</if>
+                <if test="assiantantIds != null" >assiantant_ids,</if>
+                <if test="assiantantNames != null" >assiantant_names,</if>
+                <if test="contractsManagerIds != null" >contracts_manager_ids,</if>
+                <if test="contractsManagers != null" >contracts_managers,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="orgId != null" >#{orgId, jdbcType=VARCHAR},</if>
+                <if test="userId != null" >#{userId, jdbcType=VARCHAR},</if>
+                <if test="userName != null" >#{userName, jdbcType=VARCHAR},</if>
+                <if test="configType != null" >#{configType, jdbcType=VARCHAR},</if>
+                <if test="userMap != null" >#{userMap, jdbcType=VARCHAR},</if>
+                <if test="assiantantIds != null" >#{assiantantIds, jdbcType=VARCHAR},</if>
+                <if test="assiantantNames != null" >#{assiantantNames, jdbcType=VARCHAR},</if>
+                <if test="contractsManagerIds != null" >#{contractsManagerIds, jdbcType=VARCHAR},</if>
+                <if test="contractsManagers != null" >#{contractsManagers, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.ext.sys.branchedleaders.entity.BranchedLeadersEO" >
+    update TS_BRANCHED_LEADERS
+       set  org_id = #{orgId},
+            user_id = #{userId},
+            user_name = #{userName},
+            config_type = #{configType},
+            user_map = #{userMap},
+            assiantant_ids = #{assiantantIds},
+            assiantant_names = #{assiantantNames},
+            contracts_manager_ids = #{contractsManagerIds},
+            contracts_managers = #{contractsManagers}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.ext.sys.branchedleaders.entity.BranchedLeadersEO" >
+    update TS_BRANCHED_LEADERS
+    <set >
+      <if test="orgId != null" >
+        org_id = #{orgId},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName},
+      </if>
+      <if test="configType != null" >
+        config_type = #{configType},
+      </if>
+      <if test="userMap != null" >
+        user_map = #{userMap},
+      </if>
+      <if test="assiantantIds != null" >
+        assiantant_ids = #{assiantantIds},
+      </if>
+      <if test="assiantantNames != null" >
+        assiantant_names = #{assiantantNames},
+      </if>
+      <if test="contractsManagerIds != null" >
+        contracts_manager_ids = #{contractsManagerIds},
+      </if>
+      <if test="contractsManagers != null" >
+        contracts_managers = #{contractsManagers},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 TS_BRANCHED_LEADERS -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from TS_BRANCHED_LEADERS
+     where id = #{value}
+
+  </select>
+
+    <select id="selectIdByOrgId" resultType="string" parameterType="java.lang.String">
+        select id
+        from TS_BRANCHED_LEADERS
+        where org_id= #{value}
+
+    </select>
+
+    <select id="selectParentOrgNameByOrgId" resultType="string" parameterType="java.lang.String">
+        select org_name
+        from TS_ORG
+        where id=(select parent_id from TS_ORG where id=#{value})
+
+    </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TS_BRANCHED_LEADERS
+     where id = #{value}
+
+  </delete>
+
+    <delete id="deleteByOrgName" parameterType="java.lang.String">
+    delete from TS_BRANCHED_LEADERS
+     where org_id in (select id from ts_org where org_name = #{value})
+
+  </delete>
+
+  <!-- TS_BRANCHED_LEADERS 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from TS_BRANCHED_LEADERS
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TS_BRANCHED_LEADERS列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from TS_BRANCHED_LEADERS
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+    <select id="getPage" resultMap="BaseResultMap2" parameterType="com.adc.da.base.page.BasePage">
+        select <include refid="Base_Column_List2" /> from
+        (select tmp_tb.* , rownum rn from
+        (select <include refid="Base_Column_List3" /> from TS_BRANCHED_LEADERS,ts_org
+        <include refid="Base_Where_Clause2"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from TS_BRANCHED_LEADERS
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+    <select id = "queryOrgByName" resultMap = "BaseResultMapOrg" parameterType = "java.lang.String">
+        SELECT *
+        FROM TS_ORG T
+        WHERE T.ORG_NAME LIKE #{orgName}
+    </select>
+
+    <select id = "queryOrgIdByName" resultType = "string" parameterType = "java.lang.String">
+        SELECT ID
+        FROM TS_ORG T
+        WHERE T.ORG_NAME LIKE #{orgName} and del_flag!=1
+    </select>
+
+    <!--根据组织机构id和用户name查询用户-->
+    <!--    @author Lee Kwanho 李坤澔-->
+    <!--    date 2019-05-27-->
+    <select id = "queryUserByDepIdAndUserName" resultMap = "ResultMapUserList" parameterType = "java.lang.String">
+
+        SELECT USID, USNAME
+        FROM TS_USER
+        WHERE USNAME = #{userName}
+          AND DEL_FLAG = '0'
+          AND USID IN (
+            SELECT DISTINCT A.USER_ID
+            FROM TR_USER_ORG A
+            WHERE A.ORG_ID IN (
+                SELECT B."ID"
+                FROM TS_ORG B
+                START WITH B."ID" = #{orgId}
+                CONNECT BY PRIOR B."ID" = B.PARENT_ID
+            )
+        )
+    </select>
+
+
+    <select id="getEmployeeInfoByNameAndOrgId" resultType="map" >
+           select usid,usname,org1.id oid,org1.layer,org1.parent_ids,org1.org_name org_name1,org2.org_name org_name2 ,org3.org_name org_name3,org4.org_name org_name4 ,org5.org_name             org_name5,org6.org_name org_name6
+            from ts_user left join tr_user_org on ts_user.usid=tr_user_org.user_id
+            left join ts_org org1 on tr_user_org.org_id=org1.id
+            left join ts_org org2 on org1.parent_id=org2.id
+            left join ts_org org3 on org2.parent_id=org3.id
+            left join ts_org org4 on org3.parent_id=org4.id
+            left join ts_org org5 on org4.parent_id=org5.id
+            left join ts_org org6 on org5.parent_id=org6.id
+            where org1.layer is not null and org1.parent_ids is not null and ts_user.DEL_FLAG!=1
+            and usname=#{usname} and org1.id=#{oid}
+    </select>
+
+</mapper>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.adc.da.listener.dao.ListenerOrgDao">
+    <!-- Result Map-->
+
+    <select id = "getOrgAndParent" resultType = "java.lang.String" parameterType = "java.lang.String">
+        SELECT ID
+        FROM TS_ORG
+        START WITH ID = #{orgId}
+        CONNECT BY ID = PRIOR PARENT_ID
+    </select>
+
+    <select id = "getOrgAndChild" resultType = "java.lang.String" parameterType = "java.lang.String">
+        SELECT ID
+        FROM TS_ORG
+        START WITH ID = #{orgId}
+        CONNECT BY PRIOR ID = PARENT_ID
+    </select>
+
+    <select id = "getUserWithDeptAndRole" resultType = "java.lang.String" parameterType = "java.lang.String">
+        SELECT uo.USER_ID
+        FROM TR_USER_ORG uo
+                 LEFT JOIN TR_USER_ROLE ur ON uo.USER_ID = ur.USER_ID
+        WHERE ORG_ID = #{orgId}
+          AND ROLE_ID = #{roleId}
+    </select>
+
+
+    <sql id = "SQL_UO_ORG_ID">
+        SELECT uo.ORG_ID
+        FROM TR_USER_ORG uo
+        WHERE USER_ID = #{userId}
+    </sql>
+
+    <select id = "getUserOrgId" resultType = "java.lang.String" parameterType = "java.lang.String">
+        <include refid = "SQL_UO_ORG_ID"/>
+    </select>
+
+    <resultMap id = "BaseResultMap" type = "com.adc.da.sys.entity.OrgEO">
+        <id column = "id" property = "id"/>
+        <result column = "del_flag" property = "delFlag"/>
+        <result column = "org_name" property = "name"/>
+        <result column = "org_desc" property = "orgDesc"/>
+        <result column = "org_code" property = "orgCode"/>
+        <result column = "org_type" property = "orgType"/>
+        <result column = "parent_id" property = "parentId"/>
+        <result column = "parent_ids" property = "parentIds"/>
+        <result column = "is_show" property = "isShow"/>
+        <result column = "remarks" property = "remarks"/>
+    </resultMap>
+
+    <resultMap id = "ResultMapOrgLevel" type = "com.adc.da.listener.entity.OrgEOLevel" extends = "BaseResultMap">
+        <id column = "id" property = "id"/>
+        <result column = "ORG_LEAF" property = "leaf"/>
+        <result column = "ORG_LEVEL" property = "level"/>
+        <result column = "USER_ID" property = "userId"/>
+        <result column = "ORG_ID" property = "id"/>
+    </resultMap>
+
+
+    <select id = "getUserOrgIdWithLevel" resultMap = "ResultMapOrgLevel" parameterType = "java.lang.String">
+        SELECT ORG_LEV, ID
+        FROM (SELECT LEVEL ORG_LEV, o.* FROM TS_ORG o START WITH ID = #{rootOrgId} CONNECT BY PRIOR ID = PARENT_ID)
+        WHERE ID IN (<include refid = "SQL_UO_ORG_ID"/>)
+        ORDER BY ORG_LEV DESC
+    </select>
+
+
+    <select id = "getUserByRole" resultType = "java.lang.String" parameterType = "java.lang.String">
+        SELECT DISTINCT uo.USER_ID
+        FROM TR_USER_ROLE uo
+                 LEFT JOIN TS_USER u ON uo.USER_ID = u.USID
+        WHERE u.DEL_FLAG = 0
+          AND uo.ROLE_ID = #{roleId}
+    </select>
+
+    <select id = "getRoleByUser" resultType = "java.lang.String" parameterType = "java.lang.String">
+        SELECT uo.ROLE_ID
+        FROM TR_USER_ROLE uo
+        WHERE USER_ID = #{userId}
+    </select>
+
+</mapper>

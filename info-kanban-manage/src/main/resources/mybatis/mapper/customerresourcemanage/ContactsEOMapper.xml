@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.customerresourcemanage.dao.ContactsEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.customerresourcemanage.entity.ContactsEO" >
+    <id column="id" property="id" />
+    <result column="ext5" property="ext5" />
+    <result column="ext3" property="ext3" />
+    <result column="ext4" property="ext4" />
+    <result column="enterprise_id" property="enterpriseId" />
+    <result column="contacts_usname" property="contactsUsname" />
+    <result column="contacts_sex" property="contactsSex" />
+    <result column="depart_name" property="departName" />
+    <result column="child_depart_name" property="childDepartName" />
+    <result column="contacts_post" property="contactsPost" />
+    <result column="contacts_phone" property="contactsPhone" />
+    <result column="contacts_landline" property="contactsLandline" />
+    <result column="contacts_email" property="contactsEmail" />
+    <result column="contacts_homeaddress" property="contactsHomeaddress" />
+    <result column="contacts_birthday" property="contactsBirthday" />
+    <result column="contacts_birthplace" property="contactsBirthplace" />
+    <result column="contacts_school" property="contactsSchool" />
+    <result column="effect_id" property="effectId" />
+    <result column="intimacy_id" property="intimacyId" />
+    <result column="create_time" property="createTime" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="create_user_name" property="createUserName" />
+    <result column="con_usname" property="conUsname" />
+    <result column="con_depart_name" property="conDepartName" />
+    <result column="con_post" property="conPost" />
+    <result column="con_phone" property="conPhone" />
+    <result column="con_email" property="conEmail" />
+    <result column="stuff" property="stuff" />
+    <result column="evaluate" property="evaluate" />
+    <result column="market" property="market" />
+    <result column="statute" property="statute" />
+    <result column="authentication" property="authentication" />
+    <result column="intelligence" property="intelligence" />
+    <result column="purchase" property="purchase" />
+    <result column="finance" property="finance" />
+    <result column="remark" property="remark" />
+    <result column="ext1" property="ext1" />
+    <result column="ext2" property="ext2" />
+      <result column="del_flag" property="delFlag" />
+      <result column="comprehensive" property="comprehensive"/>
+      <result column="update_time" property="updateTime"/>
+      <result column="update_user_id" property="updateUserId" />
+      <result column="update_user_name" property="updateUserName" />
+    <!--  <result property="enterpriseName"/>
+      <result property="effectName"/>
+      <result property="intimacyName"/>-->
+  </resultMap>
+
+
+
+  <!-- DB_CONTACTS table all fields -->
+  <sql id="Base_Column_List" >
+     ext5, ext3, ext4, id, enterprise_id, contacts_usname, contacts_sex, depart_name, child_depart_name, contacts_post, contacts_phone, contacts_landline, contacts_email, contacts_homeaddress, contacts_birthday, contacts_birthplace, contacts_school, effect_id, intimacy_id, create_time, create_user_id, create_user_name, con_usname, con_depart_name, con_post, con_phone, con_email, stuff, evaluate, market, statute, authentication, intelligence, purchase, finance, remark, ext1, ext2, del_flag, comprehensive,update_time,update_user_id,update_user_name
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1 and del_flag = '0'
+    <trim suffixOverrides="," >
+      <if test="ext5 != null" >
+        and ext5 ${ext5Operator} #{ext5}
+      </if>
+      <if test="ext3 != null" >
+        and ext3 ${ext3Operator} #{ext3}
+      </if>
+      <if test="ext4 != null" >
+        and ext4 ${ext4Operator} #{ext4}
+      </if>
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="enterpriseId != null" >
+        and enterprise_id ${enterpriseIdOperator} #{enterpriseId}
+      </if>
+      <if test="contactsUsname != null" >
+        and contacts_usname ${contactsUsnameOperator} #{contactsUsname}
+      </if>
+      <if test="contactsSex != null" >
+        and contacts_sex ${contactsSexOperator} #{contactsSex}
+      </if>
+      <if test="departName != null" >
+        and depart_name ${departNameOperator} #{departName}
+      </if>
+      <if test="childDepartName != null" >
+        and child_depart_name ${childDepartNameOperator} #{childDepartName}
+      </if>
+      <if test="contactsPost != null" >
+        and contacts_post ${contactsPostOperator} #{contactsPost}
+      </if>
+      <if test="contactsPhone != null" >
+        and contacts_phone ${contactsPhoneOperator} #{contactsPhone}
+      </if>
+      <if test="contactsLandline != null" >
+        and contacts_landline ${contactsLandlineOperator} #{contactsLandline}
+      </if>
+      <if test="contactsEmail != null" >
+        and contacts_email ${contactsEmailOperator} #{contactsEmail}
+      </if>
+      <if test="contactsHomeaddress != null" >
+        and contacts_homeaddress ${contactsHomeaddressOperator} #{contactsHomeaddress}
+      </if>
+      <if test="contactsBirthday != null" >
+        and contacts_birthday ${contactsBirthdayOperator} #{contactsBirthday}
+      </if>
+      <if test="contactsBirthday1 != null" >
+        and contacts_birthday &gt;= #{contactsBirthday1}
+      </if>
+      <if test="contactsBirthday2 != null" >
+        and contacts_birthday &lt;= #{contactsBirthday2}
+      </if>
+      <if test="contactsBirthplace != null" >
+        and contacts_birthplace ${contactsBirthplaceOperator} #{contactsBirthplace}
+      </if>
+      <if test="contactsSchool != null" >
+        and contacts_school ${contactsSchoolOperator} #{contactsSchool}
+      </if>
+      <if test="effectId != null" >
+        and effect_id ${effectIdOperator} #{effectId}
+      </if>
+      <if test="intimacyId != null" >
+        and intimacy_id ${intimacyIdOperator} #{intimacyId}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="createUserId != null" >
+        and create_user_id ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="createUserName != null" >
+        and create_user_name ${createUserNameOperator} #{createUserName}
+      </if>
+      <if test="conUsname != null" >
+        and con_usname ${conUsnameOperator} #{conUsname}
+      </if>
+      <if test="conDepartName != null" >
+        and con_depart_name ${conDepartNameOperator} #{conDepartName}
+      </if>
+      <if test="conPost != null" >
+        and con_post ${conPostOperator} #{conPost}
+      </if>
+      <if test="conPhone != null" >
+        and con_phone ${conPhoneOperator} #{conPhone}
+      </if>
+      <if test="conEmail != null" >
+        and con_email ${conEmailOperator} #{conEmail}
+      </if>
+      <if test="stuff != null" >
+        and stuff ${stuffOperator} #{stuff}
+      </if>
+      <if test="evaluate != null" >
+        and evaluate ${evaluateOperator} #{evaluate}
+      </if>
+      <if test="market != null" >
+        and market ${marketOperator} #{market}
+      </if>
+      <if test="statute != null" >
+        and statute ${statuteOperator} #{statute}
+      </if>
+      <if test="authentication != null" >
+        and authentication ${authenticationOperator} #{authentication}
+      </if>
+      <if test="intelligence != null" >
+        and intelligence ${intelligenceOperator} #{intelligence}
+      </if>
+      <if test="purchase != null" >
+        and purchase ${purchaseOperator} #{purchase}
+      </if>
+      <if test="finance != null" >
+        and finance ${financeOperator} #{finance}
+      </if>
+      <if test="remark != null" >
+        and remark ${remarkOperator} #{remark}
+      </if>
+      <if test="ext1 != null" >
+        and ext1 ${ext1Operator} #{ext1}
+      </if>
+      <if test="ext2 != null" >
+        and ext2 ${ext2Operator} #{ext2}
+      </if>
+        <if test="delFlag != null and delFlag != ''" >
+            and del_flag ${delFlagOperator} #{delFlag}
+        </if>
+        <if test="comprehensive!=null">
+            and comprehensive ${comprehensiveOperator} #{comprehensive}
+        </if>
+        <if test="updateTime != null" >
+            and update_time ${updateTimeOperator} #{updateTime}
+        </if>
+        <if test="updateTime1 != null" >
+            and update_time &gt;= #{updateTime1}
+        </if>
+        <if test="updateTime2 != null" >
+            and update_time &lt;= #{updateTime2}
+        </if>
+        <if test="updateUserId != null" >
+            and update_user_id ${updateUserIdOperator} #{updateUserId}
+        </if>
+        <if test="createUserName != null" >
+            and update_user_name ${updateUserNameOperator} #{updateUserName}
+        </if>
+    </trim>
+  </sql>
+
+    <sql id="Base_Where_Clause_page">
+        where 1=1 and c.del_flag = '0'
+        <trim suffixOverrides="," >
+
+            <if test="contactsUsname != null and contactsUsname != ''" >
+                and c.contacts_usname ${contactsUsnameOperator} #{contactsUsname}
+            </if>
+            <if test="enterpriseName != null and enterpriseName != ''" >
+                and e.ENTERPRISE_NAME ${enterpriseNameOperator} #{enterpriseName}
+            </if>
+
+        </trim>
+    </sql>
+
+
+
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.customerresourcemanage.entity.ContactsEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_DB_CONTACTS.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into DB_CONTACTS(<include refid="Base_Column_List" />)
+    values (#{ext5, jdbcType=VARCHAR}, #{ext3, jdbcType=VARCHAR}, #{ext4, jdbcType=VARCHAR}, #{id, jdbcType=VARCHAR}, #{enterpriseId, jdbcType=VARCHAR}, #{contactsUsname, jdbcType=VARCHAR}, #{contactsSex, jdbcType=VARCHAR}, #{departName, jdbcType=VARCHAR}, #{childDepartName, jdbcType=VARCHAR}, #{contactsPost, jdbcType=VARCHAR}, #{contactsPhone, jdbcType=VARCHAR}, #{contactsLandline, jdbcType=VARCHAR}, #{contactsEmail, jdbcType=VARCHAR}, #{contactsHomeaddress, jdbcType=VARCHAR}, #{contactsBirthday, jdbcType=TIMESTAMP}, #{contactsBirthplace, jdbcType=VARCHAR}, #{contactsSchool, jdbcType=VARCHAR}, #{effectId, jdbcType=VARCHAR}, #{intimacyId, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{createUserId, jdbcType=VARCHAR}, #{createUserName, jdbcType=VARCHAR}, #{conUsname, jdbcType=VARCHAR}, #{conDepartName, jdbcType=VARCHAR}, #{conPost, jdbcType=VARCHAR}, #{conPhone, jdbcType=VARCHAR}, #{conEmail, jdbcType=VARCHAR}, #{stuff, jdbcType=VARCHAR}, #{evaluate, jdbcType=VARCHAR}, #{market, jdbcType=VARCHAR}, #{statute, jdbcType=VARCHAR}, #{authentication, jdbcType=VARCHAR}, #{intelligence, jdbcType=VARCHAR}, #{purchase, jdbcType=VARCHAR}, #{finance, jdbcType=VARCHAR}, #{remark, jdbcType=VARCHAR}, #{ext1, jdbcType=VARCHAR}, #{ext2, jdbcType=VARCHAR}, #{delFlag, jdbcType=VARCHAR}, #{comprehensive,jdbcType=VARCHAR},#{updateTime, jdbcType=TIMESTAMP},#{updateUserId, jdbcType=VARCHAR},#{updateUserName, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.customerresourcemanage.entity.ContactsEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_DB_CONTACTS.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into DB_CONTACTS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="ext5 != null" >ext5,</if>
+                <if test="ext3 != null" >ext3,</if>
+                <if test="ext4 != null" >ext4,</if>
+                <if test="id != null" >id,</if>
+                <if test="enterpriseId != null" >enterprise_id,</if>
+                <if test="contactsUsname != null" >contacts_usname,</if>
+                <if test="contactsSex != null" >contacts_sex,</if>
+                <if test="departName != null" >depart_name,</if>
+                <if test="childDepartName != null" >child_depart_name,</if>
+                <if test="contactsPost != null" >contacts_post,</if>
+                <if test="contactsPhone != null" >contacts_phone,</if>
+                <if test="contactsLandline != null" >contacts_landline,</if>
+                <if test="contactsEmail != null" >contacts_email,</if>
+                <if test="contactsHomeaddress != null" >contacts_homeaddress,</if>
+                <if test="contactsBirthday != null" >contacts_birthday,</if>
+                <if test="contactsBirthplace != null" >contacts_birthplace,</if>
+                <if test="contactsSchool != null" >contacts_school,</if>
+                <if test="effectId != null" >effect_id,</if>
+                <if test="intimacyId != null" >intimacy_id,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="createUserId != null" >create_user_id,</if>
+                <if test="createUserName != null" >create_user_name,</if>
+                <if test="conUsname != null" >con_usname,</if>
+                <if test="conDepartName != null" >con_depart_name,</if>
+                <if test="conPost != null" >con_post,</if>
+                <if test="conPhone != null" >con_phone,</if>
+                <if test="conEmail != null" >con_email,</if>
+                <if test="stuff != null" >stuff,</if>
+                <if test="evaluate != null" >evaluate,</if>
+                <if test="market != null" >market,</if>
+                <if test="statute != null" >statute,</if>
+                <if test="authentication != null" >authentication,</if>
+                <if test="intelligence != null" >intelligence,</if>
+                <if test="purchase != null" >purchase,</if>
+                <if test="finance != null" >finance,</if>
+                <if test="remark != null" >remark,</if>
+                <if test="ext1 != null" >ext1,</if>
+                <if test="ext2 != null" >ext2,</if>
+                <if test="delFlag != null and delFlag != ''" >del_flag,</if>
+                <if test="comprehensive!=null and comprehensive!= ''">comprehensive,</if>
+                <if test="updateTime != null" >update_time,</if>
+        <if test="updateUserId != null" >update_user_id,</if>
+        <if test="updateUserName != null" >update_user_name,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="ext5 != null" >#{ext5, jdbcType=VARCHAR},</if>
+                <if test="ext3 != null" >#{ext3, jdbcType=VARCHAR},</if>
+                <if test="ext4 != null" >#{ext4, jdbcType=VARCHAR},</if>
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="enterpriseId != null" >#{enterpriseId, jdbcType=VARCHAR},</if>
+                <if test="contactsUsname != null" >#{contactsUsname, jdbcType=VARCHAR},</if>
+                <if test="contactsSex != null" >#{contactsSex, jdbcType=VARCHAR},</if>
+                <if test="departName != null" >#{departName, jdbcType=VARCHAR},</if>
+                <if test="childDepartName != null" >#{childDepartName, jdbcType=VARCHAR},</if>
+                <if test="contactsPost != null" >#{contactsPost, jdbcType=VARCHAR},</if>
+                <if test="contactsPhone != null" >#{contactsPhone, jdbcType=VARCHAR},</if>
+                <if test="contactsLandline != null" >#{contactsLandline, jdbcType=VARCHAR},</if>
+                <if test="contactsEmail != null" >#{contactsEmail, jdbcType=VARCHAR},</if>
+                <if test="contactsHomeaddress != null" >#{contactsHomeaddress, jdbcType=VARCHAR},</if>
+                <if test="contactsBirthday != null" >#{contactsBirthday, jdbcType=TIMESTAMP},</if>
+                <if test="contactsBirthplace != null" >#{contactsBirthplace, jdbcType=VARCHAR},</if>
+                <if test="contactsSchool != null" >#{contactsSchool, jdbcType=VARCHAR},</if>
+                <if test="effectId != null" >#{effectId, jdbcType=VARCHAR},</if>
+                <if test="intimacyId != null" >#{intimacyId, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="createUserId != null" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="createUserName != null" >#{createUserName, jdbcType=VARCHAR},</if>
+                <if test="conUsname != null" >#{conUsname, jdbcType=VARCHAR},</if>
+                <if test="conDepartName != null" >#{conDepartName, jdbcType=VARCHAR},</if>
+                <if test="conPost != null" >#{conPost, jdbcType=VARCHAR},</if>
+                <if test="conPhone != null" >#{conPhone, jdbcType=VARCHAR},</if>
+                <if test="conEmail != null" >#{conEmail, jdbcType=VARCHAR},</if>
+                <if test="stuff != null" >#{stuff, jdbcType=VARCHAR},</if>
+                <if test="evaluate != null" >#{evaluate, jdbcType=VARCHAR},</if>
+                <if test="market != null" >#{market, jdbcType=VARCHAR},</if>
+                <if test="statute != null" >#{statute, jdbcType=VARCHAR},</if>
+                <if test="authentication != null" >#{authentication, jdbcType=VARCHAR},</if>
+                <if test="intelligence != null" >#{intelligence, jdbcType=VARCHAR},</if>
+                <if test="purchase != null" >#{purchase, jdbcType=VARCHAR},</if>
+                <if test="finance != null" >#{finance, jdbcType=VARCHAR},</if>
+                <if test="remark != null" >#{remark, jdbcType=VARCHAR},</if>
+                <if test="ext1 != null" >#{ext1, jdbcType=VARCHAR},</if>
+                <if test="ext2 != null" >#{ext2, jdbcType=VARCHAR},</if>
+                <if test="delFlag != null and delFlag != ''" >#{delFlag, jdbcType=VARCHAR},</if>
+                <if test="comprehensive != null and comprehensive != ''">#{comprehensive, jdbcType=VARCHAR},</if>
+                <if test="updateTime != null" >#{updateTime, jdbcType=TIMESTAMP},</if>
+        <if test="updateUserId != null" >#{updateUserId,jdbcType=VARCHAR},</if>
+        <if test="updateUserName != null" >#{updateUserName,jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.customerresourcemanage.entity.ContactsEO" >
+    update DB_CONTACTS
+       set  enterprise_id = #{enterpriseId},
+            contacts_usname = #{contactsUsname},
+            contacts_sex = #{contactsSex},
+            depart_name = #{departName},
+            child_depart_name = #{childDepartName},
+            contacts_post = #{contactsPost},
+            contacts_phone = #{contactsPhone},
+            contacts_landline = #{contactsLandline},
+            contacts_email = #{contactsEmail},
+            contacts_homeaddress = #{contactsHomeaddress},
+            <if test="contactsBirthday == null">contacts_birthday = NULL, </if>
+            <if test="contactsBirthday != null"> contacts_birthday = #{contactsBirthday}, </if>
+            contacts_birthplace = #{contactsBirthplace},
+            contacts_school = #{contactsSchool},
+            effect_id = #{effectId},
+            intimacy_id = #{intimacyId},
+            <if test="createTime == null">create_time = NULL, </if>
+            <if test="createTime != null"> create_time = #{createTime}, </if>
+            create_user_id = #{createUserId},
+            create_user_name = #{createUserName},
+            con_usname = #{conUsname},
+            con_depart_name = #{conDepartName},
+            con_post = #{conPost},
+            con_phone = #{conPhone},
+            con_email = #{conEmail},
+            stuff = #{stuff},
+            evaluate = #{evaluate},
+            market = #{market},
+            statute = #{statute},
+            authentication = #{authentication},
+            intelligence = #{intelligence},
+            purchase = #{purchase},
+            finance = #{finance},
+            del_flag = #{delFlag},
+            comprehensive = #{comprehensive},
+            <if test="updateTime == null">update_time = NULL, </if>
+            <if test="updateTime != null"> update_time = #{updateTime}, </if>
+            update_user_id = #{updateUserId},
+            update_user_name = #{updateUserName},
+            remark = #{remark}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.customerresourcemanage.entity.ContactsEO" >
+    update DB_CONTACTS
+    <set >
+      <if test="ext5 != null" >
+        ext5 = #{ext5},
+      </if>
+      <if test="ext3 != null" >
+        ext3 = #{ext3},
+      </if>
+      <if test="ext4 != null" >
+        ext4 = #{ext4},
+      </if>
+      <if test="enterpriseId != null" >
+        enterprise_id = #{enterpriseId},
+      </if>
+      <if test="contactsUsname != null" >
+        contacts_usname = #{contactsUsname},
+      </if>
+      <if test="contactsSex != null" >
+        contacts_sex = #{contactsSex},
+      </if>
+      <if test="departName != null" >
+        depart_name = #{departName},
+      </if>
+      <if test="childDepartName != null" >
+        child_depart_name = #{childDepartName},
+      </if>
+      <if test="contactsPost != null" >
+        contacts_post = #{contactsPost},
+      </if>
+      <if test="contactsPhone != null" >
+        contacts_phone = #{contactsPhone},
+      </if>
+      <if test="contactsLandline != null" >
+        contacts_landline = #{contactsLandline},
+      </if>
+      <if test="contactsEmail != null" >
+        contacts_email = #{contactsEmail},
+      </if>
+      <if test="contactsHomeaddress != null" >
+        contacts_homeaddress = #{contactsHomeaddress},
+      </if>
+      <if test="contactsBirthday != null" >
+        contacts_birthday = #{contactsBirthday},
+      </if>
+      <if test="contactsBirthplace != null" >
+        contacts_birthplace = #{contactsBirthplace},
+      </if>
+      <if test="contactsSchool != null" >
+        contacts_school = #{contactsSchool},
+      </if>
+      <if test="effectId != null" >
+        effect_id = #{effectId},
+      </if>
+      <if test="intimacyId != null" >
+        intimacy_id = #{intimacyId},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="createUserName != null" >
+        create_user_name = #{createUserName},
+      </if>
+      <if test="conUsname != null" >
+        con_usname = #{conUsname},
+      </if>
+      <if test="conDepartName != null" >
+        con_depart_name = #{conDepartName},
+      </if>
+      <if test="conPost != null" >
+        con_post = #{conPost},
+      </if>
+      <if test="conPhone != null" >
+        con_phone = #{conPhone},
+      </if>
+      <if test="conEmail != null" >
+        con_email = #{conEmail},
+      </if>
+      <if test="stuff != null" >
+        stuff = #{stuff},
+      </if>
+      <if test="evaluate != null" >
+        evaluate = #{evaluate},
+      </if>
+      <if test="market != null" >
+        market = #{market},
+      </if>
+      <if test="statute != null" >
+        statute = #{statute},
+      </if>
+      <if test="authentication != null" >
+        authentication = #{authentication},
+      </if>
+      <if test="intelligence != null" >
+        intelligence = #{intelligence},
+      </if>
+      <if test="purchase != null" >
+        purchase = #{purchase},
+      </if>
+      <if test="finance != null" >
+        finance = #{finance},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark},
+      </if>
+      <if test="ext1 != null" >
+        ext1 = #{ext1},
+      </if>
+      <if test="ext2 != null" >
+        ext2 = #{ext2},
+      </if>
+        <if test="delFlag != null" >
+            del_flag = #{delFlag},
+        </if>
+        <if test="comprehensive != null">
+            comprehensive = #{comprehensive}
+        </if>
+        <if test="updateUserId != null">
+            update_user_id = #{updateUserId}
+        </if>
+        <if test="update_user_name != null">
+            update_user_name = #{updateUserName}
+        </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 DB_CONTACTS -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> ,e.ENTERPRISE_NAME as enterpriseName,dic_e.DIC_TYPE_NAME AS effectName,dic_i.DIC_TYPE_NAME as intimacyName
+      from DB_CONTACTS c
+      LEFT JOIN DB_ENTERPRISE e ON e.id = c.ENTERPRISE_ID
+      LEFT JOIN TS_DICTYPE dic_e ON dic_e.id = c.EFFECT_ID
+      LEFT JOIN TS_DICTYPE dic_i ON dic_i.id = c.INTIMACY_ID
+      where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from DB_CONTACTS
+     where id = #{value}
+
+  </delete>
+
+    <!--根据企业id逻辑删除客户-->
+    <update id="logicDeleteByEnterpriseId" parameterType="java.lang.String">
+        update DB_CONTACTS set del_flag = '1' where ENTERPRISE_ID = #{enterpriseId}
+    </update>
+
+    <!--根据id逻辑删除客户-->
+    <update id="logicDeleteByPrimaryKey" parameterType="java.lang.String">
+        update DB_CONTACTS set del_flag = '1' where id = #{id}
+    </update>
+
+    <update id="batchLogicDeleteByPrimaryKeys" parameterType="java.util.List">
+        update DB_CONTACTS set del_flag = '1' where id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")" index="index">
+            #{id}
+        </foreach>
+    </update>
+
+
+
+    <update id="batchLogicDeleteByEnterpriseIds" parameterType="java.util.List">
+        update DB_CONTACTS set del_flag = '1' where ENTERPRISE_ID in
+        <foreach collection="enterpriseIds" item="enterpriseId" open="(" separator="," close=")" index="index">
+            #{enterpriseId}
+        </foreach>
+    </update>
+
+
+
+  <!-- DB_CONTACTS 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from DB_CONTACTS
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询DB_CONTACTS列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from DB_CONTACTS
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+      select c.*,e.ENTERPRISE_NAME as enterpriseName,dic_e.DIC_TYPE_NAME AS effectName,
+      e.ENTERPRISE_DOMAIN AS enterpriseDomain,e.ENTERPRISE_PROVINCE AS enterpriseProvince,
+      e.ENTERPRISE_ADDRESS AS enterpriseAddress,
+      dic_i.DIC_TYPE_NAME as intimacyName
+      from DB_CONTACTS c
+      LEFT JOIN DB_ENTERPRISE e ON e.id = c.ENTERPRISE_ID
+      LEFT JOIN TS_DICTYPE dic_e ON dic_e.id = c.EFFECT_ID
+      LEFT JOIN TS_DICTYPE dic_i ON dic_i.id = c.INTIMACY_ID
+      <include refid="Base_Where_Clause_page"/>
+      <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+          ${pager.orderCondition}
+      </if>
+  </select>
+
+
+    <!-- DB_CONTACTS 列表总数-->
+    <select id="queryByCountVO" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        select count(1) from DB_CONTACTS c
+        LEFT JOIN DB_ENTERPRISE e ON e.id = c.ENTERPRISE_ID
+        <include refid="Base_Where_Clause_page"/>
+    </select>
+
+    <!-- 查询DB_CONTACTS列表 -->
+    <select id="queryByPageVO" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select res.* from
+        (select tmp_tb.* , rownum rn from
+        (select c.*,e.ENTERPRISE_NAME as enterpriseName,e.ENTERPRISE_DOMAIN AS enterpriseDomain,
+        e.ENTERPRISE_PROVINCE AS enterpriseProvince,e.ENTERPRISE_ADDRESS AS enterpriseAddress,
+        dic_e.DIC_TYPE_NAME AS effectName,dic_i.DIC_TYPE_NAME as intimacyName
+        from DB_CONTACTS c
+        LEFT JOIN DB_ENTERPRISE e ON e.id = c.ENTERPRISE_ID
+        LEFT JOIN TS_DICTYPE dic_e ON dic_e.id = c.EFFECT_ID
+        LEFT JOIN TS_DICTYPE dic_i ON dic_i.id = c.INTIMACY_ID
+        <include refid="Base_Where_Clause_page"/>
+        <if test="sql_filter != null and sql_filter != ''" >
+            ${sql_filter}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex}) res
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id="contactsStatistics" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select count(1) from DB_CONTACTS where del_flag = '0'
+        <if test="createTimeStart != null and createTimeStart != ''">
+            and CREATE_TIME >= to_date(#{createTimeStart},'yyyy-mm-dd,hh24:mi:ss')
+        </if>
+        <if test="createTimeEnd!=null and createTimeEnd!=''">
+            and CREATE_TIME &lt;= to_date(#{createTimeEnd},'yyyy-mm-dd,hh24:mi:ss')
+        </if>
+        <if test="effectId != null and effectId != ''">
+            and EFFECT_ID = #{effectId}
+        </if>
+    </select>
+
+</mapper>

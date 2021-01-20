@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.finance.dao.CostManagementEODao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="com.adc.da.finance.entity.CostManagementEO">
+        <id column="id" property="id"/>
+        <result column="year" property="year"/>
+        <result column="month" property="month"/>
+        <result column="day" property="day"/>
+        <result column="subject_name" property="subjectName"/>
+        <result column="org_name" property="orgName"/>
+        <result column="certification_number" property="certificationNumber"/>
+        <result column="abstract_info" property="abstractInfo"/>
+        <result column="other_subject_name" property="otherSubjectName"/>
+        <result column="amount" property="amount"/>
+        <result column="business_name" property="businessName"/>
+        <result column="distribution_user_id" property="distributionUserId"/>
+        <result column="distribution_user_name" property="distributionUserName"/>
+        <result column="distribution_time" property="distributionTime"/>
+        <result column="deadline_time" property="deadlineTime"/>
+        <result column="claim_time" property="claimTime"/>
+        <result column="claim_user_name" property="claimUserName"/>
+        <result column="claim_user_id" property="claimUserId"/>
+        <result column="status" property="status"/>
+        <result column="ext_info" property="extInfo"/>
+        <result column="ext_info1" property="extInfo1"/>
+        <result column="ext_info2" property="extInfo2"/>
+        <result column="ext_info3" property="extInfo3"/>
+        <result column="ext_info4" property="extInfo4"/>
+        <result column="ext_info5" property="extInfo5"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="org_id" property="orgId"/>
+        <result column="business_id" property="businessId"/>
+    </resultMap>
+
+    <!-- F_COST_MANAGEMENT table all fields -->
+    <sql id="Base_Column_List">
+     id, year, month, day, subject_name, org_name, certification_number, abstract_info, other_subject_name, amount, business_name, distribution_user_id, distribution_user_name, distribution_time, deadline_time, claim_time, claim_user_name, claim_user_id, status, ext_info, ext_info1, ext_info2, ext_info3, ext_info4, ext_info5, del_flag, org_id,business_id
+  </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1 and del_flag != 1
+        <trim suffixOverrides=",">
+            <if test="id != null and id != '' ">
+                and id ${idOperator} #{id}
+            </if>
+            <if test="year != null and year != '' ">
+                and year ${yearOperator} #{year}
+            </if>
+            <if test="month != null and month != '' ">
+                and month ${monthOperator} #{month}
+            </if>
+            <if test="day != null  and day != '' ">
+                and day ${dayOperator} #{day}
+            </if>
+            <if test="subjectName != null  and subjectName != '' ">
+                and subject_name ${subjectNameOperator} #{subjectName}
+            </if>
+            <if test="orgName != null and orgName != '' ">
+                and org_name ${orgNameOperator} #{orgName}
+            </if>
+            <if test="certificationNumber != null  and certificationNumber != '' ">
+                and certification_number ${certificationNumberOperator} #{certificationNumber}
+            </if>
+            <if test="abstractInfo != null   and abstractInfo != '' ">
+                and abstract_info ${abstractInfoOperator} #{abstractInfo}
+            </if>
+            <if test="otherSubjectName != null and otherSubjectName != '' ">
+                and other_subject_name ${otherSubjectNameOperator} #{otherSubjectName}
+            </if>
+            <if test="amount != null  and amount != '' ">
+                and amount ${amountOperator} #{amount}
+            </if>
+            <if test="businessName != null   and businessName != '' ">
+                and business_name ${businessNameOperator} #{businessName}
+            </if>
+            <if test="distributionUserId != null   and distributionUserId != '' ">
+                and distribution_user_id ${distributionUserIdOperator} #{distributionUserId}
+            </if>
+            <if test="distributionUserName != null   and distributionUserName != '' ">
+                and distribution_user_name ${distributionUserNameOperator} #{distributionUserName}
+            </if>
+            <if test="distributionTime != null   and distributionTime != '' ">
+                and distribution_time ${distributionTimeOperator} #{distributionTime}
+            </if>
+            <if test="distributionTime1 != null  and distributionTime1 != '' ">
+                and distribution_time &gt;= #{distributionTime1}
+            </if>
+            <if test="distributionTime2 != null   and distributionTime2 != '' ">
+                and distribution_time &lt;= #{distributionTime2}
+            </if>
+            <if test="deadlineTime != null   and deadlineTime != '' ">
+                and deadline_time ${deadlineTimeOperator} #{deadlineTime}
+            </if>
+            <if test="deadlineTime1 != null   and deadlineTime1 != '' ">
+                and deadline_time &gt;= #{deadlineTime1}
+            </if>
+            <if test="deadlineTime2 != null   and deadlineTime2 != '' ">
+                and deadline_time &lt;= #{deadlineTime2}
+            </if>
+            <if test="claimTime != null  and claimTime != '' ">
+                and claim_time ${claimTimeOperator} #{claimTime}
+            </if>
+            <if test="claimTime1 != null  and claimTime1 != '' ">
+                and claim_time &gt;= #{claimTime1}
+            </if>
+            <if test="claimTime2 != null  and claimTime2 != '' ">
+                and claim_time &lt;= #{claimTime2}
+            </if>
+            <if test="claimUserName != null  and claimUserName != '' ">
+                and claim_user_name ${claimUserNameOperator} #{claimUserName}
+            </if>
+            <if test="claimUserId != null  and claimUserId != '' ">
+                and claim_user_id ${claimUserIdOperator} #{claimUserId}
+            </if>
+            <if test="status != null  and status != '' ">
+                and status ${statusOperator} #{status}
+            </if>
+            <if test="extInfo != null  and extInfo != '' ">
+                and ext_info ${extInfoOperator} #{extInfo}
+            </if>
+            <if test="extInfo1 != null  and extInfo1 != '' ">
+                and ext_info1 ${extInfo1Operator} #{extInfo1}
+            </if>
+            <if test="extInfo2 != null  and extInfo2 != '' ">
+                and ext_info2 ${extInfo2Operator} #{extInfo2}
+            </if>
+            <if test="extInfo3 != null  and extInfo3 != '' ">
+                and ext_info3 ${extInfo3Operator} #{extInfo3}
+            </if>
+            <if test="extInfo4 != null  and extInfo4 != '' ">
+                and ext_info4 ${extInfo4Operator} #{extInfo4}
+            </if>
+            <if test="extInfo5 != null  and extInfo5 != '' ">
+                and ext_info5 ${extInfo5Operator} #{extInfo5}
+            </if>
+            <if test="delFlag != null  and delFlag != '' ">
+                and del_flag ${delFlagOperator} #{delFlag}
+            </if>
+            <if test="orgId != null  and orgId != '' ">
+                and org_id ${orgIdOperator} #{orgId}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="com.adc.da.finance.entity.CostManagementEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+            SELECT SEQ_F_COST_MANAGEMENT.NEXTVAL FROM DUAL
+        </selectKey> -->
+        insert into F_COST_MANAGEMENT(<include refid="Base_Column_List"/>)
+        values (#{id, jdbcType=VARCHAR}, #{year, jdbcType=INTEGER}, #{month, jdbcType=INTEGER}, #{day, jdbcType=INTEGER},
+        #{subjectName, jdbcType=VARCHAR}, #{orgName, jdbcType=VARCHAR}, #{certificationNumber, jdbcType=VARCHAR}, #{abstractInfo, jdbcType=VARCHAR},
+        #{otherSubjectName, jdbcType=VARCHAR}, #{amount, jdbcType=DOUBLE}, #{businessName, jdbcType=VARCHAR}, #{distributionUserId, jdbcType=VARCHAR},
+        #{distributionUserName, jdbcType=VARCHAR}, #{distributionTime, jdbcType=TIMESTAMP}, #{deadlineTime, jdbcType=TIMESTAMP},
+        #{claimTime, jdbcType=TIMESTAMP}, #{claimUserName, jdbcType=VARCHAR}, #{claimUserId, jdbcType=VARCHAR}, #{status, jdbcType=INTEGER},
+        #{extInfo, jdbcType=INTEGER}, #{extInfo1, jdbcType=INTEGER}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR},
+        #{extInfo4, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR}, #{delFlag, jdbcType=INTEGER}, #{orgId, jdbcType=VARCHAR},
+        #{businessId, jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id="insertSelective" parameterType="com.adc.da.finance.entity.CostManagementEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_F_COST_MANAGEMENT.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into F_COST_MANAGEMENT
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="year != null">year,</if>
+            <if test="month != null">month,</if>
+            <if test="day != null">day,</if>
+            <if test="subjectName != null">subject_name,</if>
+            <if test="orgName != null">org_name,</if>
+            <if test="certificationNumber != null">certification_number,</if>
+            <if test="abstractInfo != null">abstract_info,</if>
+            <if test="otherSubjectName != null">other_subject_name,</if>
+            <if test="amount != null">amount,</if>
+            <if test="businessName != null">business_name,</if>
+            <if test="distributionUserId != null">distribution_user_id,</if>
+            <if test="distributionUserName != null">distribution_user_name,</if>
+            <if test="distributionTime != null">distribution_time,</if>
+            <if test="deadlineTime != null">deadline_time,</if>
+            <if test="claimTime != null">claim_time,</if>
+            <if test="claimUserName != null">claim_user_name,</if>
+            <if test="claimUserId != null">claim_user_id,</if>
+            <if test="status != null">status,</if>
+            <if test="extInfo != null">ext_info,</if>
+            <if test="extInfo1 != null">ext_info1,</if>
+            <if test="extInfo2 != null">ext_info2,</if>
+            <if test="extInfo3 != null">ext_info3,</if>
+            <if test="extInfo4 != null">ext_info4,</if>
+            <if test="extInfo5 != null">ext_info5,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="orgId != null">org_id,</if>
+            <if test="businessId != null">business_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id, jdbcType=VARCHAR},</if>
+            <if test="year != null">#{year, jdbcType=INTEGER},</if>
+            <if test="month != null">#{month, jdbcType=INTEGER},</if>
+            <if test="day != null">#{day, jdbcType=INTEGER},</if>
+            <if test="subjectName != null">#{subjectName, jdbcType=VARCHAR},</if>
+            <if test="orgName != null">#{orgName, jdbcType=VARCHAR},</if>
+            <if test="certificationNumber != null">#{certificationNumber, jdbcType=VARCHAR},</if>
+            <if test="abstractInfo != null">#{abstractInfo, jdbcType=VARCHAR},</if>
+            <if test="otherSubjectName != null">#{otherSubjectName, jdbcType=VARCHAR},</if>
+            <if test="amount != null">#{amount, jdbcType=DOUBLE},</if>
+            <if test="businessName != null">#{businessName, jdbcType=VARCHAR},</if>
+            <if test="distributionUserId != null">#{distributionUserId, jdbcType=VARCHAR},</if>
+            <if test="distributionUserName != null">#{distributionUserName, jdbcType=VARCHAR},</if>
+            <if test="distributionTime != null">#{distributionTime, jdbcType=TIMESTAMP},</if>
+            <if test="deadlineTime != null">#{deadlineTime, jdbcType=TIMESTAMP},</if>
+            <if test="claimTime != null">#{claimTime, jdbcType=TIMESTAMP},</if>
+            <if test="claimUserName != null">#{claimUserName, jdbcType=VARCHAR},</if>
+            <if test="claimUserId != null">#{claimUserId, jdbcType=VARCHAR},</if>
+            <if test="status != null">#{status, jdbcType=INTEGER},</if>
+            <if test="extInfo != null">#{extInfo, jdbcType=INTEGER},</if>
+            <if test="extInfo1 != null">#{extInfo1, jdbcType=INTEGER},</if>
+            <if test="extInfo2 != null">#{extInfo2, jdbcType=VARCHAR},</if>
+            <if test="extInfo3 != null">#{extInfo3, jdbcType=VARCHAR},</if>
+            <if test="extInfo4 != null">#{extInfo4, jdbcType=VARCHAR},</if>
+            <if test="extInfo5 != null">#{extInfo5, jdbcType=VARCHAR},</if>
+            <if test="delFlag != null">#{delFlag, jdbcType=INTEGER},</if>
+            <if test="orgId != null">#{orgId, jdbcType=VARCHAR},</if>
+            <if test="businessId != null">#{businessId, jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <insert id="insertList" parameterType="java.util.List">
+        INSERT ALL
+        <foreach collection="list" item="item" index="index">
+            <if test="item.id !=null">
+                INTO F_COST_MANAGEMENT
+                <trim prefix="(" suffix=")" suffixOverrides=",">
+                    <if test="item.id != null">id,</if>
+                    <if test="item.year != null">year,</if>
+                    <if test="item.month != null">month,</if>
+                    <if test="item.day != null">day,</if>
+                    <if test="item.subjectName != null">subject_name,</if>
+                    <if test="item.orgName != null">org_name,</if>
+                    <if test="item.certificationNumber != null">certification_number,</if>
+                    <if test="item.abstractInfo != null">abstract_info,</if>
+                    <if test="item.otherSubjectName != null">other_subject_name,</if>
+                    <if test="item.amount != null">amount,</if>
+                    <if test="item.businessName != null">business_name,</if>
+                    <if test="item.distributionUserId != null">distribution_user_id,</if>
+                    <if test="item.distributionUserName != null">distribution_user_name,</if>
+                    <if test="item.distributionTime != null">distribution_time,</if>
+                    <if test="item.deadlineTime != null">deadline_time,</if>
+                    <if test="item.claimTime != null">claim_time,</if>
+                    <if test="item.claimUserName != null">claim_user_name,</if>
+                    <if test="item.claimUserId != null">claim_user_id,</if>
+                    <if test="item.status != null">status,</if>
+                    <if test="item.extInfo != null">ext_info,</if>
+                    <if test="item.extInfo1 != null">ext_info1,</if>
+                    <if test="item.extInfo2 != null">ext_info2,</if>
+                    <if test="item.extInfo3 != null">ext_info3,</if>
+                    <if test="item.extInfo4 != null">ext_info4,</if>
+                    <if test="item.extInfo5 != null">ext_info5,</if>
+                    <if test="item.delFlag != null">del_flag,</if>
+                    <if test="item.orgId != null">org_id,</if>
+                    <if test="item.businessId != null">business_id,</if>
+                </trim>
+                <trim prefix="values (" suffix=")" suffixOverrides=",">
+                    <if test="item.id != null">#{item.id, jdbcType=VARCHAR},</if>
+                    <if test="item.year != null">#{item.year, jdbcType=INTEGER},</if>
+                    <if test="item.month != null">#{item.month, jdbcType=INTEGER},</if>
+                    <if test="item.day != null">#{item.day, jdbcType=INTEGER},</if>
+                    <if test="item.subjectName != null">#{item.subjectName, jdbcType=VARCHAR},</if>
+                    <if test="item.orgName != null">#{item.orgName, jdbcType=VARCHAR},</if>
+                    <if test="item.certificationNumber != null">#{item.certificationNumber, jdbcType=VARCHAR},</if>
+                    <if test="item.abstractInfo != null">#{item.abstractInfo, jdbcType=VARCHAR},</if>
+                    <if test="item.otherSubjectName != null">#{item.otherSubjectName, jdbcType=VARCHAR},</if>
+                    <if test="item.amount != null">#{item.amount, jdbcType=DOUBLE},</if>
+                    <if test="item.businessName != null">#{item.businessName, jdbcType=VARCHAR},</if>
+                    <if test="item.distributionUserId != null">#{item.distributionUserId, jdbcType=VARCHAR},</if>
+                    <if test="item.distributionUserName != null">#{item.distributionUserName, jdbcType=VARCHAR},</if>
+                    <if test="item.distributionTime != null">#{item.distributionTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.deadlineTime != null">#{item.deadlineTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.claimTime != null">#{item.claimTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.claimUserName != null">#{item.claimUserName, jdbcType=VARCHAR},</if>
+                    <if test="item.claimUserId != null">#{item.claimUserId, jdbcType=VARCHAR},</if>
+                    <if test="item.status != null">#{item.status, jdbcType=INTEGER},</if>
+                    <if test="item.extInfo != null">#{item.extInfo, jdbcType=INTEGER},</if>
+                    <if test="item.extInfo1 != null">#{item.extInfo1, jdbcType=INTEGER},</if>
+                    <if test="item.extInfo2 != null">#{item.extInfo2, jdbcType=VARCHAR},</if>
+                    <if test="item.extInfo3 != null">#{item.extInfo3, jdbcType=VARCHAR},</if>
+                    <if test="item.extInfo4 != null">#{item.extInfo4, jdbcType=VARCHAR},</if>
+                    <if test="item.extInfo5 != null">#{item.extInfo5, jdbcType=VARCHAR},</if>
+                    <if test="item.delFlag != null">#{item.delFlag, jdbcType=INTEGER},</if>
+                    <if test="item.orgId != null">#{item.orgId, jdbcType=VARCHAR},</if>
+                    <if test="item.businessId != null">#{item.businessId, jdbcType=VARCHAR},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+
+
+    <!-- 根据pk，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="com.adc.da.finance.entity.CostManagementEO">
+    update F_COST_MANAGEMENT
+       set  year = #{year},
+            month = #{month},
+            day = #{day},
+            subject_name = #{subjectName},
+            org_name = #{orgName},
+            certification_number = #{certificationNumber},
+            abstract_info = #{abstractInfo},
+            OTHER_SUBJECT_NAME = #{otherSubjectName},
+            amount = #{amount},
+            business_name = #{businessName},
+            distribution_user_id = #{distributionUserId},
+            distribution_user_name = #{distributionUserName},
+            distribution_time = #{distributionTime},
+            deadline_time = #{deadlineTime},
+            claim_time = #{claimTime},
+            claim_user_name = #{claimUserName},
+            claim_user_id = #{claimUserId},
+            status = #{status},
+            ext_info = #{extInfo},
+            ext_info1 = #{extInfo1},
+            ext_info2 = #{extInfo2},
+            ext_info3 = #{extInfo3},
+            ext_info4 = #{extInfo4},
+            ext_info5 = #{extInfo5},
+            del_flag = #{delFlag},
+            org_id = #{orgId}
+     where  id = #{id}
+  </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.finance.entity.CostManagementEO">
+        update F_COST_MANAGEMENT
+        <set>
+            <if test="year != null">
+                year = #{year},
+            </if>
+            <if test="month != null">
+                month = #{month},
+            </if>
+            <if test="day != null">
+                day = #{day},
+            </if>
+            <if test="subjectName != null">
+                subject_name = #{subjectName},
+            </if>
+            <if test="orgName != null">
+                org_name = #{orgName},
+            </if>
+            <if test="certificationNumber != null">
+                certification_number = #{certificationNumber},
+            </if>
+            <if test="abstractInfo != null">
+                abstract_info = #{abstractInfo},
+            </if>
+            <if test="otherSubjectName != null">
+                other_subject_name = #{otherSubjectName},
+            </if>
+            <if test="amount != null">
+                amount = #{amount},
+            </if>
+            <if test="businessName != null">
+                business_name = #{businessName},
+            </if>
+            <if test="distributionUserId != null">
+                distribution_user_id = #{distributionUserId},
+            </if>
+            <if test="distributionUserName != null">
+                distribution_user_name = #{distributionUserName},
+            </if>
+            <if test="distributionTime != null">
+                distribution_time = #{distributionTime},
+            </if>
+            <if test="deadlineTime != null">
+                deadline_time = #{deadlineTime},
+            </if>
+            <if test="claimTime != null">
+                claim_time = #{claimTime},
+            </if>
+            <if test="claimUserName != null">
+                claim_user_name = #{claimUserName},
+            </if>
+            <if test="claimUserId != null">
+                claim_user_id = #{claimUserId},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="extInfo != null">
+                ext_info = #{extInfo},
+            </if>
+            <if test="extInfo1 != null">
+                ext_info1 = #{extInfo1},
+            </if>
+            <if test="extInfo2 != null">
+                ext_info2 = #{extInfo2},
+            </if>
+            <if test="extInfo3 != null">
+                ext_info3 = #{extInfo3},
+            </if>
+            <if test="extInfo4 != null">
+                ext_info4 = #{extInfo4},
+            </if>
+            <if test="extInfo5 != null">
+                ext_info5 = #{extInfo5},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag},
+            </if>
+            <if test="orgId != null">
+                org_id = #{orgId},
+            </if>
+            <if test="businessId != null">
+                business_id = #{businessId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!-- 根据id查询 F_COST_MANAGEMENT -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from F_COST_MANAGEMENT
+        where id = #{value}
+
+    </select>
+
+    <!-- 根据id查询 F_COST_MANAGEMENT -->
+    <select id="selectByPrimaryKeys" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from F_COST_MANAGEMENT
+        where id in
+        <foreach collection="list" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from F_COST_MANAGEMENT
+     where id = #{value}
+
+  </delete>
+    <!-- 逻辑删除记录 -->
+    <update id="logicDeleteByPrimaryKeys" parameterType="java.util.List">
+        update F_COST_MANAGEMENT set del_flag = 1
+        where id in
+        <foreach collection="list" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+
+    </update>
+    <!--回退-->
+    <update id="goBackByPrimaryKey" parameterType="java.util.List">
+        update F_COST_MANAGEMENT
+        set claim_time = null ,
+        claim_user_name = null ,
+        claim_user_id = null ,
+        STATUS = 0,
+        BUSINESS_ID=null,
+        BUSINESS_NAME=null 
+        where id = #{id}
+    </update>
+
+    <!-- F_COST_MANAGEMENT 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        select count(1) from F_COST_MANAGEMENT
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询F_COST_MANAGEMENT列表 -->
+    <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        (select tmp_tb.* , rownum rn from
+        (select
+        <include refid="Base_Column_List"/>
+        from F_COST_MANAGEMENT
+        <include refid="Base_Where_Clause"/>
+        ORDER BY STATUS ASC ,YEAR DESC ,MONTH DESC ,DAY DESC
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id="pageByLoginUserCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        select count(1) from F_COST_MANAGEMENT fcm left join F_COST_RECEIVER fcr on fcm.ORG_ID = fcr.ORG_ID
+        where fcm.del_flag != 1
+        <if test="orgName != null and orgName != ''">
+            and fcm.ORG_NAME = #{orgName}
+        </if>
+        <if test="status != null and status != ''">
+            and fcm.STATUS = #{status}
+        </if>
+        <if test="userId != null and userId != ''">
+            and fcr.user_ids like '%'||#{userId}||'%'
+        </if>
+    </select>
+
+    <!-- 查询F_COST_MANAGEMENT列表 -->
+    <select id="pageByLoginUser" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        (select tmp_tb.* , rownum rn from
+        (select fcm.* from F_COST_MANAGEMENT fcm left join F_COST_RECEIVER fcr on fcm.ORG_ID = fcr.ORG_ID
+        where fcm.del_flag != 1
+        <if test="orgName != null and orgName != ''">
+            and fcm.ORG_NAME = #{orgName}
+        </if>
+        <if test="status != null and status != ''">
+            and fcm.STATUS = #{status}
+        </if>
+        <if test="userId != null and userId != ''">
+            and fcr.user_ids like '%'||#{userId}||'%'
+        </if>
+
+        ORDER BY fcm.STATUS ASC ,fcm.YEAR DESC ,fcm.MONTH DESC ,fcm.DAY DESC
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select
+        <include refid="Base_Column_List"/>
+        from F_COST_MANAGEMENT
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+    </select>
+    <select id="queryListByOrgId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from F_COST_MANAGEMENT
+        where ORG_ID = #{orgId}
+    </select>
+
+    <select id="statisticsAmountByBusinessId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT fcm.BUSINESS_ID,SUM(fcm.AMOUNT)as amount FROM F_BUSINESS_GONFIG fbg
+        left join F_COST_MANAGEMENT fcm on fbg.ID = fcm.BUSINESS_ID
+		LEFT JOIN TS_DICTYPE dic ON fbg.BG_STATUS = DIC."ID"
+        where DIC.DIC_TYPE_CODE = 0 AND fcm.STATUS = 1 and fcm.DEL_FLAG != 1
+        and fcm.YEAR = #{year} AND fcm.MONTH = #{month} and fbg.ID = #{businessId}
+        GROUP BY fcm.BUSINESS_ID
+    </select>
+
+    <select id="selectSumCostByYearAndMonthGroupByBusinessId" resultMap="BaseResultMap">
+        SELECT fcm.BUSINESS_ID,SUM(fcm.AMOUNT)as amount FROM F_BUSINESS_GONFIG fbg
+        left join F_COST_MANAGEMENT fcm on fbg.ID = fcm.BUSINESS_ID
+        where fbg.BG_STATUS = 0 AND fcm.STATUS = 1 and  fcm.YEAR = #{year} AND fcm.MONTH = #{month} and fcm.DEL_FLAG != 1
+        GROUP BY fcm.BUSINESS_ID
+    </select>
+
+    <select id="selectSumCostByYearAndMonthAndBusinessIdGroupByBusinessId" resultMap="BaseResultMap">
+        SELECT fcm.BUSINESS_ID,SUM(fcm.AMOUNT)as amount FROM F_BUSINESS_GONFIG fbg
+        left join F_COST_MANAGEMENT fcm on fbg.ID = fcm.BUSINESS_ID
+        where fbg.BG_STATUS = 0 AND fcm.STATUS = 1 and  fcm.YEAR = #{year} AND fcm.MONTH = #{month} and fbg.ID = #{businessId} and fcm.DEL_FLAG != 1
+        GROUP BY fcm.BUSINESS_ID
+    </select>
+
+
+</mapper>

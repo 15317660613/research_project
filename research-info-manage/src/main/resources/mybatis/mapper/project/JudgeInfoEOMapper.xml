@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.project.dao.JudgeInfoEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.research.project.entity.JudgeInfoEO" >
+    <id column="id" property="id" />
+    <result column="project_id" property="projectId" />
+    <result column="judge_method_id" property="judgeMethodId" />
+    <result column="expert_user_id" property="expertUserId" />
+    <result column="expert_user_name" property="expertUserName" />
+    <result column="rating_rules_id" property="ratingRulesId" />
+    <result column="approve_result" property="approveResult" />
+    <result column="approve_comment" property="approveComment" javaType="string" jdbcType="CLOB"/>
+    <result column="del_flag" property="delFlag" />
+    <result column="ext1" property="ext1" />
+    <result column="ext2" property="ext2" />
+    <result column="ext3" property="ext3" />
+    <result column="ext4" property="ext4" />
+    <result column="ext5" property="ext5" />
+    <result column="review_remark" property="reviewRemark" />
+  </resultMap>
+
+  <!-- RS_JUDGE_INFO table all fields -->
+  <sql id="Base_Column_List" >
+     id, project_id, judge_method_id, expert_user_id, expert_user_name, rating_rules_id, approve_result, approve_comment, del_flag, ext1, ext2, ext3, ext4, ext5,review_remark
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="projectId != null" >
+        and project_id ${projectIdOperator} #{projectId}
+      </if>
+      <if test="judgeMethodId != null" >
+        and judge_method_id ${judgeMethodIdOperator} #{judgeMethodId}
+      </if>
+      <if test="expertUserId != null" >
+        and expert_user_id ${expertUserIdOperator} #{expertUserId}
+      </if>
+      <if test="expertUserName != null" >
+        and expert_user_name ${expertUserNameOperator} #{expertUserName}
+      </if>
+      <if test="ratingRulesId != null" >
+        and rating_rules_id ${ratingRulesIdOperator} #{ratingRulesId}
+      </if>
+      <if test="approveResult != null" >
+        and approve_result ${approveResultOperator} #{approveResult}
+      </if>
+      <if test="approveComment != null" >
+        and approve_comment ${approveCommentOperator} #{approveComment}
+      </if>
+      <if test="delFlag == null" >
+        and del_flag =0
+      </if>
+      <if test="ext1 != null" >
+        and ext1 ${ext1Operator} #{ext1}
+      </if>
+      <if test="ext2 != null" >
+        and ext2 ${ext2Operator} #{ext2}
+      </if>
+      <if test="ext3 != null" >
+        and ext3 ${ext3Operator} #{ext3}
+      </if>
+      <if test="ext4 != null" >
+        and ext4 ${ext4Operator} #{ext4}
+      </if>
+      <if test="ext5 != null" >
+        and ext5 ${ext5Operator} #{ext5}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.research.project.entity.JudgeInfoEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RS_JUDGE_INFO.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into RS_JUDGE_INFO(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{projectId, jdbcType=VARCHAR}, #{judgeMethodId, jdbcType=VARCHAR}, #{expertUserId, jdbcType=VARCHAR}, #{expertUserName, jdbcType=VARCHAR}, #{ratingRulesId, jdbcType=VARCHAR}, #{approveResult, jdbcType=VARCHAR}, #{approveComment, jdbcType=CLOB}, #{delFlag, jdbcType=VARCHAR}, #{ext1, jdbcType=VARCHAR}, #{ext2, jdbcType=VARCHAR}, #{ext3, jdbcType=VARCHAR}, #{ext4, jdbcType=VARCHAR}, #{ext5, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.research.project.entity.JudgeInfoEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RS_JUDGE_INFO.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into RS_JUDGE_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="projectId != null" >project_id,</if>
+                <if test="judgeMethodId != null" >judge_method_id,</if>
+                <if test="expertUserId != null" >expert_user_id,</if>
+                <if test="expertUserName != null" >expert_user_name,</if>
+                <if test="ratingRulesId != null" >rating_rules_id,</if>
+                <if test="approveResult != null" >approve_result,</if>
+                <if test="approveComment != null" >approve_comment,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="ext1 != null" >ext1,</if>
+                <if test="ext2 != null" >ext2,</if>
+                <if test="ext3 != null" >ext3,</if>
+                <if test="ext4 != null" >ext4,</if>
+                <if test="ext5 != null" >ext5,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="projectId != null" >#{projectId, jdbcType=VARCHAR},</if>
+                <if test="judgeMethodId != null" >#{judgeMethodId, jdbcType=VARCHAR},</if>
+                <if test="expertUserId != null" >#{expertUserId, jdbcType=VARCHAR},</if>
+                <if test="expertUserName != null" >#{expertUserName, jdbcType=VARCHAR},</if>
+                <if test="ratingRulesId != null" >#{ratingRulesId, jdbcType=VARCHAR},</if>
+                <if test="approveResult != null" >#{approveResult, jdbcType=VARCHAR},</if>
+                <if test="approveComment != null" >#{approveComment, jdbcType=CLOB},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=VARCHAR},</if>
+                <if test="ext1 != null" >#{ext1, jdbcType=VARCHAR},</if>
+                <if test="ext2 != null" >#{ext2, jdbcType=VARCHAR},</if>
+                <if test="ext3 != null" >#{ext3, jdbcType=VARCHAR},</if>
+                <if test="ext4 != null" >#{ext4, jdbcType=VARCHAR},</if>
+                <if test="ext5 != null" >#{ext5, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+    <!--批量新增-->
+    <insert id = "batchInsertSelective">
+        INSERT ALL
+        <foreach collection = "judgeInfoEOS" item = "item" index = "index">
+            <if test = "item.id != null">
+                into RS_JUDGE_INFO
+                <trim prefix="(" suffix=")" suffixOverrides="," >
+                    <if test="item.id != null" >id,</if>
+                    <if test="item.projectId != null" >project_id,</if>
+                    <if test="item.judgeMethodId != null" >judge_method_id,</if>
+                    <if test="item.expertUserId != null" >expert_user_id,</if>
+                    <if test="item.expertUserName != null" >expert_user_name,</if>
+                    <if test="item.ratingRulesId != null" >rating_rules_id,</if>
+                    <if test="item.approveResult != null" >approve_result,</if>
+                    <if test="item.approveComment != null" >approve_comment,</if>
+                    <if test="item.delFlag != null" >del_flag,</if>
+                    <if test="item.ext1 != null" >ext1,</if>
+                    <if test="item.ext2 != null" >ext2,</if>
+                    <if test="item.ext3 != null" >ext3,</if>
+                    <if test="item.ext4 != null" >ext4,</if>
+                    <if test="item.ext5 != null" >ext5,</if>
+                    <if test="item.reviewRemark != null" >review_remark,</if>
+                </trim>
+                <trim prefix="values (" suffix=")" suffixOverrides="," >
+                    <if test="item.id != null" >#{item.id, jdbcType=VARCHAR},</if>
+                    <if test="item.projectId != null" >#{item.projectId, jdbcType=VARCHAR},</if>
+                    <if test="item.judgeMethodId != null" >#{item.judgeMethodId, jdbcType=VARCHAR},</if>
+                    <if test="item.expertUserId != null" >#{item.expertUserId, jdbcType=VARCHAR},</if>
+                    <if test="item.expertUserName != null" >#{item.expertUserName, jdbcType=VARCHAR},</if>
+                    <if test="item.ratingRulesId != null" >#{item.ratingRulesId, jdbcType=VARCHAR},</if>
+                    <if test="item.approveResult != null" >#{item.approveResult, jdbcType=VARCHAR},</if>
+                    <if test="item.approveComment != null" >#{item.approveComment, jdbcType=CLOB},</if>
+                    <if test="item.delFlag != null" >#{item.delFlag, jdbcType=VARCHAR},</if>
+                    <if test="item.ext1 != null" >#{item.ext1, jdbcType=VARCHAR},</if>
+                    <if test="item.ext2 != null" >#{item.ext2, jdbcType=VARCHAR},</if>
+                    <if test="item.ext3 != null" >#{item.ext3, jdbcType=VARCHAR},</if>
+                    <if test="item.ext4 != null" >#{item.ext4, jdbcType=VARCHAR},</if>
+                    <if test="item.ext5 != null" >#{item.ext5, jdbcType=VARCHAR},</if>
+                    <if test="item.reviewRemark != null" >#{item.reviewRemark, jdbcType=VARCHAR},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.research.project.entity.JudgeInfoEO" >
+    update RS_JUDGE_INFO
+       set  project_id = #{projectId},
+            judge_method_id = #{judgeMethodId},
+            expert_user_id = #{expertUserId},
+            expert_user_name = #{expertUserName},
+            rating_rules_id = #{ratingRulesId},
+            approve_result = #{approveResult},
+            approve_comment = #{approveComment},
+            del_flag = #{delFlag},
+            ext1 = #{ext1},
+            ext2 = #{ext2},
+            ext3 = #{ext3},
+            ext4 = #{ext4},
+            ext5 = #{ext5}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.research.project.entity.JudgeInfoEO" >
+    update RS_JUDGE_INFO
+    <set >
+      <if test="projectId != null" >
+        project_id = #{projectId},
+      </if>
+      <if test="judgeMethodId != null" >
+        judge_method_id = #{judgeMethodId},
+      </if>
+      <if test="expertUserId != null" >
+        expert_user_id = #{expertUserId},
+      </if>
+      <if test="expertUserName != null" >
+        expert_user_name = #{expertUserName},
+      </if>
+      <if test="ratingRulesId != null" >
+        rating_rules_id = #{ratingRulesId},
+      </if>
+      <if test="approveResult != null" >
+        approve_result = #{approveResult},
+      </if>
+      <if test="approveComment != null" >
+        approve_comment = #{approveComment},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="ext1 != null" >
+        ext1 = #{ext1},
+      </if>
+      <if test="ext2 != null" >
+        ext2 = #{ext2},
+      </if>
+      <if test="ext3 != null" >
+        ext3 = #{ext3},
+      </if>
+      <if test="ext4 != null" >
+        ext4 = #{ext4},
+      </if>
+      <if test="ext5 != null" >
+        ext5 = #{ext5},
+      </if>
+        <if test="reviewRemark != null" >
+        review_remark=#{reviewRemark},
+        </if>
+    </set>
+     where id = #{id}
+  </update>
+
+
+        <update id="updateByProjectId" parameterType="com.adc.da.research.project.entity.JudgeInfoEO" >
+            update RS_JUDGE_INFO
+            <set >
+                <if test="projectId != null" >
+                    project_id = #{projectId},
+                </if>
+                <if test="judgeMethodId != null" >
+                    judge_method_id = #{judgeMethodId},
+                </if>
+                <if test="expertUserId != null" >
+                    expert_user_id = #{expertUserId},
+                </if>
+                <if test="expertUserName != null" >
+                    expert_user_name = #{expertUserName},
+                </if>
+                <if test="ratingRulesId != null" >
+                    rating_rules_id = #{ratingRulesId},
+                </if>
+                <if test="approveResult != null" >
+                    approve_result = #{approveResult},
+                </if>
+                <if test="approveComment != null" >
+                    approve_comment = #{approveComment},
+                </if>
+                <if test="delFlag != null" >
+                    del_flag = #{delFlag},
+                </if>
+                <if test="ext1 != null" >
+                    ext1 = #{ext1},
+                </if>
+                <if test="ext2 != null" >
+                    ext2 = #{ext2},
+                </if>
+                <if test="ext3 != null" >
+                    ext3 = #{ext3},
+                </if>
+                <if test="ext4 != null" >
+                    ext4 = #{ext4},
+                </if>
+                <if test="ext5 != null" >
+                    ext5 = #{ext5},
+                </if>
+                <if test="reviewRemark != null" >
+                    review_remark=#{reviewRemark},
+                </if>
+            </set>
+            where project_id = #{projectId}
+        </update>
+
+
+    <update id="updateByProjectIdAndExpertUserId" parameterType="com.adc.da.research.project.entity.JudgeInfoEO" >
+        update RS_JUDGE_INFO
+        <set >
+            <if test="projectId != null" >
+                project_id = #{projectId},
+            </if>
+            <if test="judgeMethodId != null" >
+                judge_method_id = #{judgeMethodId},
+            </if>
+            <if test="expertUserId != null" >
+                expert_user_id = #{expertUserId},
+            </if>
+            <if test="expertUserName != null" >
+                expert_user_name = #{expertUserName},
+            </if>
+            <if test="ratingRulesId != null" >
+                rating_rules_id = #{ratingRulesId},
+            </if>
+            <if test="approveResult != null" >
+                approve_result = #{approveResult},
+            </if>
+            <if test="approveComment != null" >
+                approve_comment = #{approveComment},
+            </if>
+            <if test="delFlag != null" >
+                del_flag = #{delFlag},
+            </if>
+            <if test="ext1 != null" >
+                ext1 = #{ext1},
+            </if>
+            <if test="ext2 != null" >
+                ext2 = #{ext2},
+            </if>
+            <if test="ext3 != null" >
+                ext3 = #{ext3},
+            </if>
+            <if test="ext4 != null" >
+                ext4 = #{ext4},
+            </if>
+            <if test="ext5 != null" >
+                ext5 = #{ext5},
+            </if>
+            <if test="reviewRemark != null" >
+                review_remark=#{reviewRemark},
+            </if>
+        </set>
+        where project_id = #{projectId} and   expert_user_id = #{expertUserId}
+    </update>
+
+
+    <!-- 根据id查询 RS_JUDGE_INFO -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from RS_JUDGE_INFO
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RS_JUDGE_INFO
+     where id = #{value}
+
+  </delete>
+
+  <!-- RS_JUDGE_INFO 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from RS_JUDGE_INFO
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询RS_JUDGE_INFO列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from RS_JUDGE_INFO
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from RS_JUDGE_INFO
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+    <!-- 删除记录 -->
+    <update id="deleteByProjectId" parameterType="java.lang.String">
+    update  RS_JUDGE_INFO
+     set del_flag =1 where  project_id = #{projectId}
+
+  </update>
+
+    <!--<delete id="deleteByProjectId">-->
+        <!--delete from RS_JUDGE_INFO where project_id=#{projectId}-->
+    <!--</delete>-->
+
+    <select id="getRatingRulesIdByProjectId" resultType="String">
+        select rating_rules_id from rs_judge_info where project_id=#{project_id}
+        and rownum=1
+    </select>
+    <!-- 根据projectId查询 RS_SCORE_INFO -->
+    <select id="queryListByProjectId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="Base_Column_List" />
+        from rs_judge_info
+        where project_id = #{projectId}
+
+    </select>
+
+</mapper>

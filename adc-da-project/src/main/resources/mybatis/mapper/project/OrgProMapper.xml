@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.project.dao.OrgProDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="com.adc.da.sys.entity.OrgEO">
+        <id column="id" property="id"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="org_name" property="name"/>
+        <result column="org_desc" property="orgDesc"/>
+        <result column="org_code" property="orgCode"/>
+        <result column="org_type" property="orgType"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="parent_ids" property="parentIds"/>
+        <result column="is_show" property="isShow"/>
+        <result column="remarks" property="remarks"/>
+    </resultMap>
+    <!-- TS_ORG table all fields -->
+    <sql id="Base_Column_List">
+        id, del_flag, org_name, org_desc,org_code,parent_id, parent_ids, is_show, remarks
+    </sql>
+
+    <sql id="Base_Column_List1">
+        id, del_flag, org_name, org_desc,org_code,parent_id, parent_ids, is_show, remarks，user_id,org_id
+    </sql>
+
+    <resultMap id="BaseResultMap1" type="com.adc.da.project.entity.StatisticsEntity">
+        <id column="id" property="id"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="org_name" property="orgName"/>
+        <result column="org_desc" property="orgDesc"/>
+        <result column="org_code" property="orgCode"/>
+        <result column="org_type" property="orgType"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="parent_ids" property="parentIds"/>
+        <result column="is_show" property="isShow"/>
+        <result column="remarks" property="remarks"/>
+        <result column="user_id" property="userId"/>
+        <result column="org_id" property="orgId"/>
+    </resultMap>
+
+    <select id="listAllOrg" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM TS_ORG
+        WHERE DEL_FLAG = 0
+    </select>
+
+    <select id="queryOrgByName" resultMap="BaseResultMap1" parameterType="java.lang.String">
+        SELECT * FROM TS_ORG T WHERE T.ORG_NAME LIKE #{orgName}
+    </select>
+
+    <select id="queryEmpByOrgTree" resultMap="BaseResultMap1" parameterType="java.lang.String">
+        SELECT * FROM TR_USER_ORG A WHERE A.ORG_ID IN (
+	        SELECT B."ID" FROM TS_ORG B START WITH B."ID" = #{orgId} CONNECT BY PRIOR B."ID" = B.PARENT_ID
+        )
+    </select>
+
+    <select id="queryChildEmp" resultMap="BaseResultMap1" parameterType="java.lang.String">
+        SELECT * FROM TS_ORG T WHERE T.PARENT_ID=#{orgId}
+    </select>
+
+    <select id="queryChildGroup" resultMap="BaseResultMap1" parameterType="java.lang.String">
+        SELECT * FROM TS_ORG T WHERE T.PARENT_ID=#{orgId} AND T.ORG_NAME LIKE '%组'
+    </select>
+
+    <select id="queryEmpByOrgId" resultType="java.lang.String" parameterType="java.lang.String">
+         SELECT T.USER_ID FROM TR_USER_ORG T WHERE T.ORG_ID=#{orgId}
+    </select>
+
+    <select id="queryOrgByUserId" resultMap="BaseResultMap1" parameterType="java.lang.String">
+        SELECT * FROM TR_USER_ORG T LEFT JOIN TS_ORG P ON T.ORG_ID = P."ID"
+        WHERE T.USER_ID=#{userId} AND P.DEL_FLAG='0'
+    </select>
+
+    <select id="querygGroupByUserId" resultMap="BaseResultMap1" parameterType="java.lang.String">
+        SELECT * FROM TR_USER_ORG T LEFT JOIN TS_ORG P ON T.ORG_ID = P."ID"
+        WHERE T.USER_ID=#{userId} AND P.DEL_FLAG='0' AND P.ORG_NAME LIKE '%组'
+    </select>
+
+    <select id="queryAllChildGroups" resultMap="BaseResultMap1" parameterType="java.lang.String">
+         SELECT * FROM TS_ORG T WHERE INSTR(T.PARENT_IDS,#{orgId})>0 AND T.DEL_FLAG='0'
+    </select>
+
+    <select id="queryGroupEmps" resultType="java.lang.String" parameterType="java.lang.String">
+         SELECT M.USER_ID FROM TR_USER_ORG M WHERE M.ORG_ID IN (
+	        SELECT DISTINCT(T.ID) FROM TS_ORG T WHERE T.PARENT_ID=#{orgId} AND T.ORG_NAME LIKE '%组%'
+        )
+    </select>
+
+    <select id="queryOrgName" resultType="java.lang.String" parameterType="java.lang.String">
+        SELECT T.ORG_NAME FROM TS_ORG T WHERE T."ID"=#{orgId}
+    </select>
+
+
+
+
+
+
+
+
+
+
+
+
+    <select id="queryDepEmps" resultType="java.lang.String" parameterType="java.lang.String">
+         SELECT M.USER_ID FROM TR_USER_ORG M WHERE M.ORG_ID IN (
+	        SELECT DISTINCT(T.ID) FROM TS_ORG T WHERE T.PARENT_ID=#{orgId} AND T.ORG_NAME LIKE '%部%'
+        )
+    </select>
+
+    <select id="queryEmpByGropId" resultType="java.lang.String" parameterType="java.lang.String">
+        select p.USER_ID from TR_USER_ORG p where p.ORG_ID in (
+        select t."ID" from TS_ORG t start with t.id=#{orgId} CONNECT by t.id = PRIOR t.PARENT_ID
+        and t.ORG_NAME like '%组')
+    </select>
+
+
+    <!-- 20190326 add by liqiuhsi -->
+    <!-- 查询所有部门 -->
+    <select id="queryAllDeps" resultMap="BaseResultMap1" parameterType="java.lang.String">
+        select * from TS_ORG t
+        where t.ORG_NAME like '%部' and t.ORG_NAME not like '%本部%'
+        AND t.DEL_FLAG='0'
+    </select>
+    <!-- 查询所有大组 -->
+    <select id="queryAllGroups" resultMap="BaseResultMap1" parameterType="java.lang.String">
+        select * from TS_ORG t
+        where t.ORG_NAME like '%组' and t.DEL_FLAG='0'
+        and t.PARENT_ID not in (
+          select DISTINCT(p."ID") from TS_ORG p where p.ORG_NAME like '%组'
+        )
+    </select>
+
+
+</mapper>

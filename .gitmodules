@@ -1,0 +1,3 @@
+[submodule "adc-da-main/src/main/resources/static"]
+	path = adc-da-main/src/main/resources/static
+	url = https://60.247.58.117:50018/project/financialSystem.git

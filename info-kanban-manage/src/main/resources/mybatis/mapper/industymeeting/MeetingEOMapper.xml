@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.industymeeting.dao.MeetingEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.industymeeting.entity.MeetingEO" >
+    <id column="id" property="id" />
+    <result column="create_user_name" property="createUserName" />
+    <result column="create_time" property="createTime" />
+    <result column="del_flag" property="delFlag" />
+    <result column="ext1" property="ext1" />
+    <result column="ext2" property="ext2" />
+    <result column="ext3" property="ext3" />
+    <result column="ext4" property="ext4" />
+    <result column="ext5" property="ext5" />
+    <result column="im_name" property="imName" />
+    <result column="im_date" property="imDate" />
+    <result column="im_place" property="imPlace" />
+    <result column="im_enterprise" property="imEnterprise" />
+    <result column="depart_name" property="departName" />
+    <result column="create_user_id" property="createUserId" />
+  </resultMap>
+
+  <!-- DB_INDUSTRY_MEETING table all fields -->
+  <sql id="Base_Column_List" >
+     create_user_name, create_time, del_flag, ext1, ext2, ext3, ext4, ext5, id, im_name, im_date, im_place, im_enterprise, depart_name, create_user_id
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1 and del_flag = '0'
+    <trim suffixOverrides="," >
+      <if test="createUserName != null and createUserName != ''" >
+        and create_user_name ${createUserNameOperator} #{createUserName}
+      </if>
+      <if test="createTime != null and createTime != ''" >
+        and create_time ${createTimeOperator} to_date(#{createTime},'yyyy-mm-dd,hh24:mi:ss')
+      </if>
+      <if test="createTime1 != null and createTime1 != ''" >
+        and create_time &gt;= to_date(#{createTime1},'yyyy-mm-dd,hh24:mi:ss')
+      </if>
+      <if test="createTime2 != null and createTime2 != ''" >
+        and create_time &lt;= to_date(#{createTime2},'yyyy-mm-dd,hh24:mi:ss')
+      </if>
+      <if test="delFlag != null and delFlag != ''" >
+        and del_flag ${delFlagOperator} #{delFlag}
+      </if>
+      <if test="ext1 != null and ext1 != ''" >
+        and ext1 ${ext1Operator} #{ext1}
+      </if>
+      <if test="ext2 != null and ext2 != ''" >
+        and ext2 ${ext2Operator} #{ext2}
+      </if>
+      <if test="ext3 != null and ext3 != ''" >
+        and ext3 ${ext3Operator} #{ext3}
+      </if>
+      <if test="ext4 != null and ext4 != ''" >
+        and ext4 ${ext4Operator} #{ext4}
+      </if>
+      <if test="ext5 != null and ext5 != ''" >
+        and ext5 ${ext5Operator} #{ext5}
+      </if>
+      <if test="id != null and id != ''" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="imName != null and imName != ''" >
+        and im_name ${imNameOperator} #{imName}
+      </if>
+      <if test="imDate != null and imDate != ''" >
+        and im_date ${imDateOperator} to_date(#{imDate},'yyyy-mm-dd,hh24:mi:ss')
+      </if>
+      <if test="imDate1 != null and imDate1 != ''" >
+        and im_date &gt;= to_date(#{imDate1},'yyyy-mm-dd,hh24:mi:ss')
+      </if>
+      <if test="imDate2 != null and imDate2 != ''" >
+        and im_date &lt;= to_date(#{imDate2},'yyyy-mm-dd,hh24:mi:ss')
+      </if>
+      <if test="imPlace != null and imPlace != ''" >
+        and im_place ${imPlaceOperator} #{imPlace}
+      </if>
+      <if test="imEnterprise != null and imEnterprise != ''" >
+        and im_enterprise ${imEnterpriseOperator} #{imEnterprise}
+      </if>
+      <if test="departName != null and departName != ''" >
+        and depart_name ${departNameOperator} #{departName}
+      </if>
+      <if test="createUserId != null and createUserId != ''" >
+        and create_user_id ${createUserIdOperator} #{createUserId}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.industymeeting.entity.MeetingEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_DB_INDUSTRY_MEETING.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into DB_INDUSTRY_MEETING(<include refid="Base_Column_List" />)
+    values (#{createUserName, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{delFlag, jdbcType=VARCHAR}, #{ext1, jdbcType=VARCHAR}, #{ext2, jdbcType=VARCHAR}, #{ext3, jdbcType=VARCHAR}, #{ext4, jdbcType=VARCHAR}, #{ext5, jdbcType=VARCHAR}, #{id, jdbcType=VARCHAR}, #{imName, jdbcType=VARCHAR}, #{imDate, jdbcType=TIMESTAMP}, #{imPlace, jdbcType=VARCHAR}, #{imEnterprise, jdbcType=VARCHAR}, #{departName, jdbcType=VARCHAR}, #{createUserId, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.industymeeting.entity.MeetingEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_DB_INDUSTRY_MEETING.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into DB_INDUSTRY_MEETING
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="createUserName != null and createUserName != ''" >create_user_name,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="delFlag != null and delFlag != ''" >del_flag,</if>
+                <if test="ext1 != null and ext1 != ''" >ext1,</if>
+                <if test="ext2 != null and ext2 != ''" >ext2,</if>
+                <if test="ext3 != null and ext3 != ''" >ext3,</if>
+                <if test="ext4 != null and ext4 != ''" >ext4,</if>
+                <if test="ext5 != null and ext5 != ''" >ext5,</if>
+                <if test="id != null and id != ''" >id,</if>
+                <if test="imName != null and imName != ''" >im_name,</if>
+                <if test="imDate != null" >im_date,</if>
+                <if test="imPlace != null and imPlace != ''" >im_place,</if>
+                <if test="imEnterprise != null and imEnterprise != ''" >im_enterprise,</if>
+                <if test="departName != null and departName != ''" >depart_name,</if>
+                <if test="createUserId != null and createUserId != ''" >create_user_id,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="createUserName != null and createUserName != ''" >#{createUserName, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="delFlag != null and delFlag != ''" >#{delFlag, jdbcType=VARCHAR},</if>
+                <if test="ext1 != null and ext1 != ''" >#{ext1, jdbcType=VARCHAR},</if>
+                <if test="ext2 != null and ext2 != ''" >#{ext2, jdbcType=VARCHAR},</if>
+                <if test="ext3 != null and ext3 != ''" >#{ext3, jdbcType=VARCHAR},</if>
+                <if test="ext4 != null and ext4 != ''" >#{ext4, jdbcType=VARCHAR},</if>
+                <if test="ext5 != null and ext5 != ''" >#{ext5, jdbcType=VARCHAR},</if>
+                <if test="id != null and id != ''" >#{id, jdbcType=VARCHAR},</if>
+                <if test="imName != null and imName != ''" >#{imName, jdbcType=VARCHAR},</if>
+                <if test="imDate != null" >#{imDate, jdbcType=TIMESTAMP},</if>
+                <if test="imPlace != null and imPlace != ''" >#{imPlace, jdbcType=VARCHAR},</if>
+                <if test="imEnterprise != null and imEnterprise != ''" >#{imEnterprise, jdbcType=VARCHAR},</if>
+                <if test="departName != null and departName != ''" >#{departName, jdbcType=VARCHAR},</if>
+                <if test="createUserId != null and createUserId != ''" >#{createUserId, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.industymeeting.entity.MeetingEO" >
+    update DB_INDUSTRY_MEETING
+       set  create_user_name = #{createUserName},
+            create_time = #{createTime},
+            del_flag = #{delFlag},
+            ext1 = #{ext1},
+            ext2 = #{ext2},
+            ext3 = #{ext3},
+            ext4 = #{ext4},
+            ext5 = #{ext5},
+            im_name = #{imName},
+            im_date = #{imDate},
+            im_place = #{imPlace},
+            im_enterprise = #{imEnterprise},
+            depart_name = #{departName},
+            create_user_id = #{createUserId}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.industymeeting.entity.MeetingEO" >
+    update DB_INDUSTRY_MEETING
+    <set >
+      <if test="createUserName != null and createUserName != ''" >
+        create_user_name = #{createUserName},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="delFlag != null and delFlag != ''" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="ext1 != null and ext1 != ''" >
+        ext1 = #{ext1},
+      </if>
+      <if test="ext2 != null and ext2 != ''" >
+        ext2 = #{ext2},
+      </if>
+      <if test="ext3 != null and ext3 != ''" >
+        ext3 = #{ext3},
+      </if>
+      <if test="ext4 != null and ext4 != ''" >
+        ext4 = #{ext4},
+      </if>
+      <if test="ext5 != null and ext5 != ''" >
+        ext5 = #{ext5},
+      </if>
+      <if test="imName != null and imName != ''" >
+        im_name = #{imName},
+      </if>
+      <if test="imDate != null" >
+        im_date = #{imDate},
+      </if>
+      <if test="imPlace != null and imPlace != ''" >
+        im_place = #{imPlace},
+      </if>
+      <if test="imEnterprise != null and imEnterprise != ''" >
+        im_enterprise = #{imEnterprise},
+      </if>
+      <if test="departName != null and departName != ''" >
+        depart_name = #{departName},
+      </if>
+      <if test="createUserId != null and createUserId != ''" >
+        create_user_id = #{createUserId},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 DB_INDUSTRY_MEETING -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from DB_INDUSTRY_MEETING
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from DB_INDUSTRY_MEETING
+     where id = #{value}
+
+  </delete>
+
+    <update id="logicDeleteByPrimaryKey" parameterType="java.lang.String">
+        update DB_INDUSTRY_MEETING set del_flag = '1' where id = #{id}
+    </update>
+
+
+
+
+  <!-- DB_INDUSTRY_MEETING 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from DB_INDUSTRY_MEETING
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询DB_INDUSTRY_MEETING列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from DB_INDUSTRY_MEETING
+			 <include refid="Base_Where_Clause"/>
+             <if test="sql_filter != null and sql_filter != ''" >
+                 ${sql_filter}
+             </if>
+
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from DB_INDUSTRY_MEETING
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

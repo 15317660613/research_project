@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.budget.dao.BudgetHistoryEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.budget.entity.BudgetHistoryEO" >
+    <result column="id" property="id" />
+    <result column="budget_id" property="budgetId" />
+    <result column="budget_name" property="budgetName" />
+    <result column="dept_id" property="deptId" />
+    <result column="dept_name" property="deptName" />
+    <result column="team_name" property="teamName" />
+    <result column="property_id" property="propertyId" />
+    <result column="pm" property="pm" />
+    <result column="domain_id" property="domainId" />
+    <result column="current_year" property="currentYear" />
+    <result column="current_year_estimate" property="currentYearEstimate" />
+    <result column="next_year_1_deal" property="nextYear1Deal" />
+    <result column="next_year_1_income" property="nextYear1Income" />
+    <result column="next_year_2_deal" property="nextYear2Deal" />
+    <result column="next_year_2_income" property="nextYear2Income" />
+    <result column="next_year_3_deal" property="nextYear3Deal" />
+    <result column="next_year_3_income" property="nextYear3Income" />
+    <result column="next_year_4_deal" property="nextYear4Deal" />
+    <result column="next_year_4_income" property="nextYear4Income" />
+    <result column="next_year_5_deal" property="nextYear5Deal" />
+    <result column="next_year_5_income" property="nextYear5Income" />
+    <result column="next_year_6_deal" property="nextYear6Deal" />
+    <result column="next_year_6_income" property="nextYear6Income" />
+    <result column="next_year_7_deal" property="nextYear7Deal" />
+    <result column="next_year_7_income" property="nextYear7Income" />
+    <result column="next_year_8_deal" property="nextYear8Deal" />
+    <result column="next_year_8_income" property="nextYear8Income" />
+    <result column="next_year_9_deal" property="nextYear9Deal" />
+    <result column="next_year_9_income" property="nextYear9Income" />
+    <result column="next_year_10_deal" property="nextYear10Deal" />
+    <result column="next_year_10_income" property="nextYear10Income" />
+    <result column="next_year_11_deal" property="nextYear11Deal" />
+    <result column="next_year_11_income" property="nextYear11Income" />
+    <result column="next_year_12_deal" property="nextYear12Deal" />
+    <result column="next_year_12_income" property="nextYear12Income" />
+    <result column="remark" property="remark" />
+    <result column="cycle_begin" property="cycleBegin" />
+    <result column="cycle_end" property="cycleEnd" />
+    <result column="cycle" property="cycle" />
+    <result column="current_year_deal" property="currentYearDeal" />
+    <result column="property" property="property" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="project_team" property="projectTeam" />
+    <result column="operate_date" property="operateDate" />
+    <result column="operate_time" property="operateTime" />
+    <result column="operate_user" property="operateUser" />
+    <result column="operate_type" property="operateType" />
+  </resultMap>
+
+  <!-- TS_BUDGET_HISTORY table all fields -->
+  <sql id="Base_Column_List" >
+     id, budget_id, budget_name, dept_id, dept_name, team_name, property_id, pm, domain_id, current_year, current_year_estimate, next_year_1_deal, next_year_1_income, next_year_2_deal, next_year_2_income, next_year_3_deal, next_year_3_income, next_year_4_deal, next_year_4_income, next_year_5_deal, next_year_5_income, next_year_6_deal, next_year_6_income, next_year_7_deal, next_year_7_income, next_year_8_deal, next_year_8_income, next_year_9_deal, next_year_9_income, next_year_10_deal, next_year_10_income, next_year_11_deal, next_year_11_income, next_year_12_deal, next_year_12_income, remark, cycle_begin, cycle_end, cycle, current_year_deal, property, create_user_id, project_team, operate_date, operate_time, operate_user, operate_type
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id = #{id}
+      </if>
+      <if test="budgetId != null" >
+        and budget_id = #{budgetId}
+      </if>
+      <if test="budgetName != null" >
+        and budget_name = #{budgetName}
+      </if>
+      <if test="deptId != null" >
+        and dept_id = #{deptId}
+      </if>
+      <if test="deptName != null" >
+        and dept_name = #{deptName}
+      </if>
+      <if test="teamName != null" >
+        and team_name = #{teamName}
+      </if>
+      <if test="propertyId != null" >
+        and property_id = #{propertyId}
+      </if>
+      <if test="pm != null" >
+        and pm = #{pm}
+      </if>
+      <if test="domainId != null" >
+        and domain_id = #{domainId}
+      </if>
+      <if test="currentYear != null" >
+        and current_year = #{currentYear}
+      </if>
+      <if test="currentYearEstimate != null" >
+        and current_year_estimate = #{currentYearEstimate}
+      </if>
+      <if test="nextYear1Deal != null" >
+        and next_year_1_deal = #{nextYear1Deal}
+      </if>
+      <if test="nextYear1Income != null" >
+        and next_year_1_income = #{nextYear1Income}
+      </if>
+      <if test="nextYear2Deal != null" >
+        and next_year_2_deal = #{nextYear2Deal}
+      </if>
+      <if test="nextYear2Income != null" >
+        and next_year_2_income = #{nextYear2Income}
+      </if>
+      <if test="nextYear3Deal != null" >
+        and next_year_3_deal = #{nextYear3Deal}
+      </if>
+      <if test="nextYear3Income != null" >
+        and next_year_3_income = #{nextYear3Income}
+      </if>
+      <if test="nextYear4Deal != null" >
+        and next_year_4_deal = #{nextYear4Deal}
+      </if>
+      <if test="nextYear4Income != null" >
+        and next_year_4_income = #{nextYear4Income}
+      </if>
+      <if test="nextYear5Deal != null" >
+        and next_year_5_deal = #{nextYear5Deal}
+      </if>
+      <if test="nextYear5Income != null" >
+        and next_year_5_income = #{nextYear5Income}
+      </if>
+      <if test="nextYear6Deal != null" >
+        and next_year_6_deal = #{nextYear6Deal}
+      </if>
+      <if test="nextYear6Income != null" >
+        and next_year_6_income = #{nextYear6Income}
+      </if>
+      <if test="nextYear7Deal != null" >
+        and next_year_7_deal = #{nextYear7Deal}
+      </if>
+      <if test="nextYear7Income != null" >
+        and next_year_7_income = #{nextYear7Income}
+      </if>
+      <if test="nextYear8Deal != null" >
+        and next_year_8_deal = #{nextYear8Deal}
+      </if>
+      <if test="nextYear8Income != null" >
+        and next_year_8_income = #{nextYear8Income}
+      </if>
+      <if test="nextYear9Deal != null" >
+        and next_year_9_deal = #{nextYear9Deal}
+      </if>
+      <if test="nextYear9Income != null" >
+        and next_year_9_income = #{nextYear9Income}
+      </if>
+      <if test="nextYear10Deal != null" >
+        and next_year_10_deal = #{nextYear10Deal}
+      </if>
+      <if test="nextYear10Income != null" >
+        and next_year_10_income = #{nextYear10Income}
+      </if>
+      <if test="nextYear11Deal != null" >
+        and next_year_11_deal = #{nextYear11Deal}
+      </if>
+      <if test="nextYear11Income != null" >
+        and next_year_11_income = #{nextYear11Income}
+      </if>
+      <if test="nextYear12Deal != null" >
+        and next_year_12_deal = #{nextYear12Deal}
+      </if>
+      <if test="nextYear12Income != null" >
+        and next_year_12_income = #{nextYear12Income}
+      </if>
+      <if test="remark != null" >
+        and remark = #{remark}
+      </if>
+      <if test="cycleBegin != null" >
+        and cycle_begin = #{cycleBegin}
+      </if>
+      <if test="cycleBegin1 != null" >
+        and cycle_begin &gt;= #{cycleBegin1}
+      </if>
+      <if test="cycleBegin2 != null" >
+        and cycle_begin &lt;= #{cycleBegin2}
+      </if>
+      <if test="cycleEnd != null" >
+        and cycle_end = #{cycleEnd}
+      </if>
+      <if test="cycleEnd1 != null" >
+        and cycle_end &gt;= #{cycleEnd1}
+      </if>
+      <if test="cycleEnd2 != null" >
+        and cycle_end &lt;= #{cycleEnd2}
+      </if>
+      <if test="cycle != null" >
+        and cycle = #{cycle}
+      </if>
+      <if test="currentYearDeal != null" >
+        and current_year_deal = #{currentYearDeal}
+      </if>
+      <if test="property != null" >
+        and property = #{property}
+      </if>
+      <if test="createUserId != null" >
+        and create_user_id = #{createUserId}
+      </if>
+      <if test="projectTeam != null" >
+        and project_team = #{projectTeam}
+      </if>
+      <if test="operateDate != null" >
+        and operate_date = #{operateDate}
+      </if>
+      <if test="operateDate1 != null" >
+        and operate_date &gt;= #{operateDate1}
+      </if>
+      <if test="operateDate2 != null" >
+        and operate_date &lt;= #{operateDate2}
+      </if>
+      <if test="operateTime != null" >
+        and operate_time = #{operateTime}
+      </if>
+      <if test="operateTime1 != null" >
+        and operate_time &gt;= #{operateTime1}
+      </if>
+      <if test="operateTime2 != null" >
+        and operate_time &lt;= #{operateTime2}
+      </if>
+      <if test="operateUser != null" >
+        and operate_user = #{operateUser}
+      </if>
+      <if test="operateType != null" >
+        and operate_type = #{operateType}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.budget.entity.BudgetHistoryEO" >
+      insert into TS_BUDGET_HISTORY
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+                    <if test="id != null" >id,</if>
+                    <if test="budgetId != null" >budget_id,</if>
+                    <if test="budgetName != null" >budget_name,</if>
+                    <if test="deptId != null" >dept_id,</if>
+                    <if test="deptName != null" >dept_name,</if>
+                    <if test="teamName != null" >team_name,</if>
+                    <if test="propertyId != null" >property_id,</if>
+                    <if test="pm != null" >pm,</if>
+                    <if test="domainId != null" >domain_id,</if>
+                    <if test="currentYear != null" >current_year,</if>
+                    <if test="currentYearEstimate != null" >current_year_estimate,</if>
+                    <if test="nextYear1Deal != null" >next_year_1_deal,</if>
+                    <if test="nextYear1Income != null" >next_year_1_income,</if>
+                    <if test="nextYear2Deal != null" >next_year_2_deal,</if>
+                    <if test="nextYear2Income != null" >next_year_2_income,</if>
+                    <if test="nextYear3Deal != null" >next_year_3_deal,</if>
+                    <if test="nextYear3Income != null" >next_year_3_income,</if>
+                    <if test="nextYear4Deal != null" >next_year_4_deal,</if>
+                    <if test="nextYear4Income != null" >next_year_4_income,</if>
+                    <if test="nextYear5Deal != null" >next_year_5_deal,</if>
+                    <if test="nextYear5Income != null" >next_year_5_income,</if>
+                    <if test="nextYear6Deal != null" >next_year_6_deal,</if>
+                    <if test="nextYear6Income != null" >next_year_6_income,</if>
+                    <if test="nextYear7Deal != null" >next_year_7_deal,</if>
+                    <if test="nextYear7Income != null" >next_year_7_income,</if>
+                    <if test="nextYear8Deal != null" >next_year_8_deal,</if>
+                    <if test="nextYear8Income != null" >next_year_8_income,</if>
+                    <if test="nextYear9Deal != null" >next_year_9_deal,</if>
+                    <if test="nextYear9Income != null" >next_year_9_income,</if>
+                    <if test="nextYear10Deal != null" >next_year_10_deal,</if>
+                    <if test="nextYear10Income != null" >next_year_10_income,</if>
+                    <if test="nextYear11Deal != null" >next_year_11_deal,</if>
+                    <if test="nextYear11Income != null" >next_year_11_income,</if>
+                    <if test="nextYear12Deal != null" >next_year_12_deal,</if>
+                    <if test="nextYear12Income != null" >next_year_12_income,</if>
+                    <if test="remark != null" >remark,</if>
+                    <if test="cycleBegin != null" >cycle_begin,</if>
+                    <if test="cycleEnd != null" >cycle_end,</if>
+                    <if test="cycle != null" >cycle,</if>
+                    <if test="currentYearDeal != null" >current_year_deal,</if>
+                    <if test="property != null" >property,</if>
+                    <if test="createUserId != null" >create_user_id,</if>
+                    <if test="projectTeam != null" >project_team,</if>
+                    <if test="operateDate != null" >operate_date,</if>
+                    <if test="operateTime != null" >operate_time,</if>
+                    <if test="operateUser != null" >operate_user,</if>
+                    <if test="operateType != null" >operate_type,</if>
+                </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides="," >
+                    <if test="id != null" >#{id},</if>
+                    <if test="budgetId != null" >#{budgetId},</if>
+                    <if test="budgetName != null" >#{budgetName},</if>
+                    <if test="deptId != null" >#{deptId},</if>
+                    <if test="deptName != null" >#{deptName},</if>
+                    <if test="teamName != null" >#{teamName},</if>
+                    <if test="propertyId != null" >#{propertyId},</if>
+                    <if test="pm != null" >#{pm},</if>
+                    <if test="domainId != null" >#{domainId},</if>
+                    <if test="currentYear != null" >#{currentYear},</if>
+                    <if test="currentYearEstimate != null" >#{currentYearEstimate},</if>
+                    <if test="nextYear1Deal != null" >#{nextYear1Deal},</if>
+                    <if test="nextYear1Income != null" >#{nextYear1Income},</if>
+                    <if test="nextYear2Deal != null" >#{nextYear2Deal},</if>
+                    <if test="nextYear2Income != null" >#{nextYear2Income},</if>
+                    <if test="nextYear3Deal != null" >#{nextYear3Deal},</if>
+                    <if test="nextYear3Income != null" >#{nextYear3Income},</if>
+                    <if test="nextYear4Deal != null" >#{nextYear4Deal},</if>
+                    <if test="nextYear4Income != null" >#{nextYear4Income},</if>
+                    <if test="nextYear5Deal != null" >#{nextYear5Deal},</if>
+                    <if test="nextYear5Income != null" >#{nextYear5Income},</if>
+                    <if test="nextYear6Deal != null" >#{nextYear6Deal},</if>
+                    <if test="nextYear6Income != null" >#{nextYear6Income},</if>
+                    <if test="nextYear7Deal != null" >#{nextYear7Deal},</if>
+                    <if test="nextYear7Income != null" >#{nextYear7Income},</if>
+                    <if test="nextYear8Deal != null" >#{nextYear8Deal},</if>
+                    <if test="nextYear8Income != null" >#{nextYear8Income},</if>
+                    <if test="nextYear9Deal != null" >#{nextYear9Deal},</if>
+                    <if test="nextYear9Income != null" >#{nextYear9Income},</if>
+                    <if test="nextYear10Deal != null" >#{nextYear10Deal},</if>
+                    <if test="nextYear10Income != null" >#{nextYear10Income},</if>
+                    <if test="nextYear11Deal != null" >#{nextYear11Deal},</if>
+                    <if test="nextYear11Income != null" >#{nextYear11Income},</if>
+                    <if test="nextYear12Deal != null" >#{nextYear12Deal},</if>
+                    <if test="nextYear12Income != null" >#{nextYear12Income},</if>
+                    <if test="remark != null" >#{remark},</if>
+                    <if test="cycleBegin != null" >#{cycleBegin},</if>
+                    <if test="cycleEnd != null" >#{cycleEnd},</if>
+                    <if test="cycle != null" >#{cycle},</if>
+                    <if test="currentYearDeal != null" >#{currentYearDeal},</if>
+                    <if test="property != null" >#{property},</if>
+                    <if test="createUserId != null" >#{createUserId},</if>
+                    <if test="projectTeam != null" >#{projectTeam},</if>
+                    <if test="operateDate != null" >#{operateDate},</if>
+                    <if test="operateTime != null" >#{operateTime},</if>
+                    <if test="operateUser != null" >#{operateUser},</if>
+                    <if test="operateType != null" >#{operateType},</if>
+                </trim>
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.budget.entity.BudgetHistoryEO" >
+        insert into TS_BUDGET_HISTORY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="budgetId != null" >budget_id,</if>
+                <if test="budgetName != null" >budget_name,</if>
+                <if test="deptId != null" >dept_id,</if>
+                <if test="deptName != null" >dept_name,</if>
+                <if test="teamName != null" >team_name,</if>
+                <if test="propertyId != null" >property_id,</if>
+                <if test="pm != null" >pm,</if>
+                <if test="domainId != null" >domain_id,</if>
+                <if test="currentYear != null" >current_year,</if>
+                <if test="currentYearEstimate != null" >current_year_estimate,</if>
+                <if test="nextYear1Deal != null" >next_year_1_deal,</if>
+                <if test="nextYear1Income != null" >next_year_1_income,</if>
+                <if test="nextYear2Deal != null" >next_year_2_deal,</if>
+                <if test="nextYear2Income != null" >next_year_2_income,</if>
+                <if test="nextYear3Deal != null" >next_year_3_deal,</if>
+                <if test="nextYear3Income != null" >next_year_3_income,</if>
+                <if test="nextYear4Deal != null" >next_year_4_deal,</if>
+                <if test="nextYear4Income != null" >next_year_4_income,</if>
+                <if test="nextYear5Deal != null" >next_year_5_deal,</if>
+                <if test="nextYear5Income != null" >next_year_5_income,</if>
+                <if test="nextYear6Deal != null" >next_year_6_deal,</if>
+                <if test="nextYear6Income != null" >next_year_6_income,</if>
+                <if test="nextYear7Deal != null" >next_year_7_deal,</if>
+                <if test="nextYear7Income != null" >next_year_7_income,</if>
+                <if test="nextYear8Deal != null" >next_year_8_deal,</if>
+                <if test="nextYear8Income != null" >next_year_8_income,</if>
+                <if test="nextYear9Deal != null" >next_year_9_deal,</if>
+                <if test="nextYear9Income != null" >next_year_9_income,</if>
+                <if test="nextYear10Deal != null" >next_year_10_deal,</if>
+                <if test="nextYear10Income != null" >next_year_10_income,</if>
+                <if test="nextYear11Deal != null" >next_year_11_deal,</if>
+                <if test="nextYear11Income != null" >next_year_11_income,</if>
+                <if test="nextYear12Deal != null" >next_year_12_deal,</if>
+                <if test="nextYear12Income != null" >next_year_12_income,</if>
+                <if test="remark != null" >remark,</if>
+                <if test="cycleBegin != null" >cycle_begin,</if>
+                <if test="cycleEnd != null" >cycle_end,</if>
+                <if test="cycle != null" >cycle,</if>
+                <if test="currentYearDeal != null" >current_year_deal,</if>
+                <if test="property != null" >property,</if>
+                <if test="createUserId != null" >create_user_id,</if>
+                <if test="projectTeam != null" >project_team,</if>
+                <if test="operateDate != null" >operate_date,</if>
+                <if test="operateTime != null" >operate_time,</if>
+                <if test="operateUser != null" >operate_user,</if>
+                <if test="operateType != null" >operate_type,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id},</if>
+                <if test="budgetId != null" >#{budgetId},</if>
+                <if test="budgetName != null" >#{budgetName},</if>
+                <if test="deptId != null" >#{deptId},</if>
+                <if test="deptName != null" >#{deptName},</if>
+                <if test="teamName != null" >#{teamName},</if>
+                <if test="propertyId != null" >#{propertyId},</if>
+                <if test="pm != null" >#{pm},</if>
+                <if test="domainId != null" >#{domainId},</if>
+                <if test="currentYear != null" >#{currentYear},</if>
+                <if test="currentYearEstimate != null" >#{currentYearEstimate},</if>
+                <if test="nextYear1Deal != null" >#{nextYear1Deal},</if>
+                <if test="nextYear1Income != null" >#{nextYear1Income},</if>
+                <if test="nextYear2Deal != null" >#{nextYear2Deal},</if>
+                <if test="nextYear2Income != null" >#{nextYear2Income},</if>
+                <if test="nextYear3Deal != null" >#{nextYear3Deal},</if>
+                <if test="nextYear3Income != null" >#{nextYear3Income},</if>
+                <if test="nextYear4Deal != null" >#{nextYear4Deal},</if>
+                <if test="nextYear4Income != null" >#{nextYear4Income},</if>
+                <if test="nextYear5Deal != null" >#{nextYear5Deal},</if>
+                <if test="nextYear5Income != null" >#{nextYear5Income},</if>
+                <if test="nextYear6Deal != null" >#{nextYear6Deal},</if>
+                <if test="nextYear6Income != null" >#{nextYear6Income},</if>
+                <if test="nextYear7Deal != null" >#{nextYear7Deal},</if>
+                <if test="nextYear7Income != null" >#{nextYear7Income},</if>
+                <if test="nextYear8Deal != null" >#{nextYear8Deal},</if>
+                <if test="nextYear8Income != null" >#{nextYear8Income},</if>
+                <if test="nextYear9Deal != null" >#{nextYear9Deal},</if>
+                <if test="nextYear9Income != null" >#{nextYear9Income},</if>
+                <if test="nextYear10Deal != null" >#{nextYear10Deal},</if>
+                <if test="nextYear10Income != null" >#{nextYear10Income},</if>
+                <if test="nextYear11Deal != null" >#{nextYear11Deal},</if>
+                <if test="nextYear11Income != null" >#{nextYear11Income},</if>
+                <if test="nextYear12Deal != null" >#{nextYear12Deal},</if>
+                <if test="nextYear12Income != null" >#{nextYear12Income},</if>
+                <if test="remark != null" >#{remark},</if>
+                <if test="cycleBegin != null" >#{cycleBegin},</if>
+                <if test="cycleEnd != null" >#{cycleEnd},</if>
+                <if test="cycle != null" >#{cycle},</if>
+                <if test="currentYearDeal != null" >#{currentYearDeal},</if>
+                <if test="property != null" >#{property},</if>
+                <if test="createUserId != null" >#{createUserId},</if>
+                <if test="projectTeam != null" >#{projectTeam},</if>
+                <if test="operateDate != null" >#{operateDate},</if>
+                <if test="operateTime != null" >#{operateTime},</if>
+                <if test="operateUser != null" >#{operateUser},</if>
+                <if test="operateType != null" >#{operateType},</if>
+            </trim>
+  </insert>
+
+  <!-- TS_BUDGET_HISTORY 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from TS_BUDGET_HISTORY
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TS_BUDGET_HISTORY列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from TS_BUDGET_HISTORY
+			 <include refid="Base_Where_Clause"/>
+			) tmp_tb where rownum &lt;= #{pager.endIndex})
+			where rn &gt;= #{pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from TS_BUDGET_HISTORY
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+</mapper>

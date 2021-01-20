@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.budget.dao.MyDao" >
+
+	<select id="getUserIdByUserName" resultType="java.lang.String" parameterType="java.lang.String">
+		select usid from TS_USER t where t.usname = #{usname}
+	</select>
+
+	<select id="getUserIdByUserNameLike" resultType="java.lang.String" parameterType="java.lang.String">
+		select usid from TS_USER t where t.del_flag = 0 and t.usname like CONCAT('%',CONCAT(  #{usname},'%'))
+	</select>
+
+	<select id="getUserNameByUserId" resultType="java.lang.String" parameterType="java.lang.String">
+		select usname from TS_USER t where t.usid = #{usid}
+	</select>
+
+	<select id="getTaskIdsByWorkTimeRange" resultType="java.lang.String">
+		select task_id from (select task_id, sum(worktime) as worktime from st_task_worktime group by task_id) a
+		where 1=1
+        <if test="workTimeStart != null and workTimeStart != ''" >
+          and worktime #{workTimeStartOperator} #{workTimeStart}
+        </if>
+        <if test="workTimeEnd != null and workTimeEnd != ''" >
+          and worktime #{workTimeEndOperator} #{workTimeEnd}
+        </if>
+	</select>
+
+	<select id="getTaskIdsBy1WorkTime" resultType="java.lang.String">
+		select a.task_id as task_id from (select task_id, sum(worktime) as worktime from st_task_worktime group by task_id) a
+		where 1=1 and a.worktime ${workTimeOperator} #{workTime}
+	</select>
+
+	<select id="getWorkTimeByTaskId" resultType="java.lang.Float" parameterType="java.lang.String">
+		select worktime from (select task_id, sum(worktime) as worktime from st_task_worktime group by task_id) a where task_id=#{taskId}
+	</select>
+
+</mapper>

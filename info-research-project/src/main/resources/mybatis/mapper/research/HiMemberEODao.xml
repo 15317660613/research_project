@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.adc.da.research.dao.HiMemberEODao">
+    <!-- Result Map-->
+    <resultMap id = "BaseResultMap" type = "com.adc.da.research.entity.HiMemberEO">
+        <id column = "id_" property = "id"/>
+        <result column = "proc_business_key_" property = "procBusinessKey"/>
+        <result column = "mask_" property = "mask"/>
+        <result column = "research_project_id_" property = "researchProjectId"/>
+        <result column = "member_name_" property = "memberName"/>
+        <result column = "member_name_id_" property = "memberNameId"/>
+        <result column = "leader_flag_" property = "leaderFlag"/>
+        <result column = "job_level_" property = "jobLevel"/>
+        <result column = "job_level_id_" property = "jobLevelId"/>
+        <result column = "member_sex_" property = "memberSex"/>
+        <result column = "member_education_" property = "memberEducation"/>
+        <result column = "member_education_id_" property = "memberEducationId"/>
+        <result column = "member_degree_" property = "memberDegree"/>
+        <result column = "member_degree_id_" property = "memberDegreeId"/>
+        <result column = "main_task_description_" property = "mainTaskDescription"/>
+        <result column = "study_abroad_type_" property = "studyAbroadType"/>
+        <result column = "member_profession_" property = "memberProfession"/>
+        <result column = "member_card_" property = "memberCard"/>
+        <result column = "member_telephone_" property = "memberTelephone"/>
+        <result column = "member_mobile_phone_" property = "memberMobilePhone"/>
+        <result column = "member_email_" property = "memberEmail"/>
+        <result column = "ext_info_1_" property = "extInfo1"/>
+        <result column = "ext_info_2_" property = "extInfo2"/>
+        <result column = "ext_info_3_" property = "extInfo3"/>
+        <result column = "ext_info_4_" property = "extInfo4"/>
+        <result column = "ext_info_5_" property = "extInfo5"/>
+        <result column = "ext_info_6_" property = "extInfo6"/>
+    </resultMap>
+
+    <!-- RS_HI_PROJECT_MEMBER table all fields -->
+    <sql id = "Base_Column_List">
+        id_, proc_business_key_, mask_, research_project_id_, member_name_, member_name_id_, leader_flag_, job_level_, job_level_id_, member_sex_, member_education_, member_education_id_, member_degree_, member_degree_id_, main_task_description_, study_abroad_type_, member_profession_, member_card_, member_telephone_, member_mobile_phone_, member_email_, ext_info_1_, ext_info_2_, ext_info_3_, ext_info_4_, ext_info_5_, ext_info_6_
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id = "Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides = ",">
+            <if test = "id != null">
+                and id_ ${idOperator} #{id}
+            </if>
+            <if test = "procBusinessKey != null">
+                and proc_business_key_ ${procBusinessKeyOperator} #{procBusinessKey}
+            </if>
+            <if test = "mask != null">
+                and mask_ ${maskOperator} #{mask}
+            </if>
+            <if test = "researchProjectId != null">
+                and research_project_id_ ${researchProjectIdOperator} #{researchProjectId}
+            </if>
+            <if test = "memberName != null">
+                and member_name_ ${memberNameOperator} #{memberName}
+            </if>
+            <if test = "memberNameId != null">
+                and member_name_id_ ${memberNameIdOperator} #{memberNameId}
+            </if>
+            <if test = "leaderFlag != null">
+                and leader_flag_ ${leaderFlagOperator} #{leaderFlag}
+            </if>
+            <if test = "jobLevel != null">
+                and job_level_ ${jobLevelOperator} #{jobLevel}
+            </if>
+            <if test = "jobLevelId != null">
+                and job_level_id_ ${jobLevelIdOperator} #{jobLevelId}
+            </if>
+            <if test = "memberSex != null">
+                and member_sex_ ${memberSexOperator} #{memberSex}
+            </if>
+            <if test = "memberEducation != null">
+                and member_education_ ${memberEducationOperator} #{memberEducation}
+            </if>
+            <if test = "memberEducationId != null">
+                and member_education_id_ ${memberEducationIdOperator} #{memberEducationId}
+            </if>
+            <if test = "memberDegree != null">
+                and member_degree_ ${memberDegreeOperator} #{memberDegree}
+            </if>
+            <if test = "memberDegreeId != null">
+                and member_degree_id_ ${memberDegreeIdOperator} #{memberDegreeId}
+            </if>
+            <if test = "mainTaskDescription != null">
+                and main_task_description_ ${mainTaskDescriptionOperator} #{mainTaskDescription}
+            </if>
+            <if test = "studyAbroadType != null">
+                and study_abroad_type_ ${studyAbroadTypeOperator} #{studyAbroadType}
+            </if>
+            <if test = "memberProfession != null">
+                and member_profession_ ${memberProfessionOperator} #{memberProfession}
+            </if>
+            <if test = "memberCard != null">
+                and member_card_ ${memberCardOperator} #{memberCard}
+            </if>
+            <if test = "memberTelephone != null">
+                and member_telephone_ ${memberTelephoneOperator} #{memberTelephone}
+            </if>
+            <if test = "memberMobilePhone != null">
+                and member_mobile_phone_ ${memberMobilePhoneOperator} #{memberMobilePhone}
+            </if>
+            <if test = "memberEmail != null">
+                and member_email_ ${memberEmailOperator} #{memberEmail}
+            </if>
+            <if test = "extInfo1 != null">
+                and ext_info_1_ ${extInfo1Operator} #{extInfo1}
+            </if>
+            <if test = "extInfo2 != null">
+                and ext_info_2_ ${extInfo2Operator} #{extInfo2}
+            </if>
+            <if test = "extInfo3 != null">
+                and ext_info_3_ ${extInfo3Operator} #{extInfo3}
+            </if>
+            <if test = "extInfo4 != null">
+                and ext_info_4_ ${extInfo4Operator} #{extInfo4}
+            </if>
+            <if test = "extInfo5 != null">
+                and ext_info_5_ ${extInfo5Operator} #{extInfo5}
+            </if>
+            <if test = "extInfo6 != null">
+                and ext_info_6_ ${extInfo6Operator} #{extInfo6}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id = "insert" parameterType = "com.adc.da.research.entity.HiMemberEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+            SELECT SEQ_RS_HI_PROJECT_MEMBER.NEXTVAL FROM DUAL
+        </selectKey> -->
+        insert into RS_HI_PROJECT_MEMBER(<include refid = "Base_Column_List"/>)
+        values (#{id, jdbcType=VARCHAR}, #{procBusinessKey, jdbcType=VARCHAR}, #{mask, jdbcType=VARCHAR},
+        #{researchProjectId, jdbcType=VARCHAR}, #{memberName, jdbcType=VARCHAR}, #{memberNameId, jdbcType=VARCHAR},
+        #{leaderFlag, jdbcType=INTEGER}, #{jobLevel, jdbcType=VARCHAR}, #{jobLevelId, jdbcType=VARCHAR},
+        #{memberSex, jdbcType=INTEGER}, #{memberEducation, jdbcType=VARCHAR}, #{memberEducationId, jdbcType=VARCHAR},
+        #{memberDegree, jdbcType=VARCHAR}, #{memberDegreeId, jdbcType=VARCHAR},
+        #{mainTaskDescription, jdbcType=VARCHAR}, #{studyAbroadType, jdbcType=INTEGER},
+        #{memberProfession, jdbcType=VARCHAR}, #{memberCard, jdbcType=VARCHAR}, #{memberTelephone, jdbcType=VARCHAR},
+        #{memberMobilePhone, jdbcType=VARCHAR}, #{memberEmail, jdbcType=VARCHAR}, #{extInfo1, jdbcType=INTEGER},
+        #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR},
+        #{extInfo5, jdbcType=VARCHAR}, #{extInfo6, jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id = "insertSelective" parameterType = "com.adc.da.research.entity.HiMemberEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_RS_HI_PROJECT_MEMBER.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into RS_HI_PROJECT_MEMBER
+        <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">id_,</if>
+            <if test = "procBusinessKey != null">proc_business_key_,</if>
+            <if test = "mask != null">mask_,</if>
+            <if test = "researchProjectId != null">research_project_id_,</if>
+            <if test = "memberName != null">member_name_,</if>
+            <if test = "memberNameId != null">member_name_id_,</if>
+            <if test = "leaderFlag != null">leader_flag_,</if>
+            <if test = "jobLevel != null">job_level_,</if>
+            <if test = "jobLevelId != null">job_level_id_,</if>
+            <if test = "memberSex != null">member_sex_,</if>
+            <if test = "memberEducation != null">member_education_,</if>
+            <if test = "memberEducationId != null">member_education_id_,</if>
+            <if test = "memberDegree != null">member_degree_,</if>
+            <if test = "memberDegreeId != null">member_degree_id_,</if>
+            <if test = "mainTaskDescription != null">main_task_description_,</if>
+            <if test = "studyAbroadType != null">study_abroad_type_,</if>
+            <if test = "memberProfession != null">member_profession_,</if>
+            <if test = "memberCard != null">member_card_,</if>
+            <if test = "memberTelephone != null">member_telephone_,</if>
+            <if test = "memberMobilePhone != null">member_mobile_phone_,</if>
+            <if test = "memberEmail != null">member_email_,</if>
+            <if test = "extInfo1 != null">ext_info_1_,</if>
+            <if test = "extInfo2 != null">ext_info_2_,</if>
+            <if test = "extInfo3 != null">ext_info_3_,</if>
+            <if test = "extInfo4 != null">ext_info_4_,</if>
+            <if test = "extInfo5 != null">ext_info_5_,</if>
+            <if test = "extInfo6 != null">ext_info_6_,</if>
+        </trim>
+        <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">#{id, jdbcType=VARCHAR},</if>
+            <if test = "procBusinessKey != null">#{procBusinessKey, jdbcType=VARCHAR},</if>
+            <if test = "mask != null">#{mask, jdbcType=VARCHAR},</if>
+            <if test = "researchProjectId != null">#{researchProjectId, jdbcType=VARCHAR},</if>
+            <if test = "memberName != null">#{memberName, jdbcType=VARCHAR},</if>
+            <if test = "memberNameId != null">#{memberNameId, jdbcType=VARCHAR},</if>
+            <if test = "leaderFlag != null">#{leaderFlag, jdbcType=INTEGER},</if>
+            <if test = "jobLevel != null">#{jobLevel, jdbcType=VARCHAR},</if>
+            <if test = "jobLevelId != null">#{jobLevelId, jdbcType=VARCHAR},</if>
+            <if test = "memberSex != null">#{memberSex, jdbcType=INTEGER},</if>
+            <if test = "memberEducation != null">#{memberEducation, jdbcType=VARCHAR},</if>
+            <if test = "memberEducationId != null">#{memberEducationId, jdbcType=VARCHAR},</if>
+            <if test = "memberDegree != null">#{memberDegree, jdbcType=VARCHAR},</if>
+            <if test = "memberDegreeId != null">#{memberDegreeId, jdbcType=VARCHAR},</if>
+            <if test = "mainTaskDescription != null">#{mainTaskDescription, jdbcType=VARCHAR},</if>
+            <if test = "studyAbroadType != null">#{studyAbroadType, jdbcType=INTEGER},</if>
+            <if test = "memberProfession != null">#{memberProfession, jdbcType=VARCHAR},</if>
+            <if test = "memberCard != null">#{memberCard, jdbcType=VARCHAR},</if>
+            <if test = "memberTelephone != null">#{memberTelephone, jdbcType=VARCHAR},</if>
+            <if test = "memberMobilePhone != null">#{memberMobilePhone, jdbcType=VARCHAR},</if>
+            <if test = "memberEmail != null">#{memberEmail, jdbcType=VARCHAR},</if>
+            <if test = "extInfo1 != null">#{extInfo1, jdbcType=INTEGER},</if>
+            <if test = "extInfo2 != null">#{extInfo2, jdbcType=VARCHAR},</if>
+            <if test = "extInfo3 != null">#{extInfo3, jdbcType=VARCHAR},</if>
+            <if test = "extInfo4 != null">#{extInfo4, jdbcType=VARCHAR},</if>
+            <if test = "extInfo5 != null">#{extInfo5, jdbcType=VARCHAR},</if>
+            <if test = "extInfo6 != null">#{extInfo6, jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+    <insert id = "insertSelectiveAll" parameterType = "java.util.List">
+        INSERT ALL
+        <foreach collection = "list" item = "item" index = "index">
+            <if test = "item.id !=null">
+                into RS_HI_PROJECT_MEMBER
+                <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+                    <if test = "item.id != null">id_,</if>
+                    <if test = "item.procBusinessKey != null">proc_business_key_,</if>
+                    <if test = "item.mask != null">mask_,</if>
+                    <if test = "item.researchProjectId != null">research_project_id_,</if>
+                    <if test = "item.memberName != null">member_name_,</if>
+                    <if test = "item.memberNameId != null">member_name_id_,</if>
+                    <if test = "item.leaderFlag != null">leader_flag_,</if>
+                    <if test = "item.jobLevel != null">job_level_,</if>
+                    <if test = "item.jobLevelId != null">job_level_id_,</if>
+                    <if test = "item.memberSex != null">member_sex_,</if>
+                    <if test = "item.memberEducation != null">member_education_,</if>
+                    <if test = "item.memberEducationId != null">member_education_id_,</if>
+                    <if test = "item.memberDegree != null">member_degree_,</if>
+                    <if test = "item.memberDegreeId != null">member_degree_id_,</if>
+                    <if test = "item.mainTaskDescription != null">main_task_description_,</if>
+                    <if test = "item.studyAbroadType != null">study_abroad_type_,</if>
+                    <if test = "item.memberProfession != null">member_profession_,</if>
+                    <if test = "item.memberCard != null">member_card_,</if>
+                    <if test = "item.memberTelephone != null">member_telephone_,</if>
+                    <if test = "item.memberMobilePhone != null">member_mobile_phone_,</if>
+                    <if test = "item.memberEmail != null">member_email_,</if>
+                    <if test = "item.extInfo1 != null">ext_info_1_,</if>
+                    <if test = "item.extInfo2 != null">ext_info_2_,</if>
+                    <if test = "item.extInfo3 != null">ext_info_3_,</if>
+                    <if test = "item.extInfo4 != null">ext_info_4_,</if>
+                    <if test = "item.extInfo5 != null">ext_info_5_,</if>
+                    <if test = "item.extInfo6 != null">ext_info_6_,</if>
+                </trim>
+                <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+                    <if test = "item.id != null">#{item.id, jdbcType=VARCHAR},</if>
+                    <if test = "item.procBusinessKey != null">#{item.procBusinessKey, jdbcType=VARCHAR},</if>
+                    <if test = "item.mask != null">#{item.mask, jdbcType=VARCHAR},</if>
+                    <if test = "item.researchProjectId != null">#{item.researchProjectId, jdbcType=VARCHAR},</if>
+                    <if test = "item.memberName != null">#{item.memberName, jdbcType=VARCHAR},</if>
+                    <if test = "item.memberNameId != null">#{item.memberNameId, jdbcType=VARCHAR},</if>
+                    <if test = "item.leaderFlag != null">#{item.leaderFlag, jdbcType=INTEGER},</if>
+                    <if test = "item.jobLevel != null">#{item.jobLevel, jdbcType=VARCHAR},</if>
+                    <if test = "item.jobLevelId != null">#{item.jobLevelId, jdbcType=VARCHAR},</if>
+                    <if test = "item.memberSex != null">#{item.memberSex, jdbcType=INTEGER},</if>
+                    <if test = "item.memberEducation != null">#{item.memberEducation, jdbcType=VARCHAR},</if>
+                    <if test = "item.memberEducationId != null">#{item.memberEducationId, jdbcType=VARCHAR},</if>
+                    <if test = "item.memberDegree != null">#{item.memberDegree, jdbcType=VARCHAR},</if>
+                    <if test = "item.memberDegreeId != null">#{item.memberDegreeId, jdbcType=VARCHAR},</if>
+                    <if test = "item.mainTaskDescription != null">#{item.mainTaskDescription, jdbcType=VARCHAR},</if>
+                    <if test = "item.studyAbroadType != null">#{item.studyAbroadType, jdbcType=INTEGER},</if>
+                    <if test = "item.memberProfession != null">#{item.memberProfession, jdbcType=VARCHAR},</if>
+                    <if test = "item.memberCard != null">#{item.memberCard, jdbcType=VARCHAR},</if>
+                    <if test = "item.memberTelephone != null">#{item.memberTelephone, jdbcType=VARCHAR},</if>
+                    <if test = "item.memberMobilePhone != null">#{item.memberMobilePhone, jdbcType=VARCHAR},</if>
+                    <if test = "item.memberEmail != null">#{item.memberEmail, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo1 != null">#{item.extInfo1, jdbcType=INTEGER},</if>
+                    <if test = "item.extInfo2 != null">#{item.extInfo2, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo3 != null">#{item.extInfo3, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo4 != null">#{item.extInfo4, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo5 != null">#{item.extInfo5, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo6 != null">#{item.extInfo6, jdbcType=VARCHAR},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+    <!-- 根据pk，修改记录-->
+    <update id = "updateByPrimaryKey" parameterType = "com.adc.da.research.entity.HiMemberEO">
+        UPDATE RS_HI_PROJECT_MEMBER
+        SET proc_business_key_     = #{procBusinessKey},
+            mask_                  = #{mask},
+            research_project_id_   = #{researchProjectId},
+            member_name_           = #{memberName},
+            member_name_id_        = #{memberNameId},
+            leader_flag_           = #{leaderFlag},
+            job_level_             = #{jobLevel},
+            job_level_id_          = #{jobLevelId},
+            member_sex_            = #{memberSex},
+            member_education_      = #{memberEducation},
+            member_education_id_   = #{memberEducationId},
+            member_degree_         = #{memberDegree},
+            member_degree_id_      = #{memberDegreeId},
+            main_task_description_ = #{mainTaskDescription},
+            study_abroad_type_     = #{studyAbroadType},
+            member_profession_     = #{memberProfession},
+            member_card_           = #{memberCard},
+            member_telephone_      = #{memberTelephone},
+            member_mobile_phone_   = #{memberMobilePhone},
+            member_email_          = #{memberEmail},
+            ext_info_1_            = #{extInfo1},
+            ext_info_2_            = #{extInfo2},
+            ext_info_3_            = #{extInfo3},
+            ext_info_4_            = #{extInfo4},
+            ext_info_5_            = #{extInfo5},
+            ext_info_6_            = #{extInfo6}
+        WHERE id_ = #{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id = "updateByPrimaryKeySelective" parameterType = "com.adc.da.research.entity.HiMemberEO">
+        update RS_HI_PROJECT_MEMBER
+        <set>
+            <if test = "mask != null">
+                mask_ = #{mask},
+            </if>
+            <if test = "researchProjectId != null">
+                research_project_id_ = #{researchProjectId},
+            </if>
+            <if test = "memberName != null">
+                member_name_ = #{memberName},
+            </if>
+            <if test = "memberNameId != null">
+                member_name_id_ = #{memberNameId},
+            </if>
+            <if test = "leaderFlag != null">
+                leader_flag_ = #{leaderFlag},
+            </if>
+            <if test = "jobLevel != null">
+                job_level_ = #{jobLevel},
+            </if>
+            <if test = "jobLevelId != null">
+                job_level_id_ = #{jobLevelId},
+            </if>
+            <if test = "memberSex != null">
+                member_sex_ = #{memberSex},
+            </if>
+            <if test = "memberEducation != null">
+                member_education_ = #{memberEducation},
+            </if>
+            <if test = "memberEducationId != null">
+                member_education_id_ = #{memberEducationId},
+            </if>
+            <if test = "memberDegree != null">
+                member_degree_ = #{memberDegree},
+            </if>
+            <if test = "memberDegreeId != null">
+                member_degree_id_ = #{memberDegreeId},
+            </if>
+            <if test = "mainTaskDescription != null">
+                main_task_description_ = #{mainTaskDescription},
+            </if>
+            <if test = "studyAbroadType != null">
+                study_abroad_type_ = #{studyAbroadType},
+            </if>
+            <if test = "memberProfession != null">
+                member_profession_ = #{memberProfession},
+            </if>
+            <if test = "memberCard != null">
+                member_card_ = #{memberCard},
+            </if>
+            <if test = "memberTelephone != null">
+                member_telephone_ = #{memberTelephone},
+            </if>
+            <if test = "memberMobilePhone != null">
+                member_mobile_phone_ = #{memberMobilePhone},
+            </if>
+            <if test = "memberEmail != null">
+                member_email_ = #{memberEmail},
+            </if>
+            <if test = "extInfo1 != null">
+                ext_info_1_ = #{extInfo1},
+            </if>
+            <if test = "extInfo2 != null">
+                ext_info_2_ = #{extInfo2},
+            </if>
+            <if test = "extInfo3 != null">
+                ext_info_3_ = #{extInfo3},
+            </if>
+            <if test = "extInfo4 != null">
+                ext_info_4_ = #{extInfo4},
+            </if>
+            <if test = "extInfo5 != null">
+                ext_info_5_ = #{extInfo5},
+            </if>
+            <if test = "extInfo6 != null">
+                ext_info_6_ = #{extInfo6},
+            </if>
+        </set>
+        where id_ = #{id}
+        AND proc_business_key_ = #{procBusinessKey}
+
+    </update>
+
+    <!-- 根据id查询 RS_HI_PROJECT_MEMBER -->
+    <select id = "selectByPrimaryKey" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+        select
+        <include refid = "Base_Column_List"/>
+        from RS_HI_PROJECT_MEMBER
+        where id_ = #{value}
+
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id = "deleteByPrimaryKey" parameterType = "com.adc.da.research.entity.HiMemberEO">
+        DELETE
+        FROM RS_HI_PROJECT_MEMBER
+        WHERE id_ = #{id}
+          AND PROC_BUSINESS_KEY_ = #{procBusinessKey}
+    </delete>
+
+    <!-- RS_HI_PROJECT_MEMBER 列表总数-->
+    <select id = "queryByCount" resultType = "java.lang.Integer" parameterType = "com.adc.da.base.page.BasePage">
+        select count(1) from RS_HI_PROJECT_MEMBER
+        <include refid = "Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询RS_HI_PROJECT_MEMBER列表 -->
+    <select id = "queryByPage" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from
+        (select tmp_tb.* , rownum rn from
+        (select
+        <include refid = "Base_Column_List"/>
+        from RS_HI_PROJECT_MEMBER
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id = "queryByList" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from RS_HI_PROJECT_MEMBER
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+    </select>
+
+</mapper>

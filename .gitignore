@@ -1,0 +1,37 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+data
+
+### NetBeans ###
+nbproject/private/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+
+target
+*.iml
+*.ipr
+*.iws
+.idea
+.classpath
+.project
+.settings
+.DS_Store
+*logs/
+/adc-da-budget/src/main/resources/rebel.xml

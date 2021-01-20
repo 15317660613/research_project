@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.event.dao.EventReceiveEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.event.entity.EventReceiveEO" >
+    <id column="id_" property="id" />
+    <result column="receive_user_id_" property="receiveUserId" />
+    <result column="receive_user_name_" property="receiveUserName" />
+    <result column="state_" property="state" />
+    <result column="receive_time_" property="receiveTime" />
+    <result column="finish_time_" property="finishTime" />
+    <result column="event_id_" property="eventId" />
+    <result column="ext_info1_" property="extInfo1" />
+    <result column="ext_info2_" property="extInfo2" />
+    <result column="ext_info3_" property="extInfo3" />
+    <result column="ext_info4_" property="extInfo4" />
+    <result column="ext_info5_" property="extInfo5" />
+    <result column="ext_info6_" property="extInfo6" />
+    <result column="del_flag_" property="delFlag" />
+  </resultMap>
+
+
+    <resultMap id="EventReceiveFileMap" extends="BaseResultMap" type="com.adc.da.event.entity.EventReceiveEO">
+        <collection property="fileEO" ofType="com.adc.da.file.entity.FileEO">
+            <id column="file_id" property="fileId" />
+            <result column="user_id" property="userId" />
+            <result column="url" property="url" />
+            <result column="save_path" property="savePath" />
+            <result column="remark" property="remark" />
+            <result column="last_update_time" property="lastUpdateTime" />
+            <result column="file_type" property="fileType" />
+            <result column="file_name" property="fileName" />
+            <result column="create_time" property="createTime" />
+            <result column="content_type" property="contentType" />
+            <result column="foreign_id" property="foreignId" />
+            <result column="file_size" property="fileSize" />
+        </collection>
+        <collection property="eventEO" ofType="com.adc.da.event.entity.EventEO">
+            <id column="e_id_" property="id" />
+            <result column="e_create_user_id_" property="createUserId" />
+            <result column="e_create_user_name_" property="createUserName" />
+            <result column="e_create_time_" property="createTime" />
+            <result column="e_event_title_" property="eventTitle" />
+            <result column="e_send_flag_" property="sendFlag" />
+            <result column="e_del_flag_" property="delFlag" />
+            <result column="e_ext_info1_" property="extInfo1" />
+            <result column="e_ext_info2_" property="extInfo2" />
+            <result column="e_ext_info3_" property="extInfo3" />
+            <result column="e_ext_info4_" property="extInfo4" />
+            <result column="e_ext_info5_" property="extInfo5" />
+            <result column="e_ext_info6_" property="extInfo6" />
+        </collection>
+    </resultMap>
+
+
+
+  <!-- WR_EVENT_RECEIVE table all fields -->
+  <sql id="Base_Column_List" >
+     id_ , receive_user_id_, receive_user_name_, state_, receive_time_, finish_time_, event_id_, ext_info1_, ext_info2_, ext_info3_, ext_info4_, ext_info5_, ext_info6_, del_flag_
+  </sql>
+    <!-- WR_EVENT_RECEIVE table all fields -->
+    <sql id="Base_Column_List1" >
+     id_, receive_user_id_, receive_user_name_, state_, receive_time_, finish_time_, event_id_
+  </sql>
+
+    <sql id="Base_Column_List2" >
+     er1.id_,
+     er1.receive_user_id_,
+     er1.receive_user_name_,
+     er1.state_,
+     er1.receive_time_,
+     er1.finish_time_,
+     er1.event_id_,
+     er1.del_flag_,
+     er1.ext_info1_,
+     er1.ext_info2_,
+     er1.ext_info3_,
+     er1.ext_info4_,
+     er1.ext_info5_,
+     er1.ext_info6_,
+     tf.user_id ,  tf.url,  tf.save_path,  tf.remark,  tf.last_update_time,  tf.file_type,  tf.file_name,  tf.create_time,
+     tf.content_type,  tf.foreign_id ,  tf.file_size , tf.file_id,
+     e.id_ as e_id_,  e.create_user_id_ as e_create_user_id_,  e.create_user_name_ as e_create_user_name_,
+     e.create_time_ as e_create_time_,  e.event_title_ as e_event_title_,  e.send_flag_ as e_send_flag_,
+     e.del_flag_ as e_del_flag_,  e.ext_info1_ as e_ext_info1_,  e.ext_info2_ as e_ext_info2_,
+     e.ext_info3_ as e_ext_info3_,  e.ext_info4_ as e_ext_info4_,  e.ext_info5_ as e_ext_info5_,  e.ext_info6_ as e_ext_info6_
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id_ ${idOperator} #{id}
+      </if>
+      <if test="receiveUserId != null" >
+        and receive_user_id_ ${receiveUserIdOperator} #{receiveUserId}
+      </if>
+      <if test="receiveUserName != null" >
+        and receive_user_name_ ${receiveUserNameOperator} #{receiveUserName}
+      </if>
+      <if test="state != null" >
+        and state_ ${stateOperator} #{state}
+      </if>
+      <if test="receiveTime != null" >
+        and receive_time_ ${receiveTimeOperator} #{receiveTime}
+      </if>
+      <if test="receiveTime1 != null" >
+        and receive_time_ &gt;= #{receiveTime1}
+      </if>
+      <if test="receiveTime2 != null" >
+        and receive_time_ &lt;= #{receiveTime2}
+      </if>
+      <if test="finishTime != null" >
+        and finish_time_ ${finishTimeOperator} #{finishTime}
+      </if>
+      <if test="finishTime1 != null" >
+        and finish_time_ &gt;= #{finishTime1}
+      </if>
+      <if test="finishTime2 != null" >
+        and finish_time_ &lt;= #{finishTime2}
+      </if>
+      <if test="eventId != null" >
+        and event_id_ ${eventIdOperator} #{eventId}
+      </if>
+      <if test="extInfo1 != null" >
+        and ext_info1_ ${extInfo1Operator} #{extInfo1}
+      </if>
+      <if test="extInfo2 != null" >
+        and ext_info2_ ${extInfo2Operator} #{extInfo2}
+      </if>
+      <if test="extInfo3 != null" >
+        and ext_info3_ ${extInfo3Operator} #{extInfo3}
+      </if>
+      <if test="extInfo4 != null" >
+        and ext_info4_ ${extInfo4Operator} #{extInfo4}
+      </if>
+      <if test="extInfo5 != null" >
+        and ext_info5_ ${extInfo5Operator} #{extInfo5}
+      </if>
+      <if test="extInfo6 != null" >
+        and ext_info6_ ${extInfo6Operator} #{extInfo6}
+      </if>
+      <if test="delFlag != null" >
+        and del_flag_ = 0
+      </if>
+    </trim>
+  </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause1">
+        where 1=1
+        <trim suffixOverrides="," >
+            <if test="id != null" >
+                and id_ = #{id}
+            </if>
+            <if test="receiveUserId != null" >
+                and receive_user_id_ = #{receiveUserId}
+            </if>
+            <if test="receiveUserName != null" >
+                and receive_user_name_ like  CONCAT('%',CONCAT(  #{receiveUserName},'%'))
+            </if>
+            <if test="state != null" >
+                and state_ = #{state}
+            </if>
+            <if test="startReceiveTime != null" >
+                and receive_time_ &gt;= #{startReceiveTime}
+            </if>
+            <if test="endReceiveTime = null" >
+                and receive_time_ &lt;= #{endReceiveTime}
+            </if>
+            <if test="startFinishTime != null" >
+                and finish_time_ &gt;= #{startFinishTime}
+            </if>
+            <if test="endFinishTime != null" >
+                and finish_time_ &lt;= #{endFinishTime}
+            </if>
+            <if test="eventId != null" >
+                and event_id_ ${eventIdOperator} #{eventId}
+            </if>
+            <if test="delFlag != null" >
+                and del_flag_ = 0
+            </if>
+        </trim>
+    </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.event.entity.EventReceiveEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_WR_EVENT_RECEIVE.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into WR_EVENT_RECEIVE(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{receiveUserId, jdbcType=VARCHAR}, #{receiveUserName, jdbcType=VARCHAR}, #{state, jdbcType=INTEGER}, #{receiveTime, jdbcType=TIMESTAMP}, #{finishTime, jdbcType=TIMESTAMP}, #{eventId, jdbcType=INTEGER}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR}, #{extInfo6, jdbcType=VARCHAR}, #{delFlag, jdbcType=INTEGER})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.event.entity.EventReceiveEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_WR_EVENT_RECEIVE.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into WR_EVENT_RECEIVE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id_,</if>
+                <if test="receiveUserId != null" >receive_user_id_,</if>
+                <if test="receiveUserName != null" >receive_user_name_,</if>
+                <if test="state != null" >state_,</if>
+                <if test="receiveTime != null" >receive_time_,</if>
+                <if test="finishTime != null" >finish_time_,</if>
+                <if test="eventId != null" >event_id_,</if>
+                <if test="extInfo1 != null" >ext_info1_,</if>
+                <if test="extInfo2 != null" >ext_info2_,</if>
+                <if test="extInfo3 != null" >ext_info3_,</if>
+                <if test="extInfo4 != null" >ext_info4_,</if>
+                <if test="extInfo5 != null" >ext_info5_,</if>
+                <if test="extInfo6 != null" >ext_info6_,</if>
+                <if test="delFlag != null" >del_flag_,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="receiveUserId != null" >#{receiveUserId, jdbcType=VARCHAR},</if>
+                <if test="receiveUserName != null" >#{receiveUserName, jdbcType=VARCHAR},</if>
+                <if test="state != null" >#{state, jdbcType=INTEGER},</if>
+                <if test="receiveTime != null" >#{receiveTime, jdbcType=TIMESTAMP},</if>
+                <if test="finishTime != null" >#{finishTime, jdbcType=TIMESTAMP},</if>
+                <if test="eventId != null" >#{eventId, jdbcType=INTEGER},</if>
+                <if test="extInfo1 != null" >#{extInfo1, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="extInfo3 != null" >#{extInfo3, jdbcType=VARCHAR},</if>
+                <if test="extInfo4 != null" >#{extInfo4, jdbcType=VARCHAR},</if>
+                <if test="extInfo5 != null" >#{extInfo5, jdbcType=VARCHAR},</if>
+                <if test="extInfo6 != null" >#{extInfo6, jdbcType=VARCHAR},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=INTEGER},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.event.entity.EventReceiveEO" >
+    update WR_EVENT_RECEIVE
+       set  receive_user_id_ = #{receiveUserId},
+            receive_user_name_ = #{receiveUserName},
+            state_ = #{state},
+            receive_time_ = #{receiveTime},
+            finish_time_ = #{finishTime},
+            event_id_ = #{eventId},
+            ext_info1_ = #{extInfo1},
+            ext_info2_ = #{extInfo2},
+            ext_info3_ = #{extInfo3},
+            ext_info4_ = #{extInfo4},
+            ext_info5_ = #{extInfo5},
+            ext_info6_ = #{extInfo6},
+            del_flag_ = #{delFlag}
+     where  id_ = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.event.entity.EventReceiveEO" >
+    update WR_EVENT_RECEIVE
+    <set >
+      <if test="receiveUserId != null" >
+        receive_user_id_ = #{receiveUserId},
+      </if>
+      <if test="receiveUserName != null" >
+        receive_user_name_ = #{receiveUserName},
+      </if>
+      <if test="state != null" >
+        state_ = #{state},
+      </if>
+      <if test="receiveTime != null" >
+        receive_time_ = #{receiveTime},
+      </if>
+      <if test="finishTime != null" >
+        finish_time_ = #{finishTime},
+      </if>
+      <if test="eventId != null" >
+        event_id_ = #{eventId},
+      </if>
+      <if test="extInfo1 != null" >
+        ext_info1_ = #{extInfo1},
+      </if>
+      <if test="extInfo2 != null" >
+        ext_info2_ = #{extInfo2},
+      </if>
+      <if test="extInfo3 != null" >
+        ext_info3_ = #{extInfo3},
+      </if>
+      <if test="extInfo4 != null" >
+        ext_info4_ = #{extInfo4},
+      </if>
+      <if test="extInfo5 != null" >
+        ext_info5_ = #{extInfo5},
+      </if>
+      <if test="extInfo6 != null" >
+        ext_info6_ = #{extInfo6},
+      </if>
+      <if test="delFlag != null" >
+        del_flag_ = #{delFlag},
+      </if>
+    </set>
+     where id_ = #{id}
+  </update>
+
+    <!-- 根据id查询 WR_EVENT_RECEIVE -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="Base_Column_List" />
+        from WR_EVENT_RECEIVE
+        where id_ = #{value}  and del_flag_ = 0
+
+   </select>
+
+    <!-- 根据eventId查询 WR_EVENT_RECEIVE -->
+  <select id="selectByEventId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="Base_Column_List" />
+        from WR_EVENT_RECEIVE
+        where event_id_ = #{value} and del_flag_ = 0 order by receive_time_
+
+  </select>
+
+    <!-- 根据接收者Id查询 WR_EVENT_RECEIVE -->
+  <select id="selectByReceiveUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="Base_Column_List" />
+        from WR_EVENT_RECEIVE
+        where receive_user_id_ = #{value} and del_flag_ = 0
+
+  </select>
+
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from WR_EVENT_RECEIVE
+     where id_ = #{value}
+
+  </delete>
+
+    <!-- 删除记录,将删除标志位置为1 -->
+   <update id="delByPrimaryKey" parameterType="java.lang.String">
+      update WR_EVENT_RECEIVE
+      set del_flag_ = 1
+      where id_ = #{value}
+  </update>
+
+    <!-- 删除记录,将删除标志位置为1 -->
+    <update id="delByEventId" parameterType="java.lang.String">
+      update WR_EVENT_RECEIVE
+      set del_flag_ = 1
+      where EVENT_ID_ = #{value}
+  </update>
+
+  <!-- WR_EVENT_RECEIVE 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from WR_EVENT_RECEIVE
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+    <!-- 根据eventId和state查询WR_EVENT_RECEIVE 列表-->
+  <select id="selectNumOfState" resultType="java.lang.Integer" parameterType="com.adc.da.event.entity.EventReceiveEO">
+        select count(1) from WR_EVENT_RECEIVE
+        where event_id_ = #{eventId} and state_ = #{state}
+  </select>
+
+    <!-- 自定义WR_EVENT_RECEIVE 列表总数-->
+  <select id="queryByMyCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        select count(1) from WR_EVENT_RECEIVE
+        <include refid="Base_Where_Clause1"/>
+  </select>
+  <!-- 查询WR_EVENT_RECEIVE列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from WR_EVENT_RECEIVE
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+    <!-- 自定义查询WR_EVENT_RECEIVE列表 -->
+  <select id="queryByMyPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select <include refid="Base_Column_List1" /> from
+        (select tmp_tb.* , rownum rn from
+        (select <include refid="Base_Column_List1" /> from WR_EVENT_RECEIVE
+        <include refid="Base_Where_Clause1"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}  ORDER BY receive_time_ DESC
+  </select>
+
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from WR_EVENT_RECEIVE
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause_dingQiang">
+        where 1=1 and er.DEL_FLAG_ != 1
+        <if test="userId != null">
+            and er.receive_user_id_ = #{userId}
+        </if>
+        <if test="queryFlag != null">
+            and er.ext_info1_ = #{queryFlag}
+        </if>
+    </sql>
+
+
+    <!-- 自定义查询WR_EVENT列表 -->
+    <select id="queryBySearchPage" resultMap="EventReceiveFileMap" parameterType="com.adc.da.base.page.BasePage">
+        select <include refid="Base_Column_List2" /> from
+        (select tmp_tb.* , rownum rn from
+        (select er.* from WR_EVENT_RECEIVE er
+        left join WR_EVENT  e on e.ID_ = er.EVENT_ID_
+        left join WR_EVENT_FILE wef on wef.EVENT_ID_ = e.ID_
+        left join TS_FILE tf on wef.FILE_ID_ = tf.FILE_ID
+        <include refid="Base_Where_Clause_dingQiang"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ORDER BY e.create_time_ DESC
+        ) tmp_tb where rownum &lt;= ${pager.endIndex}) er1
+        left join WR_EVENT  e on e.ID_ = er1.EVENT_ID_
+        left join WR_EVENT_FILE wef on wef.EVENT_ID_ = e.ID_
+        left join TS_FILE tf on wef.FILE_ID_ = tf.FILE_ID
+        where rn &gt;= ${pager.startIndex}
+        ORDER BY e.create_time_ DESC
+    </select>
+
+
+    <!-- WR_EVENT 列表总数-->
+    <select id="queryBySearchPageCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        select count(1) from WR_EVENT_RECEIVE er
+        <include refid="Base_Where_Clause_dingQiang"/>
+    </select>
+
+    <!-- 根据pk，修改记录-->
+    <update id="updateByReceiveUserId">
+    update WR_EVENT_RECEIVE
+       set
+            state_ = #{state}
+     where 1=1
+     <if test="receiveUserId != null">
+     and RECEIVE_USER_ID_ = #{receiveUserId}
+    </if>
+    and EVENT_ID_ = #{eventId}
+  </update>
+
+    <!--&lt;!&ndash; 根据id查询 WR_EVENT_RECEIVE &ndash;&gt;-->
+    <!--<select id="selectByEventId" resultMap="BaseResultMap" parameterType="java.lang.String">-->
+        <!--select <include refid="Base_Column_List" />-->
+        <!--from WR_EVENT_RECEIVE-->
+        <!--where EVENT_ID_ = #{value}  and del_flag_ = 0-->
+        <!--order by-->
+    <!--</select>-->
+
+
+
+
+
+
+</mapper>

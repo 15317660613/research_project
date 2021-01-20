@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.funds.dao.ProjectOverEODao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="com.adc.da.research.funds.entity.ProjectOverEO">
+        <id column="id" property="id"/>
+        <result column="project_id" property="projectId"/>
+        <result column="project_code" property="projectCode"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="subject_name" property="subjectName"/>
+        <result column="over_amount" property="overAmount"/>
+        <result column="over_percent" property="overPercent"/>
+        <result column="over_date_begin" property="overDateBegin"/>
+        <result column="summary" property="summary"/>
+        <result column="over_state" property="overState"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="create_user_name" property="createUserName"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="ext1" property="ext1"/>
+        <result column="ext2" property="ext2"/>
+        <result column="ext3" property="ext3"/>
+        <result column="ext4" property="ext4"/>
+        <result column="ext5" property="ext5"/>
+        <result column="over_date_end" property="overDateEnd"/>
+        <result column="TECHNICAL_DIRECTOR" property="technicalDirector" />
+        <result column="ORG_NAME" property="orgName" />
+        <result column="projectTypeName" property="projectTypeName" />
+        <result column="PROJECT_NAME" property="projectName" />
+    </resultMap>
+
+    <!-- RS_PROJECT_OVER table all fields -->
+    <sql id="Base_Column_List">
+     id, project_id, project_code, dept_id, subject_name, over_amount, over_percent, over_date_begin, summary, over_state, create_user_id, create_user_name, create_time, modify_time, del_flag, ext1, ext2, ext3, ext4, ext5, over_date_end
+  </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="projectTypeId !=null and projectTypeId!=''">
+                and dicp.dic_type_name like CONCAT('%',CONCAT( #{projectTypeId, jdbcType=VARCHAR},'%'))
+            </if>
+            <if test="overDateBegin != null and overDateBegin !=''">
+                and to_char(over_date_begin,'yyyy-mm-dd') &gt;= #{overDateBegin,jdbcType=TIMESTAMP}
+            </if>
+            <if test="overDateEnd != null and overDateEnd!=''">
+                and to_char(over_date_end,'yyyy-mm-dd') &lt;= #{overDateEnd,jdbcType=TIMESTAMP}
+            </if>
+
+            <if test="id != null and id !=''">
+                and RPO.id ${idOperator} #{id, jdbcType=VARCHAR}
+            </if>
+            <if test="projectId != null and projectId!=''">
+                and project_id ${projectIdOperator} #{projectId, jdbcType=VARCHAR}
+            </if>
+            <if test="projectCode != null and projectCode !=''">
+                and RPO.project_code like CONCAT('%',CONCAT( #{projectCode, jdbcType=VARCHAR},'%'))
+            </if>
+            <if test="deptId != null and deptId!=''">
+                and dept_id ${deptIdOperator} #{deptId, jdbcType=VARCHAR}
+            </if>
+            <if test="subjectName != null and subjectName !=''">
+                and subject_name ${subjectNameOperator} #{subjectName, jdbcType=VARCHAR}
+            </if>
+            <if test="overAmount != null and overAmount!=''">
+                and over_amount ${overAmountOperator} #{overAmount, jdbcType=DOUBLE}
+            </if>
+            <if test="overPercent != null and overPercent!=''">
+                and over_percent ${overPercentOperator} #{overPercent, jdbcType=VARCHAR}
+            </if>
+<!--            <if test="overDateBegin != null">
+                and over_date_begin ${overDateBeginOperator} #{overDateBegin}
+            </if>-->
+            <if test="overDateBegin1 != null and overDateBegin1 !=''">
+                and over_date_begin &gt;= #{overDateBegin1, jdbcType=TIMESTAMP}
+            </if>
+            <if test="overDateBegin2 != null and overDateBegin2 !=''">
+                and over_date_begin &lt;= #{overDateBegin2, jdbcType=TIMESTAMP}
+            </if>
+            <if test="summary != null and summary !=''">
+                and summary ${summaryOperator} #{summary, jdbcType=VARCHAR}
+            </if>
+            <if test="overState != null and overState !=''">
+                and over_state ${overStateOperator} #{overState, jdbcType=INTEGER}
+            </if>
+            <if test="createUserId != null and createUserId !=''">
+                and technical_director LIKE  CONCAT('%',CONCAT(#{createUserId},'%'))
+            </if>
+            <if test="createUserName != null and createUserName!= ''">
+                and create_user_name ${createUserNameOperator} #{createUserName, jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null and createTime!= ''">
+                and create_time ${createTimeOperator} #{createTime, jdbcType=TIMESTAMP}
+            </if>
+            <if test="createTime1 != null and createTime1!=''">
+                and create_time &gt;= #{createTime1, jdbcType=TIMESTAMP}
+            </if>
+            <if test="createTime2 != null and createTime2!=''">
+                and create_time &lt;= #{createTime2, jdbcType=TIMESTAMP}
+            </if>
+            <if test="modifyTime != null and modifyTime!=''">
+                and modify_time ${modifyTimeOperator} #{modifyTime, jdbcType=TIMESTAMP}
+            </if>
+            <if test="modifyTime1 != null and modifyTime1!=''">
+                and modify_time &gt;= #{modifyTime1, jdbcType=TIMESTAMP}
+            </if>
+            <if test="modifyTime2 != null and modifyTime2!=''">
+                and modify_time &lt;= #{modifyTime2, jdbcType=TIMESTAMP}
+            </if>
+            <if test="delFlag != null and delFlag!=''">
+                and del_flag ${delFlagOperator} #{delFlag, jdbcType=VARCHAR}
+            </if>
+            <if test="ext1 != null and ext1!=''">
+                and ext1 ${ext1Operator} #{ext1, jdbcType=VARCHAR}
+            </if>
+            <if test="ext2 != null and ext2!=''">
+                and ext2 ${ext2Operator} #{ext2, jdbcType=VARCHAR}
+            </if>
+            <if test="ext3 != null and ext3!=''">
+                and ext3 ${ext3Operator} #{ext3, jdbcType=VARCHAR}
+            </if>
+            <if test="ext4 != null and ext4!=''">
+                and ext4 ${ext4Operator} #{ext4, jdbcType=VARCHAR}
+            </if>
+            <if test="ext5 != null and ext5!=''">
+                and ext5 ${ext5Operator} #{ext5, jdbcType=VARCHAR}
+            </if>
+<!--            <if test="overDateEnd != null">
+                and over_date_end ${overDateEndOperator} #{overDateEnd}
+            </if>-->
+            <if test="overDateEnd1 != null and overDateEnd1!=''">
+                and over_date_end &gt;= #{overDateEnd1, jdbcType=TIMESTAMP}
+            </if>
+            <if test="overDateEnd2 != null and overDateEnd2!=''">
+                and over_date_end &lt;= #{overDateEnd2, jdbcType=TIMESTAMP}
+            </if>
+            <if test="projectTypeName !=null and projectTypeName !=''">
+                and dicp.dic_type_name like CONCAT('%',CONCAT( #{projectTypeName, jdbcType=VARCHAR},'%'))
+            </if>
+            <if test="projectName !=null and projectName !=''">
+                and RPD.PROJECT_NAME like CONCAT('%',CONCAT( #{projectName, jdbcType=VARCHAR},'%'))
+            </if>
+            <if test="technicalDirector!=null and technicalDirector!=''">
+                and RPD.TECHNICAL_DIRECTOR like CONCAT('%',CONCAT( #{technicalDirector, jdbcType=VARCHAR},'%'))
+            </if>
+            <if test="modifyTimeBegin != null and modifyTimeBegin !=''" >
+                and to_char(RPO.modify_time,'yyyy-mm-dd') &gt;= #{modifyTimeBegin}
+            </if>
+            <if test="modifyTimeEnd != null and modifyTimeEnd!=''" >
+                and to_char(RPO.modify_time,'yyyy-mm-dd') &lt;= #{modifyTimeEnd}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="com.adc.da.research.funds.entity.ProjectOverEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+            SELECT SEQ_RS_PROJECT_OVER.NEXTVAL FROM DUAL
+        </selectKey> -->
+        insert into RS_PROJECT_OVER(<include refid="Base_Column_List"/>)
+        values (#{id, jdbcType=VARCHAR}, #{projectId, jdbcType=VARCHAR}, #{projectCode, jdbcType=VARCHAR},
+        #{deptId, jdbcType=VARCHAR}, #{subjectName, jdbcType=VARCHAR}, #{overAmount, jdbcType=DOUBLE},
+        #{overPercent, jdbcType=DOUBLE}, #{overDateBegin, jdbcType=TIMESTAMP}, #{summary, jdbcType=VARCHAR},
+        #{overState, jdbcType=INTEGER}, #{createUserId, jdbcType=VARCHAR}, #{createUserName, jdbcType=VARCHAR},
+        #{createTime, jdbcType=TIMESTAMP}, #{modifyTime, jdbcType=TIMESTAMP}, #{delFlag, jdbcType=INTEGER},
+        #{ext1, jdbcType=VARCHAR}, #{ext2, jdbcType=VARCHAR}, #{ext3, jdbcType=VARCHAR}, #{ext4, jdbcType=VARCHAR},
+        #{ext5, jdbcType=VARCHAR}, #{overDateEnd, jdbcType=TIMESTAMP})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id="insertSelective" parameterType="com.adc.da.research.funds.entity.ProjectOverEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RS_PROJECT_OVER.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into RS_PROJECT_OVER
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="projectId != null">project_id,</if>
+            <if test="projectCode != null">project_code,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="subjectName != null">subject_name,</if>
+            <if test="overAmount != null">over_amount,</if>
+            <if test="overPercent != null">over_percent,</if>
+            <if test="overDateBegin != null">over_date_begin,</if>
+            <if test="summary != null">summary,</if>
+            <if test="overState != null">over_state,</if>
+            <if test="createUserId != null">create_user_id,</if>
+            <if test="createUserName != null">create_user_name,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="modifyTime != null">modify_time,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="ext1 != null">ext1,</if>
+            <if test="ext2 != null">ext2,</if>
+            <if test="ext3 != null">ext3,</if>
+            <if test="ext4 != null">ext4,</if>
+            <if test="ext5 != null">ext5,</if>
+            <if test="overDateEnd != null">over_date_end,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id, jdbcType=VARCHAR},</if>
+            <if test="projectId != null">#{projectId, jdbcType=VARCHAR},</if>
+            <if test="projectCode != null">#{projectCode, jdbcType=VARCHAR},</if>
+            <if test="deptId != null">#{deptId, jdbcType=VARCHAR},</if>
+            <if test="subjectName != null">#{subjectName, jdbcType=VARCHAR},</if>
+            <if test="overAmount != null">#{overAmount, jdbcType=DOUBLE},</if>
+            <if test="overPercent != null">#{overPercent, jdbcType=DOUBLE},</if>
+            <if test="overDateBegin != null">#{overDateBegin, jdbcType=TIMESTAMP},</if>
+            <if test="summary != null">#{summary, jdbcType=VARCHAR},</if>
+            <if test="overState != null">#{overState, jdbcType=INTEGER},</if>
+            <if test="createUserId != null">#{createUserId, jdbcType=VARCHAR},</if>
+            <if test="createUserName != null">#{createUserName, jdbcType=VARCHAR},</if>
+            <if test="createTime != null">#{createTime, jdbcType=TIMESTAMP},</if>
+            <if test="modifyTime != null">#{modifyTime, jdbcType=TIMESTAMP},</if>
+            <if test="delFlag != null">#{delFlag, jdbcType=INTEGER},</if>
+            <if test="ext1 != null">#{ext1, jdbcType=VARCHAR},</if>
+            <if test="ext2 != null">#{ext2, jdbcType=VARCHAR},</if>
+            <if test="ext3 != null">#{ext3, jdbcType=VARCHAR},</if>
+            <if test="ext4 != null">#{ext4, jdbcType=VARCHAR},</if>
+            <if test="ext5 != null">#{ext5, jdbcType=VARCHAR},</if>
+            <if test="overDateEnd != null">#{overDateEnd, jdbcType=TIMESTAMP},</if>
+        </trim>
+    </insert>
+
+    <!-- 根据pk，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="com.adc.da.research.funds.entity.ProjectOverEO">
+    update RS_PROJECT_OVER
+       set  project_id = #{projectId},
+            project_code = #{projectCode},
+            dept_id = #{deptId},
+            subject_name = #{subjectName},
+            over_amount = #{overAmount},
+            over_percent = #{overPercent},
+            over_date_begin = #{overDateBegin},
+            summary = #{summary},
+            over_state = #{overState},
+            create_user_id = #{createUserId},
+            create_user_name = #{createUserName},
+            create_time = #{createTime},
+            modify_time = #{modifyTime},
+            del_flag = #{delFlag},
+            ext1 = #{ext1},
+            ext2 = #{ext2},
+            ext3 = #{ext3},
+            ext4 = #{ext4},
+            ext5 = #{ext5},
+            over_date_end = #{overDateEnd}
+     where  id = #{id}
+  </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.research.funds.entity.ProjectOverEO">
+        update RS_PROJECT_OVER
+        <set>
+            <if test="projectId != null">
+                project_id = #{projectId},
+            </if>
+            <if test="projectCode != null">
+                project_code = #{projectCode},
+            </if>
+            <if test="deptId != null">
+                dept_id = #{deptId},
+            </if>
+            <if test="subjectName != null">
+                subject_name = #{subjectName},
+            </if>
+            <if test="overAmount != null">
+                over_amount = #{overAmount},
+            </if>
+            <if test="overPercent != null">
+                over_percent = #{overPercent},
+            </if>
+            <if test="overDateBegin != null">
+                over_date_begin = #{overDateBegin},
+            </if>
+            <if test="summary != null">
+                summary = #{summary},
+            </if>
+            <if test="overState != null">
+                over_state = #{overState},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId},
+            </if>
+            <if test="createUserName != null">
+                create_user_name = #{createUserName},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag},
+            </if>
+            <if test="ext1 != null">
+                ext1 = #{ext1},
+            </if>
+            <if test="ext2 != null">
+                ext2 = #{ext2},
+            </if>
+            <if test="ext3 != null">
+                ext3 = #{ext3},
+            </if>
+            <if test="ext4 != null">
+                ext4 = #{ext4},
+            </if>
+            <if test="ext5 != null">
+                ext5 = #{ext5},
+            </if>
+            <if test="overDateEnd != null">
+                over_date_end = #{overDateEnd},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!-- 根据id查询 RS_PROJECT_OVER -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from RS_PROJECT_OVER
+        where id = #{value}
+
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RS_PROJECT_OVER
+     where id = #{value}
+
+  </delete>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByParam" parameterType="com.adc.da.base.page.BasePage">
+        delete from RS_PROJECT_OVER
+        <include refid="Base_Where_Clause"/>
+    </delete>
+
+    <!-- RS_PROJECT_OVER 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        select count(1) from (select DISTINCT(RPO.id), RPO.project_id, RPO.project_code, RPO.dept_id, RPO.subject_name,
+        RPO.over_amount, RPO.over_percent, RPO.over_date_begin, RPO.summary
+        , RPO.over_state, RPO.create_user_id, RPO.create_user_name, RPO.create_time, RPO.modify_time, RPO.del_flag,
+        RPO.ext1, RPO.ext2, RPO.ext3, RPO.ext4
+        , RPO.ext5, RPO.over_date_end,RPD.TECHNICAL_DIRECTOR,TSO.ORG_NAME,dicp.dic_type_name projectTypeName
+        , RPD.PROJECT_NAME
+        from RS_PROJECT_OVER RPO
+        LEFT JOIN RS_PROJECT_DATA RPD ON RPD.ID=RPO.PROJECT_ID
+        LEFT JOIN TS_ORG TSO ON TSO.ID=RPO.DEPT_ID
+        left join TS_DICTYPE dicp on RPD.project_type_id = dicp.id
+        <include refid="Base_Where_Clause"/>
+        )
+    </select>
+
+    <!-- 查询RS_PROJECT_OVER列表 -->
+    <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select
+        id, project_id, project_code, dept_id, subject_name, over_amount, over_percent, over_date_begin, summary
+        , over_state, create_user_id, create_user_name, create_time, modify_time, del_flag, ext1, ext2, ext3, ext4
+        , ext5, over_date_end, TECHNICAL_DIRECTOR, ORG_NAME,projectTypeName,PROJECT_NAME
+        from
+        (select tmp_tb.* , rownum rn from
+        ( select DISTINCT(RPO.id), RPO.project_id, RPO.project_code, RPO.dept_id, RPO.subject_name, RPO.over_amount,
+        RPO.over_percent, RPO.over_date_begin, RPO.summary
+        , RPO.over_state, RPO.create_user_id, RPO.create_user_name, RPO.create_time, RPO.modify_time, RPO.del_flag,
+        RPO.ext1, RPO.ext2, RPO.ext3, RPO.ext4,dicp.dic_type_name projectTypeName
+        , RPO.ext5, RPO.over_date_end,RPD.TECHNICAL_DIRECTOR,TSO.ORG_NAME ,RPD.PROJECT_NAME
+        from RS_PROJECT_OVER RPO
+        LEFT JOIN RS_PROJECT_DATA RPD ON RPD.ID=RPO.PROJECT_ID
+        LEFT JOIN TS_ORG TSO ON TSO.ID=RPO.DEPT_ID
+        left join TS_DICTYPE dicp on RPD.project_type_id = dicp.id
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        order by project_code) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select DISTINCT(RPO.id), RPO.project_id, RPO.project_code, RPO.dept_id, RPO.subject_name, RPO.over_amount,
+        RPO.over_percent, RPO.over_date_begin, RPO.summary
+        , RPO.over_state, RPO.create_user_id, RPO.create_user_name, RPO.create_time, RPO.modify_time, RPO.del_flag,
+        RPO.ext1, RPO.ext2, RPO.ext3, RPO.ext4
+        , RPO.ext5, RPO.over_date_end,RPD.TECHNICAL_DIRECTOR,TSO.ORG_NAME,dicp.dic_type_name projectTypeName, RPD.PROJECT_NAME
+        from RS_PROJECT_OVER RPO
+        LEFT JOIN RS_PROJECT_DATA RPD ON RPD.ID=RPO.PROJECT_ID
+        LEFT JOIN TS_ORG TSO ON TSO.ID=RPO.DEPT_ID
+        left join TS_DICTYPE dicp on RPD.project_type_id = dicp.id
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+    </select>
+
+</mapper>

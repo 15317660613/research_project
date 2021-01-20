@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.adc.da.progress.dao.ProjectMilepostEODao">
+    <!-- Result Map-->
+    <resultMap id = "BaseResultMap" type = "com.adc.da.progress.entity.ProjectMilepostEO">
+        <id column = "id" property = "id"/>
+        <result column = "project_id" property = "projectId"/>
+        <result column = "project_name" property = "projectName"/>
+        <result column = "milepost_name" property = "milepostName"/>
+        <result column = "milepost_target" property = "milepostTarget"/>
+        <result column = "milepost_manager_id" property = "milepostManagerId"/>
+        <result column = "milepost_manager_name" property = "milepostManagerName"/>
+        <result column = "milepost_begin_time" property = "milepostBeginTime"/>
+        <result column = "milepost_end_time" property = "milepostEndTime"/>
+        <result column = "milepost_version" property = "milepostVersion"/>
+        <result column = "ext_info1" property = "extInfo1"/>
+        <result column = "ext_info2" property = "extInfo2"/>
+        <result column = "ext_info3" property = "extInfo3"/>
+        <result column = "ext_info4" property = "extInfo4"/>
+        <result column = "ext_info5" property = "extInfo5"/>
+        <result column = "stage_id" property = "stageId"/>
+        <result column = "finish_time" property = "finishTime"/>
+        <result column = "finish_status" property = "finishStatus"/>
+    </resultMap>
+
+    <!-- PR_PROJECT_MILEPOST table all fields -->
+    <sql id = "Base_Column_List">
+        id, project_id, project_name, milepost_name, milepost_target, milepost_manager_id, milepost_manager_name, milepost_begin_time, milepost_end_time, milepost_version, ext_info1, ext_info2, ext_info3, ext_info4, ext_info5, stage_id, finish_time, finish_status
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id = "Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides = ",">
+            <if test = "id != null">
+                and id ${idOperator} #{id}
+            </if>
+            <if test = "projectIdList != null">
+                and project_id in
+                <foreach item="id_" collection="projectIdList" open="(" separator=","
+                         close=")" index="index">
+                    #{id_}
+                </foreach>
+            </if>
+            <if test = "projectId != null">
+                and project_id ${projectIdOperator} #{projectId}
+            </if>
+            <if test = "projectName != null">
+                and project_name ${projectNameOperator} #{projectName}
+            </if>
+            <if test = "milepostName != null">
+                and milepost_name ${milepostNameOperator} #{milepostName}
+            </if>
+            <if test = "milepostTarget != null">
+                and milepost_target ${milepostTargetOperator} #{milepostTarget}
+            </if>
+            <if test = "milepostManagerId != null">
+                and milepost_manager_id ${milepostManagerIdOperator} #{milepostManagerId}
+            </if>
+            <if test = "milepostManagerName != null">
+                and milepost_manager_name ${milepostManagerNameOperator} #{milepostManagerName}
+            </if>
+            <if test = "milepostBeginTime != null">
+                and milepost_begin_time ${milepostBeginTimeOperator} #{milepostBeginTime}
+            </if>
+            <if test = "milepostBeginTime1 != null">
+                and milepost_begin_time &gt;= #{milepostBeginTime1}
+            </if>
+            <if test = "milepostBeginTime2 != null">
+                and milepost_begin_time &lt;= #{milepostBeginTime2}
+            </if>
+            <if test = "milepostEndTime != null">
+                and milepost_end_time ${milepostEndTimeOperator} #{milepostEndTime}
+            </if>
+            <if test = "milepostEndTime1 != null">
+                and milepost_end_time &gt;= #{milepostEndTime1}
+            </if>
+            <if test = "milepostEndTime2 != null">
+                and milepost_end_time &lt;= #{milepostEndTime2}
+            </if>
+            <if test = "milepostVersion != null">
+                and milepost_version ${milepostVersionOperator} #{milepostVersion}
+            </if>
+            <if test = "extInfo1 != null">
+                and ext_info1 ${extInfo1Operator} #{extInfo1}
+            </if>
+            <if test = "extInfo2 != null">
+                and ext_info2 ${extInfo2Operator} #{extInfo2}
+            </if>
+            <if test = "extInfo3 != null">
+                and ext_info3 ${extInfo3Operator} #{extInfo3}
+            </if>
+            <if test = "extInfo4 != null">
+                and ext_info4 ${extInfo4Operator} #{extInfo4}
+            </if>
+            <if test = "extInfo5 != null">
+                and ext_info5 ${extInfo5Operator} #{extInfo5}
+            </if>
+            <if test = "stageId != null">
+                and stage_id ${stageIdOperator} #{stageId}
+            </if>
+            <if test = "finishTime != null">
+                and finish_time ${finishTimeOperator} #{finishTime}
+            </if>
+            <if test = "finishTime1 != null">
+                and finish_time &gt;= #{finishTime1}
+            </if>
+            <if test = "finishTime2 != null">
+                and finish_time &lt;= #{finishTime2}
+            </if>
+            <if test = "finishStatus != null">
+                and finish_status ${finishStatusOperator} #{finishStatus}
+            </if>
+        </trim>
+    </sql>
+
+
+
+    <!-- 查询条件 -->
+    <sql id = "Base_Where_Clause1">
+        where 1=1
+        <trim suffixOverrides = ",">
+            <if test = "fit_idList != null">
+                and id in
+                <foreach item="id_" collection="fit_idList" open="(" separator=","
+                         close=")" index="index">
+                    #{id_}
+                </foreach>
+            </if>
+
+            <if test = "not_idList != null">
+                and id not in
+                <foreach item="id_" collection="not_idList" open="(" separator=","
+                         close=")" index="index">
+                    #{id_}
+                </foreach>
+            </if>
+
+            <if test = "milepostManagerId != null">
+                and milepost_manager_id = #{milepostManagerId}
+            </if>
+            <if test = "projectId != null">
+                and project_id = #{projectId}
+            </if>
+            <if test = "projectIdList != null">
+                and project_id in
+                <foreach item="id_" collection="projectIdList" open="(" separator=","
+                         close=")" index="index">
+                    #{id_}
+                </foreach>
+            </if>
+            <if test = "like_projectName != null">
+                and project_name like  CONCAT('%',CONCAT(#{like_projectName},'%'))
+            </if>
+
+            <if test = "ne_like_projectName != null">
+                and project_name not like  CONCAT('%',CONCAT(#{ne_like_projectName},'%'))
+            </if>
+            <if test = "projectName != null">
+                and project_name =  #{projectName}
+            </if>
+            <if test = "ne_projectName != null">
+                and project_name !=  #{ne_projectName}
+            </if>
+
+
+            <if test = "milepostName != null">
+                and milepost_name = #{milepostName}
+            </if>
+            <if test = "ne_milepostName != null">
+                and milepost_name != #{ne_milepostName}
+            </if>
+
+            <if test = "like_milepostName != null">
+                and milepost_name like CONCAT('%',CONCAT(#{like_milepostName},'%'))
+            </if>
+            <if test = "ne_like_milepostName != null">
+                and milepost_name not like CONCAT('%',CONCAT(#{ne_like_milepostName},'%'))
+            </if>
+
+            <if test = "milepostTarget != null">
+                and milepost_target = #{milepostTarget}
+            </if>
+            <if test = "ne_milepostTarget != null">
+                and ( milepost_target != #{ne_milepostTarget} or   milepost_target is null )
+            </if>
+            <if test = "like_milepostTarget != null">
+                and milepost_target like  CONCAT('%',CONCAT(#{like_milepostTarget},'%'))
+            </if>
+            <if test = "ne_like_milepostTarget != null">
+                and ( milepost_target not like  CONCAT('%',CONCAT(#{ne_like_milepostTarget},'%')) or   milepost_target is null )
+            </if>
+
+            <if test = "milepostManagerName != null">
+                and milepost_manager_name = #{milepostManagerName}
+            </if>
+            <if test = "ne_milepostManagerName != null">
+                and milepost_manager_name != #{milepostManagerName}
+            </if>
+            <if test = "like_milepostManagerName != null">
+                and milepost_manager_name like CONCAT('%',CONCAT(#{like_milepostManagerName},'%'))
+            </if>
+            <if test = "ne_like_milepostManagerName != null">
+                and milepost_manager_name not like CONCAT('%',CONCAT(#{ne_like_milepostManagerName},'%'))
+            </if>
+
+            <if test = "milepostBeginTime != null">
+                and milepost_begin_time = #{milepostBeginTime}
+            </if>
+            <if test = "gte_milepostBeginTime != null">
+                and milepost_begin_time &gt;= #{gte_milepostBeginTime}
+            </if>
+            <if test = "gt_milepostBeginTime != null">
+                and milepost_begin_time &gt; #{gt_milepostBeginTime}
+            </if>
+            <if test = "ne_milepostBeginTime != null">
+                and milepost_begin_time != #{ne_milepostBeginTime}
+            </if>
+            <if test = "lte_milepostBeginTime != null">
+                and milepost_begin_time &lt;= #{lte_milepostBeginTime}
+            </if>
+            <if test = "lt_milepostBeginTime != null">
+                and milepost_begin_time &lt; #{lt_milepostBeginTime}
+            </if>
+
+            <if test = "milepostEndTime != null">
+                and milepost_end_time = #{milepostEndTime}
+            </if>
+            <if test = "gte_milepostEndTime != null">
+                and milepost_end_time &gt;= #{gte_milepostEndTime}
+            </if>
+            <if test = "gt_milepostEndTime != null">
+                and milepost_end_time &gt;  #{gt_milepostEndTime}
+            </if>
+            <if test = "ne_milepostEndTime != null">
+                and milepost_end_time != #{ne_milepostEndTime}
+            </if>
+            <if test = "lte_milepostEndTime != null">
+                and milepost_end_time &lt;= #{lte_milepostEndTime}
+            </if>
+            <if test = "lt_milepostEndTime != null">
+                and milepost_end_time &lt; #{lt_milepostEndTime}
+            </if>
+
+
+            <if test = "finishStatus != null and finishStatus == 0">
+                and to_date(to_char(milepost_begin_time,'yyyy-mm-dd'),'yyyy-mm-dd') &gt; to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd')
+                and finish_status != 9
+            </if>
+            <if test = "finishStatus != null and finishStatus == 3">
+                and (to_date(to_char(milepost_begin_time,'yyyy-mm-dd'),'yyyy-mm-dd') &lt;= to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'))
+                and (to_date(to_char(milepost_end_time,'yyyy-mm-dd'),'yyyy-mm-dd') &gt;= to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'))
+                and finish_status != 9
+            </if>
+            <if test = "finishStatus != null and finishStatus == 6">
+                and (to_date(to_char(milepost_begin_time,'yyyy-mm-dd'),'yyyy-mm-dd') &lt;= to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'))
+                and (to_date(to_char(milepost_end_time,'yyyy-mm-dd'),'yyyy-mm-dd') &lt; to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'))
+                and finish_status != 9
+            </if>
+            <if test = "finishStatus != null and finishStatus == 9">
+                and finish_status = #{finishStatus}
+            </if>
+
+
+            <if test = "ne_finishStatus != null and ne_finishStatus == 0">
+                and (
+                  to_date(to_char(milepost_begin_time,'yyyy-mm-dd'),'yyyy-mm-dd') &lt;= to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd')
+                  or finish_status = 9
+                )
+            </if>
+            <if test = "ne_finishStatus != null and ne_finishStatus == 3">
+                and (
+                 (to_date(to_char(milepost_begin_time,'yyyy-mm-dd'),'yyyy-mm-dd') &gt; to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'))
+                  or (to_date(to_char(milepost_end_time,'yyyy-mm-dd'),'yyyy-mm-dd') &lt; to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'))
+                  or finish_status = 9
+                )
+            </if>
+            <if test = "ne_finishStatus != null and ne_finishStatus == 6">
+                and (
+                   (to_date(to_char(milepost_begin_time,'yyyy-mm-dd'),'yyyy-mm-dd') &gt;  to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'))
+                   or (to_date(to_char(milepost_end_time,'yyyy-mm-dd'),'yyyy-mm-dd') &gt;= to_date(to_char(sysdate,'yyyy-mm-dd'),'yyyy-mm-dd'))
+                    or finish_status = 9
+                )
+            </if>
+            <if test = "ne_finishStatus != null and ne_finishStatus == 9">
+                and finish_status != #{ne_finishStatus}
+            </if>
+
+
+
+            <if test = "notUsed != null">
+                and finish_status != 9
+                and ext_info1 is null
+            </if>
+
+        </trim>
+    </sql>
+
+
+
+
+
+    <!-- 插入记录 -->
+    <insert id = "insert" parameterType = "com.adc.da.progress.entity.ProjectMilepostEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+            SELECT SEQ_PR_PROJECT_MILEPOST.NEXTVAL FROM DUAL
+        </selectKey> -->insert into PR_PROJECT_MILEPOST(<include
+            refid = "Base_Column_List"/>) values (#{id, jdbcType=VARCHAR}, #{projectId, jdbcType=VARCHAR}, #{projectName, jdbcType=VARCHAR}, #{milepostName, jdbcType=VARCHAR}, #{milepostTarget, jdbcType=VARCHAR}, #{milepostManagerId, jdbcType=VARCHAR}, #{milepostManagerName, jdbcType=VARCHAR}, #{milepostBeginTime, jdbcType=TIMESTAMP}, #{milepostEndTime, jdbcType=TIMESTAMP}, #{milepostVersion, jdbcType=INTEGER}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR}, #{stageId, jdbcType=VARCHAR}, #{finishTime, jdbcType=TIMESTAMP}, #{finishStatus, jdbcType=INTEGER})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id = "insertSelective" parameterType = "com.adc.da.progress.entity.ProjectMilepostEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_PR_PROJECT_MILEPOST.NEXTVAL FROM DUAL
+    </selectKey> -->insert into PR_PROJECT_MILEPOST
+        <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">id,</if>
+            <if test = "projectId != null">project_id,</if>
+            <if test = "projectName != null">project_name,</if>
+            <if test = "milepostName != null">milepost_name,</if>
+            <if test = "milepostTarget != null">milepost_target,</if>
+            <if test = "milepostManagerId != null">milepost_manager_id,</if>
+            <if test = "milepostManagerName != null">milepost_manager_name,</if>
+            <if test = "milepostBeginTime != null">milepost_begin_time,</if>
+            <if test = "milepostEndTime != null">milepost_end_time,</if>
+            <if test = "milepostVersion != null">milepost_version,</if>
+            <if test = "extInfo1 != null">ext_info1,</if>
+            <if test = "extInfo2 != null">ext_info2,</if>
+            <if test = "extInfo3 != null">ext_info3,</if>
+            <if test = "extInfo4 != null">ext_info4,</if>
+            <if test = "extInfo5 != null">ext_info5,</if>
+            <if test = "stageId != null">stage_id,</if>
+            <if test = "finishTime != null">finish_time,</if>
+            <if test = "finishStatus != null">finish_status,</if>
+        </trim>
+        <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">#{id, jdbcType=VARCHAR},</if>
+            <if test = "projectId != null">#{projectId, jdbcType=VARCHAR},</if>
+            <if test = "projectName != null">#{projectName, jdbcType=VARCHAR},</if>
+            <if test = "milepostName != null">#{milepostName, jdbcType=VARCHAR},</if>
+            <if test = "milepostTarget != null">#{milepostTarget, jdbcType=VARCHAR},</if>
+            <if test = "milepostManagerId != null">#{milepostManagerId, jdbcType=VARCHAR},</if>
+            <if test = "milepostManagerName != null">#{milepostManagerName, jdbcType=VARCHAR},</if>
+            <if test = "milepostBeginTime != null">#{milepostBeginTime, jdbcType=TIMESTAMP},</if>
+            <if test = "milepostEndTime != null">#{milepostEndTime, jdbcType=TIMESTAMP},</if>
+            <if test = "milepostVersion != null">#{milepostVersion, jdbcType=INTEGER},</if>
+            <if test = "extInfo1 != null">#{extInfo1, jdbcType=VARCHAR},</if>
+            <if test = "extInfo2 != null">#{extInfo2, jdbcType=VARCHAR},</if>
+            <if test = "extInfo3 != null">#{extInfo3, jdbcType=VARCHAR},</if>
+            <if test = "extInfo4 != null">#{extInfo4, jdbcType=VARCHAR},</if>
+            <if test = "extInfo5 != null">#{extInfo5, jdbcType=VARCHAR},</if>
+            <if test = "stageId != null">#{stageId, jdbcType=VARCHAR},</if>
+            <if test = "finishTime != null">#{finishTime, jdbcType=TIMESTAMP},</if>
+            <if test = "finishStatus != null">#{finishStatus, jdbcType=INTEGER},</if>
+        </trim>
+    </insert>
+
+
+    <insert id = "insertList" parameterType = "java.util.List">
+        INSERT ALL
+        <foreach collection = "list" item = "item" index = "index">
+            <if test = "item.id !=null">
+                into PR_PROJECT_MILEPOST
+                <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+                    <if test = "item.id != null">id,</if>
+                    <if test = "item.projectId != null">project_id,</if>
+                    <if test = "item.projectName != null">project_name,</if>
+                    <if test = "item.milepostName != null">milepost_name,</if>
+                    <if test = "item.milepostTarget != null">milepost_target,</if>
+                    <if test = "item.milepostManagerId != null">milepost_manager_id,</if>
+                    <if test = "item.milepostManagerName != null">milepost_manager_name,</if>
+                    <if test = "item.milepostBeginTime != null">milepost_begin_time,</if>
+                    <if test = "item.milepostEndTime != null">milepost_end_time,</if>
+                    <if test = "item.milepostVersion != null">milepost_version,</if>
+                    <if test = "item.stageId != null">stage_id,</if>
+                    <if test = "item.finishTime != null">finish_time,</if>
+                    <if test = "item.finishStatus != null">finish_status,</if>
+                </trim>
+                <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+                    <if test = "item.id != null">#{item.id, jdbcType=VARCHAR},</if>
+                    <if test = "item.projectId != null">#{item.projectId, jdbcType=VARCHAR},</if>
+                    <if test = "item.projectName != null">#{item.projectName, jdbcType=VARCHAR},</if>
+                    <if test = "item.milepostName != null">#{item.milepostName, jdbcType=VARCHAR},</if>
+                    <if test = "item.milepostTarget != null">#{item.milepostTarget, jdbcType=VARCHAR},</if>
+                    <if test = "item.milepostManagerId != null">#{item.milepostManagerId, jdbcType=VARCHAR},</if>
+                    <if test = "item.milepostManagerName != null">#{item.milepostManagerName, jdbcType=VARCHAR},</if>
+                    <if test = "item.milepostBeginTime != null">#{item.milepostBeginTime, jdbcType=TIMESTAMP},</if>
+                    <if test = "item.milepostEndTime != null">#{item.milepostEndTime, jdbcType=TIMESTAMP},</if>
+                    <if test = "item.milepostVersion != null">#{item.milepostVersion, jdbcType=INTEGER},</if>
+                    <if test = "item.stageId != null">#{item.stageId, jdbcType=VARCHAR},</if>
+                    <if test = "item.finishTime != null">#{item.finishTime, jdbcType=TIMESTAMP},</if>
+                    <if test = "item.finishStatus != null">#{item.finishStatus, jdbcType=INTEGER},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+
+
+    <!-- 根据pk，修改记录-->
+    <update id = "updateByPrimaryKey" parameterType = "com.adc.da.progress.entity.ProjectMilepostEO">
+        UPDATE PR_PROJECT_MILEPOST
+        SET project_id            = #{projectId},
+            project_name          = #{projectName},
+            milepost_name         = #{milepostName},
+            milepost_target       = #{milepostTarget},
+            milepost_manager_id   = #{milepostManagerId},
+            milepost_manager_name = #{milepostManagerName},
+            milepost_begin_time   = #{milepostBeginTime},
+            milepost_end_time     = #{milepostEndTime},
+            milepost_version      = #{milepostVersion},
+            ext_info1             = #{extInfo1},
+            ext_info2             = #{extInfo2},
+            ext_info3             = #{extInfo3},
+            ext_info4             = #{extInfo4},
+            ext_info5             = #{extInfo5},
+            STAGE_ID             = #{stageId},
+            finish_time           = #{finishTime},
+            finish_status         = #{finishStatus}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id = "updateByPrimaryKeySelective" parameterType = "com.adc.da.progress.entity.ProjectMilepostEO">
+        update PR_PROJECT_MILEPOST
+        <set>
+            <if test = "projectId != null">
+                project_id = #{projectId},
+            </if>
+            <if test = "projectName != null">
+                project_name = #{projectName},
+            </if>
+            <if test = "milepostName != null">
+                milepost_name = #{milepostName},
+            </if>
+            <if test = "milepostTarget != null">
+                milepost_target = #{milepostTarget},
+            </if>
+            <if test = "milepostManagerId != null">
+                milepost_manager_id = #{milepostManagerId},
+            </if>
+            <if test = "milepostManagerName != null">
+                milepost_manager_name = #{milepostManagerName},
+            </if>
+            <if test = "milepostBeginTime != null">
+                milepost_begin_time = #{milepostBeginTime},
+            </if>
+            <if test = "milepostEndTime != null">
+                milepost_end_time = #{milepostEndTime},
+            </if>
+            <if test = "milepostVersion != null">
+                milepost_version = #{milepostVersion},
+            </if>
+            <if test = "extInfo1 != null">
+                ext_info1 = #{extInfo1},
+            </if>
+            <if test = "extInfo2 != null">
+                ext_info2 = #{extInfo2},
+            </if>
+            <if test = "extInfo3 != null">
+                ext_info3 = #{extInfo3},
+            </if>
+            <if test = "extInfo4 != null">
+                ext_info4 = #{extInfo4},
+            </if>
+            <if test = "extInfo5 != null">
+                ext_info5 = #{extInfo5},
+            </if>
+            <if test = "stageId != null">
+                stage_id = #{stageId},
+            </if>
+            <if test = "finishTime != null">
+                finish_time = #{finishTime},
+            </if>
+            <if test = "finishStatus != null">
+                finish_status = #{finishStatus},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!-- 根据id查询 PR_PROJECT_MILEPOST -->
+    <select id = "selectByPrimaryKey" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+        select
+        <include refid = "Base_Column_List"/>
+        from PR_PROJECT_MILEPOST where id = #{value}
+
+    </select>
+
+    <!-- 根据id查询 PR_PROJECT_MILEPOST -->
+    <select id = "selectByStageId" resultMap = "BaseResultMap">
+        select
+        <include refid = "Base_Column_List"/>
+        from PR_PROJECT_MILEPOST where STAGE_ID = #{stageId}
+
+    </select>
+
+    <!-- 根据id查询 PR_PROJECT_MILEPOST -->
+    <select id = "selectByManagerId" resultMap = "BaseResultMap">
+        select
+        <include refid = "Base_Column_List"/>
+        from PR_PROJECT_MILEPOST where MILEPOST_MANAGER_ID = #{managerId}
+
+    </select>
+
+
+
+    <!-- 删除记录 -->
+    <delete id = "deleteByPrimaryKey" parameterType = "java.lang.String">
+        DELETE
+        FROM PR_PROJECT_MILEPOST
+        WHERE id = #{value}
+
+    </delete>
+
+    <!-- PR_PROJECT_MILEPOST 列表总数-->
+    <select id = "queryByCount" resultType = "java.lang.Integer" parameterType = "com.adc.da.base.page.BasePage">
+        select count(1) from PR_PROJECT_MILEPOST
+        <include refid = "Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询PR_PROJECT_MILEPOST列表 -->
+    <select id = "queryByPage" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from (select tmp_tb.* , rownum rn from (select
+        <include refid = "Base_Column_List"/>
+        from PR_PROJECT_MILEPOST
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex}) where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id = "queryByList" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from PR_PROJECT_MILEPOST
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+    </select>
+
+    <!-- PR_PROJECT_MILEPOST 列表总数-->
+    <select id = "query4TipsByCount" resultType = "java.lang.Integer" parameterType = "com.adc.da.base.page.BasePage">
+        select count(1) from PR_PROJECT_MILEPOST
+        <include refid = "Base_Where_Clause1"/>
+    </select>
+
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <select id = "page4Tips"  resultMap = "BaseResultMap"  parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from (select tmp_tb.* , rownum rn from (select
+        <include refid = "Base_Column_List"/>
+        from PR_PROJECT_MILEPOST
+        <include refid = "Base_Where_Clause1"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        order by milepost_begin_time , milepost_end_time asc
+        ) tmp_tb where rownum &lt;= ${pager.endIndex}) where rn &gt;= ${pager.startIndex}
+
+    </select>
+
+    <select id="queryCountByName" resultType="java.lang.Integer">
+        select count (1) from  PR_PROJECT_MILEPOST
+        where MILEPOST_NAME = #{milepostName} and PROJECT_ID = #{projectId}
+    </select>
+
+    <select id="getByProjectIdList" resultMap = "BaseResultMap">
+        select
+        <include refid = "Base_Column_List"/> from PR_PROJECT_MILEPOST where
+        project_id in
+        <foreach item="id_" collection="projectIdList" open="(" separator=","
+                 close=")" index="index">
+            #{id_}
+        </foreach>
+    </select>
+
+    <select id="getByProjectId" resultMap = "BaseResultMap">
+        select
+        <include refid = "Base_Column_List"/> from PR_PROJECT_MILEPOST where
+        project_id = #{projectId}
+    </select>
+
+    <select id="getProjectIdListByManagerId" resultType="java.lang.String">
+        select PROJECT_ID from PR_PROJECT_MILEPOST where
+        MILEPOST_MANAGER_ID = #{managerId}
+    </select>
+
+
+
+
+
+</mapper>

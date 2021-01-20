@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.processform.dao.OperateProjectExamEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.processform.entity.OperateProjectExamEO" >
+    <id column="projectid" property="projectid" />
+    <result column="projectname" property="projectname" />
+    <result column="projectbaerdeptid" property="projectbaerdeptid" />
+    <result column="projectbaerdeptname" property="projectbaerdeptname" />
+    <result column="projectmanagerid" property="projectmanagerid" />
+    <result column="projectmanagername" property="projectmanagername" />
+    <result column="projectbasedetail" property="projectbasedetail" />
+    <result column="projectimportantpoint" property="projectimportantpoint" />
+    <result column="projectsuggestionbookfileid" property="projectsuggestionbookfileid" />
+    <result column="projectbaerdeptsuggestion" property="projectbaerdeptsuggestion" />
+    <result column="riskimportantpoint" property="riskimportantpoint" />
+    <result column="riskmanagergroupsuggestion" property="riskmanagergroupsuggestion" />
+    <result column="bigdeptsuggestion" property="bigdeptsuggestion" />
+    <result column="formstarttime" property="formstarttime" />
+    <result column="ext_01" property="ext01" />
+    <result column="ext_02" property="ext02" />
+    <result column="ext_03" property="ext03" />
+    <result column="ext_04" property="ext04" />
+    <result column="formupdatetime" property="formupdatetime" />
+    <result column="ext_05" property="ext05" />
+    <result column="ext_06" property="ext06" />
+    <result column="ext_07" property="ext07" />
+    <result column="status" property="status" />
+    <result column="version" property="version" />
+    <result column="delflag" property="delflag" />
+  </resultMap>
+
+  <!-- PF_OPERATE_PROJECT_EXAM table all fields -->
+  <sql id="Base_Column_List" >
+     projectid, projectname, projectbaerdeptid, projectbaerdeptname, projectmanagerid, projectmanagername, projectbasedetail, projectimportantpoint, projectsuggestionbookfileid, projectbaerdeptsuggestion, riskimportantpoint, riskmanagergroupsuggestion, bigdeptsuggestion, formstarttime, ext_01, ext_02, ext_03, ext_04, formupdatetime, ext_05, ext_06, ext_07, status, version, delflag
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="projectid != null" >
+        and projectid ${projectidOperator} #{projectid}
+      </if>
+      <if test="projectname != null" >
+        and projectname ${projectnameOperator} #{projectname}
+      </if>
+      <if test="projectbaerdeptid != null" >
+        and projectbaerdeptid ${projectbaerdeptidOperator} #{projectbaerdeptid}
+      </if>
+      <if test="projectbaerdeptname != null" >
+        and projectbaerdeptname ${projectbaerdeptnameOperator} #{projectbaerdeptname}
+      </if>
+      <if test="projectmanagerid != null" >
+        and projectmanagerid ${projectmanageridOperator} #{projectmanagerid}
+      </if>
+      <if test="projectmanagername != null" >
+        and projectmanagername ${projectmanagernameOperator} #{projectmanagername}
+      </if>
+      <if test="projectbasedetail != null" >
+        and projectbasedetail ${projectbasedetailOperator} #{projectbasedetail}
+      </if>
+      <if test="projectimportantpoint != null" >
+        and projectimportantpoint ${projectimportantpointOperator} #{projectimportantpoint}
+      </if>
+      <if test="projectsuggestionbookfileid != null" >
+        and projectsuggestionbookfileid ${projectsuggestionbookfileidOperator} #{projectsuggestionbookfileid}
+      </if>
+      <if test="projectbaerdeptsuggestion != null" >
+        and projectbaerdeptsuggestion ${projectbaerdeptsuggestionOperator} #{projectbaerdeptsuggestion}
+      </if>
+      <if test="riskimportantpoint != null" >
+        and riskimportantpoint ${riskimportantpointOperator} #{riskimportantpoint}
+      </if>
+      <if test="riskmanagergroupsuggestion != null" >
+        and riskmanagergroupsuggestion ${riskmanagergroupsuggestionOperator} #{riskmanagergroupsuggestion}
+      </if>
+      <if test="bigdeptsuggestion != null" >
+        and bigdeptsuggestion ${bigdeptsuggestionOperator} #{bigdeptsuggestion}
+      </if>
+      <if test="formstarttime != null" >
+        and formstarttime ${formstarttimeOperator} #{formstarttime}
+      </if>
+      <if test="formstarttime1 != null" >
+        and formstarttime &gt;= #{formstarttime1}
+      </if>
+      <if test="formstarttime2 != null" >
+        and formstarttime &lt;= #{formstarttime2}
+      </if>
+      <if test="ext01 != null" >
+        and ext_01 ${ext01Operator} #{ext01}
+      </if>
+      <if test="ext02 != null" >
+        and ext_02 ${ext02Operator} #{ext02}
+      </if>
+      <if test="ext03 != null" >
+        and ext_03 ${ext03Operator} #{ext03}
+      </if>
+      <if test="ext04 != null" >
+        and ext_04 ${ext04Operator} #{ext04}
+      </if>
+      <if test="formupdatetime != null" >
+        and formupdatetime ${formupdatetimeOperator} #{formupdatetime}
+      </if>
+      <if test="formupdatetime1 != null" >
+        and formupdatetime &gt;= #{formupdatetime1}
+      </if>
+      <if test="formupdatetime2 != null" >
+        and formupdatetime &lt;= #{formupdatetime2}
+      </if>
+      <if test="ext05 != null" >
+        and ext_05 ${ext05Operator} #{ext05}
+      </if>
+      <if test="ext06 != null" >
+        and ext_06 ${ext06Operator} #{ext06}
+      </if>
+      <if test="ext07 != null" >
+        and ext_07 ${ext07Operator} #{ext07}
+      </if>
+      <if test="status != null" >
+        and status ${statusOperator} #{status}
+      </if>
+      <if test="version != null" >
+        and version ${versionOperator} #{version}
+      </if>
+      <if test="delflag != null" >
+        and delflag ${delflagOperator} #{delflag}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.processform.entity.OperateProjectExamEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="projectid">
+        SELECT SEQ_PF_OPERATE_PROJECT_EXAM.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into PF_OPERATE_PROJECT_EXAM(<include refid="Base_Column_List" />)
+    values (#{projectid, jdbcType=VARCHAR}, #{projectname, jdbcType=VARCHAR}, #{projectbaerdeptid, jdbcType=VARCHAR}, #{projectbaerdeptname, jdbcType=VARCHAR}, #{projectmanagerid, jdbcType=VARCHAR}, #{projectmanagername, jdbcType=VARCHAR}, #{projectbasedetail, jdbcType=VARCHAR}, #{projectimportantpoint, jdbcType=VARCHAR}, #{projectsuggestionbookfileid, jdbcType=VARCHAR}, #{projectbaerdeptsuggestion, jdbcType=VARCHAR}, #{riskimportantpoint, jdbcType=VARCHAR}, #{riskmanagergroupsuggestion, jdbcType=VARCHAR}, #{bigdeptsuggestion, jdbcType=VARCHAR}, #{formstarttime, jdbcType=TIMESTAMP}, #{ext01, jdbcType=VARCHAR}, #{ext02, jdbcType=VARCHAR}, #{ext03, jdbcType=VARCHAR}, #{ext04, jdbcType=VARCHAR}, #{formupdatetime, jdbcType=TIMESTAMP}, #{ext05, jdbcType=VARCHAR}, #{ext06, jdbcType=VARCHAR}, #{ext07, jdbcType=VARCHAR}, #{status, jdbcType=VARCHAR}, #{version, jdbcType=VARCHAR}, #{delflag, jdbcType=INTEGER})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.processform.entity.OperateProjectExamEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="projectid">
+        SELECT SEQ_PF_OPERATE_PROJECT_EXAM.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into PF_OPERATE_PROJECT_EXAM
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="projectid != null" >projectid,</if>
+                <if test="projectname != null" >projectname,</if>
+                <if test="projectbaerdeptid != null" >projectbaerdeptid,</if>
+                <if test="projectbaerdeptname != null" >projectbaerdeptname,</if>
+                <if test="projectmanagerid != null" >projectmanagerid,</if>
+                <if test="projectmanagername != null" >projectmanagername,</if>
+                <if test="projectbasedetail != null" >projectbasedetail,</if>
+                <if test="projectimportantpoint != null" >projectimportantpoint,</if>
+                <if test="projectsuggestionbookfileid != null" >projectsuggestionbookfileid,</if>
+                <if test="projectbaerdeptsuggestion != null" >projectbaerdeptsuggestion,</if>
+                <if test="riskimportantpoint != null" >riskimportantpoint,</if>
+                <if test="riskmanagergroupsuggestion != null" >riskmanagergroupsuggestion,</if>
+                <if test="bigdeptsuggestion != null" >bigdeptsuggestion,</if>
+                <if test="formstarttime != null" >formstarttime,</if>
+                <if test="ext01 != null" >ext_01,</if>
+                <if test="ext02 != null" >ext_02,</if>
+                <if test="ext03 != null" >ext_03,</if>
+                <if test="ext04 != null" >ext_04,</if>
+                <if test="formupdatetime != null" >formupdatetime,</if>
+                <if test="ext05 != null" >ext_05,</if>
+                <if test="ext06 != null" >ext_06,</if>
+                <if test="ext07 != null" >ext_07,</if>
+                <if test="status != null" >status,</if>
+                <if test="version != null" >version,</if>
+                <if test="delflag != null" >delflag,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="projectid != null" >#{projectid, jdbcType=VARCHAR},</if>
+                <if test="projectname != null" >#{projectname, jdbcType=VARCHAR},</if>
+                <if test="projectbaerdeptid != null" >#{projectbaerdeptid, jdbcType=VARCHAR},</if>
+                <if test="projectbaerdeptname != null" >#{projectbaerdeptname, jdbcType=VARCHAR},</if>
+                <if test="projectmanagerid != null" >#{projectmanagerid, jdbcType=VARCHAR},</if>
+                <if test="projectmanagername != null" >#{projectmanagername, jdbcType=VARCHAR},</if>
+                <if test="projectbasedetail != null" >#{projectbasedetail, jdbcType=VARCHAR},</if>
+                <if test="projectimportantpoint != null" >#{projectimportantpoint, jdbcType=VARCHAR},</if>
+                <if test="projectsuggestionbookfileid != null" >#{projectsuggestionbookfileid, jdbcType=VARCHAR},</if>
+                <if test="projectbaerdeptsuggestion != null" >#{projectbaerdeptsuggestion, jdbcType=VARCHAR},</if>
+                <if test="riskimportantpoint != null" >#{riskimportantpoint, jdbcType=VARCHAR},</if>
+                <if test="riskmanagergroupsuggestion != null" >#{riskmanagergroupsuggestion, jdbcType=VARCHAR},</if>
+                <if test="bigdeptsuggestion != null" >#{bigdeptsuggestion, jdbcType=VARCHAR},</if>
+                <if test="formstarttime != null" >#{formstarttime, jdbcType=TIMESTAMP},</if>
+                <if test="ext01 != null" >#{ext01, jdbcType=VARCHAR},</if>
+                <if test="ext02 != null" >#{ext02, jdbcType=VARCHAR},</if>
+                <if test="ext03 != null" >#{ext03, jdbcType=VARCHAR},</if>
+                <if test="ext04 != null" >#{ext04, jdbcType=VARCHAR},</if>
+                <if test="formupdatetime != null" >#{formupdatetime, jdbcType=TIMESTAMP},</if>
+                <if test="ext05 != null" >#{ext05, jdbcType=VARCHAR},</if>
+                <if test="ext06 != null" >#{ext06, jdbcType=VARCHAR},</if>
+                <if test="ext07 != null" >#{ext07, jdbcType=VARCHAR},</if>
+                <if test="status != null" >#{status, jdbcType=VARCHAR},</if>
+                <if test="version != null" >#{version, jdbcType=VARCHAR},</if>
+                <if test="delflag != null" >#{delflag, jdbcType=INTEGER},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.processform.entity.OperateProjectExamEO" >
+    update PF_OPERATE_PROJECT_EXAM
+       set  projectname = #{projectname},
+            projectbaerdeptid = #{projectbaerdeptid},
+            projectbaerdeptname = #{projectbaerdeptname},
+            projectmanagerid = #{projectmanagerid},
+            projectmanagername = #{projectmanagername},
+            projectbasedetail = #{projectbasedetail},
+            projectimportantpoint = #{projectimportantpoint},
+            projectsuggestionbookfileid = #{projectsuggestionbookfileid},
+            projectbaerdeptsuggestion = #{projectbaerdeptsuggestion},
+            riskimportantpoint = #{riskimportantpoint},
+            riskmanagergroupsuggestion = #{riskmanagergroupsuggestion},
+            bigdeptsuggestion = #{bigdeptsuggestion},
+            formstarttime = #{formstarttime},
+            ext_01 = #{ext01},
+            ext_02 = #{ext02},
+            ext_03 = #{ext03},
+            ext_04 = #{ext04},
+            formupdatetime = #{formupdatetime},
+            ext_05 = #{ext05},
+            ext_06 = #{ext06},
+            ext_07 = #{ext07},
+            status = #{status},
+            version = #{version},
+            delflag = #{delflag}
+     where  projectid = #{projectid}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.processform.entity.OperateProjectExamEO" >
+    update PF_OPERATE_PROJECT_EXAM
+    <set >
+      <if test="projectname != null" >
+        projectname = #{projectname},
+      </if>
+      <if test="projectbaerdeptid != null" >
+        projectbaerdeptid = #{projectbaerdeptid},
+      </if>
+      <if test="projectbaerdeptname != null" >
+        projectbaerdeptname = #{projectbaerdeptname},
+      </if>
+      <if test="projectmanagerid != null" >
+        projectmanagerid = #{projectmanagerid},
+      </if>
+      <if test="projectmanagername != null" >
+        projectmanagername = #{projectmanagername},
+      </if>
+      <if test="projectbasedetail != null" >
+        projectbasedetail = #{projectbasedetail},
+      </if>
+      <if test="projectimportantpoint != null" >
+        projectimportantpoint = #{projectimportantpoint},
+      </if>
+      <if test="projectsuggestionbookfileid != null" >
+        projectsuggestionbookfileid = #{projectsuggestionbookfileid},
+      </if>
+      <if test="projectbaerdeptsuggestion != null" >
+        projectbaerdeptsuggestion = #{projectbaerdeptsuggestion},
+      </if>
+      <if test="riskimportantpoint != null" >
+        riskimportantpoint = #{riskimportantpoint},
+      </if>
+      <if test="riskmanagergroupsuggestion != null" >
+        riskmanagergroupsuggestion = #{riskmanagergroupsuggestion},
+      </if>
+      <if test="bigdeptsuggestion != null" >
+        bigdeptsuggestion = #{bigdeptsuggestion},
+      </if>
+      <if test="formstarttime != null" >
+        formstarttime = #{formstarttime},
+      </if>
+      <if test="ext01 != null" >
+        ext_01 = #{ext01},
+      </if>
+      <if test="ext02 != null" >
+        ext_02 = #{ext02},
+      </if>
+      <if test="ext03 != null" >
+        ext_03 = #{ext03},
+      </if>
+      <if test="ext04 != null" >
+        ext_04 = #{ext04},
+      </if>
+      <if test="formupdatetime != null" >
+        formupdatetime = #{formupdatetime},
+      </if>
+      <if test="ext05 != null" >
+        ext_05 = #{ext05},
+      </if>
+      <if test="ext06 != null" >
+        ext_06 = #{ext06},
+      </if>
+      <if test="ext07 != null" >
+        ext_07 = #{ext07},
+      </if>
+      <if test="status != null" >
+        status = #{status},
+      </if>
+      <if test="version != null" >
+        version = #{version},
+      </if>
+      <if test="delflag != null" >
+        delflag = #{delflag},
+      </if>
+    </set>
+     where projectid = #{projectid}
+  </update>
+
+  <!-- 根据id查询 PF_OPERATE_PROJECT_EXAM -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from PF_OPERATE_PROJECT_EXAM
+     where projectid = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    update  PF_OPERATE_PROJECT_EXAM set delflag = 1
+     where projectid = #{value}
+
+  </delete>
+
+  <!-- PF_OPERATE_PROJECT_EXAM 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from PF_OPERATE_PROJECT_EXAM
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询PF_OPERATE_PROJECT_EXAM列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from PF_OPERATE_PROJECT_EXAM
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from PF_OPERATE_PROJECT_EXAM
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

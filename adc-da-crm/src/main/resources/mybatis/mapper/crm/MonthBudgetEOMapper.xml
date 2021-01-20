@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.crm.dao.MonthBudgetEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.crm.entity.MonthBudgetEO" >
+    <result column="id" property="id" />
+    <result column="pro_target_botom_id" property="proTargetBotomId" />
+    <result column="month" property="month" />
+    <result column="contract_target" property="contractTarget" />
+    <result column="ticket_target" property="ticketTarget" />
+    <result column="del_flag" property="delFlag" />
+    <result column="created_time" property="createdTime" />
+    <result column="created_user" property="createdUser" />
+    <result column="modified_time" property="modifiedTime" />
+    <result column="modified_user" property="modifiedUser" />
+  </resultMap>
+
+  <!-- MONTH_BUDGET table all fields -->
+  <sql id="Base_Column_List" >
+     id, pro_target_botom_id, month, contract_target, ticket_target, del_flag, created_time, created_user, modified_time, modified_user
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="proTargetBotomId != null" >
+        and pro_target_botom_id ${proTargetBotomIdOperator} #{proTargetBotomId}
+      </if>
+      <if test="month != null" >
+        and month ${monthOperator} #{month}
+      </if>
+      <if test="contractTarget != null" >
+        and contract_target ${contractTargetOperator} #{contractTarget}
+      </if>
+      <if test="ticketTarget != null" >
+        and ticket_target ${ticketTargetOperator} #{ticketTarget}
+      </if>
+      <if test="delFlag != null" >
+        and del_flag ${delFlagOperator} #{delFlag}
+      </if>
+      <if test="createdTime != null" >
+        and created_time ${createdTimeOperator} #{createdTime}
+      </if>
+      <if test="createdTime1 != null" >
+        and created_time &gt;= #{createdTime1}
+      </if>
+      <if test="createdTime2 != null" >
+        and created_time &lt;= #{createdTime2}
+      </if>
+      <if test="createdUser != null" >
+        and created_user ${createdUserOperator} #{createdUser}
+      </if>
+      <if test="modifiedTime != null" >
+        and modified_time ${modifiedTimeOperator} #{modifiedTime}
+      </if>
+      <if test="modifiedTime1 != null" >
+        and modified_time &gt;= #{modifiedTime1}
+      </if>
+      <if test="modifiedTime2 != null" >
+        and modified_time &lt;= #{modifiedTime2}
+      </if>
+      <if test="modifiedUser != null" >
+        and modified_user ${modifiedUserOperator} #{modifiedUser}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.crm.entity.MonthBudgetEO" >
+    insert into MONTH_BUDGET(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{proTargetBotomId, jdbcType=VARCHAR}, #{month, jdbcType=VARCHAR}, #{contractTarget, jdbcType=VARCHAR}, #{ticketTarget, jdbcType=VARCHAR}, #{delFlag, jdbcType=VARCHAR}, #{createdTime, jdbcType=TIMESTAMP}, #{createdUser, jdbcType=VARCHAR}, #{modifiedTime, jdbcType=TIMESTAMP}, #{modifiedUser, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.crm.entity.MonthBudgetEO" >
+        insert into MONTH_BUDGET
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="proTargetBotomId != null" >pro_target_botom_id,</if>
+                <if test="month != null" >month,</if>
+                <if test="contractTarget != null" >contract_target,</if>
+                <if test="ticketTarget != null" >ticket_target,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="createdTime != null" >created_time,</if>
+                <if test="createdUser != null" >created_user,</if>
+                <if test="modifiedTime != null" >modified_time,</if>
+                <if test="modifiedUser != null" >modified_user,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="proTargetBotomId != null" >#{proTargetBotomId, jdbcType=VARCHAR},</if>
+                <if test="month != null" >#{month, jdbcType=VARCHAR},</if>
+                <if test="contractTarget != null" >#{contractTarget, jdbcType=VARCHAR},</if>
+                <if test="ticketTarget != null" >#{ticketTarget, jdbcType=VARCHAR},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=VARCHAR},</if>
+                <if test="createdTime != null" >#{createdTime, jdbcType=TIMESTAMP},</if>
+                <if test="createdUser != null" >#{createdUser, jdbcType=VARCHAR},</if>
+                <if test="modifiedTime != null" >#{modifiedTime, jdbcType=TIMESTAMP},</if>
+                <if test="modifiedUser != null" >#{modifiedUser, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.crm.entity.MonthBudgetEO" >
+    update MONTH_BUDGET
+       set  pro_target_botom_id = #{proTargetBotomId},
+            month = #{month},
+            contract_target = #{contractTarget},
+            ticket_target = #{ticketTarget},
+            del_flag = #{delFlag},
+            created_time = #{createdTime},
+            created_user = #{createdUser},
+            modified_time = #{modifiedTime},
+            modified_user = #{modifiedUser}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.crm.entity.MonthBudgetEO" >
+    update MONTH_BUDGET
+    <set >
+      <if test="projectId != null" >
+          pro_target_botom_id = #{proTargetBotomId},
+      </if>
+      <if test="month != null" >
+        month = #{month},
+      </if>
+      <if test="contractTarget != null" >
+        contract_target = #{contractTarget},
+      </if>
+      <if test="ticketTarget != null" >
+        ticket_target = #{ticketTarget},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+      <if test="createdUser != null" >
+        created_user = #{createdUser},
+      </if>
+      <if test="modifiedTime != null" >
+        modified_time = #{modifiedTime},
+      </if>
+      <if test="modifiedUser != null" >
+        modified_user = #{modifiedUser},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 MONTH_BUDGET -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+      from MONTH_BUDGET
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from MONTH_BUDGET
+     where id = #{value}
+
+  </delete>
+
+  <!-- MONTH_BUDGET 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from MONTH_BUDGET
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询MONTH_BUDGET列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from MONTH_BUDGET
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from MONTH_BUDGET
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+    <update id="updateByProTargetBotomIdAndDelFlag">
+        update MONTH_BUDGET set del_flag=#{delFlag} where id=#{proTargetBotomId}
+    </update>
+</mapper>

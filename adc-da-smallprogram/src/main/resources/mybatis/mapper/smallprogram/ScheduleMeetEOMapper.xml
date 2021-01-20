@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.smallprogram.dao.ScheduleMeetEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.smallprogram.entity.ScheduleMeetEO" >
+    <id column="id_" property="id" />
+    <result column="address" property="address" />
+    <result column="title" property="title" />
+    <result column="create_time" property="createTime" />
+    <result column="update_time" property="updateTime" />
+    <result column="dead_time" property="deadTime" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="create_user_name" property="createUserName" />
+    <result column="detail" property="detail" />
+    <result column="del_flag" property="delFlag" />
+    <result column="meet_type" property="meetType" />
+    <result column="status" property="status" />
+    <result column="ext_info" property="extInfo" />
+    <result column="ext_info1" property="extInfo1" />
+    <result column="ext_info2" property="extInfo2" />
+    <result column="ext_info3" property="extInfo3" />
+    <result column="ext_info4" property="extInfo4" />
+    <result column="ext_info5" property="extInfo5" />
+  </resultMap>
+
+  <!-- TS_SCHEDULE_MEET table all fields -->
+  <sql id="Base_Column_List" >
+     address, id_, title, create_time, update_time, dead_time, create_user_id, create_user_name, detail, del_flag, meet_type, status, ext_info, ext_info1, ext_info2, ext_info3, ext_info4, ext_info5
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="address != null" >
+        and address ${addressOperator} #{address}
+      </if>
+      <if test="id != null" >
+        and id_ ${idOperator} #{id}
+      </if>
+      <if test="title != null" >
+        and title ${titleOperator} #{title}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="updateTime != null" >
+        and update_time ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and update_time &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and update_time &lt;= #{updateTime2}
+      </if>
+      <if test="deadTime != null" >
+        and dead_time ${deadTimeOperator} #{deadTime}
+      </if>
+      <if test="deadTime1 != null" >
+        and dead_time &gt;= #{deadTime1}
+      </if>
+      <if test="deadTime2 != null" >
+        and dead_time &lt;= #{deadTime2}
+      </if>
+      <if test="createUserId != null" >
+        and create_user_id ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="createUserName != null" >
+        and create_user_name ${createUserNameOperator} #{createUserName}
+      </if>
+      <if test="detail != null" >
+        and detail ${detailOperator} #{detail}
+      </if>
+      <if test="delFlag != null" >
+        and del_flag ${delFlagOperator} #{delFlag}
+      </if>
+      <if test="meetType != null" >
+        and meet_type ${meetTypeOperator} #{meetType}
+      </if>
+      <if test="status != null" >
+        and status ${statusOperator} #{status}
+      </if>
+      <if test="extInfo != null" >
+        and ext_info ${extInfoOperator} #{extInfo}
+      </if>
+      <if test="extInfo1 != null" >
+        and ext_info1 ${extInfo1Operator} #{extInfo1}
+      </if>
+      <if test="extInfo2 != null" >
+        and ext_info2 ${extInfo2Operator} #{extInfo2}
+      </if>
+      <if test="extInfo3 != null" >
+        and ext_info3 ${extInfo3Operator} #{extInfo3}
+      </if>
+      <if test="extInfo4 != null" >
+        and ext_info4 ${extInfo4Operator} #{extInfo4}
+      </if>
+      <if test="extInfo5 != null" >
+        and ext_info5 ${extInfo5Operator} #{extInfo5}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.smallprogram.entity.ScheduleMeetEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_TS_SCHEDULE_MEET.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into TS_SCHEDULE_MEET(<include refid="Base_Column_List" />)
+    values (#{address, jdbcType=VARCHAR}, #{id, jdbcType=VARCHAR}, #{title, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{updateTime, jdbcType=TIMESTAMP}, #{deadTime, jdbcType=TIMESTAMP}, #{createUserId, jdbcType=VARCHAR}, #{createUserName, jdbcType=VARCHAR}, #{detail, jdbcType=VARCHAR}, #{delFlag, jdbcType=INTEGER}, #{meetType, jdbcType=INTEGER}, #{status, jdbcType=INTEGER}, #{extInfo, jdbcType=VARCHAR}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.smallprogram.entity.ScheduleMeetEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_TS_SCHEDULE_MEET.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into TS_SCHEDULE_MEET
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="address != null" >address,</if>
+                <if test="id != null" >id_,</if>
+                <if test="title != null" >title,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="updateTime != null" >update_time,</if>
+                <if test="deadTime != null" >dead_time,</if>
+                <if test="createUserId != null" >create_user_id,</if>
+                <if test="createUserName != null" >create_user_name,</if>
+                <if test="detail != null" >detail,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="meetType != null" >meet_type,</if>
+                <if test="status != null" >status,</if>
+                <if test="extInfo != null" >ext_info,</if>
+                <if test="extInfo1 != null" >ext_info1,</if>
+                <if test="extInfo2 != null" >ext_info2,</if>
+                <if test="extInfo3 != null" >ext_info3,</if>
+                <if test="extInfo4 != null" >ext_info4,</if>
+                <if test="extInfo5 != null" >ext_info5,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="address != null" >#{address, jdbcType=VARCHAR},</if>
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="title != null" >#{title, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="updateTime != null" >#{updateTime, jdbcType=TIMESTAMP},</if>
+                <if test="deadTime != null" >#{deadTime, jdbcType=TIMESTAMP},</if>
+                <if test="createUserId != null" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="createUserName != null" >#{createUserName, jdbcType=VARCHAR},</if>
+                <if test="detail != null" >#{detail, jdbcType=VARCHAR},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=INTEGER},</if>
+                <if test="meetType != null" >#{meetType, jdbcType=INTEGER},</if>
+                <if test="status != null" >#{status, jdbcType=INTEGER},</if>
+                <if test="extInfo != null" >#{extInfo, jdbcType=VARCHAR},</if>
+                <if test="extInfo1 != null" >#{extInfo1, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="extInfo3 != null" >#{extInfo3, jdbcType=VARCHAR},</if>
+                <if test="extInfo4 != null" >#{extInfo4, jdbcType=VARCHAR},</if>
+                <if test="extInfo5 != null" >#{extInfo5, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.smallprogram.entity.ScheduleMeetEO" >
+    update TS_SCHEDULE_MEET
+       set  address = #{address},
+            title = #{title},
+            create_time = #{createTime},
+            update_time = #{updateTime},
+            dead_time = #{deadTime},
+            create_user_id = #{createUserId},
+            create_user_name = #{createUserName},
+            detail = #{detail},
+            del_flag = #{delFlag},
+            meet_type = #{meetType},
+            status = #{status},
+            ext_info = #{extInfo},
+            ext_info1 = #{extInfo1},
+            ext_info2 = #{extInfo2},
+            ext_info3 = #{extInfo3},
+            ext_info4 = #{extInfo4},
+            ext_info5 = #{extInfo5}
+     where  id_ = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.smallprogram.entity.ScheduleMeetEO" >
+    update TS_SCHEDULE_MEET
+    <set >
+      <if test="address != null" >
+        address = #{address},
+      </if>
+      <if test="title != null" >
+        title = #{title},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+      <if test="deadTime != null" >
+        dead_time = #{deadTime},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="createUserName != null" >
+        create_user_name = #{createUserName},
+      </if>
+      <if test="detail != null" >
+        detail = #{detail},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="meetType != null" >
+        meet_type = #{meetType},
+      </if>
+      <if test="status != null" >
+        status = #{status},
+      </if>
+      <if test="extInfo != null" >
+        ext_info = #{extInfo},
+      </if>
+      <if test="extInfo1 != null" >
+        ext_info1 = #{extInfo1},
+      </if>
+      <if test="extInfo2 != null" >
+        ext_info2 = #{extInfo2},
+      </if>
+      <if test="extInfo3 != null" >
+        ext_info3 = #{extInfo3},
+      </if>
+      <if test="extInfo4 != null" >
+        ext_info4 = #{extInfo4},
+      </if>
+      <if test="extInfo5 != null" >
+        ext_info5 = #{extInfo5},
+      </if>
+    </set>
+     where id_ = #{id}
+  </update>
+
+  <!-- 根据id查询 TS_SCHEDULE_MEET -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="Base_Column_List" />
+        from TS_SCHEDULE_MEET
+        where id_ = #{value}
+
+    </select>
+    <!-- 根据id查询 TS_SCHEDULE_MEET -->
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select  id_,title, ADDRESS,CREATE_TIME ,dead_time, create_user_id, create_user_name, detail,meet_type,( select wm_concat(atu.USNAME) from TS_SCHEDULE_MEET atsm
+        left join TS_SCHEDULE_MEET_USER atsmu on atsm.ID_ = atsmu.MEET_ID
+        left join TS_USER atu on atu.USID = atsmu.RECEIVE_USER_ID
+        where atsm.id_ = tsm.ID_ and atsmu.STATUS not in (-1,-2)
+        ) as ext_info
+      from TS_SCHEDULE_MEET tsm
+      where tsm.ID_ = #{value}
+    </select>
+
+    <select id="selectByReceiveUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+      select tsm.ID_ as id_, tsmu.TOP as ext_info1 ,tsmu.COLLECTED as ext_info2 ,title, ADDRESS,
+       tsm.CREATE_TIME as CREATE_TIME ,dead_time, create_user_id, create_user_name, detail,meet_type, tsmu.status as status,
+       ( select wm_concat(atu.USNAME) from TS_SCHEDULE_MEET atsm
+               left join TS_SCHEDULE_MEET_USER atsmu on atsm.ID_ = atsmu.MEET_ID
+               left join TS_USER atu on atu.USID = atsmu.RECEIVE_USER_ID
+         where atsm.id_ = tsm.ID_ and atsmu.STATUS not in (-1,-2)
+       ) as ext_info
+
+      from TS_SCHEDULE_MEET tsm
+      left join  TS_SCHEDULE_MEET_USER tsmu on tsm.ID_ = tsmu.MEET_ID
+      left join TS_USER tu on tu.USID = tsmu.RECEIVE_USER_ID
+      where tsmu.RECEIVE_USER_ID = #{receiveUserId}
+      group by tsm.ID_ ,tsmu.TOP ,tsmu.COLLECTED,title, dead_time ,tsm.CREATE_TIME,ADDRESS ,create_user_id,
+       create_user_name ,detail,meet_type, tsmu.status order by tsmu.TOP  desc, DEAD_TIME desc
+
+    </select>
+
+
+
+  <!-- 删除记录 -->
+  <update id="deleteByPrimaryKey" parameterType="java.lang.String">
+    update TS_SCHEDULE_MEET set DEL_FLAG = 1
+     where id_ = #{value}
+
+  </update>
+
+  <!-- TS_SCHEDULE_MEET 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from TS_SCHEDULE_MEET
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+    <!-- 查询TS_SCHEDULE_MEET列表 -->
+    <select id="queryByPageWithReceiveUserId" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select * from
+        (select tmp_tb.* , rownum rn from
+            (select tsm.ID_ as id_, tsmu.TOP as ext_info1 ,tsmu.COLLECTED as ext_info2,title, ADDRESS,
+        tsm.CREATE_TIME as CREATE_TIME ,dead_time, create_user_id, create_user_name, detail,meet_type, tsmu.status as status,
+                    ( select wm_concat(atu.USNAME) from TS_SCHEDULE_MEET atsm
+                    left join TS_SCHEDULE_MEET_USER atsmu on atsm.ID_ = atsmu.MEET_ID
+                    left join TS_USER atu on atu.USID = atsmu.RECEIVE_USER_ID
+                    where atsm.id_ = tsm.ID_ and atsmu.STATUS not in (-1,-2)
+                    ) as ext_info
+
+            from ( select * from  TS_SCHEDULE_MEET where  DEL_FLAG != 1 and meet_type = #{meetType}
+                <if test="title != null and title != ''" >
+                   and title like '%'||#{title}||'%'
+                </if>
+        ) tsm
+            left join  TS_SCHEDULE_MEET_USER tsmu on tsm.ID_ = tsmu.MEET_ID
+            left join TS_USER tu on tu.USID = tsmu.RECEIVE_USER_ID
+            where tsmu.RECEIVE_USER_ID = #{receiveUserId} and tsmu.status not in (-1,-2)
+            group by tsm.ID_ ,title, dead_time ,tsm.CREATE_TIME,ADDRESS ,create_user_id,tsmu.TOP , tsmu.COLLECTED ,
+            create_user_name ,detail,meet_type, tsmu.status order by tsmu.TOP  desc, CREATE_TIME desc
+            <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+                ${pager.orderCondition}
+            </if>
+            ) tmp_tb where rownum &lt;= ${pager.endIndex}
+        )
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+
+    <!-- 查询TS_SCHEDULE_MEET列表 -->
+    <select id="queryByPageAll" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select * from
+        (select tmp_tb.* , rownum rn from
+        (select  tsm.ID_ as id_, tsmu.TOP as ext_info1 ,tsmu.COLLECTED as ext_info2,title,
+        ADDRESS, tsm.CREATE_TIME as CREATE_TIME ,dead_time, create_user_id,
+        create_user_name, detail,meet_type, tsm.status as status,
+        tsmu.RECEIVE_USER_NAME as ext_info3
+        ,( select wm_concat(atu.USNAME) from TS_SCHEDULE_MEET atsm
+        left join TS_SCHEDULE_MEET_USER atsmu on atsm.ID_ = atsmu.MEET_ID
+        left join TS_USER atu on atu.USID = atsmu.RECEIVE_USER_ID
+        where atsm.id_ = tsm.ID_ and atsmu.STATUS not in (-1,-2)
+        ) as ext_info
+        from ( select * from  TS_SCHEDULE_MEET where  DEL_FLAG != 1
+        <if test="meetType != null" >
+            and meet_type = #{meetType}
+        </if>
+        <if test="title != null and title != ''" >
+            and title like '%'||#{title}||'%'
+        </if>
+        ) tsm
+        left join  TS_SCHEDULE_MEET_USER tsmu on tsm.ID_ = tsmu.MEET_ID
+        left join TS_USER tu on tu.USID = tsmu.RECEIVE_USER_ID
+        <if test="receiveUserId != null and receiveUserId != ''" >
+           where tsmu.RECEIVE_USER_ID = #{receiveUserId}
+        </if>
+        group by tsm.ID_ ,title, dead_time ,tsm.CREATE_TIME,ADDRESS ,create_user_id,tsmu.TOP , tsmu.COLLECTED ,
+        create_user_name ,detail,meet_type, tsm.status , tsmu.RECEIVE_USER_NAME order by tsmu.TOP desc, CREATE_TIME desc
+        <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex}
+        )
+        where rn &gt;= ${pager.startIndex}
+    </select>
+    <!-- 查询TS_SCHEDULE_MEET列表 -->
+    <select id="queryCountByPageAll" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        select count(distinct tsmu.MEET_ID) from (
+        select   distinct (id_), address,title, create_time, update_time, dead_time,
+        create_user_id, create_user_name, detail, del_flag, meet_type, status, ext_info,
+        ext_info1, ext_info2, ext_info3, ext_info4, ext_info5
+        from  TS_SCHEDULE_MEET where  DEL_FLAG != 1
+        <if test="meetType != null" >
+          and meet_type = #{meetType}
+        </if>
+        <if test="title != null and title != ''" >
+            and title like '%'||#{title}||'%'
+        </if>
+        ) tsm
+        left join  TS_SCHEDULE_MEET_USER tsmu on tsm.ID_ = tsmu.MEET_ID
+        <if test="receiveUserId != null and receiveUserId != ''" >
+            where tsmu.RECEIVE_USER_ID = #{receiveUserId}
+        </if>
+    </select>
+
+
+    <!-- 查询TS_SCHEDULE_MEET列表 -->
+    <select id="queryByPageAdmin" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select * from
+        (select tmp_tb.* , rownum rn from
+        (select   id_,title, ADDRESS,CREATE_TIME ,dead_time, create_user_id, create_user_name, detail,meet_type,( select wm_concat(atu.USNAME) from TS_SCHEDULE_MEET atsm
+        left join TS_SCHEDULE_MEET_USER atsmu on atsm.ID_ = atsmu.MEET_ID
+        left join TS_USER atu on atu.USID = atsmu.RECEIVE_USER_ID
+        where atsm.id_ = tsm.ID_ and atsmu.STATUS not in (-1,-2)
+        ) as ext_info
+        from ( select * from  TS_SCHEDULE_MEET where  DEL_FLAG != 1
+        <if test="meetType != null" >
+            and meet_type = #{meetType}
+        </if>
+        <if test="title != null and title != ''" >
+            and title like '%'||#{title}||'%'
+        </if>
+        ) tsm
+        group by id_,title, ADDRESS,CREATE_TIME ,dead_time, create_user_id,
+        create_user_name, detail,meet_type order by  CREATE_TIME desc
+        <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex}
+        )
+        where rn &gt;= ${pager.startIndex}
+    </select>
+    <!-- 查询TS_SCHEDULE_MEET列表 -->
+    <select id="queryCountByPageAdmin" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        select count(1) from (
+        select   distinct (id_), address,title, create_time, update_time, dead_time,
+        create_user_id, create_user_name, detail, del_flag, meet_type, status, ext_info,
+        ext_info1, ext_info2, ext_info3, ext_info4, ext_info5
+        from  TS_SCHEDULE_MEET where  DEL_FLAG != 1
+        <if test="meetType != null" >
+            and meet_type = #{meetType}
+        </if>
+        <if test="title != null and title != ''" >
+            and title like '%'||#{title}||'%'
+        </if>
+        )
+    </select>
+
+
+
+
+
+
+
+    <!-- 查询TS_SCHEDULE_MEET列表 -->
+    <select id="queryCountByPageWithReceiveUserId" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+       select count(1) from (
+        select * from  TS_SCHEDULE_MEET where  DEL_FLAG != 1
+        and meet_type = #{meetType}
+        <if test="title != null and title != ''" >
+            and title like '%'||#{title}||'%'
+        </if>
+        ) tsm
+        left join  TS_SCHEDULE_MEET_USER tsmu on tsm.ID_ = tsmu.MEET_ID
+        where tsmu.RECEIVE_USER_ID = #{receiveUserId} and tsmu.status not in (-1,-2)
+    </select>
+
+  <!-- 查询TS_SCHEDULE_MEET列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from TS_SCHEDULE_MEET
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from TS_SCHEDULE_MEET
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

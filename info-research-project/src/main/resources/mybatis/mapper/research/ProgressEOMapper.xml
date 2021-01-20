@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.adc.da.research.dao.ProgressEODao">
+    <!-- Result Map-->
+    <resultMap id = "BaseResultMap" type = "com.adc.da.research.entity.ProgressEO">
+        <id column = "id_" property = "id"/>
+        <result column = "research_project_id_" property = "researchProjectId"/>
+        <result column = "date_" property = "date"/>
+        <result column = "check_detail_" property = "checkDetail"/>
+        <result column = "ext_info_1_" property = "extInfo1"/>
+        <result column = "ext_info_2_" property = "extInfo2"/>
+        <result column = "ext_info_3_" property = "extInfo3"/>
+    </resultMap>
+
+    <!-- RS_PROJECT_PROGRESS table all fields -->
+    <sql id = "Base_Column_List">
+        id_, research_project_id_, date_, check_detail_, ext_info_1_, ext_info_2_, ext_info_3_
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id = "Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides = ",">
+            <if test = "id != null">
+                and id_ ${idOperator} #{id}
+            </if>
+            <if test = "researchProjectId != null">
+                and research_project_id_ ${researchProjectIdOperator} #{researchProjectId}
+            </if>
+            <if test = "date != null">
+                and date_ ${dateOperator} #{date}
+            </if>
+            <if test = "date1 != null">
+                and date_ &gt;= #{date1}
+            </if>
+            <if test = "date2 != null">
+                and date_ &lt;= #{date2}
+            </if>
+            <if test = "checkDetail != null">
+                and check_detail_ ${checkDetailOperator} #{checkDetail}
+            </if>
+            <if test = "extInfo1 != null">
+                and ext_info_1_ ${extInfo1Operator} #{extInfo1}
+            </if>
+            <if test = "extInfo2 != null">
+                and ext_info_2_ ${extInfo2Operator} #{extInfo2}
+            </if>
+            <if test = "extInfo3 != null">
+                and ext_info_3_ ${extInfo3Operator} #{extInfo3}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id = "insert" parameterType = "com.adc.da.research.entity.ProgressEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+            SELECT SEQ_RS_PROJECT_PROGRESS.NEXTVAL FROM DUAL
+        </selectKey> -->
+        insert into RS_PROJECT_PROGRESS(<include refid = "Base_Column_List"/>)
+        values (#{id, jdbcType=VARCHAR}, #{researchProjectId, jdbcType=VARCHAR}, #{date, jdbcType=TIMESTAMP},
+        #{checkDetail, jdbcType=VARCHAR}, #{extInfo1, jdbcType=INTEGER}, #{extInfo2, jdbcType=VARCHAR},
+        #{extInfo3, jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id = "insertSelective" parameterType = "com.adc.da.research.entity.ProgressEO">
+        insert into RS_PROJECT_PROGRESS
+        <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">id_,</if>
+            <if test = "researchProjectId != null">research_project_id_,</if>
+            <if test = "date != null">date_,</if>
+            <if test = "checkDetail != null">check_detail_,</if>
+            <if test = "extInfo1 != null">ext_info_1_,</if>
+            <if test = "extInfo2 != null">ext_info_2_,</if>
+            <if test = "extInfo3 != null">ext_info_3_,</if>
+        </trim>
+        <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">#{id, jdbcType=VARCHAR},</if>
+            <if test = "researchProjectId != null">#{researchProjectId, jdbcType=VARCHAR},</if>
+            <if test = "date != null">#{date, jdbcType=TIMESTAMP},</if>
+            <if test = "checkDetail != null">#{checkDetail, jdbcType=VARCHAR},</if>
+            <if test = "extInfo1 != null">#{extInfo1, jdbcType=INTEGER},</if>
+            <if test = "extInfo2 != null">#{extInfo2, jdbcType=VARCHAR},</if>
+            <if test = "extInfo3 != null">#{extInfo3, jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+
+    <insert id = "insertSelectiveAll" parameterType = "java.util.List">
+        INSERT ALL
+        <foreach collection = "list" item = "item" index = "index">
+            <if test = "item.id !=null">
+                into RS_PROJECT_PROGRESS
+                <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+                    <if test = "item.id != null">id_,</if>
+                    <if test = "item.researchProjectId != null">research_project_id_,</if>
+                    <if test = "item.date != null">date_,</if>
+                    <if test = "item.checkDetail != null">check_detail_,</if>
+                    <if test = "item.extInfo1 != null">ext_info_1_,</if>
+                    <if test = "item.extInfo2 != null">ext_info_2_,</if>
+                    <if test = "item.extInfo3 != null">ext_info_3_,</if>
+                </trim>
+                <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+                    <if test = "item.id != null">#{item.id, jdbcType=VARCHAR},</if>
+                    <if test = "item.researchProjectId != null">#{item.researchProjectId, jdbcType=VARCHAR},</if>
+                    <if test = "item.date != null">#{item.date, jdbcType=TIMESTAMP},</if>
+                    <if test = "item.checkDetail != null">#{item.checkDetail, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo1 != null">#{item.extInfo1, jdbcType=INTEGER},</if>
+                    <if test = "item.extInfo2 != null">#{item.extInfo2, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo3 != null">#{item.extInfo3, jdbcType=VARCHAR},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+    <!-- 根据pk，修改记录-->
+    <update id = "updateByPrimaryKey" parameterType = "com.adc.da.research.entity.ProgressEO">
+        UPDATE RS_PROJECT_PROGRESS
+        SET research_project_id_ = #{researchProjectId},
+            date_                = #{date},
+            check_detail_        = #{checkDetail},
+            ext_info_1_          = #{extInfo1},
+            ext_info_2_          = #{extInfo2},
+            ext_info_3_          = #{extInfo3}
+        WHERE id_ = #{id}
+    </update>
+
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id = "updateByPrimaryKeySelective" parameterType = "com.adc.da.research.entity.ProgressEO">
+        update RS_PROJECT_PROGRESS
+        <set>
+            <if test = "researchProjectId != null">
+                research_project_id_ = #{researchProjectId},
+            </if>
+            <if test = "date != null">
+                date_ = #{date},
+            </if>
+            <if test = "checkDetail != null">
+                check_detail_ = #{checkDetail},
+            </if>
+            <if test = "extInfo1 != null">
+                ext_info_1_ = #{extInfo1},
+            </if>
+            <if test = "extInfo2 != null">
+                ext_info_2_ = #{extInfo2},
+            </if>
+            <if test = "extInfo3 != null">
+                ext_info_3_ = #{extInfo3},
+            </if>
+        </set>
+        where id_ = #{id}
+    </update>
+
+    <!-- 根据id查询 RS_PROJECT_PROGRESS -->
+    <select id = "selectByPrimaryKey" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+        select
+        <include refid = "Base_Column_List"/>
+        from RS_PROJECT_PROGRESS
+        where id_ = #{value}
+
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id = "deleteByPrimaryKey" parameterType = "java.lang.String">
+        DELETE
+        FROM RS_PROJECT_PROGRESS
+        WHERE id_ = #{value}
+
+    </delete>
+
+    <!-- RS_PROJECT_PROGRESS 列表总数-->
+    <select id = "queryByCount" resultType = "java.lang.Integer" parameterType = "com.adc.da.base.page.BasePage">
+        select count(1) from RS_PROJECT_PROGRESS
+        <include refid = "Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询RS_PROJECT_PROGRESS列表 -->
+    <select id = "queryByPage" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from
+        (select tmp_tb.* , rownum rn from
+        (select
+        <include refid = "Base_Column_List"/>
+        from RS_PROJECT_PROGRESS
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id = "queryByList" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from RS_PROJECT_PROGRESS
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+    </select>
+    <select id = "getRunningProjectInfo" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+        select
+        <include refid = "Base_Column_List"/>
+        from RS_PROJECT_PROGRESS
+        where RESEARCH_PROJECT_ID_ = #{value} and (ext_info_1_ != 0 or ext_info_2_ != -1)
+
+    </select>
+</mapper>

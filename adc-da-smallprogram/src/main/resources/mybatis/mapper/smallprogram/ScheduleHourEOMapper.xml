@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.smallprogram.dao.ScheduleHourEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.smallprogram.entity.ScheduleHourEO" >
+    <id column="id" property="id" />
+    <result column="schedule_content" property="scheduleContent" />
+    <result column="schedule_date" property="scheduleDate" />
+    <result column="schedule_hour" property="scheduleHour" />
+    <result column="del_flag" property="delFlag" />
+    <result column="create_time" property="createTime" />
+    <result column="update_time" property="updateTime" />
+    <result column="schedule_type_id" property="scheduleTypeId" />
+    <result column="user_id" property="userId" />
+      <result column="schedule_desc" property="scheduleDesc" />
+
+      <result column="update_flag" property="updateFlag" />
+      <result column="update_user_id" property="updateUserId" />
+      <result column="update_user_name" property="updateUserName" />
+  </resultMap>
+
+    <resultMap id="ScheduleHourVOMap" extends="BaseResultMap" type="com.adc.da.smallprogram.vo.ScheduleHourVO">
+        <collection property="scheduleDetailEOList" ofType="com.adc.da.smallprogram.entity.ScheduleDetailEO">
+            <id column="d_id" property="id" />
+            <result column="d_parent_id" property="parentId" />
+            <result column="d_begin_time" property="beginTime" />
+            <result column="d_end_time" property="endTime" />
+            <result column="d_time_limit" property="timeLimit" />
+            <result column="d_schedule_detail" property="scheduleDetail" />
+            <result column="d_order_number" property="orderNumber" />
+            <result column="d_create_user_id" property="createUserId" />
+            <result column="d_detail_type" property="detailType" />
+            <result column="d_del_flag" property="delFlag" />
+            <result column="d_status" property="status" />
+            <result column="d_ext_info1" property="extInfo1" />
+            <result column="d_ext_info2" property="extInfo2" />
+            <result column="d_ext_info3" property="extInfo3" />
+            <result column="d_ext_info4" property="extInfo4" />
+            <result column="d_ext_info5" property="extInfo5" />
+        </collection>
+    </resultMap>
+
+
+    <!--case "update_flag" : return "updateFlag";-->
+    <!--case "update_user_id" : return "updateUserId";-->
+    <!--case "update_user_name" : return "updateUserName";-->
+
+  <!-- TS_SCHEDULE_HOUR table all fields -->
+  <sql id="Base_Column_List" >
+     id, schedule_content, schedule_date, schedule_hour, del_flag, create_time,
+     update_time, schedule_type_id,user_id,schedule_desc,update_flag,update_user_id,
+     update_user_name
+  </sql>
+
+    <sql id="ScheduleHourVO_Column_List" >
+      h.*,
+      d.id as d_id ,
+      d.parent_id as d_parent_id,
+      d.begin_time as d_begin_time,
+      d.end_time as d_end_time,
+      d.time_limit as d_time_limit,
+      d.schedule_detail as d_schedule_detail,
+      d.order_number as d_order_number ,
+      d.create_user_id as d_create_user_id,
+      d.detail_type as d_detail_type,
+      d.del_flag as d_del_flag,
+      d.status as d_status,
+      d.ext_info1 as d_ext_info1,
+      d.ext_info2 as d_ext_info2,
+      d.ext_info3 as d_ext_info3,
+      d.ext_info4 as d_ext_info4,
+      d.ext_info5 as d_ext_info5
+
+  </sql>
+
+
+    <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1 and del_flag = '0'
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id = #{id}
+      </if>
+      <if test="scheduleContent != null" >
+        and schedule_content = #{scheduleContent}
+      </if>
+      <if test="scheduleDate != null" >
+        and TO_CHAR(schedule_date, 'yyyy-MM-dd') = #{scheduleDate}
+      </if>
+      <if test="scheduleDate1 != null" >
+        and schedule_date &gt;= #{scheduleDate1}
+      </if>
+      <if test="scheduleDate2 != null" >
+        and schedule_date &lt;= #{scheduleDate2}
+      </if>
+      <if test="scheduleHour != null" >
+        and schedule_hour = #{scheduleHour}
+      </if>
+      <if test="delFlag != null" >
+        and del_flag = #{delFlag}
+      </if>
+      <if test="createTime != null" >
+        and create_time = #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="updateTime != null" >
+        and update_time = #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and update_time &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and update_time &lt;= #{updateTime2}
+      </if>
+      <if test="scheduleTypeId != null" >
+        and schedule_type_id = #{scheduleTypeId}
+      </if>
+        <if test="userId != null" >
+            and user_id = #{userId}
+        </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.smallprogram.entity.ScheduleHourEO" >
+     <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_SCHEDULE_HOUR.NEXTVAL FROM DUAL
+    </selectKey>
+      insert into TS_SCHEDULE_HOUR
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+                    <if test="id != null" >id,</if>
+                    <if test="scheduleContent != null" >schedule_content,</if>
+                    <if test="scheduleDate != null" >schedule_date,</if>
+                    <if test="scheduleHour != null" >schedule_hour,</if>
+                    <if test="delFlag != null" >del_flag,</if>
+                    <if test="createTime != null" >create_time,</if>
+                    <if test="updateTime != null" >update_time,</if>
+                    <if test="scheduleTypeId != null" >schedule_type_id,</if>
+                    <if test="userId != null" >user_id,</if>
+          <if test="scheduleDesc != null" >schedule_desc,</if>
+                </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides="," >
+                    <if test="id != null" >#{id},</if>
+                    <if test="scheduleContent != null" >#{scheduleContent},</if>
+                    <if test="scheduleDate != null" >#{scheduleDate},</if>
+                    <if test="scheduleHour != null" >#{scheduleHour},</if>
+                    <if test="delFlag != null" >#{delFlag},</if>
+                    <if test="createTime != null" >#{createTime},</if>
+                    <if test="updateTime != null" >#{updateTime},</if>
+                    <if test="scheduleTypeId != null" >#{scheduleTypeId},</if>
+                    <if test="userId != null" >#{userId},</if>
+          <if test="scheduleDesc != null" >#{scheduleDesc},</if>
+                </trim>
+  </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.smallprogram.entity.ScheduleHourEO" >
+        <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_SCHEDULE_HOUR.NEXTVAL FROM DUAL
+    </selectKey>
+        insert into TS_SCHEDULE_HOUR
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="scheduleContent != null" >schedule_content,</if>
+                <if test="scheduleDate != null" >schedule_date,</if>
+                <if test="scheduleHour != null" >schedule_hour,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="updateTime != null" >update_time,</if>
+                <if test="scheduleTypeId != null" >schedule_type_id,</if>
+                <if test="userId != null" >user_id,</if>
+                <if test="scheduleDesc != null" >schedule_desc,</if>
+                <if test="updateFlag != null" >update_flag,</if>
+                <if test="updateUserId != null" >update_user_id,</if>
+                <if test="updateUserName != null" >update_user_name,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id},</if>
+                <if test="scheduleContent != null" >#{scheduleContent},</if>
+                <if test="scheduleDate != null" >#{scheduleDate},</if>
+                <if test="scheduleHour != null" >#{scheduleHour},</if>
+                <if test="delFlag != null" >#{delFlag},</if>
+                <if test="createTime != null" >#{createTime},</if>
+                <if test="updateTime != null" >#{updateTime},</if>
+                <if test="scheduleTypeId != null" >#{scheduleTypeId},</if>
+                <if test="userId != null" >#{userId},</if>
+                <if test="scheduleDesc != null" >#{scheduleDesc},</if>
+                <if test="updateFlag != null" >#{updateFlag},</if>
+                <if test="updateUserId != null" >#{updateUserId},</if>
+                <if test="updateUserName != null" >#{updateUserName},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.smallprogram.entity.ScheduleHourEO" >
+    update TS_SCHEDULE_HOUR
+       set  schedule_content = #{scheduleContent},
+            schedule_date = #{scheduleDate},
+            schedule_hour = #{scheduleHour},
+            del_flag = #{delFlag},
+            create_time = #{createTime},
+            update_time = #{updateTime},
+            schedule_type_id = #{scheduleTypeId},
+            user_id = #{userId}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.smallprogram.entity.ScheduleHourEO" >
+    update TS_SCHEDULE_HOUR
+    <set >
+      <if test="scheduleContent != null" >
+        schedule_content = #{scheduleContent},
+      </if>
+      <if test="scheduleDate != null" >
+        schedule_date = #{scheduleDate},
+      </if>
+      <if test="scheduleHour != null" >
+        schedule_hour = #{scheduleHour},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+      <if test="scheduleTypeId != null" >
+        schedule_type_id = #{scheduleTypeId},
+      </if>
+      <if test="userId != null" >
+          user_id = #{userId},
+      </if>
+        <if test="scheduleDesc != null" >
+            schedule_desc = #{scheduleDesc},
+        </if>
+        <if test="updateFlag != null" >
+            update_flag = #{updateFlag},
+        </if>
+        <if test="updateUserId != null" >
+            update_user_id = #{updateUserId},
+        </if>
+        <if test="updateUserName != null" >
+            update_user_name = #{updateUserName},
+        </if>
+    </set>
+     where id = #{id}
+  </update>
+
+
+  <!-- 根据id查询 TS_SCHEDULE_HOUR -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+      from TS_SCHEDULE_HOUR
+     where id = #{value}
+
+  </select>
+
+    <!-- 根据id查询 TS_SCHEDULE_HOUR -->
+    <select id="selectByUserIdAndScheduleDate" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" />
+        from TS_SCHEDULE_HOUR
+        where user_id = #{userId} and schedule_date = #{scheduleDate} and DEL_FLAG != 1
+
+    </select>
+
+  <!--&lt;!&ndash; 删除记录 &ndash;&gt;
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TS_SCHEDULE_HOUR
+     where id = #{value}
+
+  </delete>-->
+
+    <update id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        update TS_SCHEDULE_HOUR
+        set del_flag = '1'
+        where id = #{id}
+    </update>
+
+    <update id="resetUpdateFlagByIds" >
+        update TS_SCHEDULE_HOUR
+        set UPDATE_FLAG = 0
+        where id in
+        <foreach item="id" collection="list" open="(" separator=","
+                 close=")" index="index">
+            #{id}
+        </foreach>
+    </update>
+
+
+  <!-- TS_SCHEDULE_HOUR 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from TS_SCHEDULE_HOUR
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TS_SCHEDULE_HOUR列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from TS_SCHEDULE_HOUR
+			 <include refid="Base_Where_Clause"/>
+			) tmp_tb where rownum &lt;= #{pager.endIndex})
+			where rn &gt;= #{pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from TS_SCHEDULE_HOUR
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+
+    <select id="queryListByUserIdTimeBetween" resultMap="BaseResultMap" >
+        select <include refid="Base_Column_List"/> from TS_SCHEDULE_HOUR h
+        where h.DEL_FLAG != 1  and  h.user_id = #{userId} and h.schedule_date between #{startTime} and #{endTime}
+    </select>
+
+
+    <!--<select id="queryListByUserIdTimeBetween" resultMap="ScheduleHourVOMap" >-->
+        <!--select <include refid="ScheduleHourVO_Column_List"/> from TS_SCHEDULE_HOUR h  left join TS_SCHEDULE_DETAIL d on h.ID = d.PARENT_ID-->
+
+       <!--where h.DEL_FLAG != 1 and d.DEL_FLAG != 1 and  h.user_id = #{userId} and h.schedule_date between #{startTime} and #{endTime}-->
+    <!--</select>-->
+
+    <!--<select id="queryListByUserIdTimeBetween" resultMap="ScheduleHourVOMap" >-->
+        <!--select <include refid="ScheduleHourVO_Column_List"/> from TS_SCHEDULE_HOUR h  left join TS_SCHEDULE_DETAIL d on h.ID = d.PARENT_ID-->
+
+        <!--where h.DEL_FLAG != 1 and d.DEL_FLAG != 1 and  h.user_id = #{userId} and h.schedule_date &gt;= #{startTime} and  h.schedule_date &lt;= #{endTime}-->
+    <!--</select>-->
+
+</mapper>

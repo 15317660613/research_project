@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.dao.EndProjectSummaryEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.research.entity.EndProjectSummaryEO" >
+    <id column="proc_business_key_" property="procBusinessKey" />
+    <result column="research_project_id_" property="researchProjectId" />
+    <result column="total_target_" property="totalTarget" />
+    <result column="total_target_act_" property="totalTargetAct" />
+    <result column="research_project_content_" property="researchProjectContent" />
+    <result column="research_project_content_act_" property="researchProjectContentAct" />
+    <result column="ext_info_1_" property="extInfo1" />
+    <result column="ext_info_2_" property="extInfo2" />
+    <result column="ext_info_3_" property="extInfo3" />
+    <result column="ext_info_4_" property="extInfo4" />
+    <result column="ext_info_5_" property="extInfo5" />
+    <result column="ext_info_6_" property="extInfo6" />
+  </resultMap>
+
+  <!-- RS_END_PROJECT_SUMMARY table all fields -->
+  <sql id="Base_Column_List" >
+     proc_business_key_, research_project_id_, total_target_, total_target_act_, research_project_content_, research_project_content_act_, ext_info_1_, ext_info_2_, ext_info_3_, ext_info_4_, ext_info_5_, ext_info_6_
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="procBusinessKey != null" >
+        and proc_business_key_ ${procBusinessKeyOperator} #{procBusinessKey}
+      </if>
+      <if test="researchProjectId != null" >
+        and research_project_id_ ${researchProjectIdOperator} #{researchProjectId}
+      </if>
+      <if test="totalTarget != null" >
+        and total_target_ ${totalTargetOperator} #{totalTarget}
+      </if>
+      <if test="totalTargetAct != null" >
+        and total_target_act_ ${totalTargetActOperator} #{totalTargetAct}
+      </if>
+      <if test="researchProjectContent != null" >
+        and research_project_content_ ${researchProjectContentOperator} #{researchProjectContent}
+      </if>
+      <if test="researchProjectContentAct != null" >
+        and research_project_content_act_ ${researchProjectContentActOperator} #{researchProjectContentAct}
+      </if>
+      <if test="extInfo1 != null" >
+        and ext_info_1_ ${extInfo1Operator} #{extInfo1}
+      </if>
+      <if test="extInfo2 != null" >
+        and ext_info_2_ ${extInfo2Operator} #{extInfo2}
+      </if>
+      <if test="extInfo3 != null" >
+        and ext_info_3_ ${extInfo3Operator} #{extInfo3}
+      </if>
+      <if test="extInfo4 != null" >
+        and ext_info_4_ ${extInfo4Operator} #{extInfo4}
+      </if>
+      <if test="extInfo5 != null" >
+        and ext_info_5_ ${extInfo5Operator} #{extInfo5}
+      </if>
+      <if test="extInfo6 != null" >
+        and ext_info_6_ ${extInfo6Operator} #{extInfo6}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.research.entity.EndProjectSummaryEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="proc_business_key_">
+        SELECT SEQ_RS_END_PROJECT_SUMMARY.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into RS_END_PROJECT_SUMMARY(<include refid="Base_Column_List" />)
+    values (#{procBusinessKey, jdbcType=VARCHAR}, #{researchProjectId, jdbcType=VARCHAR}, #{totalTarget, jdbcType=VARCHAR}, #{totalTargetAct, jdbcType=VARCHAR}, #{researchProjectContent, jdbcType=VARCHAR}, #{researchProjectContentAct, jdbcType=VARCHAR}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR}, #{extInfo6, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.research.entity.EndProjectSummaryEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="proc_business_key_">
+        SELECT SEQ_RS_END_PROJECT_SUMMARY.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into RS_END_PROJECT_SUMMARY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="procBusinessKey != null" >proc_business_key_,</if>
+                <if test="researchProjectId != null" >research_project_id_,</if>
+                <if test="totalTarget != null" >total_target_,</if>
+                <if test="totalTargetAct != null" >total_target_act_,</if>
+                <if test="researchProjectContent != null" >research_project_content_,</if>
+                <if test="researchProjectContentAct != null" >research_project_content_act_,</if>
+                <if test="extInfo1 != null" >ext_info_1_,</if>
+                <if test="extInfo2 != null" >ext_info_2_,</if>
+                <if test="extInfo3 != null" >ext_info_3_,</if>
+                <if test="extInfo4 != null" >ext_info_4_,</if>
+                <if test="extInfo5 != null" >ext_info_5_,</if>
+                <if test="extInfo6 != null" >ext_info_6_,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="procBusinessKey != null" >#{procBusinessKey, jdbcType=VARCHAR},</if>
+                <if test="researchProjectId != null" >#{researchProjectId, jdbcType=VARCHAR},</if>
+                <if test="totalTarget != null" >#{totalTarget, jdbcType=VARCHAR},</if>
+                <if test="totalTargetAct != null" >#{totalTargetAct, jdbcType=VARCHAR},</if>
+                <if test="researchProjectContent != null" >#{researchProjectContent, jdbcType=VARCHAR},</if>
+                <if test="researchProjectContentAct != null" >#{researchProjectContentAct, jdbcType=VARCHAR},</if>
+                <if test="extInfo1 != null" >#{extInfo1, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="extInfo3 != null" >#{extInfo3, jdbcType=VARCHAR},</if>
+                <if test="extInfo4 != null" >#{extInfo4, jdbcType=VARCHAR},</if>
+                <if test="extInfo5 != null" >#{extInfo5, jdbcType=VARCHAR},</if>
+                <if test="extInfo6 != null" >#{extInfo6, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.research.entity.EndProjectSummaryEO" >
+    update RS_END_PROJECT_SUMMARY
+       set  research_project_id_ = #{researchProjectId},
+            total_target_ = #{totalTarget},
+            total_target_act_ = #{totalTargetAct},
+            research_project_content_ = #{researchProjectContent},
+            research_project_content_act_ = #{researchProjectContentAct},
+            ext_info_1_ = #{extInfo1},
+            ext_info_2_ = #{extInfo2},
+            ext_info_3_ = #{extInfo3},
+            ext_info_4_ = #{extInfo4},
+            ext_info_5_ = #{extInfo5},
+            ext_info_6_ = #{extInfo6}
+     where  proc_business_key_ = #{procBusinessKey}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.research.entity.EndProjectSummaryEO" >
+    update RS_END_PROJECT_SUMMARY
+    <set >
+      <if test="researchProjectId != null" >
+        research_project_id_ = #{researchProjectId},
+      </if>
+      <if test="totalTarget != null" >
+        total_target_ = #{totalTarget},
+      </if>
+      <if test="totalTargetAct != null" >
+        total_target_act_ = #{totalTargetAct},
+      </if>
+      <if test="researchProjectContent != null" >
+        research_project_content_ = #{researchProjectContent},
+      </if>
+      <if test="researchProjectContentAct != null" >
+        research_project_content_act_ = #{researchProjectContentAct},
+      </if>
+      <if test="extInfo1 != null" >
+        ext_info_1_ = #{extInfo1},
+      </if>
+      <if test="extInfo2 != null" >
+        ext_info_2_ = #{extInfo2},
+      </if>
+      <if test="extInfo3 != null" >
+        ext_info_3_ = #{extInfo3},
+      </if>
+      <if test="extInfo4 != null" >
+        ext_info_4_ = #{extInfo4},
+      </if>
+      <if test="extInfo5 != null" >
+        ext_info_5_ = #{extInfo5},
+      </if>
+      <if test="extInfo6 != null" >
+        ext_info_6_ = #{extInfo6},
+      </if>
+    </set>
+     where proc_business_key_ = #{procBusinessKey}
+  </update>
+
+  <!-- 根据id查询 RS_END_PROJECT_SUMMARY -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from RS_END_PROJECT_SUMMARY
+     where proc_business_key_ = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RS_END_PROJECT_SUMMARY
+     where proc_business_key_ = #{value}
+
+  </delete>
+
+  <!-- RS_END_PROJECT_SUMMARY 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from RS_END_PROJECT_SUMMARY
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询RS_END_PROJECT_SUMMARY列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from RS_END_PROJECT_SUMMARY
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from RS_END_PROJECT_SUMMARY
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.dao.KpiDeliverableEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.research.entity.KpiDeliverableEO" >
+    <id column="id_" property="id" />
+    <result column="research_project_id_" property="researchProjectId" />
+    <result column="name_" property="name" />
+    <result column="kpi_" property="kpi" />
+    <result column="ext_info_1_" property="extInfo1" />
+    <result column="ext_info_2_" property="extInfo2" />
+    <result column="ext_info_3_" property="extInfo3" />
+  </resultMap>
+
+  <!-- RS_PROJECT_KPI_DELIVERABLE table all fields -->
+  <sql id="Base_Column_List" >
+     id_, research_project_id_, name_, kpi_, ext_info_1_, ext_info_2_, ext_info_3_
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id_ ${idOperator} #{id}
+      </if>
+      <if test="researchProjectId != null" >
+        and research_project_id_ ${researchProjectIdOperator} #{researchProjectId}
+      </if>
+      <if test="name != null" >
+        and name_ ${nameOperator} #{name}
+      </if>
+      <if test="kpi != null" >
+        and kpi_ ${kpiOperator} #{kpi}
+      </if>
+      <if test="extInfo1 != null" >
+        and ext_info_1_ ${extInfo1Operator} #{extInfo1}
+      </if>
+      <if test="extInfo2 != null" >
+        and ext_info_2_ ${extInfo2Operator} #{extInfo2}
+      </if>
+      <if test="extInfo3 != null" >
+        and ext_info_3_ ${extInfo3Operator} #{extInfo3}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.research.entity.KpiDeliverableEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_RS_PROJECT_KPI_DELIVERABLE.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into RS_PROJECT_KPI_DELIVERABLE(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{researchProjectId, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, #{kpi, jdbcType=VARCHAR}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.research.entity.KpiDeliverableEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_RS_PROJECT_KPI_DELIVERABLE.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into RS_PROJECT_KPI_DELIVERABLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id_,</if>
+                <if test="researchProjectId != null" >research_project_id_,</if>
+                <if test="name != null" >name_,</if>
+                <if test="kpi != null" >kpi_,</if>
+                <if test="extInfo1 != null" >ext_info_1_,</if>
+                <if test="extInfo2 != null" >ext_info_2_,</if>
+                <if test="extInfo3 != null" >ext_info_3_,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="researchProjectId != null" >#{researchProjectId, jdbcType=VARCHAR},</if>
+                <if test="name != null" >#{name, jdbcType=VARCHAR},</if>
+                <if test="kpi != null" >#{kpi, jdbcType=VARCHAR},</if>
+                <if test="extInfo1 != null" >#{extInfo1, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="extInfo3 != null" >#{extInfo3, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.research.entity.KpiDeliverableEO" >
+    update RS_PROJECT_KPI_DELIVERABLE
+       set  research_project_id_ = #{researchProjectId},
+            name_ = #{name},
+            kpi_ = #{kpi},
+            ext_info_1_ = #{extInfo1},
+            ext_info_2_ = #{extInfo2},
+            ext_info_3_ = #{extInfo3}
+     where  id_ = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.research.entity.KpiDeliverableEO" >
+    update RS_PROJECT_KPI_DELIVERABLE
+    <set >
+      <if test="researchProjectId != null" >
+        research_project_id_ = #{researchProjectId},
+      </if>
+      <if test="name != null" >
+        name_ = #{name},
+      </if>
+      <if test="kpi != null" >
+        kpi_ = #{kpi},
+      </if>
+      <if test="extInfo1 != null" >
+        ext_info_1_ = #{extInfo1},
+      </if>
+      <if test="extInfo2 != null" >
+        ext_info_2_ = #{extInfo2},
+      </if>
+      <if test="extInfo3 != null" >
+        ext_info_3_ = #{extInfo3},
+      </if>
+    </set>
+     where id_ = #{id}
+  </update>
+
+  <!-- 根据id查询 RS_PROJECT_KPI_DELIVERABLE -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from RS_PROJECT_KPI_DELIVERABLE
+     where id_ = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RS_PROJECT_KPI_DELIVERABLE
+     where id_ = #{value}
+
+  </delete>
+
+  <!-- RS_PROJECT_KPI_DELIVERABLE 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from RS_PROJECT_KPI_DELIVERABLE
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询RS_PROJECT_KPI_DELIVERABLE列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from RS_PROJECT_KPI_DELIVERABLE
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from RS_PROJECT_KPI_DELIVERABLE
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

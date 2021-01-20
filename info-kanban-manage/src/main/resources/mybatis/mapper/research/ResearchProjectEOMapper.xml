@@ -1,0 +1,812 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.dao.ResearchProjectEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.research.entity.ResearchProjectEO" >
+    <id column="id" property="id" />
+    <result column="update_user_id" property="updateUserId" />
+    <result column="update_user_name" property="updateUserName" />
+    <result column="ext_info1" property="extInfo1" />
+    <result column="ext_info2" property="extInfo2" />
+    <result column="ext_info3" property="extInfo3" />
+    <result column="ext_info4" property="extInfo4" />
+    <result column="leader_org_id" property="leaderOrgId" />
+    <result column="charge_org_id" property="chargeOrgId" />
+    <result column="project_manager_id" property="projectManagerId" />
+    <result column="project_responsible_id" property="projectResponsibleId" />
+    <result column="project_contact_id" property="projectContactId" />
+    <result column="project_specialist_id" property="projectSpecialistId" />
+    <result column="project_member_ids" property="projectMemberIds" />
+    <result column="research_project_id" property="researchProjectId" />
+    <result column="project_no" property="projectNo" />
+    <result column="apply_year" property="applyYear" />
+    <result column="year" property="year" />
+    <result column="project_name" property="projectName" />
+    <result column="finance_no" property="financeNo" />
+    <result column="project_level_dic_id" property="projectLevelDicId" />
+      <result column="project_level_dic_name" property="projectLevelDicName" />
+    <result column="project_origin" property="projectOrigin" />
+    <result column="leader_org_name" property="leaderOrgName" />
+    <result column="charge_org_name" property="chargeOrgName" />
+    <result column="project_status_dic_id" property="projectStatusDicId" />
+      <result column="project_status_dic_name" property="projectStatusDicName" />
+    <result column="project_start_time" property="projectStartTime" />
+    <result column="project_end_time" property="projectEndTime" />
+    <result column="all_funds" property="allFunds" />
+    <result column="allocate_funds" property="allocateFunds" />
+    <result column="raise_funds" property="raiseFunds" />
+    <result column="project_manager_name" property="projectManagerName" />
+    <result column="project_responsible_name" property="projectResponsibleName" />
+    <result column="project_contact_name" property="projectContactName" />
+    <result column="project_contact_phone" property="projectContactPhone" />
+    <result column="project_specialist_name" property="projectSpecialistName" />
+    <result column="project_member_names" property="projectMemberNames" />
+    <result column="create_time" property="createTime" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="create_user_name" property="createUserName" />
+    <result column="update_time" property="updateTime" />
+  </resultMap>
+
+  <!-- DB_RESEARCH_PROJECT table all fields -->
+  <sql id="Base_Column_List" >
+     update_user_id, update_user_name, ext_info1, ext_info2, ext_info3, ext_info4, leader_org_id, charge_org_id, project_manager_id, project_responsible_id, project_contact_id, project_specialist_id, project_member_ids, id, research_project_id, project_no, apply_year, year, project_name, finance_no, project_level_dic_id,project_level_dic_name, project_origin, leader_org_name, charge_org_name, project_status_dic_id, project_status_dic_name,project_start_time, project_end_time, all_funds, allocate_funds, raise_funds, project_manager_name, project_responsible_name, project_contact_name, project_contact_phone, project_specialist_name, project_member_names, create_time, create_user_id, create_user_name, update_time
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where  DEL_FLAG != 1
+      <trim suffixOverrides="," >
+      <if test="updateUserId != null" >
+        and update_user_id ${updateUserIdOperator} #{updateUserId}
+      </if>
+      <if test="updateUserName != null" >
+        and update_user_name ${updateUserNameOperator} #{updateUserName}
+      </if>
+      <if test="extInfo1 != null" >
+        and ext_info1 ${extInfo1Operator} #{extInfo1}
+      </if>
+      <if test="extInfo2 != null" >
+        and ext_info2 ${extInfo2Operator} #{extInfo2}
+      </if>
+      <if test="extInfo3 != null" >
+        and ext_info3 ${extInfo3Operator} #{extInfo3}
+      </if>
+      <if test="extInfo4 != null" >
+        and ext_info4 ${extInfo4Operator} #{extInfo4}
+      </if>
+      <if test="leaderOrgId != null" >
+        and leader_org_id ${leaderOrgIdOperator} #{leaderOrgId}
+      </if>
+      <if test="chargeOrgId != null" >
+        and charge_org_id ${chargeOrgIdOperator} #{chargeOrgId}
+      </if>
+      <if test="projectManagerId != null" >
+        and project_manager_id ${projectManagerIdOperator} #{projectManagerId}
+      </if>
+      <if test="projectResponsibleId != null" >
+        and project_responsible_id ${projectResponsibleIdOperator} #{projectResponsibleId}
+      </if>
+      <if test="projectContactId != null" >
+        and project_contact_id ${projectContactIdOperator} #{projectContactId}
+      </if>
+      <if test="projectSpecialistId != null" >
+        and project_specialist_id ${projectSpecialistIdOperator} #{projectSpecialistId}
+      </if>
+      <if test="projectMemberIds != null" >
+        and project_member_ids ${projectMemberIdsOperator} #{projectMemberIds}
+      </if>
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="researchProjectId != null" >
+        and research_project_id like '%'|| #{researchProjectId}|| '%'
+      </if>
+      <if test="projectNo != null" >
+        and project_no ${projectNoOperator} #{projectNo}
+      </if>
+      <if test="applyYear != null" >
+        and apply_year ${applyYearOperator} #{applyYear}
+      </if>
+      <if test="year != null" >
+        and year ${yearOperator} #{year}
+      </if>
+      <if test="projectName != null" >
+        and project_name like '%'|| #{projectName}|| '%'
+      </if>
+      <if test="financeNo != null" >
+        and finance_no ${financeNoOperator} #{financeNo}
+      </if>
+      <if test="projectLevelDicId != null" >
+        and project_level_dic_id ${projectLevelDicIdOperator} #{projectLevelDicId}
+      </if>
+        <if test="projectLevelDicName != null" >
+            and project_level_dic_name ${projectLevelDicNameOperator} #{projectLevelDicName}
+        </if>
+      <if test="projectOrigin != null" >
+        and project_origin ${projectOriginOperator} #{projectOrigin}
+      </if>
+      <if test="leaderOrgName != null" >
+        and leader_org_name ${leaderOrgNameOperator} #{leaderOrgName}
+      </if>
+      <if test="chargeOrgName != null" >
+        and charge_org_name ${chargeOrgNameOperator} #{chargeOrgName}
+      </if>
+      <if test="projectStatusDicId != null" >
+        and project_status_dic_id ${projectStatusDicIdOperator} #{projectStatusDicId}
+      </if>
+        <if test="projectStatusDicName != null" >
+            and project_status_dic_name ${projectStatusDicNameOperator} #{projectStatusDicName}
+        </if>
+      <if test="projectStartTime != null" >
+        and project_start_time ${projectStartTimeOperator} #{projectStartTime}
+      </if>
+      <if test="projectStartTime1 != null" >
+        and project_start_time &gt;= #{projectStartTime1}
+      </if>
+      <if test="projectStartTime2 != null" >
+        and project_start_time &lt;= #{projectStartTime2}
+      </if>
+      <if test="projectEndTime != null" >
+        and project_end_time ${projectEndTimeOperator} #{projectEndTime}
+      </if>
+      <if test="projectEndTime1 != null" >
+        and project_end_time &gt;= #{projectEndTime1}
+      </if>
+      <if test="projectEndTime2 != null" >
+        and project_end_time &lt;= #{projectEndTime2}
+      </if>
+      <if test="allFunds != null" >
+        and all_funds ${allFundsOperator} #{allFunds}
+      </if>
+      <if test="allocateFunds != null" >
+        and allocate_funds ${allocateFundsOperator} #{allocateFunds}
+      </if>
+      <if test="raiseFunds != null" >
+        and raise_funds ${raiseFundsOperator} #{raiseFunds}
+      </if>
+      <if test="projectManagerName != null" >
+        and project_manager_name ${projectManagerNameOperator} #{projectManagerName}
+      </if>
+      <if test="projectResponsibleName != null" >
+        and project_responsible_name ${projectResponsibleNameOperator} #{projectResponsibleName}
+      </if>
+      <if test="projectContactName != null" >
+        and project_contact_name ${projectContactNameOperator} #{projectContactName}
+      </if>
+      <if test="projectContactPhone != null" >
+        and project_contact_phone ${projectContactPhoneOperator} #{projectContactPhone}
+      </if>
+      <if test="projectSpecialistName != null" >
+        and project_specialist_name ${projectSpecialistNameOperator} #{projectSpecialistName}
+      </if>
+      <if test="projectMemberNames != null" >
+        and project_member_names ${projectMemberNamesOperator} #{projectMemberNames}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="createUserId != null" >
+        and create_user_id ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="createUserName != null" >
+        and create_user_name ${createUserNameOperator} #{createUserName}
+      </if>
+      <if test="updateTime != null" >
+        and update_time ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and update_time &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and update_time &lt;= #{updateTime2}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.research.entity.ResearchProjectEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_DB_RESEARCH_PROJECT.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into DB_RESEARCH_PROJECT(<include refid="Base_Column_List" />)
+    values (#{updateUserId, jdbcType=VARCHAR}, #{updateUserName, jdbcType=VARCHAR}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR}, #{leaderOrgId, jdbcType=VARCHAR}, #{chargeOrgId, jdbcType=VARCHAR}, #{projectManagerId, jdbcType=VARCHAR}, #{projectResponsibleId, jdbcType=VARCHAR}, #{projectContactId, jdbcType=VARCHAR}, #{projectSpecialistId, jdbcType=VARCHAR}, #{projectMemberIds, jdbcType=VARCHAR}, #{id, jdbcType=VARCHAR}, #{researchProjectId, jdbcType=VARCHAR}, #{projectNo, jdbcType=VARCHAR}, #{applyYear, jdbcType=VARCHAR}, #{year, jdbcType=VARCHAR}, #{projectName, jdbcType=VARCHAR}, #{financeNo, jdbcType=VARCHAR}, #{projectLevelDicId, jdbcType=VARCHAR}, #{projectOrigin, jdbcType=VARCHAR}, #{leaderOrgName, jdbcType=VARCHAR}, #{chargeOrgName, jdbcType=VARCHAR}, #{projectStatusDicId, jdbcType=VARCHAR}, #{projectStartTime, jdbcType=TIMESTAMP}, #{projectEndTime, jdbcType=TIMESTAMP}, #{allFunds, jdbcType=DOUBLE}, #{allocateFunds, jdbcType=DOUBLE}, #{raiseFunds, jdbcType=DOUBLE}, #{projectManagerName, jdbcType=VARCHAR}, #{projectResponsibleName, jdbcType=VARCHAR}, #{projectContactName, jdbcType=VARCHAR}, #{projectContactPhone, jdbcType=VARCHAR}, #{projectSpecialistName, jdbcType=VARCHAR}, #{projectMemberNames, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{createUserId, jdbcType=VARCHAR}, #{createUserName, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.research.entity.ResearchProjectEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_DB_RESEARCH_PROJECT.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into DB_RESEARCH_PROJECT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="updateUserId != null" >update_user_id,</if>
+                <if test="updateUserName != null" >update_user_name,</if>
+                <if test="extInfo1 != null" >ext_info1,</if>
+                <if test="extInfo2 != null" >ext_info2,</if>
+                <if test="extInfo3 != null" >ext_info3,</if>
+                <if test="extInfo4 != null" >ext_info4,</if>
+                <if test="leaderOrgId != null" >leader_org_id,</if>
+                <if test="chargeOrgId != null" >charge_org_id,</if>
+                <if test="projectManagerId != null" >project_manager_id,</if>
+                <if test="projectResponsibleId != null" >project_responsible_id,</if>
+                <if test="projectContactId != null" >project_contact_id,</if>
+                <if test="projectSpecialistId != null" >project_specialist_id,</if>
+                <if test="projectMemberIds != null" >project_member_ids,</if>
+                <if test="id != null" >id,</if>
+                <if test="researchProjectId != null" >research_project_id,</if>
+                <if test="projectNo != null" >project_no,</if>
+                <if test="applyYear != null" >apply_year,</if>
+                <if test="year != null" >year,</if>
+                <if test="projectName != null" >project_name,</if>
+                <if test="financeNo != null" >finance_no,</if>
+                <if test="projectLevelDicId != null" >project_level_dic_id,</if>
+                <if test="projectLevelDicName != null" >project_level_dic_name,</if>
+                <if test="projectOrigin != null" >project_origin,</if>
+                <if test="leaderOrgName != null" >leader_org_name,</if>
+                <if test="chargeOrgName != null" >charge_org_name,</if>
+                <if test="projectStatusDicId != null" >project_status_dic_id,</if>
+                <if test="projectStatusDicName != null" >project_status_dic_name,</if>
+                <if test="projectStartTime != null" >project_start_time,</if>
+                <if test="projectEndTime != null" >project_end_time,</if>
+                <if test="allFunds != null" >all_funds,</if>
+                <if test="allocateFunds != null" >allocate_funds,</if>
+                <if test="raiseFunds != null" >raise_funds,</if>
+                <if test="projectManagerName != null" >project_manager_name,</if>
+                <if test="projectResponsibleName != null" >project_responsible_name,</if>
+                <if test="projectContactName != null" >project_contact_name,</if>
+                <if test="projectContactPhone != null" >project_contact_phone,</if>
+                <if test="projectSpecialistName != null" >project_specialist_name,</if>
+                <if test="projectMemberNames != null" >project_member_names,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="createUserId != null" >create_user_id,</if>
+                <if test="createUserName != null" >create_user_name,</if>
+                <if test="updateTime != null" >update_time,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="updateUserId != null" >#{updateUserId, jdbcType=VARCHAR},</if>
+                <if test="updateUserName != null" >#{updateUserName, jdbcType=VARCHAR},</if>
+                <if test="extInfo1 != null" >#{extInfo1, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="extInfo3 != null" >#{extInfo3, jdbcType=VARCHAR},</if>
+                <if test="extInfo4 != null" >#{extInfo4, jdbcType=VARCHAR},</if>
+                <if test="leaderOrgId != null" >#{leaderOrgId, jdbcType=VARCHAR},</if>
+                <if test="chargeOrgId != null" >#{chargeOrgId, jdbcType=VARCHAR},</if>
+                <if test="projectManagerId != null" >#{projectManagerId, jdbcType=VARCHAR},</if>
+                <if test="projectResponsibleId != null" >#{projectResponsibleId, jdbcType=VARCHAR},</if>
+                <if test="projectContactId != null" >#{projectContactId, jdbcType=VARCHAR},</if>
+                <if test="projectSpecialistId != null" >#{projectSpecialistId, jdbcType=VARCHAR},</if>
+                <if test="projectMemberIds != null" >#{projectMemberIds, jdbcType=VARCHAR},</if>
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="researchProjectId != null" >#{researchProjectId, jdbcType=VARCHAR},</if>
+                <if test="projectNo != null" >#{projectNo, jdbcType=VARCHAR},</if>
+                <if test="applyYear != null" >#{applyYear, jdbcType=VARCHAR},</if>
+                <if test="year != null" >#{year, jdbcType=VARCHAR},</if>
+                <if test="projectName != null" >#{projectName, jdbcType=VARCHAR},</if>
+                <if test="financeNo != null" >#{financeNo, jdbcType=VARCHAR},</if>
+                <if test="projectLevelDicId != null" >#{projectLevelDicId, jdbcType=VARCHAR},</if>
+              <if test="projectLevelDicName != null" >#{projectLevelDicName, jdbcType=VARCHAR},</if>
+                <if test="projectOrigin != null" >#{projectOrigin, jdbcType=VARCHAR},</if>
+                <if test="leaderOrgName != null" >#{leaderOrgName, jdbcType=VARCHAR},</if>
+                <if test="chargeOrgName != null" >#{chargeOrgName, jdbcType=VARCHAR},</if>
+                <if test="projectStatusDicId != null" >#{projectStatusDicId, jdbcType=VARCHAR},</if>
+        <if test="projectStatusDicName != null" >#{projectStatusDicName, jdbcType=VARCHAR},</if>
+                <if test="projectStartTime != null" >#{projectStartTime, jdbcType=TIMESTAMP},</if>
+                <if test="projectEndTime != null" >#{projectEndTime, jdbcType=TIMESTAMP},</if>
+                <if test="allFunds != null" >#{allFunds, jdbcType=DOUBLE},</if>
+                <if test="allocateFunds != null" >#{allocateFunds, jdbcType=DOUBLE},</if>
+                <if test="raiseFunds != null" >#{raiseFunds, jdbcType=DOUBLE},</if>
+                <if test="projectManagerName != null" >#{projectManagerName, jdbcType=VARCHAR},</if>
+                <if test="projectResponsibleName != null" >#{projectResponsibleName, jdbcType=VARCHAR},</if>
+                <if test="projectContactName != null" >#{projectContactName, jdbcType=VARCHAR},</if>
+                <if test="projectContactPhone != null" >#{projectContactPhone, jdbcType=VARCHAR},</if>
+                <if test="projectSpecialistName != null" >#{projectSpecialistName, jdbcType=VARCHAR},</if>
+                <if test="projectMemberNames != null" >#{projectMemberNames, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="createUserId != null" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="createUserName != null" >#{createUserName, jdbcType=VARCHAR},</if>
+                <if test="updateTime != null" >#{updateTime, jdbcType=TIMESTAMP},</if>
+            </trim>
+  </insert>
+
+
+    <insert id="insertList" parameterType="java.util.List">
+        INSERT ALL
+        <foreach collection="list" item="item" index="index">
+            <if test="item.id !=null">
+                INTO DB_RESEARCH_PROJECT
+                <trim prefix="(" suffix=")" suffixOverrides=",">
+                    <if test="item.updateUserId != null" >update_user_id,</if>
+                    <if test="item.updateUserName != null" >update_user_name,</if>
+                    <if test="item.extInfo1 != null" >ext_info1,</if>
+                    <if test="item.extInfo2 != null" >ext_info2,</if>
+                    <if test="item.extInfo3 != null" >ext_info3,</if>
+                    <if test="item.extInfo4 != null" >ext_info4,</if>
+                    <if test="item.leaderOrgId != null" >leader_org_id,</if>
+                    <if test="item.chargeOrgId != null" >charge_org_id,</if>
+                    <if test="item.projectManagerId != null" >project_manager_id,</if>
+                    <if test="item.projectResponsibleId != null" >project_responsible_id,</if>
+                    <if test="item.projectContactId != null" >project_contact_id,</if>
+                    <if test="item.projectSpecialistId != null" >project_specialist_id,</if>
+                    <if test="item.projectMemberIds != null" >project_member_ids,</if>
+                    <if test="item.id != null" >id,</if>
+                    <if test="item.researchProjectId != null" >research_project_id,</if>
+                    <if test="item.projectNo != null" >project_no,</if>
+                    <if test="item.applyYear != null" >apply_year,</if>
+                    <if test="item.year != null" >year,</if>
+                    <if test="item.projectName != null" >project_name,</if>
+                    <if test="item.financeNo != null" >finance_no,</if>
+                    <if test="item.projectLevelDicId != null" >project_level_dic_id,</if>
+                    <if test="item.projectLevelDicName != null" >project_level_dic_name,</if>
+                    <if test="item.projectOrigin != null" >project_origin,</if>
+                    <if test="item.leaderOrgName != null" >leader_org_name,</if>
+                    <if test="item.chargeOrgName != null" >charge_org_name,</if>
+                    <if test="item.projectStatusDicId != null" >project_status_dic_id,</if>
+                    <if test="item.projectStatusDicName != null" >project_status_dic_name,</if>
+                    <if test="item.projectStartTime != null" >project_start_time,</if>
+                    <if test="item.projectEndTime != null" >project_end_time,</if>
+                    <if test="item.allFunds != null" >all_funds,</if>
+                    <if test="item.allocateFunds != null" >allocate_funds,</if>
+                    <if test="item.raiseFunds != null" >raise_funds,</if>
+                    <if test="item.projectManagerName != null" >project_manager_name,</if>
+                    <if test="item.projectResponsibleName != null" >project_responsible_name,</if>
+                    <if test="item.projectContactName != null" >project_contact_name,</if>
+                    <if test="item.projectContactPhone != null" >project_contact_phone,</if>
+                    <if test="item.projectSpecialistName != null" >project_specialist_name,</if>
+                    <if test="item.projectMemberNames != null" >project_member_names,</if>
+                    <if test="item.createTime != null" >create_time,</if>
+                    <if test="item.createUserId != null" >create_user_id,</if>
+                    <if test="item.createUserName != null" >create_user_name,</if>
+                    <if test="item.updateTime != null" >update_time,</if>
+                </trim>
+                <trim prefix="values (" suffix=")" suffixOverrides=",">
+                    <if test="item.updateUserId != null" >#{item.updateUserId, jdbcType=VARCHAR},</if>
+                    <if test="item.updateUserName != null" >#{item.updateUserName, jdbcType=VARCHAR},</if>
+                    <if test="item.extInfo1 != null" >#{item.extInfo1, jdbcType=VARCHAR},</if>
+                    <if test="item.extInfo2 != null" >#{item.extInfo2, jdbcType=VARCHAR},</if>
+                    <if test="item.extInfo3 != null" >#{item.extInfo3, jdbcType=VARCHAR},</if>
+                    <if test="item.extInfo4 != null" >#{item.extInfo4, jdbcType=VARCHAR},</if>
+                    <if test="item.leaderOrgId != null" >#{item.leaderOrgId, jdbcType=VARCHAR},</if>
+                    <if test="item.chargeOrgId != null" >#{item.chargeOrgId, jdbcType=VARCHAR},</if>
+                    <if test="item.projectManagerId != null" >#{item.projectManagerId, jdbcType=VARCHAR},</if>
+                    <if test="item.projectResponsibleId != null" >#{item.projectResponsibleId, jdbcType=VARCHAR},</if>
+                    <if test="item.projectContactId != null" >#{item.projectContactId, jdbcType=VARCHAR},</if>
+                    <if test="item.projectSpecialistId != null" >#{item.projectSpecialistId, jdbcType=VARCHAR},</if>
+                    <if test="item.projectMemberIds != null" >#{item.projectMemberIds, jdbcType=VARCHAR},</if>
+                    <if test="item.id != null" >#{item.id, jdbcType=VARCHAR},</if>
+                    <if test="item.researchProjectId != null" >#{item.researchProjectId, jdbcType=VARCHAR},</if>
+                    <if test="item.projectNo != null" >#{item.projectNo, jdbcType=VARCHAR},</if>
+                    <if test="item.applyYear != null" >#{item.applyYear, jdbcType=VARCHAR},</if>
+                    <if test="item.year != null" >#{item.year, jdbcType=VARCHAR},</if>
+                    <if test="item.projectName != null" >#{item.projectName, jdbcType=VARCHAR},</if>
+                    <if test="item.financeNo != null" >#{item.financeNo, jdbcType=VARCHAR},</if>
+                    <if test="item.projectLevelDicId != null" >#{item.projectLevelDicId, jdbcType=VARCHAR},</if>
+                    <if test="item.projectLevelDicName != null" >#{item.projectLevelDicName, jdbcType=VARCHAR},</if>
+                    <if test="item.projectOrigin != null" >#{item.projectOrigin, jdbcType=VARCHAR},</if>
+                    <if test="item.leaderOrgName != null" >#{item.leaderOrgName, jdbcType=VARCHAR},</if>
+                    <if test="item.chargeOrgName != null" >#{item.chargeOrgName, jdbcType=VARCHAR},</if>
+                    <if test="item.projectStatusDicId != null" >#{item.projectStatusDicId, jdbcType=VARCHAR},</if>
+                    <if test="item.projectStatusDicName != null" >#{item.projectStatusDicName, jdbcType=VARCHAR},</if>
+                    <if test="item.projectStartTime != null" >#{item.projectStartTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.projectEndTime != null" >#{item.projectEndTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.allFunds != null" >#{item.allFunds, jdbcType=DOUBLE},</if>
+                    <if test="item.allocateFunds != null" >#{item.allocateFunds, jdbcType=DOUBLE},</if>
+                    <if test="item.raiseFunds != null" >#{item.raiseFunds, jdbcType=DOUBLE},</if>
+                    <if test="item.projectManagerName != null" >#{item.projectManagerName, jdbcType=VARCHAR},</if>
+                    <if test="item.projectResponsibleName != null" >#{item.projectResponsibleName, jdbcType=VARCHAR},</if>
+                    <if test="item.projectContactName != null" >#{item.projectContactName, jdbcType=VARCHAR},</if>
+                    <if test="item.projectContactPhone != null" >#{item.projectContactPhone, jdbcType=VARCHAR},</if>
+                    <if test="item.projectSpecialistName != null" >#{item.projectSpecialistName, jdbcType=VARCHAR},</if>
+                    <if test="item.projectMemberNames != null" >#{item.projectMemberNames, jdbcType=VARCHAR},</if>
+                    <if test="item.createTime != null" >#{item.createTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.createUserId != null" >#{item.createUserId, jdbcType=VARCHAR},</if>
+                    <if test="item.createUserName != null" >#{item.createUserName, jdbcType=VARCHAR},</if>
+                    <if test="item.updateTime != null" >#{item.updateTime, jdbcType=TIMESTAMP},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+
+
+    <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.research.entity.ResearchProjectEO" >
+    update DB_RESEARCH_PROJECT
+       set  update_user_id = #{updateUserId},
+            update_user_name = #{updateUserName},
+            ext_info1 = #{extInfo1},
+            ext_info2 = #{extInfo2},
+            ext_info3 = #{extInfo3},
+            ext_info4 = #{extInfo4},
+            leader_org_id = #{leaderOrgId},
+            charge_org_id = #{chargeOrgId},
+            project_manager_id = #{projectManagerId},
+            project_responsible_id = #{projectResponsibleId},
+            project_contact_id = #{projectContactId},
+            project_specialist_id = #{projectSpecialistId},
+            project_member_ids = #{projectMemberIds},
+            research_project_id = #{researchProjectId},
+            project_no = #{projectNo},
+            apply_year = #{applyYear},
+            year = #{year},
+            project_name = #{projectName},
+            finance_no = #{financeNo},
+            project_level_dic_id = #{projectLevelDicId},
+            project_level_dic_name = #{projectLevelDicName},
+            project_origin = #{projectOrigin},
+            leader_org_name = #{leaderOrgName},
+            charge_org_name = #{chargeOrgName},
+            project_status_dic_id = #{projectStatusDicId},
+             project_status_dic_name = #{projectStatusDicName},
+            project_start_time = #{projectStartTime},
+            project_end_time = #{projectEndTime},
+            all_funds = #{allFunds},
+            allocate_funds = #{allocateFunds},
+            raise_funds = #{raiseFunds},
+            project_manager_name = #{projectManagerName},
+            project_responsible_name = #{projectResponsibleName},
+            project_contact_name = #{projectContactName},
+            project_contact_phone = #{projectContactPhone},
+            project_specialist_name = #{projectSpecialistName},
+            project_member_names = #{projectMemberNames},
+            create_time = #{createTime},
+            create_user_id = #{createUserId},
+            create_user_name = #{createUserName},
+            update_time = #{updateTime}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.research.entity.ResearchProjectEO" >
+    update DB_RESEARCH_PROJECT
+    <set >
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId},
+      </if>
+      <if test="updateUserName != null" >
+        update_user_name = #{updateUserName},
+      </if>
+      <if test="extInfo1 != null" >
+        ext_info1 = #{extInfo1},
+      </if>
+      <if test="extInfo2 != null" >
+        ext_info2 = #{extInfo2},
+      </if>
+      <if test="extInfo3 != null" >
+        ext_info3 = #{extInfo3},
+      </if>
+      <if test="extInfo4 != null" >
+        ext_info4 = #{extInfo4},
+      </if>
+      <if test="leaderOrgId != null" >
+        leader_org_id = #{leaderOrgId},
+      </if>
+      <if test="chargeOrgId != null" >
+        charge_org_id = #{chargeOrgId},
+      </if>
+      <if test="projectManagerId != null" >
+        project_manager_id = #{projectManagerId},
+      </if>
+      <if test="projectResponsibleId != null" >
+        project_responsible_id = #{projectResponsibleId},
+      </if>
+      <if test="projectContactId != null" >
+        project_contact_id = #{projectContactId},
+      </if>
+      <if test="projectSpecialistId != null" >
+        project_specialist_id = #{projectSpecialistId},
+      </if>
+      <if test="projectMemberIds != null" >
+        project_member_ids = #{projectMemberIds},
+      </if>
+      <if test="researchProjectId != null" >
+          research_project_id = #{researchProjectId},
+      </if>
+      <if test="projectNo != null" >
+        project_no = #{projectNo},
+      </if>
+      <if test="applyYear != null" >
+        apply_year = #{applyYear},
+      </if>
+      <if test="year != null" >
+        year = #{year},
+      </if>
+      <if test="projectName != null" >
+        project_name = #{projectName},
+      </if>
+      <if test="financeNo != null" >
+        finance_no = #{financeNo},
+      </if>
+      <if test="projectLevelDicId != null" >
+        project_level_dic_id = #{projectLevelDicId},
+      </if>
+        <if test="projectLevelDicName != null" >
+            project_level_dic_name = #{projectLevelDicName},
+        </if>
+      <if test="projectOrigin != null" >
+        project_origin = #{projectOrigin},
+      </if>
+      <if test="leaderOrgName != null" >
+        leader_org_name = #{leaderOrgName},
+      </if>
+      <if test="chargeOrgName != null" >
+        charge_org_name = #{chargeOrgName},
+      </if>
+      <if test="projectStatusDicId != null" >
+        project_status_dic_id = #{projectStatusDicId},
+      </if>
+        <if test="projectStatusDicName != null" >
+            project_status_dic_name = #{projectStatusDicName},
+        </if>
+      <if test="projectStartTime != null" >
+        project_start_time = #{projectStartTime},
+      </if>
+      <if test="projectEndTime != null" >
+        project_end_time = #{projectEndTime},
+      </if>
+        <if test="projectStartTime == null" >
+            project_start_time = null,
+        </if>
+        <if test="projectEndTime == null" >
+            project_end_time = null,
+        </if>
+      <if test="allFunds != null" >
+        all_funds = #{allFunds},
+      </if>
+      <if test="allocateFunds != null" >
+        allocate_funds = #{allocateFunds},
+      </if>
+      <if test="raiseFunds != null" >
+        raise_funds = #{raiseFunds},
+      </if>
+      <if test="projectManagerName != null" >
+        project_manager_name = #{projectManagerName},
+      </if>
+      <if test="projectResponsibleName != null" >
+        project_responsible_name = #{projectResponsibleName},
+      </if>
+      <if test="projectContactName != null" >
+        project_contact_name = #{projectContactName},
+      </if>
+      <if test="projectContactPhone != null" >
+        project_contact_phone = #{projectContactPhone},
+      </if>
+      <if test="projectSpecialistName != null" >
+        project_specialist_name = #{projectSpecialistName},
+      </if>
+      <if test="projectMemberNames != null" >
+        project_member_names = #{projectMemberNames},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="createUserName != null" >
+        create_user_name = #{createUserName},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 DB_RESEARCH_PROJECT -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+      from DB_RESEARCH_PROJECT
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from DB_RESEARCH_PROJECT
+     where id = #{value}
+
+  </delete>
+
+  <!-- DB_RESEARCH_PROJECT 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from DB_RESEARCH_PROJECT
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询DB_RESEARCH_PROJECT列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from DB_RESEARCH_PROJECT
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from DB_RESEARCH_PROJECT
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+
+    <select id="sumNationFundsByResearchProjectIdList" resultType="java.math.BigDecimal" >
+        select sum(allocate_funds)  from DB_RESEARCH_PROJECT
+        where  DEL_FLAG != 1 AND  research_project_id in
+        <foreach item = "item" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{item}
+        </foreach>
+    </select>
+    <select id="sumSelfFundsByResearchProjectIdList" resultType="java.math.BigDecimal" >
+        select sum(raise_funds)  from DB_RESEARCH_PROJECT
+        where  DEL_FLAG != 1 AND  research_project_id in
+        <foreach item = "item" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{item}
+        </foreach>
+    </select>
+    <select id="sumAllFundsByResearchProjectIdList" resultType="java.math.BigDecimal" >
+        select sum(all_funds)  from DB_RESEARCH_PROJECT
+        where   DEL_FLAG != 1 AND  research_project_id in
+        <foreach item = "item" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{item}
+        </foreach>
+    </select>
+
+    <!--=======================-->
+    <select id="sumNationFundsByIdList" resultType="java.math.BigDecimal" >
+        select sum(allocate_funds)  from DB_RESEARCH_PROJECT
+        where  DEL_FLAG != 1 AND  id in
+        <foreach item = "item" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{item}
+        </foreach>
+    </select>
+    <select id="sumSelfFundsByIdList" resultType="java.math.BigDecimal" >
+        select sum(raise_funds)  from DB_RESEARCH_PROJECT
+        where  DEL_FLAG != 1 AND  id in
+        <foreach item = "item" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{item}
+        </foreach>
+    </select>
+    <select id="sumAllFundsByIdList" resultType="java.math.BigDecimal" >
+        select sum(all_funds)  from DB_RESEARCH_PROJECT
+        where   DEL_FLAG != 1 AND  id in
+        <foreach item = "item" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{item}
+        </foreach>
+    </select>
+
+
+
+
+    <select id="sumSelfFundsByYearAndResearchProjectIdList" resultType="java.math.BigDecimal" >
+        select sum(raise_funds)  from DB_RESEARCH_PROJECT
+        where  DEL_FLAG != 1 AND  apply_year = #{year} and  research_project_id in
+        <foreach item = "item" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{item}
+        </foreach>
+    </select>
+
+
+    <!--批量逻辑删除-->
+    <update id = "deleteLogicAll" parameterType = "java.util.List">
+        update DB_RESEARCH_PROJECT set del_flag = 1 where 1=1
+    </update>
+
+    <select id="queryNationFundsTop5"  resultMap="BaseResultMap">
+        select allocate_funds  , project_no    from
+        (select sum(allocate_funds) as allocate_funds  , project_no  from DB_RESEARCH_PROJECT
+            where   DEL_FLAG != 1 AND  id in
+            <foreach item = "item" collection = "list" open = "(" separator = "," close = ")" index = "index">
+              #{item}
+            </foreach>
+        group by project_no ) order by allocate_funds desc
+    </select>
+
+    <select id="queryNationFundsGroupByOrgName"  resultMap="BaseResultMap">
+        select sum(ALLOCATE_FUNDS) as ALLOCATE_FUNDS , CHARGE_ORG_NAME from DB_RESEARCH_PROJECT
+        where   DEL_FLAG != 1 AND  research_project_id in
+        <foreach item = "item" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{item}
+        </foreach>
+        group by CHARGE_ORG_NAME
+        order by allocate_funds desc
+
+    </select>
+    <select id="querySelfFundsGroupByOrgName"  resultMap="BaseResultMap">
+        select sum(RAISE_FUNDS) as RAISE_FUNDS , CHARGE_ORG_NAME from DB_RESEARCH_PROJECT
+        where   DEL_FLAG != 1 AND  research_project_id in
+        <foreach item = "item" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{item}
+        </foreach>
+        group by CHARGE_ORG_NAME
+        order by RAISE_FUNDS desc
+    </select>
+
+    <select id="queryAllFundsGroupByOrgName"  resultMap="BaseResultMap">
+        select sum(ALL_FUNDS) as ALL_FUNDS , CHARGE_ORG_NAME from DB_RESEARCH_PROJECT
+        where   DEL_FLAG != 1 AND  research_project_id in
+        <foreach item = "item" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{item}
+        </foreach>
+        group by CHARGE_ORG_NAME
+        order by ALL_FUNDS desc
+    </select>
+
+    <select id="querySelfFundsTop5"  resultMap="BaseResultMap" >
+        select raise_funds  , project_no   from
+        (select sum(raise_funds) as raise_funds  , project_no  from DB_RESEARCH_PROJECT
+        where   DEL_FLAG != 1 AND  id in
+        <foreach item = "item" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{item}
+        </foreach>
+        group by project_no ) order by raise_funds desc
+    </select>
+
+    <select id="queryAllFundsTop5"  resultMap="BaseResultMap">
+        select all_funds  , project_no   from
+        (select sum(all_funds) as all_funds  , project_no  from DB_RESEARCH_PROJECT
+        where   DEL_FLAG != 1 AND  id in
+        <foreach item = "item" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{item}
+        </foreach>
+        group by project_no) order by all_funds desc
+    </select>
+
+    <!--<select id="queryByList" resultMap="BaseResultMap" >-->
+    <!--select sum (drp.all_funds) as all_funds , sum(drp.raise_funds)  as raise_funds , sum (drp.allocate_funds)  as allocate_funds-->
+    <!--from DB_RESEARCH_PROJECT drp-->
+      <!--where drp.apply_year = #{year}-->
+      <!--and drp.project_status_dic_name in ('中标未公示','公示未签任务书','在研（未建本）','在研（已建本）')-->
+      <!--and drp.project_level_dic_name in('国家级','省部级')-->
+      <!---->
+<!--</select>-->
+
+    <update id = "deleteLogicInBatch" parameterType = "java.util.List">
+        update DB_RESEARCH_PROJECT set del_flag = 1 where id in
+        <foreach item = "id" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{id}
+        </foreach>
+    </update>
+
+    <select id = "getResearchProjectIdList" resultType="java.lang.String" >
+        select distinct research_project_id from DB_RESEARCH_PROJECT where  del_flag = 1
+    </select>
+
+    <select id="queryByResearchProjectIdList"  resultMap="BaseResultMap" >
+        select <include refid="Base_Column_List"/>   from DB_RESEARCH_PROJECT
+        where   DEL_FLAG != 1 AND  research_project_id in
+        <foreach item = "item" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{item}
+        </foreach>
+
+    </select>
+
+    <select id="queryByIdList"  resultMap="BaseResultMap" >
+        select <include refid="Base_Column_List"/>   from DB_RESEARCH_PROJECT
+        where   DEL_FLAG != 1 AND  id in
+        <foreach item = "item" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{item}
+        </foreach>
+
+    </select>
+
+
+    <select id="queryListByDangerLevel"  resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="Base_Column_List"/>   from DB_RESEARCH_PROJECT
+        where   DEL_FLAG != 1 AND ext_info1 = #{level}
+
+    </select>
+
+
+</mapper>

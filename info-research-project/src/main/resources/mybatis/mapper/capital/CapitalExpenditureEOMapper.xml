@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.adc.da.capital.dao.CapitalExpenditureEODao">
+    <!-- Result Map-->
+    <resultMap id = "BaseResultMap" type = "com.adc.da.capital.entity.CapitalExpenditureEO">
+        <id column = "id_" property = "id"/>
+        <result column = "research_project_id_" property = "researchProjectId"/>
+        <result column = "budget_0_" property = "budget0"/>
+        <result column = "budget_1_" property = "budget1"/>
+        <result column = "budget_2_" property = "budget2"/>
+        <result column = "other_" property = "other"/>
+        <result column = "ext_info_1_" property = "extInfo1"/>
+        <result column = "ext_info_2_" property = "extInfo2"/>
+        <result column = "ext_info_3_" property = "extInfo3"/>
+        <result column = "ext_info_4_" property = "extInfo4"/>
+        <result column = "ext_info_5_" property = "extInfo5"/>
+        <result column = "ext_info_6_" property = "extInfo6"/>
+    </resultMap>
+
+    <!-- RS_CAPITAL_EXPENDITURE table all fields -->
+    <sql id = "Base_Column_List">
+        id_, research_project_id_, budget_0_, budget_1_, budget_2_, other_, ext_info_1_, ext_info_2_, ext_info_3_, ext_info_4_, ext_info_5_, ext_info_6_
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id = "Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides = ",">
+            <if test = "id != null">
+                and id_ ${idOperator} #{id}
+            </if>
+            <if test = "researchProjectId != null">
+                and research_project_id_ ${researchProjectIdOperator} #{researchProjectId}
+            </if>
+            <if test = "budget0 != null">
+                and budget_0_ ${budget0Operator} #{budget0}
+            </if>
+            <if test = "budget1 != null">
+                and budget_1_ ${budget1Operator} #{budget1}
+            </if>
+            <if test = "budget2 != null">
+                and budget_2_ ${budget2Operator} #{budget2}
+            </if>
+            <if test = "other != null">
+                and other_ ${otherOperator} #{other}
+            </if>
+            <if test = "extInfo1 != null">
+                and ext_info_1_ ${extInfo1Operator} #{extInfo1}
+            </if>
+            <if test = "extInfo2 != null">
+                and ext_info_2_ ${extInfo2Operator} #{extInfo2}
+            </if>
+            <if test = "extInfo3 != null">
+                and ext_info_3_ ${extInfo3Operator} #{extInfo3}
+            </if>
+            <if test = "extInfo4 != null">
+                and ext_info_4_ ${extInfo4Operator} #{extInfo4}
+            </if>
+            <if test = "extInfo5 != null">
+                and ext_info_5_ ${extInfo5Operator} #{extInfo5}
+            </if>
+            <if test = "extInfo6 != null">
+                and ext_info_6_ ${extInfo6Operator} #{extInfo6}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id = "insert" parameterType = "com.adc.da.capital.entity.CapitalExpenditureEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+            SELECT SEQ_RS_CAPITAL_EXPENDITURE.NEXTVAL FROM DUAL
+        </selectKey> -->insert into RS_CAPITAL_EXPENDITURE(<include
+            refid = "Base_Column_List"/>) values (#{id, jdbcType=VARCHAR}, #{researchProjectId, jdbcType=VARCHAR}, #{budget0, jdbcType=VARCHAR}, #{budget1, jdbcType=VARCHAR}, #{budget2, jdbcType=VARCHAR}, #{other, jdbcType=VARCHAR}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR}, #{extInfo6, jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id = "insertSelective" parameterType = "com.adc.da.capital.entity.CapitalExpenditureEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_RS_CAPITAL_EXPENDITURE.NEXTVAL FROM DUAL
+    </selectKey> -->insert into RS_CAPITAL_EXPENDITURE
+        <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">id_,</if>
+            <if test = "researchProjectId != null">research_project_id_,</if>
+            <if test = "budget0 != null">budget_0_,</if>
+            <if test = "budget1 != null">budget_1_,</if>
+            <if test = "budget2 != null">budget_2_,</if>
+            <if test = "other != null">other_,</if>
+            <if test = "extInfo1 != null">ext_info_1_,</if>
+            <if test = "extInfo2 != null">ext_info_2_,</if>
+            <if test = "extInfo3 != null">ext_info_3_,</if>
+            <if test = "extInfo4 != null">ext_info_4_,</if>
+            <if test = "extInfo5 != null">ext_info_5_,</if>
+            <if test = "extInfo6 != null">ext_info_6_,</if>
+        </trim>
+        <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">#{id, jdbcType=VARCHAR},</if>
+            <if test = "researchProjectId != null">#{researchProjectId, jdbcType=VARCHAR},</if>
+            <if test = "budget0 != null">#{budget0, jdbcType=VARCHAR},</if>
+            <if test = "budget1 != null">#{budget1, jdbcType=VARCHAR},</if>
+            <if test = "budget2 != null">#{budget2, jdbcType=VARCHAR},</if>
+            <if test = "other != null">#{other, jdbcType=VARCHAR},</if>
+            <if test = "extInfo1 != null">#{extInfo1, jdbcType=VARCHAR},</if>
+            <if test = "extInfo2 != null">#{extInfo2, jdbcType=VARCHAR},</if>
+            <if test = "extInfo3 != null">#{extInfo3, jdbcType=VARCHAR},</if>
+            <if test = "extInfo4 != null">#{extInfo4, jdbcType=VARCHAR},</if>
+            <if test = "extInfo5 != null">#{extInfo5, jdbcType=VARCHAR},</if>
+            <if test = "extInfo6 != null">#{extInfo6, jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <insert id = "insertSelectiveAll" parameterType = "java.util.List">
+        INSERT ALL
+        <foreach collection = "list" item = "item" index = "index">
+            <if test = "item.id !=null">
+                into RS_CAPITAL_EXPENDITURE
+                <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+                    <if test = "item.id != null">id_,</if>
+                    <if test = "item.researchProjectId != null">research_project_id_,</if>
+                    <if test = "item.budget0 != null">budget_0_,</if>
+                    <if test = "item.budget1 != null">budget_1_,</if>
+                    <if test = "item.budget2 != null">budget_2_,</if>
+                    <if test = "item.other != null">other_,</if>
+                    <if test = "item.extInfo1 != null">ext_info_1_,</if>
+                    <if test = "item.extInfo2 != null">ext_info_2_,</if>
+                    <if test = "item.extInfo3 != null">ext_info_3_,</if>
+                    <if test = "item.extInfo4 != null">ext_info_4_,</if>
+                    <if test = "item.extInfo5 != null">ext_info_5_,</if>
+                    <if test = "item.extInfo6 != null">ext_info_6_,</if>
+                </trim>
+                <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+                    <if test = "item.id != null">#{item.id, jdbcType=VARCHAR},</if>
+                    <if test = "item.researchProjectId != null">#{item.researchProjectId, jdbcType=VARCHAR},</if>
+                    <if test = "item.budget0 != null">#{item.budget0, jdbcType=VARCHAR},</if>
+                    <if test = "item.budget1 != null">#{item.budget1, jdbcType=VARCHAR},</if>
+                    <if test = "item.budget2 != null">#{item.budget2, jdbcType=VARCHAR},</if>
+                    <if test = "item.other != null">#{item.other, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo1 != null">#{item.extInfo1, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo2 != null">#{item.extInfo2, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo3 != null">#{item.extInfo3, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo4 != null">#{item.extInfo4, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo5 != null">#{item.extInfo5, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo6 != null">#{item.extInfo6, jdbcType=VARCHAR},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+
+
+    <!-- 根据pk，修改记录-->
+    <update id = "updateByPrimaryKey" parameterType = "com.adc.da.capital.entity.CapitalExpenditureEO">
+        UPDATE RS_CAPITAL_EXPENDITURE
+        SET research_project_id_ = #{researchProjectId},
+            budget_0_            = #{budget0},
+            budget_1_            = #{budget1},
+            budget_2_            = #{budget2},
+            other_               = #{other},
+            ext_info_1_          = #{extInfo1},
+            ext_info_2_          = #{extInfo2},
+            ext_info_3_          = #{extInfo3},
+            ext_info_4_          = #{extInfo4},
+            ext_info_5_          = #{extInfo5},
+            ext_info_6_          = #{extInfo6}
+        WHERE id_ = #{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id = "updateByPrimaryKeySelective" parameterType = "com.adc.da.capital.entity.CapitalExpenditureEO">
+        update RS_CAPITAL_EXPENDITURE
+        <set>
+            <if test = "researchProjectId != null">
+                research_project_id_ = #{researchProjectId},
+            </if>
+            <if test = "budget0 != null">
+                budget_0_ = #{budget0},
+            </if>
+            <if test = "budget1 != null">
+                budget_1_ = #{budget1},
+            </if>
+            <if test = "budget2 != null">
+                budget_2_ = #{budget2},
+            </if>
+            <if test = "other != null">
+                other_ = #{other},
+            </if>
+            <if test = "extInfo1 != null">
+                ext_info_1_ = #{extInfo1},
+            </if>
+            <if test = "extInfo2 != null">
+                ext_info_2_ = #{extInfo2},
+            </if>
+            <if test = "extInfo3 != null">
+                ext_info_3_ = #{extInfo3},
+            </if>
+            <if test = "extInfo4 != null">
+                ext_info_4_ = #{extInfo4},
+            </if>
+            <if test = "extInfo5 != null">
+                ext_info_5_ = #{extInfo5},
+            </if>
+            <if test = "extInfo6 != null">
+                ext_info_6_ = #{extInfo6},
+            </if>
+        </set>
+        where id_ = #{id}
+    </update>
+
+    <!-- 根据id查询 RS_CAPITAL_EXPENDITURE -->
+    <select id = "selectByPrimaryKey" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+        select
+        <include refid = "Base_Column_List"/>
+        from RS_CAPITAL_EXPENDITURE where id_ = #{value}
+
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id = "deleteByPrimaryKey" parameterType = "java.lang.String">
+        DELETE
+        FROM RS_CAPITAL_EXPENDITURE
+        WHERE id_ = #{value}
+
+    </delete>
+
+    <!-- RS_CAPITAL_EXPENDITURE 列表总数-->
+    <select id = "queryByCount" resultType = "java.lang.Integer" parameterType = "com.adc.da.base.page.BasePage">
+        select count(1) from RS_CAPITAL_EXPENDITURE
+        <include refid = "Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询RS_CAPITAL_EXPENDITURE列表 -->
+    <select id = "queryByPage" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from (select tmp_tb.* , rownum rn from (select
+        <include refid = "Base_Column_List"/>
+        from RS_CAPITAL_EXPENDITURE
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex}) where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id = "queryByList" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from RS_CAPITAL_EXPENDITURE
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+    </select>
+
+</mapper>

@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.dao.ResProArriveFeeEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.research.entity.ResProArriveFeeEO" >
+    <id column="id" property="id" />
+    <result column="research_project_id" property="researchProjectId" />
+    <result column="project_no" property="projectNo" />
+    <result column="arrive_year" property="arriveYear" />
+    <result column="arrive_month" property="arriveMonth" />
+    <result column="arrive_fee" property="arriveFee" />
+    <result column="update_user_id" property="updateUserId" />
+    <result column="update_user_name" property="updateUserName" />
+    <result column="update_time" property="updateTime" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="create_user_name" property="createUserName" />
+    <result column="create_time" property="createTime" />
+    <result column="ext_info1" property="extInfo1" />
+    <result column="ext_info2" property="extInfo2" />
+    <result column="ext_info3" property="extInfo3" />
+    <result column="ext_info4" property="extInfo4" />
+  </resultMap>
+
+  <!-- DB_RES_PRO_ARRIVE_FEE table all fields -->
+  <sql id="Base_Column_List" >
+     id, research_project_id, project_no, arrive_year, arrive_month, arrive_fee, update_user_id, update_user_name, update_time, create_user_id, create_user_name, create_time, ext_info1, ext_info2, ext_info3, ext_info4
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where  DEL_FLAG != 1
+      <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="researchProjectId != null" >
+        and research_project_id like '%'|| #{researchProjectId}|| '%'
+      </if>
+      <if test="projectNo != null" >
+        and project_no like '%'|| #{projectNo}|| '%'
+      </if>
+      <if test="arriveYear != null" >
+        and arrive_year ${arriveYearOperator} #{arriveYear}
+      </if>
+      <if test="arriveMonth != null" >
+        and arrive_month ${arriveMonthOperator} #{arriveMonth}
+      </if>
+      <if test="arriveFee != null" >
+        and arrive_fee ${arriveFeeOperator} #{arriveFee}
+      </if>
+      <if test="updateUserId != null" >
+        and update_user_id ${updateUserIdOperator} #{updateUserId}
+      </if>
+      <if test="updateUserName != null" >
+        and update_user_name ${updateUserNameOperator} #{updateUserName}
+      </if>
+      <if test="updateTime != null" >
+        and update_time ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and update_time &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and update_time &lt;= #{updateTime2}
+      </if>
+      <if test="createUserId != null" >
+        and create_user_id ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="createUserName != null" >
+        and create_user_name ${createUserNameOperator} #{createUserName}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="extInfo1 != null" >
+        and ext_info1 ${extInfo1Operator} #{extInfo1}
+      </if>
+      <if test="extInfo2 != null" >
+        and ext_info2 ${extInfo2Operator} #{extInfo2}
+      </if>
+      <if test="extInfo3 != null" >
+        and ext_info3 ${extInfo3Operator} #{extInfo3}
+      </if>
+      <if test="extInfo4 != null" >
+        and ext_info4 ${extInfo4Operator} #{extInfo4}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.research.entity.ResProArriveFeeEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_DB_RES_PRO_ARRIVE_FEE.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into DB_RES_PRO_ARRIVE_FEE(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{researchProjectId, jdbcType=VARCHAR}, #{projectNo, jdbcType=VARCHAR}, #{arriveYear, jdbcType=VARCHAR}, #{arriveMonth, jdbcType=VARCHAR}, #{arriveFee, jdbcType=DOUBLE}, #{updateUserId, jdbcType=VARCHAR}, #{updateUserName, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP}, #{createUserId, jdbcType=VARCHAR}, #{createUserName, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR})
+  </insert>
+
+    <!--批量逻辑删除-->
+    <update id = "deleteLogicAll" parameterType = "java.util.List">
+        update DB_RES_PRO_ARRIVE_FEE set del_flag = 1 where 1=1
+    </update>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.research.entity.ResProArriveFeeEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_DB_RES_PRO_ARRIVE_FEE.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into DB_RES_PRO_ARRIVE_FEE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="researchProjectId != null" >research_project_id,</if>
+                <if test="projectNo != null" >project_no,</if>
+                <if test="arriveYear != null" >arrive_year,</if>
+                <if test="arriveMonth != null" >arrive_month,</if>
+                <if test="arriveFee != null" >arrive_fee,</if>
+                <if test="updateUserId != null" >update_user_id,</if>
+                <if test="updateUserName != null" >update_user_name,</if>
+                <if test="updateTime != null" >update_time,</if>
+                <if test="createUserId != null" >create_user_id,</if>
+                <if test="createUserName != null" >create_user_name,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="extInfo1 != null" >ext_info1,</if>
+                <if test="extInfo2 != null" >ext_info2,</if>
+                <if test="extInfo3 != null" >ext_info3,</if>
+                <if test="extInfo4 != null" >ext_info4,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="researchProjectId != null" >#{researchProjectId, jdbcType=VARCHAR},</if>
+                <if test="projectNo != null" >#{projectNo, jdbcType=VARCHAR},</if>
+                <if test="arriveYear != null" >#{arriveYear, jdbcType=VARCHAR},</if>
+                <if test="arriveMonth != null" >#{arriveMonth, jdbcType=VARCHAR},</if>
+                <if test="arriveFee != null" >#{arriveFee, jdbcType=DOUBLE},</if>
+                <if test="updateUserId != null" >#{updateUserId, jdbcType=VARCHAR},</if>
+                <if test="updateUserName != null" >#{updateUserName, jdbcType=VARCHAR},</if>
+                <if test="updateTime != null" >#{updateTime, jdbcType=TIMESTAMP},</if>
+                <if test="createUserId != null" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="createUserName != null" >#{createUserName, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="extInfo1 != null" >#{extInfo1, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="extInfo3 != null" >#{extInfo3, jdbcType=VARCHAR},</if>
+                <if test="extInfo4 != null" >#{extInfo4, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+    <insert id="insertList" parameterType="java.util.List">
+        INSERT ALL
+        <foreach collection="list" item="item" index="index">
+            <if test="item.id !=null">
+                INTO DB_RES_PRO_ARRIVE_FEE
+                <trim prefix="(" suffix=")" suffixOverrides=",">
+                    <if test="item.id != null" >id,</if>
+                    <if test="item.researchProjectId != null" >research_project_id,</if>
+                    <if test="item.projectNo != null" >project_no,</if>
+                    <if test="item.arriveYear != null" >arrive_year,</if>
+                    <if test="item.arriveMonth != null" >arrive_month,</if>
+                    <if test="item.arriveFee != null" >arrive_fee,</if>
+                    <if test="item.updateUserId != null" >update_user_id,</if>
+                    <if test="item.updateUserName != null" >update_user_name,</if>
+                    <if test="item.updateTime != null" >update_time,</if>
+                    <if test="item.createUserId != null" >create_user_id,</if>
+                    <if test="item.createUserName != null" >create_user_name,</if>
+                    <if test="item.createTime != null" >create_time,</if>
+                    <if test="item.extInfo1 != null" >ext_info1,</if>
+                    <if test="item.extInfo2 != null" >ext_info2,</if>
+                    <if test="item.extInfo3 != null" >ext_info3,</if>
+                    <if test="item.extInfo4 != null" >ext_info4,</if>
+                </trim>
+                <trim prefix="values (" suffix=")" suffixOverrides=",">
+                    <if test="item.id != null" >#{item.id, jdbcType=VARCHAR},</if>
+                    <if test="item.researchProjectId != null" >#{item.researchProjectId, jdbcType=VARCHAR},</if>
+                    <if test="item.projectNo != null" >#{item.projectNo, jdbcType=VARCHAR},</if>
+                    <if test="item.arriveYear != null" >#{item.arriveYear, jdbcType=VARCHAR},</if>
+                    <if test="item.arriveMonth != null" >#{item.arriveMonth, jdbcType=VARCHAR},</if>
+                    <if test="item.arriveFee != null" >#{item.arriveFee, jdbcType=DOUBLE},</if>
+                    <if test="item.updateUserId != null" >#{item.updateUserId, jdbcType=VARCHAR},</if>
+                    <if test="item.updateUserName != null" >#{item.updateUserName, jdbcType=VARCHAR},</if>
+                    <if test="item.updateTime != null" >#{item.updateTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.createUserId != null" >#{item.createUserId, jdbcType=VARCHAR},</if>
+                    <if test="item.createUserName != null" >#{item.createUserName, jdbcType=VARCHAR},</if>
+                    <if test="item.createTime != null" >#{item.createTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.extInfo1 != null" >#{item.extInfo1, jdbcType=VARCHAR},</if>
+                    <if test="item.extInfo2 != null" >#{item.extInfo2, jdbcType=VARCHAR},</if>
+                    <if test="item.extInfo3 != null" >#{item.extInfo3, jdbcType=VARCHAR},</if>
+                    <if test="item.extInfo4 != null" >#{item.extInfo4, jdbcType=VARCHAR},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.research.entity.ResProArriveFeeEO" >
+    update DB_RES_PRO_ARRIVE_FEE
+       set  research_project_id = #{researchProjectId},
+            project_no = #{projectNo},
+            arrive_year = #{arriveYear},
+            arrive_month = #{arriveMonth},
+            arrive_fee = #{arriveFee},
+            update_user_id = #{updateUserId},
+            update_user_name = #{updateUserName},
+            update_time = #{updateTime},
+            create_user_id = #{createUserId},
+            create_user_name = #{createUserName},
+            create_time = #{createTime},
+            ext_info1 = #{extInfo1},
+            ext_info2 = #{extInfo2},
+            ext_info3 = #{extInfo3},
+            ext_info4 = #{extInfo4},
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.research.entity.ResProArriveFeeEO" >
+    update DB_RES_PRO_ARRIVE_FEE
+    <set >
+      <if test="researchProjectId != null" >
+        research_project_id = #{researchProjectId},
+      </if>
+      <if test="projectNo != null" >
+        project_no = #{projectNo},
+      </if>
+      <if test="arriveYear != null" >
+        arrive_year = #{arriveYear},
+      </if>
+    <!--<if test="arriveYear == null" >-->
+        <!--arrive_year is null,-->
+    <!--</if>-->
+      <if test="arriveMonth != null" >
+        arrive_month = #{arriveMonth},
+      </if>
+        <!--<if test="arriveMonth == null" >-->
+            <!--arrive_month is null,-->
+        <!--</if>-->
+      <if test="arriveFee != null" >
+        arrive_fee = #{arriveFee},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId},
+      </if>
+      <if test="updateUserName != null" >
+        update_user_name = #{updateUserName},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="createUserName != null" >
+        create_user_name = #{createUserName},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="extInfo1 != null" >
+        ext_info1 = #{extInfo1},
+      </if>
+      <if test="extInfo2 != null" >
+        ext_info2 = #{extInfo2},
+      </if>
+      <if test="extInfo3 != null" >
+        ext_info3 = #{extInfo3},
+      </if>
+      <if test="extInfo4 != null" >
+        ext_info4 = #{extInfo4},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 DB_RES_PRO_ARRIVE_FEE -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+      from DB_RES_PRO_ARRIVE_FEE
+     where id = #{value}
+
+  </select>
+
+    <select id="selectByResearchProjectIdList" resultMap="BaseResultMap" parameterType="java.util.List">
+        select <include refid="Base_Column_List" />
+        from DB_RES_PRO_ARRIVE_FEE
+        where research_project_id in
+        <foreach item = "item" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{item}
+        </foreach>
+        and DEL_FLAG != 1
+    </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from DB_RES_PRO_ARRIVE_FEE
+     where id = #{value}
+
+  </delete>
+
+  <!-- DB_RES_PRO_ARRIVE_FEE 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from DB_RES_PRO_ARRIVE_FEE
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询DB_RES_PRO_ARRIVE_FEE列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from DB_RES_PRO_ARRIVE_FEE
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from DB_RES_PRO_ARRIVE_FEE
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+    <select id="queryByYearEqAndMonthGteAndResearchProjectIdList" resultMap="BaseResultMap" >
+        select <include refid="Base_Column_List"/> from DB_RES_PRO_ARRIVE_FEE
+        where  DEL_FLAG != 1 AND  arrive_year = #{year}  and arrive_month >= #{month}  and research_project_id in
+        <foreach item = "item" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{item}
+        </foreach>
+    </select>
+    <select id="queryByYearGteAndResearchProjectIdList" resultMap="BaseResultMap" >
+        select <include refid="Base_Column_List"/> from DB_RES_PRO_ARRIVE_FEE
+        where  DEL_FLAG != 1 AND  arrive_year>=#{year} and research_project_id in
+        <foreach item = "item" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="sumArriveFeeByYearAndResearchProjectIdList" resultType="java.math.BigDecimal" >
+        select sum(arrive_fee)  from DB_RES_PRO_ARRIVE_FEE
+        where  DEL_FLAG != 1 AND  arrive_year = #{year} and research_project_id in
+        <foreach item = "item" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{item}
+        </foreach>
+    </select>
+    <select id="sumArriveFeeByResearchProjectIdList" resultType="java.math.BigDecimal" >
+        select sum(arrive_fee)  from DB_RES_PRO_ARRIVE_FEE
+        where  DEL_FLAG != 1 AND  research_project_id in
+        <foreach item = "item" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{item}
+        </foreach>
+    </select>
+
+    <update id = "deleteLogicInBatch" parameterType = "java.util.List">
+        update DB_RES_PRO_ARRIVE_FEE set del_flag = 1 where id in
+        <foreach item = "id" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{id}
+        </foreach>
+    </update>
+
+</mapper>

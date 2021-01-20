@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.project.dao.ResearchProjectChangeEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.research.project.entity.ResearchProjectChangeEO" >
+    <id column="id" property="id" />
+    <result column="change_personal" property="changePersonal" />
+    <result column="change_time" property="changeTime" />
+    <result column="change_attribute" property="changeAttribute" />
+    <result column="change_content" property="changeContent" />
+    <result column="create_time" property="createTime" />
+    <result column="project_id" property="projectId" />
+    <result column="contract_id" property="contractId" />
+    <result column="change_status" property="changeStatus" />
+  </resultMap>
+
+  <!-- RS_RESEARCH_PROJECT_CHANGE table all fields -->
+  <sql id="Base_Column_List" >
+     id, change_personal, change_time, change_attribute, change_content, create_time, project_id, contract_id,change_status
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="changePersonal != null" >
+        and change_personal ${changePersonalOperator} #{changePersonal}
+      </if>
+      <if test="changeTime != null" >
+        and change_time ${changeTimeOperator} to_date( #{changeTime},'yyyy-MM-dd')
+
+      </if>
+      <if test="changeTime1 != null" >
+        and change_time &gt;= #{changeTime1}
+      </if>
+      <if test="changeTime2 != null" >
+        and change_time &lt;= #{changeTime2}
+      </if>
+      <if test="changeAttribute != null" >
+        and change_attribute ${changeAttributeOperator} #{changeAttribute}
+      </if>
+      <if test="changeContent != null" >
+        and change_content ${changeContentOperator} #{changeContent}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="projectId != null" >
+        and project_id ${projectIdOperator} #{projectId}
+      </if>
+      <if test="contractId != null" >
+        and contract_id ${contractIdOperator} #{contractId}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.research.project.entity.ResearchProjectChangeEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RS_RESEARCH_PROJECT_CHANGE.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into RS_RESEARCH_PROJECT_CHANGE(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{changePersonal, jdbcType=VARCHAR}, #{changeTime, jdbcType=TIMESTAMP}, #{changeAttribute, jdbcType=VARCHAR}, #{changeContent, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{projectId, jdbcType=VARCHAR}, #{contractId, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.research.project.entity.ResearchProjectChangeEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RS_RESEARCH_PROJECT_CHANGE.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into RS_RESEARCH_PROJECT_CHANGE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="changePersonal != null" >change_personal,</if>
+                <if test="changeTime != null" >change_time,</if>
+                <if test="changeAttribute != null" >change_attribute,</if>
+                <if test="changeContent != null" >change_content,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="projectId != null" >project_id,</if>
+                <if test="contractId != null" >contract_id,</if>
+                <if test="changeStatus != null" >change_status,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="changePersonal != null" >#{changePersonal, jdbcType=VARCHAR},</if>
+                <if test="changeTime != null" >#{changeTime, jdbcType=TIMESTAMP},</if>
+                <if test="changeAttribute != null" >#{changeAttribute, jdbcType=VARCHAR},</if>
+                <if test="changeContent != null" >#{changeContent, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="projectId != null" >#{projectId, jdbcType=VARCHAR},</if>
+                <if test="contractId != null" >#{contractId, jdbcType=VARCHAR},</if>
+               <if test="changeStatus != null" >#{changeStatus, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+    <!--批量新增-->
+    <insert id = "batchInsertSelective">
+        INSERT ALL
+        <foreach collection = "researchProjectChangeEOS" item = "item" index = "index">
+            <if test = "item.id != null">
+                into RS_RESEARCH_PROJECT_CHANGE
+                <trim prefix="(" suffix=")" suffixOverrides="," >
+                    <if test="item.id != null" >id,</if>
+                    <if test="item.changePersonal != null" >change_personal,</if>
+                    <if test="item.changeTime != null" >change_time,</if>
+                    <if test="item.changeAttribute != null" >change_attribute,</if>
+                    <if test="item.changeContent != null" >change_content,</if>
+                    <if test="item.createTime != null" >create_time,</if>
+                    <if test="item.projectId != null" >project_id,</if>
+                    <if test="item.contractId != null" >contract_id,</if>
+                    <if test="item.changeStatus != null" >change_status,</if>
+                </trim>
+                <trim prefix="values (" suffix=")" suffixOverrides="," >
+                    <if test="item.id != null" >#{item.id, jdbcType=VARCHAR},</if>
+                    <if test="item.changePersonal != null" >#{item.changePersonal, jdbcType=VARCHAR},</if>
+                    <if test="item.changeTime != null" >#{item.changeTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.changeAttribute != null" >#{item.changeAttribute, jdbcType=VARCHAR},</if>
+                    <if test="item.changeContent != null" >#{item.changeContent, jdbcType=VARCHAR},</if>
+                    <if test="item.createTime != null" >#{item.createTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.projectId != null" >#{item.projectId, jdbcType=VARCHAR},</if>
+                    <if test="item.contractId != null" >#{item.contractId, jdbcType=VARCHAR},</if>
+                    <if test="item.changeStatus != null" >#{item.changeStatus, jdbcType=VARCHAR},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.research.project.entity.ResearchProjectChangeEO" >
+    update RS_RESEARCH_PROJECT_CHANGE
+       set  change_personal = #{changePersonal},
+            change_time = #{changeTime},
+            change_attribute = #{changeAttribute},
+            change_content = #{changeContent},
+            create_time = #{createTime},
+            project_id = #{projectId},
+            contract_id = #{contractId}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.research.project.entity.ResearchProjectChangeEO" >
+    update RS_RESEARCH_PROJECT_CHANGE
+    <set >
+      <if test="changePersonal != null" >
+        change_personal = #{changePersonal},
+      </if>
+      <if test="changeTime != null" >
+        change_time = #{changeTime},
+      </if>
+      <if test="changeAttribute != null" >
+        change_attribute = #{changeAttribute},
+      </if>
+      <if test="changeContent != null" >
+        change_content = #{changeContent},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="projectId != null" >
+        project_id = #{projectId},
+      </if>
+      <if test="contractId != null" >
+        contract_id = #{contractId},
+      </if>
+        <if test="changeStatus != null" >
+            change_status = #{changeStatus},
+        </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 RS_RESEARCH_PROJECT_CHANGE -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from RS_RESEARCH_PROJECT_CHANGE
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RS_RESEARCH_PROJECT_CHANGE
+     where id = #{value}
+
+  </delete>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByProjectId" parameterType="java.lang.String">
+    delete from RS_RESEARCH_PROJECT_CHANGE
+     where project_id = #{projectId}
+
+  </delete>
+
+  <!-- RS_RESEARCH_PROJECT_CHANGE 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from RS_RESEARCH_PROJECT_CHANGE
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询RS_RESEARCH_PROJECT_CHANGE列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from RS_RESEARCH_PROJECT_CHANGE
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from RS_RESEARCH_PROJECT_CHANGE
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

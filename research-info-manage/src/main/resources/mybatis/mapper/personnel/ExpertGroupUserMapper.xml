@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.personnel.dao.ExpertGroupUserDao">
+    <delete id="deleteByUserId">
+        delete from TR_GROUP_USER where user_id = #{userId}
+    </delete>
+
+
+    <insert id="insertInfoBatch" parameterType="java.util.List">
+        INSERT ALL
+        <foreach collection="expertGroupUserVOS" item="item" index="index">
+            <if test="item.id != null">
+                INTO TR_GROUP_USER
+                <trim prefix="(" suffix=")" suffixOverrides=",">
+                    <if test="item.id != null" >ID,</if>
+                    <if test="item.groupId != null" >EXPERT_GROUP_ID,</if>
+                    <if test="item.userId != null" >USER_ID,</if>
+                </trim>
+                <trim prefix="values (" suffix=")" suffixOverrides=",">
+                    <if test="item.id != null" >#{item.id,jdbcType=VARCHAR},</if>
+                    <if test="item.groupId != null" >#{item.groupId,jdbcType=VARCHAR},</if>
+                    <if test="item.userId != null" >#{item.userId,jdbcType=VARCHAR},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+</mapper>

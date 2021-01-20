@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.dao.NoticeUserEODao">
+    <resultMap id="BaseResultMap" type="com.adc.da.entity.NoticeUserEO">
+        <id column="ID" jdbcType="VARCHAR" property="id" />
+        <result column="NOTICE_ID" jdbcType="VARCHAR" property="noticeId" />
+        <result column="RECEIVE_USER_ID" jdbcType="VARCHAR" property="receiveUserId" />
+        <result column="OPERATION_STATUS" jdbcType="VARCHAR" property="operationStatus" />
+    </resultMap>
+
+
+    <resultMap id="BaseResultVOMap" type="com.adc.da.dto.NoticeUserVO">
+        <id column="ID" jdbcType="VARCHAR" property="id" />
+        <result column="NOTICE_NAME" jdbcType="VARCHAR" property="noticeName" />
+        <result column="NOTICE_CONTENT" jdbcType="VARCHAR" property="noticeContent" />
+        <result column="NOTICE_FILE_ID" jdbcType="VARCHAR" property="noticeFileId" />
+        <result column="NOTICE_TYPE_ID" jdbcType="VARCHAR" property="noticeTypeId" />
+        <result column="CREATE_TIME" jdbcType="DATE" property="createTime" />
+        <result column="UPDATE_TIME" jdbcType="DATE" property="updateTime" />
+        <result column="CREATE_USER_ID" jdbcType="VARCHAR" property="createUserId" />
+        <result column="DEL_FLAG" jdbcType="VARCHAR" property="delFlag" />
+        <result column="NOTICE_FILE_NAME" jdbcType="VARCHAR" property="noticeFileName" />
+        <result column="NOTICE_IS_LOOK" jdbcType="VARCHAR" property="noticeIsLook" />
+        <result column="RECEIVE_USER_IDS" jdbcType="VARCHAR" property="receiveUserIds" />
+        <result column="RECEIVE_USER_NAMES" jdbcType="VARCHAR" property="receiveUserNames" />
+        <result column="EXT1" jdbcType="VARCHAR" property="ext1" />
+        <result column="EXT2" jdbcType="VARCHAR" property="ext2" />
+        <result column="EXT3" jdbcType="VARCHAR" property="ext3" />
+        <result column="EXT4" jdbcType="VARCHAR" property="ext4" />
+        <result column="EXT5" jdbcType="VARCHAR" property="ext5" />
+        <result column="typeName" jdbcType="VARCHAR" property="noticeTypeName"/>
+        <result column="NOTICE_ID" jdbcType="VARCHAR" property="noticeId" />
+        <result column="RECEIVE_USER_ID" jdbcType="VARCHAR" property="receiveUserId" />
+        <result column="OPERATION_STATUS" jdbcType="VARCHAR" property="operationStatus" />
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+      ID, NOTICE_ID, RECEIVE_USER_ID, OPERATION_STATUS
+    </sql>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+      delete from NOTICE_USER
+      where ID = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <!--根据公告id批量删除公告用户信息-->
+    <delete id="deleteInBatch" parameterType="java.util.List">
+      delete from NOTICE_USER where NOTICE_ID in
+      <foreach collection="noticeIds" item="noticeId" open="(" separator="," close=")" index="index">
+          #{noticeId}
+      </foreach>
+    </delete>
+
+
+
+
+    <insert id="insertSelective" parameterType="com.adc.da.entity.NoticeUserEO">
+        insert into NOTICE_USER
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="noticeId != null">
+                NOTICE_ID,
+            </if>
+            <if test="receiveUserId != null">
+                RECEIVE_USER_ID,
+            </if>
+            <if test="operationStatus != null">
+                OPERATION_STATUS,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="noticeId != null">
+                #{noticeId,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveUserId != null">
+                #{receiveUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="operationStatus != null">
+                #{operationStatus,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.entity.NoticeUserEO">
+        update NOTICE_USER
+        <set>
+            <if test="noticeId != null">
+                NOTICE_ID = #{noticeId,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveUserId != null">
+                RECEIVE_USER_ID = #{receiveUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="operationStatus != null">
+                OPERATION_STATUS = #{operationStatus,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+
+
+    <insert id = "insertList" parameterType = "java.util.List">
+        INSERT ALL
+        <foreach collection = "list" item = "item" index = "index">
+            <if test = "item.id !=null">
+                INTO NOTICE_USER
+                <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+                    <if test = "item.id != null">ID,</if>
+                    <if test = "item.noticeId != null">NOTICE_ID,</if>
+                    <if test = "item.receiveUserId != null">RECEIVE_USER_ID,</if>
+                    <if test = "item.operationStatus != null">OPERATION_STATUS,</if>
+                </trim>
+                <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+                    <if test="item.id != null" >#{item.id, jdbcType=VARCHAR},</if>
+                    <if test="item.noticeId != null" >#{item.noticeId, jdbcType=VARCHAR},</if>
+                    <if test="item.receiveUserId != null" >#{item.receiveUserId, jdbcType=VARCHAR},</if>
+                    <if test="item.operationStatus != null" >#{item.operationStatus, jdbcType=VARCHAR},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+
+    <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from  noticeuser
+        where ID = #{id,jdbcType=VARCHAR}
+    </select>
+
+
+    <sql id="findPageWithWhere">
+        <where> 1=1
+            <if test="id != null and id != ''" >
+                and ID = #{id,jdbcType=VARCHAR}
+            </if>
+            <if test="noticeId != null and noticeId != ''" >
+                and NOTICE_ID = #{noticeId,jdbcType=VARCHAR}
+            </if>
+            <if test="receiveUserId != null and receiveUserId != ''" >
+                and RECEIVE_USER_ID = #{receiveUserId,jdbcType=VARCHAR}
+            </if>
+            <if test="operationStatus != null and operationStatus != ''" >
+                and OPERATION_STATUS = #{operationStatus,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+
+
+
+    <select id="findPageWithCount" parameterType="com.adc.da.dto.PageDTO" resultType="Integer">
+        select count(1)
+        from noticeuser
+        <include refid="findPageWithWhere" />
+    </select>
+
+
+    <select id="findNoticeUserEOByNoticeId" parameterType="java.util.List" resultMap="BaseResultMap">
+        SELECT * FROM NOTICE_USER
+        WHERE 1=1
+        <if test="noticeIds!=null and noticeIds.size>0">
+            AND NOTICE_ID in
+            <foreach collection="noticeIds" item="noticeId" open="(" separator="," close=")" index="index">
+                #{noticeId}
+            </foreach>
+        </if>
+    </select>
+
+    <select id="findNoticeUserEOByNoticeIdAndUserId" resultMap="BaseResultMap">
+        SELECT * FROM NOTICE_USER
+        WHERE 1=1
+        <if test="noticeIds!=null and noticeIds.size>0">
+            AND NOTICE_ID in
+            <foreach collection="noticeIds" item="noticeId" open="(" separator="," close=")" index="index">
+                #{noticeId}
+            </foreach>
+        </if>
+        and RECEIVE_USER_ID = #{receiveUserId}
+    </select>
+
+
+
+
+
+
+
+
+
+</mapper>

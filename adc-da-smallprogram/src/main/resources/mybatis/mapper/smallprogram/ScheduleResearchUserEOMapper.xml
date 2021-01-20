@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.smallprogram.dao.ScheduleResearchUserEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.smallprogram.entity.ScheduleResearchUserEO" >
+    <id column="id" property="id" />
+    <result column="research_id" property="researchId" />
+    <result column="content" property="content" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="create_user_name" property="createUserName" />
+    <result column="create_time" property="createTime" />
+    <result column="update_time" property="updateTime" />
+    <result column="status" property="status" />
+  </resultMap>
+
+  <!-- TS_SCHEDULE_RESEARCH_USER table all fields -->
+  <sql id="Base_Column_List" >
+     id, research_id, content, create_user_id, create_user_name, create_time, update_time, status
+  </sql>
+    <sql id="Base_Column_List_tsru" >
+     tsru.id, tsru.research_id, tsru.content, tsru.create_user_id, tsru.create_user_name, tsru.create_time, tsru.update_time, tsru.status
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="researchId != null" >
+        and research_id ${researchIdOperator} #{researchId}
+      </if>
+      <if test="content != null" >
+        and content ${contentOperator} #{content}
+      </if>
+      <if test="createUserId != null" >
+        and create_user_id ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="createUserName != null" >
+        and create_user_name ${createUserNameOperator} #{createUserName}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="updateTime != null" >
+        and update_time ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and update_time &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and update_time &lt;= #{updateTime2}
+      </if>
+      <if test="status != null" >
+        and status ${statusOperator} #{status}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.smallprogram.entity.ScheduleResearchUserEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_SCHEDULE_RESEARCH_USER.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into TS_SCHEDULE_RESEARCH_USER(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{researchId, jdbcType=VARCHAR}, #{content, jdbcType=VARCHAR}, #{createUserId, jdbcType=VARCHAR}, #{createUserName, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{updateTime, jdbcType=TIMESTAMP}, #{status, jdbcType=INTEGER})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.smallprogram.entity.ScheduleResearchUserEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_SCHEDULE_RESEARCH_USER.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into TS_SCHEDULE_RESEARCH_USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="researchId != null" >research_id,</if>
+                <if test="content != null" >content,</if>
+                <if test="createUserId != null" >create_user_id,</if>
+                <if test="createUserName != null" >create_user_name,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="updateTime != null" >update_time,</if>
+                <if test="status != null" >status,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="researchId != null" >#{researchId, jdbcType=VARCHAR},</if>
+                <if test="content != null" >#{content, jdbcType=VARCHAR},</if>
+                <if test="createUserId != null" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="createUserName != null" >#{createUserName, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="updateTime != null" >#{updateTime, jdbcType=TIMESTAMP},</if>
+                <if test="status != null" >#{status, jdbcType=INTEGER},</if>
+            </trim>
+  </insert>
+
+    <insert id="insertList" parameterType="java.util.List">
+        INSERT ALL
+        <foreach collection="list" item="item" index="index">
+            <if test="item.id !=null">
+                INTO TS_SCHEDULE_RESEARCH_USER
+                <trim prefix="(" suffix=")" suffixOverrides=",">
+                    <if test="item.id != null" >id,</if>
+                    <if test="item.researchId != null" >research_id,</if>
+                    <if test="item.content != null" >content,</if>
+                    <if test="item.createUserId != null" >create_user_id,</if>
+                    <if test="item.createUserName != null" >create_user_name,</if>
+                    <if test="item.createTime != null" >create_time,</if>
+                    <if test="item.updateTime != null" >update_time,</if>
+                    <if test="item.status != null" >status,</if>
+                </trim>
+                <trim prefix="values (" suffix=")" suffixOverrides=",">
+                    <if test="item.id != null" >#{item.id, jdbcType=VARCHAR},</if>
+                    <if test="item.researchId != null" >#{item.researchId, jdbcType=VARCHAR},</if>
+                    <if test="item.content != null" >#{item.content, jdbcType=VARCHAR},</if>
+                    <if test="item.createUserId != null" >#{item.createUserId, jdbcType=VARCHAR},</if>
+                    <if test="item.createUserName != null" >#{item.createUserName, jdbcType=VARCHAR},</if>
+                    <if test="item.createTime != null" >#{item.createTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.updateTime != null" >#{item.updateTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.status != null" >#{item.status, jdbcType=INTEGER},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+
+
+
+
+    <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.smallprogram.entity.ScheduleResearchUserEO" >
+    update TS_SCHEDULE_RESEARCH_USER
+       set  research_id = #{researchId},
+            content = #{content},
+            create_user_id = #{createUserId},
+            create_user_name = #{createUserName},
+            create_time = #{createTime},
+            update_time = #{updateTime},
+            status = #{status}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.smallprogram.entity.ScheduleResearchUserEO" >
+    update TS_SCHEDULE_RESEARCH_USER
+    <set >
+      <if test="researchId != null" >
+        research_id = #{researchId},
+      </if>
+      <if test="content != null" >
+        content = #{content},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="createUserName != null" >
+        create_user_name = #{createUserName},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+      <if test="status != null" >
+        status = #{status},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 TS_SCHEDULE_RESEARCH_USER -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+      from TS_SCHEDULE_RESEARCH_USER
+     where id = #{value}
+
+  </select>
+    <select id="selectByResearchIdList" resultMap="BaseResultMap" >
+        select <include refid="Base_Column_List_tsru" />
+        from TS_SCHEDULE_RESEARCH_USER tsru left join TS_USER tu on tsru.CREATE_USER_ID = tu.USID
+        where RESEARCH_ID in
+        <foreach item="it" collection="list" open="(" separator=","
+                 close=")" index="index">
+            #{it}
+        </foreach>
+        ORDER BY tu.EXT_INFO DESC
+    </select>
+
+    <select id="selectByResearchIdAndStatus" resultMap="BaseResultMap" >
+        select <include refid="Base_Column_List_tsru" />
+        from TS_SCHEDULE_RESEARCH_USER tsru left join TS_USER tu on tsru.CREATE_USER_ID = tu.USID
+        where RESEARCH_ID = #{researchId} and tsru.status = #{status}
+        ORDER BY tu.EXT_INFO DESC
+    </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TS_SCHEDULE_RESEARCH_USER
+     where id = #{value}
+  </delete>
+
+  <!-- TS_SCHEDULE_RESEARCH_USER 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from TS_SCHEDULE_RESEARCH_USER
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TS_SCHEDULE_RESEARCH_USER列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from TS_SCHEDULE_RESEARCH_USER
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from TS_SCHEDULE_RESEARCH_USER
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+    <!--完成情况处先按完成情况进行排序，已完成的排在未完成的前面，已完成的中，再按完成时间进行排序。未完成的中，按职级权重再次排序-->
+    <select id="queryFinishList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select <include refid="Base_Column_List_tsru"/> from TS_SCHEDULE_RESEARCH_USER tsru
+        left join TS_USER tu on tsru.CREATE_USER_ID = tu.USID
+        <include refid="Base_Where_Clause"/>
+--         ORDER BY tsru.STATUS DESC, tu.EXT_INFO DESC, tsru.UPDATE_TIME ASC
+        order by tsru.status desc, (case when tsru.status =1 then (tsru.update_time - to_date('1970-01-01 08:00:00','yyyy-mm-dd hh24:mi:ss'))*86400000
+        when tsru.status = 0 then -to_number(tu.EXT_INFO)
+        end) asc
+    </select>
+</mapper>

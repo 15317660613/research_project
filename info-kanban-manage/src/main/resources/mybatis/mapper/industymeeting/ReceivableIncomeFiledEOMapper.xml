@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.adc.da.industymeeting.dao.ReceivableIncomeFiledEODao">
+    <!-- Result Map-->
+    <resultMap id = "BaseResultMap" type = "com.adc.da.industymeeting.entity.ReceivableIncomeFiledEO">
+        <id column = "id" property = "id"/>
+        <result column = "year" property = "year"/>
+        <result column = "month" property = "month"/>
+        <result column = "company" property = "company"/>
+        <result column = "receivable_balance" property = "receivableBalance"/>
+        <result column = "income" property = "income"/>
+        <result column = "create_time" property = "createTime"/>
+        <result column = "create_user_id" property = "createUserId"/>
+        <result column = "update_time" property = "updateTime"/>
+        <result column = "update_user_id" property = "updateUserId"/>
+        <result column = "del_flag" property = "delFlag"/>
+        <result column = "area" property = "area"/>
+    </resultMap>
+
+    <!-- RECEIVABLE_INCOME_FILED table all fields -->
+    <sql id = "Base_Column_List">
+     id, year, month, company, receivable_balance, income, create_time, create_user_id, update_time, update_user_id, del_flag, area
+  </sql>
+
+    <sql id = "Base_Column_List2">
+     rif.id as id, rif.year as year, rif.month as month, rif.company as company, rif.area as area, rif.receivable_balance as receivable_balance, rif.income as income, rif.create_time as create_time, rif.create_user_id as create_user_id,
+     rif.update_time as update_time, rif.update_user_id as update_user_id, rif.del_flag as del_flag, dic.dic_type_name as areaName, u0.usname as createUser, u1.usname as updateUser, dic2.dic_type_name as companyName
+  </sql>
+
+    <!-- 查询条件 -->
+    <sql id = "Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides = ",">
+            <if test = "id != null">
+                and id ${idOperator} #{id}
+            </if>
+            <if test = "year != null">
+                and year ${yearOperator} #{year}
+            </if>
+            <if test = "month != null">
+                and month ${monthOperator} #{month}
+            </if>
+            <if test = "company != null">
+                and company ${companyOperator} #{company}
+            </if>
+            <if test = "receivableBalance != null">
+                and receivable_balance ${receivableBalanceOperator} #{receivableBalance}
+            </if>
+            <if test = "income != null">
+                and income ${incomeOperator} #{income}
+            </if>
+            <if test = "createTime != null">
+                and create_time ${createTimeOperator} #{createTime}
+            </if>
+            <if test = "createTime1 != null">
+                and create_time &gt;= #{createTime1}
+            </if>
+            <if test = "createTime2 != null">
+                and create_time &lt;= #{createTime2}
+            </if>
+            <if test = "createUserId != null">
+                and create_user_id ${createUserIdOperator} #{createUserId}
+            </if>
+            <if test = "updateTime != null">
+                and update_time ${updateTimeOperator} #{updateTime}
+            </if>
+            <if test = "updateTime1 != null">
+                and update_time &gt;= #{updateTime1}
+            </if>
+            <if test = "updateTime2 != null">
+                and update_time &lt;= #{updateTime2}
+            </if>
+            <if test = "updateUserId != null">
+                and update_user_id ${updateUserIdOperator} #{updateUserId}
+            </if>
+            <if test = "delFlag != null">
+                and del_flag ${delFlagOperator} #{delFlag}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id = "insert" parameterType = "com.adc.da.industymeeting.entity.ReceivableIncomeFiledEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+            SELECT SEQ_RECEIVABLE_INCOME_FILED.NEXTVAL FROM DUAL
+        </selectKey> -->insert into DB_RECEIVABLE_INCOME_FILED(<include
+            refid="Base_Column_List"/>) values (#{id, jdbcType=VARCHAR}, #{year, jdbcType=VARCHAR}, #{month, jdbcType=VARCHAR},
+        #{company, jdbcType=VARCHAR}, #{receivableBalance, jdbcType=DECIMAL}, #{income, jdbcType=DECIMAL}, #{createTime, jdbcType=TIMESTAMP},
+        #{createUserId, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP}, #{updateUserId, jdbcType=VARCHAR}, #{delFlag, jdbcType=INTEGER})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id = "insertSelective" parameterType = "com.adc.da.industymeeting.entity.ReceivableIncomeFiledEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RECEIVABLE_INCOME_FILED.NEXTVAL FROM DUAL
+    </selectKey> -->insert into DB_RECEIVABLE_INCOME_FILED
+        <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">id,</if>
+            <if test = "year != null">year,</if>
+            <if test = "month != null">month,</if>
+            <if test = "company != null">company,</if>
+            <if test = "receivableBalance != null">receivable_balance,</if>
+            <if test = "income != null">income,</if>
+            <if test = "createTime != null">create_time,</if>
+            <if test = "createUserId != null">create_user_id,</if>
+            <if test = "updateTime != null">update_time,</if>
+            <if test = "updateUserId != null">update_user_id,</if>
+            <if test = "delFlag != null">del_flag,</if>
+            <if test = "area != null">area,</if>
+        </trim>
+        <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">#{id, jdbcType=VARCHAR},</if>
+            <if test = "year != null">#{year, jdbcType=VARCHAR},</if>
+            <if test = "month != null">#{month, jdbcType=VARCHAR},</if>
+            <if test = "company != null">#{company, jdbcType=VARCHAR},</if>
+            <if test="receivableBalance != null">#{receivableBalance, jdbcType=DECIMAL},</if>
+            <if test="income != null">#{income, jdbcType=DECIMAL},</if>
+            <if test = "createTime != null">#{createTime, jdbcType=TIMESTAMP},</if>
+            <if test = "createUserId != null">#{createUserId, jdbcType=VARCHAR},</if>
+            <if test = "updateTime != null">#{updateTime, jdbcType=TIMESTAMP},</if>
+            <if test = "updateUserId != null">#{updateUserId, jdbcType=VARCHAR},</if>
+            <if test = "delFlag != null">#{delFlag, jdbcType=INTEGER},</if>
+            <if test = "area != null">#{area, jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+
+    <insert id="insertList" parameterType="java.util.List">
+        INSERT ALL
+        <foreach collection="list" item="item" index="index">
+            <if test="item.id !=null">
+                INTO DB_RECEIVABLE_INCOME_FILED
+                <trim prefix="(" suffix=")" suffixOverrides=",">
+                    <if test = "item.id != null">id,</if>
+                    <if test = "item.year != null">year,</if>
+                    <if test = "item.month != null">month,</if>
+                    <if test = "item.company != null">company,</if>
+                    <if test = "item.receivableBalance != null">receivable_balance,</if>
+                    <if test = "item.income != null">income,</if>
+                    <if test = "item.createTime != null">create_time,</if>
+                    <if test = "item.createUserId != null">create_user_id,</if>
+                    <if test = "item.updateTime != null">update_time,</if>
+                    <if test = "item.updateUserId != null">update_user_id,</if>
+                    <if test = "item.delFlag != null">del_flag,</if>
+                    <if test = "item.area != null">area,</if>
+                </trim>
+                <trim prefix="values (" suffix=")" suffixOverrides=",">
+                    <if test = "item.id != null">#{item.id, jdbcType=VARCHAR},</if>
+                    <if test = "item.year != null">#{item.year, jdbcType=VARCHAR},</if>
+                    <if test = "item.month != null">#{item.month, jdbcType=VARCHAR},</if>
+                    <if test = "item.company != null">#{item.company, jdbcType=VARCHAR},</if>
+                    <if test="item.receivableBalance != null">#{item.receivableBalance, jdbcType=DECIMAL},</if>
+                    <if test="item.income != null">#{item.income, jdbcType=DECIMAL},</if>
+                    <if test = "item.createTime != null">#{item.createTime, jdbcType=TIMESTAMP},</if>
+                    <if test = "item.createUserId != null">#{item.createUserId, jdbcType=VARCHAR},</if>
+                    <if test = "item.updateTime != null">#{item.updateTime, jdbcType=TIMESTAMP},</if>
+                    <if test = "item.updateUserId != null">#{item.updateUserId, jdbcType=VARCHAR},</if>
+                    <if test = "item.delFlag != null">#{item.delFlag, jdbcType=INTEGER},</if>
+                    <if test = "item.area != null">#{item.area, jdbcType=VARCHAR},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+
+    <!-- 根据pk，修改记录-->
+    <update id = "updateByPrimaryKey" parameterType = "com.adc.da.industymeeting.entity.ReceivableIncomeFiledEO">
+    update DB_RECEIVABLE_INCOME_FILED
+       set  year = #{year},
+            month = #{month},
+            company = #{company},
+            receivable_balance = #{receivableBalance},
+            income = #{income},
+            create_time = #{createTime},
+            create_user_id = #{createUserId},
+            update_time = #{updateTime},
+            update_user_id = #{updateUserId},
+            del_flag = #{delFlag}
+     where  id = #{id}
+  </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id = "updateByPrimaryKeySelective"
+            parameterType = "com.adc.da.industymeeting.entity.ReceivableIncomeFiledEO">
+        update DB_RECEIVABLE_INCOME_FILED
+        <set>
+            <if test = "year != null">
+                year = #{year},
+            </if>
+            <if test = "month != null">
+                month = #{month},
+            </if>
+            <if test = "company != null">
+                company = #{company},
+            </if>
+            <if test = "receivableBalance != null">
+                receivable_balance = #{receivableBalance},
+            </if>
+            <if test = "income != null">
+                income = #{income},
+            </if>
+            <if test = "createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test = "createUserId != null">
+                create_user_id = #{createUserId},
+            </if>
+            <if test = "updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test = "updateUserId != null">
+                update_user_id = #{updateUserId},
+            </if>
+            <if test = "delFlag != null">
+                del_flag = #{delFlag},
+            </if>
+            <if test = "area != null">
+                area = #{area},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!-- 根据id查询 RECEIVABLE_INCOME_FILED -->
+    <select id = "selectByPrimaryKey" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+        select
+        <include refid = "Base_Column_List"/>
+        from DB_RECEIVABLE_INCOME_FILED where id = #{value}
+
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id = "deleteByPrimaryKey" parameterType = "java.lang.String">
+    delete from DB_RECEIVABLE_INCOME_FILED
+     where id = #{value}
+
+  </delete>
+
+    <!--批量逻辑删除-->
+    <update id = "deleteLogicInBatch" parameterType = "java.util.List">
+        update DB_RECEIVABLE_INCOME_FILED set del_flag = 1 where id in
+        <foreach item = "id" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{id}
+        </foreach>
+    </update>
+
+    <delete id = "deleteAll" parameterType = "java.util.List">
+        delete from DB_RECEIVABLE_INCOME_FILED where 1=1
+    </delete>
+
+
+    <!-- RECEIVABLE_INCOME_FILED 列表总数-->
+    <select id = "queryByCount" resultType = "java.lang.Integer" parameterType = "com.adc.da.base.page.BasePage">
+        select count(1) from DB_RECEIVABLE_INCOME_FILED
+        <include refid = "Base_Where_Clause"/>
+        and del_flag != 1
+    </select>
+
+    <!-- 查询RECEIVABLE_INCOME_FILED列表 -->
+    <select id = "queryByPage" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select<include
+            refid = "Base_Column_List"/>, createUser, updateUser, areaName, companyName from (select tmp_tb.* , rownum rn from (select
+        <include refid = "Base_Column_List2"/>
+        from DB_RECEIVABLE_INCOME_FILED rif LEFT JOIN TS_USER u0 on rif.CREATE_USER_ID = u0.usid LEFT JOIN TS_USER u1 on rif.UPDATE_USER_ID = u1.usid
+        LEFT JOIN TS_DICTYPE dic on rif.area = dic.id LEFT JOIN TS_DICTYPE dic2 on rif.COMPANY = dic2.id
+        <include refid = "Base_Where_Clause"/>
+        and rif.del_flag != 1
+        <!--<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+            ${pager.orderCondition}
+        </if>-->
+        <choose>
+            <when test = "pager.orderCondition != null and pager.orderCondition != ''">
+                ${pager.orderCondition}
+            </when>
+            <otherwise>
+                order by rif.update_time desc, rif.id asc
+            </otherwise>
+        </choose>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex}) where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id = "queryByList" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List2"/>
+        from DB_RECEIVABLE_INCOME_FILED rif LEFT JOIN TS_USER u0 on rif.CREATE_USER_ID = u0.usid LEFT JOIN TS_USER u1 on rif.UPDATE_USER_ID = u1.usid
+        LEFT JOIN TS_DICTYPE dic on rif.area = dic.id LEFT JOIN TS_DICTYPE dic2 on rif.COMPANY = dic2.id
+        <include refid = "Base_Where_Clause"/>
+        and rif.del_flag != 1
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+    </select>
+
+    <select id="sumReceivableAmountByYearAndMonthLte" resultType="java.math.BigDecimal">
+    select SUM(receivable_balance) from DB_RECEIVABLE_INCOME_FILED where DEL_FLAG !=1 and year = #{year} and month  &lt;= #{month}
+    </select>
+    <select id="sumReceivableAmountByYearAndMonthEqual" resultType="java.math.BigDecimal">
+        select SUM(receivable_balance) from DB_RECEIVABLE_INCOME_FILED where DEL_FLAG !=1 and year = #{year} and month  = #{month}
+    </select>
+    <select id="sumReceivableAmountByYearLte" resultType="java.math.BigDecimal">
+        select SUM(receivable_balance) from DB_RECEIVABLE_INCOME_FILED where DEL_FLAG !=1 and year &lt;= #{year}
+    </select>
+
+    <select id="sumReceivableAmountByYearAndMonthLt" resultType="java.math.BigDecimal">
+        select SUM(receivable_balance) from DB_RECEIVABLE_INCOME_FILED where DEL_FLAG !=1 and year = #{year} and month  &lt; #{month}
+    </select>
+
+
+    <select id="sumIncomeAmountByYearAndMonthLte" resultType="java.math.BigDecimal">
+    select SUM(INCOME) from DB_RECEIVABLE_INCOME_FILED where DEL_FLAG !=1 and year = #{year} and month  &lt;= #{month}
+    </select>
+    <select id="sumIncomeAmountByYearLte" resultType="java.math.BigDecimal">
+        select SUM(INCOME) from DB_RECEIVABLE_INCOME_FILED where DEL_FLAG !=1 and year &lt;= #{year}
+    </select>
+
+    <select id="sumIncomeAmountByYearEqual" resultType="java.math.BigDecimal">
+        select SUM(INCOME) from DB_RECEIVABLE_INCOME_FILED where DEL_FLAG !=1 and year = #{year}
+    </select>
+
+    <select id="sumIncomeAmountByYearLt" resultType="java.math.BigDecimal">
+        select SUM(INCOME) from DB_RECEIVABLE_INCOME_FILED where DEL_FLAG !=1 and year &lt; #{year}
+    </select>
+
+    <select id="sumIncomeAmountByYearAndMonthEqual" resultType="java.math.BigDecimal">
+    select SUM(INCOME) from DB_RECEIVABLE_INCOME_FILED where DEL_FLAG !=1 and year = #{year} and month  = #{month}
+    </select>
+
+    <select id="sumIncomeAmountByYearAndMonthLt" resultType="java.math.BigDecimal">
+        select SUM(INCOME) from DB_RECEIVABLE_INCOME_FILED where DEL_FLAG !=1 and year = #{year} and month  &lt; #{month}
+    </select>
+
+    <select id="listByYearEqual" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from DB_RECEIVABLE_INCOME_FILED where DEL_FLAG !=1 and year = #{year}
+    </select>
+
+    <select id="listByYearAndMonthEqualGroupArea" resultMap="BaseResultMap">
+        select SUM(INCOME) as INCOME  ,dic.DIC_TYPE_NAME as Area from DB_RECEIVABLE_INCOME_FILED rif
+                          LEFT JOIN TS_DICTYPE dic on rif.area = dic.id
+        where rif.DEL_FLAG !=1 and rif.year = #{year} and rif.month = #{month}
+        group by dic.DIC_TYPE_NAME
+    </select>
+
+    <select id="listByYearAndMonthEqualGroupCompanyFullName" resultMap="BaseResultMap">
+        select SUM(INCOME) as INCOME  ,dic.EXTINFO as COMPANY from DB_RECEIVABLE_INCOME_FILED rif
+        LEFT JOIN TS_DICTYPE dic on rif.COMPANY = dic.id
+        where rif.DEL_FLAG !=1 and rif.year = #{year} and rif.month &lt;= #{month}
+        group by dic.EXTINFO
+
+    </select>
+
+    <select id="sumIncomeAmountByYearAndMonthLtAndArea" resultType="java.math.BigDecimal">
+        select SUM(INCOME) from DB_RECEIVABLE_INCOME_FILED rif
+          LEFT JOIN TS_DICTYPE dic on rif.area = dic.id
+         where rif.DEL_FLAG !=1 and rif.year = #{year} and rif.month  &lt; #{month} and dic.DIC_TYPE_NAME = #{area}
+    </select>
+
+    <select id="sumIncomeAmountByYearAndMonthEqualAndArea" resultType="java.math.BigDecimal">
+        select SUM(INCOME) from DB_RECEIVABLE_INCOME_FILED rif
+          LEFT JOIN TS_DICTYPE dic on rif.area = dic.id
+         where rif.DEL_FLAG !=1 and rif.year = #{year} and rif.month  = #{month} and dic.DIC_TYPE_NAME = #{area}
+    </select>
+</mapper>

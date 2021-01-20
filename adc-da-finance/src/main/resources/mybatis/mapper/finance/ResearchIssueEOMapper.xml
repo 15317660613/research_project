@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.finance.dao.ResearchIssueEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.finance.entity.ResearchIssueEO" >
+    <id column="id" property="id" />
+    <result column="issue_name" property="issueName" />
+    <result column="issue_no" property="issueNo" />
+    <result column="org_id" property="orgId" />
+    <result column="status" property="status" />
+    <result column="del_flag" property="delFlag" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="create_time" property="createTime" />
+    <result column="update_user_id" property="updateUserId" />
+    <result column="update_time" property="updateTime" />
+    <result column="ext_info" property="extInfo" />
+    <result column="ext_info2" property="extInfo2" />
+    <result column="ext_info3" property="extInfo3" />
+  </resultMap>
+
+  <!-- F_RESEARCH_ISSUE table all fields -->
+  <sql id="Base_Column_List" >
+     id, issue_name, issue_no, org_id, rstatus, del_flag, create_user_id, create_time, update_user_id, update_time, ext_info, ext_info2, ext_info3
+  </sql>
+
+  <sql id="Base_Column_List2" >
+     fri.id as id, fri.issue_name as issue_name, fri.issue_no as issue_no, fri.org_id as org_id, fri.rstatus as rstatus, dic.dic_type_name as statusStr,
+     fri.del_flag as del_flag, fri.create_user_id as create_user_id, fri.create_time as create_time, fri.update_user_id as update_user_id, fri.update_time as update_time,
+     fri.ext_info as ext_info, fri.ext_info2 as ext_info2, fri.ext_info3 as ext_info3, org.org_name as orgName
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="issueName != null and issueName != ''" >
+        and issue_name ${issueNameOperator} #{issueName}
+      </if>
+      <if test="issueNo != null" >
+        and issue_no ${issueNoOperator} #{issueNo}
+      </if>
+      <if test="orgId != null" >
+        and org_id ${orgIdOperator} #{orgId}
+      </if>
+      <if test="status != null and status != ''" >
+        and status ${statusOperator} #{status}
+      </if>
+      <if test="rstatus != null and rstatus != ''" >
+        and rstatus ${rstatusOperator} #{rstatus}
+      </if>
+      <if test="delFlag != null" >
+        and del_flag ${delFlagOperator} #{delFlag}
+      </if>
+      <if test="createUserId != null" >
+        and create_user_id ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="updateUserId != null" >
+        and update_user_id ${updateUserIdOperator} #{updateUserId}
+      </if>
+      <if test="updateTime != null" >
+        and update_time ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and update_time &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and update_time &lt;= #{updateTime2}
+      </if>
+      <if test="extInfo != null" >
+        and ext_info ${extInfoOperator} #{extInfo}
+      </if>
+      <if test="extInfo2 != null" >
+        and ext_info2 ${extInfo2Operator} #{extInfo2}
+      </if>
+      <if test="extInfo3 != null" >
+        and ext_info3 ${extInfo3Operator} #{extInfo3}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.finance.entity.ResearchIssueEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_F_RESEARCH_ISSUE.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into F_RESEARCH_ISSUE(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{issueName, jdbcType=VARCHAR}, #{issueNo, jdbcType=VARCHAR}, #{orgId, jdbcType=VARCHAR}, #{status, jdbcType=INTEGER}, #{delFlag, jdbcType=INTEGER}, #{createUserId, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{updateUserId, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP}, #{extInfo, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.finance.entity.ResearchIssueEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_F_RESEARCH_ISSUE.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into F_RESEARCH_ISSUE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="issueName != null" >issue_name,</if>
+                <if test="issueNo != null" >issue_no,</if>
+                <if test="orgId != null" >org_id,</if>
+                <if test="status != null" >status,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="createUserId != null" >create_user_id,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="updateUserId != null" >update_user_id,</if>
+                <if test="updateTime != null" >update_time,</if>
+                <if test="extInfo != null" >ext_info,</if>
+                <if test="extInfo2 != null" >ext_info2,</if>
+                <if test="extInfo3 != null" >ext_info3,</if>
+                <if test="rstatus != null" >rstatus,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="issueName != null" >#{issueName, jdbcType=VARCHAR},</if>
+                <if test="issueNo != null" >#{issueNo, jdbcType=VARCHAR},</if>
+                <if test="orgId != null" >#{orgId, jdbcType=VARCHAR},</if>
+                <if test="status != null" >#{status, jdbcType=INTEGER},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=INTEGER},</if>
+                <if test="createUserId != null" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="updateUserId != null" >#{updateUserId, jdbcType=VARCHAR},</if>
+                <if test="updateTime != null" >#{updateTime, jdbcType=TIMESTAMP},</if>
+                <if test="extInfo != null" >#{extInfo, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="extInfo3 != null" >#{extInfo3, jdbcType=VARCHAR},</if>
+                <if test="rstatus != null" >#{rstatus, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.finance.entity.ResearchIssueEO" >
+    update F_RESEARCH_ISSUE
+       set  issue_name = #{issueName},
+            issue_no = #{issueNo},
+            org_id = #{orgId},
+            status = #{status},
+            del_flag = #{delFlag},
+            create_user_id = #{createUserId},
+            create_time = #{createTime},
+            update_user_id = #{updateUserId},
+            update_time = #{updateTime},
+            ext_info = #{extInfo},
+            ext_info2 = #{extInfo2},
+            ext_info3 = #{extInfo3}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.finance.entity.ResearchIssueEO" >
+    update F_RESEARCH_ISSUE
+    <set >
+      <if test="issueName != null" >
+        issue_name = #{issueName},
+      </if>
+      <if test="issueNo != null" >
+        issue_no = #{issueNo},
+      </if>
+      <if test="orgId != null" >
+        org_id = #{orgId},
+      </if>
+      <if test="status != null" >
+        status = #{status},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+      <if test="extInfo != null" >
+        ext_info = #{extInfo},
+      </if>
+      <if test="extInfo2 != null" >
+        ext_info2 = #{extInfo2},
+      </if>
+      <if test="extInfo3 != null" >
+        ext_info3 = #{extInfo3},
+      </if>
+      <if test="rstatus != null" >
+        rstatus = #{rstatus},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 F_RESEARCH_ISSUE -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from F_RESEARCH_ISSUE
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from F_RESEARCH_ISSUE
+     where id = #{value}
+
+  </delete>
+
+  <!--批量逻辑删除-->
+  <update id="deleteLogicInBatch" parameterType="java.util.List">
+    update F_RESEARCH_ISSUE set del_flag = 1
+    where id in
+    <foreach item="id" collection="list" open="(" separator="," close=")" index="index">
+    	#{id}
+    </foreach>
+  </update>
+
+  <!-- F_RESEARCH_ISSUE 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from F_RESEARCH_ISSUE
+    <include refid="Base_Where_Clause"/>
+    and del_flag != 1
+  </select>
+
+  <!-- 查询F_RESEARCH_ISSUE列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" />, orgName, statusStr from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List2" /> from F_RESEARCH_ISSUE fri
+             LEFT JOIN TS_ORG org on fri.org_id = org.ID
+             LEFT JOIN TS_DICTYPE dic on dic.ID = fri.rstatus
+			 <include refid="Base_Where_Clause"/>
+             and fri.del_flag != 1
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			 order by dic.dic_type_code asc,
+             NLSSORT(fri.ISSUE_NAME,'NLS_SORT = SCHINESE_PINYIN_M')
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List2"/> from F_RESEARCH_ISSUE fri
+      LEFT JOIN TS_ORG org on fri.org_id = org.ID
+      LEFT JOIN TS_DICTYPE dic on dic.ID = fri.rstatus
+    <include refid="Base_Where_Clause"/>
+      and fri.del_flag != 1
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+    order by dic.dic_type_code asc,
+    NLSSORT(fri.ISSUE_NAME,'NLS_SORT = SCHINESE_PINYIN_M')
+  </select>
+
+</mapper>

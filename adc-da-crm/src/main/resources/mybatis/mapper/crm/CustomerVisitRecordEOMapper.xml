@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.crm.dao.CustomerVisitRecordEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.crm.entity.CustomerVisitRecordEO" >
+    <id column="id" property="id" />
+    <result column="cus_record_id" property="cusRecordId" />
+    <result column="customer_number" property="customerNumber" />
+    <result column="visited_time" property="visitedTime" />
+    <result column="visited_dept" property="visitedDept" />
+    <result column="visitor" property="visitor" />
+    <result column="communicationcontent" property="communicationcontent" />
+    <result column="remark" property="remark" />
+    <result column="travel_approval_id" property="travelApprovalId" />
+    <result column="del_flag" property="delFlag" />
+    <result column="created_time" property="createdTime" />
+    <result column="created_user" property="createdUser" />
+    <result column="modified_time" property="modifiedTime" />
+    <result column="modified_user" property="modifiedUser" />
+  </resultMap>
+
+  <!-- CUSTOMER_VISIT_RECORD table all fields -->
+  <sql id="Base_Column_List" >
+     id, cus_record_id, customer_number, visited_time, visited_dept, visitor, communicationcontent, remark, travel_approval_id, del_flag, created_time, created_user, modified_time, modified_user
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="cusRecordId != null" >
+        and cus_record_id ${cusRecordIdOperator} #{cusRecordId}
+      </if>
+      <if test="customerNumber != null" >
+        and customer_number ${customerNumberOperator} #{customerNumber}
+      </if>
+      <if test="visitedTime != null" >
+        and visited_time ${visitedTimeOperator} #{visitedTime}
+      </if>
+      <if test="visitedTime1 != null" >
+        and visited_time &gt;= #{visitedTime1}
+      </if>
+      <if test="visitedTime2 != null" >
+        and visited_time &lt;= #{visitedTime2}
+      </if>
+      <if test="visitedDept != null" >
+        and visited_dept ${visitedDeptOperator} #{visitedDept}
+      </if>
+      <if test="visitor != null" >
+        and visitor ${visitorOperator} #{visitor}
+      </if>
+      <if test="communicationcontent != null" >
+        and communicationcontent ${communicationcontentOperator} #{communicationcontent}
+      </if>
+      <if test="remark != null" >
+        and remark ${remarkOperator} #{remark}
+      </if>
+      <if test="travelApprovalId != null" >
+        and travel_approval_id ${travelApprovalIdOperator} #{travelApprovalId}
+      </if>
+      <if test="delFlag != null" >
+        and del_flag ${delFlagOperator} #{delFlag}
+      </if>
+      <if test="createdTime != null" >
+        and created_time ${createdTimeOperator} #{createdTime}
+      </if>
+      <if test="createdTime1 != null" >
+        and created_time &gt;= #{createdTime1}
+      </if>
+      <if test="createdTime2 != null" >
+        and created_time &lt;= #{createdTime2}
+      </if>
+      <if test="createdUser != null" >
+        and created_user ${createdUserOperator} #{createdUser}
+      </if>
+      <if test="modifiedTime != null" >
+        and modified_time ${modifiedTimeOperator} #{modifiedTime}
+      </if>
+      <if test="modifiedTime1 != null" >
+        and modified_time &gt;= #{modifiedTime1}
+      </if>
+      <if test="modifiedTime2 != null" >
+        and modified_time &lt;= #{modifiedTime2}
+      </if>
+      <if test="modifiedUser != null" >
+        and modified_user ${modifiedUserOperator} #{modifiedUser}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.crm.entity.CustomerVisitRecordEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_CUSTOMER_VISIT_RECORD.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into CUSTOMER_VISIT_RECORD(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{cusRecordId, jdbcType=VARCHAR}, #{customerNumber, jdbcType=VARCHAR}, #{visitedTime, jdbcType=TIMESTAMP}, #{visitedDept, jdbcType=VARCHAR}, #{visitor, jdbcType=VARCHAR}, #{communicationcontent, jdbcType=VARCHAR}, #{remark, jdbcType=VARCHAR}, #{travelApprovalId, jdbcType=VARCHAR}, #{delFlag, jdbcType=VARCHAR}, #{createdTime, jdbcType=TIMESTAMP}, #{createdUser, jdbcType=VARCHAR}, #{modifiedTime, jdbcType=TIMESTAMP}, #{modifiedUser, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.crm.entity.CustomerVisitRecordEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_CUSTOMER_VISIT_RECORD.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into CUSTOMER_VISIT_RECORD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="cusRecordId != null" >cus_record_id,</if>
+                <if test="customerNumber != null" >customer_number,</if>
+                <if test="visitedTime != null" >visited_time,</if>
+                <if test="visitedDept != null" >visited_dept,</if>
+                <if test="visitor != null" >visitor,</if>
+                <if test="communicationcontent != null" >communicationcontent,</if>
+                <if test="remark != null" >remark,</if>
+                <if test="travelApprovalId != null" >travel_approval_id,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="createdTime != null" >created_time,</if>
+                <if test="createdUser != null" >created_user,</if>
+                <if test="modifiedTime != null" >modified_time,</if>
+                <if test="modifiedUser != null" >modified_user,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="cusRecordId != null" >#{cusRecordId, jdbcType=VARCHAR},</if>
+                <if test="customerNumber != null" >#{customerNumber, jdbcType=VARCHAR},</if>
+                <if test="visitedTime != null" >#{visitedTime, jdbcType=TIMESTAMP},</if>
+                <if test="visitedDept != null" >#{visitedDept, jdbcType=VARCHAR},</if>
+                <if test="visitor != null" >#{visitor, jdbcType=VARCHAR},</if>
+                <if test="communicationcontent != null" >#{communicationcontent, jdbcType=VARCHAR},</if>
+                <if test="remark != null" >#{remark, jdbcType=VARCHAR},</if>
+                <if test="travelApprovalId != null" >#{travelApprovalId, jdbcType=VARCHAR},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=VARCHAR},</if>
+                <if test="createdTime != null" >#{createdTime, jdbcType=TIMESTAMP},</if>
+                <if test="createdUser != null" >#{createdUser, jdbcType=VARCHAR},</if>
+                <if test="modifiedTime != null" >#{modifiedTime, jdbcType=TIMESTAMP},</if>
+                <if test="modifiedUser != null" >#{modifiedUser, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.crm.entity.CustomerVisitRecordEO" >
+    update CUSTOMER_VISIT_RECORD
+       set  cus_record_id = #{cusRecordId},
+            customer_number = #{customerNumber},
+            visited_time = #{visitedTime},
+            visited_dept = #{visitedDept},
+            visitor = #{visitor},
+            communicationcontent = #{communicationcontent},
+            remark = #{remark},
+            travel_approval_id = #{travelApprovalId},
+            del_flag = #{delFlag},
+            created_time = #{createdTime},
+            created_user = #{createdUser},
+            modified_time = #{modifiedTime},
+            modified_user = #{modifiedUser}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.crm.entity.CustomerVisitRecordEO" >
+    update CUSTOMER_VISIT_RECORD
+    <set >
+      <if test="cusRecordId != null" >
+        cus_record_id = #{cusRecordId},
+      </if>
+      <if test="customerNumber != null" >
+        customer_number = #{customerNumber},
+      </if>
+      <if test="visitedTime != null" >
+        visited_time = #{visitedTime},
+      </if>
+      <if test="visitedDept != null" >
+        visited_dept = #{visitedDept},
+      </if>
+      <if test="visitor != null" >
+        visitor = #{visitor},
+      </if>
+      <if test="communicationcontent != null" >
+        communicationcontent = #{communicationcontent},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark},
+      </if>
+      <if test="travelApprovalId != null" >
+        travel_approval_id = #{travelApprovalId},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+      <if test="createdUser != null" >
+        created_user = #{createdUser},
+      </if>
+      <if test="modifiedTime != null" >
+        modified_time = #{modifiedTime},
+      </if>
+      <if test="modifiedUser != null" >
+        modified_user = #{modifiedUser},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 CUSTOMER_VISIT_RECORD -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from CUSTOMER_VISIT_RECORD
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from CUSTOMER_VISIT_RECORD
+     where id = #{value}
+
+  </delete>
+    <delete id="deleteByCusRecordId" parameterType="java.lang.String">
+        delete from CUSTOMER_VISIT_RECORD
+         where CUS_RECORD_ID = #{value}
+    </delete>
+
+    <!-- CUSTOMER_VISIT_RECORD 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from CUSTOMER_VISIT_RECORD
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询CUSTOMER_VISIT_RECORD列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from CUSTOMER_VISIT_RECORD
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from CUSTOMER_VISIT_RECORD
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+    <update id="updateByCusRecordIdAndDelFlag">
+        update CUSTOMER_VISIT_RECORD set del_flag=#{delFlag} where cus_record_id=#{cusRecordId}
+    </update>
+
+</mapper>

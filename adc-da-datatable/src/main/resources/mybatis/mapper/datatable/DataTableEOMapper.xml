@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.datatable.dao.DataTableDao">
+	<!-- Result Map -->
+	<resultMap id="BaseResultMap" type="com.adc.da.datatable.entity.DataTableEO">
+		<id column="id" property="id" />
+		<result column="field_name" property="fieldName" />
+		<result column="content" property="content" />
+		<result column="field_default" property="fieldDefault" />
+		<result column="field_must_input" property="fieldMustInput" />
+		<result column="field_valid_type" property="fieldValidType" />
+		<result column="is_key" property="isKey" />
+		<result column="is_null" property="isNull" />
+		<result column="is_show" property="isShow" />
+		<result column="table_name" property="tableName" />
+		<result column="field_type" property="fieldType" />
+		<result column="field_length" property="fieldLength" />
+		<result column="show_type" property="showType" />
+		<result column="create_time" property="createTime" />
+	</resultMap>
+
+	<!-- TS_FORM_FIELD table all fields -->
+	<sql id="Base_Column_List">
+		id, field_name, content, field_default, field_must_input, field_valid_type,is_key,is_null,is_show,table_name,field_type,field_length,show_type,create_time
+	</sql>
+
+
+	<!-- 查询条件 -->
+	<sql id="Base_Where_Clause">
+		where 1=1
+		<trim suffixOverrides=",">
+			<if test="id != null">
+				and u0.id ${idOperator} #{id}
+			</if>
+			<if test="fieldName != null">
+				and u0.field_name ${fieldNameOperator} #{fieldName}
+			</if>
+			<if test="tableName != null">
+				and u0.table_name ${tableNameOperator} #{tableName}
+			</if>
+		</trim>
+	</sql>
+	
+
+	<delete id="deleteFieldById" parameterType="java.util.List">
+		delete from TS_FORM_FIELD
+		where id = #{id}
+	</delete>
+
+	<select id="getDataTableEOByFieldName" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from TS_FORM_FIELD
+		where FIELD_NAME = #{fieldName} and TABLE_NAME = #{tableName}
+	</select>
+
+	
+
+
+	<!-- 插入记录 -->
+	<insert id="insert" parameterType="com.adc.da.datatable.entity.DataTableEO">
+		insert into TS_FORM_FIELD
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >ID,</if>
+			<if test="fieldName != null" >FIELD_NAME,</if>
+			<if test="content != null" >CONTENT,</if>
+			<if test="fieldDefault != null" >FIELD_DEFAULT,</if>
+			<if test="fieldMustInput != null" >FIELD_MUST_INPUT,</if>
+			<if test="fieldValidType != null" >FIELD_VALID_TYPE,</if>
+			<if test="isKey != null" >IS_KEY,</if>
+			<if test="isNull != null" >IS_NULL,</if>
+			<if test="isShow != null" >IS_SHOW,</if>
+			<if test="tableName != null" >TABLE_NAME,</if>
+			<if test="fieldType != null" >FIELD_TYPE,</if>
+			<if test="fieldLength != null" >FIELD_LENGTH,</if>
+			<if test="showType != null" >SHOW_TYPE,</if>
+			<if test="createTime != null" >CREATE_TIME,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >#{id},</if>
+			<if test="fieldName != null" >#{fieldName},</if>
+			<if test="content != null" >#{content},</if>
+			<if test="fieldDefault != null" >#{fieldDefault},</if>
+			<if test="fieldMustInput != null" >#{fieldMustInput},</if>
+			<if test="fieldValidType != null" >#{fieldValidType},</if>
+			<if test="isKey != null" >#{isKey},</if>
+			<if test="isNull != null" >#{isNull},</if>
+			<if test="isShow != null" >#{isShow},</if>
+			<if test="tableName != null" >#{tableName},</if>
+			<if test="fieldType != null" >#{fieldType},</if>
+			<if test="fieldLength != null" >#{fieldLength},</if>
+			<if test="showType != null" >#{showType},</if>
+			<if test="createTime != null" >#{createTime},</if>
+		</trim>
+	</insert>
+
+
+	<!-- 修改记录，只修改只不为空的字段 -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.adc.da.datatable.entity.DataTableEO">
+		update TS_FORM_FIELD
+		<set>
+			<if test="fieldName != null">
+				field_name = #{fieldName},
+			</if>
+			<if test="content != null">
+				content = #{content},
+			</if>
+			<if test="fieldDefault != null">
+				field_default = #{fieldDefault},
+			</if>
+			<if test="fieldMustInput != null">
+				field_must_input = #{fieldMustInput},
+			</if>
+			<if test="fieldValidType != null">
+				field_valid_type = #{fieldValidType},
+			</if>
+			<if test="isKey != null">
+				is_key = #{isKey},
+			</if>
+			<if test="isNull != null">
+				is_null = #{isNull},
+			</if>
+			<if test="isShow != null">
+				is_show = #{isShow},
+			</if>
+			<if test="tableName != null">
+				table_name = #{tableName},
+			</if>
+			<if test="fieldType != null">
+				field_type = #{fieldType},
+			</if>
+			<if test="fieldLength != null">
+				field_length = #{fieldLength},
+			</if>
+			<if test="showType != null">
+				show_type = #{showType},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime},
+			</if>
+		</set>
+		where ID = #{id}
+	</update>
+	
+	<update id="addFieldToDB" parameterType="java.util.Map">
+		alter table ${tableName} add (${fieldName} ${fieldTypeLength} default '' ${isNull})
+	</update>
+	
+	<update id="updateFieldToDB" parameterType="java.util.Map">
+		alter table ${tableName} modify (${oldFieldName} ${fieldTypeLength})
+	</update>
+	
+	<update id="updateFieldNameToDB" parameterType="java.util.Map">
+		alter table ${tableName} rename column ${oldFieldName} to ${newFieldName} 
+	</update>
+
+	<update id="deleteFieldFromDt" parameterType="java.util.Map">
+		alter table ${tableName} drop column ${fieldName} 
+	</update>
+	<!-- 根据id查询 TS_FORM_FIELD -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from TS_FORM_FIELD
+		where id = #{value}
+	</select>
+
+	<!-- TS_FORM_FIELD 列表总数 -->
+	<select id="queryByCount" resultType="java.lang.Integer"
+		parameterType="com.adc.da.base.page.BasePage">
+		select count(distinct u0.id) from TS_FORM_FIELD u0
+		<include refid="Base_Where_Clause" />
+	</select>
+
+	<!-- 查询TS_FORM_FIELD列表 -->
+    <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	  select <include refid="Base_Column_List" /> from
+		  (select tmp_tb.* , rownum rn from
+			  (select distinct u0.* from TS_FORM_FIELD u0
+			   <include refid="Base_Where_Clause"/>
+			   <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	  ${pager.orderCondition}
+			   </if>
+			  ) tmp_tb where rownum &lt;= ${pager.endIndex}) u
+			  where rn &gt;= ${pager.startIndex}
+    </select>
+
+	<select id="getFieldListByTableName" resultMap="BaseResultMap" parameterType="java.lang.String">
+      select <include refid="Base_Column_List"/> from TS_FORM_FIELD
+      WHERE TABLE_NAME = #{tableName}           
+	</select>
+</mapper>

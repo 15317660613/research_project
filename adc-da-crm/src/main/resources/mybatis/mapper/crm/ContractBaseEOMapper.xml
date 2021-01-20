@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.crm.dao.ContractBaseEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.crm.entity.ContractBaseEO" >
+    <id column="id" property="id" />
+    <result column="area_manager_id" property="areaManagerId" />
+    <result column="dept_id" property="deptId" />
+    <result column="record_date" property="recordDate" />
+    <result column="contract_no" property="contractNo" />
+    <result column="customer_no" property="customerNo" />
+    <result column="customer_name" property="customerName" />
+    <result column="begin" property="begin" />
+    <result column="end" property="end" />
+    <result column="status" property="status" />
+    <result column="contract_amount" property="contractAmount" />
+    <result column="invoice_amount" property="invoiceAmount" />
+    <result column="income_amount" property="incomeAmount" />
+    <result column="cost_amount" property="costAmount" />
+    <result column="attachment" property="attachment" />
+    <result column="del_flag" property="delFlag" />
+    <result column="created_time" property="createdTime" />
+    <result column="created_user" property="createdUser" />
+    <result column="modified_time2" property="modifiedTime2" />
+    <result column="modified_user2" property="modifiedUser2" />
+  </resultMap>
+
+  <!-- CONTRACT_BASE table all fields -->
+  <sql id="CRM_Column_List" >
+     id, (select u.usname from TS_USER u where u.usid = area_manager_id) as area_manager_id, (select org.org_name from TS_ORG org where id = dept_id) as dept_id, record_date, contract_no, customer_no, customer_name, begin, end, status, contract_amount, invoice_amount, income_amount, cost_amount, attachment, del_flag, created_time, created_user, modified_time2, modified_user2
+  </sql>
+    <!-- CONTRACT_BASE table all fields -->
+    <sql id="Base_Column_List" >
+     id, area_manager_id, dept_id, record_date, contract_no, customer_no, customer_name, begin, end, status, contract_amount, invoice_amount, income_amount, cost_amount, attachment, del_flag, created_time, created_user, modified_time2, modified_user2
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="areaManagerId != null" >
+        and area_manager_id ${areaManagerIdOperator} #{areaManagerId}
+      </if>
+      <if test="deptId != null" >
+        and dept_id ${deptIdOperator} #{deptId}
+      </if>
+      <if test="recordDate != null" >
+        and record_date ${recordDateOperator} #{recordDate}
+      </if>
+      <if test="recordDate1 != null" >
+        and record_date &gt;= #{recordDate1}
+      </if>
+      <if test="recordDate2 != null" >
+        and record_date &lt;= #{recordDate2}
+      </if>
+      <if test="contractNo != null" >
+        and contract_no ${contractNoOperator} #{contractNo}
+      </if>
+      <if test="customerNo != null" >
+        and customer_no ${customerNoOperator} #{customerNo}
+      </if>
+      <if test="customerName != null" >
+        and customer_name ${customerNameOperator} #{customerName}
+      </if>
+      <if test="begin != null" >
+        and begin ${beginOperator} #{begin}
+      </if>
+      <if test="end != null" >
+        and end ${endOperator} #{end}
+      </if>
+      <if test="status != null" >
+        and status ${statusOperator} #{status}
+      </if>
+      <if test="contractAmount != null" >
+        and contract_amount ${contractAmountOperator} #{contractAmount}
+      </if>
+      <if test="invoiceAmount != null" >
+        and invoice_amount ${invoiceAmountOperator} #{invoiceAmount}
+      </if>
+      <if test="incomeAmount != null" >
+        and income_amount ${incomeAmountOperator} #{incomeAmount}
+      </if>
+      <if test="costAmount != null" >
+        and cost_amount ${costAmountOperator} #{costAmount}
+      </if>
+      <if test="attachment != null" >
+        and attachment ${attachmentOperator} #{attachment}
+      </if>
+      <if test="createdTime != null" >
+        and created_time ${createdTimeOperator} #{createdTime}
+      </if>
+      <if test="createdTime1 != null" >
+        and created_time &gt;= #{createdTime1}
+      </if>
+      <if test="createdTime2 != null" >
+        and created_time &lt;= #{createdTime2}
+      </if>
+      <if test="createdUser != null" >
+        and created_user ${createdUserOperator} #{createdUser}
+      </if>
+      <if test="modifiedTime2 != null" >
+        and modified_time2 ${modifiedTime2Operator} #{modifiedTime2}
+      </if>
+      <if test="modifiedTime21 != null" >
+        and modified_time2 &gt;= #{modifiedTime21}
+      </if>
+      <if test="modifiedTime22 != null" >
+        and modified_time2 &lt;= #{modifiedTime22}
+      </if>
+      <if test="modifiedUser2 != null" >
+        and modified_user2 ${modifiedUser2Operator} #{modifiedUser2}
+      </if>
+        and del_flag = '0'
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.crm.entity.ContractBaseEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_CONTRACT_BASE.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into CONTRACT_BASE(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{areaManagerId, jdbcType=VARCHAR}, #{deptId, jdbcType=VARCHAR}, #{recordDate, jdbcType=TIMESTAMP}, #{contractNo, jdbcType=VARCHAR}, #{customerNo, jdbcType=VARCHAR}, #{customerName, jdbcType=VARCHAR}, #{begin, jdbcType=VARCHAR}, #{end, jdbcType=VARCHAR}, #{status, jdbcType=VARCHAR}, #{contractAmount, jdbcType=VARCHAR}, #{invoiceAmount, jdbcType=VARCHAR}, #{incomeAmount, jdbcType=VARCHAR}, #{costAmount, jdbcType=VARCHAR}, #{attachment, jdbcType=VARCHAR}, #{delFlag, jdbcType=VARCHAR}, #{createdTime, jdbcType=TIMESTAMP}, #{createdUser, jdbcType=VARCHAR}, #{modifiedTime2, jdbcType=TIMESTAMP}, #{modifiedUser2, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.crm.entity.ContractBaseEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_CONTRACT_BASE.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into CONTRACT_BASE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="areaManagerId != null" >area_manager_id,</if>
+                <if test="deptId != null" >dept_id,</if>
+                <if test="recordDate != null" >record_date,</if>
+                <if test="contractNo != null" >contract_no,</if>
+                <if test="customerNo != null" >customer_no,</if>
+                <if test="customerName != null" >customer_name,</if>
+                <if test="begin != null" >begin,</if>
+                <if test="end != null" >end,</if>
+                <if test="status != null" >status,</if>
+                <if test="contractAmount != null" >contract_amount,</if>
+                <if test="invoiceAmount != null" >invoice_amount,</if>
+                <if test="incomeAmount != null" >income_amount,</if>
+                <if test="costAmount != null" >cost_amount,</if>
+                <if test="attachment != null" >attachment,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="createdTime != null" >created_time,</if>
+                <if test="createdUser != null" >created_user,</if>
+                <if test="modifiedTime2 != null" >modified_time2,</if>
+                <if test="modifiedUser2 != null" >modified_user2,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="areaManagerId != null" >#{areaManagerId, jdbcType=VARCHAR},</if>
+                <if test="deptId != null" >#{deptId, jdbcType=VARCHAR},</if>
+                <if test="recordDate != null" >#{recordDate, jdbcType=TIMESTAMP},</if>
+                <if test="contractNo != null" >#{contractNo, jdbcType=VARCHAR},</if>
+                <if test="customerNo != null" >#{customerNo, jdbcType=VARCHAR},</if>
+                <if test="customerName != null" >#{customerName, jdbcType=VARCHAR},</if>
+                <if test="begin != null" >#{begin, jdbcType=VARCHAR},</if>
+                <if test="end != null" >#{end, jdbcType=VARCHAR},</if>
+                <if test="status != null" >#{status, jdbcType=VARCHAR},</if>
+                <if test="contractAmount != null" >#{contractAmount, jdbcType=VARCHAR},</if>
+                <if test="invoiceAmount != null" >#{invoiceAmount, jdbcType=VARCHAR},</if>
+                <if test="incomeAmount != null" >#{incomeAmount, jdbcType=VARCHAR},</if>
+                <if test="costAmount != null" >#{costAmount, jdbcType=VARCHAR},</if>
+                <if test="attachment != null" >#{attachment, jdbcType=VARCHAR},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=VARCHAR},</if>
+                <if test="createdTime != null" >#{createdTime, jdbcType=TIMESTAMP},</if>
+                <if test="createdUser != null" >#{createdUser, jdbcType=VARCHAR},</if>
+                <if test="modifiedTime2 != null" >#{modifiedTime2, jdbcType=TIMESTAMP},</if>
+                <if test="modifiedUser2 != null" >#{modifiedUser2, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.crm.entity.ContractBaseEO" >
+    update CONTRACT_BASE
+       set  area_manager_id = #{areaManagerId},
+            dept_id = #{deptId},
+            record_date = #{recordDate},
+            contract_no = #{contractNo},
+            customer_no = #{customerNo},
+            customer_name = #{customerName},
+            begin = #{begin},
+            end = #{end},
+            status = #{status},
+            contract_amount = #{contractAmount},
+            invoice_amount = #{invoiceAmount},
+            income_amount = #{incomeAmount},
+            cost_amount = #{costAmount},
+            attachment = #{attachment},
+            del_flag = #{delFlag},
+            created_time = #{createdTime},
+            created_user = #{createdUser},
+            modified_time2 = #{modifiedTime2},
+            modified_user2 = #{modifiedUser2}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.crm.entity.ContractBaseEO" >
+    update CONTRACT_BASE
+    <set >
+      <if test="areaManagerId != null" >
+        area_manager_id = #{areaManagerId},
+      </if>
+      <if test="deptId != null" >
+        dept_id = #{deptId},
+      </if>
+      <if test="recordDate != null" >
+        record_date = #{recordDate},
+      </if>
+      <if test="contractNo != null" >
+        contract_no = #{contractNo},
+      </if>
+      <if test="customerNo != null" >
+        customer_no = #{customerNo},
+      </if>
+      <if test="customerName != null" >
+        customer_name = #{customerName},
+      </if>
+      <if test="begin != null" >
+        begin = #{begin},
+      </if>
+      <if test="end != null" >
+        end = #{end},
+      </if>
+      <if test="status != null" >
+        status = #{status},
+      </if>
+      <if test="contractAmount != null" >
+        contract_amount = #{contractAmount},
+      </if>
+      <if test="invoiceAmount != null" >
+        invoice_amount = #{invoiceAmount},
+      </if>
+      <if test="incomeAmount != null" >
+        income_amount = #{incomeAmount},
+      </if>
+      <if test="costAmount != null" >
+        cost_amount = #{costAmount},
+      </if>
+      <if test="attachment != null" >
+        attachment = #{attachment},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+      <if test="createdUser != null" >
+        created_user = #{createdUser},
+      </if>
+      <if test="modifiedTime2 != null" >
+        modified_time2 = #{modifiedTime2},
+      </if>
+      <if test="modifiedUser2 != null" >
+        modified_user2 = #{modifiedUser2},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 CONTRACT_BASE -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from CONTRACT_BASE
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from CONTRACT_BASE
+     where id = #{value}
+
+  </delete>
+
+  <!-- CONTRACT_BASE 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from CONTRACT_BASE
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询CONTRACT_BASE列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from CONTRACT_BASE
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <!-- 查询CONTRACT_BASE列表 -->
+  <select id="queryCRMListByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="CRM_Column_List" /> from CONTRACT_BASE
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from CONTRACT_BASE
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+    <update id="updateByPrimaryKeyAndDelFlag">
+        update CONTRACT_BASE set del_flag=#{delFlag} where id=#{primaryKey}
+    </update>
+</mapper>

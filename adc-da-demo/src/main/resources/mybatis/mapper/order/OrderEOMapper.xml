@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.order.dao.OrderEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.order.entity.OrderEO" >
+    <id column="order_id" property="orderId" />
+    <result column="proc_inst_id_" property="procInstId" />
+    <result column="user_id" property="userId" />
+    <result column="status" property="status" />
+    <result column="title" property="title" />
+    <result column="content" property="content" />
+    <result column="order_type" property="orderType" />
+    <result column="order_sum" property="orderSum" />
+    <result column="create_time" property="createTime" />
+  </resultMap>
+
+  <!-- TS_ORDER table all fields -->
+  <sql id="Base_Column_List" >
+     proc_inst_id_, user_id, status, order_id, title, content, order_type, order_sum, create_time
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="procInstId != null" >
+        and proc_inst_id_ ${procInstIdOperator} #{procInstId}
+      </if>
+      <if test="userId != null" >
+        and user_id ${userIdOperator} #{userId}
+      </if>
+      <if test="status != null" >
+        and status ${statusOperator} #{status}
+      </if>
+      <if test="orderId != null" >
+        and order_id ${orderIdOperator} #{orderId}
+      </if>
+      <if test="title != null" >
+        and title ${titleOperator} #{title}
+      </if>
+      <if test="content != null" >
+        and content ${contentOperator} #{content}
+      </if>
+      <if test="orderType != null" >
+        and order_type ${orderTypeOperator} #{orderType}
+      </if>
+      <if test="orderSum != null" >
+        and order_sum ${orderSumOperator} #{orderSum}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.order.entity.OrderEO" >
+    <!-- <selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="order_id">
+        SELECT SEQ_TS_ORDER.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into TS_ORDER(<include refid="Base_Column_List" />)
+    values (#{procInstId, jdbcType=VARCHAR}, #{userId, jdbcType=VARCHAR}, #{status, jdbcType=VARCHAR}, #{orderId, jdbcType=VARCHAR}, #{title, jdbcType=VARCHAR}, #{content, jdbcType=VARCHAR}, #{orderType, jdbcType=VARCHAR}, #{orderSum, jdbcType=DOUBLE  }, #{createTime, jdbcType=TIMESTAMP})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.order.entity.OrderEO" >
+        <!-- <selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="order_id">
+        SELECT SEQ_TS_ORDER.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into TS_ORDER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="procInstId != null" >proc_inst_id_,</if>
+                <if test="userId != null" >user_id,</if>
+                <if test="status != null" >status,</if>
+                <if test="orderId != null" >order_id,</if>
+                <if test="title != null" >title,</if>
+                <if test="content != null" >content,</if>
+                <if test="orderType != null" >order_type,</if>
+                <if test="orderSum != null" >order_sum,</if>
+                <if test="createTime != null" >create_time,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="procInstId != null" >#{procInstId, jdbcType=VARCHAR},</if>
+                <if test="userId != null" >#{userId, jdbcType=VARCHAR},</if>
+                <if test="status != null" >#{status, jdbcType=VARCHAR},</if>
+                <if test="orderId != null" >#{orderId, jdbcType=VARCHAR},</if>
+                <if test="title != null" >#{title, jdbcType=VARCHAR},</if>
+                <if test="content != null" >#{content, jdbcType=VARCHAR},</if>
+                <if test="orderType != null" >#{orderType, jdbcType=VARCHAR},</if>
+                <if test="orderSum != null" >#{orderSum, jdbcType=DOUBLE  },</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.order.entity.OrderEO" >
+    update TS_ORDER
+       set  proc_inst_id_ = #{procInstId},
+            user_id = #{userId},
+            status = #{status},
+            title = #{title},
+            content = #{content},
+            order_type = #{orderType},
+            order_sum = #{orderSum},
+            create_time = #{createTime}
+     where  order_id = #{orderId}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.order.entity.OrderEO" >
+    update TS_ORDER
+    <set >
+      <if test="procInstId != null" >
+        proc_inst_id_ = #{procInstId},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId},
+      </if>
+      <if test="status != null" >
+        status = #{status},
+      </if>
+      <if test="title != null" >
+        title = #{title},
+      </if>
+      <if test="content != null" >
+        content = #{content},
+      </if>
+      <if test="orderType != null" >
+        order_type = #{orderType},
+      </if>
+      <if test="orderSum != null" >
+        order_sum = #{orderSum},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+    </set>
+     where order_id = #{orderId}
+  </update>
+
+  <!-- 根据id查询 TS_ORDER -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select <include refid="Base_Column_List" /> 
+      from TS_ORDER
+     where order_id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TS_ORDER
+     where order_id = #{value}
+
+  </delete>
+
+  <!-- TS_ORDER 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from TS_ORDER
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TS_ORDER列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from TS_ORDER
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from TS_ORDER
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

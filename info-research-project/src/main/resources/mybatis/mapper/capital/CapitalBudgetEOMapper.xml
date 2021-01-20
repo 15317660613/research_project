@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.capital.dao.CapitalBudgetEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.capital.entity.CapitalBudgetEO" >
+    <id column="research_project_id_" property="researchProjectId" />
+    <result column="center_budget_" property="centerBudget" />
+    <result column="center_comment_" property="centerComment" />
+    <result column="dept_budget_" property="deptBudget" />
+    <result column="dept_comment_" property="deptComment" />
+    <result column="other_budget_" property="otherBudget" />
+    <result column="other_comment_" property="otherComment" />
+    <result column="ext_info_1_" property="extInfo1" />
+    <result column="ext_info_2_" property="extInfo2" />
+    <result column="ext_info_3_" property="extInfo3" />
+    <result column="ext_info_4_" property="extInfo4" />
+    <result column="ext_info_5_" property="extInfo5" />
+    <result column="ext_info_6_" property="extInfo6" />
+  </resultMap>
+
+  <!-- RS_CAPITAL_BUDGET table all fields -->
+  <sql id="Base_Column_List" >
+     research_project_id_, center_budget_, center_comment_, dept_budget_, dept_comment_, other_budget_, other_comment_, ext_info_1_, ext_info_2_, ext_info_3_, ext_info_4_, ext_info_5_, ext_info_6_
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="researchProjectId != null" >
+        and research_project_id_ ${researchProjectIdOperator} #{researchProjectId}
+      </if>
+      <if test="centerBudget != null" >
+        and center_budget_ ${centerBudgetOperator} #{centerBudget}
+      </if>
+      <if test="centerComment != null" >
+        and center_comment_ ${centerCommentOperator} #{centerComment}
+      </if>
+      <if test="deptBudget != null" >
+        and dept_budget_ ${deptBudgetOperator} #{deptBudget}
+      </if>
+      <if test="deptComment != null" >
+        and dept_comment_ ${deptCommentOperator} #{deptComment}
+      </if>
+      <if test="otherBudget != null" >
+        and other_budget_ ${otherBudgetOperator} #{otherBudget}
+      </if>
+      <if test="otherComment != null" >
+        and other_comment_ ${otherCommentOperator} #{otherComment}
+      </if>
+      <if test="extInfo1 != null" >
+        and ext_info_1_ ${extInfo1Operator} #{extInfo1}
+      </if>
+      <if test="extInfo2 != null" >
+        and ext_info_2_ ${extInfo2Operator} #{extInfo2}
+      </if>
+      <if test="extInfo3 != null" >
+        and ext_info_3_ ${extInfo3Operator} #{extInfo3}
+      </if>
+      <if test="extInfo4 != null" >
+        and ext_info_4_ ${extInfo4Operator} #{extInfo4}
+      </if>
+      <if test="extInfo5 != null" >
+        and ext_info_5_ ${extInfo5Operator} #{extInfo5}
+      </if>
+      <if test="extInfo6 != null" >
+        and ext_info_6_ ${extInfo6Operator} #{extInfo6}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.capital.entity.CapitalBudgetEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="research_project_id_">
+        SELECT SEQ_RS_CAPITAL_BUDGET.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into RS_CAPITAL_BUDGET(<include refid="Base_Column_List" />)
+    values (#{researchProjectId, jdbcType=VARCHAR}, #{centerBudget, jdbcType=VARCHAR}, #{centerComment, jdbcType=VARCHAR}, #{deptBudget, jdbcType=VARCHAR}, #{deptComment, jdbcType=VARCHAR}, #{otherBudget, jdbcType=VARCHAR}, #{otherComment, jdbcType=VARCHAR}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR}, #{extInfo6, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.capital.entity.CapitalBudgetEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="research_project_id_">
+        SELECT SEQ_RS_CAPITAL_BUDGET.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into RS_CAPITAL_BUDGET
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="researchProjectId != null" >research_project_id_,</if>
+                <if test="centerBudget != null" >center_budget_,</if>
+                <if test="centerComment != null" >center_comment_,</if>
+                <if test="deptBudget != null" >dept_budget_,</if>
+                <if test="deptComment != null" >dept_comment_,</if>
+                <if test="otherBudget != null" >other_budget_,</if>
+                <if test="otherComment != null" >other_comment_,</if>
+                <if test="extInfo1 != null" >ext_info_1_,</if>
+                <if test="extInfo2 != null" >ext_info_2_,</if>
+                <if test="extInfo3 != null" >ext_info_3_,</if>
+                <if test="extInfo4 != null" >ext_info_4_,</if>
+                <if test="extInfo5 != null" >ext_info_5_,</if>
+                <if test="extInfo6 != null" >ext_info_6_,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="researchProjectId != null" >#{researchProjectId, jdbcType=VARCHAR},</if>
+                <if test="centerBudget != null" >#{centerBudget, jdbcType=VARCHAR},</if>
+                <if test="centerComment != null" >#{centerComment, jdbcType=VARCHAR},</if>
+                <if test="deptBudget != null" >#{deptBudget, jdbcType=VARCHAR},</if>
+                <if test="deptComment != null" >#{deptComment, jdbcType=VARCHAR},</if>
+                <if test="otherBudget != null" >#{otherBudget, jdbcType=VARCHAR},</if>
+                <if test="otherComment != null" >#{otherComment, jdbcType=VARCHAR},</if>
+                <if test="extInfo1 != null" >#{extInfo1, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="extInfo3 != null" >#{extInfo3, jdbcType=VARCHAR},</if>
+                <if test="extInfo4 != null" >#{extInfo4, jdbcType=VARCHAR},</if>
+                <if test="extInfo5 != null" >#{extInfo5, jdbcType=VARCHAR},</if>
+                <if test="extInfo6 != null" >#{extInfo6, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.capital.entity.CapitalBudgetEO" >
+    update RS_CAPITAL_BUDGET
+       set  center_budget_ = #{centerBudget},
+            center_comment_ = #{centerComment},
+            dept_budget_ = #{deptBudget},
+            dept_comment_ = #{deptComment},
+            other_budget_ = #{otherBudget},
+            other_comment_ = #{otherComment},
+            ext_info_1_ = #{extInfo1},
+            ext_info_2_ = #{extInfo2},
+            ext_info_3_ = #{extInfo3},
+            ext_info_4_ = #{extInfo4},
+            ext_info_5_ = #{extInfo5},
+            ext_info_6_ = #{extInfo6}
+     where  research_project_id_ = #{researchProjectId}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.capital.entity.CapitalBudgetEO" >
+    update RS_CAPITAL_BUDGET
+    <set >
+      <if test="centerBudget != null" >
+        center_budget_ = #{centerBudget},
+      </if>
+      <if test="centerComment != null" >
+        center_comment_ = #{centerComment},
+      </if>
+      <if test="deptBudget != null" >
+        dept_budget_ = #{deptBudget},
+      </if>
+      <if test="deptComment != null" >
+        dept_comment_ = #{deptComment},
+      </if>
+      <if test="otherBudget != null" >
+        other_budget_ = #{otherBudget},
+      </if>
+      <if test="otherComment != null" >
+        other_comment_ = #{otherComment},
+      </if>
+      <if test="extInfo1 != null" >
+        ext_info_1_ = #{extInfo1},
+      </if>
+      <if test="extInfo2 != null" >
+        ext_info_2_ = #{extInfo2},
+      </if>
+      <if test="extInfo3 != null" >
+        ext_info_3_ = #{extInfo3},
+      </if>
+      <if test="extInfo4 != null" >
+        ext_info_4_ = #{extInfo4},
+      </if>
+      <if test="extInfo5 != null" >
+        ext_info_5_ = #{extInfo5},
+      </if>
+      <if test="extInfo6 != null" >
+        ext_info_6_ = #{extInfo6},
+      </if>
+    </set>
+     where research_project_id_ = #{researchProjectId}
+  </update>
+
+  <!-- 根据id查询 RS_CAPITAL_BUDGET -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from RS_CAPITAL_BUDGET
+     where research_project_id_ = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RS_CAPITAL_BUDGET
+     where research_project_id_ = #{value}
+
+  </delete>
+
+  <!-- RS_CAPITAL_BUDGET 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from RS_CAPITAL_BUDGET
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询RS_CAPITAL_BUDGET列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from RS_CAPITAL_BUDGET
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from RS_CAPITAL_BUDGET
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

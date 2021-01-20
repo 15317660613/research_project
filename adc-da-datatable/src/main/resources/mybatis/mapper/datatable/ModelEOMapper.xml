@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.datatable.dao.ModelEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.datatable.entity.ModelEO" >
+    <id column="m_id" property="mId" />
+    <result column="m_name" property="mName" />
+    <result column="m_info" property="mInfo" />
+    <result column="m_param" property="mParam" />
+    <result column="m_tables" property="mTables" />
+    <result column="m_associates" property="mAssociates" />
+    <result column="m_create" property="mCreate" />
+    <result column="m_change" property="mChange" />
+    <result column="create_man" property="createMan" />
+    <result column="change_man" property="changeMan" />
+    <result column="m_x" property="mX" />
+    <result column="m_y" property="mY" />
+    <result column="m_config" property="mConfig" />
+      <result column="m_code" property="mCode" />
+  </resultMap>
+
+  <!-- TS_MODEL table all fields -->
+  <sql id="Base_Column_List" >
+     m_name, m_id, m_info, m_param, m_tables, m_associates, m_create, m_change, create_man, change_man, m_x, m_y, m_config, m_code
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="mName != null" >
+        and m_name ${mNameOperator} #{mName}
+      </if>
+      <if test="mId != null" >
+        and m_id ${mIdOperator} #{mId}
+      </if>
+      <if test="mInfo != null" >
+        and m_info ${mInfoOperator} #{mInfo}
+      </if>
+      <if test="mParam != null" >
+        and m_param ${mParamOperator} #{mParam}
+      </if>
+      <if test="mTables != null" >
+        and m_tables ${mTablesOperator} #{mTables}
+      </if>
+      <if test="mAssociates != null" >
+        and m_associates ${mAssociatesOperator} #{mAssociates}
+      </if>
+      <if test="mCreate != null" >
+        and m_create ${mCreateOperator} #{mCreate}
+      </if>
+      <if test="mCreate1 != null" >
+        and m_create &gt;= #{mCreate1}
+      </if>
+      <if test="mCreate2 != null" >
+        and m_create &lt;= #{mCreate2}
+      </if>
+      <if test="mChange != null" >
+        and m_change ${mChangeOperator} #{mChange}
+      </if>
+      <if test="mChange1 != null" >
+        and m_change &gt;= #{mChange1}
+      </if>
+      <if test="mChange2 != null" >
+        and m_change &lt;= #{mChange2}
+      </if>
+      <if test="createMan != null" >
+        and create_man ${createManOperator} #{createMan}
+      </if>
+      <if test="changeMan != null" >
+        and change_man ${changeManOperator} #{changeMan}
+      </if>
+      <if test="mX != null" >
+        and m_x ${mXOperator} #{mX}
+      </if>
+      <if test="mY != null" >
+        and m_y ${mYOperator} #{mY}
+      </if>
+      <if test="mConfig != null" >
+        and m_config ${mConfigOperator} #{mConfig}
+      </if>
+        <if test="mCode != null" >
+            and m_code ${mCodeOperator} #{mCode}
+        </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.datatable.entity.ModelEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="m_id">
+        SELECT SEQ_TS_MODEL.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into TS_MODEL(<include refid="Base_Column_List" />)
+    values (#{mName, jdbcType=VARCHAR}, #{mId, jdbcType=VARCHAR}, #{mInfo, jdbcType=VARCHAR}, #{mParam, jdbcType=VARCHAR}, #{mTables, jdbcType=VARCHAR}, #{mAssociates, jdbcType=VARCHAR}, #{mCreate, jdbcType=TIMESTAMP}, #{mChange, jdbcType=TIMESTAMP}, #{createMan, jdbcType=VARCHAR}, #{changeMan, jdbcType=VARCHAR}, #{mX, jdbcType=VARCHAR}, #{mY, jdbcType=VARCHAR}, #{mConfig, jdbcType=VARCHAR}, #{mCode, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.datatable.entity.ModelEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="m_id">
+        SELECT SEQ_TS_MODEL.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into TS_MODEL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="mName != null" >m_name,</if>
+                <if test="mId != null" >m_id,</if>
+                <if test="mInfo != null" >m_info,</if>
+                <if test="mParam != null" >m_param,</if>
+                <if test="mTables != null" >m_tables,</if>
+                <if test="mAssociates != null" >m_associates,</if>
+                <if test="mCreate != null" >m_create,</if>
+                <if test="mChange != null" >m_change,</if>
+                <if test="createMan != null" >create_man,</if>
+                <if test="changeMan != null" >change_man,</if>
+                <if test="mX != null" >m_x,</if>
+                <if test="mY != null" >m_y,</if>
+                <if test="mConfig != null" >m_config,</if>
+                <if test="mCode != null" >m_code,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="mName != null" >#{mName, jdbcType=VARCHAR},</if>
+                <if test="mId != null" >#{mId, jdbcType=VARCHAR},</if>
+                <if test="mInfo != null" >#{mInfo, jdbcType=VARCHAR},</if>
+                <if test="mParam != null" >#{mParam, jdbcType=VARCHAR},</if>
+                <if test="mTables != null" >#{mTables, jdbcType=VARCHAR},</if>
+                <if test="mAssociates != null" >#{mAssociates, jdbcType=VARCHAR},</if>
+                <if test="mCreate != null" >#{mCreate, jdbcType=TIMESTAMP},</if>
+                <if test="mChange != null" >#{mChange, jdbcType=TIMESTAMP},</if>
+                <if test="createMan != null" >#{createMan, jdbcType=VARCHAR},</if>
+                <if test="changeMan != null" >#{changeMan, jdbcType=VARCHAR},</if>
+                <if test="mX != null" >#{mX, jdbcType=VARCHAR},</if>
+                <if test="mY != null" >#{mY, jdbcType=VARCHAR},</if>
+                <if test="mConfig != null" >#{mConfig, jdbcType=VARCHAR},</if>
+                <if test="mCode != null" >#{mCode, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.datatable.entity.ModelEO" >
+    update TS_MODEL
+       set  m_name = #{mName},
+            m_info = #{mInfo},
+            m_param = #{mParam},
+            m_tables = #{mTables},
+            m_associates = #{mAssociates},
+            m_create = #{mCreate},
+            m_change = #{mChange},
+            create_man = #{createMan},
+            change_man = #{changeMan},
+            m_x = #{mX},
+            m_y = #{mY},
+            m_config = #{mConfig},
+            m_code = #{mCode}
+     where  m_id = #{mId}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.datatable.entity.ModelEO" >
+    update TS_MODEL
+    <set >
+      <if test="mName != null" >
+        m_name = #{mName},
+      </if>
+      <if test="mInfo != null" >
+        m_info = #{mInfo},
+      </if>
+      <if test="mParam != null" >
+        m_param = #{mParam},
+      </if>
+      <if test="mTables != null" >
+        m_tables = #{mTables},
+      </if>
+      <if test="mAssociates != null" >
+        m_associates = #{mAssociates},
+      </if>
+      <if test="mCreate != null" >
+        m_create = #{mCreate},
+      </if>
+      <if test="mChange != null" >
+        m_change = #{mChange},
+      </if>
+      <if test="createMan != null" >
+        create_man = #{createMan},
+      </if>
+      <if test="changeMan != null" >
+        change_man = #{changeMan},
+      </if>
+      <if test="mX != null" >
+        m_x = #{mX},
+      </if>
+      <if test="mY != null" >
+        m_y = #{mY},
+      </if>
+      <if test="mConfig != null" >
+        m_config = #{mConfig},
+      </if>
+        <if test="mCode != null" >
+            m_code = #{mCode},
+        </if>
+    </set>
+     where m_id = #{mId}
+  </update>
+
+  <!-- 根据id查询 TS_MODEL -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+      from TS_MODEL
+     where m_id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TS_MODEL
+     where m_id = #{value}
+
+  </delete>
+
+  <!-- TS_MODEL 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from TS_MODEL
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TS_MODEL列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from TS_MODEL
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			 order by m_create desc
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from TS_MODEL
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+    <update id="saveConfig" parameterType="java.lang.String">
+		update TS_MODEL
+        set M_CONFIG  = #{m_config}
+        where M_ID = #{mid}
+	</update>
+
+</mapper>

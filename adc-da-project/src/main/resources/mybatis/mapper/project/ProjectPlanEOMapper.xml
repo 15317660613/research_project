@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.project.dao.ProjectPlanEODao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="com.adc.da.project.entity.ProjectPlanEO">
+        <id column="id" property="id"/>
+        <result column="year" property="year"/>
+        <result column="month" property="month"/>
+        <result column="department" property="department"/>
+        <result column="project_type" property="projectType"/>
+        <result column="mark" property="mark"/>
+        <result column="project_name" property="projectName"/>
+        <result column="project_content" property="projectContent"/>
+        <result column="progress_target" property="progressTarget"/>
+        <result column="finish_time" property="finishTime"/>
+        <result column="major_person" property="majorPerson"/>
+        <result column="participant" property="participant"/>
+        <result column="cooperation_department" property="cooperationDepartment"/>
+        <result column="ext_inf01" property="extInf01"/>
+        <result column="ext_inf02" property="extInf02"/>
+        <result column="ext_inf03" property="extInf03"/>
+        <result column="ext_inf04" property="extInf04"/>
+        <result column="ext_inf05" property="extInf05"/>
+    </resultMap>
+
+    <!-- PROJECT_PLAN table all fields -->
+    <sql id="Base_Column_List">
+     id, year, month, department, project_type, mark, project_name, project_content, progress_target, finish_time, major_person, participant, cooperation_department, ext_inf01, ext_inf02, ext_inf03, ext_inf04, ext_inf05
+  </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                and id ${idOperator} #{id}
+            </if>
+            <if test="year != null">
+                and year ${yearOperator} #{year}
+            </if>
+            <if test="month != null">
+                and month ${monthOperator} #{month}
+            </if>
+            <if test="department != null">
+                and department ${departmentOperator} #{department}
+            </if>
+            <if test="projectType != null">
+                and project_type ${projectTypeOperator} #{projectType}
+            </if>
+            <if test="mark != null">
+                and mark ${markOperator} #{mark}
+            </if>
+            <if test="projectName != null">
+                and project_name ${projectNameOperator} #{projectName}
+            </if>
+            <if test="projectContent != null">
+                and project_content ${projectContentOperator} #{projectContent}
+            </if>
+            <if test="progressTarget != null">
+                and progress_target ${progressTargetOperator} #{progressTarget}
+            </if>
+            <if test="finishTime != null">
+                and finish_time ${finishTimeOperator} #{finishTime}
+            </if>
+            <if test="majorPerson != null">
+                and major_person ${majorPersonOperator} #{majorPerson}
+            </if>
+            <if test="participant != null">
+                and participant ${participantOperator} #{participant}
+            </if>
+            <if test="cooperationDepartment != null">
+                and cooperation_department ${cooperationDepartmentOperator} #{cooperationDepartment}
+            </if>
+            <if test="extInf01 != null">
+                and ext_inf01 ${extInf01Operator} #{extInf01}
+            </if>
+            <if test="extInf02 != null">
+                and ext_inf02 ${extInf02Operator} #{extInf02}
+            </if>
+            <if test="extInf03 != null">
+                and ext_inf03 ${extInf03Operator} #{extInf03}
+            </if>
+            <if test="extInf04 != null">
+                and ext_inf04 ${extInf04Operator} #{extInf04}
+            </if>
+            <if test="extInf05 != null">
+                and ext_inf05 ${extInf05Operator} #{extInf05}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="com.adc.da.project.entity.ProjectPlanEO">
+        <!-- <selectKey resultType="java.lang.String" project="BEFORE" keyProperty="id">
+            SELECT SEQ_PROJECT_PLAN.NEXTVAL FROM DUAL
+        </selectKey> -->
+        insert into PROJECT_PLAN(<include refid="Base_Column_List"/>)
+        values (#{id, jdbcType=VARCHAR}, #{year, jdbcType=VARCHAR}, #{month, jdbcType=VARCHAR}, #{department, jdbcType=VARCHAR},
+        #{projectType, jdbcType=VARCHAR}, #{mark, jdbcType=VARCHAR}, #{projectName, jdbcType=VARCHAR}, #{projectContent, jdbcType=VARCHAR},
+        #{progressTarget, jdbcType=VARCHAR}, #{finishTime, jdbcType=VARCHAR}, #{majorPerson, jdbcType=VARCHAR}, #{participant, jdbcType=VARCHAR},
+        #{cooperationDepartment, jdbcType=VARCHAR}, #{extInf01, jdbcType=VARCHAR}, #{extInf02, jdbcType=VARCHAR}, #{extInf03, jdbcType=VARCHAR},
+        #{extInf04, jdbcType=VARCHAR}, #{extInf05, jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id="insertSelective" parameterType="com.adc.da.project.entity.ProjectPlanEO">
+        <!-- <selectKey resultType="java.lang.String" project="BEFORE" keyProperty="id">
+        SELECT SEQ_PROJECT_PLAN.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into PROJECT_PLAN
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="year != null">year,</if>
+            <if test="month != null">month,</if>
+            <if test="department != null">department,</if>
+            <if test="projectType != null">project_type,</if>
+            <if test="mark != null">mark,</if>
+            <if test="projectName != null">project_name,</if>
+            <if test="projectContent != null">project_content,</if>
+            <if test="progressTarget != null">progress_target,</if>
+            <if test="finishTime != null">finish_time,</if>
+            <if test="majorPerson != null">major_person,</if>
+            <if test="participant != null">participant,</if>
+            <if test="cooperationDepartment != null">cooperation_department,</if>
+            <if test="extInf01 != null">ext_inf01,</if>
+            <if test="extInf02 != null">ext_inf02,</if>
+            <if test="extInf03 != null">ext_inf03,</if>
+            <if test="extInf04 != null">ext_inf04,</if>
+            <if test="extInf05 != null">ext_inf05,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id, jdbcType=VARCHAR},</if>
+            <if test="year != null">#{year, jdbcType=VARCHAR},</if>
+            <if test="month != null">#{month, jdbcType=VARCHAR},</if>
+            <if test="department != null">#{department, jdbcType=VARCHAR},</if>
+            <if test="projectType != null">#{projectType, jdbcType=VARCHAR},</if>
+            <if test="mark != null">#{mark, jdbcType=VARCHAR},</if>
+            <if test="projectName != null">#{projectName, jdbcType=VARCHAR},</if>
+            <if test="projectContent != null">#{projectContent, jdbcType=VARCHAR},</if>
+            <if test="progressTarget != null">#{progressTarget, jdbcType=VARCHAR},</if>
+            <if test="finishTime != null">#{finishTime, jdbcType=VARCHAR},</if>
+            <if test="majorPerson != null">#{majorPerson, jdbcType=VARCHAR},</if>
+            <if test="participant != null">#{participant, jdbcType=VARCHAR},</if>
+            <if test="cooperationDepartment != null">#{cooperationDepartment, jdbcType=VARCHAR},</if>
+            <if test="extInf01 != null">#{extInf01, jdbcType=VARCHAR},</if>
+            <if test="extInf02 != null">#{extInf02, jdbcType=VARCHAR},</if>
+            <if test="extInf03 != null">#{extInf03, jdbcType=VARCHAR},</if>
+            <if test="extInf04 != null">#{extInf04, jdbcType=VARCHAR},</if>
+            <if test="extInf05 != null">#{extInf05, jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <!-- 根据pk，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="com.adc.da.project.entity.ProjectPlanEO">
+    update PROJECT_PLAN
+       set  year = #{year},
+            month = #{month},
+            department = #{department},
+            project_type = #{projectType},
+            mark = #{mark},
+            project_name = #{projectName},
+            project_content = #{projectContent},
+            progress_target = #{progressTarget},
+            finish_time = #{finishTime},
+            major_person = #{majorPerson},
+            participant = #{participant},
+            cooperation_department = #{cooperationDepartment},
+            ext_inf01 = #{extInf01},
+            ext_inf02 = #{extInf02},
+            ext_inf03 = #{extInf03},
+            ext_inf04 = #{extInf04},
+            ext_inf05 = #{extInf05}
+     where  id = #{id}
+  </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.project.entity.ProjectPlanEO">
+        update PROJECT_PLAN
+        <set>
+            <if test="year != null">
+                year = #{year},
+            </if>
+            <if test="month != null">
+                month = #{month},
+            </if>
+            <if test="department != null">
+                department = #{department},
+            </if>
+            <if test="projectType != null">
+                project_type = #{projectType},
+            </if>
+            <if test="mark != null">
+                mark = #{mark},
+            </if>
+            <if test="projectName != null">
+                project_name = #{projectName},
+            </if>
+            <if test="projectContent != null">
+                project_content = #{projectContent},
+            </if>
+            <if test="progressTarget != null">
+                progress_target = #{progressTarget},
+            </if>
+            <if test="finishTime != null">
+                finish_time = #{finishTime},
+            </if>
+            <if test="majorPerson != null">
+                major_person = #{majorPerson},
+            </if>
+            <if test="participant != null">
+                participant = #{participant},
+            </if>
+            <if test="cooperationDepartment != null">
+                cooperation_department = #{cooperationDepartment},
+            </if>
+            <if test="extInf01 != null">
+                ext_inf01 = #{extInf01},
+            </if>
+            <if test="extInf02 != null">
+                ext_inf02 = #{extInf02},
+            </if>
+            <if test="extInf03 != null">
+                ext_inf03 = #{extInf03},
+            </if>
+            <if test="extInf04 != null">
+                ext_inf04 = #{extInf04},
+            </if>
+            <if test="extInf05 != null">
+                ext_inf05 = #{extInf05},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!-- 根据id查询 PROJECT_PLAN -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from PROJECT_PLAN
+        where id = #{value}
+
+    </select>
+
+    <!-- 根据id和流程实例ID查询 PROJECT_PLAN -->
+    <select id="selectProjectPlanByIdAndProcessInsId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from PROJECT_PLAN
+        where id = #{0} and ext_inf01 = #{1}
+    </select>
+
+
+    <!-- 根据id查询 PROJECT_PLAN -->
+    <select id="selectByDeptProTypeAndProcessInstId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from PROJECT_PLAN
+        where department = #{0} and ext_inf02 = #{1} and project_type = #{2} and ext_inf01 = #{3}
+        order by ext_inf03
+    </select>
+
+    <!-- 根据id查询 PROJECT_PLAN -->
+    <select id="selectByProTypeAndProcessInstId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from PROJECT_PLAN
+        where project_type = #{0} and ext_inf02 = #{1} and ext_inf01 = #{2}
+        order by ext_inf03
+    </select>
+
+
+
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from PROJECT_PLAN
+     where id = #{value}
+
+  </delete>
+
+    <!-- PROJECT_PLAN 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        select count(1) from PROJECT_PLAN
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询PROJECT_PLAN列表 -->
+    <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        (select tmp_tb.* , rownum rn from
+        (select
+        <include refid="Base_Column_List"/>
+        from PROJECT_PLAN
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select
+        <include refid="Base_Column_List"/>
+        from PROJECT_PLAN
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+    </select>
+
+</mapper>

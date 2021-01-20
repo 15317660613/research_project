@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.funds.dao.ProjectIncomeEODao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="com.adc.da.research.funds.entity.ProjectIncomeEO">
+        <id column="id" property="id"/>
+        <result column="project_id" property="projectId"/>
+        <result column="project_code" property="projectCode"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="subject_name" property="subjectName"/>
+        <result column="voucher_number" property="voucherNumber"/>
+        <result column="income_amount" property="incomeAmount"/>
+        <result column="income_date" property="incomeDate"/>
+        <result column="summary" property="summary"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="create_user_name" property="createUserName"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+        <result column="income_type" property="incomeType" />
+        <result column="del_flag" property="delFlag"/>
+        <result column="ext1" property="ext1"/>
+        <result column="ext2" property="ext2"/>
+        <result column="ext3" property="ext3"/>
+        <result column="ext4" property="ext4"/>
+        <result column="ext5" property="ext5"/>
+    </resultMap>
+
+    <resultMap id="BaseResultAllMap" type="com.adc.da.research.funds.entity.ProjectIncomeEO">
+        <id column="id" property="id"/>
+        <result column="project_id" property="projectId"/>
+        <result column="project_code" property="projectCode"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="subject_name" property="subjectName"/>
+        <result column="voucher_number" property="voucherNumber"/>
+        <result column="income_amount" property="incomeAmount"/>
+        <result column="income_date" property="incomeDate"/>
+        <result column="summary" property="summary"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="create_user_name" property="createUserName"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+        <result column="del_flag" property="delFlag"/>
+        <result column="project_name" property="projectName"/>
+        <result column="income_type" property="incomeType" />
+        <result column="dept_name" property="deptName"/>
+        <result column="ext1" property="ext1"/>
+        <result column="ext2" property="ext2"/>
+        <result column="ext3" property="ext3"/>
+        <result column="ext4" property="ext4"/>
+        <result column="ext5" property="ext5"/>
+    </resultMap>
+
+    <!-- RS_PROJECT_INCOME table all fields -->
+    <sql id="Base_Column_List">
+     id, project_id, project_code, dept_id, subject_name, voucher_number, income_amount, income_date, summary
+     , create_user_id, create_user_name, create_time, modify_time, del_flag, ext1, ext2, ext3, ext4, ext5, income_type
+  </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause_New">
+        where 1=1 AND (RPI.DEL_FLAG=0 OR RPI.DEL_FLAG =0)
+        <trim suffixOverrides=",">
+            <if test="incomeDateBegin != null and incomeDateBegin !=''" >
+                and to_char(RPI.income_date,'yyyy-mm-dd') &gt;= #{incomeDateBegin}
+            </if>
+            <if test="incomeDateEnd != null and incomeDateEnd!=''" >
+                and to_char(RPI.income_date,'yyyy-mm-dd') &lt;= #{incomeDateEnd}
+            </if>
+            <if test="incomeAmountBegin !=null and incomeAmountBegin!=''">
+                and RPI.income_amount <![CDATA[>=]]> #{incomeAmountBegin}
+            </if>
+            <if test="incomeAmountEnd !=null and incomeAmountEnd!=''">
+                and RPI.income_amount <![CDATA[<=]]> #{incomeAmountEnd}
+            </if>
+            <if test="incomeType!=null and incomeType!=''">
+                and RPI.income_type = #{incomeType}
+            </if>
+            <if test="id != null and id !=null">
+                and RPI.id ${idOperator} #{id}
+            </if>
+            <if test="projectName != null and projectName!=''">
+                and project_name like CONCAT('%',CONCAT( #{projectName},'%'))
+            </if>
+            <if test="projectId != null and projectId!=''">
+                and project_id =  #{projectId}
+            </if>
+            <if test="projectCode != null and projectCode!=''">
+                and RPI.project_code like CONCAT('%',CONCAT( #{projectCode},'%'))
+            </if>
+            <if test="deptName != null and deptName!=''">
+                and dept_name like CONCAT('%',CONCAT( #{deptName},'%'))
+            </if>
+            <if test="subjectName != null and subjectName !=''">
+                and RPI.subject_name like CONCAT('%',CONCAT( #{subjectName},'%'))
+            </if>
+            <if test="voucherNumber != null and voucherNumber !=''">
+                and RPI.voucher_number like CONCAT('%',CONCAT( #{voucherNumber},'%'))
+            </if>
+            <if test="incomeAmount != null and incomeAmount !=''">
+                and RPI.income_amount ${incomeAmountOperator} #{incomeAmount}
+            </if>
+            <if test="incomeDate != null and incomeDate !=''">
+                and to_char(RPI.income_date,'yyyy-mm-dd') ${incomeDateOperator} #{incomeDate}
+            </if>
+            <if test="incomeDate1 != null and incomeDate1 !=''" >
+                and to_char(RPI.income_date,'yyyy-mm-dd') &gt;= #{incomeDate1}
+            </if>
+            <if test="incomeDate2 != null and incomeDate2 !=''">
+                and to_char(RPI.income_date,'yyyy-mm-dd') &lt;= #{incomeDate2}
+            </if>
+            <if test="summary != null and summary!= ''">
+                and RPI.summary ${summaryOperator} #{summary}
+            </if>
+            <if test="createUserId != null and createUserId!=''" >
+                and  RPD.technical_director LIKE  CONCAT('%',CONCAT(#{createUserId},'%'))
+            </if>
+            <if test="createUserName != null and createUserName!=''">
+                and RPI.create_user_name ${createUserNameOperator} #{createUserName}
+            </if>
+            <if test="createTime != null  and createTime !=''">
+                and RPI.create_time ${createTimeOperator} #{createTime}
+            </if>
+            <if test="createTime1 != null and createTime1 !=''">
+                and RPI.create_time &gt;= #{createTime1}
+            </if>
+            <if test="createTime2 != null and createTime2 !=''">
+                and RPI.create_time &lt;= #{createTime2}
+            </if>
+            <if test="modifyTime != null and modifyTime !=''">
+                and RPI.modify_time ${modifyTimeOperator} #{modifyTime}
+            </if>
+            <if test="modifyTime1 != null and modifyTime1 !=''">
+                and RPI.modify_time &gt;= #{modifyTime1}
+            </if>
+            <if test="modifyTime2 != null and modifyTime2 !=''">
+                and RPI.modify_time &lt;= #{modifyTime2}
+            </if>
+            <if test="delFlag != null and delFlag !=''">
+                and RPI.del_flag ${delFlagOperator} #{delFlag}
+            </if>
+            <if test="ext1 != null and ext1 !=''">
+                and RPI.ext1 ${ext1Operator} #{ext1}
+            </if>
+            <if test="ext2 != null and ext2 !=''">
+                and RPI.ext2 ${ext2Operator} #{ext2}
+            </if>
+            <if test="ext3 != null and ext3 !=''">
+                and RPI.ext3 ${ext3Operator} #{ext3}
+            </if>
+            <if test="ext4 != null and ext4 !=''">
+                and RPI.ext4 ${ext4Operator} #{ext4}
+            </if>
+            <if test="ext5 != null and ext5 !=''">
+                and RPI.ext5 ${ext5Operator} #{ext5}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id="insert" parameterType="com.adc.da.research.funds.entity.ProjectIncomeEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+            SELECT SEQ_RS_PROJECT_INCOME.NEXTVAL FROM DUAL
+        </selectKey> -->
+        insert into RS_PROJECT_INCOME(<include refid="Base_Column_List"/>)
+        values (#{id, jdbcType=VARCHAR}, #{projectId, jdbcType=VARCHAR}, #{projectCode, jdbcType=VARCHAR},
+        #{deptId, jdbcType=VARCHAR}, #{subjectName, jdbcType=VARCHAR}, #{voucherNumber, jdbcType=VARCHAR},
+        #{incomeAmount, jdbcType=DOUBLE}, #{incomeDate, jdbcType=TIMESTAMP}, #{summary, jdbcType=VARCHAR},
+        #{createUserId, jdbcType=VARCHAR}, #{createUserName, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP},
+        #{modifyTime, jdbcType=TIMESTAMP}, #{delFlag, jdbcType=INTEGER}, #{ext1, jdbcType=VARCHAR},
+        #{ext2, jdbcType=VARCHAR}, #{ext3, jdbcType=VARCHAR}, #{ext4, jdbcType=VARCHAR}, #{ext5, jdbcType=VARCHAR}
+        ,#{incomeType,jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id="insertSelective" parameterType="com.adc.da.research.funds.entity.ProjectIncomeEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RS_PROJECT_INCOME.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into RS_PROJECT_INCOME
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="projectId != null">project_id,</if>
+            <if test="projectCode != null">project_code,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="subjectName != null">subject_name,</if>
+            <if test="voucherNumber != null">voucher_number,</if>
+            <if test="incomeAmount != null">income_amount,</if>
+            <if test="incomeDate != null">income_date,</if>
+            <if test="summary != null">summary,</if>
+            <if test="createUserId != null">create_user_id,</if>
+            <if test="createUserName != null">create_user_name,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="modifyTime != null">modify_time,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="ext1 != null">ext1,</if>
+            <if test="ext2 != null">ext2,</if>
+            <if test="ext3 != null">ext3,</if>
+            <if test="ext4 != null">ext4,</if>
+            <if test="ext5 != null">ext5,</if>
+            <if test="incomeType!=null">income_type,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id, jdbcType=VARCHAR},</if>
+            <if test="projectId != null">#{projectId, jdbcType=VARCHAR},</if>
+            <if test="projectCode != null">#{projectCode, jdbcType=VARCHAR},</if>
+            <if test="deptId != null">#{deptId, jdbcType=VARCHAR},</if>
+            <if test="subjectName != null">#{subjectName, jdbcType=VARCHAR},</if>
+            <if test="voucherNumber != null">#{voucherNumber, jdbcType=VARCHAR},</if>
+            <if test="incomeAmount != null">#{incomeAmount, jdbcType=DOUBLE},</if>
+            <if test="incomeDate != null">#{incomeDate, jdbcType=TIMESTAMP},</if>
+            <if test="summary != null">#{summary, jdbcType=VARCHAR},</if>
+            <if test="createUserId != null">#{createUserId, jdbcType=VARCHAR},</if>
+            <if test="createUserName != null">#{createUserName, jdbcType=VARCHAR},</if>
+            <if test="createTime != null">#{createTime, jdbcType=TIMESTAMP},</if>
+            <if test="modifyTime != null">#{modifyTime, jdbcType=TIMESTAMP},</if>
+            <if test="delFlag != null">#{delFlag, jdbcType=INTEGER},</if>
+            <if test="ext1 != null">#{ext1, jdbcType=VARCHAR},</if>
+            <if test="ext2 != null">#{ext2, jdbcType=VARCHAR},</if>
+            <if test="ext3 != null">#{ext3, jdbcType=VARCHAR},</if>
+            <if test="ext4 != null">#{ext4, jdbcType=VARCHAR},</if>
+            <if test="ext5 != null">#{ext5, jdbcType=VARCHAR},</if>
+            <if test="incomeType !=null">#{incomeType,jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <!-- 根据pk，修改记录-->
+    <update id="updateByPrimaryKey" parameterType="com.adc.da.research.funds.entity.ProjectIncomeEO">
+    update RS_PROJECT_INCOME
+       set  project_id = #{projectId},
+            project_code = #{projectCode},
+            dept_id = #{deptId},
+            subject_name = #{subjectName},
+            voucher_number = #{voucherNumber},
+            income_amount = #{incomeAmount},
+            income_date = #{incomeDate},
+            summary = #{summary},
+            create_user_id = #{createUserId},
+            create_user_name = #{createUserName},
+            create_time = #{createTime},
+            modify_time = #{modifyTime},
+            del_flag = #{delFlag},
+            ext1 = #{ext1},
+            ext2 = #{ext2},
+            ext3 = #{ext3},
+            ext4 = #{ext4},
+            ext5 = #{ext5},
+            income_type = #{incomeType}
+     where  id = #{id}
+  </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.research.funds.entity.ProjectIncomeEO">
+        update RS_PROJECT_INCOME
+        <set>
+            <if test="projectId != null">
+                project_id = #{projectId},
+            </if>
+            <if test="projectCode != null">
+                project_code = #{projectCode},
+            </if>
+            <if test="deptId != null">
+                dept_id = #{deptId},
+            </if>
+            <if test="subjectName != null">
+                subject_name = #{subjectName},
+            </if>
+            <if test="voucherNumber != null">
+                voucher_number = #{voucherNumber},
+            </if>
+            <if test="incomeAmount != null">
+                income_amount = #{incomeAmount},
+            </if>
+            <if test="incomeDate != null">
+                income_date = #{incomeDate},
+            </if>
+            <if test="summary != null">
+                summary = #{summary},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId},
+            </if>
+            <if test="createUserName != null">
+                create_user_name = #{createUserName},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag},
+            </if>
+            <if test="ext1 != null">
+                ext1 = #{ext1},
+            </if>
+            <if test="ext2 != null">
+                ext2 = #{ext2},
+            </if>
+            <if test="ext3 != null">
+                ext3 = #{ext3},
+            </if>
+            <if test="ext4 != null">
+                ext4 = #{ext4},
+            </if>
+            <if test="ext5 != null">
+                ext5 = #{ext5},
+            </if>
+            <if test="incomeType !=null">
+                income_type = #{incomeType},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!-- 根据id查询 RS_PROJECT_INCOME -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultAllMap" parameterType="java.lang.String">
+    select DISTINCT(RPI.id), RPI.project_id, RPI.project_code, RPI.dept_id, RPI.subject_name, RPI.voucher_number
+      , RPI.income_amount, RPI.income_date, RPI.summary, RPI.create_user_id, RPI.create_user_name, RPI.create_time
+      , RPI.modify_time, RPI.del_flag, RPI.ext1, RPI.ext2, RPI.ext3, RPI.ext4, RPI.ext5,RPD.PROJECT_NAME
+      ,TDB.DEPT_NAME,RPI.income_Type
+      from RS_PROJECT_INCOME RPI
+      LEFT JOIN RS_PROJECT_DATA RPD ON project_id=RPD.ID
+      LEFT JOIN TS_DEPT_BUDGET TDB ON TDB.DEPT_ID=RPI.DEPT_ID
+     where RPI.id = #{value}
+
+  </select>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RS_PROJECT_INCOME
+     where id = #{value}
+
+  </delete>
+
+    <!-- 逻辑删除记录 -->
+    <update id="logicDeleteByPrimaryKeys" parameterType="java.util.List">
+        update RS_PROJECT_INCOME set del_flag = 1
+        where id in
+        <foreach collection="list" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+
+    </update>
+    <!-- RS_PROJECT_INCOME 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        SELECT COUNT(1) FROM (
+        select DISTINCT(RPI.id), RPI.project_id, RPI.project_code, RPI.dept_id, RPI.subject_name, RPI.voucher_number
+        , RPI.income_amount, RPI.income_date, RPI.summary, RPI.create_user_id, RPI.create_user_name, RPI.create_time
+        , RPI.modify_time, RPI.del_flag, RPI.ext1, RPI.ext2, RPI.ext3, RPI.ext4, RPI.ext5,RPD.PROJECT_NAME
+        ,TDB.DEPT_NAME,RPI.income_Type
+        from RS_PROJECT_INCOME RPI
+        LEFT JOIN RS_PROJECT_DATA RPD ON project_id=RPD.ID
+        LEFT JOIN TS_DEPT_BUDGET TDB ON TDB.DEPT_ID=RPI.DEPT_ID
+        <include refid="Base_Where_Clause_New"></include>
+        )
+    </select>
+
+    <!-- 查询RS_PROJECT_INCOME列表 -->
+    <select id="queryByPage" resultMap="BaseResultAllMap" parameterType="com.adc.da.base.page.BasePage">
+        select id, project_id, project_code, dept_id, subject_name, voucher_number, income_amount, income_date, summary
+        , create_user_id, create_user_name, create_time, modify_time, del_flag, ext1, ext2, ext3, ext4, ext5,PROJECT_NAME
+        , DEPT_NAME ,income_Type
+        from
+        (select tmp_tb.* , rownum rn from
+        (select DISTINCT(RPI.id), RPI.project_id, RPI.project_code, RPI.dept_id, RPI.subject_name, RPI.voucher_number
+        , RPI.income_amount, RPI.income_date, RPI.summary, RPI.create_user_id, RPI.create_user_name, RPI.create_time
+        , RPI.modify_time, RPI.del_flag, RPI.ext1, RPI.ext2, RPI.ext3, RPI.ext4, RPI.ext5,RPD.PROJECT_NAME
+        ,TDB.DEPT_NAME,RPI.income_Type
+        from RS_PROJECT_INCOME RPI
+        LEFT JOIN RS_PROJECT_DATA RPD ON project_id=RPD.ID
+        LEFT JOIN TS_DEPT_BUDGET TDB ON TDB.DEPT_ID=RPI.DEPT_ID
+        <include refid="Base_Where_Clause_New"></include>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ORDER BY RPI.income_date DESC
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id="queryByList" resultMap="BaseResultAllMap" parameterType="com.adc.da.base.page.BasePage">
+        select DISTINCT(RPI.id), RPI.project_id, RPI.project_code, RPI.dept_id, RPI.subject_name, RPI.voucher_number
+        , RPI.income_amount, RPI.income_date, RPI.summary, RPI.create_user_id, RPI.create_user_name, RPI.create_time
+        , RPI.modify_time, RPI.del_flag, RPI.ext1, RPI.ext2, RPI.ext3, RPI.ext4, RPI.ext5,RPD.PROJECT_NAME
+        ,TDB.DEPT_NAME,RPI.income_Type
+        from RS_PROJECT_INCOME RPI
+        LEFT JOIN RS_PROJECT_DATA RPD ON project_id=RPD.ID
+        LEFT JOIN TS_DEPT_BUDGET TDB ON TDB.DEPT_ID=RPI.DEPT_ID
+        <include refid="Base_Where_Clause_New"></include>
+        ORDER BY RPI.income_date DESC
+    </select>
+
+</mapper>

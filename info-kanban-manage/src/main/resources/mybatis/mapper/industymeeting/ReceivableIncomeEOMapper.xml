@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.industymeeting.dao.ReceivableIncomeEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.industymeeting.entity.ReceivableIncomeEO" >
+    <id column="id" property="id" />
+    <result column="year" property="year" />
+    <result column="month" property="month" />
+    <result column="day" property="day" />
+    <result column="headquarters_id" property="headquartersId" />
+    <result column="department_id" property="departmentId" />
+    <result column="project" property="project" />
+    <result column="corpname" property="corpname" />
+    <result column="weekly_arrival" property="weeklyArrival" />
+    <result column="amount_receivable" property="amountReceivable" />
+    <result column="account_time" property="accountTime" />
+    <result column="company" property="company" />
+    <result column="create_time" property="createTime" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="update_time" property="updateTime" />
+    <result column="update_user_id" property="updateUserId" />
+    <result column="del_flag" property="delFlag" />
+  </resultMap>
+
+  <!-- RECEIVABLE_INCOME table all rields -->
+  <sql id="Base_Column_List" >
+     id, year, month, day, headquarters_id, department_id, project, corpname, weekly_arrival, amount_receivable, account_time, company, create_time, create_user_id, update_time, update_user_id, del_flag
+  </sql>
+
+  <sql id="Base_Column_List2" >
+     ri.id as id, ri.year as year, ri.month as month, ri.day as day, ri.headquarters_id as headquarters_id, ri.department_id as department_id, ri.project as project, ri.corpname as corpname, ri.weekly_arrival as weekly_arrival, ri.amount_receivable as amount_receivable, ri.account_time as account_time, ri.company as company,
+     ri.create_time as create_time, ri.create_user_id as create_user_id, ri.update_time as update_time, ri.update_user_id as update_user_id, ri.del_flag as del_flag, org0.ORG_NAME as headquarters, org1.ORG_NAME as department, u0.usname as createUser, u1.usname as updateUser, dic.dic_type_name as companyName
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="year != null" >
+        and year ${yearOperator} #{year}
+      </if>
+      <if test="month != null" >
+        and month ${monthOperator} #{month}
+      </if>
+      <if test="day != null" >
+        and day ${dayOperator} #{day}
+      </if>
+      <if test="headquartersId != null" >
+        and headquarters_id ${headquartersIdOperator} #{headquartersId}
+      </if>
+      <if test="departmentId != null" >
+        and department_id ${departmentIdOperator} #{departmentId}
+      </if>
+      <if test="project != null" >
+        and project ${projectOperator} #{project}
+      </if>
+      <if test="corpname != null" >
+        and corpname ${corpnameOperator} #{corpname}
+      </if>
+      <if test="weeklyArrival != null" >
+        and weekly_arrival ${weeklyArrivalOperator} #{weeklyArrival}
+      </if>
+      <if test="amountReceivable != null" >
+        and amount_receivable ${amountReceivableOperator} #{amountReceivable}
+      </if>
+      <if test="accountTime != null" >
+        and account_time ${accountTimeOperator} #{accountTime}
+      </if>
+      <if test="company != null" >
+        and company ${companyOperator} #{company}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="createUserId != null" >
+        and create_user_id ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="updateTime != null" >
+        and update_time ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and update_time &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and update_time &lt;= #{updateTime2}
+      </if>
+      <if test="updateUserId != null" >
+        and update_user_id ${updateUserIdOperator} #{updateUserId}
+      </if>
+      <if test="delFlag != null" >
+        and del_flag ${delFlagOperator} #{delFlag}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.industymeeting.entity.ReceivableIncomeEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RECEIVABLE_INCOME.NEXTVAL FROM DUAL
+    </selectKey> -->
+      insert into DB_RECEIVABLE_INCOME(<include refid="Base_Column_List"/>)
+      values (#{id, jdbcType=VARCHAR}, #{year, jdbcType=VARCHAR}, #{month, jdbcType=VARCHAR}, #{day, jdbcType=VARCHAR},
+      #{headquartersId, jdbcType=VARCHAR}, #{departmentId, jdbcType=VARCHAR}, #{project, jdbcType=VARCHAR}, #{corpname, jdbcType=VARCHAR},
+      #{weeklyArrival, jdbcType=DECIMAL}, #{amountReceivable, jdbcType=DECIMAL}, #{accountTime, jdbcType=VARCHAR}, #{company, jdbcType=VARCHAR},
+      #{createTime, jdbcType=TIMESTAMP}, #{createUserId, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP}, #{updateUserId, jdbcType=VARCHAR},
+      #{delFlag, jdbcType=INTEGER})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.industymeeting.entity.ReceivableIncomeEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RECEIVABLE_INCOME.NEXTVAL FROM DUAL
+    </selectKey> -->
+      insert into DB_RECEIVABLE_INCOME
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="year != null" >year,</if>
+                <if test="month != null" >month,</if>
+                <if test="day != null" >day,</if>
+                <if test="headquartersId != null" >headquarters_id,</if>
+                <if test="departmentId != null" >department_id,</if>
+                <if test="project != null" >project,</if>
+                <if test="corpname != null" >corpname,</if>
+                <if test="weeklyArrival != null" >weekly_arrival,</if>
+                <if test="amountReceivable != null" >amount_receivable,</if>
+                <if test="accountTime != null" >account_time,</if>
+                <if test="company != null" >company,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="createUserId != null" >create_user_id,</if>
+                <if test="updateTime != null" >update_time,</if>
+                <if test="updateUserId != null" >update_user_id,</if>
+                <if test="delFlag != null" >del_flag,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="year != null" >#{year, jdbcType=VARCHAR},</if>
+                <if test="month != null" >#{month, jdbcType=VARCHAR},</if>
+                <if test="day != null" >#{day, jdbcType=VARCHAR},</if>
+                <if test="headquartersId != null" >#{headquartersId, jdbcType=VARCHAR},</if>
+                <if test="departmentId != null" >#{departmentId, jdbcType=VARCHAR},</if>
+                <if test="project != null" >#{project, jdbcType=VARCHAR},</if>
+                <if test="corpname != null" >#{corpname, jdbcType=VARCHAR},</if>
+        <if test="weeklyArrival != null">#{weeklyArrival, jdbcType=DECIMAL},</if>
+        <if test="amountReceivable != null">#{amountReceivable, jdbcType=DECIMAL},</if>
+                <if test="accountTime != null" >#{accountTime, jdbcType=VARCHAR},</if>
+                <if test="company != null" >#{company, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="createUserId != null" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="updateTime != null" >#{updateTime, jdbcType=TIMESTAMP},</if>
+                <if test="updateUserId != null" >#{updateUserId, jdbcType=VARCHAR},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=INTEGER},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.industymeeting.entity.ReceivableIncomeEO" >
+    update DB_RECEIVABLE_INCOME
+       set  year = #{year},
+            month = #{month},
+            day = #{day},
+            headquarters_id = #{headquartersId},
+            department_id = #{departmentId},
+            project = #{project},
+            corpname = #{corpname},
+            weekly_arrival = #{weeklyArrival},
+            amount_receivable = #{amountReceivable},
+            account_time = #{accountTime},
+            company = #{company},
+            create_time = #{createTime},
+            create_user_id = #{createUserId},
+            update_time = #{updateTime},
+            update_user_id = #{updateUserId},
+            del_flag = #{delFlag}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.industymeeting.entity.ReceivableIncomeEO" >
+      update DB_RECEIVABLE_INCOME
+    <set >
+      <if test="year != null" >
+        year = #{year},
+      </if>
+      <if test="month != null" >
+        month = #{month},
+      </if>
+      <if test="day != null" >
+        day = #{day},
+      </if>
+      <if test="headquartersId != null" >
+        headquarters_id = #{headquartersId},
+      </if>
+      <if test="departmentId != null" >
+        department_id = #{departmentId},
+      </if>
+      <if test="project != null" >
+        project = #{project},
+      </if>
+      <if test="corpname != null" >
+        corpname = #{corpname},
+      </if>
+      <if test="weeklyArrival != null" >
+        weekly_arrival = #{weeklyArrival},
+      </if>
+      <if test="amountReceivable != null" >
+        amount_receivable = #{amountReceivable},
+      </if>
+      <if test="accountTime != null" >
+        account_time = #{accountTime},
+      </if>
+      <if test="company != null" >
+        company = #{company},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 RECEIVABLE_INCOME -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+      select
+      <include refid="Base_Column_List"/>
+      from DB_RECEIVABLE_INCOME
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from DB_RECEIVABLE_INCOME
+     where id = #{value}
+
+  </delete>
+
+  <!--批量逻辑删除-->
+  <update id="deleteLogicInBatch" parameterType="java.util.List">
+      update DB_RECEIVABLE_INCOME set del_flag = 1
+      where id in
+      <foreach item="id" collection="list" open="(" separator="," close=")" index="index">
+          #{id}
+      </foreach>
+  </update>
+
+    <!--逻辑清空-->
+  <update id="empty">
+    update DB_RECEIVABLE_INCOME set del_flag = 1
+  </update>
+
+  <!-- RECEIVABLE_INCOME 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+      select count(1) from DB_RECEIVABLE_INCOME
+    <include refid="Base_Where_Clause"/>
+    and del_flag != 1
+  </select>
+
+  <!-- 查询RECEIVABLE_INCOME列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" />, headquarters, department, createUser, updateUser, companyName from
+		(select tmp_tb.* , rownum rn from
+      (select
+      <include refid="Base_Column_List2"/>
+      from DB_RECEIVABLE_INCOME ri
+             LEFT JOIN TS_ORG org0 on ri.HEADQUARTERS_ID = org0.ID
+             LEFT JOIN TS_ORG org1 on ri.DEPARTMENT_ID = org1.ID
+             LEFT JOIN TS_USER u0 on ri.CREATE_USER_ID = u0.usid
+             LEFT JOIN TS_USER u1 on ri.UPDATE_USER_ID = u1.usid
+             <!-- LEFT JOIN TS_BUDGET budget on ri.PROJECT = budget.id -->
+             LEFT JOIN TS_DICTYPE dic on ri.COMPANY = dic.id
+			 <include refid="Base_Where_Clause"/>
+             and ri.del_flag != 1
+			 <!--<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>-->
+             <choose>
+                <when test="pager.orderCondition != null and pager.orderCondition != ''">
+                    ${pager.orderCondition}
+                </when>
+                <otherwise>
+                      order by ri.update_time desc, ri.id asc
+                </otherwise>
+             </choose>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+      select
+      <include refid="Base_Column_List2"/>
+      from DB_RECEIVABLE_INCOME ri
+    LEFT JOIN TS_ORG org0 on ri.HEADQUARTERS_ID = org0.ID
+    LEFT JOIN TS_ORG org1 on ri.DEPARTMENT_ID = org1.ID
+    LEFT JOIN TS_USER u0 on ri.CREATE_USER_ID = u0.usid
+    LEFT JOIN TS_USER u1 on ri.UPDATE_USER_ID = u1.usid
+    <!-- LEFT JOIN TS_BUDGET budget on ri.PROJECT = budget.id -->
+    LEFT JOIN TS_DICTYPE dic on ri.COMPANY = dic.id
+    <include refid="Base_Where_Clause"/>
+    and ri.del_flag != 1
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+    <select id="sumIncomeAmount" resultType="java.math.BigDecimal">
+        select sum (WEEKLY_ARRIVAL) from   DB_RECEIVABLE_INCOME where DEL_FLAG !=1
+    </select>
+
+    <select id="sumReceivableAmount" resultType="java.math.BigDecimal">
+        select sum (AMOUNT_RECEIVABLE)  from  DB_RECEIVABLE_INCOME  where DEL_FLAG !=1
+    </select>
+
+    <!--小于某个年份的应收集合-->
+    <select id="sumReceivableAmountByYearLt" resultType="java.math.BigDecimal">
+        select sum (AMOUNT_RECEIVABLE) from   DB_RECEIVABLE_INCOME
+        where DEL_FLAG !=1 and year  &lt; #{year}
+    </select>
+    <!--小于某个年份的应收集合-->
+    <select id="sumReceivableAmountByYearLte" resultType="java.math.BigDecimal">
+        select sum (AMOUNT_RECEIVABLE) from   DB_RECEIVABLE_INCOME
+        where DEL_FLAG !=1 and year  &lt;= #{year}
+    </select>
+
+
+    <!--小于某个年份的到账集合-->
+    <select id="sumIncomeAmountByYearLt" resultType="java.math.BigDecimal">
+        select sum (WEEKLY_ARRIVAL) from   DB_RECEIVABLE_INCOME
+        where DEL_FLAG !=1 and year  &lt; #{year}
+    </select>
+
+    <select id="selectByYearLte" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from DB_RECEIVABLE_INCOME
+        where DEL_FLAG != 1 and year &lt;= #{year}
+    </select>
+
+    <select id="selectByYearLt" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from DB_RECEIVABLE_INCOME
+        where DEL_FLAG != 1 and year &lt; #{year}
+    </select>
+
+    <select id="selectByYear" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from DB_RECEIVABLE_INCOME
+        where DEL_FLAG != 1 and year = #{year}
+    </select>
+
+    <select id="selectByYearAndMonth" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from DB_RECEIVABLE_INCOME
+        where DEL_FLAG != 1 and year = #{year} and  month  = #{month }
+    </select>
+
+    <!--substr('This is a test', 6, 2) return 'is' -->
+
+    <select id="accountReceivableByEnterprise" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT B.* FROM (
+        SELECT A.*,ROWNUM rn FROM (
+        SELECT CORPNAME,"SUM"(AMOUNT_RECEIVABLE) AS amountReceivable  FROM DB_RECEIVABLE_INCOME
+        WHERE DEL_FLAG = 0
+        GROUP BY CORPNAME ORDER BY amountReceivable DESC
+        ) A WHERE ROWNUM &lt;= #{topNum}
+        ) B WHERE rn >=1
+    </select>
+
+    <select id="accountReceivableByDepart" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT B.* FROM (
+        SELECT A.*,ROWNUM rn FROM (
+            SELECT ri.DEPARTMENT_ID AS departmentId,org.ORG_NAME AS departmentName,"SUM"(ri.AMOUNT_RECEIVABLE) amountReceivable,(SELECT "SUM"(AMOUNT_RECEIVABLE) FROM DB_RECEIVABLE_INCOME WHERE DEL_FLAG = 0) AS totalAmountReceivable
+            FROM DB_RECEIVABLE_INCOME ri LEFT JOIN TS_ORG org ON ri.DEPARTMENT_ID = org."ID"
+            WHERE ri.DEL_FLAG != 1 and org.DEL_FLAG != 1
+            GROUP BY ri.DEPARTMENT_ID ,org.ORG_NAME
+            ORDER BY amountReceivable DESC
+        ) A WHERE ROWNUM &lt;= #{topNum}
+        ) B WHERE rn >= 1
+    </select>
+
+    <!--历史年份到账额-->
+    <select id="queryHistoryYearWeeklyArrivalByCorpname" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT sum(WEEKLY_ARRIVAL) AS weeklyArrival FROM DB_RECEIVABLE_INCOME ri
+        left join TS_DICTYPE tdic on tdic.ID = ri.COMPANY
+        WHERE ri.DEL_FLAG != 1
+        AND tdic.extinfo = #{corpname}
+        and year  &lt;  #{year}
+    </select>
+
+    <!--本年应该收账款余额-->
+    <select id="queryCurrentYearAmountReceivableByCorpname" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT sum(AMOUNT_RECEIVABLE) as amountReceivable FROM DB_RECEIVABLE_INCOME ri
+        left join TS_DICTYPE tdic on tdic.ID = ri.COMPANY
+        WHERE ri.DEL_FLAG != 1
+        AND tdic.extinfo = #{corpname}
+        and year &lt;= #{year}
+    </select>
+
+</mapper>

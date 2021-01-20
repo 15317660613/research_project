@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.industymeeting.dao.CommunicationFrequencyEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.industymeeting.entity.CommunicationFrequencyEO" >
+    <id column="id" property="id" />
+    <result column="province" property="province" />
+    <result column="frequency" property="frequency" />
+    <result column="create_time" property="createTime" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="update_time" property="updateTime" />
+    <result column="update_user_id" property="updateUserId" />
+    <result column="del_flag" property="delFlag" />
+  </resultMap>
+
+  <!-- COMMUNICATION_FREQUENCY table all fields -->
+  <sql id="Base_Column_List" >
+     id, province, frequency, create_time, create_user_id, update_time, update_user_id, del_flag
+  </sql>
+  <sql id="Base_Column_List2" >
+     cf.id as id, cf.province as province, cf.frequency as frequency, cf.create_time as create_time, cf.create_user_id as create_user_id, cf.update_time as update_time, cf.update_user_id as update_user_id,
+     cf.del_flag as del_flag, u0.usname as createUser, u1.usname as updateUser
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="province != null" >
+        and province ${provinceOperator} #{province}
+      </if>
+      <if test="frequency != null" >
+        and frequency ${frequencyOperator} #{frequency}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="createUserId != null" >
+        and create_user_id ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="updateTime != null" >
+        and update_time ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and update_time &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and update_time &lt;= #{updateTime2}
+      </if>
+      <if test="updateUserId != null" >
+        and update_user_id ${updateUserIdOperator} #{updateUserId}
+      </if>
+      <if test="delFlag != null" >
+        and del_flag ${delFlagOperator} #{delFlag}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.industymeeting.entity.CommunicationFrequencyEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_COMMUNICATION_FREQUENCY.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into COMMUNICATION_FREQUENCY(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{province, jdbcType=VARCHAR}, #{frequency, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{createUserId, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP}, #{updateUserId, jdbcType=VARCHAR}, #{delFlag, jdbcType=INTEGER})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.industymeeting.entity.CommunicationFrequencyEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_COMMUNICATION_FREQUENCY.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into COMMUNICATION_FREQUENCY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="province != null" >province,</if>
+                <if test="frequency != null" >frequency,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="createUserId != null" >create_user_id,</if>
+                <if test="updateTime != null" >update_time,</if>
+                <if test="updateUserId != null" >update_user_id,</if>
+                <if test="delFlag != null" >del_flag,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="province != null" >#{province, jdbcType=VARCHAR},</if>
+                <if test="frequency != null" >#{frequency, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="createUserId != null" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="updateTime != null" >#{updateTime, jdbcType=TIMESTAMP},</if>
+                <if test="updateUserId != null" >#{updateUserId, jdbcType=VARCHAR},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=INTEGER},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.industymeeting.entity.CommunicationFrequencyEO" >
+    update COMMUNICATION_FREQUENCY
+       set  province = #{province},
+            frequency = #{frequency},
+            create_time = #{createTime},
+            create_user_id = #{createUserId},
+            update_time = #{updateTime},
+            update_user_id = #{updateUserId},
+            del_flag = #{delFlag}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.industymeeting.entity.CommunicationFrequencyEO" >
+    update COMMUNICATION_FREQUENCY
+    <set >
+      <if test="province != null" >
+        province = #{province},
+      </if>
+      <if test="frequency != null" >
+        frequency = #{frequency},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 COMMUNICATION_FREQUENCY -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from COMMUNICATION_FREQUENCY
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from COMMUNICATION_FREQUENCY
+     where id = #{value}
+
+  </delete>
+
+  <!--逻辑清空-->
+  <update id="empty">
+    update COMMUNICATION_FREQUENCY set del_flag = 1
+  </update>
+
+  <!-- COMMUNICATION_FREQUENCY 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from COMMUNICATION_FREQUENCY
+    <include refid="Base_Where_Clause"/>
+      and del_flag != 1
+  </select>
+
+  <!-- 查询COMMUNICATION_FREQUENCY列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" />, createUser, updateUser from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List2" /> from COMMUNICATION_FREQUENCY cf
+             LEFT JOIN TS_USER u0 on cf.CREATE_USER_ID = u0.usid
+             LEFT JOIN TS_USER u1 on cf.UPDATE_USER_ID = u1.usid
+			 <include refid="Base_Where_Clause"/>
+             and cf.del_flag != 1
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List2"/> from COMMUNICATION_FREQUENCY cf
+    LEFT JOIN TS_USER u0 on cf.CREATE_USER_ID = u0.usid
+    LEFT JOIN TS_USER u1 on cf.UPDATE_USER_ID = u1.usid
+    <include refid="Base_Where_Clause"/>
+    and cf.del_flag != 1
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+</mapper>

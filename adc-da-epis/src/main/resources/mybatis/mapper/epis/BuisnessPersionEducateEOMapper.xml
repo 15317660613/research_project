@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.epis.dao.BuisnessPersionEducateEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.epis.entity.BuisnessPersionEducateEO" >
+    <id column="id" property="id" />
+    <result column="applypersonnel_id" property="applypersonnelId" />
+    <result column="trainingprogrm_id" property="trainingprogrmId" />
+    <result column="personnel_type" property="personnelType" />
+    <result column="creationtime" property="creationtime" />
+    <result column="creationname" property="creationname" />
+    <result column="updatetime" property="updatetime" />
+    <result column="actualpersonnel_id" property="actualpersonnelId" />
+  </resultMap>
+
+  <!-- BUISNESS_PERSION_EDUCATE table all fields -->
+  <sql id="Base_Column_List" >
+     id, applypersonnel_id, trainingprogrm_id, personnel_type, creationtime, creationname, updatetime, actualpersonnel_id
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="applypersonnelId != null" >
+        and applypersonnel_id ${applypersonnelIdOperator} #{applypersonnelId}
+      </if>
+      <if test="trainingprogrmId != null" >
+        and trainingprogrm_id ${trainingprogrmIdOperator} #{trainingprogrmId}
+      </if>
+      <if test="personnelType != null" >
+        and personnel_type ${personnelTypeOperator} #{personnelType}
+      </if>
+      <if test="creationtime != null" >
+        and creationtime ${creationtimeOperator} #{creationtime}
+      </if>
+      <if test="creationtime1 != null" >
+        and creationtime &gt;= #{creationtime1}
+      </if>
+      <if test="creationtime2 != null" >
+        and creationtime &lt;= #{creationtime2}
+      </if>
+      <if test="creationname != null" >
+        and creationname ${creationnameOperator} #{creationname}
+      </if>
+      <if test="updatetime != null" >
+        and updatetime ${updatetimeOperator} #{updatetime}
+      </if>
+      <if test="updatetime1 != null" >
+        and updatetime &gt;= #{updatetime1}
+      </if>
+      <if test="updatetime2 != null" >
+        and updatetime &lt;= #{updatetime2}
+      </if>
+      <if test="actualpersonnelId != null" >
+        and actualpersonnel_id ${actualpersonnelIdOperator} #{actualpersonnelId}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.epis.entity.BuisnessPersionEducateEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_BUISNESS_PERSION_EDUCATE.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into BUISNESS_PERSION_EDUCATE(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{applypersonnelId, jdbcType=VARCHAR}, #{trainingprogrmId, jdbcType=VARCHAR}, #{personnelType, jdbcType=INTEGER}, #{creationtime, jdbcType=TIMESTAMP}, #{creationname, jdbcType=VARCHAR}, #{updatetime, jdbcType=TIMESTAMP}, #{actualpersonnelId, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.epis.entity.BuisnessPersionEducateEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_BUISNESS_PERSION_EDUCATE.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into BUISNESS_PERSION_EDUCATE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="applypersonnelId != null" >applypersonnel_id,</if>
+                <if test="trainingprogrmId != null" >trainingprogrm_id,</if>
+                <if test="personnelType != null" >personnel_type,</if>
+                <if test="creationtime != null" >creationtime,</if>
+                <if test="creationname != null" >creationname,</if>
+                <if test="updatetime != null" >updatetime,</if>
+                <if test="actualpersonnelId != null" >actualpersonnel_id,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="applypersonnelId != null" >#{applypersonnelId, jdbcType=VARCHAR},</if>
+                <if test="trainingprogrmId != null" >#{trainingprogrmId, jdbcType=VARCHAR},</if>
+                <if test="personnelType != null" >#{personnelType, jdbcType=INTEGER},</if>
+                <if test="creationtime != null" >#{creationtime, jdbcType=TIMESTAMP},</if>
+                <if test="creationname != null" >#{creationname, jdbcType=VARCHAR},</if>
+                <if test="updatetime != null" >#{updatetime, jdbcType=TIMESTAMP},</if>
+                <if test="actualpersonnelId != null" >#{actualpersonnelId, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.epis.entity.BuisnessPersionEducateEO" >
+    update BUISNESS_PERSION_EDUCATE
+       set  applypersonnel_id = #{applypersonnelId},
+            trainingprogrm_id = #{trainingprogrmId},
+            personnel_type = #{personnelType},
+            creationtime = #{creationtime},
+            creationname = #{creationname},
+            updatetime = #{updatetime},
+            actualpersonnel_id = #{actualpersonnelId}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.epis.entity.BuisnessPersionEducateEO" >
+    update BUISNESS_PERSION_EDUCATE
+    <set >
+      <if test="applypersonnelId != null" >
+        applypersonnel_id = #{applypersonnelId},
+      </if>
+      <if test="trainingprogrmId != null" >
+        trainingprogrm_id = #{trainingprogrmId},
+      </if>
+      <if test="personnelType != null" >
+        personnel_type = #{personnelType},
+      </if>
+      <if test="creationtime != null" >
+        creationtime = #{creationtime},
+      </if>
+      <if test="creationname != null" >
+        creationname = #{creationname},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime},
+      </if>
+      <if test="actualpersonnelId != null" >
+        actualpersonnel_id = #{actualpersonnelId},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 BUISNESS_PERSION_EDUCATE -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from BUISNESS_PERSION_EDUCATE
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from BUISNESS_PERSION_EDUCATE
+     where id = #{value}
+
+  </delete>
+
+  <!-- BUISNESS_PERSION_EDUCATE 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from BUISNESS_PERSION_EDUCATE
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询BUISNESS_PERSION_EDUCATE列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from BUISNESS_PERSION_EDUCATE
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from BUISNESS_PERSION_EDUCATE
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

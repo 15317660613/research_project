@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.smallprogram.dao.ScheduleResearchMarkEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.smallprogram.entity.ScheduleResearchMarkEO" >
+    <id column="id" property="id" />
+    <result column="research_id" property="researchId" />
+    <result column="user_id" property="userId" />
+    <result column="user_name" property="userName" />
+    <result column="top" property="top" />
+    <result column="collect" property="collect" />
+  </resultMap>
+
+  <!-- TS_SCHEDULE_RESEARCH_MARK table all fields -->
+  <sql id="Base_Column_List" >
+     id, research_id, user_id, user_name, top, collect
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="researchId != null" >
+        and research_id ${researchIdOperator} #{researchId}
+      </if>
+      <if test="userId != null" >
+        and user_id ${userIdOperator} #{userId}
+      </if>
+      <if test="userName != null" >
+        and user_name ${userNameOperator} #{userName}
+      </if>
+      <if test="top != null" >
+        and top ${topOperator} #{top}
+      </if>
+      <if test="collect != null" >
+        and collect ${collectOperator} #{collect}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.smallprogram.entity.ScheduleResearchMarkEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_SCHEDULE_RESEARCH_MARK.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into TS_SCHEDULE_RESEARCH_MARK(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{researchId, jdbcType=VARCHAR}, #{userId, jdbcType=VARCHAR}, #{userName, jdbcType=VARCHAR}, #{top, jdbcType=INTEGER}, #{collect, jdbcType=INTEGER})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.smallprogram.entity.ScheduleResearchMarkEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_SCHEDULE_RESEARCH_MARK.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into TS_SCHEDULE_RESEARCH_MARK
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="researchId != null" >research_id,</if>
+                <if test="userId != null" >user_id,</if>
+                <if test="userName != null" >user_name,</if>
+                <if test="top != null" >top,</if>
+                <if test="collect != null" >collect,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="researchId != null" >#{researchId, jdbcType=VARCHAR},</if>
+                <if test="userId != null" >#{userId, jdbcType=VARCHAR},</if>
+                <if test="userName != null" >#{userName, jdbcType=VARCHAR},</if>
+                <if test="top != null" >#{top, jdbcType=INTEGER},</if>
+                <if test="collect != null" >#{collect, jdbcType=INTEGER},</if>
+            </trim>
+  </insert>
+
+    <insert id="insertList" parameterType="java.util.List">
+        INSERT ALL
+        <foreach collection="list" item="item" index="index">
+            <if test="item.id !=null">
+                INTO TS_SCHEDULE_RESEARCH_MARK
+                <trim prefix="(" suffix=")" suffixOverrides=",">
+                    <if test="item.id != null" >id,</if>
+                    <if test="item.researchId != null" >research_id,</if>
+                    <if test="item.userId != null" >user_id,</if>
+                    <if test="item.userName != null" >user_name,</if>
+                    <if test="item.top != null" >top,</if>
+                    <if test="item.collect != null" >collect,</if>
+                </trim>
+                <trim prefix="values (" suffix=")" suffixOverrides=",">
+                    <if test="item.id != null" >#{item.id, jdbcType=VARCHAR},</if>
+                    <if test="item.researchId != null" >#{item.researchId, jdbcType=VARCHAR},</if>
+                    <if test="item.userId != null" >#{item.userId, jdbcType=VARCHAR},</if>
+                    <if test="item.userName != null" >#{item.userName, jdbcType=VARCHAR},</if>
+                    <if test="item.top != null" >#{item.top, jdbcType=INTEGER},</if>
+                    <if test="item.collect != null" >#{item.collect, jdbcType=INTEGER},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.smallprogram.entity.ScheduleResearchMarkEO" >
+    update TS_SCHEDULE_RESEARCH_MARK
+       set  research_id = #{researchId},
+            user_id = #{userId},
+            user_name = #{userName},
+            top = #{top},
+            collect = #{collect}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.smallprogram.entity.ScheduleResearchMarkEO" >
+    update TS_SCHEDULE_RESEARCH_MARK
+    <set >
+      <if test="researchId != null" >
+        research_id = #{researchId},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName},
+      </if>
+      <if test="top != null" >
+        top = #{top},
+      </if>
+      <if test="collect != null" >
+        collect = #{collect},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+    <update id="updateTopOrCollect" parameterType="com.adc.da.smallprogram.entity.ScheduleResearchMarkEO" >
+        update TS_SCHEDULE_RESEARCH_MARK
+        <set >
+            <if test="top != null" >
+                top = #{top},
+            </if>
+            <if test="collect != null" >
+                collect = #{collect},
+            </if>
+        </set>
+        where  research_id = #{researchId} and  user_id = #{userId}
+    </update>
+
+    <update id="resetTop" parameterType="com.adc.da.smallprogram.entity.ScheduleResearchMarkEO" >
+        update TS_SCHEDULE_RESEARCH_MARK
+        set top = 0
+        where  research_id != #{researchId} and  user_id = #{userId}
+    </update>
+
+  <!-- 根据id查询 TS_SCHEDULE_RESEARCH_MARK -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+      from TS_SCHEDULE_RESEARCH_MARK
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TS_SCHEDULE_RESEARCH_MARK
+     where id = #{value}
+
+  </delete>
+
+  <!-- TS_SCHEDULE_RESEARCH_MARK 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from TS_SCHEDULE_RESEARCH_MARK
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TS_SCHEDULE_RESEARCH_MARK列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from TS_SCHEDULE_RESEARCH_MARK
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from TS_SCHEDULE_RESEARCH_MARK
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

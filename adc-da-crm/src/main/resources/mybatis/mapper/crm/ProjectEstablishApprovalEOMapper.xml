@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.crm.dao.ProjectEstablishApprovalEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.crm.entity.ProjectEstablishApprovalEO" >
+    <id column="id" property="id" />
+    <result column="project_number" property="projectNumber" />
+    <result column="project_name" property="projectName" />
+    <result column="discription" property="discription" />
+    <result column="establish_file" property="establishFile" />
+    <result column="establish_explanation" property="establishExplanation" />
+    <result column="belonging_platform" property="belongingPlatform" />
+    <result column="belonging_plate" property="belongingPlate" />
+    <result column="belonging_central_dept" property="belongingCentralDept" />
+    <result column="belonging_dept" property="belongingDept" />
+    <result column="pro_period" property="proPeriod" />
+    <result column="pro_type" property="proType" />
+    <result column="mobile" property="mobile" />
+    <result column="phone" property="phone" />
+    <result column="email" property="email" />
+    <result column="dept_head_opinion" property="deptHeadOpinion" />
+    <result column="leader_opinion" property="leaderOpinion" />
+    <result column="del_flag" property="delFlag" />
+    <result column="created_time" property="createdTime" />
+    <result column="created_user" property="createdUser" />
+    <result column="modified_time" property="modifiedTime" />
+    <result column="modified_user" property="modifiedUser" />
+    <result column="check_status" property="checkStatus" />
+    <result column="projecr_manager_id" property="projecrManagerId" />
+    <result column="dept_id" property="deptId" />
+    <result column="establish_date" property="establishDate" />
+    <result column="project_id" property="projectId" />
+  </resultMap>
+
+  <!-- PROJECT_ESTABLISH_APPROVAL table all fields -->
+  <sql id="Base_Column_List" >
+     project_number, project_name, discription, establish_file, establish_explanation, belonging_platform, belonging_plate, belonging_central_dept, belonging_dept, pro_period, pro_type, mobile, phone, email, dept_head_opinion, leader_opinion, del_flag, created_time, created_user, modified_time, modified_user, check_status, id, projecr_manager_id, dept_id, establish_date, project_id
+  </sql>
+    <!-- PROJECT_ESTABLISH_APPROVAL table all fields -->
+    <sql id="CRM_Column_List" >
+     project_number, project_name, discription, establish_file, establish_explanation, belonging_platform, belonging_plate, belonging_central_dept, belonging_dept, pro_period, pro_type, mobile, phone, email, dept_head_opinion, leader_opinion, del_flag, created_time, created_user, modified_time, modified_user, check_status, id, (select u.usname from TS_USER u where u.usid = projecr_manager_id) as projecr_manager_id, (select org.org_name from TS_ORG org where id = dept_id) as dept_id, establish_date, project_id
+  </sql>
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="projectNumber != null" >
+        and project_number ${projectNumberOperator} #{projectNumber}
+      </if>
+      <if test="projectName != null" >
+        and project_name ${projectNameOperator} #{projectName}
+      </if>
+      <if test="discription != null" >
+        and discription ${discriptionOperator} #{discription}
+      </if>
+      <if test="establishFile != null" >
+        and establish_file ${establishFileOperator} #{establishFile}
+      </if>
+      <if test="establishExplanation != null" >
+        and establish_explanation ${establishExplanationOperator} #{establishExplanation}
+      </if>
+      <if test="belongingPlatform != null" >
+        and belonging_platform ${belongingPlatformOperator} #{belongingPlatform}
+      </if>
+      <if test="belongingPlate != null" >
+        and belonging_plate ${belongingPlateOperator} #{belongingPlate}
+      </if>
+      <if test="belongingCentralDept != null" >
+        and belonging_central_dept ${belongingCentralDeptOperator} #{belongingCentralDept}
+      </if>
+      <if test="belongingDept != null" >
+        and belonging_dept ${belongingDeptOperator} #{belongingDept}
+      </if>
+      <if test="proPeriod != null" >
+        and pro_period ${proPeriodOperator} #{proPeriod}
+      </if>
+      <if test="proType != null" >
+        and pro_type ${proTypeOperator} #{proType}
+      </if>
+      <if test="mobile != null" >
+        and mobile ${mobileOperator} #{mobile}
+      </if>
+      <if test="phone != null" >
+        and phone ${phoneOperator} #{phone}
+      </if>
+      <if test="email != null" >
+        and email ${emailOperator} #{email}
+      </if>
+      <if test="deptHeadOpinion != null" >
+        and dept_head_opinion ${deptHeadOpinionOperator} #{deptHeadOpinion}
+      </if>
+      <if test="leaderOpinion != null" >
+        and leader_opinion ${leaderOpinionOperator} #{leaderOpinion}
+      </if>
+      <if test="createdTime != null" >
+        and created_time ${createdTimeOperator} #{createdTime}
+      </if>
+      <if test="createdTime1 != null" >
+        and created_time &gt;= #{createdTime1}
+      </if>
+      <if test="createdTime2 != null" >
+        and created_time &lt;= #{createdTime2}
+      </if>
+      <if test="createdUser != null" >
+        and created_user ${createdUserOperator} #{createdUser}
+      </if>
+      <if test="modifiedTime != null" >
+        and modified_time ${modifiedTimeOperator} #{modifiedTime}
+      </if>
+      <if test="modifiedTime1 != null" >
+        and modified_time &gt;= #{modifiedTime1}
+      </if>
+      <if test="modifiedTime2 != null" >
+        and modified_time &lt;= #{modifiedTime2}
+      </if>
+      <if test="modifiedUser != null" >
+        and modified_user ${modifiedUserOperator} #{modifiedUser}
+      </if>
+      <if test="checkStatus != null" >
+        and check_status ${checkStatusOperator} #{checkStatus}
+      </if>
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="projecrManagerId != null" >
+        and projecr_manager_id ${projecrManagerIdOperator} #{projecrManagerId}
+      </if>
+      <if test="deptId != null" >
+        and dept_id ${deptIdOperator} #{deptId}
+      </if>
+      <if test="establishDate != null" >
+        and establish_date ${establishDateOperator} #{establishDate}
+      </if>
+      <if test="establishDate1 != null" >
+        and establish_date &gt;= #{establishDate1}
+      </if>
+      <if test="establishDate2 != null" >
+        and establish_date &lt;= #{establishDate2}
+      </if>
+      <if test="projectId != null" >
+        and project_id ${projectIdOperator} #{projectId}
+      </if>
+        and del_flag = '0'
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.crm.entity.ProjectEstablishApprovalEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_PROJECT_ESTABLISH_APPROVAL.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into PROJECT_ESTABLISH_APPROVAL(<include refid="Base_Column_List" />)
+    values (#{projectNumber, jdbcType=VARCHAR}, #{projectName, jdbcType=VARCHAR}, #{discription, jdbcType=CLOB}, #{establishFile, jdbcType=VARCHAR}, #{establishExplanation, jdbcType=CLOB}, #{belongingPlatform, jdbcType=VARCHAR}, #{belongingPlate, jdbcType=VARCHAR}, #{belongingCentralDept, jdbcType=VARCHAR}, #{belongingDept, jdbcType=VARCHAR}, #{proPeriod, jdbcType=VARCHAR}, #{proType, jdbcType=VARCHAR}, #{mobile, jdbcType=VARCHAR}, #{phone, jdbcType=VARCHAR}, #{email, jdbcType=VARCHAR}, #{deptHeadOpinion, jdbcType=VARCHAR}, #{leaderOpinion, jdbcType=VARCHAR}, #{delFlag, jdbcType=VARCHAR}, #{createdTime, jdbcType=TIMESTAMP}, #{createdUser, jdbcType=VARCHAR}, #{modifiedTime, jdbcType=TIMESTAMP}, #{modifiedUser, jdbcType=VARCHAR}, #{checkStatus, jdbcType=VARCHAR}, #{id, jdbcType=VARCHAR}, #{projecrManagerId, jdbcType=VARCHAR}, #{deptId, jdbcType=VARCHAR}, #{establishDate, jdbcType=TIMESTAMP}, #{projectId, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.crm.entity.ProjectEstablishApprovalEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_PROJECT_ESTABLISH_APPROVAL.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into PROJECT_ESTABLISH_APPROVAL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="projectNumber != null" >project_number,</if>
+                <if test="projectName != null" >project_name,</if>
+                <if test="discription != null" >discription,</if>
+                <if test="establishFile != null" >establish_file,</if>
+                <if test="establishExplanation != null" >establish_explanation,</if>
+                <if test="belongingPlatform != null" >belonging_platform,</if>
+                <if test="belongingPlate != null" >belonging_plate,</if>
+                <if test="belongingCentralDept != null" >belonging_central_dept,</if>
+                <if test="belongingDept != null" >belonging_dept,</if>
+                <if test="proPeriod != null" >pro_period,</if>
+                <if test="proType != null" >pro_type,</if>
+                <if test="mobile != null" >mobile,</if>
+                <if test="phone != null" >phone,</if>
+                <if test="email != null" >email,</if>
+                <if test="deptHeadOpinion != null" >dept_head_opinion,</if>
+                <if test="leaderOpinion != null" >leader_opinion,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="createdTime != null" >created_time,</if>
+                <if test="createdUser != null" >created_user,</if>
+                <if test="modifiedTime != null" >modified_time,</if>
+                <if test="modifiedUser != null" >modified_user,</if>
+                <if test="checkStatus != null" >check_status,</if>
+                <if test="id != null" >id,</if>
+                <if test="projecrManagerId != null" >projecr_manager_id,</if>
+                <if test="deptId != null" >dept_id,</if>
+                <if test="establishDate != null" >establish_date,</if>
+                <if test="projectId != null" >project_id,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="projectNumber != null" >#{projectNumber, jdbcType=VARCHAR},</if>
+                <if test="projectName != null" >#{projectName, jdbcType=VARCHAR},</if>
+                <if test="discription != null" >#{discription, jdbcType=CLOB},</if>
+                <if test="establishFile != null" >#{establishFile, jdbcType=VARCHAR},</if>
+                <if test="establishExplanation != null" >#{establishExplanation, jdbcType=CLOB},</if>
+                <if test="belongingPlatform != null" >#{belongingPlatform, jdbcType=VARCHAR},</if>
+                <if test="belongingPlate != null" >#{belongingPlate, jdbcType=VARCHAR},</if>
+                <if test="belongingCentralDept != null" >#{belongingCentralDept, jdbcType=VARCHAR},</if>
+                <if test="belongingDept != null" >#{belongingDept, jdbcType=VARCHAR},</if>
+                <if test="proPeriod != null" >#{proPeriod, jdbcType=VARCHAR},</if>
+                <if test="proType != null" >#{proType, jdbcType=VARCHAR},</if>
+                <if test="mobile != null" >#{mobile, jdbcType=VARCHAR},</if>
+                <if test="phone != null" >#{phone, jdbcType=VARCHAR},</if>
+                <if test="email != null" >#{email, jdbcType=VARCHAR},</if>
+                <if test="deptHeadOpinion != null" >#{deptHeadOpinion, jdbcType=VARCHAR},</if>
+                <if test="leaderOpinion != null" >#{leaderOpinion, jdbcType=VARCHAR},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=VARCHAR},</if>
+                <if test="createdTime != null" >#{createdTime, jdbcType=TIMESTAMP},</if>
+                <if test="createdUser != null" >#{createdUser, jdbcType=VARCHAR},</if>
+                <if test="modifiedTime != null" >#{modifiedTime, jdbcType=TIMESTAMP},</if>
+                <if test="modifiedUser != null" >#{modifiedUser, jdbcType=VARCHAR},</if>
+                <if test="checkStatus != null" >#{checkStatus, jdbcType=VARCHAR},</if>
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="projecrManagerId != null" >#{projecrManagerId, jdbcType=VARCHAR},</if>
+                <if test="deptId != null" >#{deptId, jdbcType=VARCHAR},</if>
+                <if test="establishDate != null" >#{establishDate, jdbcType=TIMESTAMP},</if>
+                <if test="projectId != null" >#{projectId, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.crm.entity.ProjectEstablishApprovalEO" >
+    update PROJECT_ESTABLISH_APPROVAL
+       set  project_number = #{projectNumber},
+            project_name = #{projectName},
+            discription = #{discription},
+            establish_file = #{establishFile},
+            establish_explanation = #{establishExplanation},
+            belonging_platform = #{belongingPlatform},
+            belonging_plate = #{belongingPlate},
+            belonging_central_dept = #{belongingCentralDept},
+            belonging_dept = #{belongingDept},
+            pro_period = #{proPeriod},
+            pro_type = #{proType},
+            mobile = #{mobile},
+            phone = #{phone},
+            email = #{email},
+            dept_head_opinion = #{deptHeadOpinion},
+            leader_opinion = #{leaderOpinion},
+            del_flag = #{delFlag},
+            created_time = #{createdTime},
+            created_user = #{createdUser},
+            modified_time = #{modifiedTime},
+            modified_user = #{modifiedUser},
+            check_status = #{checkStatus},
+            projecr_manager_id = #{projecrManagerId},
+            dept_id = #{deptId},
+            establish_date = #{establishDate},
+            project_id = #{projectId}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.crm.entity.ProjectEstablishApprovalEO" >
+    update PROJECT_ESTABLISH_APPROVAL
+    <set >
+      <if test="projectNumber != null" >
+        project_number = #{projectNumber},
+      </if>
+      <if test="projectName != null" >
+        project_name = #{projectName},
+      </if>
+      <if test="discription != null" >
+        discription = #{discription},
+      </if>
+      <if test="establishFile != null" >
+        establish_file = #{establishFile},
+      </if>
+      <if test="establishExplanation != null" >
+        establish_explanation = #{establishExplanation},
+      </if>
+      <if test="belongingPlatform != null" >
+        belonging_platform = #{belongingPlatform},
+      </if>
+      <if test="belongingPlate != null" >
+        belonging_plate = #{belongingPlate},
+      </if>
+      <if test="belongingCentralDept != null" >
+        belonging_central_dept = #{belongingCentralDept},
+      </if>
+      <if test="belongingDept != null" >
+        belonging_dept = #{belongingDept},
+      </if>
+      <if test="proPeriod != null" >
+        pro_period = #{proPeriod},
+      </if>
+      <if test="proType != null" >
+        pro_type = #{proType},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone},
+      </if>
+      <if test="email != null" >
+        email = #{email},
+      </if>
+      <if test="deptHeadOpinion != null" >
+        dept_head_opinion = #{deptHeadOpinion},
+      </if>
+      <if test="leaderOpinion != null" >
+        leader_opinion = #{leaderOpinion},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+      <if test="createdUser != null" >
+        created_user = #{createdUser},
+      </if>
+      <if test="modifiedTime != null" >
+        modified_time = #{modifiedTime},
+      </if>
+      <if test="modifiedUser != null" >
+        modified_user = #{modifiedUser},
+      </if>
+      <if test="checkStatus != null" >
+        check_status = #{checkStatus},
+      </if>
+      <if test="projecrManagerId != null" >
+        projecr_manager_id = #{projecrManagerId},
+      </if>
+      <if test="deptId != null" >
+        dept_id = #{deptId},
+      </if>
+      <if test="establishDate != null" >
+        establish_date = #{establishDate},
+      </if>
+      <if test="projectId != null" >
+        project_id = #{projectId},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 PROJECT_ESTABLISH_APPROVAL -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from PROJECT_ESTABLISH_APPROVAL
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from PROJECT_ESTABLISH_APPROVAL
+     where id = #{value}
+
+  </delete>
+
+  <!-- PROJECT_ESTABLISH_APPROVAL 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from PROJECT_ESTABLISH_APPROVAL
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询PROJECT_ESTABLISH_APPROVAL列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from PROJECT_ESTABLISH_APPROVAL
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+
+    <!-- 查询PROJECT_ESTABLISH_APPROVAL列表 -->
+    <select id="queryCRMListByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+        select <include refid="Base_Column_List" /> from
+        (select tmp_tb.* , rownum rn from
+        (select <include refid="CRM_Column_List" /> from PROJECT_ESTABLISH_APPROVAL
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from PROJECT_ESTABLISH_APPROVAL
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+    <update id="updateByPrimaryKeyAndDelFlag">
+        update PROJECT_ESTABLISH_APPROVAL set del_flag=#{delFlag} where id=#{primaryKey}
+    </update>
+
+</mapper>

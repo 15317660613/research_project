@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.smallprogram.dao.ScheduleResearchEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.smallprogram.entity.ScheduleResearchEO" >
+    <id column="id" property="id" />
+    <result column="title" property="title" />
+    <result column="create_time" property="createTime" />
+    <result column="update_time" property="updateTime" />
+    <result column="status" property="status" />
+    <result column="del_flag" property="delFlag" />
+    <result column="year" property="year" />
+    <result column="month" property="month" />
+  </resultMap>
+
+    <resultMap id="BaseResultMapResearchVO" type="com.adc.da.smallprogram.vo.ResearchVO" >
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="collect" property="collect" />
+        <result column="top" property="top" />
+    </resultMap>
+
+  <!-- TS_SCHEDULE_RESEARCH table all fields -->
+  <sql id="Base_Column_List" >
+     id, title, create_time, update_time, status, del_flag, year, month
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="title != null" >
+        and title ${titleOperator} #{title}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="updateTime != null" >
+        and update_time ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and update_time &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and update_time &lt;= #{updateTime2}
+      </if>
+      <if test="status != null" >
+        and status ${statusOperator} #{status}
+      </if>
+      <if test="delFlag != null" >
+        and del_flag ${delFlagOperator} #{delFlag}
+      </if>
+      <if test="year != null" >
+        and year ${yearOperator} #{year}
+      </if>
+      <if test="month != null" >
+        and month ${monthOperator} #{month}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.smallprogram.entity.ScheduleResearchEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_SCHEDULE_RESEARCH.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into TS_SCHEDULE_RESEARCH(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{title, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{updateTime, jdbcType=TIMESTAMP}, #{status, jdbcType=INTEGER}, #{delFlag, jdbcType=INTEGER}, #{year, jdbcType=VARCHAR}, #{month, jdbcType=INTEGER})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.smallprogram.entity.ScheduleResearchEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_SCHEDULE_RESEARCH.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into TS_SCHEDULE_RESEARCH
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="title != null" >title,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="updateTime != null" >update_time,</if>
+                <if test="status != null" >status,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="year != null" >year,</if>
+                <if test="month != null" >month,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="title != null" >#{title, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="updateTime != null" >#{updateTime, jdbcType=TIMESTAMP},</if>
+                <if test="status != null" >#{status, jdbcType=INTEGER},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=INTEGER},</if>
+                <if test="year != null" >#{year, jdbcType=VARCHAR},</if>
+                <if test="month != null" >#{month, jdbcType=INTEGER},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.smallprogram.entity.ScheduleResearchEO" >
+    update TS_SCHEDULE_RESEARCH
+       set  title = #{title},
+            create_time = #{createTime},
+            update_time = #{updateTime},
+            status = #{status},
+            del_flag = #{delFlag},
+            year = #{year},
+            month = #{month}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.smallprogram.entity.ScheduleResearchEO" >
+    update TS_SCHEDULE_RESEARCH
+    <set >
+      <if test="title != null" >
+        title = #{title},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+      <if test="status != null" >
+        status = #{status},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="year != null" >
+        year = #{year},
+      </if>
+      <if test="month != null" >
+        month = #{month},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 TS_SCHEDULE_RESEARCH -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+      from TS_SCHEDULE_RESEARCH
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TS_SCHEDULE_RESEARCH
+     where id = #{value}
+
+  </delete>
+
+  <!-- TS_SCHEDULE_RESEARCH 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from TS_SCHEDULE_RESEARCH
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+    <!-- TS_SCHEDULE_RESEARCH 列表总数-->
+    <select id="queryByMyCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        select count(1) from TS_SCHEDULE_RESEARCH tsr
+        WHERE 1 = 1
+        <if test="year != null and year != '' and month != null and month != ''" >
+            and tsr.YEAR = #{year} and tsr.MONTH = #{month}
+        </if>
+    </select>
+
+  <!-- 查询TS_SCHEDULE_RESEARCH列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from TS_SCHEDULE_RESEARCH
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+    <!-- 查询TS_SCHEDULE_RESEARCH列表 -->
+    <select id="queryVOByPage" resultMap="BaseResultMapResearchVO" parameterType="com.adc.da.base.page.BasePage">
+        select distinct(ID),COLLECT,TOP,TITLE,create_time,update_time,STATUS from
+        (select tmp_tb.* , rownum rn from
+        (select  tsr.ID AS ID ,tsru.update_time AS update_time,tsr.create_time AS create_time,tsrm.COLLECT AS COLLECT, tsrm.TOP AS TOP, tsr.TITLE AS TITLE, tsr.STATUS AS STATUS from TS_SCHEDULE_RESEARCH tsr
+        left join TS_SCHEDULE_RESEARCH_MARK tsrm on tsr.ID = tsrm.RESEARCH_ID
+        left join TS_SCHEDULE_RESEARCH_USER tsru on tsru.CREATE_USER_ID = tsrm.user_id and  tsr.ID = tsru.RESEARCH_ID
+
+        WHERE 1=1
+        <if test=" userId != null and userId != '' " >
+            and tsrm.USER_ID = #{userId}
+        </if>
+        <if test="year != null and year != '' and month != null and month != ''" >
+            and tsr.YEAR = #{year} and tsr.MONTH = #{month}
+        </if>
+        ORDER BY tsrm.TOP DESC, tsr.YEAR DESC, tsr.MONTH DESC
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from TS_SCHEDULE_RESEARCH
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

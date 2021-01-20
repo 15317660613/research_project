@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.processform.dao.FormFileEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.processform.entity.FormFileEO" >
+    <id column="id" property="id" />
+    <result column="processinstid" property="processinstid" />
+    <result column="fileid" property="fileid" />
+    <result column="delflag" property="delflag" />
+    <result column="filebelong" property="filebelong" />
+    <result column="ext_01" property="ext01" />
+    <result column="ext_02" property="ext02" />
+    <result column="ext_03" property="ext03" />
+    <result column="ext_04" property="ext04" />
+    <result column="ext_05" property="ext05" />
+    <result column="ext_06" property="ext06" />
+  </resultMap>
+
+  <!-- PF_FORM_FILE table all fields -->
+  <sql id="Base_Column_List" >
+     id, processinstid, fileid, delflag, filebelong, ext_01, ext_02, ext_03, ext_04, ext_05, ext_06
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="processinstid != null" >
+        and processinstid ${processinstidOperator} #{processinstid}
+      </if>
+      <if test="fileid != null" >
+        and fileid ${fileidOperator} #{fileid}
+      </if>
+      <if test="delflag != null" >
+        and delflag ${delflagOperator} #{delflag}
+      </if>
+      <if test="filebelong != null" >
+        and filebelong ${filebelongOperator} #{filebelong}
+      </if>
+      <if test="ext01 != null" >
+        and ext_01 ${ext01Operator} #{ext01}
+      </if>
+      <if test="ext02 != null" >
+        and ext_02 ${ext02Operator} #{ext02}
+      </if>
+      <if test="ext03 != null" >
+        and ext_03 ${ext03Operator} #{ext03}
+      </if>
+      <if test="ext04 != null" >
+        and ext_04 ${ext04Operator} #{ext04}
+      </if>
+      <if test="ext05 != null" >
+        and ext_05 ${ext05Operator} #{ext05}
+      </if>
+      <if test="ext06 != null" >
+        and ext_06 ${ext06Operator} #{ext06}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.processform.entity.FormFileEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_PF_FORM_FILE.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into PF_FORM_FILE(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{processinstid, jdbcType=VARCHAR}, #{fileid, jdbcType=VARCHAR}, #{delflag, jdbcType=VARCHAR}, #{filebelong, jdbcType=VARCHAR}, #{ext01, jdbcType=VARCHAR}, #{ext02, jdbcType=VARCHAR}, #{ext03, jdbcType=VARCHAR}, #{ext04, jdbcType=VARCHAR}, #{ext05, jdbcType=VARCHAR}, #{ext06, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.processform.entity.FormFileEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_PF_FORM_FILE.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into PF_FORM_FILE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="processinstid != null" >processinstid,</if>
+                <if test="fileid != null" >fileid,</if>
+                <if test="delflag != null" >delflag,</if>
+                <if test="filebelong != null" >filebelong,</if>
+                <if test="ext01 != null" >ext_01,</if>
+                <if test="ext02 != null" >ext_02,</if>
+                <if test="ext03 != null" >ext_03,</if>
+                <if test="ext04 != null" >ext_04,</if>
+                <if test="ext05 != null" >ext_05,</if>
+                <if test="ext06 != null" >ext_06,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="processinstid != null" >#{processinstid, jdbcType=VARCHAR},</if>
+                <if test="fileid != null" >#{fileid, jdbcType=VARCHAR},</if>
+                <if test="delflag != null" >#{delflag, jdbcType=VARCHAR},</if>
+                <if test="filebelong != null" >#{filebelong, jdbcType=VARCHAR},</if>
+                <if test="ext01 != null" >#{ext01, jdbcType=VARCHAR},</if>
+                <if test="ext02 != null" >#{ext02, jdbcType=VARCHAR},</if>
+                <if test="ext03 != null" >#{ext03, jdbcType=VARCHAR},</if>
+                <if test="ext04 != null" >#{ext04, jdbcType=VARCHAR},</if>
+                <if test="ext05 != null" >#{ext05, jdbcType=VARCHAR},</if>
+                <if test="ext06 != null" >#{ext06, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.processform.entity.FormFileEO" >
+    update PF_FORM_FILE
+       set  processinstid = #{processinstid},
+            fileid = #{fileid},
+            delflag = #{delflag},
+            filebelong = #{filebelong},
+            ext_01 = #{ext01},
+            ext_02 = #{ext02},
+            ext_03 = #{ext03},
+            ext_04 = #{ext04},
+            ext_05 = #{ext05},
+            ext_06 = #{ext06}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.processform.entity.FormFileEO" >
+    update PF_FORM_FILE
+    <set >
+      <if test="processinstid != null" >
+        processinstid = #{processinstid},
+      </if>
+      <if test="fileid != null" >
+        fileid = #{fileid},
+      </if>
+      <if test="delflag != null" >
+        delflag = #{delflag},
+      </if>
+      <if test="filebelong != null" >
+        filebelong = #{filebelong},
+      </if>
+      <if test="ext01 != null" >
+        ext_01 = #{ext01},
+      </if>
+      <if test="ext02 != null" >
+        ext_02 = #{ext02},
+      </if>
+      <if test="ext03 != null" >
+        ext_03 = #{ext03},
+      </if>
+      <if test="ext04 != null" >
+        ext_04 = #{ext04},
+      </if>
+      <if test="ext05 != null" >
+        ext_05 = #{ext05},
+      </if>
+      <if test="ext06 != null" >
+        ext_06 = #{ext06},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 PF_FORM_FILE -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from PF_FORM_FILE
+     where id = #{value}
+
+  </select>
+
+
+    <!-- 根据id查询 PF_FORM_FILE -->
+    <select id="selectByProcessAndBelong" resultMap="BaseResultMap" >
+        select <include refid="Base_Column_List" />
+        from PF_FORM_FILE
+        where processinstid = #{processinstid} and filebelong = #{filebelong} and DELFLAG is null
+
+    </select>
+
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete PF_FORM_FILE SET DELFLAG = 'del'
+     where id = #{value}
+
+  </delete>
+
+
+    <!-- 软删除 -->
+    <delete id="softDelete" >
+    UPDATE  PF_FORM_FILE SET DELFLAG = 'del'
+     where processinstid = #{processinstid} and filebelong = #{filebelong}
+
+  </delete>
+
+
+  <!-- PF_FORM_FILE 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from PF_FORM_FILE
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询PF_FORM_FILE列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from PF_FORM_FILE
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from PF_FORM_FILE
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

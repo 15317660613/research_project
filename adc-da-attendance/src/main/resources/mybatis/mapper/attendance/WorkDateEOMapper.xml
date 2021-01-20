@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.adc.da.attendance.dao.WorkDateEODao">
+    <!-- Result Map-->
+    <resultMap id = "BaseResultMap" type = "com.adc.da.attendance.entity.WorkDateEO">
+        <id column = "id" property = "id"/>
+        <result column = "dept" property = "dept"/>
+        <result column = "date_time" property = "dateTime"/>
+        <result column = "week" property = "week"/>
+        <result column = "is_work_date" property = "isWorkDate"/>
+        <result column = "is_public_holiday" property = "isPublicHoliday"/>
+        <result column = "holiday_name" property = "holidayName"/>
+    </resultMap>
+
+    <!-- WORK_DATE table all fields -->
+    <sql id = "Base_Column_List">
+        id, dept, date_time, week, is_work_date, is_public_holiday, holiday_name
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id = "Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides = ",">
+            <if test = "id != null">
+                and id ${idOperator} #{id}
+            </if>
+            <if test = "dept != null">
+                and dept ${deptOperator} #{dept}
+            </if>
+            <if test = "dateTime != null">
+                and date_time ${dateTimeOperator} #{dateTime}
+            </if>
+            <if test = "dateTime1 != null">
+                and date_time &gt;= #{dateTime1}
+            </if>
+            <if test = "dateTime2 != null">
+                and date_time &lt;= #{dateTime2}
+            </if>
+            <if test = "week != null">
+                and week ${weekOperator} #{week}
+            </if>
+            <if test = "isWorkDate != null">
+                and is_work_date ${isWorkDateOperator} #{isWorkDate}
+            </if>
+            <if test = "isPublicHoliday != null">
+                and is_public_holiday ${isPublicHolidayOperator} #{isPublicHoliday}
+            </if>
+            <if test = "holidayName != null">
+                and holiday_name ${holidayNameOperator} #{holidayName}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id = "insert" parameterType = "com.adc.da.attendance.entity.WorkDateEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+            SELECT SEQ_WORK_DATE.NEXTVAL FROM DUAL
+        </selectKey> -->
+        insert into WORK_DATE(<include refid = "Base_Column_List"/>)
+        values (#{id, jdbcType=VARCHAR}, #{dept, jdbcType=INTEGER}, #{dateTime, jdbcType=TIMESTAMP},
+        #{week, jdbcType=VARCHAR}, #{isWorkDate, jdbcType=INTEGER}, #{isPublicHoliday, jdbcType=INTEGER},
+        #{holidayName, jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id = "insertSelective" parameterType = "com.adc.da.attendance.entity.WorkDateEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_WORK_DATE.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into WORK_DATE
+        <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">id,</if>
+            <if test = "dept != null">dept,</if>
+            <if test = "dateTime != null">date_time,</if>
+            <if test = "week != null">week,</if>
+            <if test = "isWorkDate != null">is_work_date,</if>
+            <if test = "isPublicHoliday != null">is_public_holiday,</if>
+            <if test = "holidayName != null">holiday_name,</if>
+        </trim>
+        <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">#{id, jdbcType=VARCHAR},</if>
+            <if test = "dept != null">#{dept, jdbcType=INTEGER},</if>
+            <if test = "dateTime != null">#{dateTime, jdbcType=TIMESTAMP},</if>
+            <if test = "week != null">#{week, jdbcType=VARCHAR},</if>
+            <if test = "isWorkDate != null">#{isWorkDate, jdbcType=INTEGER},</if>
+            <if test = "isPublicHoliday != null">#{isPublicHoliday, jdbcType=INTEGER},</if>
+            <if test = "holidayName != null">#{holidayName, jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <!-- 根据pk，修改记录-->
+    <update id = "updateByPrimaryKey" parameterType = "com.adc.da.attendance.entity.WorkDateEO">
+        UPDATE WORK_DATE
+        SET dept              = #{dept},
+            date_time         = #{dateTime},
+            week              = #{week},
+            is_work_date      = #{isWorkDate},
+            is_public_holiday = #{isPublicHoliday},
+            holiday_name      = #{holidayName}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id = "updateByPrimaryKeySelective" parameterType = "com.adc.da.attendance.entity.WorkDateEO">
+        update WORK_DATE
+        <set>
+            <if test = "dept != null">
+                dept = #{dept},
+            </if>
+            <if test = "dateTime != null">
+                date_time = #{dateTime},
+            </if>
+            <if test = "week != null">
+                week = #{week},
+            </if>
+            <if test = "isWorkDate != null">
+                is_work_date = #{isWorkDate},
+            </if>
+            <if test = "isPublicHoliday != null">
+                is_public_holiday = #{isPublicHoliday},
+            </if>
+            <if test = "holidayName != null">
+                holiday_name = #{holidayName},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!-- 根据id查询 WORK_DATE -->
+    <select id = "selectByPrimaryKey" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+        select
+        <include refid = "Base_Column_List"/>
+        from WORK_DATE
+        where id = #{value}
+
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id = "deleteByPrimaryKey" parameterType = "java.lang.String">
+        DELETE
+        FROM WORK_DATE
+        WHERE id = #{value}
+
+    </delete>
+
+    <!-- WORK_DATE 列表总数-->
+    <select id = "queryByCount" resultType = "java.lang.Integer" parameterType = "com.adc.da.base.page.BasePage">
+        select count(1) from WORK_DATE
+        <include refid = "Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询WORK_DATE列表 -->
+    <select id = "queryByPage" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from
+        (select tmp_tb.* , rownum rn from
+        (select
+        <include refid = "Base_Column_List"/>
+        from WORK_DATE
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id = "queryByList" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from WORK_DATE
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+    </select>
+    <!--  -->
+    <select id = "getNotWorkDate" parameterType = "java.util.Date" resultMap = "BaseResultMap">
+        SELECT
+        <include refid = "Base_Column_List"/>
+        FROM WORK_DATE
+        WHERE DATE_TIME BETWEEN #{beginDate} AND #{endDate}
+        AND IS_WORK_DATE = 0
+    </select>
+
+    <select id = "getUserCode" resultMap = "BaseResultMap">
+        SELECT usid AS ID, USER_CODE AS week
+
+        FROM TS_USER
+        WHERE DEL_FLAG != 1
+    </select>
+</mapper>

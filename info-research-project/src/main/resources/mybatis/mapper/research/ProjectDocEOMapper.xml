@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.dao.ProjectDocEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.research.entity.ProjectDocEO" >
+    <id column="id_" property="id" />
+    <result column="research_project_id_" property="researchProjectId" />
+    <result column="doc_type_" property="docType" />
+    <result column="file_id_" property="fileId" />
+    <result column="ext_info_2_" property="extInfo2" />
+    <result column="ext_info_3_" property="extInfo3" />
+    <result column="ext_info_4_" property="extInfo4" />
+    <result column="ext_info_5_" property="extInfo5" />
+    <result column="ext_info_6_" property="extInfo6" />
+  </resultMap>
+
+  <!-- RS_PROJECT_DOC table all fields -->
+  <sql id="Base_Column_List" >
+     id_, research_project_id_, doc_type_, file_id_, ext_info_2_, ext_info_3_, ext_info_4_, ext_info_5_, ext_info_6_
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id_ ${idOperator} #{id}
+      </if>
+      <if test="researchProjectId != null" >
+        and research_project_id_ ${researchProjectIdOperator} #{researchProjectId}
+      </if>
+      <if test="docType != null" >
+        and doc_type_ ${docTypeOperator} #{docType}
+      </if>
+      <if test="fileId != null" >
+        and file_id_ ${fileIdOperator} #{fileId}
+      </if>
+      <if test="extInfo2 != null" >
+        and ext_info_2_ ${extInfo2Operator} #{extInfo2}
+      </if>
+      <if test="extInfo3 != null" >
+        and ext_info_3_ ${extInfo3Operator} #{extInfo3}
+      </if>
+      <if test="extInfo4 != null" >
+        and ext_info_4_ ${extInfo4Operator} #{extInfo4}
+      </if>
+      <if test="extInfo5 != null" >
+        and ext_info_5_ ${extInfo5Operator} #{extInfo5}
+      </if>
+      <if test="extInfo6 != null" >
+        and ext_info_6_ ${extInfo6Operator} #{extInfo6}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.research.entity.ProjectDocEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_RS_PROJECT_DOC.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into RS_PROJECT_DOC(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{researchProjectId, jdbcType=VARCHAR}, #{docType, jdbcType=VARCHAR}, #{fileId, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR}, #{extInfo6, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.research.entity.ProjectDocEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_RS_PROJECT_DOC.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into RS_PROJECT_DOC
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id_,</if>
+                <if test="researchProjectId != null" >research_project_id_,</if>
+                <if test="docType != null" >doc_type_,</if>
+                <if test="fileId != null" >file_id_,</if>
+                <if test="extInfo2 != null" >ext_info_2_,</if>
+                <if test="extInfo3 != null" >ext_info_3_,</if>
+                <if test="extInfo4 != null" >ext_info_4_,</if>
+                <if test="extInfo5 != null" >ext_info_5_,</if>
+                <if test="extInfo6 != null" >ext_info_6_,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="researchProjectId != null" >#{researchProjectId, jdbcType=VARCHAR},</if>
+                <if test="docType != null" >#{docType, jdbcType=VARCHAR},</if>
+                <if test="fileId != null" >#{fileId, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="extInfo3 != null" >#{extInfo3, jdbcType=VARCHAR},</if>
+                <if test="extInfo4 != null" >#{extInfo4, jdbcType=VARCHAR},</if>
+                <if test="extInfo5 != null" >#{extInfo5, jdbcType=VARCHAR},</if>
+                <if test="extInfo6 != null" >#{extInfo6, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.research.entity.ProjectDocEO" >
+    update RS_PROJECT_DOC
+       set  research_project_id_ = #{researchProjectId},
+            doc_type_ = #{docType},
+            file_id_ = #{fileId},
+            ext_info_2_ = #{extInfo2},
+            ext_info_3_ = #{extInfo3},
+            ext_info_4_ = #{extInfo4},
+            ext_info_5_ = #{extInfo5},
+            ext_info_6_ = #{extInfo6}
+     where  id_ = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.research.entity.ProjectDocEO" >
+    update RS_PROJECT_DOC
+    <set >
+      <if test="researchProjectId != null" >
+        research_project_id_ = #{researchProjectId},
+      </if>
+      <if test="docType != null" >
+        doc_type_ = #{docType},
+      </if>
+      <if test="fileId != null" >
+        file_id_ = #{fileId},
+      </if>
+      <if test="extInfo2 != null" >
+        ext_info_2_ = #{extInfo2},
+      </if>
+      <if test="extInfo3 != null" >
+        ext_info_3_ = #{extInfo3},
+      </if>
+      <if test="extInfo4 != null" >
+        ext_info_4_ = #{extInfo4},
+      </if>
+      <if test="extInfo5 != null" >
+        ext_info_5_ = #{extInfo5},
+      </if>
+      <if test="extInfo6 != null" >
+        ext_info_6_ = #{extInfo6},
+      </if>
+    </set>
+     where id_ = #{id}
+  </update>
+
+  <!-- 根据id查询 RS_PROJECT_DOC -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from RS_PROJECT_DOC
+     where id_ = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RS_PROJECT_DOC
+     where id_ = #{value}
+
+  </delete>
+
+  <!-- RS_PROJECT_DOC 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from RS_PROJECT_DOC
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询RS_PROJECT_DOC列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from RS_PROJECT_DOC
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from RS_PROJECT_DOC
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

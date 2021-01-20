@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.project.dao.ResearchProjectBudgetEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.research.project.entity.ResearchProjectBudgetEO" >
+    <id column="id" property="id" />
+    <result column="project_id" property="projectId" />
+    <result column="contract_id" property="contractId" />
+    <result column="budget_type" property="budgetType" />
+    <result column="purchase_equipment" property="purchaseEquipment" />
+    <result column="trial_equipment" property="trialEquipment" />
+    <result column="lease_equipment" property="leaseEquipment" />
+    <result column="materials" property="materials" />
+    <result column="test_machining" property="testMachining" />
+    <result column="fuel_power" property="fuelPower" />
+    <result column="travel" property="travel" />
+    <result column="meeting" property="meeting" />
+    <result column="international" property="international" />
+    <result column="intellectual_property" property="intellectualProperty" />
+    <result column="software" property="software" />
+    <result column="labor" property="labor" />
+    <result column="expert_advice" property="expertAdvice" />
+    <result column="outsourcing" property="outsourcing" />
+    <result column="management" property="management" />
+    <result column="budget_year" property="budgetYear" />
+    <result column="budget_quarterly" property="budgetQuarterly" />
+    <result column="budget_month" property="budgetMonth" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="create_user_name" property="createUserName" />
+    <result column="create_time" property="createTime" />
+    <result column="modify_time" property="modifyTime" />
+    <result column="del_flag" property="delFlag" />
+    <result column="ext1" property="ext1" />
+    <result column="ext2" property="ext2" />
+    <result column="ext3" property="ext3" />
+    <result column="ext4" property="ext4" />
+    <result column="ext5" property="ext5" />
+    <result column="ext6" property="ext6" />
+  </resultMap>
+
+  <!-- RS_RESEARCH_PROJECT_BUDGET table all fields -->
+  <sql id="Base_Column_List" >
+     id, project_id, contract_id, budget_type, purchase_equipment, trial_equipment, lease_equipment, materials, test_machining, fuel_power, travel, meeting, international, intellectual_property, software, labor, expert_advice, outsourcing, management, budget_year, budget_quarterly, budget_month, create_user_id, create_user_name, create_time, modify_time, del_flag, ext1, ext2, ext3, ext4, ext5, ext6
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="projectId != null" >
+        and project_id ${projectIdOperator} #{projectId}
+      </if>
+      <if test="contractId != null" >
+        and contract_id ${contractIdOperator} #{contractId}
+      </if>
+      <if test="budgetType != null" >
+        and budget_type ${budgetTypeOperator} #{budgetType}
+      </if>
+      <if test="purchaseEquipment != null" >
+        and purchase_equipment ${purchaseEquipmentOperator} #{purchaseEquipment}
+      </if>
+      <if test="trialEquipment != null" >
+        and trial_equipment ${trialEquipmentOperator} #{trialEquipment}
+      </if>
+      <if test="leaseEquipment != null" >
+        and lease_equipment ${leaseEquipmentOperator} #{leaseEquipment}
+      </if>
+      <if test="materials != null" >
+        and materials ${materialsOperator} #{materials}
+      </if>
+      <if test="testMachining != null" >
+        and test_machining ${testMachiningOperator} #{testMachining}
+      </if>
+      <if test="fuelPower != null" >
+        and fuel_power ${fuelPowerOperator} #{fuelPower}
+      </if>
+      <if test="travel != null" >
+        and travel ${travelOperator} #{travel}
+      </if>
+      <if test="meeting != null" >
+        and meeting ${meetingOperator} #{meeting}
+      </if>
+      <if test="international != null" >
+        and international ${internationalOperator} #{international}
+      </if>
+      <if test="intellectualProperty != null" >
+        and intellectual_property ${intellectualPropertyOperator} #{intellectualProperty}
+      </if>
+      <if test="software != null" >
+        and software ${softwareOperator} #{software}
+      </if>
+      <if test="labor != null" >
+        and labor ${laborOperator} #{labor}
+      </if>
+      <if test="expertAdvice != null" >
+        and expert_advice ${expertAdviceOperator} #{expertAdvice}
+      </if>
+      <if test="outsourcing != null" >
+        and outsourcing ${outsourcingOperator} #{outsourcing}
+      </if>
+      <if test="management != null" >
+        and management ${managementOperator} #{management}
+      </if>
+      <if test="budgetYear != null" >
+        and budget_year ${budgetYearOperator} #{budgetYear}
+      </if>
+      <if test="budgetQuarterly != null" >
+        and budget_quarterly ${budgetQuarterlyOperator} #{budgetQuarterly}
+      </if>
+      <if test="budgetMonth != null" >
+        and budget_month ${budgetMonthOperator} #{budgetMonth}
+      </if>
+      <if test="createUserId != null" >
+        and create_user_id ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="createUserName != null" >
+        and create_user_name ${createUserNameOperator} #{createUserName}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="modifyTime != null" >
+        and modify_time ${modifyTimeOperator} #{modifyTime}
+      </if>
+      <if test="modifyTime1 != null" >
+        and modify_time &gt;= #{modifyTime1}
+      </if>
+      <if test="modifyTime2 != null" >
+        and modify_time &lt;= #{modifyTime2}
+      </if>
+      <if test="delFlag != null" >
+        and del_flag =0
+      </if>
+      <if test="ext1 != null" >
+        and ext1 ${ext1Operator} #{ext1}
+      </if>
+      <if test="ext2 != null" >
+        and ext2 ${ext2Operator} #{ext2}
+      </if>
+      <if test="ext3 != null" >
+        and ext3 ${ext3Operator} #{ext3}
+      </if>
+      <if test="ext4 != null" >
+        and ext4 ${ext4Operator} #{ext4}
+      </if>
+      <if test="ext5 != null" >
+        and ext5 ${ext5Operator} #{ext5}
+      </if>
+      <if test="ext6 != null" >
+        and ext6 ${ext6Operator} #{ext6}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.research.project.entity.ResearchProjectBudgetEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RS_RESEARCH_PROJECT_BUDGET.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into RS_RESEARCH_PROJECT_BUDGET(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{projectId, jdbcType=VARCHAR}, #{contractId, jdbcType=VARCHAR}, #{budgetType, jdbcType=VARCHAR}, #{purchaseEquipment, jdbcType=VARCHAR}, #{trialEquipment, jdbcType=VARCHAR}, #{leaseEquipment, jdbcType=VARCHAR}, #{materials, jdbcType=VARCHAR}, #{testMachining, jdbcType=VARCHAR}, #{fuelPower, jdbcType=VARCHAR}, #{travel, jdbcType=VARCHAR}, #{meeting, jdbcType=VARCHAR}, #{international, jdbcType=VARCHAR}, #{intellectualProperty, jdbcType=VARCHAR}, #{software, jdbcType=VARCHAR}, #{labor, jdbcType=VARCHAR}, #{expertAdvice, jdbcType=VARCHAR}, #{outsourcing, jdbcType=VARCHAR}, #{management, jdbcType=VARCHAR}, #{budgetYear, jdbcType=VARCHAR}, #{budgetQuarterly, jdbcType=VARCHAR}, #{budgetMonth, jdbcType=VARCHAR}, #{createUserId, jdbcType=VARCHAR}, #{createUserName, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{modifyTime, jdbcType=TIMESTAMP}, #{delFlag, jdbcType=VARCHAR}, #{ext1, jdbcType=VARCHAR}, #{ext2, jdbcType=VARCHAR}, #{ext3, jdbcType=VARCHAR}, #{ext4, jdbcType=VARCHAR}, #{ext5, jdbcType=VARCHAR}, #{ext6, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.research.project.entity.ResearchProjectBudgetEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RS_RESEARCH_PROJECT_BUDGET.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into RS_RESEARCH_PROJECT_BUDGET
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="projectId != null" >project_id,</if>
+                <if test="contractId != null" >contract_id,</if>
+                <if test="budgetType != null" >budget_type,</if>
+                <if test="purchaseEquipment != null" >purchase_equipment,</if>
+                <if test="trialEquipment != null" >trial_equipment,</if>
+                <if test="leaseEquipment != null" >lease_equipment,</if>
+                <if test="materials != null" >materials,</if>
+                <if test="testMachining != null" >test_machining,</if>
+                <if test="fuelPower != null" >fuel_power,</if>
+                <if test="travel != null" >travel,</if>
+                <if test="meeting != null" >meeting,</if>
+                <if test="international != null" >international,</if>
+                <if test="intellectualProperty != null" >intellectual_property,</if>
+                <if test="software != null" >software,</if>
+                <if test="labor != null" >labor,</if>
+                <if test="expertAdvice != null" >expert_advice,</if>
+                <if test="outsourcing != null" >outsourcing,</if>
+                <if test="management != null" >management,</if>
+                <if test="budgetYear != null" >budget_year,</if>
+                <if test="budgetQuarterly != null" >budget_quarterly,</if>
+                <if test="budgetMonth != null" >budget_month,</if>
+                <if test="createUserId != null" >create_user_id,</if>
+                <if test="createUserName != null" >create_user_name,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="modifyTime != null" >modify_time,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="ext1 != null" >ext1,</if>
+                <if test="ext2 != null" >ext2,</if>
+                <if test="ext3 != null" >ext3,</if>
+                <if test="ext4 != null" >ext4,</if>
+                <if test="ext5 != null" >ext5,</if>
+                <if test="ext6 != null" >ext6,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="projectId != null" >#{projectId, jdbcType=VARCHAR},</if>
+                <if test="contractId != null" >#{contractId, jdbcType=VARCHAR},</if>
+                <if test="budgetType != null" >#{budgetType, jdbcType=VARCHAR},</if>
+                <if test="purchaseEquipment != null" >#{purchaseEquipment, jdbcType=VARCHAR},</if>
+                <if test="trialEquipment != null" >#{trialEquipment, jdbcType=VARCHAR},</if>
+                <if test="leaseEquipment != null" >#{leaseEquipment, jdbcType=VARCHAR},</if>
+                <if test="materials != null" >#{materials, jdbcType=VARCHAR},</if>
+                <if test="testMachining != null" >#{testMachining, jdbcType=VARCHAR},</if>
+                <if test="fuelPower != null" >#{fuelPower, jdbcType=VARCHAR},</if>
+                <if test="travel != null" >#{travel, jdbcType=VARCHAR},</if>
+                <if test="meeting != null" >#{meeting, jdbcType=VARCHAR},</if>
+                <if test="international != null" >#{international, jdbcType=VARCHAR},</if>
+                <if test="intellectualProperty != null" >#{intellectualProperty, jdbcType=VARCHAR},</if>
+                <if test="software != null" >#{software, jdbcType=VARCHAR},</if>
+                <if test="labor != null" >#{labor, jdbcType=VARCHAR},</if>
+                <if test="expertAdvice != null" >#{expertAdvice, jdbcType=VARCHAR},</if>
+                <if test="outsourcing != null" >#{outsourcing, jdbcType=VARCHAR},</if>
+                <if test="management != null" >#{management, jdbcType=VARCHAR},</if>
+                <if test="budgetYear != null" >#{budgetYear, jdbcType=VARCHAR},</if>
+                <if test="budgetQuarterly != null" >#{budgetQuarterly, jdbcType=VARCHAR},</if>
+                <if test="budgetMonth != null" >#{budgetMonth, jdbcType=VARCHAR},</if>
+                <if test="createUserId != null" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="createUserName != null" >#{createUserName, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="modifyTime != null" >#{modifyTime, jdbcType=TIMESTAMP},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=VARCHAR},</if>
+                <if test="ext1 != null" >#{ext1, jdbcType=VARCHAR},</if>
+                <if test="ext2 != null" >#{ext2, jdbcType=VARCHAR},</if>
+                <if test="ext3 != null" >#{ext3, jdbcType=VARCHAR},</if>
+                <if test="ext4 != null" >#{ext4, jdbcType=VARCHAR},</if>
+                <if test="ext5 != null" >#{ext5, jdbcType=VARCHAR},</if>
+                <if test="ext6 != null" >#{ext6, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.research.project.entity.ResearchProjectBudgetEO" >
+    update RS_RESEARCH_PROJECT_BUDGET
+       set  project_id = #{projectId},
+            contract_id = #{contractId},
+            budget_type = #{budgetType},
+            purchase_equipment = #{purchaseEquipment},
+            trial_equipment = #{trialEquipment},
+            lease_equipment = #{leaseEquipment},
+            materials = #{materials},
+            test_machining = #{testMachining},
+            fuel_power = #{fuelPower},
+            travel = #{travel},
+            meeting = #{meeting},
+            international = #{international},
+            intellectual_property = #{intellectualProperty},
+            software = #{software},
+            labor = #{labor},
+            expert_advice = #{expertAdvice},
+            outsourcing = #{outsourcing},
+            management = #{management},
+            budget_year = #{budgetYear},
+            budget_quarterly = #{budgetQuarterly},
+            budget_month = #{budgetMonth},
+            create_user_id = #{createUserId},
+            create_user_name = #{createUserName},
+            create_time = #{createTime},
+            modify_time = #{modifyTime},
+            del_flag = #{delFlag},
+            ext1 = #{ext1},
+            ext2 = #{ext2},
+            ext3 = #{ext3},
+            ext4 = #{ext4},
+            ext5 = #{ext5},
+            ext6 = #{ext6}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.research.project.entity.ResearchProjectBudgetEO" >
+    update RS_RESEARCH_PROJECT_BUDGET
+    <set >
+      <if test="projectId != null" >
+        project_id = #{projectId},
+      </if>
+      <if test="contractId != null" >
+        contract_id = #{contractId},
+      </if>
+      <if test="budgetType != null" >
+        budget_type = #{budgetType},
+      </if>
+      <if test="purchaseEquipment != null" >
+        purchase_equipment = #{purchaseEquipment},
+      </if>
+      <if test="trialEquipment != null" >
+        trial_equipment = #{trialEquipment},
+      </if>
+      <if test="leaseEquipment != null" >
+        lease_equipment = #{leaseEquipment},
+      </if>
+      <if test="materials != null" >
+        materials = #{materials},
+      </if>
+      <if test="testMachining != null" >
+        test_machining = #{testMachining},
+      </if>
+      <if test="fuelPower != null" >
+        fuel_power = #{fuelPower},
+      </if>
+      <if test="travel != null" >
+        travel = #{travel},
+      </if>
+      <if test="meeting != null" >
+        meeting = #{meeting},
+      </if>
+      <if test="international != null" >
+        international = #{international},
+      </if>
+      <if test="intellectualProperty != null" >
+        intellectual_property = #{intellectualProperty},
+      </if>
+      <if test="software != null" >
+        software = #{software},
+      </if>
+      <if test="labor != null" >
+        labor = #{labor},
+      </if>
+      <if test="expertAdvice != null" >
+        expert_advice = #{expertAdvice},
+      </if>
+      <if test="outsourcing != null" >
+        outsourcing = #{outsourcing},
+      </if>
+      <if test="management != null" >
+        management = #{management},
+      </if>
+      <if test="budgetYear != null" >
+        budget_year = #{budgetYear},
+      </if>
+      <if test="budgetQuarterly != null" >
+        budget_quarterly = #{budgetQuarterly},
+      </if>
+      <if test="budgetMonth != null" >
+        budget_month = #{budgetMonth},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="createUserName != null" >
+        create_user_name = #{createUserName},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="ext1 != null" >
+        ext1 = #{ext1},
+      </if>
+      <if test="ext2 != null" >
+        ext2 = #{ext2},
+      </if>
+      <if test="ext3 != null" >
+        ext3 = #{ext3},
+      </if>
+      <if test="ext4 != null" >
+        ext4 = #{ext4},
+      </if>
+      <if test="ext5 != null" >
+        ext5 = #{ext5},
+      </if>
+      <if test="ext6 != null" >
+        ext6 = #{ext6},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 RS_RESEARCH_PROJECT_BUDGET -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from RS_RESEARCH_PROJECT_BUDGET
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RS_RESEARCH_PROJECT_BUDGET
+     where id = #{value}
+
+  </delete>
+
+  <!-- RS_RESEARCH_PROJECT_BUDGET 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from RS_RESEARCH_PROJECT_BUDGET
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询RS_RESEARCH_PROJECT_BUDGET列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from RS_RESEARCH_PROJECT_BUDGET
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from RS_RESEARCH_PROJECT_BUDGET
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.datatable.dao.DataSetDao">
+	<!-- Result Map -->
+
+
+	<!-- 查询条件 -->
+	<sql id="Base_Where_Clause">
+		where 1=1
+		<trim suffixOverrides=",">
+			<if test="id != null">
+				and u0.id ${idOperator} #{id}
+			</if>
+			<if test="fieldName != null">
+				and u0.field_name ${fieldNameOperator} #{fieldName}
+			</if>
+			<if test="tableName != null">
+				and u0.table_name ${tableNameOperator} #{tableName}
+			</if>
+		</trim>
+	</sql>
+	
+
+	<delete id="deleteMainTableById" parameterType="java.util.Map">
+		delete from ${mainTableName}
+		where ${mainPrimaryKey} = '${id}'
+	</delete>
+	
+	<delete id="deleteSubTableById" parameterType="java.util.Map">
+		delete from ${tableName}
+		where ${subPrimaryKey} = '${id}'
+	</delete>
+
+	<!-- 插入记录 -->
+	<insert id="insertMainTable" parameterType="java.util.Map">
+		insert into ${mainTableName} (${mainField}) values (${id},${mainFieldValue})
+	</insert>
+	
+	<insert id="insertSubTable" parameterType="java.util.Map">
+		insert into ${tableName} (${subPrimaryKey}) values (${id})
+	</insert>
+
+
+	<!-- 修改记录，只修改只不为空的字段 -->
+	<update id="updateMainTableById" parameterType="java.util.Map">
+		<if test="mainFieldV != null and mainFieldV != ''" >
+			 	 update ${mainTableName} set ${mainFieldV} where ${mainPrimaryKey} = ${id}
+	    </if>
+	</update>
+	
+	<update id="addKeyValueById" parameterType="java.util.Map">
+	    <if test="subFieldV != null and subFieldV != ''" >
+			 	 update ${tableName} set ${subFieldV} where ${subPrimaryKey} = ${id}
+	    </if>		
+	</update>
+	
+	<update id="addFieldToDB" parameterType="java.util.Map">
+		alter table ${tableName} add (${fieldName} ${fieldTypeLength} default '' ${isNull})
+	</update>
+	
+	<update id="updateFieldToDB" parameterType="java.util.Map">
+		alter table ${tableName} modify (${oldFieldName} ${fieldTypeLength})
+	</update>
+	
+	<update id="updateFieldNameToDB" parameterType="java.util.Map">
+		alter table ${tableName} rename column ${oldFieldName} to ${newFieldName} 
+	</update>
+
+	<update id="deleteFieldFromDt" parameterType="java.util.Map">
+		alter table ${tableName} drop column ${fieldName} 
+	</update>
+	<!-- 根据id查询 TS_FORM_FIELD -->
+	<select id="getDataSetById" resultType="map"
+		parameterType="java.util.Map">
+		select u0.* ${fieldName} from ${mainTableName} u0
+			<if test="tableName != null" >
+				 left join ${tableName} ur0 on u0.${mainPrimaryKey} = ur0.${subPrimaryKey} 
+			</if>	
+			where 1=1
+			 <if test="idParam != null" >
+			 	  and ${idParam}
+			   </if>
+	</select>
+
+	<!-- TS_FORM_FIELD 列表总数 -->
+	<select id="queryByCount" resultType="java.lang.Integer"
+		parameterType="com.adc.da.base.page.BasePage">
+		select count(*) from ${mainTableName}
+		<if test="queryParam != null" >
+			and ${queryParam}
+		</if>
+	</select>
+
+	 <!--查询TS_FORM_FIELD列表 -->
+	 <!--ur0和u0进行拼接，usid id 改为变量传入 -->
+    <!--<select id="queryByPage" resultType="map" parameterType="com.adc.da.base.page.BasePage">-->
+<!--&#45;&#45;      select A.* from (select ROW_NUMBER() over(order by usid desc) AS RowNumber,TS_USER.* FROM TS_USER )A WHERE A.RowNumber between (${pageNo}-1)*${pageSize}+1 AND ${pageNo}*${pageSize}; -->
+	  <!--select * from-->
+		  <!--(select tmp_tb.* , rownum rn from-->
+			  <!--(select distinct u0.* ${fieldName} from ${mainTableName} u0-->
+			  <!--<if test="tableName != null" >-->
+			 	<!--left join ${tableName} ur0 on u0.${mainPrimaryKey} = ur0.${subPrimaryKey}-->
+			  <!--</if>-->
+			  <!--where 1=1-->
+			  <!--<if test="queryParam != null" >-->
+			 	  <!--and ${queryParam}-->
+			   <!--</if>-->
+			   <!--<if test="pager.orderCondition != null and pager.orderCondition != ''" >-->
+			 	  <!--${pager.orderCondition}-->
+			   <!--</if>-->
+			  <!--) tmp_tb where rownum &lt;= ${pager.endIndex}) u-->
+			  <!--where rn &gt;= ${pager.startIndex}-->
+    <!--</select>-->
+
+
+	<select id="queryByPage" resultType="map" parameterType="com.adc.da.base.page.BasePage">
+		select * from
+		  (select tmp_tb.* , rownum rn from
+		    (select distinct ${param} from ${mainTableName}
+                       ${test}
+                  where 1 = 1
+		     <if test="queryParam != null" >
+			    and ${queryParam}
+		     </if>
+		     <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			    ${pager.orderCondition}
+		     </if>
+		) tmp_tb where rownum &lt;= ${pager.endIndex}
+		) u
+		where rn &gt;= ${pager.startIndex}
+	</select>
+	<select id="forCode" resultType="map" parameterType="com.adc.da.base.page.BasePage">
+                               ${test}
+	</select>
+	<select id="allTable" resultType="map" parameterType="com.adc.da.base.page.BasePage">
+             select uo.object_name AS name,'0'parentID from user_objects uo
+             where uo.object_type = 'TABLE'
+             order by name asc
+	</select>
+	<select id="allTable2" resultType="map" parameterType="com.adc.da.base.page.BasePage">
+             select uo.object_name AS name from user_objects uo
+             where uo.object_type = 'TABLE'
+	</select>
+
+	<select id="tableToAllColumn" resultType="map" parameterType="com.adc.da.base.page.BasePage">
+         select column_name AS name,table_name AS parentID from user_tab_columns
+	</select>
+
+	<select id="tableToColumn" resultType="map" parameterType="com.adc.da.base.page.BasePage">
+         select column_name AS name  from user_tab_columns
+          where table_name = ${tableName}
+	</select>
+	<select id="colTOComment" resultType="map" parameterType="com.adc.da.base.page.BasePage">
+         select COMMENTS from user_col_comments
+         where table_name = ${tableName} AND column_name= ${colName}
+	</select>
+
+
+</mapper>

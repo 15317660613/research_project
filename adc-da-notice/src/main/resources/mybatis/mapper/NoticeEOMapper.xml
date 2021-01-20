@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.dao.NoticeEODao">
+
+    <resultMap id="BaseResultMap" type="com.adc.da.entity.NoticeEO">
+        <id column="ID" jdbcType="VARCHAR" property="id" />
+        <result column="NOTICE_NAME" jdbcType="VARCHAR" property="noticeName" />
+        <result column="NOTICE_CONTENT" jdbcType="VARCHAR" property="noticeContent" />
+        <result column="NOTICE_FILE_ID" jdbcType="VARCHAR" property="noticeFileId" />
+        <result column="NOTICE_TYPE_ID" jdbcType="VARCHAR" property="noticeTypeId" />
+        <result column="CREATE_TIME" jdbcType="DATE" property="createTime" />
+        <result column="UPDATE_TIME" jdbcType="DATE" property="updateTime" />
+        <result column="CREATE_USER_ID" jdbcType="VARCHAR" property="createUserId" />
+        <result column="DEL_FLAG" jdbcType="VARCHAR" property="delFlag" />
+        <result column="NOTICE_FILE_NAME" jdbcType="VARCHAR" property="noticeFileName" />
+        <result column="NOTICE_IS_LOOK" jdbcType="VARCHAR" property="noticeIsLook" />
+        <result column="RECEIVE_USER_IDS" jdbcType="VARCHAR" property="receiveUserIds" />
+        <result column="RECEIVE_USER_NAMES" jdbcType="VARCHAR" property="receiveUserNames" />
+        <result column="EXT1" jdbcType="VARCHAR" property="ext1" />
+        <result column="EXT2" jdbcType="VARCHAR" property="ext2" />
+        <result column="EXT3" jdbcType="VARCHAR" property="ext3" />
+        <result column="EXT4" jdbcType="VARCHAR" property="ext4" />
+        <result column="EXT5" jdbcType="VARCHAR" property="ext5" />
+        <result column="NOTICE_TYPE_NAME" property="noticeTypeName"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+      ID, NOTICE_NAME, NOTICE_CONTENT, NOTICE_FILE_ID, NOTICE_TYPE_ID, CREATE_TIME, UPDATE_TIME,
+      CREATE_USER_ID, DEL_FLAG, NOTICE_FILE_NAME, NOTICE_IS_LOOK, RECEIVE_USER_IDS, RECEIVE_USER_NAMES,
+      EXT1, EXT2, EXT3, EXT4, EXT5
+    </sql>
+
+    <sql id="Base_Column_List_ExFileName_Prefix_n">
+      n.ID as ID,
+       n.NOTICE_NAME as NOTICE_NAME,
+        n.NOTICE_CONTENT as NOTICE_CONTENT,
+         n.NOTICE_FILE_ID as NOTICE_FILE_ID,
+          n.NOTICE_TYPE_ID as NOTICE_TYPE_ID,
+           n.CREATE_TIME as CREATE_TIME,
+            n.UPDATE_TIME as UPDATE_TIME,
+      n.CREATE_USER_ID as CREATE_USER_ID,
+       n.DEL_FLAG as DEL_FLAG,
+        n.NOTICE_IS_LOOK as NOTICE_IS_LOOK,
+         n.RECEIVE_USER_IDS as RECEIVE_USER_IDS,
+          n.RECEIVE_USER_NAMES as RECEIVE_USER_NAMES,
+      n.EXT1 as EXT1,
+       n.EXT2 as EXT2,
+        n.EXT3 as EXT3,
+         n.EXT4 as EXT4,
+          n.EXT5 as EXT5
+    </sql>
+
+    <delete id="delete" parameterType="java.lang.String">
+      delete from NOTICE
+      where ID = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <!--根据id业务逻辑删除  del 为 1 是删除-->
+    <delete id="deleteLogicInBatch" parameterType="java.util.List">
+      update NOTICE set DEL_FLAG = 1 where id in
+      <foreach collection="ids" item="id" open="(" separator="," close=")" index="index">
+        #{id}
+      </foreach>
+    </delete>
+
+
+    <insert id="insertSelective" parameterType="com.adc.da.entity.NoticeEO">
+        insert into NOTICE
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="noticeName != null">
+                NOTICE_NAME,
+            </if>
+            <if test="noticeContent != null and noticeContent != ''">
+                NOTICE_CONTENT,
+            </if>
+            <if test="noticeFileId != null">
+                NOTICE_FILE_ID,
+            </if>
+            <if test="noticeTypeId != null">
+                NOTICE_TYPE_ID,
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME,
+            </if>
+            <if test="updateTime != null">
+                UPDATE_TIME,
+            </if>
+            <if test="createUserId != null">
+                CREATE_USER_ID,
+            </if>
+            <if test="delFlag != null">
+                DEL_FLAG,
+            </if>
+            <if test="noticeFileName != null">
+                NOTICE_FILE_NAME,
+            </if>
+            <if test="noticeIsLook != null">
+                NOTICE_IS_LOOK,
+            </if>
+            <if test="receiveUserIds != null">
+                RECEIVE_USER_IDS,
+            </if>
+            <if test="receiveUserNames != null">
+                RECEIVE_USER_NAMES,
+            </if>
+            <if test="ext1 != null">
+                EXT1,
+            </if>
+            <if test="ext2 != null">
+                EXT2,
+            </if>
+            <if test="ext3 != null">
+                EXT3,
+            </if>
+            <if test="ext4 != null">
+                EXT4,
+            </if>
+            <if test="ext5 != null">
+                EXT5,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="noticeName != null">
+                #{noticeName,jdbcType=VARCHAR},
+            </if>
+            <if test="noticeContent != null and noticeContent != ''">
+                #{noticeContent,jdbcType=VARCHAR},
+            </if>
+            <if test="noticeFileId != null">
+                #{noticeFileId,jdbcType=VARCHAR},
+            </if>
+            <if test="noticeTypeId != null">
+                #{noticeTypeId,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=DATE},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=DATE},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="noticeFileName != null">
+                #{noticeFileName,jdbcType=VARCHAR},
+            </if>
+            <if test="noticeIsLook != null">
+                #{noticeIsLook,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveUserIds != null">
+                #{receiveUserIds,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveUserNames != null">
+                #{receiveUserNames,jdbcType=VARCHAR},
+            </if>
+            <if test="ext1 != null">
+                #{ext1,jdbcType=VARCHAR},
+            </if>
+            <if test="ext2 != null">
+                #{ext2,jdbcType=VARCHAR},
+            </if>
+            <if test="ext3 != null">
+                #{ext3,jdbcType=VARCHAR},
+            </if>
+            <if test="ext4 != null">
+                #{ext4,jdbcType=VARCHAR},
+            </if>
+            <if test="ext5 != null">
+                #{ext5,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+
+    <insert id="insertList" parameterType="java.util.List">
+        INSERT ALL
+        <foreach collection="list" item="item" index="index">
+            <if test="item.id !=null">
+                INTO NOTICE
+                <trim prefix="(" suffix=")" suffixOverrides=",">
+                    <if test="item.id != null">
+                        ID,
+                    </if>
+                    <if test="item.noticeName != null">
+                        NOTICE_NAME,
+                    </if>
+                    <if test="item.noticeContent != null and item.noticeContent != ''">
+                        NOTICE_CONTENT,
+                    </if>
+                    <if test="item.noticeFileId != null">
+                        NOTICE_FILE_ID,
+                    </if>
+                    <if test="item.noticeTypeId != null">
+                        NOTICE_TYPE_ID,
+                    </if>
+                    <if test="item.createTime != null">
+                        CREATE_TIME,
+                    </if>
+                    <if test="item.updateTime != null">
+                        UPDATE_TIME,
+                    </if>
+                    <if test="item.createUserId != null">
+                        CREATE_USER_ID,
+                    </if>
+                    <if test="item.delFlag != null">
+                        DEL_FLAG,
+                    </if>
+                    <if test="item.noticeFileName != null">
+                        NOTICE_FILE_NAME,
+                    </if>
+                    <if test="item.noticeIsLook != null">
+                        NOTICE_IS_LOOK,
+                    </if>
+                    <if test="item.receiveUserIds != null">
+                        RECEIVE_USER_IDS,
+                    </if>
+                    <if test="item.receiveUserNames != null">
+                        RECEIVE_USER_NAMES,
+                    </if>
+                </trim>
+                <trim prefix="values (" suffix=")" suffixOverrides=",">
+                    <if test="item.id != null">
+                        #{item.id,jdbcType=VARCHAR},
+                    </if>
+                    <if test="item.noticeName != null">
+                        #{item.noticeName,jdbcType=VARCHAR},
+                    </if>
+                    <if test="item.noticeContent != null and item.noticeContent != ''">
+                        #{item.noticeContent,jdbcType=VARCHAR},
+                    </if>
+                    <if test="item.noticeFileId != null">
+                        #{item.noticeFileId,jdbcType=VARCHAR},
+                    </if>
+                    <if test="item.noticeTypeId != null">
+                        #{item.noticeTypeId,jdbcType=VARCHAR},
+                    </if>
+                    <if test="item.createTime != null">
+                        #{item.createTime,jdbcType=DATE},
+                    </if>
+                    <if test="item.updateTime != null">
+                        #{item.updateTime,jdbcType=DATE},
+                    </if>
+                    <if test="item.createUserId != null">
+                        #{item.createUserId,jdbcType=VARCHAR},
+                    </if>
+                    <if test="item.delFlag != null">
+                        #{item.delFlag,jdbcType=VARCHAR},
+                    </if>
+                    <if test="item.noticeFileName != null">
+                        #{item.noticeFileName,jdbcType=VARCHAR},
+                    </if>
+                    <if test="item.noticeIsLook != null">
+                        #{item.noticeIsLook,jdbcType=VARCHAR},
+                    </if>
+                    <if test="item.receiveUserIds != null">
+                        #{item.receiveUserIds,jdbcType=VARCHAR},
+                    </if>
+                    <if test="item.receiveUserNames != null">
+                        #{item.receiveUserNames,jdbcType=VARCHAR},
+                    </if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.entity.NoticeEO">
+        update NOTICE
+        <set>
+            <if test="noticeName != null">
+                NOTICE_NAME = #{noticeName,jdbcType=VARCHAR},
+            </if>
+            <if test="noticeContent != null">
+                NOTICE_CONTENT = #{noticeContent,jdbcType=VARCHAR},
+            </if>
+            <if test="noticeFileId != null">
+                NOTICE_FILE_ID = #{noticeFileId,jdbcType=VARCHAR},
+            </if>
+            <if test="noticeTypeId != null">
+                NOTICE_TYPE_ID = #{noticeTypeId,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime,jdbcType=DATE},
+            </if>
+            <if test="updateTime != null">
+                UPDATE_TIME = #{updateTime,jdbcType=DATE},
+            </if>
+            <if test="createUserId != null">
+                CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="noticeFileName != null">
+                NOTICE_FILE_NAME = #{noticeFileName,jdbcType=VARCHAR},
+            </if>
+            <if test="noticeIsLook != null">
+                NOTICE_IS_LOOK = #{noticeIsLook,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveUserIds != null">
+                RECEIVE_USER_IDS = #{receiveUserIds,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveUserNames != null">
+                RECEIVE_USER_NAMES = #{receiveUserNames,jdbcType=VARCHAR},
+            </if>
+            <if test="ext1 != null">
+                EXT1 = #{ext1,jdbcType=VARCHAR},
+            </if>
+            <if test="ext2 != null">
+                EXT2 = #{ext2,jdbcType=VARCHAR},
+            </if>
+            <if test="ext3 != null">
+                EXT3 = #{ext3,jdbcType=VARCHAR},
+            </if>
+            <if test="ext4 != null">
+                EXT4 = #{ext4,jdbcType=VARCHAR},
+            </if>
+            <if test="ext5 != null">
+                EXT5 = #{ext5,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+         n.ID,NOTICE_NAME,NOTICE_IS_LOOK,CREATE_USER_ID,NOTICE_CONTENT, NOTICE_FILE_ID,
+          (CONCAT(concat(f.file_name,'.'),f.file_type)) as NOTICE_FILE_NAME,
+          n.UPDATE_TIME,DIC_TYPE_NAME as NOTICE_TYPE_NAME,n.NOTICE_TYPE_ID as NOTICE_TYPE_ID
+        from  notice n
+        left join TS_DICTYPE dic  on n.NOTICE_TYPE_ID = dic.ID
+         LEFT JOIN TS_FILE f ON n.NOTICE_FILE_ID = f.file_id and f.DEL_FLAG is null
+        where n.ID = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <sql id="findPageWithWhere">
+        <where> 1=1
+            <if test="id != null and id != ''" >
+                and ID = #{id,jdbcType=VARCHAR}
+            </if>
+            <if test="noticeName != null and noticeName != ''" >
+                and NOTICE_NAME = #{noticeName,jdbcType=VARCHAR}
+            </if>
+            <if test="noticeContent != null and noticeContent != ''" >
+                and NOTICE_CONTENT = #{noticeContent,jdbcType=VARCHAR}
+            </if>
+            <if test="noticeFileId != null and noticeFileId != ''" >
+                and NOTICE_FILE_ID = #{noticeFileId,jdbcType=VARCHAR}
+            </if>
+            <if test="noticeTypeId != null and noticeTypeId != ''" >
+                and NOTICE_TYPE_ID = #{noticeTypeId,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null" >
+                and CREATE_TIME = #{createTime,jdbcType=DATE}
+            </if>
+            <if test="updateTime != null" >
+                and UPDATE_TIME = #{updateTime,jdbcType=DATE}
+            </if>
+            <if test="createUserId != null and createUserId != ''" >
+                and CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR}
+            </if>
+            <if test="delFlag != null and delFlag != ''" >
+                and DEL_FLAG = #{delFlag,jdbcType=VARCHAR}
+            </if>
+            <if test="noticeFileName != null and noticeFileName != ''" >
+                and NOTICE_FILE_NAME = #{noticeFileName,jdbcType=VARCHAR}
+            </if>
+            <if test="noticeIsLook != null and noticeIsLook != ''" >
+                and NOTICE_IS_LOOK = #{noticeIsLook,jdbcType=VARCHAR}
+            </if>
+            <if test="receiveUserId != null and receiveUserId != ''" >
+                and RECEIVE_USER_IDS = #{receiveUserId,jdbcType=VARCHAR}
+            </if>
+            <if test="receiveUserName != null and receiveUserName != ''" >
+                and RECEIVE_USER_NAMES = #{receiveUserName,jdbcType=VARCHAR}
+            </if>
+            <if test="ext1 != null and ext1 != ''" >
+                and EXT1 = #{ext1,jdbcType=VARCHAR}
+            </if>
+            <if test="ext2 != null and ext2 != ''" >
+                and EXT2 = #{ext2,jdbcType=VARCHAR}
+            </if>
+            <if test="ext3 != null and ext3 != ''" >
+                and EXT3 = #{ext3,jdbcType=VARCHAR}
+            </if>
+            <if test="ext4 != null and ext4 != ''" >
+                and EXT4 = #{ext4,jdbcType=VARCHAR}
+            </if>
+            <if test="ext5 != null and ext5 != ''" >
+                and EXT5 = #{ext5,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+
+
+    <select id="findIsIgnoreNoticeListByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+       SELECT n.*,(CONCAT(concat(f.file_name,'.'),f.file_type)) as filename FROM NOTICE n
+        LEFT JOIN TS_FILE f ON n.fileid = f.file_id and f.DEL_FLAG is null
+        WHERE n.id not IN (
+        SELECT NOTICE_ID FROM NOTICE_USER WHERE RECEIVE_USER_ID LIKE #{userId}
+        AND OPERATION_STATUS = #{operationStatus}
+        ) AND DEL_FLAG = 0 ORDER BY n.UPDATE_TIME DESC
+    </select>
+
+    <select id="findNotIgnoreNoticeListByUserId" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" /> from NOTICE
+        where ID not in (select NOTICE_ID from  NOTICE_USER where RECEIVE_USER_ID = #{receiveUserId})
+        and DEL_FLAG = 0
+        or RECEIVE_USER_IDS LIKE '%'||#{receiveUserId}||'%'
+        order by UPDATE_TIME DESC
+    </select>
+
+
+    <select id="findListFilterByIds" resultMap="BaseResultMap">
+        select notice.*,dic_type_name as typeName
+        from notice,TS_DICTYPE
+        where 1=1
+        and NOTICE.NOTICE_TYPE_ID = TS_DICTYPE."ID"
+        <if test="ids!=null and ids.size > 0">
+            and NOTICE.id not in
+            <foreach collection="ids" item="id" open="(" separator="," close=")" index="index">
+                #{id}
+            </foreach>
+        </if>
+        and NOTICE.DEL_FLAG = 0
+        ORDER BY NOTICE.UPDATE_TIME DESC
+    </select>
+
+    <select id="findListByIds" resultMap="BaseResultMap">
+        select notice.*,dic_type_name as typeName
+        from notice,TS_DICTYPE
+        where 1=1
+        and NOTICE.NOTICE_TYPE_ID = TS_DICTYPE."ID"
+        <if test="ids!=null and ids.size > 0">
+            and NOTICE.id in
+            <foreach collection="ids" item="id" open="(" separator="," close=")" index="index">
+                #{id}
+            </foreach>
+        </if>
+        and NOTICE.DEL_FLAG = 0
+        ORDER BY NOTICE.UPDATE_TIME DESC
+    </select>
+
+
+    <select id="findAll" resultType="com.adc.da.dto.NoticeUserVO" parameterType="java.lang.String">
+        SELECT * FROM (
+        SELECT A.*,ROWNUM rn FROM(
+        SELECT n.id as noticeid,n.*,nu.ISIGNORE,nu.ISREAD,nu.RECEIVE_USER_ID,dic.dic_type_name as typename,(CONCAT(concat(f.file_name,'.'),f.file_type)) as filename
+        FROM NOTICE n
+        LEFT JOIN NOTICE_USER nu ON n."ID" = nu.NOTICE_ID AND nu.RECEIVE_USER_ID = #{userId}
+        LEFT JOIN TS_DICTYPE dic ON n.typeid = dic.id
+        LEFT JOIN TS_FILE f ON n.fileid = f.file_id and f.DEL_FLAG  is null
+        WHERE n.DEL_FLAG = 0
+        ORDER BY UPDATE_TIME DESC,ISIGNORE,ISREAD
+        ) A WHERE ROWNUM&lt;=${endIndex}
+        ) B WHERE rn>${startIndex}
+    </select>
+
+    <select id="findAllInPage" resultMap="BaseResultMap" >
+        SELECT * FROM (
+        SELECT A.*,ROWNUM rn FROM(
+            SELECT <include refid="Base_Column_List_ExFileName_Prefix_n" /> , (CONCAT(concat(f.file_name,'.'),f.file_type)) as NOTICE_FILE_NAME,dic.DIC_TYPE_NAME AS noticeTypeName FROM NOTICE n
+            LEFT JOIN TS_DICTYPE dic ON n.NOTICE_TYPE_ID = dic.id
+            LEFT JOIN TS_FILE f ON n.NOTICE_FILE_ID = f.file_id and f.DEL_FLAG is null
+             where n.DEL_FLAG =0
+            ORDER BY n.UPDATE_TIME DESC
+            ) A WHERE ROWNUM &lt;= #{endIndex}
+        ) B WHERE rn > #{startIndex}
+    </select>
+
+    <select id="findAllCountInPage" resultType="java.lang.Integer">
+        SELECT count(1) FROM  NOTICE where DEL_FLAG = 0
+    </select>
+
+    <!-- 不是管理员 那么 查当前用户 是接受人 且 不再在 已读列表 且未删除 or 全部可见-->
+    <select id="findAllNoticeByReceiveUserIdInList" resultMap="BaseResultMap" >
+        select <include refid="Base_Column_List" /> from
+        (select <include refid="Base_Column_List" /> from notice where del_flag=0 and notice_is_look=1 or receive_user_ids like '%'||#{receiveUserId}||'%')
+          where id not in
+             (select notice_id from notice_user where receive_user_id=#{receiveUserId})
+            ORDER BY UPDATE_TIME DESC
+    </select>
+    <!-- 不是管理员 那么 查当前用户 是接受人 且 不再在 已读列表 且未删除 or 全部可见-->
+    <select id="findAllNoticeByReceiveUserIdAndNameEqualInList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        (select
+        <include refid="Base_Column_List"/>
+        from notice where del_flag=0 and NOTICE_NAME = #{name} and notice_is_look=1 or receive_user_ids like '%'||#{receiveUserId}||'%')
+        where id not in
+        (select notice_id from notice_user where receive_user_id=#{receiveUserId})
+        ORDER BY UPDATE_TIME DESC
+    </select>
+
+
+    <delete id="deleteNoticeByReceiveUserIdEqualAndNoticeTypeEqual">
+        delete from notice where NOTICE_TYPE_ID = #{noticeType} and receive_user_ids = #{receiveUserId}
+        and id not in
+        (select notice_id from notice_user where receive_user_id=#{receiveUserId})
+    </delete>
+
+<!--LEFT JOIN NOTICE_USER nu ON n.id = nu.NOTICE_ID-->
+    <!--or nu.RECEIVE_USER_ID =  #{receiveUserId}-->
+    <select id="findAllNoticeByReceiveUserIdInPage" resultMap="BaseResultMap" >
+        SELECT * FROM (
+        SELECT A.*,ROWNUM rn FROM(
+            SELECT <include refid="Base_Column_List_ExFileName_Prefix_n" /> , (CONCAT(concat(f.file_name,'.'),f.file_type)) as NOTICE_FILE_NAME , dic.DIC_TYPE_NAME AS noticeTypeName FROM
+             (select * from  NOTICE where DEL_FLAG =0) n
+            LEFT JOIN TS_DICTYPE dic ON n.NOTICE_TYPE_ID = dic.id
+             LEFT JOIN TS_FILE f ON n.NOTICE_FILE_ID = f.file_id and f.DEL_FLAG is null
+            WHERE n.NOTICE_IS_LOOK = 1 or n.RECEIVE_USER_IDS LIKE '%'||#{receiveUserId}||'%'
+            ORDER BY  n.UPDATE_TIME DESC
+            ) A WHERE ROWNUM &lt;= #{endIndex}
+        ) B WHERE rn > #{startIndex}
+    </select>
+    <!--LEFT JOIN NOTICE_USER nu ON n.id = nu.NOTICE_ID-->
+    <!--or nu.RECEIVE_USER_ID =  #{receiveUserId}-->
+    <select id="findAllCountNoticeByReceiveUserIdInPage" resultType="java.lang.Integer" >
+            SELECT count(1) FROM
+             (select * from  NOTICE where DEL_FLAG =0) n
+            LEFT JOIN TS_DICTYPE dic ON n.NOTICE_TYPE_ID = dic.id
+            WHERE n.NOTICE_IS_LOOK = 1
+                 or n.RECEIVE_USER_IDS LIKE '%'||#{receiveUserId}||'%'
+
+    </select>
+
+
+    <select id="findAllNoticeByCreateUserIdInPage" resultType="com.adc.da.entity.NoticeEO" >
+        SELECT * FROM (
+        SELECT A.*,ROWNUM rn FROM(
+        SELECT <include refid="Base_Column_List_ExFileName_Prefix_n" /> , (CONCAT(concat(f.file_name,'.'),f.file_type)) as NOTICE_FILE_NAME , dic.DIC_TYPE_NAME AS TYPENAME FROM NOTICE n
+        LEFT JOIN TS_DICTYPE dic ON n.typeid = dic.id
+        LEFT JOIN TS_FILE f ON n.NOTICE_FILE_ID = f.file_id and f.DEL_FLAG is null
+        WHERE n.DEL_FLAG is null
+        <if test="createUserId != null and createUserId != ''">
+            and CREATE_USER_ID =  #{createUserId}
+        </if>
+        ORDER BY n.UPDATE_TIME DESC
+        ) A WHERE ROWNUM &lt;= #{endIndex}
+        ) B WHERE rn > #{startIndex}
+    </select>
+
+    <!--弃用-->
+    <select id="findAllConut" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT count(1)
+        FROM NOTICE n
+        LEFT JOIN NOTICE_USER nu ON n."ID" = nu.NOTICE_ID AND nu.RECEIVE_USER_ID = #{receiveUserId}
+        WHERE n.DEL_FLAG = 0 or n.RECEIVE_USER_IDS LIKE '%'||#{receiveUserId}||'%'
+    </select>
+
+
+
+</mapper>

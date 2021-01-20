@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.file.dao.MyFileEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.file.entity.MyFileEO" >
+    <id column="file_id" property="fileId" />
+    <result column="user_id" property="userId" />
+    <result column="url" property="url" />
+    <result column="save_path" property="savePath" />
+    <result column="remark" property="remark" />
+    <result column="last_update_time" property="lastUpdateTime" />
+    <result column="file_type" property="fileType" />
+    <result column="file_name" property="fileName" />
+    <result column="create_time" property="createTime" />
+    <result column="content_type" property="contentType" />
+    <result column="foreign_id" property="foreignId" />
+      <result column="file_size" property="fileSize" />
+      <result column="ext_info1" property="extInfo1" />
+      <result column="ext_info2" property="extInfo2" />
+      <result column="ext_info3" property="extInfo3" />
+      <result column="ext_info4" property="extInfo4" />
+      <result column="ext_info5" property="extInfo5" />
+      <result column="ext_info6" property="extInfo6" />
+      <result column="del_flag" property="delFlag" />
+      <result column="user_name" property="userName" />
+  </resultMap>
+
+  <!-- TS_FILE table all fields -->
+  <sql id="Base_Column_List" >
+     user_id, url, save_path, remark, last_update_time, file_type, file_name, create_time, content_type, file_id , foreign_id , file_size
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="userId != null" >
+        and user_id ${userIdOperator} #{userId}
+      </if>
+      <if test="url != null" >
+        and url ${urlOperator} #{url}
+      </if>
+      <if test="savePath != null" >
+        and save_path ${savePathOperator} #{savePath}
+      </if>
+      <if test="remark != null" >
+        and remark ${remarkOperator} #{remark}
+      </if>
+      <if test="lastUpdateTime != null" >
+        and last_update_time ${lastUpdateTimeOperator} #{lastUpdateTime}
+      </if>
+      <if test="lastUpdateTime1 != null" >
+        and last_update_time &gt;= #{lastUpdateTime1}
+      </if>
+      <if test="lastUpdateTime2 != null" >
+        and last_update_time &lt;= #{lastUpdateTime2}
+      </if>
+      <if test="fileType != null" >
+        and file_type ${fileTypeOperator} #{fileType}
+      </if>
+      <if test="fileName != null" >
+        and file_name ${fileNameOperator} #{fileName}
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="contentType != null" >
+        and content_type ${contentTypeOperator} #{contentType}
+      </if>
+      <if test="fileId != null" >
+        and file_id ${fileIdOperator} #{fileId}
+      </if>
+    </trim>
+  </sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause1">
+        where 1=2
+        <if test="stageId != null">
+             or foreign_id = #{stageId}
+        </if>
+        <if test="milepostId != null">
+            or foreign_id = #{milepostId}
+        </if>
+        <if test="milepostResultIdList != null">
+            or foreign_id in
+            <foreach item="it" collection="milepostResultIdList" open="(" separator=","
+                     close=")" index="index">
+                #{it}
+            </foreach>
+        </if>
+        <if test="milepostIdList != null">
+            or foreign_id in
+            <foreach item="it" collection="milepostIdList" open="(" separator=","
+                     close=")" index="index">
+                #{it}
+            </foreach>
+        </if>
+    </sql>
+
+    <!-- 查询TS_FILE列表 -->
+    <select id = "queryFileByPage" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from (select tmp_tb.* , rownum rn from (select
+        <include refid = "Base_Column_List"/>
+        from ( select  * from TS_FILE where remark is null )
+        <include refid = "Base_Where_Clause1"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        )
+        tmp_tb where rownum &lt;= ${pager.endIndex}) where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <!-- 查询TS_FILE列表-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+        select count(1) from ( select  * from TS_FILE where remark is null )
+        <include refid="Base_Where_Clause1"/>
+
+    </select>
+
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.file.entity.MyFileEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="file_id">
+        SELECT SEQ_TS_FILE.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into TS_FILE(<include refid="Base_Column_List" />)
+    values (#{userId}, #{url}, #{savePath}, #{remark}, #{lastUpdateTime}, #{fileType}, #{fileName}, #{createTime}, #{contentType}, #{fileId}),#{foreignId}
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.file.entity.MyFileEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="file_id">
+        SELECT SEQ_TS_FILE.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into TS_FILE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="userId != null" >user_id,</if>
+                <if test="url != null" >url,</if>
+                <if test="savePath != null" >save_path,</if>
+                <if test="remark != null" >remark,</if>
+                <if test="lastUpdateTime != null" >last_update_time,</if>
+                <if test="fileType != null" >file_type,</if>
+                <if test="fileName != null" >file_name,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="contentType != null" >content_type,</if>
+                <if test="fileId != null" >file_id,</if>
+                <if test="foreignId != null" >foreign_id,</if>
+                <if test="fileSize != null" >file_size,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="userId != null" >#{userId},</if>
+                <if test="url != null" >#{url},</if>
+                <if test="savePath != null" >#{savePath},</if>
+                <if test="remark != null" >#{remark},</if>
+                <if test="lastUpdateTime != null" >#{lastUpdateTime},</if>
+                <if test="fileType != null" >#{fileType},</if>
+                <if test="fileName != null" >#{fileName},</if>
+                <if test="createTime != null" >#{createTime},</if>
+                <if test="contentType != null" >#{contentType},</if>
+                <if test="fileId != null" >#{fileId},</if>
+                <if test="foreignId != null" >#{foreignId},</if>
+                <if test="fileSize != null" >#{fileSize},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.file.entity.MyFileEO" >
+    update TS_FILE
+       set  user_id = #{userId},
+            url = #{url},
+            save_path = #{savePath},
+            remark = #{remark},
+            last_update_time = #{lastUpdateTime},
+            file_type = #{fileType},
+            file_name = #{fileName},
+            create_time = #{createTime},
+            content_type = #{contentType}
+     where  file_id = #{fileId}
+  </update>
+
+
+    <!-- 根据pk，修改记录-->
+    <update id="moveFile" parameterType="java.lang.String" >
+    update TS_FILE
+       set  foreign_id = #{foreignId}
+     where  file_id in
+        <foreach item="it" collection="fileIdList" open="(" separator=","
+                 close=")" index="index">
+            #{it}
+        </foreach>
+  </update>
+
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+    <update id = "updateByPrimaryKeySelective" parameterType = "com.adc.da.file.entity.MyFileEO">
+        update TS_FILE
+        <set>
+            <if test = "userId != null">
+                user_id = #{userId},
+            </if>
+            <if test = "url != null">
+                url = #{url},
+            </if>
+            <if test = "savePath != null">
+                save_path = #{savePath},
+            </if>
+            <if test = "remark != null">
+                remark = #{remark},
+            </if>
+            <if test = "lastUpdateTime != null">
+                last_update_time = #{lastUpdateTime},
+            </if>
+            <if test = "fileType != null">
+                file_type = #{fileType},
+            </if>
+            <if test = "fileName != null">
+                file_name = #{fileName},
+            </if>
+            <if test = "createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test = "contentType != null">
+                content_type = #{contentType},
+            </if>
+            <if test = "foreignId != null">
+                foreign_id = #{foreignId}
+            </if>
+        </set>
+        where file_id = #{fileId}
+    </update>
+
+  <!-- 根据id查询 TS_FILE -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+      from TS_FILE
+     where file_id = #{value}
+  </select>
+
+    <!-- 根据id查询 TS_FILE -->
+    <select id="selectByForeignId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="Base_Column_List" />
+        from TS_FILE
+        where foreign_id = #{value}
+    </select>
+
+
+
+  <!-- 删除记录 -->
+  <delete id="deleteByFileId" parameterType="java.lang.String">
+    delete from TS_FILE
+     where file_id = #{value}
+  </delete>
+
+
+
+</mapper>

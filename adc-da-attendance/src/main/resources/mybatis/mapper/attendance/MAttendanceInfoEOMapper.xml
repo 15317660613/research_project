@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.attendance.dao.MAttendanceInfoEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.attendance.entity.AttendanceInfoEO" >
+    <id column="id" property="id" />
+    <result column="work_id" property="workId" />
+    <result column="human_name" property="humanName" />
+    <result column="attendance" property="attendance" />
+    <result column="attendance_time" property="attendanceTime" />
+    <result column="dept" property="dept" />
+    <result column="isdel" property="isdel" />
+    <result column="created_time" property="createdTime" />
+    <result column="created_user" property="createdUser" />
+    <result column="modified_user" property="modifiedUser" />
+    <result column="modifyed_time" property="modifyedTime" />
+    <result column="isexcept" property="isexcept" />
+  </resultMap>
+
+  <insert id ="insertList" parameterType="java.util.List" >
+      INSERT ALL
+    <foreach collection="list" item="item" index="index"  >
+        INTO ATTENDANCE_INFO  VALUES (
+       #{item.id, jdbcType=VARCHAR},
+      #{item.workId, jdbcType=VARCHAR}, 
+         #{item.humanName, jdbcType=VARCHAR},
+         #{item.attendance, jdbcType=TIMESTAMP},
+         #{item.attendanceTime, jdbcType=VARCHAR},
+         #{item.dept, jdbcType=VARCHAR},
+        #{item.isdel, jdbcType=VARCHAR},
+         #{item.createdTime, jdbcType=TIMESTAMP},
+        #{item.createdUser, jdbcType=VARCHAR},
+        #{item.modifiedTime, jdbcType=TIMESTAMP},
+        #{item.modifyedUser, jdbcType=VARCHAR},
+        #{item.isexcept, jdbcType=VARCHAR})
+    </foreach>
+      select 1 from dual
+
+  </insert>
+
+    <sql id="Base_Column_List" >
+        id, work_id, human_name, attendance, attendance_time, dept, isdel, created_time, created_user, modified_time, modifyed_user, isexcept
+    </sql>
+
+    <update id="updateByDate" parameterType="com.adc.da.attendance.entity.ExportDateExcleDTO" >
+          update ATTENDANCE_INFO set ISDEL='0' where ATTENDANCE BETWEEN #{startDate} AND #{endDate}
+    </update>
+
+    <delete id="deleteByDate" parameterType="com.adc.da.attendance.entity.ExportDateExcleDTO" >
+        delete from ATTENDANCE_INFO where ATTENDANCE BETWEEN #{startDate} AND #{endDate}
+    </delete>
+
+    <select id="selectAllList" resultMap="BaseResultMap" parameterType="com.adc.da.attendance.entity.ExportDateExcleDTO">
+        SELECT <include refid="Base_Column_List"/>
+        FROM ATTENDANCE_INFO WHERE
+        ISDEL='0'
+        AND
+        ATTENDANCE
+        BETWEEN #{startDate}
+        AND #{endDate}
+        ORDER BY ATTENDANCE,WORK_ID
+    </select>
+
+    <select id="existsAttendanceInfo" resultType="int" parameterType="com.adc.da.attendance.entity.AttendanceInfoEO">
+
+      SELECT  count(*) from ATTENDANCE_INFO WHERE WORK_ID =#{workId} AND HUMAN_NAME = #{humanName} AND ATTENDANCE = #{attendance}
+    </select>
+
+</mapper>

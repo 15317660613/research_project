@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+    <!--由于VO 和 EO 字段名称非完全对应,且有的字段类型不一样,所有需要依靠dozer进行转换-->
+    <!--调用时依靠Controller 中
+        @Autowired private BeanMapper beanMapper 进行自动装配，然后调用相应方法进行匹配-->
+
+    <!--时间进行格式转换-->
+    <mapping date-format="yyyy-MM-dd">
+        <!--客户档案表对应实体类-->
+        <class-a>com.adc.da.crm.entity.CustomerRecordEO</class-a>
+        <class-b>com.adc.da.crm.vo.CustomerRecordVO</class-b>
+
+    </mapping>
+
+    <!--时间进行格式转换-->
+    <mapping date-format="yyyy-MM-dd">
+        <!--发票申请表对应实体类-->
+        <class-a>com.adc.da.crm.entity.InvoiceApprovalEO</class-a>
+        <class-b>com.adc.da.crm.vo.InvoiceApprovalVO</class-b>
+
+    </mapping>
+
+    <!--时间进行格式转换-->
+    <mapping date-format="yyyy-MM-dd">
+        <!--发票申请表对应实体类-->
+        <class-a>com.adc.da.crm.entity.ContractApprovalEO</class-a>
+        <class-b>com.adc.da.crm.vo.ContractApprovalVO</class-b>
+
+    </mapping>
+
+    <!--时间进行格式转换-->
+    <mapping date-format="yyyy-MM-dd">
+        <!--出差申请表对应实体类-->
+        <class-a>com.adc.da.crm.entity.BTravelApprovalEO</class-a>
+        <class-b>com.adc.da.crm.vo.BTravelApprovalVO</class-b>
+
+    </mapping>
+<!--时间进行格式转换-->
+    <mapping date-format="yyyy-MM-dd">
+        <!--项目目标值底表对应实体类-->
+        <class-a>com.adc.da.crm.entity.ProjectTargetBottomEO</class-a>
+        <class-b>com.adc.da.crm.vo.ProjectTargetBottomVO</class-b>
+
+    </mapping>
+
+
+</mappings>

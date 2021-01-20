@@ -1,0 +1,1132 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.adc.da.budget.dao.BudgetEODao">
+    <!-- Result Map-->
+    <resultMap id = "BaseResultMap" type = "com.adc.da.budget.entity.BudgetEO">
+        <id column = "id" property = "id"/>
+        <result column = "dept_id" property = "deptId"/>
+        <result column = "project_name" property = "projectName"/>
+        <result column = "team_name" property = "teamName"/>
+        <result column = "property_id" property = "propertyId"/>
+        <result column = "pm" property = "pm"/>
+        <result column = "usname" property = "usname"/>
+        <result column = "domain_id" property = "domainId"/>
+        <result column = "cycle_begin" property = "cycleBegin"/>
+        <result column = "cycle_end" property = "cycleEnd"/>
+        <result column = "cycle" property = "cycle"/>
+        <result column = "current_year" property = "currentYear"/>
+        <result column = "current_year_deal" property = "currentYearDeal"/>
+        <result column = "current_year_estimate" property = "currentYearEstimate"/>
+        <result column = "next_year_1_deal" property = "nextYear1Deal"/>
+        <result column = "next_year_1_income" property = "nextYear1Income"/>
+        <result column = "next_year_2_deal" property = "nextYear2Deal"/>
+        <result column = "next_year_2_income" property = "nextYear2Income"/>
+        <result column = "next_year_3_deal" property = "nextYear3Deal"/>
+        <result column = "next_year_3_income" property = "nextYear3Income"/>
+        <result column = "next_year_4_deal" property = "nextYear4Deal"/>
+        <result column = "next_year_4_income" property = "nextYear4Income"/>
+        <result column = "next_year_5_deal" property = "nextYear5Deal"/>
+        <result column = "next_year_5_income" property = "nextYear5Income"/>
+        <result column = "next_year_6_deal" property = "nextYear6Deal"/>
+        <result column = "next_year_6_income" property = "nextYear6Income"/>
+        <result column = "next_year_7_deal" property = "nextYear7Deal"/>
+        <result column = "next_year_7_income" property = "nextYear7Income"/>
+        <result column = "next_year_8_deal" property = "nextYear8Deal"/>
+        <result column = "next_year_8_income" property = "nextYear8Income"/>
+        <result column = "next_year_9_deal" property = "nextYear9Deal"/>
+        <result column = "next_year_9_income" property = "nextYear9Income"/>
+        <result column = "next_year_10_deal" property = "nextYear10Deal"/>
+        <result column = "next_year_10_income" property = "nextYear10Income"/>
+        <result column = "next_year_11_deal" property = "nextYear11Deal"/>
+        <result column = "next_year_11_income" property = "nextYear11Income"/>
+        <result column = "next_year_12_deal" property = "nextYear12Deal"/>
+        <result column = "next_year_12_income" property = "nextYear12Income"/>
+        <result column = "remark" property = "remark"/>
+        <result column = "dept_name" property = "deptName"/>
+        <result column = "create_time" property = "createTime"/>
+        <result column = "update_name" property = "updateTime"/>
+        <result column = "property" property = "property"/>
+        <result column = "create_user_id" property = "createUserId"/>
+        <result column = "project_Team" property = "projectTeam"/>
+        <result column = "createUserName" property = "createUserName"/>
+        <result column = "worktime" property = "worktime"/>
+        <result column = "finished_status" property = "finishedStatus"/>
+        <result column = "business_admin_id" property = "businessAdminId"/>
+        <result column = "business_admin_name" property = "businessAdminName"/>
+    </resultMap>
+
+    <!-- TS_BUDGET table all fields -->
+    <sql id = "Base_Column_List">
+        id, dept_id, project_name, team_name, property_id, pm, domain_id,cycle, cycle_begin,
+         cycle_end, current_year, current_year_deal, current_year_estimate, next_year_1_deal,
+          next_year_1_income, next_year_2_deal, next_year_2_income, next_year_3_deal,
+           next_year_3_income, next_year_4_deal, next_year_4_income,next_year_5_deal,
+            next_year_5_income,next_year_6_deal, next_year_6_income,next_year_7_deal,
+             next_year_7_income,next_year_8_deal, next_year_8_income,next_year_9_deal,
+              next_year_9_income,next_year_10_deal, next_year_10_income,next_year_11_deal,
+              next_year_11_income,next_year_12_deal, next_year_12_income, remark, dept_name,
+              create_time, update_time, property,create_user_id,project_Team,finished_status,
+                business_admin_id,business_admin_name
+    </sql>
+
+
+    <!-- TS_BUDGET table all fields -->
+    <sql id = "Base_Column_Listc">
+        id, project_name, pm, create_user_id
+    </sql>
+
+
+    <!-- TS_BUDGET table all fields -->
+    <sql id = "Base_Column_Listb">
+        id, dept_id, project_name, team_name, property_id, pm, domain_id,cycle, cycle_begin, cycle_end, current_year, current_year_deal, current_year_estimate, next_year_1_deal, next_year_1_income, next_year_2_deal, next_year_2_income, next_year_3_deal, next_year_3_income, next_year_4_deal, next_year_4_income,next_year_5_deal, next_year_5_income,next_year_6_deal, next_year_6_income,next_year_7_deal, next_year_7_income,next_year_8_deal, next_year_8_income,next_year_9_deal, next_year_9_income,next_year_10_deal, next_year_10_income,next_year_11_deal, next_year_11_income,next_year_12_deal, next_year_12_income, remark, dept_name, create_time, update_time, property,create_user_id,project_Team,finished_status
+    </sql>
+
+
+    <sql id = "Base_Column_Usname_List">
+        ts_b.id, ts_b.dept_id, ts_b.project_name, ts_b.team_name, ts_b.property_id, ts_b.pm, ts_b.domain_id,ts_b.cycle, ts_b.cycle_begin,
+        ts_b.cycle_end, ts_b.current_year, ts_b.current_year_deal, ts_b.current_year_estimate, ts_b.next_year_1_deal, ts_b.next_year_1_income,
+         ts_b.next_year_2_deal, ts_b.next_year_2_income, ts_b.next_year_3_deal, ts_b.next_year_3_income, ts_b.next_year_4_deal,
+         ts_b.next_year_4_income,ts_b.next_year_5_deal, ts_b.next_year_5_income,ts_b.next_year_6_deal, ts_b.next_year_6_income,
+         ts_b.next_year_7_deal, ts_b.next_year_7_income,ts_b.next_year_8_deal, ts_b.next_year_8_income,ts_b.next_year_9_deal,
+          ts_b.next_year_9_income,ts_b.next_year_10_deal, ts_b.next_year_10_income,ts_b.next_year_11_deal, ts_b.next_year_11_income,
+          ts_b.next_year_12_deal, ts_b.next_year_12_income, ts_b.remark, ts_b.dept_name, ts_b.create_time, ts_b.update_time, ts_b.property,
+          ts_b.create_user_id,ts_b.project_Team,ts_b.business_admin_id,ts_b.business_admin_name
+    </sql>
+
+    <sql id = "BaseAll_Column_List">
+        b.id, b.dept_id, b.project_name, b.team_name, b.property_id, b.pm, b.domain_id,b.cycle,  b.cycle_begin, b.cycle_end, b.current_year,b.current_year_deal,
+     b.current_year_estimate, b.next_year_1_deal, b.next_year_1_income, b.next_year_2_deal, b.next_year_2_income,
+     b.next_year_3_deal, b.next_year_3_income, b.next_year_4_deal, b.next_year_4_income,b.next_year_5_deal, b.next_year_5_income,
+     b.next_year_6_deal, b.next_year_6_income,b.next_year_7_deal, b.next_year_7_income,b.next_year_8_deal, b.next_year_8_income,
+     b.next_year_9_deal, b.next_year_9_income,b.next_year_10_deal, b.next_year_10_income,b.next_year_11_deal, b.next_year_11_income,
+     b.next_year_12_deal, b.next_year_12_income, b.remark, g.ORG_NAME AS dept_name, b.create_time, b.update_time,
+     b.property,b.create_user_id,b.project_Team,finished_status,business_admin_id,business_admin_name
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id = "Base_Where_Clause">
+        where 1=1 and del_flag is null
+        <trim suffixOverrides = ",">
+            <if test = "id != null">
+                and id ${idOperator} #{id}
+            </if>
+            <if test = "deptIds != null and deptIds.size()>0">
+                and dept_id in
+                <foreach item = "deptIds" collection = "deptIds" open = "(" separator = "," close = ")" index = "index">
+                    #{deptIds}
+                </foreach>
+            </if>
+            <if test = "businessIds != null and businessIds.size()>0">
+                and id in
+                <foreach collection = "businessIds" item = "businessId" separator = "," open = "(" close = ")">
+                    #{businessId}
+                </foreach>
+            </if>
+            <if test = "domainIds != null">
+                and domain_id in
+                <foreach collection = "domainIds" item = "domainIds" separator = "," open = "(" close = ")">
+                    #{domainIds}
+                </foreach>
+            </if>
+            <if test = "projectName != null">
+                and project_name ${projectNameOperator} '%'||#{projectName}||'%'
+            </if>
+            <if test = "teamName != null">
+                and team_name ${teamNameOperator} #{teamName}
+            </if>
+            <if test = "propertyId != null">
+                and property_id ${propertyIdOperator} #{propertyId}
+            </if>
+            <if test = "pm != null">
+                and pm ${pmOperator} #{pm}
+            </if>
+            <if test = "domainId != null">
+                and domain_id ${domainIdOperator} #{domainId}
+            </if>
+            <if test = "cycle != null">
+                and cycle ${cycleOperator} #{cycle}
+            </if>
+            <if test = "cycleBegin != null">
+                and cycle_begin ${cycleBeginOperator} #{cycleBegin}
+            </if>
+            <if test = "cycleEnd != null">
+                and cycle_end ${cycleEndOperator} #{cycleEnd}
+            </if>
+            <if test = "currentYear != null">
+                and current_year ${currentYearOperator} #{currentYear}
+            </if>
+            <if test = "currentYearDeal != null">
+                and current_year_deal ${currentYearDealOperator} #{currentYearDeal}
+            </if>
+            <if test = "currentYearEstimate != null">
+                and current_year_estimate ${currentYearEstimateOperator} #{currentYearEstimate}
+            </if>
+            <if test = "nextYear1Deal != null">
+                and next_year_1_deal ${nextYear1DealOperator} #{nextYear1Deal}
+            </if>
+            <if test = "nextYear1Income != null">
+                and next_year_1_income ${nextYear1IncomeOperator} #{nextYear1Income}
+            </if>
+            <if test = "nextYear2Deal != null">
+                and next_year_2_deal ${nextYear2DealOperator} #{nextYear2Deal}
+            </if>
+            <if test = "nextYear2Income != null">
+                and next_year_2_income ${nextYear2IncomeOperator} #{nextYear2Income}
+            </if>
+            <if test = "nextYear3Deal != null">
+                and next_year_3_deal ${nextYear3DealOperator} #{nextYear3Deal}
+            </if>
+            <if test = "nextYear3Income != null">
+                and next_year_3_income ${nextYear3IncomeOperator} #{nextYear3Income}
+            </if>
+            <if test = "nextYear4Deal != null">
+                and next_year_4_deal ${nextYear4DealOperator} #{nextYear4Deal}
+            </if>
+            <if test = "nextYear4Income != null">
+                and next_year_4_income ${nextYear4IncomeOperator} #{nextYear4Income}
+            </if>
+
+            <if test = "nextYear5Deal != null">
+                and next_year_5_deal ${nextYear5DealOperator} #{nextYear5Deal}
+            </if>
+            <if test = "nextYear5Income != null">
+                and next_year_5_income ${nextYear5IncomeOperator} #{nextYear5Income}
+            </if>
+            <if test = "nextYear6Deal != null">
+                and next_year_6_deal ${nextYear6DealOperator} #{nextYear6Deal}
+            </if>
+            <if test = "nextYear6Income != null">
+                and next_year_6_income ${nextYear6IncomeOperator} #{nextYear6Income}
+            </if>
+            <if test = "nextYear7Deal != null">
+                and next_year_7_deal ${nextYear7DealOperator} #{nextYear7Deal}
+            </if>
+            <if test = "nextYear7Income != null">
+                and next_year_7_income ${nextYear7IncomeOperator} #{nextYear7Income}
+            </if>
+            <if test = "nextYear8Deal != null">
+                and next_year_8_deal ${nextYear8DealOperator} #{nextYear8Deal}
+            </if>
+            <if test = "nextYear8Income != null">
+                and next_year_8_income ${nextYear8IncomeOperator} #{nextYear8Income}
+            </if>
+            <if test = "nextYear9Deal != null">
+                and next_year_9_deal ${nextYear9DealOperator} #{nextYear9Deal}
+            </if>
+            <if test = "nextYear9Income != null">
+                and next_year_9_income ${nextYear9IncomeOperator} #{nextYear9Income}
+            </if>
+            <if test = "nextYear10Deal != null">
+                and next_year_10_deal ${nextYear10DealOperator} #{nextYear10Deal}
+            </if>
+            <if test = "nextYear10Income != null">
+                and next_year_10_income ${nextYear10IncomeOperator} #{nextYear10Income}
+            </if>
+            <if test = "nextYear11Deal != null">
+                and next_year_11_deal ${nextYear11DealOperator} #{nextYear11Deal}
+            </if>
+            <if test = "nextYear11Income != null">
+                and next_year_11_income ${nextYear11IncomeOperator} #{nextYear11Income}
+            </if>
+            <if test = "nextYear12Deal != null">
+                and next_year_12_deal ${nextYear12DealOperator} #{nextYear12Deal}
+            </if>
+            <if test = "nextYear12Income != null">
+                and next_year_12_income ${nextYear12IncomeOperator} #{nextYear12Income}
+            </if>
+
+            <if test = "remark != null">
+                and remark ${remarkOperator} #{remark}
+            </if>
+            <if test = "deptName != null">
+                and dept_name ${deptNameOperator} #{deptName}
+            </if>
+            <if test = "property != null">
+                and property ${propertyOperator} #{property}
+            </if>
+            <if test = "createUserId != null">
+                and create_user_id ${createUserIdOperator} #{createUserId}
+            </if>
+            <if test = "projectTeam != null">
+                and project_team ${projectTeamOperator} #{projectTeam}
+            </if>
+        </trim>
+    </sql>
+
+    <sql id = "Base_Where_Clause_Query">
+        where 1=1 and t.del_flag is null
+        <if test = "(projectNames != null and projectNames.size > 0) or
+                 (propertys != null and propertys.size > 0) or
+                 (usnames != null and usnames.size > 0) or
+                 (propertyIds != null and propertyIds.size > 0) or
+                 (cycleBegins != null and cycleBegins.size > 0) or
+                 (cycleEnds != null and cycleEnds.size > 0) or
+                 (worktimes != null and worktimes.size > 0) or
+                 (finishedStatus != null and finishedStatus.size > 0) or
+                 (createUserNames != null and createUserNames.size > 0) or
+                 (createTimes != null and createTimes.size > 0) or
+                 (updateTimes != null and updateTimes.size > 0)">
+            and
+        </if>
+        <trim suffixOverrides = "AND|OR">
+            <if test = "projectNames != null and projectNames.size > 0">
+                <foreach item = "projectName" collection = "projectNames" index = "index">
+                    t.project_name ${projectName.operator} #{projectName.name} ${projectName.logic}
+                </foreach>
+            </if>
+            <if test = "propertys != null and propertys.size > 0">
+                <foreach item = "property" collection = "propertys" index = "index">
+                    t.property ${property.operator} #{property.name} ${property.logic}
+                </foreach>
+            </if>
+            <if test = "usnames != null and usnames.size > 0">
+                <foreach item = "usname" collection = "usnames" index = "index">
+                    u.usname ${usname.operator} #{usname.name} ${usname.logic}
+                </foreach>
+            </if>
+            <if test = "propertyIds != null and propertyIds.size > 0">
+                <foreach item = "propertyId" collection = "propertyIds" index = "index">
+                    t.property_id ${propertyId.operator} #{propertyId.name} ${propertyId.logic}
+                </foreach>
+            </if>
+            <if test = "cycleBegins != null and cycleBegins.size > 0">
+                <foreach item = "cycleBegin" collection = "cycleBegins" index = "index">
+                    to_char(t.cycle_begin, 'yyyy-mm-dd') ${cycleBegin.operator} #{cycleBegin.name} ${cycleBegin.logic}
+                </foreach>
+            </if>
+            <if test = "cycleEnds != null and cycleEnds.size > 0">
+                <foreach item = "cycleEnd" collection = "cycleEnds" index = "index">
+                    to_char(t.cycle_end, 'yyyy-mm-dd') ${cycleEnd.operator} #{cycleEnd.name} ${cycleEnd.logic}
+                </foreach>
+            </if>
+            <if test = "worktimes != null and worktimes.size > 0">
+                <foreach item = "worktime" collection = "worktimes" index = "index">
+                    nvl(w.worktime,0) ${worktime.operator} #{worktime.name} ${worktime.logic}
+                </foreach>
+            </if>
+            <if test = "finishedStatus != null and finishedStatus.size > 0">
+                <foreach item = "finishedStatu" collection = "finishedStatus" index = "index">
+                    t.finished_status ${finishedStatu.operator} #{finishedStatu.name} ${finishedStatu.logic}
+                </foreach>
+            </if>
+            <if test = "createUserNames != null and createUserNames.size > 0">
+                <foreach item = "createUserName" collection = "createUserNames" index = "index">
+                    v.usname ${createUserName.operator} #{createUserName.name} ${createUserName.logic}
+                </foreach>
+            </if>
+            <if test = "createTimes != null and createTimes.size > 0">
+                <foreach item = "createTime" collection = "createTimes" index = "index">
+                    to_char(t.create_time, 'yyyy-mm-dd') ${createTime.operator} #{createTime.name} ${createTime.logic}
+                </foreach>
+            </if>
+            <if test = "updateTimes != null and updateTimes.size > 0">
+                <foreach item = "updateTime" collection = "updateTimes" index = "index">
+                    t.update_time ${updateTime.operator} #{updateTime.time} ${updateTime.logic}
+                </foreach>
+            </if>
+        </trim>
+        <trim>
+        <if test = "businessIds != null and businessIds.size()>0">
+            and id in
+            <foreach collection = "businessIds" item = "businessId" separator = "," open = "(" close = ")">
+                #{businessId}
+            </foreach>
+        </if>
+        </trim>
+        <!-- 丁丁说先不用考虑部门权限问题 -->
+        <!--<trim suffixOverrides="," >-->
+        <!--<if test="deptIds != null" >-->
+        <!--and t.dept_id in-->
+        <!--<foreach item="deptIds" collection="deptIds" open="(" separator=","-->
+        <!--close=")" index="index">-->
+        <!--#{deptIds}-->
+        <!--</foreach>-->
+        <!--</if>-->
+        <!--<if test="businessIds != null" >-->
+        <!--and t.id in-->
+        <!--<foreach collection="businessIds" item="businessId" separator="," open="(" close=")">-->
+        <!--#{businessId}-->
+        <!--</foreach>-->
+        <!--</if>-->
+        <!--</trim>-->
+    </sql>
+
+    <sql id = "Base_Where_Clause_Query_New">
+        where 1=1 and t.del_flag is null
+        <if test="sql_filter != null">
+            and ${sql_filter}
+        </if>
+        <if test = "businessIds != null and businessIds.size()>0">
+            and id in
+            <foreach collection = "businessIds" item = "businessId" separator = "," open = "(" close = ")">
+                #{businessId}
+            </foreach>
+        </if>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id = "insert" parameterType = "com.adc.da.budget.entity.BudgetEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+            SELECT SEQ_TS_BUDGET.NEXTVAL FROM DUAL
+        </selectKey> -->insert into TS_BUDGET(<include
+            refid = "Base_Column_List"/>) values
+        (#{id, jdbcType=VARCHAR}, #{deptId, jdbcType=VARCHAR}, #{projectName, jdbcType=VARCHAR},
+         #{teamName, jdbcType=VARCHAR}, #{propertyId, jdbcType=VARCHAR},
+          #{pm, jdbcType=VARCHAR}, #{domainId, jdbcType=VARCHAR}, #{cycle, jdbcType=VARCHAR},
+          #{cycleBegin, jdbcType=DATE}, #{cycleEnd, jdbcType=DATE}, #{currentYear, jdbcType=VARCHAR},
+           #{currentYearEstimate, jdbcType=DOUBLE  },#{currentYearDeal, jdbcType=DOUBLE  },
+           #{nextYear1Deal, jdbcType=DOUBLE  }, #{nextYear1Income, jdbcType=DOUBLE  },
+            #{nextYear2Deal, jdbcType=DOUBLE  }, #{nextYear2Income, jdbcType=DOUBLE  }, #{nextYear3Deal, jdbcType=DOUBLE  },
+             #{nextYear3Income, jdbcType=DOUBLE  }, #{nextYear4Deal, jdbcType=DOUBLE  }, #{nextYear4Income, jdbcType=DOUBLE  },
+              #{nextYear5Deal, jdbcType=DOUBLE  }, #{nextYear5Income, jdbcType=DOUBLE  },#{nextYear6Deal, jdbcType=DOUBLE  },
+               #{nextYear6Income, jdbcType=DOUBLE  },#{nextYear7Deal, jdbcType=DOUBLE  }, #{nextYear7Income, jdbcType=DOUBLE  },
+               #{nextYear8Deal, jdbcType=DOUBLE  }, #{nextYear8Income, jdbcType=DOUBLE  },#{nextYear9Deal, jdbcType=DOUBLE  },
+                #{nextYear9Income, jdbcType=DOUBLE  },#{nextYear10Deal, jdbcType=DOUBLE  }, #{nextYear10Income, jdbcType=DOUBLE  },
+                #{nextYear11Deal, jdbcType=DOUBLE  }, #{nextYear11Income, jdbcType=DOUBLE  },#{nextYear12Deal, jdbcType=DOUBLE  },
+                 #{nextYear12Income, jdbcType=DOUBLE  }, #{remark, jdbcType=VARCHAR}, #{deptName, jdbcType=VARCHAR},
+                 #{createTime, jdbcType=DATE}, #{updateTime, jdbcType=DATE}, #{property, jdbcType=DATE},
+                 #{createUserId, jdbcType=VARCHAR}, #{projectTeam, jdbcType=VARCHAR}, #{business_admin_id, jdbcType=VARCHAR},
+                  #{business_admin_name, jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id = "insertSelective" parameterType = "com.adc.da.budget.entity.BudgetEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_BUDGET.NEXTVAL FROM DUAL
+    </selectKey> -->insert into TS_BUDGET
+        <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">id,</if>
+            <if test = "deptId != null">dept_id,</if>
+            <if test = "projectName != null">project_name,</if>
+            <if test = "teamName != null">team_name,</if>
+            <if test = "propertyId != null">property_id,</if>
+            <if test = "pm != null">pm,</if>
+            <if test = "domainId != null">domain_id,</if>
+            <if test = "cycle != null">cycle,</if>
+            <if test = "cycleBegin != null">cycle_begin,</if>
+            <if test = "cycleEnd != null">cycle_end,</if>
+            <if test = "currentYear != null">current_year,</if>
+            <if test = "currentYearDeal != null">current_year_deal,</if>
+            <if test = "currentYearEstimate != null">current_year_estimate,</if>
+            <if test = "nextYear1Deal != null">next_year_1_deal,</if>
+            <if test = "nextYear1Income != null">next_year_1_income,</if>
+            <if test = "nextYear2Deal != null">next_year_2_deal,</if>
+            <if test = "nextYear2Income != null">next_year_2_income,</if>
+            <if test = "nextYear3Deal != null">next_year_3_deal,</if>
+            <if test = "nextYear3Income != null">next_year_3_income,</if>
+            <if test = "nextYear4Deal != null">next_year_4_deal,</if>
+            <if test = "nextYear4Income != null">next_year_4_income,</if>
+            <if test = "nextYear5Deal != null">next_year_5_deal,</if>
+            <if test = "nextYear5Income != null">next_year_5_income,</if>
+            <if test = "nextYear6Deal != null">next_year_6_deal,</if>
+            <if test = "nextYear6Income != null">next_year_6_income,</if>
+            <if test = "nextYear7Deal != null">next_year_7_deal,</if>
+            <if test = "nextYear7Income != null">next_year_7_income,</if>
+            <if test = "nextYear8Deal != null">next_year_8_deal,</if>
+            <if test = "nextYear8Income != null">next_year_8_income,</if>
+            <if test = "nextYear9Deal != null">next_year_9_deal,</if>
+            <if test = "nextYear9Income != null">next_year_9_income,</if>
+            <if test = "nextYear10Deal != null">next_year_10_deal,</if>
+            <if test = "nextYear10Income != null">next_year_10_income,</if>
+            <if test = "nextYear11Deal != null">next_year_11_deal,</if>
+            <if test = "nextYear11Income != null">next_year_11_income,</if>
+            <if test = "nextYear12Deal != null">next_year_12_deal,</if>
+            <if test = "nextYear12Income != null">next_year_12_income,</if>
+            <if test = "remark != null">remark,</if>
+            <if test = "deptName != null">dept_name,</if>
+            <if test = "createTime != null">create_time,</if>
+            <if test = "updateTime != null">update_time,</if>
+            <if test = "property != null">property,</if>
+            <if test = "createUserId != null">create_user_id,</if>
+            <if test = "projectTeam != null">project_team,</if>
+            <if test = "businessAdminId != null">business_admin_id,</if>
+            <if test = "businessAdminName != null">business_admin_name</if>
+        </trim>
+        <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">#{id, jdbcType=VARCHAR},</if>
+            <if test = "deptId != null">#{deptId, jdbcType=VARCHAR},</if>
+            <if test = "projectName != null">#{projectName, jdbcType=VARCHAR},</if>
+            <if test = "teamName != null">#{teamName, jdbcType=VARCHAR},</if>
+            <if test = "propertyId != null">#{propertyId, jdbcType=VARCHAR},</if>
+            <if test = "pm != null">#{pm, jdbcType=VARCHAR},</if>
+            <if test = "domainId != null">#{domainId, jdbcType=VARCHAR},</if>
+            <if test = "cycle != null">#{cycle, jdbcType=VARCHAR},</if>
+            <if test = "cycleBegin != null">#{cycleBegin, jdbcType=DATE},</if>
+            <if test = "cycleEnd != null">#{cycleEnd, jdbcType=DATE},</if>
+            <if test = "currentYear != null">#{currentYear, jdbcType=VARCHAR},</if>
+            <if test = "currentYearEstimate != null">#{currentYearEstimate, jdbcType=DOUBLE  },</if>
+            <if test = "currentYearDeal != null">#{currentYearDeal, jdbcType=DOUBLE  },</if>
+            <if test = "nextYear1Deal != null">#{nextYear1Deal, jdbcType=DOUBLE  },</if>
+            <if test = "nextYear1Income != null">#{nextYear1Income, jdbcType=DOUBLE  },</if>
+            <if test = "nextYear2Deal != null">#{nextYear2Deal, jdbcType=DOUBLE  },</if>
+            <if test = "nextYear2Income != null">#{nextYear2Income, jdbcType=DOUBLE  },</if>
+            <if test = "nextYear3Deal != null">#{nextYear3Deal, jdbcType=DOUBLE  },</if>
+            <if test = "nextYear3Income != null">#{nextYear3Income, jdbcType=DOUBLE  },</if>
+            <if test = "nextYear4Deal != null">#{nextYear4Deal, jdbcType=DOUBLE  },</if>
+            <if test = "nextYear4Income != null">#{nextYear4Income, jdbcType=DOUBLE  },</if>
+            <if test = "nextYear5Deal != null">#{nextYear5Deal, jdbcType=DOUBLE  },</if>
+            <if test = "nextYear5Income != null">#{nextYear5Income, jdbcType=DOUBLE  },</if>
+            <if test = "nextYear6Deal != null">#{nextYear6Deal, jdbcType=DOUBLE  },</if>
+            <if test = "nextYear6Income != null">#{nextYear6Income, jdbcType=DOUBLE  },</if>
+            <if test = "nextYear7Deal != null">#{nextYear7Deal, jdbcType=DOUBLE  },</if>
+            <if test = "nextYear7Income != null">#{nextYear7Income, jdbcType=DOUBLE  },</if>
+            <if test = "nextYear8Deal != null">#{nextYear8Deal, jdbcType=DOUBLE  },</if>
+            <if test = "nextYear8Income != null">#{nextYear8Income, jdbcType=DOUBLE  },</if>
+            <if test = "nextYear9Deal != null">#{nextYear9Deal, jdbcType=DOUBLE  },</if>
+            <if test = "nextYear9Income != null">#{nextYear9Income, jdbcType=DOUBLE  },</if>
+            <if test = "nextYear10Deal != null">#{nextYear10Deal, jdbcType=DOUBLE  },</if>
+            <if test = "nextYear10Income != null">#{nextYear10Income, jdbcType=DOUBLE  },</if>
+            <if test = "nextYear11Deal != null">#{nextYear11Deal, jdbcType=DOUBLE  },</if>
+            <if test = "nextYear11Income != null">#{nextYear11Income, jdbcType=DOUBLE  },</if>
+            <if test = "nextYear12Deal != null">#{nextYear12Deal, jdbcType=DOUBLE  },</if>
+            <if test = "nextYear12Income != null">#{nextYear12Income, jdbcType=DOUBLE  },</if>
+            <if test = "remark != null">#{remark, jdbcType=VARCHAR},</if>
+            <if test = "deptName != null">#{deptName, jdbcType=VARCHAR},</if>
+            <if test = "createTime != null">#{createTime, jdbcType=DATE},</if>
+            <if test = "updateTime != null">#{updateTime, jdbcType=DATE},</if>
+            <if test = "property != null">#{property, jdbcType=VARCHAR},</if>
+            <if test = "createUserId != null">#{createUserId, jdbcType=VARCHAR},</if>
+            <if test = "projectTeam != null">#{projectTeam, jdbcType=VARCHAR},</if>
+            <if test = "businessAdminId != null">#{businessAdminId, jdbcType=VARCHAR},</if>
+            <if test = "businessAdminName != null">#{businessAdminName, jdbcType=VARCHAR}</if>
+        </trim>
+    </insert>
+
+    <!-- 根据pk，修改记录-->
+    <update id = "updateByPrimaryKey" parameterType = "com.adc.da.budget.entity.BudgetEO">
+        UPDATE TS_BUDGET
+        SET dept_id               = #{deptId, jdbcType=VARCHAR},
+            project_name          = #{projectName, jdbcType=VARCHAR},
+            team_name             = #{teamName, jdbcType=VARCHAR},
+            property_id           = #{propertyId, jdbcType=VARCHAR},
+            pm                    = #{pm, jdbcType=VARCHAR},
+            domain_id             = #{domainId, jdbcType=VARCHAR},
+            cycle                 = #{cycle, jdbcType=VARCHAR},
+            cycle_begin           = #{cycleBegin, jdbcType=DATE},
+            cycle_end             = #{cycleEnd, jdbcType=DATE},
+            current_year          = #{currentYear, jdbcType=VARCHAR},
+            current_year_deal     = #{currentYearDeal, jdbcType=DOUBLE},
+            current_year_estimate = #{currentYearEstimate, jdbcType=DOUBLE},
+            next_year_1_deal      = #{nextYear1Deal, jdbcType=DOUBLE},
+            next_year_1_income    = #{nextYear1Income, jdbcType=DOUBLE},
+            next_year_2_deal      = #{nextYear2Deal, jdbcType=DOUBLE},
+            next_year_2_income    = #{nextYear2Income, jdbcType=DOUBLE},
+            next_year_3_deal      = #{nextYear3Deal, jdbcType=DOUBLE},
+            next_year_3_income    = #{nextYear3Income, jdbcType=DOUBLE},
+            next_year_4_deal      = #{nextYear4Deal, jdbcType=DOUBLE},
+            next_year_4_income    = #{nextYear4Income, jdbcType=DOUBLE},
+            next_year_5_deal      = #{nextYear5Deal, jdbcType=DOUBLE},
+            next_year_5_income    = #{nextYear5Income, jdbcType=DOUBLE},
+            next_year_6_deal      = #{nextYear6Deal, jdbcType=DOUBLE},
+            next_year_6_income    = #{nextYear6Income, jdbcType=DOUBLE},
+            next_year_7_deal      = #{nextYear7Deal, jdbcType=DOUBLE},
+            next_year_7_income    = #{nextYear7Income, jdbcType=DOUBLE},
+            next_year_8_deal      = #{nextYear8Deal, jdbcType=DOUBLE},
+            next_year_8_income    = #{nextYear8Income, jdbcType=DOUBLE},
+            next_year_9_deal      = #{nextYear9Deal, jdbcType=DOUBLE},
+            next_year_9_income    = #{nextYear9Income, jdbcType=DOUBLE},
+            next_year_10_deal     = #{nextYear10Deal, jdbcType=DOUBLE},
+            next_year_10_income   = #{nextYear10Income, jdbcType=DOUBLE},
+            next_year_11_deal     = #{nextYear11Deal, jdbcType=DOUBLE},
+            next_year_11_income   = #{nextYear11Income, jdbcType=DOUBLE},
+            next_year_12_deal     = #{nextYear12Deal, jdbcType=DOUBLE},
+            next_year_12_income   = #{nextYear12Income, jdbcType=DOUBLE},
+            remark                = #{remark, jdbcType=VARCHAR},
+            dept_name             = #{deptName, jdbcType=VARCHAR},
+            create_time           = #{createTime, jdbcType=DATE},
+            update_time           = #{updateTime, jdbcType=DATE},
+            property              = #{property, jdbcType=VARCHAR},
+            project_team          = #{projectTeam, jdbcType=VARCHAR},
+            business_admin_id       = #{businessAdminId, jdbcType=VARCHAR},
+            business_admin_name     = #{businessAdminName, jdbcType=VARCHAR}
+        WHERE id = #{id, jdbcType=VARCHAR}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id = "updateByPrimaryKeySelective" parameterType = "com.adc.da.budget.entity.BudgetEO">
+        update TS_BUDGET
+        <set>
+            <if test = "deptId != null">
+                dept_id = #{deptId},
+            </if>
+            <if test = "projectName != null">
+                project_name = #{projectName},
+            </if>
+            <if test = "teamName != null">
+                team_name = #{teamName},
+            </if>
+            <if test = "propertyId != null">
+                property_id = #{propertyId},
+            </if>
+            <if test = "pm != null">
+                pm = #{pm},
+            </if>
+            <if test = "domainId != null">
+                domain_id = #{domainId},
+            </if>
+            <if test = "cycle != null">
+                cycle = #{cycle},
+            </if>
+            <if test = "cycleBegin != null">
+                cycle_begin = #{cycleBegin},
+            </if>
+            <if test = "cycleEnd != null">
+                cycle_end = #{cycleEnd},
+            </if>
+            <if test = "currentYear != null">
+                current_year = #{currentYear},
+            </if>
+            <if test = "currentYearDeal != null">
+                current_year_deal = #{currentYearDeal},
+            </if>
+            <if test = "currentYearEstimate != null">
+                current_year_estimate = #{currentYearEstimate},
+            </if>
+            <if test = "nextYear1Deal != null">
+                next_year_1_deal = #{nextYear1Deal},
+            </if>
+            <if test = "nextYear1Income != null">
+                next_year_1_income = #{nextYear1Income},
+            </if>
+            <if test = "nextYear2Deal != null">
+                next_year_2_deal = #{nextYear2Deal},
+            </if>
+            <if test = "nextYear2Income != null">
+                next_year_2_income = #{nextYear2Income},
+            </if>
+            <if test = "nextYear3Deal != null">
+                next_year_3_deal = #{nextYear3Deal},
+            </if>
+            <if test = "nextYear3Income != null">
+                next_year_3_income = #{nextYear3Income},
+            </if>
+            <if test = "nextYear4Deal != null">
+                next_year_4_deal = #{nextYear4Deal},
+            </if>
+            <if test = "nextYear4Income != null">
+                next_year_4_income = #{nextYear4Income},
+            </if>
+            <if test = "nextYear5Deal != null">
+                next_year_5_deal = #{nextYear5Deal},
+            </if>
+            <if test = "nextYear5Income != null">
+                next_year_5_income = #{nextYear5Income},
+            </if>
+            <if test = "nextYear6Deal != null">
+                next_year_6_deal = #{nextYear6Deal},
+            </if>
+            <if test = "nextYear6Income != null">
+                next_year_6_income = #{nextYear6Income},
+            </if>
+            <if test = "nextYear7Deal != null">
+                next_year_7_deal = #{nextYear7Deal},
+            </if>
+            <if test = "nextYear7Income != null">
+                next_year_7_income = #{nextYear7Income},
+            </if>
+            <if test = "nextYear8Deal != null">
+                next_year_8_deal = #{nextYear8Deal},
+            </if>
+            <if test = "nextYear8Income != null">
+                next_year_8_income = #{nextYear8Income},
+            </if>
+            <if test = "nextYear9Deal != null">
+                next_year_9_deal = #{nextYear9Deal},
+            </if>
+            <if test = "nextYear9Income != null">
+                next_year_9_income = #{nextYear9Income},
+            </if>
+            <if test = "nextYear10Deal != null">
+                next_year_10_deal = #{nextYear10Deal},
+            </if>
+            <if test = "nextYear10Income != null">
+                next_year_10_income = #{nextYear10Income},
+            </if>
+            <if test = "nextYear11Deal != null">
+                next_year_11_deal = #{nextYear11Deal},
+            </if>
+            <if test = "nextYear11Income != null">
+                next_year_11_income = #{nextYear11Income},
+            </if>
+            <if test = "nextYear12Deal != null">
+                next_year_12_deal = #{nextYear12Deal},
+            </if>
+            <if test = "nextYear12Income != null">
+                next_year_12_income = #{nextYear12Income},
+            </if>
+            <if test = "remark != null">
+                remark = #{remark},
+            </if>
+            <if test = "deptName != null">
+                dept_name = #{deptName},
+            </if>
+            <if test = "createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test = "updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test = "property != null">
+                property = #{property},
+            </if>
+            <if test = "createUserId != null">
+                create_user_id = #{createUserId},
+            </if>
+            <if test = "projectTeam != null">
+                project_team = #{projectTeam},
+            </if>
+            <if test = "businessAdminId != null">
+                business_admin_id = #{businessAdminId},
+            </if>
+            <if test = "businessAdminName != null">
+                business_admin_name = #{businessAdminName}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!-- 根据id查询 TS_BUDGET -->
+    <select id = "selectByPrimaryKey" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+        select<include
+            refid = "Base_Column_Usname_List"/>, u.usname from TS_BUDGET ts_b left join TS_USER u on ts_b.pm = u.usid where ts_b.id = #{id} and ts_b.del_flag is null
+    </select>
+
+    <select id = "selectById" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+        select <include refid = "Base_Column_List"/> from TS_BUDGET where id =  #{id}
+    </select>
+
+    <!--批量删除-->
+    <delete id = "deleteInBatch" parameterType = "java.util.List">
+        delete from TS_BUDGET where id in
+        <foreach item = "id" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--批量逻辑删除业务-->
+    <update id = "deleteLogicInBatch" parameterType = "java.util.List">
+        update TS_BUDGET set del_flag = 1 where id in
+        <foreach item = "id" collection = "budgetIds" open = "(" separator = "," close = ")" index = "index">
+            #{id}
+        </foreach>
+    </update>
+
+
+    <update id = "deleteLogicInBatchById" parameterType = "java.lang.String">
+        update TS_BUDGET set del_flag = 1 where id in #{id}
+    </update>
+
+    <!-- 删除记录 -->
+    <delete id = "deleteByPrimaryKey" parameterType = "java.lang.String">
+        DELETE
+        FROM TS_BUDGET
+        WHERE id = #{value}
+
+    </delete>
+
+    <!-- TS_BUDGET 列表总数-->
+    <select id = "queryByCount" resultType = "java.lang.Integer" parameterType = "com.adc.da.base.page.BasePage">
+        select count(1) from TS_BUDGET
+        <include refid = "Base_Where_Clause"/>
+        and pm = #{pm}
+    </select>
+
+    <select id = "findByCount" resultType = "java.lang.Integer" parameterType = "com.adc.da.base.page.BasePage">
+        select count(1) from TS_BUDGET t left join TS_USER u on t.pm = u.usid left join TS_USER v on t.create_user_id = v.usid left join (select BUSINESS_ID, sum(worktime) as worktime from ST_BUSINESS_WORKTIME
+        <!-- 丁丁说先不用考虑部门权限问题 -->
+        <!--<if test="deptIds != null" >-->
+        <!--where DEPARTMENT_ID in-->
+        <!--<foreach collection="deptIds" item="deptId" separator="," open="(" close=")" index="index">-->
+        <!--#{deptId}-->
+        <!--</foreach>-->
+        <!--</if>-->group by BUSINESS_ID) w on t.id = w.BUSINESS_ID
+        <include refid = "Base_Where_Clause_Query_New"/>
+    </select>
+
+    <!-- 查询TS_BUDGET列表 -->
+    <select id = "findByPage" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select<include
+            refid = "Base_Column_Usname_List"/>, ts_b.usname, ts_b.createUserName, ts_b.worktime from (select tmp_tb.* , rownum rn from (select t.*, u.usname, v.usname as createUserName, nvl(w.worktime,0) as worktime from TS_BUDGET t left join TS_USER u on t.pm = u.usid left join TS_USER v on t.create_user_id = v.usid left join (select BUSINESS_ID, sum(worktime) as worktime from ST_BUSINESS_WORKTIME
+        <!-- 丁丁说先不用考虑部门权限问题 -->
+        <!--<if test="deptIds != null and deptIds.size > 0" >-->
+        <!--where DEPARTMENT_ID in-->
+        <!--<foreach collection="deptIds" item="deptId" separator="," open="(" close=")" index="index">-->
+        <!--#{deptId}-->
+        <!--</foreach>-->
+        <!--</if>-->group by BUSINESS_ID) w on t.id = w.BUSINESS_ID
+        <include refid = "Base_Where_Clause_Query_New"/>
+        <!-- 查询工时排序 -->order by nvl(w.worktime,0) desc
+        <!--<if test="pager.orderCondition != null and pager.orderCondition != ''" >-->
+        <!--${pager.orderCondition}-->
+        <!--</if>-->) tmp_tb where rownum &lt;= ${pager.endIndex}) ts_b where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <!-- 查询TS_BUDGET列表 -->
+    <select id = "queryByPage" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select<include refid = "Base_Column_Usname_List"/>, u.usname from (select tmp_tb.* , rownum rn from (select
+        <include refid = "Base_Column_List"/>
+        from TS_BUDGET
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex}) ts_b left join TS_USER u on ts_b.pm = u.usid where rn &gt;= ${pager.startIndex}
+        <if test = "q != null and q != ''">
+            and (ts_b.pm = #{q} or ts_b.create_user_id = #{q})
+        </if>
+        order by ts_b.create_time desc
+    </select>
+
+    <select id = "queryByList" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select<include refid = "BaseAll_Column_List"/>, u.usname from (select
+        <include refid = "Base_Column_List"/>
+        from TS_BUDGET
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}</if>) b LEFT JOIN TS_ORG g ON b.dept_id = g.id LEFT JOIN TS_USER u ON b.pm = u.usid
+        <where>
+            <if test = "q != null and q != ''">
+                and (b.pm = #{q} or b.create_user_id = #{q})
+            </if>
+        </where>
+        order by b.create_time desc
+
+    </select>
+
+    <select id = "selectByIdList" resultMap = "BaseResultMap" parameterType = "java.util.List">
+        select
+        <include refid = "Base_Column_List"/>
+        from TS_BUDGET where id in
+        <foreach item = "item" collection = "budgetIds" index = "index" open = "(" separator = "," close = ")">
+            #{item , jdbcType=VARCHAR}
+        </foreach>
+    </select>
+
+
+    <select id = "selectByAdminId" resultMap = "BaseResultMap">
+        select
+        <include refid = "Base_Column_List"/>
+        from TS_BUDGET where business_admin_id = #{adminId}
+    </select>
+
+    <select id = "selectByPrimaryKeys" resultMap = "BaseResultMap" parameterType = "java.util.List">
+        select
+        <include refid = "Base_Column_Listc"/>
+        from TS_BUDGET where id in
+        <foreach item = "item" collection = "budgetIds" index = "index" open = "(" separator = "," close = ")">
+            #{item , jdbcType=VARCHAR}
+        </foreach>
+    </select>
+
+    <select id = "selectByPrimaryKeysNotOld" resultMap = "BaseResultMap" parameterType = "java.util.List">
+        select
+        <include refid = "Base_Column_Listc"/>
+        from TS_BUDGET where id in
+        <foreach item = "item" collection = "budgetIds" index = "index" open = "(" separator = "," close = ")">
+            #{item , jdbcType=VARCHAR}
+        </foreach>
+        and project_name not like '旧-%' and del_flag is null
+    </select>
+
+    <select id = "findAllBudgetNameNotLikeAndKeys" resultMap = "BaseResultMap">
+        select
+        <include refid = "Base_Column_Listc"/>
+        from TS_BUDGET where id in
+        <foreach item = "item" collection = "budgetIds" index = "index" open = "(" separator = "," close = ")">
+            #{item , jdbcType=VARCHAR}
+        </foreach>
+        and project_name not like #{args} and del_flag is null
+        <if test = "property!=null">
+            and property in
+            <foreach item = "item" collection = "property" index = "index" open = "(" separator = "," close = ")">
+                #{item , jdbcType=VARCHAR}
+            </foreach>
+        </if>
+    </select>
+
+
+    <select id = "selectByCreateUserId" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+        select
+        <include refid = "Base_Column_List"/>
+        from TS_BUDGET
+        <where>
+            (create_user_id = #{userId} or pm = #{userId}) and project_name not like '旧-%' and del_flag is null
+        </where>
+    </select>
+
+    <select id = "selectByDeptIds" resultMap = "BaseResultMap">
+        select
+        <include refid = "Base_Column_List"/>
+        from TS_BUDGET
+        <where>
+            dept_id in
+            <foreach collection = "deptIds" item = "deptId" separator = "," open = "(" close = ")">
+                #{deptId}
+            </foreach>
+            and del_flag is null and project_name not like '旧-%'
+            <if test="property!=null">
+            and property = #{property}
+        </if>
+        </where>
+        order by nlssort(project_name,'NLS_SORT=SCHINESE_PINYIN_M')
+    </select>
+
+
+    <select id = "selectByDeptIdsAndBudgetName" resultMap = "BaseResultMap">
+        select
+        <include refid = "Base_Column_List"/>
+        from TS_BUDGET
+        <where>
+            PROJECT_NAME = #{budgetName} and dept_id in
+            <foreach collection = "deptIds" item = "deptId" separator = "," open = "(" close = ")">
+                #{deptId}
+            </foreach>
+            and del_flag is null
+        </where>
+        order by create_time desc
+    </select>
+
+    <select id = "selectByBudgetName" resultMap = "BaseResultMap">
+        select
+        <include refid = "Base_Column_List"/>
+        from TS_BUDGET
+        <where>
+            PROJECT_NAME = #{budgetName} and del_flag is null
+        </where>
+        order by create_time desc
+    </select>
+
+    <select id = "findAll" resultMap = "BaseResultMap">
+        select
+        <include refid = "Base_Column_List"/>
+        from TS_BUDGET where del_flag is null and project_name not like '旧-%'
+        <if test="property!=null and property != ''">
+            and property = #{property}
+        </if>
+        order by nlssort(project_name,'NLS_SORT=SCHINESE_PINYIN_M')
+    </select>
+
+    <select id = "findAllBudget" resultMap = "BaseResultMap">
+        select
+        <include refid = "Base_Column_List"/>
+        from TS_BUDGET where del_flag is null
+    </select>
+
+    <select id = "findByDomainIdNotNull" resultMap = "BaseResultMap">
+        select
+        <include refid = "Base_Column_List"/>
+        from TS_BUDGET where del_flag is null and
+                             DOMAIN_ID is not NULL
+    </select>
+
+    <select id = "findAllBudgetNameLike" resultMap = "BaseResultMap">
+        select
+        <include refid = "Base_Column_List"/>
+        from TS_BUDGET where project_name like #{args} and del_flag is null
+    </select>
+
+    <select id = "findAllBudgetNameLikeAndByType" resultMap = "BaseResultMap">
+        select
+        <include refid = "Base_Column_List"/>
+        from TS_BUDGET where project_name like CONCAT('%',CONCAT(#{args},'%')) and del_flag is null and property = #{property}
+    </select>
+
+    <select id = "findAllBudgetIdByDomainId" resultMap = "BaseResultMap">
+        select
+        <include refid = "Base_Column_List"/>
+        from TS_BUDGET where domain_id = #{domainId}
+    </select>
+
+    <select id = "findAllBudgetNameEquals" resultMap = "BaseResultMap">
+        select
+        <include refid = "Base_Column_List"/>
+        from TS_BUDGET where project_name = #{args} and del_flag is null
+    </select>
+
+
+    <select id = "findBudgetIdsByNameLike" resultType = "java.lang.String">
+        select
+        <include refid = "Base_Column_List"/>
+        from TS_BUDGET where project_name like #{args} and del_flag is null
+    </select>
+
+    <select id = "findBudgetIdsByNameEquals" resultType = "java.lang.String">
+        select
+        <include refid = "Base_Column_List"/>
+        from TS_BUDGET where project_name = #{args} and del_flag is null
+    </select>
+
+
+    <select id = "findAllBudgetIdByNameNotLike" resultType = "java.lang.String">
+        SELECT ID
+        FROM TS_BUDGET
+        WHERE project_name NOT LIKE #{args} AND del_flag IS NULL
+    </select>
+
+    <select id = "findAllBudgetIdByNameNotLikeAndPropertyArr" resultType = "java.lang.String">
+        SELECT ID
+        FROM TS_BUDGET
+        WHERE project_name NOT LIKE #{args} AND del_flag IS NULL
+        <if test = "property!=null">
+            and property in
+            <foreach item = "item" collection = "property" index = "index" open = "(" separator = "," close = ")">
+                #{item , jdbcType=VARCHAR}
+            </foreach>
+        </if>
+    </select>
+
+
+    <select id = "findAllBudgetNameNotLike" resultMap = "BaseResultMap">
+        select
+        <include refid = "Base_Column_List"/>
+        from TS_BUDGET where project_name not like #{args} and del_flag is null
+        <if test = "property!=null">
+            and property in
+            <foreach item = "item" collection = "property" index = "index" open = "(" separator = "," close = ")">
+                #{item , jdbcType=VARCHAR}
+            </foreach>
+        </if>
+    </select>
+
+
+    <select id = "queryAllBudgetByType" resultType = "java.lang.String">
+        SELECT ID
+        FROM TS_BUDGET
+        WHERE property = #{property , jdbcType=VARCHAR}
+    </select>
+
+    <select id = "queryAllBudgetByTypeName" resultType = "java.lang.String">
+        SELECT ID
+        FROM TS_BUDGET
+        WHERE property = #{0}
+          AND project_name LIKE #{1}
+    </select>
+
+    <select id = "selectBudgetIdAndBudgetNameByBudgetName" resultType = "java.lang.String">
+        select ID
+        from TS_BUDGET where DEL_FLAG is null
+        <choose>
+            <when test = 'operate=="="'>
+                and PROJECT_NAME = #{budgetName}
+            </when>
+            <when test = 'operate=="!="'>
+                and PROJECT_NAME != #{budgetName}
+            </when>
+            <when test = 'operate=="like"'>
+                and PROJECT_NAME like '%'||#{budgetName}||'%'
+            </when>
+            <when test = 'operate=="not like"'>
+                and PROJECT_NAME not like '%'||#{budgetName}||'%'
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+    </select>
+
+
+    <select id = "findByIds" resultMap = "BaseResultMap">
+        select
+        <include refid = "Base_Column_List"/>
+        from TS_BUDGET
+        <where>
+            id in
+            <foreach collection = "ids" item = "id" separator = "," open = "(" close = ")">
+                #{id}
+            </foreach>
+            and del_flag is null and project_name not like '旧-%'
+            <if test="property!=null and property != ''">
+                and property = #{property}
+            </if>
+        </where>
+        order by nlssort(project_name,'NLS_SORT=SCHINESE_PINYIN_M')
+    </select>
+
+    <!-- 只根据PM查询业务 -->
+    <select id = "selectByPM" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+        select
+        <include refid = "Base_Column_List"/>
+        from TS_BUDGET
+        <where>
+            pm = #{userId} and del_flag is null and project_name not like '旧-%'
+        </where>
+        order by create_time desc
+    </select>
+
+    <!-- 根据PM与BudgetName查询业务 -->
+    <select id = "selectByPmAndBudgetName" resultMap = "BaseResultMap">
+        select
+        <include refid = "Base_Column_List"/>
+        from TS_BUDGET where 1=1
+        <if test = "id != null and id != ''">
+            and id != #{id}
+        </if>
+        <if test = "userId != null and userId != ''">
+             and pm = #{userId}
+        </if>
+        <if test = "budgetName != null and budgetName != ''">
+             and PROJECT_NAME = #{budgetName}
+        </if>
+        and del_flag is null
+    </select>
+
+    <!-- 只根据业务名称查询每个月的数据 -->
+    <select id = "selectEveryMonthInvoiceDataByBudgetName" resultType = "java.util.Map">
+        SELECT MONTH AS KEY, INVOICE_AMOUNT AS VALUE
+        FROM TS_BUDGET b
+                 INNER JOIN TS_OPERATING_BUDGET t
+                            ON b.PROJECT_NAME = t.BUSINESS_NAME
+        WHERE BUSINESS_NAME = #{budgetName}
+          AND t.year = #{ year}
+          AND month > 0
+        ORDER BY MONTH ASC
+    </select>
+
+    <update id = "updateByDomainId" parameterType = "com.adc.da.budget.entity.BudgetEO">
+        UPDATE TS_BUDGET
+        SET dept_id               = #{deptId, jdbcType=VARCHAR},
+            project_name          = #{projectName, jdbcType=VARCHAR},
+            team_name             = #{teamName, jdbcType=VARCHAR},
+            property_id           = #{propertyId, jdbcType=VARCHAR},
+            pm                    = #{pm, jdbcType=VARCHAR},
+            cycle                 = #{cycle, jdbcType=VARCHAR},
+            cycle_begin           = #{cycleBegin, jdbcType=DATE},
+            cycle_end             = #{cycleEnd, jdbcType=DATE},
+            current_year          = #{currentYear, jdbcType=VARCHAR},
+            current_year_deal     = #{currentYearDeal, jdbcType=DOUBLE},
+            current_year_estimate = #{currentYearEstimate, jdbcType=DOUBLE},
+            next_year_1_deal      = #{nextYear1Deal, jdbcType=DOUBLE},
+            next_year_1_income    = #{nextYear1Income, jdbcType=DOUBLE},
+            next_year_2_deal      = #{nextYear2Deal, jdbcType=DOUBLE},
+            next_year_2_income    = #{nextYear2Income, jdbcType=DOUBLE},
+            next_year_3_deal      = #{nextYear3Deal, jdbcType=DOUBLE},
+            next_year_3_income    = #{nextYear3Income, jdbcType=DOUBLE},
+            next_year_4_deal      = #{nextYear4Deal, jdbcType=DOUBLE},
+            next_year_4_income    = #{nextYear4Income, jdbcType=DOUBLE},
+            next_year_5_deal      = #{nextYear5Deal, jdbcType=DOUBLE},
+            next_year_5_income    = #{nextYear5Income, jdbcType=DOUBLE},
+            next_year_6_deal      = #{nextYear6Deal, jdbcType=DOUBLE},
+            next_year_6_income    = #{nextYear6Income, jdbcType=DOUBLE},
+            next_year_7_deal      = #{nextYear7Deal, jdbcType=DOUBLE},
+            next_year_7_income    = #{nextYear7Income, jdbcType=DOUBLE},
+            next_year_8_deal      = #{nextYear8Deal, jdbcType=DOUBLE},
+            next_year_8_income    = #{nextYear8Income, jdbcType=DOUBLE},
+            next_year_9_deal      = #{nextYear9Deal, jdbcType=DOUBLE},
+            next_year_9_income    = #{nextYear9Income, jdbcType=DOUBLE},
+            next_year_10_deal     = #{nextYear10Deal, jdbcType=DOUBLE},
+            next_year_10_income   = #{nextYear10Income, jdbcType=DOUBLE},
+            next_year_11_deal     = #{nextYear11Deal, jdbcType=DOUBLE},
+            next_year_11_income   = #{nextYear11Income, jdbcType=DOUBLE},
+            next_year_12_deal     = #{nextYear12Deal, jdbcType=DOUBLE},
+            next_year_12_income   = #{nextYear12Income, jdbcType=DOUBLE},
+            remark                = #{remark, jdbcType=VARCHAR},
+            dept_name             = #{deptName, jdbcType=VARCHAR},
+            create_time           = #{createTime, jdbcType=DATE},
+            update_time           = #{updateTime, jdbcType=DATE},
+            property              = #{property, jdbcType=VARCHAR},
+            create_user_id        = #{createUserId, jdbcType=VARCHAR},
+            project_team          = #{projectTeam, jdbcType=VARCHAR}
+        WHERE domain_id = #{domainId, jdbcType=VARCHAR}
+    </update>
+
+
+</mapper>

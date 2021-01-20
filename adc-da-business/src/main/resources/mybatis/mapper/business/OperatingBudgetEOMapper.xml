@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.adc.da.business.dao.OperatingBudgetEODao">
+    <!-- Result Map-->
+    <resultMap id = "BaseResultMap" type = "com.adc.da.business.entity.OperatingBudgetEO">
+        <id column = "id" property = "id"/>
+        <result column = "year" property = "year"/>
+        <result column = "month" property = "month"/>
+        <result column = "dept_id" property = "deptId"/>
+        <result column = "dept_name" property = "deptName"/>
+        <result column = "business_name" property = "businessName"/>
+        <result column = "contract_sum" property = "contractSum"/>
+        <result column = "invoice_amount" property = "invoiceAmount"/>
+        <result column = "contribution_amount" property = "contributionAmount"/>
+        <result column = "accounts_receivable" property = "accountsReceivable"/>
+        <result column = "revenue_budget" property = "revenueBudget"/>
+        <result column = "ext_info1" property = "extInfo1"/>
+        <result column = "ext_info2" property = "extInfo2"/>
+        <result column = "ext_info3" property = "extInfo3"/>
+        <result column = "ext_info4" property = "extInfo4"/>
+        <result column = "ext_info5" property = "extInfo5"/>
+        <result column = "ext_info6" property = "extInfo6"/>
+    </resultMap>
+
+    <!-- TS_OPERATING_BUDGET table all fields -->
+    <sql id = "Base_Column_List">
+        id, year, month, dept_id, dept_name, business_name, contract_sum, invoice_amount, contribution_amount, accounts_receivable, revenue_budget, ext_info1, ext_info2, ext_info3, ext_info4, ext_info5, ext_info6
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id = "Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides = ",">
+            <if test = "id != null">
+                and id ${idOperator} #{id}
+            </if>
+            <if test = "year != null">
+                and year ${yearOperator} #{year}
+            </if>
+            <if test = "month != null">
+                and month ${monthOperator} #{month}
+            </if>
+            <if test = "deptId != null">
+                and dept_id ${deptIdOperator} #{deptId}
+            </if>
+            <if test = "deptName != null">
+                and dept_name ${deptNameOperator} #{deptName}
+            </if>
+            <if test = "businessName != null">
+                and business_name ${businessNameOperator} #{businessName}
+            </if>
+            <if test = "contractSum != null">
+                and contract_sum ${contractSumOperator} #{contractSum}
+            </if>
+            <if test = "invoiceAmount != null">
+                and invoice_amount ${invoiceAmountOperator} #{invoiceAmount}
+            </if>
+            <if test = "contributionAmount != null">
+                and contribution_amount ${contributionAmountOperator} #{contributionAmount}
+            </if>
+            <if test = "accountsReceivable != null">
+                and accounts_receivable ${accountsReceivableOperator} #{accountsReceivable}
+            </if>
+            <if test = "revenueBudget != null">
+                and revenue_budget ${revenueBudgetOperator} #{revenueBudget}
+            </if>
+            <if test = "extInfo1 != null">
+                and ext_info1 ${extInfo1Operator} #{extInfo1}
+            </if>
+            <if test = "extInfo2 != null">
+                and ext_info2 ${extInfo2Operator} #{extInfo2}
+            </if>
+            <if test = "extInfo3 != null">
+                and ext_info3 ${extInfo3Operator} #{extInfo3}
+            </if>
+            <if test = "extInfo4 != null">
+                and ext_info4 ${extInfo4Operator} #{extInfo4}
+            </if>
+            <if test = "extInfo5 != null">
+                and ext_info5 ${extInfo5Operator} #{extInfo5}
+            </if>
+            <if test = "extInfo6 != null">
+                and ext_info6 ${extInfo6Operator} #{extInfo6}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id = "insert" parameterType = "com.adc.da.business.entity.OperatingBudgetEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+            SELECT SEQ_TS_OPERATING_BUDGET.NEXTVAL FROM DUAL
+        </selectKey> -->insert into TS_OPERATING_BUDGET(<include
+            refid = "Base_Column_List"/>) values (#{id, jdbcType=VARCHAR}, #{year, jdbcType=VARCHAR}, #{month, jdbcType=VARCHAR}, #{deptId, jdbcType=VARCHAR}, #{deptName, jdbcType=VARCHAR}, #{businessName, jdbcType=VARCHAR}, #{contractSum, jdbcType=FLOAT}, #{invoiceAmount, jdbcType=FLOAT}, #{contributionAmount, jdbcType=FLOAT}, #{accountsReceivable, jdbcType=FLOAT}, #{revenueBudget, jdbcType=FLOAT}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR}, #{extInfo6, jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id = "insertSelective" parameterType = "com.adc.da.business.entity.OperatingBudgetEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_OPERATING_BUDGET.NEXTVAL FROM DUAL
+    </selectKey> -->insert into TS_OPERATING_BUDGET
+        <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">id,</if>
+            <if test = "year != null">year,</if>
+            <if test = "month != null">month,</if>
+            <if test = "deptId != null">dept_id,</if>
+            <if test = "deptName != null">dept_name,</if>
+            <if test = "businessName != null">business_name,</if>
+            <if test = "contractSum != null">contract_sum,</if>
+            <if test = "invoiceAmount != null">invoice_amount,</if>
+            <if test = "contributionAmount != null">contribution_amount,</if>
+            <if test = "accountsReceivable != null">accounts_receivable,</if>
+            <if test = "revenueBudget != null">revenue_budget,</if>
+            <if test = "extInfo1 != null">ext_info1,</if>
+            <if test = "extInfo2 != null">ext_info2,</if>
+            <if test = "extInfo3 != null">ext_info3,</if>
+            <if test = "extInfo4 != null">ext_info4,</if>
+            <if test = "extInfo5 != null">ext_info5,</if>
+            <if test = "extInfo6 != null">ext_info6,</if>
+        </trim>
+        <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">#{id, jdbcType=VARCHAR},</if>
+            <if test = "year != null">#{year, jdbcType=VARCHAR},</if>
+            <if test = "month != null">#{month, jdbcType=VARCHAR},</if>
+            <if test = "deptId != null">#{deptId, jdbcType=VARCHAR},</if>
+            <if test = "deptName != null">#{deptName, jdbcType=VARCHAR},</if>
+            <if test = "businessName != null">#{businessName, jdbcType=VARCHAR},</if>
+            <if test = "contractSum != null">#{contractSum, jdbcType=FLOAT},</if>
+            <if test = "invoiceAmount != null">#{invoiceAmount, jdbcType=FLOAT},</if>
+            <if test = "contributionAmount != null">#{contributionAmount, jdbcType=FLOAT},</if>
+            <if test = "accountsReceivable != null">#{accountsReceivable, jdbcType=FLOAT},</if>
+            <if test = "revenueBudget != null">#{revenueBudget, jdbcType=FLOAT},</if>
+            <if test = "extInfo1 != null">#{extInfo1, jdbcType=VARCHAR},</if>
+            <if test = "extInfo2 != null">#{extInfo2, jdbcType=VARCHAR},</if>
+            <if test = "extInfo3 != null">#{extInfo3, jdbcType=VARCHAR},</if>
+            <if test = "extInfo4 != null">#{extInfo4, jdbcType=VARCHAR},</if>
+            <if test = "extInfo5 != null">#{extInfo5, jdbcType=VARCHAR},</if>
+            <if test = "extInfo6 != null">#{extInfo6, jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <!-- 根据pk，修改记录-->
+    <update id = "updateByPrimaryKey" parameterType = "com.adc.da.business.entity.OperatingBudgetEO">
+        UPDATE TS_OPERATING_BUDGET
+        SET year                = #{year},
+            month               = #{month},
+            dept_id             = #{deptId},
+            dept_name           = #{deptName},
+            business_name       = #{businessName},
+            contract_sum        = #{contractSum},
+            invoice_amount      = #{invoiceAmount},
+            contribution_amount = #{contributionAmount},
+            accounts_receivable = #{accountsReceivable},
+            revenue_budget      = #{revenueBudget},
+            ext_info1           = #{extInfo1},
+            ext_info2           = #{extInfo2},
+            ext_info3           = #{extInfo3},
+            ext_info4           = #{extInfo4},
+            ext_info5           = #{extInfo5},
+            ext_info6           = #{extInfo6}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id = "updateByPrimaryKeySelective" parameterType = "com.adc.da.business.entity.OperatingBudgetEO">
+        update TS_OPERATING_BUDGET
+        <set>
+            <if test = "year != null">
+                year = #{year},
+            </if>
+            <if test = "month != null">
+                month = #{month},
+            </if>
+            <if test = "deptId != null">
+                dept_id = #{deptId},
+            </if>
+            <if test = "deptName != null">
+                dept_name = #{deptName},
+            </if>
+            <if test = "businessName != null">
+                business_name = #{businessName},
+            </if>
+            <if test = "contractSum != null">
+                contract_sum = #{contractSum},
+            </if>
+            <if test = "invoiceAmount != null">
+                invoice_amount = #{invoiceAmount},
+            </if>
+            <if test = "contributionAmount != null">
+                contribution_amount = #{contributionAmount},
+            </if>
+            <if test = "accountsReceivable != null">
+                accounts_receivable = #{accountsReceivable},
+            </if>
+            <if test = "revenueBudget != null">
+                revenue_budget = #{revenueBudget},
+            </if>
+            <if test = "extInfo1 != null">
+                ext_info1 = #{extInfo1},
+            </if>
+            <if test = "extInfo2 != null">
+                ext_info2 = #{extInfo2},
+            </if>
+            <if test = "extInfo3 != null">
+                ext_info3 = #{extInfo3},
+            </if>
+            <if test = "extInfo4 != null">
+                ext_info4 = #{extInfo4},
+            </if>
+            <if test = "extInfo5 != null">
+                ext_info5 = #{extInfo5},
+            </if>
+            <if test = "extInfo6 != null">
+                ext_info6 = #{extInfo6},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!-- 根据id查询 TS_OPERATING_BUDGET -->
+    <select id = "selectByPrimaryKey" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+        select
+        <include refid = "Base_Column_List"/>
+        from TS_OPERATING_BUDGET where id = #{value}
+    </select>
+
+    <!-- 根据id查询 TS_OPERATING_BUDGET -->
+    <select id = "selectEveryMonthInvoiceDataByBudgetName" resultMap = "BaseResultMap"
+            parameterType = "java.lang.String">
+        select
+        <include refid = "Base_Column_List"/>
+        from TS_OPERATING_BUDGET where business_name = #{bizName} and year = #{year} and month > 0 order by month
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id = "deleteByPrimaryKey" parameterType = "java.lang.String">
+        DELETE
+        FROM TS_OPERATING_BUDGET
+        WHERE id = #{value}
+
+    </delete>
+
+    <!-- TS_OPERATING_BUDGET 列表总数-->
+    <select id = "queryByCount" resultType = "java.lang.Integer" parameterType = "com.adc.da.base.page.BasePage">
+        select count(1) from TS_OPERATING_BUDGET
+        <include refid = "Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询TS_OPERATING_BUDGET列表 -->
+    <select id = "queryByPage" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from (select tmp_tb.* , rownum rn from (select
+        <include refid = "Base_Column_List"/>
+        from TS_OPERATING_BUDGET
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex}) where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id = "queryByList" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from TS_OPERATING_BUDGET
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+    </select>
+
+
+    <select id = "queryYearData" resultMap = "BaseResultMap">
+        SELECT *
+        FROM TS_OPERATING_BUDGET
+        WHERE YEAR = #{0}
+          AND month BETWEEN #{1} AND #{2}
+        ORDER BY MONTH
+    </select>
+
+
+    <select id = "queryAllYear" resultType = "java.lang.String">
+        SELECT DISTINCT year
+        FROM TS_OPERATING_BUDGET
+        ORDER BY year DESC
+    </select>
+
+    <!-- 与需求对过了，这里要查历史所有年份的应收款项-->
+    <select id = "queryForwardYearAR" resultType = "java.lang.Float">
+        SELECT sum(ACCOUNTS_RECEIVABLE)
+        FROM "TS_OPERATING_BUDGET"
+        WHERE year &lt; #{0}
+    </select>
+
+    <!-- 与需求对过了，这里要查历史所有年份的应收款项-->
+    <select id = "queryThisYearAR" resultType = "java.lang.Float">
+        SELECT sum(ACCOUNTS_RECEIVABLE)
+        FROM "TS_OPERATING_BUDGET"
+        WHERE year = #{0}
+    </select>
+
+    <select id = "queryContractAmountByYearAndMonths" resultType = "java.lang.Float">
+        select sum(contract_sum) from TS_OPERATING_BUDGET where depet_id in
+        <foreach item = "item" collection = "deptIds" index = "index" open = "(" separator = "," close = ")">
+
+            #{item}
+
+        </foreach>
+        and year = #{thisYear} and month between #{startMonth} and #{endMonth}
+    </select>
+
+    <select id = "queryInvoiceAmountByYearAndMonths" resultType = "java.lang.Float">
+        select sum(invoice_amount) from TS_OPERATING_BUDGET where depet_id in
+        <foreach item = "item" collection = "deptIds" index = "index" open = "(" separator = "," close = ")">
+
+            #{item}
+
+        </foreach>
+        and year = #{thisYear} and month between #{startMonth} and #{endMonth}
+    </select>
+
+    <select id = "queryBusinessNamesByYearAndMonths" resultType = "java.lang.String">
+        SELECT business_name
+        FROM TS_OPERATING_BUDGET
+        WHERE year = #{year}
+          AND month BETWEEN #{startMonth} AND #{endMonth}
+    </select>
+
+    <!-- 根据项目名称查询区间总开票额，和总预计收入-->
+
+    <resultMap id = "BudgetIncomeResultMap" type = "com.adc.da.business.entity.BudgetIncomeCalculateEO">
+        <id column = "BUSINESS_ID" property = "businessId"/>
+        <result column = "BUSINESS_NAME" property = "businessName"/>
+        <result column = "PMID" property = "pmId"/>
+        <result column = "PM_Name" property = "pmName"/>
+        <result column = "ALL_INVOICE" property = "allInvoice"/>
+        <result column = "REVENUE_BUDGET" property = "revenueBudget"/>
+        <result column = "EXECUTION_RATE" property = "executionRate"/>
+        <result column = "YEAR" property = "year"/>
+    </resultMap>
+
+    <sql id = "InvoiceAndBudget">
+        SELECT sum(invoice_amount) AS ALL_INVOICE, min(BUSINESS_NAME) AS BUSINESS_NAME FROM TS_OPERATING_BUDGET t
+
+        WHERE
+        <if test = "businessName != null">
+            t.business_name LIKE #{businessName} AND
+        </if>
+        t.year = #{year} AND t.month BETWEEN #{startMonth} AND #{endMonth} GROUP BY t.BUSINESS_NAME
+
+    </sql>
+    <!--               WHERE rownum &lt;= ${pager.endIndex})
+              WHERE rn &gt;= ${pager.startIndex}-->
+    <select id = "queryInvoiceAndBudgetByNameYearAndMonths" resultMap = "BudgetIncomeResultMap">
+        SELECT t.BUSINESS_NAME, tb.ID BUSINESS_ID, tb.PM PMID, USNAME PM_Name, ALL_INVOICE, t.REVENUE_BUDGET, YEAR, TO_CHAR(ALL_INVOICE / REVENUE_BUDGET, 'FM9990.99999') EXECUTION_RATE FROM TS_OPERATING_BUDGET t RIGHT JOIN ( SELECT * FROM (SELECT tmp_tb.*, rownum rn FROM (
+        <include refid = "InvoiceAndBudget"/>
+        ORDER BY BUSINESS_NAME) tmp_tb WHERE rownum &lt;= ${pager.endIndex}) WHERE rn &gt;= ${pager.startIndex} ) res ON res.BUSINESS_NAME = t.BUSINESS_NAME AND t.MONTH = 0 AND t.YEAR = #{year} LEFT JOIN TS_BUDGET tb ON tb.PROJECT_NAME = t.BUSINESS_NAME LEFT JOIN TS_USER TU ON tb.PM = tu.USID
+
+    </select>
+
+    <select id = "countInvoiceAndBudgetByNameYearAndMonths" resultType = "java.lang.Integer">
+        SELECT count(1) FROM (<include refid = "InvoiceAndBudget"/>)
+    </select>
+    <!--
+
+
+
+    -->
+    <resultMap id = "PairResultMap" type = "com.adc.da.business.entity.PairEO">
+
+        <id column = "id" property = "key"/>
+        <result column = "VALUE" property = "value"/>
+
+    </resultMap>
+
+    <!-- 分组统计部门创收 即总开票额-->
+    <select id = "queryAllInvoiceByYearGroupByDeptId" resultType = "com.adc.da.business.entity.PairEO">
+        SELECT DEPT_ID AS KEY, sum(INVOICE_AMOUNT) AS VALUE
+        FROM TS_OPERATING_BUDGET
+        WHERE YEAR = #{year}
+        GROUP BY DEPT_ID
+    </select>
+
+    <select id = "queryAllInvoiceByYearGroupByDeptIdNew" resultType = "com.adc.da.business.entity.PairEO">
+        SELECT PROJECT_ID AS KEY, sum(INVOICE_AMOUNT) AS VALUE
+        FROM PF_PROJECT_CONTRACT_INVOICE
+        WHERE (INVOICE_DATE BETWEEN #{beginTime} AND #{endTime})
+          AND DELFLAG = 0
+        GROUP BY PROJECT_ID
+        ORDER BY VALUE DESC
+
+    </select>
+
+</mapper>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.smallprogram.dao.ScheudlePermissionEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.smallprogram.entity.ScheudlePermissionEO" >
+    <id column="id" property="id" />
+    <result column="origin_user_id" property="originUserId" />
+    <result column="dest_user_id" property="destUserId" />
+    <result column="origin_user_name" property="originUserName" />
+    <result column="dest_user_name" property="destUserName" />
+    <result column="dest_user_map" property="destUserMap" />
+    <result column="config_type" property="configType" />
+      <result column="MAINTENANCE_PERSON_NAME" property="maintenancePersonName" />
+      <result column="MAINTENANCE_PERSON_ID" property="maintenancePersonId" />
+      <result column="MAINTENANCE_PERSON_MAP" property="maintenancePersonMap" />
+  </resultMap>
+
+  <!-- TS_SCHEUDLE_PERMISSION table all fields -->
+  <sql id="Base_Column_List" >
+     id, origin_user_id, dest_user_id, origin_user_name,
+      dest_user_name, dest_user_map,config_type,
+      MAINTENANCE_PERSON_NAME,MAINTENANCE_PERSON_MAP,MAINTENANCE_PERSON_ID
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="originUserId != null" >
+        and origin_user_id ${originUserIdOperator} #{originUserId}
+      </if>
+      <if test="destUserId != null" >
+        and dest_user_id like '%'||#{destUserId}||'%'
+      </if>
+      <if test="originUserName != null" >
+        and origin_user_name like '%'||#{originUserName}||'%'
+      </if>
+      <if test="destUserName != null" >
+        and dest_user_name like '%'||#{destUserName}||'%'
+      </if>
+      <if test="destUserMap != null" >
+        and dest_user_map ${destUserMapOperator} #{destUserMap}
+      </if>
+        <if test="configType != null" >
+            and config_type ${configTypeOperator} #{configType}
+        </if>
+        <if test="maintenancePersonName != null" >
+            and MAINTENANCE_PERSON_NAME ${maintenancePersonNameOperator} #{maintenancePersonName}
+        </if>
+        <if test="maintenancePersonId != null" >
+            and MAINTENANCE_PERSON_ID ${maintenancePersonIdOperator} #{maintenancePersonId}
+        </if>
+        <if test="maintenancePersonMap != null" >
+            and MAINTENANCE_PERSON_MAP ${maintenancePersonMapOperator} #{maintenancePersonMap}
+        </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.smallprogram.entity.ScheudlePermissionEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_SCHEUDLE_PERMISSION.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into TS_SCHEUDLE_PERMISSION(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{originUserId, jdbcType=VARCHAR},
+     #{destUserId, jdbcType=VARCHAR}, #{originUserName, jdbcType=VARCHAR},
+     #{destUserName, jdbcType=VARCHAR}, #{destUserMap, jdbcType=VARCHAR},
+      #{maintenancePersonName, jdbcType=VARCHAR}, #{maintenancePersonMap, jdbcType=VARCHAR},#{maintenancePersonId, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.smallprogram.entity.ScheudlePermissionEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_SCHEUDLE_PERMISSION.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into TS_SCHEUDLE_PERMISSION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="originUserId != null" >origin_user_id,</if>
+                <if test="destUserId != null" >dest_user_id,</if>
+                <if test="originUserName != null" >origin_user_name,</if>
+                <if test="destUserName != null" >dest_user_name,</if>
+                <if test="destUserMap != null" >dest_user_map,</if>
+                <if test="configType != null" >config_type,</if>
+        <if test="maintenancePersonName != null" >MAINTENANCE_PERSON_NAME,</if>
+        <if test="maintenancePersonMap != null" >MAINTENANCE_PERSON_MAP ,</if>
+        <if test="maintenancePersonId != null" >MAINTENANCE_PERSON_ID ,</if>
+
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="originUserId != null" >#{originUserId, jdbcType=VARCHAR},</if>
+                <if test="destUserId != null" >#{destUserId, jdbcType=VARCHAR},</if>
+                <if test="originUserName != null" >#{originUserName, jdbcType=VARCHAR},</if>
+                <if test="destUserName != null" >#{destUserName, jdbcType=VARCHAR},</if>
+                <if test="destUserMap != null" >#{destUserMap, jdbcType=VARCHAR},</if>
+                <if test="configType != null" >#{configType, jdbcType=VARCHAR},</if>
+        <if test="maintenancePersonName != null" >#{maintenancePersonName, jdbcType=VARCHAR},</if>
+        <if test="maintenancePersonMap != null" >#{maintenancePersonMap, jdbcType=VARCHAR},</if>
+        <if test="maintenancePersonId != null" >#{maintenancePersonId, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.smallprogram.entity.ScheudlePermissionEO" >
+    update TS_SCHEUDLE_PERMISSION
+       set  origin_user_id = #{originUserId},
+            dest_user_id = #{destUserId},
+            origin_user_name = #{originUserName},
+            dest_user_name = #{destUserName},
+            dest_user_map = #{destUserMap},
+            MAINTENANCE_PERSON_ID = #{maintenancePersonId}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.smallprogram.entity.ScheudlePermissionEO" >
+    update TS_SCHEUDLE_PERMISSION
+    <set >
+      <if test="originUserId != null" >
+        origin_user_id = #{originUserId},
+      </if>
+      <if test="destUserId != null" >
+        dest_user_id = #{destUserId},
+      </if>
+      <if test="originUserName != null" >
+        origin_user_name = #{originUserName},
+      </if>
+      <if test="destUserName != null" >
+        dest_user_name = #{destUserName} ,
+      </if>
+      <if test="destUserMap != null" >
+        dest_user_map = #{destUserMap},
+      </if>
+        <if test="configType != null" >
+            config_type = #{configType},
+        </if>
+        <if test="maintenancePersonName != null" >
+            MAINTENANCE_PERSON_NAME = #{maintenancePersonName},
+        </if>
+        <if test="maintenancePersonMap != null" >
+            MAINTENANCE_PERSON_MAP = #{maintenancePersonMap},
+        </if>
+        <if test="maintenancePersonMap != null" >
+            MAINTENANCE_PERSON_ID = #{maintenancePersonId},
+        </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 TS_SCHEUDLE_PERMISSION -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+      from TS_SCHEUDLE_PERMISSION
+     where id = #{value}
+
+  </select>
+
+    <!-- 根据id查询 TS_SCHEUDLE_PERMISSION -->
+    <select id="selectByOriginIdAndDestUserIdLike" resultType="java.lang.Integer">
+        select count(*)
+        from TS_SCHEUDLE_PERMISSION
+        where ORIGIN_USER_ID = #{originId} and config_type='0' and DEST_USER_MAP like '%'||#{destUserId}||'%'
+
+    </select>
+
+    <select id="queryByUserIdLikeMaintenancePersonMap" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="Base_Column_List" />
+        from TS_SCHEUDLE_PERMISSION
+        where MAINTENANCE_PERSON_MAP like '%'||#{value}||'%'
+
+    </select>
+    <select id="queryByUserIdLikeMaintenancePersonMapAndConfigType" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="Base_Column_List" />
+        from TS_SCHEUDLE_PERMISSION
+        where MAINTENANCE_PERSON_MAP like '%'||#{usid}||'%' and config_type = #{configType}
+
+    </select>
+    <select id="queryByOriginUserIdAndConfigType" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="Base_Column_List" />
+        from TS_SCHEUDLE_PERMISSION
+        where ORIGIN_USER_ID = #{originUserId} and config_type = #{configType}
+
+    </select>
+
+    <select id="queryByConfigType" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="Base_Column_List" />
+        from TS_SCHEUDLE_PERMISSION
+        where  config_type = #{configType}
+
+    </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TS_SCHEUDLE_PERMISSION
+     where id = #{value}
+
+  </delete>
+
+  <!-- TS_SCHEUDLE_PERMISSION 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from TS_SCHEUDLE_PERMISSION
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TS_SCHEUDLE_PERMISSION列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from TS_SCHEUDLE_PERMISSION
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from TS_SCHEUDLE_PERMISSION
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.smallprogram.dao.UserOpenidEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.smallprogram.entity.UserOpenidEO" >
+    <id column="id" property="id" />
+    <result column="user_id" property="userId" />
+    <result column="open_id" property="openId" />
+    <result column="del_flag" property="delFlag" />
+  </resultMap>
+
+  <!-- TS_USER_OPENID table all fields -->
+  <sql id="Base_Column_List" >
+     id, user_id, open_id, del_flag
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id = #{id}
+      </if>
+      <if test="userId != null" >
+        and user_id = #{userId}
+      </if>
+      <if test="openId != null" >
+        and open_id = #{openId}
+      </if>
+      <if test="delFlag != null" >
+        and del_flag = #{delFlag}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.smallprogram.entity.UserOpenidEO" >
+     <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_USER_OPENID.NEXTVAL FROM DUAL
+    </selectKey>
+      insert into TS_USER_OPENID
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+                    <if test="id != null" >id,</if>
+                    <if test="userId != null" >user_id,</if>
+                    <if test="openId != null" >open_id,</if>
+                    <if test="delFlag != null" >del_flag,</if>
+                </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides="," >
+                    <if test="id != null" >#{id},</if>
+                    <if test="userId != null" >#{userId},</if>
+                    <if test="openId != null" >#{openId},</if>
+                    <if test="delFlag != null" >#{delFlag},</if>
+                </trim>
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.smallprogram.entity.UserOpenidEO" >
+        <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_USER_OPENID.NEXTVAL FROM DUAL
+    </selectKey>
+        insert into TS_USER_OPENID
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="userId != null" >user_id,</if>
+                <if test="openId != null" >open_id,</if>
+                <if test="delFlag != null" >del_flag,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id},</if>
+                <if test="userId != null" >#{userId},</if>
+                <if test="openId != null" >#{openId},</if>
+                <if test="delFlag != null" >#{delFlag},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.smallprogram.entity.UserOpenidEO" >
+    update TS_USER_OPENID
+       set  user_id = #{userId},
+            open_id = #{openId},
+            del_flag = #{delFlag}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.smallprogram.entity.UserOpenidEO" >
+    update TS_USER_OPENID
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId},
+      </if>
+      <if test="openId != null" >
+        open_id = #{openId},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 TS_USER_OPENID -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+      from TS_USER_OPENID
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TS_USER_OPENID
+     where id = #{value}
+
+  </delete>
+
+    <!-- 删除记录 -->
+    <delete id="deleteByUserId" parameterType="java.lang.String">
+    delete from TS_USER_OPENID where user_id = #{userId}
+
+  </delete>
+
+
+    <!-- 删除记录 -->
+    <delete id="deleteByUserIdList" parameterType="java.util.List">
+    delete from TS_USER_OPENID where user_id
+    in <foreach item="usid" collection="list" open="(" separator=","
+                close=")" index="index">
+        #{usid}
+    </foreach>
+
+  </delete>
+
+
+
+  <!-- TS_USER_OPENID 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from TS_USER_OPENID
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TS_USER_OPENID列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from TS_USER_OPENID
+			 <include refid="Base_Where_Clause"/>
+			) tmp_tb where rownum &lt;= #{pager.endIndex})
+			where rn &gt;= #{pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from TS_USER_OPENID
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+    <select id="getUserByOpenId" resultType="com.adc.da.sys.entity.UserEO" parameterType="java.lang.String">
+        select
+        tu.usid as usid,
+        tu.account as account,
+        tu.usname as usname,
+        tu.ext_info as extInfo,
+        tu.user_code as userCode,
+        tu.office_phone as officePhone,
+        tu.cellphone_number as cellPhoneNumber,
+        tu.home_address as homeAddress,
+        tu.postal_code as postalCode,
+        tu.email as email,
+        tu.contact_address as contactAddress
+        from TS_USER tu
+        left join TS_USER_OPENID tuo on tu.usid = tuo.user_id
+        where tuo.open_id = #{openId}
+
+    </select>
+
+    <select id="getUserIdByOpenId" resultType="java.lang.String" parameterType="java.lang.String">
+        select USER_ID
+        from  TS_USER_OPENID
+        where open_id = #{openId}
+
+    </select>
+
+
+
+    <select id="checkUserByOpenId" resultType="java.lang.Integer">
+        SELECT COUNT(1)
+        FROM TS_USER_OPENID
+        WHERE
+        OPEN_ID = #{openId}
+    </select>
+
+</mapper>

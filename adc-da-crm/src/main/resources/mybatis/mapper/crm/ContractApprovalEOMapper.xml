@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.crm.dao.ContractApprovalEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.crm.entity.ContractApprovalEO" >
+    <id column="id" property="id" />
+    <result column="area_manager_id" property="areaManagerId" />
+    <result column="apply_data" property="applyData" />
+    <result column="apply_deptid" property="applyDeptid" />
+    <result column="operate_deptid" property="operateDeptid" />
+    <result column="contract_no" property="contractNo" />
+    <result column="contract_name" property="contractName" />
+    <result column="customer_no" property="customerNo" />
+    <result column="customer_name" property="customerName" />
+    <result column="manager_id" property="managerId" />
+    <result column="contact_user" property="contactUser" />
+    <result column="contract_type" property="contractType" />
+    <result column="part" property="part" />
+    <result column="party_b" property="partyB" />
+    <result column="platform" property="platform" />
+    <result column="block" property="block" />
+    <result column="contract_amount" property="contractAmount" />
+    <result column="sign_data" property="signData" />
+    <result column="begin_data" property="beginData" />
+    <result column="end_data" property="endData" />
+    <result column="dept_view" property="deptView" />
+    <result column="director_view" property="directorView" />
+    <result column="del_flag" property="delFlag" />
+    <result column="created_time" property="createdTime" />
+    <result column="created_user" property="createdUser" />
+    <result column="modified_time2" property="modifiedTime2" />
+    <result column="modified_user2" property="modifiedUser2" />
+  </resultMap>
+
+  <!-- CONTRACT_APPROVAL table all fields -->
+  <sql id="Base_Column_List" >
+     id, area_manager_id, apply_data, apply_deptid, operate_deptid, contract_no, contract_name, customer_no, customer_name, manager_id, contact_user, contract_type, part, party_b, platform, block, contract_amount, sign_data, begin_data, end_data, dept_view, director_view, del_flag, created_time, created_user, modified_time2, modified_user2
+  </sql>
+<!-- CONTRACT_APPROVAL table all fields -->
+  <sql id="CRM_Column_List" >
+     id, (select u.usname from TS_USER u where u.usid = area_manager_id) as area_manager_id, apply_data, (select org.org_name from TS_ORG org where id = apply_deptid) as apply_deptid,  (select org.org_name from TS_ORG org where id = operate_deptid) as operate_deptid, contract_no, contract_name, customer_no, customer_name, (select u.usname from TS_USER u where u.usid = manager_id) as manager_id, (select u.usname from TS_USER u where u.usid = contact_user) as contact_user, contract_type, part, party_b, platform, block, contract_amount, sign_data, begin_data, end_data, dept_view, director_view, del_flag, created_time, created_user, modified_time2, modified_user2
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="areaManagerId != null" >
+        and area_manager_id ${areaManagerIdOperator} #{areaManagerId}
+      </if>
+      <if test="applyData != null" >
+        and apply_data ${applyDataOperator} #{applyData}
+      </if>
+      <if test="applyData1 != null" >
+        and apply_data &gt;= #{applyData1}
+      </if>
+      <if test="applyData2 != null" >
+        and apply_data &lt;= #{applyData2}
+      </if>
+      <if test="applyDeptid != null" >
+        and apply_deptid ${applyDeptidOperator} #{applyDeptid}
+      </if>
+      <if test="operateDeptid != null" >
+        and operate_deptid ${operateDeptidOperator} #{operateDeptid}
+      </if>
+      <if test="contractNo != null" >
+        and contract_no ${contractNoOperator} #{contractNo}
+      </if>
+      <if test="contractName != null" >
+        and contract_name ${contractNameOperator} #{contractName}
+      </if>
+      <if test="customerNo != null" >
+        and customer_no ${customerNoOperator} #{customerNo}
+      </if>
+      <if test="customerName != null" >
+        and customer_name ${customerNameOperator} #{customerName}
+      </if>
+      <if test="managerId != null" >
+        and manager_id ${managerIdOperator} #{managerId}
+      </if>
+      <if test="contactUser != null" >
+        and contact_user ${contactUserOperator} #{contactUser}
+      </if>
+      <if test="contractType != null" >
+        and contract_type ${contractTypeOperator} #{contractType}
+      </if>
+      <if test="part != null" >
+        and part ${partOperator} #{part}
+      </if>
+      <if test="partyB != null" >
+        and party_b ${partyBOperator} #{partyB}
+      </if>
+      <if test="platform != null" >
+        and platform ${platformOperator} #{platform}
+      </if>
+      <if test="block != null" >
+        and block ${blockOperator} #{block}
+      </if>
+      <if test="contractAmount != null" >
+        and contract_amount ${contractAmountOperator} #{contractAmount}
+      </if>
+      <if test="signData != null" >
+        and sign_data ${signDataOperator} #{signData}
+      </if>
+      <if test="signData1 != null" >
+        and sign_data &gt;= #{signData1}
+      </if>
+      <if test="signData2 != null" >
+        and sign_data &lt;= #{signData2}
+      </if>
+      <if test="beginData != null" >
+        and begin_data ${beginDataOperator} #{beginData}
+      </if>
+      <if test="beginData1 != null" >
+        and begin_data &gt;= #{beginData1}
+      </if>
+      <if test="beginData2 != null" >
+        and begin_data &lt;= #{beginData2}
+      </if>
+      <if test="endData != null" >
+        and end_data ${endDataOperator} #{endData}
+      </if>
+      <if test="endData1 != null" >
+        and end_data &gt;= #{endData1}
+      </if>
+      <if test="endData2 != null" >
+        and end_data &lt;= #{endData2}
+      </if>
+      <if test="deptView != null" >
+        and dept_view ${deptViewOperator} #{deptView}
+      </if>
+      <if test="directorView != null" >
+        and director_view ${directorViewOperator} #{directorView}
+      </if>
+      <if test="createdTime != null" >
+        and created_time ${createdTimeOperator} #{createdTime}
+      </if>
+      <if test="createdTime1 != null" >
+        and created_time &gt;= #{createdTime1}
+      </if>
+      <if test="createdTime2 != null" >
+        and created_time &lt;= #{createdTime2}
+      </if>
+      <if test="createdUser != null" >
+        and created_user ${createdUserOperator} #{createdUser}
+      </if>
+      <if test="modifiedTime2 != null" >
+        and modified_time2 ${modifiedTime2Operator} #{modifiedTime2}
+      </if>
+      <if test="modifiedTime21 != null" >
+        and modified_time2 &gt;= #{modifiedTime21}
+      </if>
+      <if test="modifiedTime22 != null" >
+        and modified_time2 &lt;= #{modifiedTime22}
+      </if>
+      <if test="modifiedUser2 != null" >
+        and modified_user2 ${modifiedUser2Operator} #{modifiedUser2}
+      </if>
+        and del_flag = '0'
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.crm.entity.ContractApprovalEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_CONTRACT_APPROVAL.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into CONTRACT_APPROVAL(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{areaManagerId, jdbcType=VARCHAR}, #{applyData, jdbcType=TIMESTAMP}, #{applyDeptid, jdbcType=VARCHAR}, #{operateDeptid, jdbcType=VARCHAR}, #{contractNo, jdbcType=VARCHAR}, #{contractName, jdbcType=VARCHAR}, #{customerNo, jdbcType=VARCHAR}, #{customerName, jdbcType=VARCHAR}, #{managerId, jdbcType=VARCHAR}, #{contactUser, jdbcType=VARCHAR}, #{contractType, jdbcType=VARCHAR}, #{part, jdbcType=VARCHAR}, #{partyB, jdbcType=VARCHAR}, #{platform, jdbcType=VARCHAR}, #{block, jdbcType=VARCHAR}, #{contractAmount, jdbcType=VARCHAR}, #{signData, jdbcType=TIMESTAMP}, #{beginData, jdbcType=TIMESTAMP}, #{endData, jdbcType=TIMESTAMP}, #{deptView, jdbcType=VARCHAR}, #{directorView, jdbcType=VARCHAR}, #{delFlag, jdbcType=VARCHAR}, #{createdTime, jdbcType=TIMESTAMP}, #{createdUser, jdbcType=VARCHAR}, #{modifiedTime2, jdbcType=TIMESTAMP}, #{modifiedUser2, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.crm.entity.ContractApprovalEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_CONTRACT_APPROVAL.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into CONTRACT_APPROVAL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="areaManagerId != null" >area_manager_id,</if>
+                <if test="applyData != null" >apply_data,</if>
+                <if test="applyDeptid != null" >apply_deptid,</if>
+                <if test="operateDeptid != null" >operate_deptid,</if>
+                <if test="contractNo != null" >contract_no,</if>
+                <if test="contractName != null" >contract_name,</if>
+                <if test="customerNo != null" >customer_no,</if>
+                <if test="customerName != null" >customer_name,</if>
+                <if test="managerId != null" >manager_id,</if>
+                <if test="contactUser != null" >contact_user,</if>
+                <if test="contractType != null" >contract_type,</if>
+                <if test="part != null" >part,</if>
+                <if test="partyB != null" >party_b,</if>
+                <if test="platform != null" >platform,</if>
+                <if test="block != null" >block,</if>
+                <if test="contractAmount != null" >contract_amount,</if>
+                <if test="signData != null" >sign_data,</if>
+                <if test="beginData != null" >begin_data,</if>
+                <if test="endData != null" >end_data,</if>
+                <if test="deptView != null" >dept_view,</if>
+                <if test="directorView != null" >director_view,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="createdTime != null" >created_time,</if>
+                <if test="createdUser != null" >created_user,</if>
+                <if test="modifiedTime2 != null" >modified_time2,</if>
+                <if test="modifiedUser2 != null" >modified_user2,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="areaManagerId != null" >#{areaManagerId, jdbcType=VARCHAR},</if>
+                <if test="applyData != null" >#{applyData, jdbcType=TIMESTAMP},</if>
+                <if test="applyDeptid != null" >#{applyDeptid, jdbcType=VARCHAR},</if>
+                <if test="operateDeptid != null" >#{operateDeptid, jdbcType=VARCHAR},</if>
+                <if test="contractNo != null" >#{contractNo, jdbcType=VARCHAR},</if>
+                <if test="contractName != null" >#{contractName, jdbcType=VARCHAR},</if>
+                <if test="customerNo != null" >#{customerNo, jdbcType=VARCHAR},</if>
+                <if test="customerName != null" >#{customerName, jdbcType=VARCHAR},</if>
+                <if test="managerId != null" >#{managerId, jdbcType=VARCHAR},</if>
+                <if test="contactUser != null" >#{contactUser, jdbcType=VARCHAR},</if>
+                <if test="contractType != null" >#{contractType, jdbcType=VARCHAR},</if>
+                <if test="part != null" >#{part, jdbcType=VARCHAR},</if>
+                <if test="partyB != null" >#{partyB, jdbcType=VARCHAR},</if>
+                <if test="platform != null" >#{platform, jdbcType=VARCHAR},</if>
+                <if test="block != null" >#{block, jdbcType=VARCHAR},</if>
+                <if test="contractAmount != null" >#{contractAmount, jdbcType=VARCHAR},</if>
+                <if test="signData != null" >#{signData, jdbcType=TIMESTAMP},</if>
+                <if test="beginData != null" >#{beginData, jdbcType=TIMESTAMP},</if>
+                <if test="endData != null" >#{endData, jdbcType=TIMESTAMP},</if>
+                <if test="deptView != null" >#{deptView, jdbcType=VARCHAR},</if>
+                <if test="directorView != null" >#{directorView, jdbcType=VARCHAR},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=VARCHAR},</if>
+                <if test="createdTime != null" >#{createdTime, jdbcType=TIMESTAMP},</if>
+                <if test="createdUser != null" >#{createdUser, jdbcType=VARCHAR},</if>
+                <if test="modifiedTime2 != null" >#{modifiedTime2, jdbcType=TIMESTAMP},</if>
+                <if test="modifiedUser2 != null" >#{modifiedUser2, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.crm.entity.ContractApprovalEO" >
+    update CONTRACT_APPROVAL
+       set  area_manager_id = #{areaManagerId},
+            apply_data = #{applyData},
+            apply_deptid = #{applyDeptid},
+            operate_deptid = #{operateDeptid},
+            contract_no = #{contractNo},
+            contract_name = #{contractName},
+            customer_no = #{customerNo},
+            customer_name = #{customerName},
+            manager_id = #{managerId},
+            contact_user = #{contactUser},
+            contract_type = #{contractType},
+            part = #{part},
+            party_b = #{partyB},
+            platform = #{platform},
+            block = #{block},
+            contract_amount = #{contractAmount},
+            sign_data = #{signData},
+            begin_data = #{beginData},
+            end_data = #{endData},
+            dept_view = #{deptView},
+            director_view = #{directorView},
+            del_flag = #{delFlag},
+            created_time = #{createdTime},
+            created_user = #{createdUser},
+            modified_time2 = #{modifiedTime2},
+            modified_user2 = #{modifiedUser2}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.crm.entity.ContractApprovalEO" >
+    update CONTRACT_APPROVAL
+    <set >
+      <if test="areaManagerId != null" >
+        area_manager_id = #{areaManagerId},
+      </if>
+      <if test="applyData != null" >
+        apply_data = #{applyData},
+      </if>
+      <if test="applyDeptid != null" >
+        apply_deptid = #{applyDeptid},
+      </if>
+      <if test="operateDeptid != null" >
+        operate_deptid = #{operateDeptid},
+      </if>
+      <if test="contractNo != null" >
+        contract_no = #{contractNo},
+      </if>
+      <if test="contractName != null" >
+        contract_name = #{contractName},
+      </if>
+      <if test="customerNo != null" >
+        customer_no = #{customerNo},
+      </if>
+      <if test="customerName != null" >
+        customer_name = #{customerName},
+      </if>
+      <if test="managerId != null" >
+        manager_id = #{managerId},
+      </if>
+      <if test="contactUser != null" >
+        contact_user = #{contactUser},
+      </if>
+      <if test="contractType != null" >
+        contract_type = #{contractType},
+      </if>
+      <if test="part != null" >
+        part = #{part},
+      </if>
+      <if test="partyB != null" >
+        party_b = #{partyB},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform},
+      </if>
+      <if test="block != null" >
+        block = #{block},
+      </if>
+      <if test="contractAmount != null" >
+        contract_amount = #{contractAmount},
+      </if>
+      <if test="signData != null" >
+        sign_data = #{signData},
+      </if>
+      <if test="beginData != null" >
+        begin_data = #{beginData},
+      </if>
+      <if test="endData != null" >
+        end_data = #{endData},
+      </if>
+      <if test="deptView != null" >
+        dept_view = #{deptView},
+      </if>
+      <if test="directorView != null" >
+        director_view = #{directorView},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+      <if test="createdUser != null" >
+        created_user = #{createdUser},
+      </if>
+      <if test="modifiedTime2 != null" >
+        modified_time2 = #{modifiedTime2},
+      </if>
+      <if test="modifiedUser2 != null" >
+        modified_user2 = #{modifiedUser2},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 CONTRACT_APPROVAL -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from CONTRACT_APPROVAL
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from CONTRACT_APPROVAL
+     where id = #{value}
+
+  </delete>
+
+  <!-- CONTRACT_APPROVAL 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from CONTRACT_APPROVAL
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询CONTRACT_APPROVAL列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from CONTRACT_APPROVAL
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <!-- 查询CONTRACT_APPROVAL列表 -->
+  <select id="queryCRMListByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="CRM_Column_List" /> from CONTRACT_APPROVAL
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from CONTRACT_APPROVAL
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+    <update id="updateByPrimaryKeyAndDelFlag">
+        update CONTRACT_APPROVAL set del_flag=#{delFlag} where id=#{primaryKey}
+    </update>
+
+</mapper>

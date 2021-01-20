@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.adc.da.research.dao.DeclarationEODao">
+    <!-- Result Map-->
+    <resultMap id = "BaseResultMap" type = "com.adc.da.research.entity.DeclarationEO">
+        <id column = "id_" property = "id"/>
+        <result column = "project_name_" property = "projectName"/>
+        <result column = "leader_id_" property = "leaderId"/>
+        <result column = "dept_id_" property = "deptId"/>
+        <result column = "project_type_id_" property = "projectTypeId"/>
+        <result column = "undertaking_id_" property = "undertakingId"/>
+        <result column = "create_time_" property = "createTime"/>
+        <result column = "begin_time_" property = "beginTime"/>
+        <result column = "end_time_" property = "endTime"/>
+        <result column = "time_area_" property = "timeArea"/>
+        <result column = "amount_" property = "amount"/>
+        <result column = "summary_doc_01_" property = "summaryDoc01"/>
+        <result column = "summary_doc_02_" property = "summaryDoc02"/>
+        <result column = "summary_doc_03_" property = "summaryDoc03"/>
+        <result column = "summary_doc_04_" property = "summaryDoc04"/>
+        <result column = "summary_doc_05_" property = "summaryDoc05"/>
+        <result column = "del_flag_" property = "delFlag"/>
+        <result column = "status_" property = "status"/>
+        <result column = "ext_info_1_" property = "extInfo1"/>
+        <result column = "ext_info_2_" property = "extInfo2"/>
+        <result column = "ext_info_3_" property = "extInfo3"/>
+        <result column = "ext_info_4_" property = "extInfo4"/>
+        <result column = "ext_info_5_" property = "extInfo5"/>
+        <result column = "ext_info_6_" property = "extInfo6"/>
+        <result column = "ORG_NAME" property = "deptName"/>
+        <result column = "LEADER_NAME_" property = "leaderName"/>
+        <result column = "CREATOR_NAME_" property = "creatorName"/>
+        <result column = "PT_NAME_" property = "projectTypeName"/>
+        <result column = "UT_NAME_" property = "undertakingName"/>
+        <result column = "SUBMISSION_TIME_" property = "submissionTime"/>
+    </resultMap>
+
+    <!-- RS_PROJECT_DECLARATION table all fields -->
+    <sql id = "Base_Column_List">
+        id_, project_name_, leader_id_, dept_id_, project_type_id_, undertaking_id_,
+    create_time_, begin_time_, end_time_, time_area_, amount_,
+    summary_doc_01_, summary_doc_02_, summary_doc_03_, summary_doc_04_, summary_doc_05_,
+    del_flag_, status_,
+    ext_info_1_, ext_info_2_, ext_info_3_, ext_info_4_, ext_info_5_, ext_info_6_,
+    SUBMISSION_TIME_
+    </sql>
+
+
+    <!-- 查询条件 -->
+    <sql id = "Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides = ",">
+            <if test = "id != null">
+                and id_ ${idOperator} #{id}
+            </if>
+
+            <if test = "deptName != null">
+                and ORG_NAME like '%'||#{deptName}||'%'
+            </if>
+            <if test = "leaderName != null">
+                and u.USNAME like '%'||#{leaderName}||'%'
+            </if>
+            <if test = "creatorName != null">
+                and x.USNAME like '%'||#{creatorName}||'%'
+            </if>
+            <if test = "projectName != null">
+                and project_name_ like '%'||#{projectName}||'%'
+            </if>
+
+            <if test = "leaderId != null">
+                and leader_id_ ${leaderIdOperator} #{leaderId}
+            </if>
+            <if test = "deptId != null">
+                and dept_id_ ${deptIdOperator} #{deptId}
+            </if>
+            <if test = "projectTypeId != null">
+                and project_type_id_ ${projectTypeIdOperator} #{projectTypeId}
+            </if>
+            <if test = "undertakingId != null">
+                and undertaking_id_ ${undertakingIdOperator} #{undertakingId}
+            </if>
+            <if test = "createTime != null">
+                and create_time_ ${createTimeOperator} #{createTime}
+            </if>
+            <if test = "createTime1 != null">
+                and create_time_ &gt;= #{createTime1}
+            </if>
+            <if test = "createTime2 != null">
+                and create_time_ &lt;= #{createTime2}
+            </if>
+            <if test = "beginTime != null">
+                and begin_time_ ${beginTimeOperator} #{beginTime}
+            </if>
+            <if test = "beginTime1 != null">
+                and begin_time_ &gt;= #{beginTime1}
+            </if>
+            <if test = "beginTime2 != null">
+                and begin_time_ &lt;= #{beginTime2}
+            </if>
+            <if test = "endTime != null">
+                and end_time_ ${endTimeOperator} #{endTime}
+            </if>
+            <if test = "endTime1 != null">
+                and end_time_ &gt;= #{endTime1}
+            </if>
+            <if test = "endTime2 != null">
+                and end_time_ &lt;= #{endTime2}
+            </if>
+            <if test = "timeArea != null">
+                and time_area_ ${timeAreaOperator} #{timeArea}
+            </if>
+            <if test = "amount != null">
+                and amount_ ${amountOperator} #{amount}
+            </if>
+            <if test = "summaryDoc01 != null">
+                and summary_doc_01_ ${summaryDoc01Operator} #{summaryDoc01}
+            </if>
+            <if test = "summaryDoc02 != null">
+                and summary_doc_02_ ${summaryDoc02Operator} #{summaryDoc02}
+            </if>
+            <if test = "summaryDoc03 != null">
+                and summary_doc_03_ ${summaryDoc03Operator} #{summaryDoc03}
+            </if>
+            <if test = "summaryDoc04 != null">
+                and summary_doc_04_ ${summaryDoc04Operator} #{summaryDoc04}
+            </if>
+            <if test = "summaryDoc05 != null">
+                and summary_doc_05_ ${summaryDoc05Operator} #{summaryDoc05}
+            </if>
+            <if test = "delFlag != null">
+                and del_flag_ ${delFlagOperator} #{delFlag}
+            </if>
+            <if test = "status != null">
+                and (status_ = #{status} or ext_info_6_ = #{committeeUserId} )
+            </if>
+            <if test = "extInfo1 != null">
+                and ext_info_1_ ${extInfo1Operator} #{extInfo1}
+            </if>
+            <if test = "extInfo2 != null">
+                and ext_info_2_ ${extInfo2Operator} #{extInfo2}
+            </if>
+            <if test = "extInfo3 != null">
+                and ext_info_3_ ${extInfo3Operator} #{extInfo3}
+            </if>
+            <if test = "extInfo4 != null">
+                and ext_info_4_ ${extInfo4Operator} #{extInfo4}
+            </if>
+            <if test = "submissionTimeBegin != null">
+                and SUBMISSION_TIME_ &gt;= #{submissionTimeBegin}
+            </if>
+            <if test = "submissionTimeEnd != null">
+                and SUBMISSION_TIME_ &lt;= #{submissionTimeEnd}
+            </if>
+            <if test = "extInfo5 != null">
+                and ext_info_5_ ${extInfo5Operator} #{extInfo5}
+            </if>
+            <if test = "extInfo6 != null">
+                and ext_info_6_ ${extInfo6Operator} #{extInfo6}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id = "insert" parameterType = "com.adc.da.research.entity.DeclarationEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+            SELECT SEQ_RS_PROJECT_DECLARATION.NEXTVAL FROM DUAL
+        </selectKey> -->
+        insert into RS_PROJECT_DECLARATION(<include refid = "Base_Column_List"/>)
+        values (
+        #{id, jdbcType=VARCHAR},
+        #{projectName, jdbcType=VARCHAR},
+        #{leaderId, jdbcType=VARCHAR},
+        #{deptId, jdbcType=VARCHAR},
+        #{projectTypeId, jdbcType=VARCHAR},
+        #{undertakingId, jdbcType=VARCHAR},
+        #{createTime, jdbcType=TIMESTAMP}, #{beginTime, jdbcType=TIMESTAMP}, #{endTime, jdbcType=TIMESTAMP},
+        #{timeArea, jdbcType=VARCHAR}, #{amount, jdbcType=DOUBLE},
+        #{summaryDoc01, jdbcType=VARCHAR},#{summaryDoc02, jdbcType=VARCHAR}, #{summaryDoc03, jdbcType=VARCHAR},
+        #{summaryDoc04, jdbcType=VARCHAR},#{summaryDoc05, jdbcType=VARCHAR},
+        #{delFlag, jdbcType=INTEGER}, #{status, jdbcType=INTEGER},
+        #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR},
+        #{extInfo4, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR},
+        #{extInfo6, jdbcType=VARCHAR},#{submissionTime, jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id = "insertSelective" parameterType = "com.adc.da.research.entity.DeclarationEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_RS_PROJECT_DECLARATION.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into RS_PROJECT_DECLARATION
+        <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">id_,</if>
+            <if test = "projectName != null">project_name_,</if>
+            <if test = "leaderId != null">leader_id_,</if>
+            <if test = "deptId != null">dept_id_,</if>
+            <if test = "projectTypeId != null">project_type_id_,</if>
+            <if test = "undertakingId != null">undertaking_id_,</if>
+            <if test = "createTime != null">create_time_,</if>
+            <if test = "beginTime != null">begin_time_,</if>
+            <if test = "endTime != null">end_time_,</if>
+            <if test = "timeArea != null">time_area_,</if>
+            <if test = "amount != null">amount_,</if>
+            <if test = "summaryDoc01 != null">summary_doc_01_,</if>
+            <if test = "summaryDoc02 != null">summary_doc_02_,</if>
+            <if test = "summaryDoc03 != null">summary_doc_03_,</if>
+            <if test = "summaryDoc04 != null">summary_doc_04_,</if>
+            <if test = "summaryDoc05 != null">summary_doc_05_,</if>
+            <if test = "delFlag != null">del_flag_,</if>
+            <if test = "status != null">status_,</if>
+            <if test = "extInfo1 != null">ext_info_1_,</if>
+            <if test = "extInfo2 != null">ext_info_2_,</if>
+            <if test = "extInfo3 != null">ext_info_3_,</if>
+            <if test = "extInfo4 != null">ext_info_4_,</if>
+            <if test = "extInfo5 != null">ext_info_5_,</if>
+            <if test = "extInfo6 != null">ext_info_6_,</if>
+            <if test = "submissionTime != null">SUBMISSION_TIME_ ,</if>
+        </trim>
+        <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+            <if test = "id != null">#{id, jdbcType=VARCHAR},</if>
+            <if test = "projectName != null">#{projectName, jdbcType=VARCHAR},</if>
+            <if test = "leaderId != null">#{leaderId, jdbcType=VARCHAR},</if>
+            <if test = "deptId != null">#{deptId, jdbcType=VARCHAR},</if>
+            <if test = "projectTypeId != null">#{projectTypeId, jdbcType=VARCHAR},</if>
+            <if test = "undertakingId != null">#{undertakingId, jdbcType=VARCHAR},</if>
+            <if test = "createTime != null">#{createTime, jdbcType=TIMESTAMP},</if>
+            <if test = "beginTime != null">#{beginTime, jdbcType=TIMESTAMP},</if>
+            <if test = "endTime != null">#{endTime, jdbcType=TIMESTAMP},</if>
+            <if test = "timeArea != null">#{timeArea, jdbcType=VARCHAR},</if>
+            <if test = "amount != null">#{amount, jdbcType=DOUBLE},</if>
+            <if test = "summaryDoc01 != null">#{summaryDoc01, jdbcType=VARCHAR},</if>
+            <if test = "summaryDoc02 != null">#{summaryDoc02, jdbcType=VARCHAR},</if>
+            <if test = "summaryDoc03 != null">#{summaryDoc03, jdbcType=VARCHAR},</if>
+            <if test = "summaryDoc04 != null">#{summaryDoc04, jdbcType=VARCHAR},</if>
+            <if test = "summaryDoc05 != null">#{summaryDoc05, jdbcType=VARCHAR},</if>
+            <if test = "delFlag != null">#{delFlag, jdbcType=INTEGER},</if>
+            <if test = "status != null">#{status, jdbcType=INTEGER},</if>
+            <if test = "extInfo1 != null">#{extInfo1, jdbcType=VARCHAR},</if>
+            <if test = "extInfo2 != null">#{extInfo2, jdbcType=VARCHAR},</if>
+            <if test = "extInfo3 != null">#{extInfo3, jdbcType=VARCHAR},</if>
+            <if test = "extInfo4 != null">#{extInfo4, jdbcType=VARCHAR},</if>
+            <if test = "extInfo5 != null">#{extInfo5, jdbcType=VARCHAR},</if>
+            <if test = "extInfo6 != null">#{extInfo6, jdbcType=VARCHAR},</if>
+            <if test = "submissionTime != null">#{submissionTime, jdbcType=TIMESTAMP},</if>
+        </trim>
+    </insert>
+
+    <!-- 根据pk，修改记录-->
+    <update id = "updateByPrimaryKey" parameterType = "com.adc.da.research.entity.DeclarationEO">
+        UPDATE RS_PROJECT_DECLARATION
+        SET project_name_    = #{projectName},
+            leader_id_       = #{leaderId},
+            dept_id_         = #{deptId},
+            project_type_id_ = #{projectTypeId},
+            undertaking_id_  = #{undertakingId},
+            create_time_     = #{createTime},
+            begin_time_      = #{beginTime},
+            end_time_        = #{endTime},
+            time_area_       = #{timeArea},
+            amount_          = #{amount},
+            summary_doc_01_  = #{summaryDoc01},
+            summary_doc_02_  = #{summaryDoc02},
+            summary_doc_03_  = #{summaryDoc03},
+            summary_doc_04_  = #{summaryDoc04},
+            summary_doc_05_  = #{summaryDoc05},
+            del_flag_        = #{delFlag},
+            status_          = #{status},
+            ext_info_1_      = #{extInfo1},
+            ext_info_2_      = #{extInfo2},
+            ext_info_3_      = #{extInfo3},
+            ext_info_4_      = #{extInfo4},
+            ext_info_5_      = #{extInfo5},
+            ext_info_6_      = #{extInfo6},
+            SUBMISSION_TIME_ = #{submissionTime}
+        WHERE id_ = #{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id = "updateByPrimaryKeySelective" parameterType = "com.adc.da.research.entity.DeclarationEO">
+        update RS_PROJECT_DECLARATION
+        <set>
+            <if test = "projectName != null">
+                project_name_ = #{projectName},
+            </if>
+            <if test = "leaderId != null">
+                leader_id_ = #{leaderId},
+            </if>
+            <if test = "deptId != null">
+                dept_id_ = #{deptId},
+            </if>
+            <if test = "projectTypeId != null">
+                project_type_id_ = #{projectTypeId},
+            </if>
+            <if test = "undertakingId != null">
+                undertaking_id_ = #{undertakingId},
+            </if>
+            <if test = "createTime != null">
+                create_time_ = #{createTime},
+            </if>
+            <if test = "beginTime != null">
+                begin_time_ = #{beginTime},
+            </if>
+            <if test = "endTime != null">
+                end_time_ = #{endTime},
+            </if>
+            <if test = "timeArea != null">
+                time_area_ = #{timeArea},
+            </if>
+            <if test = "amount != null">
+                amount_ = #{amount},
+            </if>
+            <if test = "summaryDoc01 != null">
+                summary_doc_01_ = #{summaryDoc01},
+            </if>
+            <if test = "summaryDoc02 != null">
+                summary_doc_02_ = #{summaryDoc02},
+            </if>
+            <if test = "summaryDoc03 != null">
+                summary_doc_03_ = #{summaryDoc03},
+            </if>
+            <if test = "summaryDoc04 != null">
+                summary_doc_04_ = #{summaryDoc04},
+            </if>
+            <if test = "summaryDoc05 != null">
+                summary_doc_05_ = #{summaryDoc05},
+            </if>
+            <if test = "delFlag != null">
+                del_flag_ = #{delFlag},
+            </if>
+            <if test = "status != null">
+                status_ = #{status},
+            </if>
+            <if test = "extInfo1 != null">
+                ext_info_1_ = #{extInfo1},
+            </if>
+            <if test = "extInfo2 != null">
+                ext_info_2_ = #{extInfo2},
+            </if>
+            <if test = "extInfo3 != null">
+                ext_info_3_ = #{extInfo3},
+            </if>
+            <if test = "extInfo4 != null">
+                ext_info_4_ = #{extInfo4},
+            </if>
+            <if test = "extInfo5 != null">
+                ext_info_5_ = #{extInfo5},
+            </if>
+            <if test = "extInfo6 != null">
+                ext_info_6_ = #{extInfo6},
+            </if>
+            <if test = "submissionTime != null">
+                SUBMISSION_TIME_ = #{submissionTime},
+            </if>
+        </set>
+        where id_ = #{id}
+    </update>
+
+    <!-- 根据id查询 RS_PROJECT_DECLARATION -->
+    <select id = "selectByPrimaryKey" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+        SELECT PROJECT_NAME_,
+               u.USNAME                                AS LEADER_NAME_,
+               ORG_NAME,
+               pt.DIC_TYPE_NAME                        AS EXT_INFO_3_,
+               ut.DIC_TYPE_NAME || '  ' || EXT_INFO_2_ AS EXT_INFO_2_,
+               EXT_INFO_1_,
+               TIME_AREA_,
+               AMOUNT_,
+               EXT_INFO_5_,
+               SUMMARY_DOC_01_,
+               SUMMARY_DOC_02_,
+               SUMMARY_DOC_03_,
+               SUMMARY_DOC_04_,
+               SUMMARY_DOC_05_
+
+        FROM RS_PROJECT_DECLARATION rs
+                 LEFT JOIN TS_USER u ON LEADER_ID_ = u.USID
+                 LEFT JOIN TS_ORG o ON DEPT_ID_ = o.id
+                 LEFT JOIN TS_DICTYPE ut ON rs.UNDERTAKING_ID_ = ut.DIC_TYPE_CODE
+                 LEFT JOIN TS_DICTYPE pt ON rs.PROJECT_TYPE_ID_ = pt.DIC_TYPE_CODE
+        WHERE id_ = #{value}
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id = "deleteByPrimaryKey" parameterType = "java.lang.String">
+        DELETE
+        FROM RS_PROJECT_DECLARATION
+        WHERE id_ = #{value}
+
+    </delete>
+
+    <!-- RS_PROJECT_DECLARATION 列表总数-->
+    <select id = "queryByCount" resultType = "java.lang.Integer" parameterType = "com.adc.da.base.page.BasePage">
+        select count(1) from (
+        <include refid = "queryPage"/>
+        )
+    </select>
+    <sql id = "queryPage">
+        select
+        ORG_NAME,
+        u.USNAME AS LEADER_NAME_,
+        x.USNAME AS CREATOR_NAME_,
+        pt.DIC_TYPE_NAME as PT_NAME_,
+        ut.DIC_TYPE_NAME as UT_NAME_,
+        <include refid = "Base_Column_List"/>
+        FROM RS_PROJECT_DECLARATION rs
+        LEFT JOIN TS_USER u ON LEADER_ID_ = u.USID
+        LEFT JOIN TS_USER x ON EXT_INFO_6_ = x.USID
+        LEFT JOIN TS_ORG o ON DEPT_ID_ = o.ID
+        LEFT JOIN TS_DICTYPE ut ON rs.UNDERTAKING_ID_ = ut.DIC_TYPE_CODE
+        LEFT JOIN TS_DICTYPE pt ON rs.PROJECT_TYPE_ID_ = pt.DIC_TYPE_CODE
+        <include refid = "Base_Where_Clause"/>
+        and DEL_FLAG_ !=1
+    </sql>
+    <!-- 查询RS_PROJECT_DECLARATION列表 -->
+    <select id = "queryByPage" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        ORG_NAME,
+        LEADER_NAME_,
+        CREATOR_NAME_,
+        PT_NAME_,
+        UT_NAME_,
+        <include refid = "Base_Column_List"/>
+
+        from
+        (select tmp_tb.* , rownum rn from
+        (
+        <include refid = "queryPage"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id = "queryByList" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from (<include refid = "queryPage"/>)
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+    </select>
+
+</mapper>

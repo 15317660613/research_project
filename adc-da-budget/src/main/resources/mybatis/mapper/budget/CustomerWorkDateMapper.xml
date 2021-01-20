@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.budget.dao.CustomerWorkDateDao" >
+
+     <select id = "countWorkDate" parameterType = "java.util.Date" resultType = "java.lang.Integer">
+        SELECT count(*)
+        FROM WORK_DATE
+        WHERE DATE_TIME BETWEEN #{startDate} AND #{endDate}
+          AND IS_WORK_DATE = 1
+    </select>
+
+</mapper>

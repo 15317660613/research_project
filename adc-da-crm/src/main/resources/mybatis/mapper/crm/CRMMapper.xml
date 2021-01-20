@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.crm.dao.CRMDao">
+    <!-- Result Map -->
+    <resultMap id="BaseResultMap" type="com.adc.da.form.entity.AdcFormDataEO">
+        <id column="ID" property="id"/>
+        <result column="FORM_TITLE" property="formTitle"/>
+        <result column="FORM_CONTENT" property="formContent"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="CREATE_NAME" property="createName"/>
+        <result column="FORM_STATE" property="formState"/>
+        <result column="DEL_FLAG" property="delFlag"/>
+    </resultMap>
+
+    <!-- CT_FORM table all fields -->
+    <sql id="Base_Column_List">
+		ID, FORM_TITLE, FORM_CONTENT, CREATE_TIME, CREATE_NAME, FORM_STATE,DEL_FLAG
+	</sql>
+
+    <resultMap id="FormDataMap" extends="BaseResultMap" type="com.adc.da.form.entity.AdcFormDataEO">
+        <collection property="adcFormEO" ofType="com.adc.da.form.entity.AdcFormEO">
+            <id column="formid" property="id"/>
+            <result column="formName" property="formName"/>
+            <result column="formCode" property="formCode"/>
+            <result column="formWrite" property="formWrite"/>
+            <result column="createAccount" property="createAccount"/>
+            <result column="r_createTime" property="createTime"/>
+            <result column="r_createName" property="createName"/>
+
+            <result column="contentHtml" property="contentHtml"/>
+            <result column="editor" property="editor"/>
+            <result column="editTime" property="editTime"/>
+            <result column="editName" property="editName"/>
+            <result column="dataSourceId" property="dataSourceId"/>
+            <result column="r_delFlag" property="delFlag"/>
+        </collection>
+    </resultMap>
+
+    <sql id="Form_Data_List">
+		u.*, r.id as formid,
+		r.FORM_NAME as formName,
+		r.FORM_CODE as formCode,
+		r.IS_WRITE as formWrite,
+		r.CREATE_ACCOUNT as createAccount,
+		r.CREATE_TIME as r_createTime,
+		r.CREATE_NAME as r_createName,
+		r.CONTENT_HTML as contentHtml,
+		r.EDITOR as editor,
+		r.EDIT_TIME as editTime,
+		r.EDIT_NAME as editName,
+		r.DATA_SOURCE_ID as dataSourceId,
+		r.DEL_FLAG as r_delFlag
+	</sql>
+
+    <!-- 查询条件 -->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                and r0.id = #{id}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 查询CT_DATA 列表总数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.crm.page.AdcFormDataVOPage">
+        SELECT COUNT(1) FROM CT_FORM
+        LEFT JOIN CT_FORM_DATA ON CT_FORM_DATA.FORM_ID = CT_FORM.ID
+        LEFT JOIN CT_DATA ON CT_DATA.ID = CT_FORM_DATA.DATA_ID
+        WHERE CT_FORM.DEL_FLAG != 1 AND CT_DATA.del_flag != 1 AND CT_FORM.ID = #{formId}
+    </select>
+    <!-- 查询CT_DATA列表 -->
+    <select id="queryPageByFormId" resultMap="FormDataMap" parameterType="com.adc.da.crm.page.AdcFormDataVOPage">
+        select
+        <include refid="Form_Data_List"/>
+        from
+        (select tmp_tb.* , rownum rn from
+        (select distinct u0.* from CT_DATA u0
+        left join CT_FORM_DATA ur0 on u0.id = ur0.data_id
+        left join CT_FORM r0 on ur0.form_id = r0.id
+        <include refid="Base_Where_Clause"/>
+        and u0.del_flag != 1 and r0.id = #{formId}
+        ) tmp_tb where rownum &lt;= #{pageSize}) u
+        left join CT_FORM_DATA ur on u.id = ur.data_id
+        left join CT_FORM r on ur.form_id = r.id
+        where rn &gt;= #{page}
+        ORDER BY U.CREATE_TIME DESC
+    </select>
+
+    <!-- 查询FORM_EO表 -->
+    <select id="queryServiceNameByFormId" resultType="string" parameterType="string">
+        select
+        EO
+        from
+        form_eo
+        where form_id = #{1}
+    </select>
+<!-- 查询报表1 -->
+    <select id="queryExport1" resultType="java.util.Map" parameterType="string">
+    	SELECT * FROM (
+  			select 
+  				'1' TYPE,
+				to_char(SIGN_DATA,'yyyy')||'年' Y,
+				sum(decode(to_char(SIGN_DATA,'mm'),'01',CONTRACT_AMOUNT,0)) M1,
+				sum(decode(to_char(SIGN_DATA,'mm'),'02',CONTRACT_AMOUNT,0)) M2 ,
+    			sum(decode(to_char(SIGN_DATA,'mm'),'03',CONTRACT_AMOUNT,0)) M3 ,
+    			sum(decode(to_char(SIGN_DATA,'mm'),'04',CONTRACT_AMOUNT,0)) M4, 
+    			sum(decode(to_char(SIGN_DATA,'mm'),'05',CONTRACT_AMOUNT,0)) M5,
+    			sum(decode(to_char(SIGN_DATA,'mm'),'06',CONTRACT_AMOUNT,0)) M6,
+    			sum(decode(to_char(SIGN_DATA,'mm'),'07',CONTRACT_AMOUNT,0)) M7,
+    			sum(decode(to_char(SIGN_DATA,'mm'),'08',CONTRACT_AMOUNT,0)) M8,
+   	 			sum(decode(to_char(SIGN_DATA,'mm'),'09',CONTRACT_AMOUNT,0)) M9,
+   	 			sum(decode(to_char(SIGN_DATA,'mm'),'10',CONTRACT_AMOUNT,0)) M10,
+    			sum(decode(to_char(SIGN_DATA,'mm'),'11',CONTRACT_AMOUNT,0)) M11,
+    			sum(decode(to_char(SIGN_DATA,'mm'),'12',CONTRACT_AMOUNT,0)) M12, 
+				sum(CONTRACT_AMOUNT) TT 
+     		from CONTRACT_APPROVAL 
+    		where to_char(SIGN_DATA,'yyyy') &gt;=to_char(SYSDATE,'yyyy')-3 
+     			and to_char(SIGN_DATA,'yyyy') &lt;=to_char(SYSDATE,'yyyy')
+     			and DEL_FLAG='0'
+	 		GROUP BY to_char(SIGN_DATA,'yyyy') 
+			ORDER BY to_char(SIGN_DATA,'yyyy') 
+		)   
+		UNION 
+		SELECT * FROM (
+			SELECT 
+				'2' TYPE,
+				to_char(P.YEAR)||'年预测' Y ,
+				sum(decode(M.MONTH ,'1',CONTRACT_TARGET,0)) M1,
+				sum(decode(M.MONTH ,'2',CONTRACT_TARGET,0)) M2,
+				sum(decode(M.MONTH ,'3',CONTRACT_TARGET,0)) M3,
+				sum(decode(M.MONTH ,'4',CONTRACT_TARGET,0)) M4,
+				sum(decode(M.MONTH ,'5',CONTRACT_TARGET,0)) M5,
+				sum(decode(M.MONTH ,'6',CONTRACT_TARGET,0)) M6,
+				sum(decode(M.MONTH ,'7',CONTRACT_TARGET,0)) M7,
+				sum(decode(M.MONTH ,'8',CONTRACT_TARGET,0)) M8,
+				sum(decode(M.MONTH ,'9',CONTRACT_TARGET,0)) M9,
+				sum(decode(M.MONTH ,'10',CONTRACT_TARGET,0)) M10,
+				sum(decode(M.MONTH ,'11',CONTRACT_TARGET,0)) M11,
+				sum(decode(M.MONTH ,'12',CONTRACT_TARGET,0)) M12,
+				sum(CONTRACT_TARGET) TT 
+			FROM PROJECT_TARGET_BOTTOM P LEFT JOIN MONTH_BUDGET M ON P.ID=M.PRO_TARGET_BOTOM_ID
+			WHERE P.YEAR=to_char(SYSDATE,'yyyy')
+			GROUP BY P.YEAR 
+		) 
+    </select>
+    <!-- 查询报表2 -->
+    <select id="queryExport2" resultType="java.util.Map" parameterType="string">
+    	SELECT *  FROM (
+			select  '1' TYPE,
+				to_char(d.IN_DATE,'yyyy')||'年' Y,
+				sum(decode(to_char(d.IN_DATE,'mm'),'01',d.AMOUNT,0)) M1,
+				sum(decode(to_char(d.IN_DATE,'mm'),'02',d.AMOUNT,0)) M2 ,
+   				sum(decode(to_char(d.IN_DATE,'mm'),'03',d.AMOUNT,0)) M3 ,
+    			sum(decode(to_char(d.IN_DATE,'mm'),'04',d.AMOUNT,0)) M4, 
+    			sum(decode(to_char(d.IN_DATE,'mm'),'05',d.AMOUNT,0)) M5,
+    			sum(decode(to_char(d.IN_DATE,'mm'),'06',d.AMOUNT,0)) M6,
+    			sum(decode(to_char(d.IN_DATE,'mm'),'07',d.AMOUNT,0)) M7,
+    			sum(decode(to_char(d.IN_DATE,'mm'),'08',d.AMOUNT,0)) M8,
+   	 			sum(decode(to_char(d.IN_DATE,'mm'),'09',d.AMOUNT,0)) M9,
+   	 			sum(decode(to_char(d.IN_DATE,'mm'),'10',d.AMOUNT,0)) M10,
+    			sum(decode(to_char(d.IN_DATE,'mm'),'11',d.AMOUNT,0)) M11,
+    			sum(decode(to_char(d.IN_DATE,'mm'),'12',d.AMOUNT,0)) M12, 
+				sum(d.AMOUNT) TT 
+     		from INVOICE_APPROVAL a LEFT JOIN INVOICE_INFO d on a.ID=d.CONTRACT_ID
+     		where to_char(d.IN_DATE,'yyyy') &gt;=to_char(SYSDATE,'yyyy')-3
+     			and to_char(d.IN_DATE,'yyyy') &lt;=to_char(SYSDATE,'yyyy')
+     			and a.DEL_FLAG='0' 
+				and d.DEL_FLAG='0' 
+	 		GROUP BY to_char(d.IN_DATE,'yyyy') 
+			ORDER BY to_char(d.IN_DATE,'yyyy') )
+		UNION
+ 			SELECT * FROM (
+			SELECT '2' TYPE,
+				to_char(P.YEAR)||'年预测' Y ,
+				sum(decode(M.MONTH ,'1',TICKET_TARGET,0)) M1,
+				sum(decode(M.MONTH ,'2',TICKET_TARGET,0)) M2,
+				sum(decode(M.MONTH ,'3',TICKET_TARGET,0)) M3,
+				sum(decode(M.MONTH ,'4',TICKET_TARGET,0)) M4,
+				sum(decode(M.MONTH ,'5',TICKET_TARGET,0)) M5,
+				sum(decode(M.MONTH ,'6',TICKET_TARGET,0)) M6,
+				sum(decode(M.MONTH ,'7',TICKET_TARGET,0)) M7,
+				sum(decode(M.MONTH ,'8',TICKET_TARGET,0)) M8,
+				sum(decode(M.MONTH ,'9',TICKET_TARGET,0)) M9,
+				sum(decode(M.MONTH ,'10',TICKET_TARGET,0)) M10,
+				sum(decode(M.MONTH ,'11',TICKET_TARGET,0)) M11,
+				sum(decode(M.MONTH ,'12',TICKET_TARGET,0)) M12,
+				sum(TICKET_TARGET) TT 
+ 			FROM PROJECT_TARGET_BOTTOM P LEFT JOIN MONTH_BUDGET M ON P.ID=M.PRO_TARGET_BOTOM_ID
+			WHERE P.YEAR=to_char(SYSDATE,'yyyy')
+			GROUP BY P.YEAR  )
+    </select>
+    <!-- 查询报表3 -->
+    <select id="queryExport3" resultType="java.util.Map" parameterType="string">
+   		    select 
+		tt.DIC_TYPE_NAME  DN, year1,
+aa.*
+FROM   TS_DICTYPE tt
+LEFT JOIN (SELECT  to_char(SYSDATE,'yyyy')-1||'年'  year1 FROM DUAL 
+						UNION 
+					SELECT (to_char(SYSDATE,'yyyy')-0)||'年' year1 FROM DUAL ) YY ON 1=1
+LEFT JOIN 
+  (select d.ID,
+			d.DIC_TYPE_NAME DN,
+			to_char(a.SIGN_DATA,'yyyy')||'年' Y,
+			sum(decode(to_char(a.SIGN_DATA,'Q'),'1',a.CONTRACT_AMOUNT,0)) Q1,
+			sum(decode(to_char(a.SIGN_DATA,'Q'),'2',a.CONTRACT_AMOUNT,0)) Q2 ,
+    		sum(decode(to_char(a.SIGN_DATA,'Q'),'3',a.CONTRACT_AMOUNT,0)) Q3 ,
+    		sum(decode(to_char(a.SIGN_DATA,'Q'),'4',a.CONTRACT_AMOUNT,0)) Q4, 
+			sum(a.CONTRACT_AMOUNT) TT 
+    	from CONTRACT_APPROVAL a LEFT JOIN TS_DICTYPE d on a.PLATFORM=d.ID
+     	where to_char(a.SIGN_DATA,'yyyy') &gt;=to_char(SYSDATE,'yyyy')-1
+     		and to_char(a.SIGN_DATA,'yyyy') &lt;=to_char(SYSDATE,'yyyy')
+     		and a.DEL_FLAG='0'
+	 	GROUP BY d.DIC_TYPE_NAME,to_char(a.SIGN_DATA,'yyyy'), d.DIC_TYPE_CODE ,d.ID
+		ORDER BY d.DIC_TYPE_CODE ,to_char(a.SIGN_DATA,'yyyy')
+		) aa ON aa.id= tt.id AND aa.Y= YY.year1
+		WHERE
+  		 tt.DIC_ID='TNWZBB478B' 
+		ORDER BY tt.DIC_TYPE_NAME DESC, year1
+    </select>
+    
+    <!-- 查询报表4 -->
+    <select id="queryExport4" resultType="java.util.Map" parameterType="string">
+   		    select 
+		tt.DIC_TYPE_NAME  DN, year1,
+aa.*
+FROM   TS_DICTYPE tt
+LEFT JOIN (SELECT  to_char(SYSDATE,'yyyy')-1||'年'  year1 FROM DUAL 
+						UNION 
+					SELECT (to_char(SYSDATE,'yyyy')-0)||'年' year1 FROM DUAL ) YY ON 1=1
+LEFT JOIN 
+  (select d.ID,select 
+			d.DIC_TYPE_NAME DN,
+			to_char(i.IN_DATE,'yyyy')||'年' Y,
+			sum(decode(to_char(i.IN_DATE,'Q'),'1',i.AMOUNT,0)) Q1,
+			sum(decode(to_char(i.IN_DATE,'Q'),'2',i.AMOUNT,0)) Q2 ,
+    		sum(decode(to_char(i.IN_DATE,'Q'),'3',i.AMOUNT,0)) Q3 ,
+    		sum(decode(to_char(i.IN_DATE,'Q'),'4',i.AMOUNT,0)) Q4, 
+			sum(i.AMOUNT) TT 
+    	from INVOICE_APPROVAL a LEFT JOIN TS_DICTYPE d on a.PLATFORM=d.ID
+			LEFT JOIN INVOICE_INFO i on a.ID=i.CONTRACT_ID
+   		where to_char(i.IN_DATE,'yyyy') >=to_char(SYSDATE,'yyyy')-1
+     		and to_char(i.IN_DATE,'yyyy') &lt;=to_char(SYSDATE,'yyyy')
+     		and a.DEL_FLAG='0'
+			and i.DEL_FLAG='0'
+	 	GROUP BY d.DIC_TYPE_NAME,to_char(i.IN_DATE,'yyyy'), d.DIC_TYPE_CODE ,d.ID
+		ORDER BY d.DIC_TYPE_CODE ,to_char(i.IN_DATE,'yyyy')
+		) aa ON aa.id= tt.id AND aa.Y= YY.year1
+		WHERE
+  		 tt.DIC_ID='TNWZBB478B' 
+		ORDER BY DN DESC,tt.DIC_TYPE_NAME , year1
+    </select>
+    
+    <!-- 查询报表5 -->
+    <select id="queryExport5" resultType="java.util.Map" parameterType="string">
+   		  select 
+		tt.DIC_TYPE_NAME DN , year1,
+aa.*
+FROM   TS_DICTYPE tt
+LEFT JOIN (SELECT  to_char(SYSDATE,'yyyy')-1||'年'  year1 FROM DUAL 
+						UNION 
+					SELECT (to_char(SYSDATE,'yyyy')-0)||'年' year1 FROM DUAL ) YY ON 1=1
+LEFT JOIN 
+  (select 
+ d."ID",
+		d.DIC_TYPE_NAME,
+		to_char(a.SIGN_DATA,'yyyy')||'年' Y,
+		sum(decode(to_char(a.SIGN_DATA,'Q'),'1',a.CONTRACT_AMOUNT,0)) Q1,
+		sum(decode(to_char(a.SIGN_DATA,'Q'),'2',a.CONTRACT_AMOUNT,0)) Q2 ,
+    	sum(decode(to_char(a.SIGN_DATA,'Q'),'3',a.CONTRACT_AMOUNT,0)) Q3 ,
+    	sum(decode(to_char(a.SIGN_DATA,'Q'),'4',a.CONTRACT_AMOUNT,0)) Q4, 
+		sum(a.CONTRACT_AMOUNT) TT 
+     from CONTRACT_APPROVAL a LEFT JOIN TS_DICTYPE d on a."BLOCK"=d.ID
+     where to_char(a.SIGN_DATA,'yyyy') >=to_char(SYSDATE,'yyyy')-1
+     		and to_char(a.SIGN_DATA,'yyyy') &lt;=to_char(SYSDATE,'yyyy')
+     		and a.DEL_FLAG='0'
+	 GROUP BY d.DIC_TYPE_NAME,to_char(a.SIGN_DATA,'yyyy'), d.DIC_TYPE_CODE ,d."ID"
+ORDER BY d.DIC_TYPE_CODE ,to_char(a.SIGN_DATA,'yyyy')
+) aa ON aa.id= tt.id AND aa.Y= YY.year1
+WHERE
+   tt.ID IN('RTEN6442VV','K9KLBCJRV2','NLBRP5Y539')
+ORDER BY tt.DIC_TYPE_NAME , year1
+    </select>
+    
+    <!-- 查询报表6 -->
+    <select id="queryExport6" resultType="java.util.Map" parameterType="string">
+   		    select 
+		tt.DIC_TYPE_NAME  DN, year1,
+aa.*
+FROM   TS_DICTYPE tt
+LEFT JOIN (SELECT  to_char(SYSDATE,'yyyy')-1||'年'  year1 FROM DUAL 
+						UNION 
+					SELECT (to_char(SYSDATE,'yyyy')-0)||'年' year1 FROM DUAL ) YY ON 1=1
+LEFT JOIN 
+  (select 
+ d."ID",
+		d.DIC_TYPE_NAME,
+		to_char(i.IN_DATE,'yyyy')||'年' Y,
+		sum(decode(to_char(i.IN_DATE,'Q'),'1',i.AMOUNT,0)) Q1,
+		sum(decode(to_char(i.IN_DATE,'Q'),'2',i.AMOUNT,0)) Q2 ,
+    	sum(decode(to_char(i.IN_DATE,'Q'),'3',i.AMOUNT,0)) Q3 ,
+    	sum(decode(to_char(i.IN_DATE,'Q'),'4',i.AMOUNT,0)) Q4, 
+		sum(i.AMOUNT) TT 
+from INVOICE_APPROVAL a LEFT JOIN TS_DICTYPE d on a.BLOCK=d.ID
+		LEFT JOIN INVOICE_INFO i on a.ID=i.CONTRACT_ID
+     where to_char(i.IN_DATE,'yyyy') >=to_char(SYSDATE,'yyyy')-1
+     		and to_char(i.IN_DATE,'yyyy')&lt;=to_char(SYSDATE,'yyyy')
+     		and a.DEL_FLAG='0'	and i.DEL_FLAG='0'
+	 GROUP BY d.DIC_TYPE_NAME,to_char(i.IN_DATE,'yyyy'), d.DIC_TYPE_CODE ,d."ID"
+ORDER BY d.DIC_TYPE_CODE ,to_char(i.IN_DATE,'yyyy')
+) aa ON aa.id= tt.id AND aa.Y= YY.year1
+WHERE
+   tt.ID IN('RTEN6442VV','K9KLBCJRV2','NLBRP5Y539')
+ORDER BY tt.DIC_TYPE_NAME , year1
+    </select>
+    
+    <!-- 查询报表7 -->
+    <select id="queryExport7" resultType="java.util.Map" parameterType="string">
+   		select 
+		tt.org_name  DN, year1,
+aa.*
+FROM   TS_ORG tt
+LEFT JOIN (SELECT  to_char(SYSDATE,'yyyy')-0||'年'  year1 FROM DUAL 
+						UNION 
+					SELECT (to_char(SYSDATE,'yyyy')-1)||'年' year1 FROM DUAL ) YY ON 1=1
+LEFT JOIN 
+  (select 
+ T."ID",
+		to_char(a.SIGN_DATA,'yyyy')||'年' Y,
+		sum(decode(to_char(a.SIGN_DATA,'Q'),'1',a.CONTRACT_AMOUNT,0)) Q1,
+		sum(decode(to_char(a.SIGN_DATA,'Q'),'2',a.CONTRACT_AMOUNT,0)) Q2 ,
+    	sum(decode(to_char(a.SIGN_DATA,'Q'),'3',a.CONTRACT_AMOUNT,0)) Q3 ,
+    	sum(decode(to_char(a.SIGN_DATA,'Q'),'4',a.CONTRACT_AMOUNT,0)) Q4, 
+		sum(a.CONTRACT_AMOUNT) TT 
+     from TS_ORG t
+		LEFT  JOIN TS_ORG d on t.ID=d.parent_id
+		LEFT  JOIN CONTRACT_APPROVAL a  on d.ID=a.APPLY_DEPTID
+     where 
+	to_char(a.SIGN_DATA,'yyyy') >=to_char(SYSDATE,'yyyy')-1
+    and to_char(a.SIGN_DATA,'yyyy') &lt;=to_char(SYSDATE,'yyyy')
+    	and a.DEL_FLAG='0' 
+		 
+	 GROUP BY t.org_name,to_char(a.SIGN_DATA,'yyyy'), t.org_CODE ,T."ID"
+ORDER BY t.org_CODE ,to_char(a.SIGN_DATA,'yyyy')
+) aa ON aa.id= tt.id AND aa.Y= YY.year1
+WHERE
+   tt.ID IN('LG2Q52HH7Y','YYKU3J77UA','TT8S672VLL','X2JQL6ZGVF')
+   ORDER BY DN , year1
+    </select>
+    
+    <!-- 查询报表8 -->
+    <select id="queryExport8" resultType="java.util.Map" parameterType="string">
+   		select 
+		tt.org_name  DN, year1,
+aa.*
+FROM   TS_ORG tt
+LEFT JOIN (SELECT  to_char(SYSDATE,'yyyy')-0||'年'  year1 FROM DUAL UNION SELECT (to_char(SYSDATE,'yyyy')-1)||'年' year1 FROM DUAL ) YY ON 1=1
+LEFT JOIN 
+  (select 
+		--t.org_name,
+ T."ID",
+		--d.DIC_TYPE_NAME,
+		to_char(i.IN_DATE,'yyyy')||'年' Y,
+		sum(decode(to_char(i.IN_DATE,'Q'),'1',i.AMOUNT,0)) Q1,
+		sum(decode(to_char(i.IN_DATE,'Q'),'2',i.AMOUNT,0)) Q2 ,
+    	sum(decode(to_char(i.IN_DATE,'Q'),'3',i.AMOUNT,0)) Q3 ,
+    	sum(decode(to_char(i.IN_DATE,'Q'),'4',i.AMOUNT,0)) Q4, 
+		sum(i.AMOUNT) TT 
+     from TS_ORG t
+		LEFT  JOIN TS_ORG d on t.ID=d.parent_id
+		LEFT  JOIN INVOICE_APPROVAL a  on d.ID=a.APPLY_DEPT
+		LEFT JOIN INVOICE_INFO i on a.ID=i.CONTRACT_ID
+     where 
+	to_char(i.IN_DATE,'yyyy') >=to_char(SYSDATE,'yyyy')-1
+    and to_char(i.IN_DATE,'yyyy') &lt;=to_char(SYSDATE,'yyyy')
+    	and a.DEL_FLAG='0' 
+			and i.DEL_FLAG='0'
+		 
+	 GROUP BY t.org_name,to_char(i.IN_DATE,'yyyy'), t.org_CODE ,T."ID"
+ORDER BY t.org_CODE ,to_char(i.IN_DATE,'yyyy')
+) aa ON aa.id= tt.id AND aa.Y= YY.year1
+WHERE
+   tt.ID IN('LG2Q52HH7Y','YYKU3J77UA','TT8S672VLL','X2JQL6ZGVF')
+   ORDER BY DN , year1
+    </select>
+    
+    
+  
+      <!--  报表9,10所需数据 -->
+    <sql id="With_Sql">
+       WITH A AS (select 
+D.ID,
+t.ORG_NAME depN,
+d.ORG_NAME ,
+		to_char(a.SIGN_DATA,'yyyy')||'年' Y,
+		sum(decode(to_char(SIGN_DATA,'mm'),#{month},CONTRACT_AMOUNT,0)) M1 ,
+	sum(CONTRACT_AMOUNT) TT 
+   from TS_ORG t
+		LEFT  JOIN TS_ORG d on t.ID=d.parent_id
+		LEFT  JOIN CONTRACT_APPROVAL a  on d.ID=a.APPLY_DEPTID
+     where to_char(SIGN_DATA,'yyyy')  = #{year} 
+		and to_char(SIGN_DATA,'mm') &lt;= #{month}
+	 GROUP BY to_char(SIGN_DATA,'yyyy') ,D."ID",d.ORG_NAME,t.ORG_NAME
+ORDER BY to_char(SIGN_DATA,'yyyy') ),
+B AS (select 
+D.ID,
+t.ORG_NAME depN,
+d.ORG_NAME ,
+		to_char(a.SIGN_DATA,'yyyy')||'年' Y,
+		sum(decode(to_char(SIGN_DATA,'mm'),#{month},CONTRACT_AMOUNT,0)) M1 ,
+	sum(CONTRACT_AMOUNT) TT 
+   from TS_ORG t
+		LEFT  JOIN TS_ORG d on t.ID=d.parent_id
+		LEFT  JOIN CONTRACT_APPROVAL a  on d.ID=a.APPLY_DEPTID
+     where to_char(SIGN_DATA,'yyyy')  = #{year}-1 
+		and to_char(SIGN_DATA,'mm') &lt;= #{month}
+	 GROUP BY to_char(SIGN_DATA,'yyyy') ,D."ID",d.ORG_NAME,t.ORG_NAME
+ORDER BY to_char(SIGN_DATA,'yyyy') ),
+
+C AS (select 
+D.ID,
+t.ORG_NAME depN,
+d.ORG_NAME ,
+		to_char(i.IN_DATE,'yyyy')||'年' Y,
+		sum(decode(to_char(i.IN_DATE,'mm'),#{month},i.AMOUNT,0)) M1 ,
+   sum(i.AMOUNT) TT 
+    from TS_ORG t
+		LEFT  JOIN TS_ORG d on t.ID=d.parent_id
+		LEFT  JOIN INVOICE_APPROVAL a  on d.ID=a.APPLY_DEPT
+		LEFT JOIN INVOICE_INFO i on a.ID=i.CONTRACT_ID
+     where 
+	to_char(i.IN_DATE,'yyyy') = #{year}
+    and to_char(i.IN_DATE,'mm') &lt;= #{month}
+    	and a.DEL_FLAG='0' 
+			and i.DEL_FLAG='0'
+	 GROUP BY to_char(i.IN_DATE,'yyyy') ,D."ID",d.ORG_NAME,t.ORG_NAME
+ORDER BY to_char(i.IN_DATE,'yyyy') ),
+
+D AS (select 
+D.ID,
+t.ORG_NAME depN,
+d.ORG_NAME ,
+		to_char(i.IN_DATE,'yyyy')||'年' Y,
+		sum(decode(to_char(i.IN_DATE,'mm'),#{month},i.AMOUNT,0)) M1 ,
+   sum(i.AMOUNT) TT 
+    from TS_ORG t
+		LEFT  JOIN TS_ORG d on t.ID=d.parent_id
+		LEFT  JOIN INVOICE_APPROVAL a  on d.ID=a.APPLY_DEPT
+		LEFT JOIN INVOICE_INFO i on a.ID=i.CONTRACT_ID
+     where 
+	to_char(i.IN_DATE,'yyyy') = #{year}-1
+    and to_char(i.IN_DATE,'mm') &lt;= #{month}
+    	and a.DEL_FLAG='0' 
+			and i.DEL_FLAG='0'
+	 GROUP BY to_char(i.IN_DATE,'yyyy') ,D."ID",d.ORG_NAME,t.ORG_NAME
+ORDER BY to_char(i.IN_DATE,'yyyy') )
+
+    </sql>
+      <!-- 查询报表9 -->
+    <select id="queryExport9" resultType="java.util.Map" parameterType="java.lang.String">
+   		 <include refid="With_Sql"/>
+SELECT T2.ORG_NAME BB,T.ORG_NAME BM,A.Y,A.M1 MO1,A.TT TTO1,
+B.Y,B.M1 MO2,B.TT TTO2,
+C.Y,C.M1 MI3,C.TT TTI3,
+D.Y,D.M1 MI4,D.TT TTI4
+	FROM  TS_ORG T 
+	LEFT JOIN TS_ORG T2 ON T2."ID"=T.parent_id
+	LEFT JOIN A ON T.ID=A.ID
+	LEFT JOIN B ON T.ID=B.ID 
+	LEFT JOIN C ON T.ID=C.ID
+	LEFT JOIN D ON T.ID=D.ID 
+WHERE T.ID IN(
+SELECT ID FROM TS_ORG WHERE
+ parent_id IN('LG2Q52HH7Y','YYKU3J77UA','TT8S672VLL','X2JQL6ZGVF')
+) 
+ORDER BY T2."ID"
+    </select>
+    
+      <!-- 查询报表10 -->
+    <select id="queryExport10" resultType="java.util.Map" parameterType="java.lang.String">
+   		 <include refid="With_Sql"/>
+SELECT T2.ORG_NAME BB,T.ORG_NAME BM,
+ (B.TT-D.TT)  as WEIKUAN,
+A.Y,A.TT THISY,
+ (B.TT-D.TT+A.TT) as HEJI  
+	FROM  TS_ORG T 
+	LEFT JOIN TS_ORG T2 ON T2."ID"=T.parent_id
+	LEFT JOIN A ON T.ID=A.ID
+	LEFT JOIN B ON T.ID=B.ID 
+	LEFT JOIN C ON T.ID=C.ID
+	LEFT JOIN D ON T.ID=D.ID 
+WHERE T.ID IN(
+SELECT ID FROM TS_ORG WHERE
+ parent_id IN('LG2Q52HH7Y','YYKU3J77UA','TT8S672VLL','X2JQL6ZGVF')
+) 
+ORDER BY T2."ID"
+    </select>
+</mapper>

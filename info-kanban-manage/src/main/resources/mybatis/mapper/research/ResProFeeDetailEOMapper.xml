@@ -1,0 +1,671 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.dao.ResProFeeDetailEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.research.entity.ResProFeeDetailEO" >
+    <id column="id" property="id" />
+    <result column="project_no" property="projectNo" />
+    <result column="funds_type" property="fundsType" />
+    <result column="funds_type_id" property="fundsTypeId" />
+    <result column="funds_year" property="fundsYear" />
+    <result column="funds_month" property="fundsMonth" />
+    <result column="equip_purchase_fee" property="equipPurchaseFee" />
+    <result column="equip_test_create_fee" property="equipTestCreateFee" />
+    <result column="equip_rent_fee" property="equipRentFee" />
+    <result column="material_fee" property="materialFee" />
+    <result column="test_process_fee" property="testProcessFee" />
+    <result column="fuel_power_fee" property="fuelPowerFee" />
+    <result column="travel_fee" property="travelFee" />
+    <result column="meeting_fee" property="meetingFee" />
+    <result column="internation_exchange_fee" property="internationExchangeFee" />
+    <result column="k_soft_fee" property="kSoftFee" />
+    <result column="k_other_fee" property="kOtherFee" />
+    <result column="labor_fee" property="laborFee" />
+      <result column="person_fee" property="personFee" />
+    <result column="expert_consult_fee" property="expertConsultFee" />
+    <result column="external_assist_fee" property="externalAssistFee" />
+    <result column="manage_fee" property="manageFee" />
+    <result column="other_fee" property="otherFee" />
+    <result column="ext_info1" property="extInfo1" />
+    <result column="ext_info2" property="extInfo2" />
+    <result column="ext_info3" property="extInfo3" />
+    <result column="ext_info4" property="extInfo4" />
+    <result column="research_project_id" property="researchProjectId" />
+    <result column="create_time" property="createTime" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="create_user_name" property="createUserName" />
+    <result column="update_time" property="updateTime" />
+    <result column="update_user_id" property="updateUserId" />
+    <result column="update_user_name" property="updateUserName" />
+  </resultMap>
+
+  <!-- DB_RES_PRO_FEE_DETAIL table all fields -->
+  <sql id="Base_Column_List" >
+     id, project_no, funds_type, funds_type_id, funds_year, funds_month, equip_purchase_fee, equip_test_create_fee, equip_rent_fee, material_fee, test_process_fee, fuel_power_fee, travel_fee, meeting_fee, internation_exchange_fee, k_soft_fee, k_other_fee, labor_fee, person_fee , expert_consult_fee, external_assist_fee, manage_fee, other_fee, ext_info1, ext_info2, ext_info3, ext_info4, research_project_id, create_time, create_user_id, create_user_name, update_time, update_user_id, update_user_name
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where  DEL_FLAG != 1
+      <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="projectNo != null" >
+        and project_no like '%'|| #{projectNo}|| '%'
+      </if>
+      <if test="fundsType != null" >
+        and funds_type ${fundsTypeOperator} #{fundsType}
+      </if>
+      <if test="fundsTypeId != null" >
+        and funds_type_id ${fundsTypeIdOperator} #{fundsTypeId}
+      </if>
+      <if test="fundsYear != null" >
+        and funds_year ${fundsYearOperator} #{fundsYear}
+      </if>
+      <if test="fundsMonth != null" >
+        and funds_month ${fundsMonthOperator} #{fundsMonth}
+      </if>
+      <if test="equipPurchaseFee != null" >
+        and equip_purchase_fee ${equipPurchaseFeeOperator} #{equipPurchaseFee}
+      </if>
+      <if test="equipTestCreateFee != null" >
+        and equip_test_create_fee ${equipTestCreateFeeOperator} #{equipTestCreateFee}
+      </if>
+      <if test="equipRentFee != null" >
+        and equip_rent_fee ${equipRentFeeOperator} #{equipRentFee}
+      </if>
+      <if test="materialFee != null" >
+        and material_fee ${materialFeeOperator} #{materialFee}
+      </if>
+      <if test="testProcessFee != null" >
+        and test_process_fee ${testProcessFeeOperator} #{testProcessFee}
+      </if>
+      <if test="fuelPowerFee != null" >
+        and fuel_power_fee ${fuelPowerFeeOperator} #{fuelPowerFee}
+      </if>
+      <if test="travelFee != null" >
+        and travel_fee ${travelFeeOperator} #{travelFee}
+      </if>
+      <if test="meetingFee != null" >
+        and meeting_fee ${meetingFeeOperator} #{meetingFee}
+      </if>
+      <if test="internationExchangeFee != null" >
+        and internation_exchange_fee ${internationExchangeFeeOperator} #{internationExchangeFee}
+      </if>
+      <if test="kSoftFee != null" >
+        and k_soft_fee ${kSoftFeeOperator} #{kSoftFee}
+      </if>
+      <if test="kOtherFee != null" >
+        and k_other_fee ${kOtherFeeOperator} #{kOtherFee}
+      </if>
+      <if test="laborFee != null" >
+        and labor_fee ${laborFeeOperator} #{laborFee}
+      </if>
+        <if test="personFee != null" >
+            and person_fee ${personFeeOperator} #{personFee}
+        </if>
+      <if test="expertConsultFee != null" >
+        and expert_consult_fee ${expertConsultFeeOperator} #{expertConsultFee}
+      </if>
+      <if test="externalAssistFee != null" >
+        and external_assist_fee ${externalAssistFeeOperator} #{externalAssistFee}
+      </if>
+      <if test="manageFee != null" >
+        and manage_fee ${manageFeeOperator} #{manageFee}
+      </if>
+      <if test="otherFee != null" >
+        and other_fee ${otherFeeOperator} #{otherFee}
+      </if>
+      <if test="extInfo1 != null" >
+        and ext_info1 ${extInfo1Operator} #{extInfo1}
+      </if>
+      <if test="extInfo2 != null" >
+        and ext_info2 ${extInfo2Operator} #{extInfo2}
+      </if>
+      <if test="extInfo3 != null" >
+        and ext_info3 ${extInfo3Operator} #{extInfo3}
+      </if>
+      <if test="extInfo4 != null" >
+        and ext_info4 ${extInfo4Operator} #{extInfo4}
+      </if>
+      <if test="researchProjectId != null" >
+        and research_project_id like '%'|| #{researchProjectId}|| '%'
+      </if>
+      <if test="createTime != null" >
+        and create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null" >
+        and create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null" >
+        and create_time &lt;= #{createTime2}
+      </if>
+      <if test="createUserId != null" >
+        and create_user_id ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="createUserName != null" >
+        and create_user_name ${createUserNameOperator} #{createUserName}
+      </if>
+      <if test="updateTime != null" >
+        and update_time ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null" >
+        and update_time &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null" >
+        and update_time &lt;= #{updateTime2}
+      </if>
+      <if test="updateUserId != null" >
+        and update_user_id ${updateUserIdOperator} #{updateUserId}
+      </if>
+      <if test="updateUserName != null" >
+        and update_user_name ${updateUserNameOperator} #{updateUserName}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.research.entity.ResProFeeDetailEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_DB_RES_PRO_FEE_DETAIL.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into DB_RES_PRO_FEE_DETAIL(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{projectNo, jdbcType=VARCHAR}, #{fundsType, jdbcType=VARCHAR}, #{fundsTypeId, jdbcType=VARCHAR}, #{fundsYear, jdbcType=INTEGER}, #{fundsMonth, jdbcType=INTEGER}, #{equipPurchaseFee, jdbcType=DOUBLE}, #{equipTestCreateFee, jdbcType=DOUBLE}, #{equipRentFee, jdbcType=DOUBLE}, #{materialFee, jdbcType=DOUBLE}, #{testProcessFee, jdbcType=DOUBLE}, #{fuelPowerFee, jdbcType=DOUBLE}, #{travelFee, jdbcType=DOUBLE}, #{meetingFee, jdbcType=DOUBLE}, #{internationExchangeFee, jdbcType=DOUBLE}, #{kSoftFee, jdbcType=DOUBLE}, #{kOtherFee, jdbcType=DOUBLE}, #{laborFee, jdbcType=DOUBLE}, #{personFee, jdbcType=DOUBLE},#{expertConsultFee, jdbcType=DOUBLE}, #{externalAssistFee, jdbcType=DOUBLE}, #{manageFee, jdbcType=DOUBLE}, #{otherFee, jdbcType=DOUBLE}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR}, #{researchProjectId, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{createUserId, jdbcType=VARCHAR}, #{createUserName, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP}, #{updateUserId, jdbcType=VARCHAR}, #{updateUserName, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.research.entity.ResProFeeDetailEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_DB_RES_PRO_FEE_DETAIL.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into DB_RES_PRO_FEE_DETAIL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="projectNo != null" >project_no,</if>
+                <if test="fundsType != null" >funds_type,</if>
+                <if test="fundsTypeId != null" >funds_type_id,</if>
+                <if test="fundsYear != null" >funds_year,</if>
+                <if test="fundsMonth != null" >funds_month,</if>
+                <if test="equipPurchaseFee != null" >equip_purchase_fee,</if>
+                <if test="equipTestCreateFee != null" >equip_test_create_fee,</if>
+                <if test="equipRentFee != null" >equip_rent_fee,</if>
+                <if test="materialFee != null" >material_fee,</if>
+                <if test="testProcessFee != null" >test_process_fee,</if>
+                <if test="fuelPowerFee != null" >fuel_power_fee,</if>
+                <if test="travelFee != null" >travel_fee,</if>
+                <if test="meetingFee != null" >meeting_fee,</if>
+                <if test="internationExchangeFee != null" >internation_exchange_fee,</if>
+                <if test="kSoftFee != null" >k_soft_fee,</if>
+                <if test="kOtherFee != null" >k_other_fee,</if>
+                <if test="laborFee != null" >labor_fee,</if>
+                <if test="personFee != null" >person_fee,</if>
+                <if test="expertConsultFee != null" >expert_consult_fee,</if>
+                <if test="externalAssistFee != null" >external_assist_fee,</if>
+                <if test="manageFee != null" >manage_fee,</if>
+                <if test="otherFee != null" >other_fee,</if>
+                <if test="extInfo1 != null" >ext_info1,</if>
+                <if test="extInfo2 != null" >ext_info2,</if>
+                <if test="extInfo3 != null" >ext_info3,</if>
+                <if test="extInfo4 != null" >ext_info4,</if>
+                <if test="researchProjectId != null" >research_project_id,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="createUserId != null" >create_user_id,</if>
+                <if test="createUserName != null" >create_user_name,</if>
+                <if test="updateTime != null" >update_time,</if>
+                <if test="updateUserId != null" >update_user_id,</if>
+                <if test="updateUserName != null" >update_user_name,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="projectNo != null" >#{projectNo, jdbcType=VARCHAR},</if>
+                <if test="fundsType != null" >#{fundsType, jdbcType=VARCHAR},</if>
+                <if test="fundsTypeId != null" >#{fundsTypeId, jdbcType=VARCHAR},</if>
+                <if test="fundsYear != null" >#{fundsYear, jdbcType=INTEGER},</if>
+                <if test="fundsMonth != null" >#{fundsMonth, jdbcType=INTEGER},</if>
+                <if test="equipPurchaseFee != null" >#{equipPurchaseFee, jdbcType=DOUBLE},</if>
+                <if test="equipTestCreateFee != null" >#{equipTestCreateFee, jdbcType=DOUBLE},</if>
+                <if test="equipRentFee != null" >#{equipRentFee, jdbcType=DOUBLE},</if>
+                <if test="materialFee != null" >#{materialFee, jdbcType=DOUBLE},</if>
+                <if test="testProcessFee != null" >#{testProcessFee, jdbcType=DOUBLE},</if>
+                <if test="fuelPowerFee != null" >#{fuelPowerFee, jdbcType=DOUBLE},</if>
+                <if test="travelFee != null" >#{travelFee, jdbcType=DOUBLE},</if>
+                <if test="meetingFee != null" >#{meetingFee, jdbcType=DOUBLE},</if>
+                <if test="internationExchangeFee != null" >#{internationExchangeFee, jdbcType=DOUBLE},</if>
+                <if test="kSoftFee != null" >#{kSoftFee, jdbcType=DOUBLE},</if>
+                <if test="kOtherFee != null" >#{kOtherFee, jdbcType=DOUBLE},</if>
+                <if test="laborFee != null" >#{laborFee, jdbcType=DOUBLE},</if>
+        <if test="personFee != null" >#{personFee, jdbcType=DOUBLE},</if>
+                <if test="expertConsultFee != null" >#{expertConsultFee, jdbcType=DOUBLE},</if>
+                <if test="externalAssistFee != null" >#{externalAssistFee, jdbcType=DOUBLE},</if>
+                <if test="manageFee != null" >#{manageFee, jdbcType=DOUBLE},</if>
+                <if test="otherFee != null" >#{otherFee, jdbcType=DOUBLE},</if>
+                <if test="extInfo1 != null" >#{extInfo1, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="extInfo3 != null" >#{extInfo3, jdbcType=VARCHAR},</if>
+                <if test="extInfo4 != null" >#{extInfo4, jdbcType=VARCHAR},</if>
+                <if test="researchProjectId != null" >#{researchProjectId, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="createUserId != null" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="createUserName != null" >#{createUserName, jdbcType=VARCHAR},</if>
+                <if test="updateTime != null" >#{updateTime, jdbcType=TIMESTAMP},</if>
+                <if test="updateUserId != null" >#{updateUserId, jdbcType=VARCHAR},</if>
+                <if test="updateUserName != null" >#{updateUserName, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+    <insert id="insertList" parameterType="java.util.List">
+        INSERT ALL
+        <foreach collection="list" item="item" index="index">
+            <if test="item.id !=null">
+                INTO DB_RES_PRO_FEE_DETAIL
+                <trim prefix="(" suffix=")" suffixOverrides=",">
+                    <if test="item.id != null" >id,</if>
+                    <if test="item.projectNo != null" >project_no,</if>
+                    <if test="item.fundsType != null" >funds_type,</if>
+                    <if test="item.fundsTypeId != null" >funds_type_id,</if>
+                    <if test="item.fundsYear != null" >funds_year,</if>
+                    <if test="item.fundsMonth != null" >funds_month,</if>
+                    <if test="item.equipPurchaseFee != null" >equip_purchase_fee,</if>
+                    <if test="item.equipTestCreateFee != null" >equip_test_create_fee,</if>
+                    <if test="item.equipRentFee != null" >equip_rent_fee,</if>
+                    <if test="item.materialFee != null" >material_fee,</if>
+                    <if test="item.testProcessFee != null" >test_process_fee,</if>
+                    <if test="item.fuelPowerFee != null" >fuel_power_fee,</if>
+                    <if test="item.travelFee != null" >travel_fee,</if>
+                    <if test="item.meetingFee != null" >meeting_fee,</if>
+                    <if test="item.internationExchangeFee != null" >internation_exchange_fee,</if>
+                    <if test="item.kSoftFee != null" >k_soft_fee,</if>
+                    <if test="item.kOtherFee != null" >k_other_fee,</if>
+                    <if test="item.laborFee != null" >labor_fee,</if>
+                    <if test="item.personFee != null" >person_fee,</if>
+                    <if test="item.expertConsultFee != null" >expert_consult_fee,</if>
+                    <if test="item.externalAssistFee != null" >external_assist_fee,</if>
+                    <if test="item.manageFee != null" >manage_fee,</if>
+                    <if test="item.otherFee != null" >other_fee,</if>
+                    <if test="item.extInfo1 != null" >ext_info1,</if>
+                    <if test="item.extInfo2 != null" >ext_info2,</if>
+                    <if test="item.extInfo3 != null" >ext_info3,</if>
+                    <if test="item.extInfo4 != null" >ext_info4,</if>
+                    <if test="item.researchProjectId != null" >research_project_id,</if>
+                    <if test="item.createTime != null" >create_time,</if>
+                    <if test="item.createUserId != null" >create_user_id,</if>
+                    <if test="item.createUserName != null" >create_user_name,</if>
+                    <if test="item.updateTime != null" >update_time,</if>
+                    <if test="item.updateUserId != null" >update_user_id,</if>
+                    <if test="item.updateUserName != null" >update_user_name,</if>
+                </trim>
+                <trim prefix="values (" suffix=")" suffixOverrides=",">
+                    <if test="item.id != null" >#{item.id, jdbcType=VARCHAR},</if>
+                    <if test="item.projectNo != null" >#{item.projectNo, jdbcType=VARCHAR},</if>
+                    <if test="item.fundsType != null" >#{item.fundsType, jdbcType=VARCHAR},</if>
+                    <if test="item.fundsTypeId != null" >#{item.fundsTypeId, jdbcType=VARCHAR},</if>
+                    <if test="item.fundsYear != null" >#{item.fundsYear, jdbcType=INTEGER},</if>
+                    <if test="item.fundsMonth != null" >#{item.fundsMonth, jdbcType=INTEGER},</if>
+                    <if test="item.equipPurchaseFee != null" >#{item.equipPurchaseFee, jdbcType=DOUBLE},</if>
+                    <if test="item.equipTestCreateFee != null" >#{item.equipTestCreateFee, jdbcType=DOUBLE},</if>
+                    <if test="item.equipRentFee != null" >#{item.equipRentFee, jdbcType=DOUBLE},</if>
+                    <if test="item.materialFee != null" >#{item.materialFee, jdbcType=DOUBLE},</if>
+                    <if test="item.testProcessFee != null" >#{item.testProcessFee, jdbcType=DOUBLE},</if>
+                    <if test="item.fuelPowerFee != null" >#{item.fuelPowerFee, jdbcType=DOUBLE},</if>
+                    <if test="item.travelFee != null" >#{item.travelFee, jdbcType=DOUBLE},</if>
+                    <if test="item.meetingFee != null" >#{item.meetingFee, jdbcType=DOUBLE},</if>
+                    <if test="item.internationExchangeFee != null" >#{item.internationExchangeFee, jdbcType=DOUBLE},</if>
+                    <if test="item.kSoftFee != null" >#{item.kSoftFee, jdbcType=DOUBLE},</if>
+                    <if test="item.kOtherFee != null" >#{item.kOtherFee, jdbcType=DOUBLE},</if>
+                    <if test="item.laborFee != null" >#{item.laborFee, jdbcType=DOUBLE},</if>
+                    <if test="item.personFee != null" >#{item.personFee, jdbcType=DOUBLE},</if>
+                    <if test="item.expertConsultFee != null" >#{item.expertConsultFee, jdbcType=DOUBLE},</if>
+                    <if test="item.externalAssistFee != null" >#{item.externalAssistFee, jdbcType=DOUBLE},</if>
+                    <if test="item.manageFee != null" >#{item.manageFee, jdbcType=DOUBLE},</if>
+                    <if test="item.otherFee != null" >#{item.otherFee, jdbcType=DOUBLE},</if>
+                    <if test="item.extInfo1 != null" >#{item.extInfo1, jdbcType=VARCHAR},</if>
+                    <if test="item.extInfo2 != null" >#{item.extInfo2, jdbcType=VARCHAR},</if>
+                    <if test="item.extInfo3 != null" >#{item.extInfo3, jdbcType=VARCHAR},</if>
+                    <if test="item.extInfo4 != null" >#{item.extInfo4, jdbcType=VARCHAR},</if>
+                    <if test="item.researchProjectId != null" >#{item.researchProjectId, jdbcType=VARCHAR},</if>
+                    <if test="item.createTime != null" >#{item.createTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.createUserId != null" >#{item.createUserId, jdbcType=VARCHAR},</if>
+                    <if test="item.createUserName != null" >#{item.createUserName, jdbcType=VARCHAR},</if>
+                    <if test="item.updateTime != null" >#{item.updateTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.updateUserId != null" >#{item.updateUserId, jdbcType=VARCHAR},</if>
+                    <if test="item.updateUserName != null" >#{item.updateUserName, jdbcType=VARCHAR},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.research.entity.ResProFeeDetailEO" >
+    update DB_RES_PRO_FEE_DETAIL
+       set  project_no = #{projectNo},
+            funds_type = #{fundsType},
+            funds_type_id = #{fundsTypeId},
+            funds_year = #{fundsYear},
+            funds_month = #{fundsMonth},
+            equip_purchase_fee = #{equipPurchaseFee},
+            equip_test_create_fee = #{equipTestCreateFee},
+            equip_rent_fee = #{equipRentFee},
+            material_fee = #{materialFee},
+            test_process_fee = #{testProcessFee},
+            fuel_power_fee = #{fuelPowerFee},
+            travel_fee = #{travelFee},
+            meeting_fee = #{meetingFee},
+            internation_exchange_fee = #{internationExchangeFee},
+            k_soft_fee = #{kSoftFee},
+            k_other_fee = #{kOtherFee},
+            labor_fee = #{laborFee},
+              person_fee = #{personFee},
+            expert_consult_fee = #{expertConsultFee},
+            external_assist_fee = #{externalAssistFee},
+            manage_fee = #{manageFee},
+            other_fee = #{otherFee},
+            ext_info1 = #{extInfo1},
+            ext_info2 = #{extInfo2},
+            ext_info3 = #{extInfo3},
+            ext_info4 = #{extInfo4},
+            research_project_id = #{researchProjectId},
+            create_time = #{createTime},
+            create_user_id = #{createUserId},
+            create_user_name = #{createUserName},
+            update_time = #{updateTime},
+            update_user_id = #{updateUserId},
+            update_user_name = #{updateUserName}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.research.entity.ResProFeeDetailEO" >
+    update DB_RES_PRO_FEE_DETAIL
+    <set >
+      <if test="projectNo != null" >
+        project_no = #{projectNo},
+      </if>
+      <if test="fundsType != null" >
+        funds_type = #{fundsType},
+      </if>
+      <if test="fundsTypeId != null" >
+        funds_type_id = #{fundsTypeId},
+      </if>
+      <if test="fundsYear != null" >
+        funds_year = #{fundsYear},
+      </if>
+        <if test="fundsYear == null" >
+            funds_year = null,
+        </if>
+      <if test="fundsMonth != null" >
+        funds_month = #{fundsMonth},
+      </if>
+        <if test="fundsMonth == null" >
+            funds_month = null,
+        </if>
+      <if test="equipPurchaseFee != null" >
+        equip_purchase_fee = #{equipPurchaseFee},
+      </if>
+      <if test="equipTestCreateFee != null" >
+        equip_test_create_fee = #{equipTestCreateFee},
+      </if>
+      <if test="equipRentFee != null" >
+        equip_rent_fee = #{equipRentFee},
+      </if>
+      <if test="materialFee != null" >
+        material_fee = #{materialFee},
+      </if>
+      <if test="testProcessFee != null" >
+        test_process_fee = #{testProcessFee},
+      </if>
+      <if test="fuelPowerFee != null" >
+        fuel_power_fee = #{fuelPowerFee},
+      </if>
+      <if test="travelFee != null" >
+        travel_fee = #{travelFee},
+      </if>
+      <if test="meetingFee != null" >
+        meeting_fee = #{meetingFee},
+      </if>
+      <if test="internationExchangeFee != null" >
+        internation_exchange_fee = #{internationExchangeFee},
+      </if>
+      <if test="kSoftFee != null" >
+        k_soft_fee = #{kSoftFee},
+      </if>
+      <if test="kOtherFee != null" >
+        k_other_fee = #{kOtherFee},
+      </if>
+      <if test="laborFee != null" >
+        labor_fee = #{laborFee},
+      </if>
+        <if test="personFee != null" >
+            person_fee = #{personFee},
+        </if>
+      <if test="expertConsultFee != null" >
+        expert_consult_fee = #{expertConsultFee},
+      </if>
+      <if test="externalAssistFee != null" >
+        external_assist_fee = #{externalAssistFee},
+      </if>
+      <if test="manageFee != null" >
+        manage_fee = #{manageFee},
+      </if>
+      <if test="otherFee != null" >
+        other_fee = #{otherFee},
+      </if>
+
+        <if test="equipPurchaseFee == null" >
+            equip_purchase_fee = null,
+        </if>
+        <if test="equipTestCreateFee == null" >
+            equip_test_create_fee  = null,
+        </if>
+        <if test="equipRentFee == null" >
+            equip_rent_fee  = null,
+        </if>
+        <if test="materialFee == null" >
+            material_fee  = null,
+        </if>
+        <if test="testProcessFee == null" >
+            test_process_fee  = null,
+        </if>
+        <if test="fuelPowerFee == null" >
+            fuel_power_fee  = null,
+        </if>
+        <if test="travelFee == null" >
+            travel_fee  = null,
+        </if>
+        <if test="meetingFee == null" >
+            meeting_fee  = null,
+        </if>
+        <if test="internationExchangeFee == null" >
+            internation_exchange_fee  = null,
+        </if>
+        <if test="kSoftFee == null" >
+            k_soft_fee = null,
+        </if>
+        <if test="kOtherFee == null" >
+            k_other_fee  = null,
+        </if>
+        <if test="laborFee == null" >
+            labor_fee  = null,
+        </if>
+        <if test="personFee == null" >
+            person_fee  = null,
+        </if>
+        <if test="expertConsultFee == null" >
+            expert_consult_fee  = null,
+        </if>
+        <if test="externalAssistFee == null" >
+            external_assist_fee  = null,
+        </if>
+        <if test="manageFee == null" >
+            manage_fee =  null,
+        </if>
+
+        <if test="otherFee == null" >
+            other_fee = null,
+        </if>
+      <if test="extInfo1 != null" >
+        ext_info1 = #{extInfo1},
+      </if>
+      <if test="extInfo2 != null" >
+        ext_info2 = #{extInfo2},
+      </if>
+      <if test="extInfo3 != null" >
+        ext_info3 = #{extInfo3},
+      </if>
+      <if test="extInfo4 != null" >
+        ext_info4 = #{extInfo4},
+      </if>
+      <if test="researchProjectId != null" >
+          research_project_id = #{researchProjectId},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="createUserName != null" >
+        create_user_name = #{createUserName},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId},
+      </if>
+      <if test="updateUserName != null" >
+        update_user_name = #{updateUserName},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 DB_RES_PRO_FEE_DETAIL -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+      from DB_RES_PRO_FEE_DETAIL
+     where id = #{value}
+
+  </select>
+
+    <select id="selectByResearchProjectIdList" resultMap="BaseResultMap" parameterType="java.util.List">
+        select <include refid="Base_Column_List" />
+        from DB_RES_PRO_FEE_DETAIL
+        where research_project_id in
+        <foreach item = "item" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{item}
+        </foreach>
+        and DEL_FLAG != 1
+    </select>
+
+    <!--批量逻辑删除-->
+    <update id = "deleteLogicAll" parameterType = "java.util.List">
+        update DB_RES_PRO_FEE_DETAIL set del_flag = 1 where 1=1
+    </update>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from DB_RES_PRO_FEE_DETAIL
+     where id = #{value}
+
+  </delete>
+
+  <!-- DB_RES_PRO_FEE_DETAIL 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from DB_RES_PRO_FEE_DETAIL
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询DB_RES_PRO_FEE_DETAIL列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from DB_RES_PRO_FEE_DETAIL
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from DB_RES_PRO_FEE_DETAIL
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+    <select id="queryByResearchProjectIdList" resultMap="BaseResultMap" >
+        select <include refid="Base_Column_List"/> from DB_RES_PRO_FEE_DETAIL
+        where  DEL_FLAG != 1 AND  research_project_id in
+        <foreach item = "item" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{item}
+        </foreach>
+    </select>
+
+
+    <select id="sumByResearchProjectIdListGroupByFundsType" resultMap="BaseResultMap" >
+        select
+        sum (equip_purchase_fee) as equip_purchase_fee,
+        sum (equip_test_create_fee) as equip_test_create_fee,
+        sum (equip_rent_fee) as equip_rent_fee,
+        sum (material_fee) as material_fee ,
+        sum (test_process_fee) as test_process_fee,
+        sum (fuel_power_fee) as fuel_power_fee,
+        sum (travel_fee) as travel_fee,
+        sum (meeting_fee) as meeting_fee,
+        sum (internation_exchange_fee) as internation_exchange_fee,
+        sum (k_soft_fee) as k_soft_fee,
+        sum (k_other_fee) as k_other_fee,
+        sum (labor_fee) as labor_fee,
+        sum (person_fee) as person_fee,
+        sum (expert_consult_fee) as expert_consult_fee,
+        sum (external_assist_fee) as external_assist_fee,
+        sum (manage_fee) as manage_fee,
+        sum (other_fee) as other_fee,
+        funds_type
+        from DB_RES_PRO_FEE_DETAIL
+        where  DEL_FLAG != 1 AND   research_project_id in
+        <foreach item = "item" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{item}
+        </foreach>
+        group by funds_type
+    </select>
+
+    <select id="sumByResearchProjectIdList" resultMap="BaseResultMap" >
+        select
+        sum (equip_purchase_fee) as equip_purchase_fee,
+        sum (equip_test_create_fee) as equip_test_create_fee,
+        sum (equip_rent_fee) as equip_rent_fee,
+        sum (material_fee) as material_fee ,
+        sum (test_process_fee) as test_process_fee,
+        sum (fuel_power_fee) as fuel_power_fee,
+        sum (travel_fee) as travel_fee,
+        sum (meeting_fee) as meeting_fee,
+        sum (internation_exchange_fee) as internation_exchange_fee,
+        sum (k_soft_fee) as k_soft_fee,
+        sum (k_other_fee) as k_other_fee,
+        sum (labor_fee) as labor_fee,
+        sum (person_fee) as person_fee,
+        sum (expert_consult_fee) as expert_consult_fee,
+        sum (external_assist_fee) as external_assist_fee,
+        sum (manage_fee) as manage_fee,
+        sum (other_fee) as other_fee
+        from DB_RES_PRO_FEE_DETAIL
+        where DEL_FLAG != 1 AND  research_project_id in
+        <foreach item = "item" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{item}
+        </foreach>
+    </select>
+
+    <update id = "deleteLogicInBatch" parameterType = "java.util.List">
+        update DB_RES_PRO_FEE_DETAIL set del_flag = 1 where id in
+        <foreach item = "id" collection = "list" open = "(" separator = "," close = ")" index = "index">
+            #{id}
+        </foreach>
+    </update>
+
+</mapper>

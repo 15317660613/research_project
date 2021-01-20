@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.adc.da.capital.dao.HiCapitalDetailEODao">
+    <!-- Result Map-->
+    <resultMap id = "BaseResultMap" type = "com.adc.da.capital.entity.HiCapitalDetailEO">
+        <result column = "proc_business_key_" property = "procBusinessKey"/>
+        <result column = "mask_" property = "mask"/>
+        <result column = "id_" property = "id"/>
+        <result column = "research_project_id_" property = "researchProjectId"/>
+        <result column = "detail_type_" property = "detailType"/>
+        <result column = "name_" property = "name"/>
+        <result column = "count_" property = "count"/>
+        <result column = "unit_" property = "unit"/>
+        <result column = "unit_price_" property = "unitPrice"/>
+        <result column = "sort_" property = "sort"/>
+        <result column = "ext_info_1_" property = "extInfo1"/>
+        <result column = "ext_info_2_" property = "extInfo2"/>
+        <result column = "ext_info_3_" property = "extInfo3"/>
+        <result column = "ext_info_4_" property = "extInfo4"/>
+        <result column = "ext_info_5_" property = "extInfo5"/>
+        <result column = "ext_info_6_" property = "extInfo6"/>
+    </resultMap>
+
+    <!-- RS_HI_CAPITAL_DETAIL table all fields -->
+    <sql id = "Base_Column_List">
+        proc_business_key_, mask_, id_, research_project_id_, detail_type_, name_, count_, unit_, unit_price_, sort_, ext_info_1_, ext_info_2_, ext_info_3_, ext_info_4_, ext_info_5_, ext_info_6_
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id = "Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides = ",">
+            <if test = "procBusinessKey != null">
+                and proc_business_key_ ${procBusinessKeyOperator} #{procBusinessKey}
+            </if>
+            <if test = "mask != null">
+                and mask_ ${maskOperator} #{mask}
+            </if>
+            <if test = "id != null">
+                and id_ ${idOperator} #{id}
+            </if>
+            <if test = "researchProjectId != null">
+                and research_project_id_ ${researchProjectIdOperator} #{researchProjectId}
+            </if>
+            <if test = "detailType != null">
+                and detail_type_ ${detailTypeOperator} #{detailType}
+            </if>
+            <if test = "name != null">
+                and name_ ${nameOperator} #{name}
+            </if>
+            <if test = "count != null">
+                and count_ ${countOperator} #{count}
+            </if>
+            <if test = "unit != null">
+                and unit_ ${unitOperator} #{unit}
+            </if>
+            <if test = "unitPrice != null">
+                and unit_price_ ${unitPriceOperator} #{unitPrice}
+            </if>
+            <if test = "sort != null">
+                and sort_ ${sortOperator} #{sort}
+            </if>
+            <if test = "extInfo1 != null">
+                and ext_info_1_ ${extInfo1Operator} #{extInfo1}
+            </if>
+            <if test = "extInfo2 != null">
+                and ext_info_2_ ${extInfo2Operator} #{extInfo2}
+            </if>
+            <if test = "extInfo3 != null">
+                and ext_info_3_ ${extInfo3Operator} #{extInfo3}
+            </if>
+            <if test = "extInfo4 != null">
+                and ext_info_4_ ${extInfo4Operator} #{extInfo4}
+            </if>
+            <if test = "extInfo5 != null">
+                and ext_info_5_ ${extInfo5Operator} #{extInfo5}
+            </if>
+            <if test = "extInfo6 != null">
+                and ext_info_6_ ${extInfo6Operator} #{extInfo6}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id = "insert" parameterType = "com.adc.da.capital.entity.HiCapitalDetailEO">
+        insert into RS_HI_CAPITAL_DETAIL(<include refid = "Base_Column_List"/>)
+        values (#{procBusinessKey, jdbcType=VARCHAR}, #{mask, jdbcType=VARCHAR}, #{id, jdbcType=VARCHAR},
+        #{researchProjectId, jdbcType=VARCHAR}, #{detailType, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR},
+        #{count, jdbcType=VARCHAR}, #{unit, jdbcType=VARCHAR}, #{unitPrice, jdbcType=VARCHAR},
+        #{sort, jdbcType=VARCHAR}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR},
+        #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR},
+        #{extInfo6, jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id = "insertSelective" parameterType = "com.adc.da.capital.entity.HiCapitalDetailEO">
+        insert into RS_HI_CAPITAL_DETAIL
+        <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+            <if test = "procBusinessKey != null">proc_business_key_,</if>
+            <if test = "mask != null">mask_,</if>
+            <if test = "id != null">id_,</if>
+            <if test = "researchProjectId != null">research_project_id_,</if>
+            <if test = "detailType != null">detail_type_,</if>
+            <if test = "name != null">name_,</if>
+            <if test = "count != null">count_,</if>
+            <if test = "unit != null">unit_,</if>
+            <if test = "unitPrice != null">unit_price_,</if>
+            <if test = "sort != null">sort_,</if>
+            <if test = "extInfo1 != null">ext_info_1_,</if>
+            <if test = "extInfo2 != null">ext_info_2_,</if>
+            <if test = "extInfo3 != null">ext_info_3_,</if>
+            <if test = "extInfo4 != null">ext_info_4_,</if>
+            <if test = "extInfo5 != null">ext_info_5_,</if>
+            <if test = "extInfo6 != null">ext_info_6_,</if>
+        </trim>
+        <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+            <if test = "procBusinessKey != null">#{procBusinessKey, jdbcType=VARCHAR},</if>
+            <if test = "mask != null">#{mask, jdbcType=VARCHAR},</if>
+            <if test = "id != null">#{id, jdbcType=VARCHAR},</if>
+            <if test = "researchProjectId != null">#{researchProjectId, jdbcType=VARCHAR},</if>
+            <if test = "detailType != null">#{detailType, jdbcType=VARCHAR},</if>
+            <if test = "name != null">#{name, jdbcType=VARCHAR},</if>
+            <if test = "count != null">#{count, jdbcType=VARCHAR},</if>
+            <if test = "unit != null">#{unit, jdbcType=VARCHAR},</if>
+            <if test = "unitPrice != null">#{unitPrice, jdbcType=VARCHAR},</if>
+            <if test = "sort != null">#{sort, jdbcType=VARCHAR},</if>
+            <if test = "extInfo1 != null">#{extInfo1, jdbcType=VARCHAR},</if>
+            <if test = "extInfo2 != null">#{extInfo2, jdbcType=VARCHAR},</if>
+            <if test = "extInfo3 != null">#{extInfo3, jdbcType=VARCHAR},</if>
+            <if test = "extInfo4 != null">#{extInfo4, jdbcType=VARCHAR},</if>
+            <if test = "extInfo5 != null">#{extInfo5, jdbcType=VARCHAR},</if>
+            <if test = "extInfo6 != null">#{extInfo6, jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <!-- RS_HI_CAPITAL_DETAIL 列表总数-->
+    <select id = "queryByCount" resultType = "java.lang.Integer" parameterType = "com.adc.da.base.page.BasePage">
+        select count(1) from RS_HI_CAPITAL_DETAIL
+        <include refid = "Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询RS_HI_CAPITAL_DETAIL列表 -->
+    <select id = "queryByPage" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from
+        (select tmp_tb.* , rownum rn from
+        (select
+        <include refid = "Base_Column_List"/>
+        from RS_HI_CAPITAL_DETAIL
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id = "queryByList" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from RS_HI_CAPITAL_DETAIL
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id = "deleteByPrimaryKey" parameterType = "com.adc.da.capital.entity.HiCapitalDetailEO">
+        DELETE
+        FROM RS_HI_CAPITAL_DETAIL
+        WHERE id_ = #{id}
+          AND PROC_BUSINESS_KEY_ = #{procBusinessKey}
+    </delete>
+
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id = "updateByPrimaryKeySelective" parameterType = "com.adc.da.capital.entity.HiCapitalDetailEO">
+        update RS_HI_CAPITAL_DETAIL
+        <set>
+            <if test = "mask != null">
+                MASK_ = #{mask},
+            </if>
+            <if test = "researchProjectId != null">
+                research_project_id_ = #{researchProjectId},
+            </if>
+            <if test = "detailType != null">
+                detail_type_ = #{detailType},
+            </if>
+            <if test = "name != null">
+                name_ = #{name},
+            </if>
+            <if test = "count != null">
+                count_ = #{count},
+            </if>
+            <if test = "unit != null">
+                unit_ = #{unit},
+            </if>
+            <if test = "unitPrice != null">
+                unit_price_ = #{unitPrice},
+            </if>
+            <if test = "sort != null">
+                sort_ = #{sort},
+            </if>
+            <if test = "extInfo1 != null">
+                ext_info_1_ = #{extInfo1},
+            </if>
+            <if test = "extInfo2 != null">
+                ext_info_2_ = #{extInfo2},
+            </if>
+            <if test = "extInfo3 != null">
+                ext_info_3_ = #{extInfo3},
+            </if>
+            <if test = "extInfo4 != null">
+                ext_info_4_ = #{extInfo4},
+            </if>
+            <if test = "extInfo5 != null">
+                ext_info_5_ = #{extInfo5},
+            </if>
+            <if test = "extInfo6 != null">
+                ext_info_6_ = #{extInfo6},
+            </if>
+        </set>
+        where id_ = #{id}
+        AND PROC_BUSINESS_KEY_ = #{procBusinessKey}
+    </update>
+    <!--    批量新增-->
+    <insert id = "insertSelectiveAll" parameterType = "java.util.List">
+        INSERT ALL
+        <foreach collection = "list" item = "item" index = "index">
+            <if test = "item.id !=null">
+                into RS_HI_CAPITAL_DETAIL
+                <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+                    <if test = "item.procBusinessKey != null">proc_business_key_,</if>
+                    <if test = "item.mask != null">mask_,</if>
+                    <if test = "item.id != null">id_,</if>
+                    <if test = "item.researchProjectId != null">research_project_id_,</if>
+                    <if test = "item.detailType != null">detail_type_,</if>
+                    <if test = "item.name != null">name_,</if>
+                    <if test = "item.count != null">count_,</if>
+                    <if test = "item.unit != null">unit_,</if>
+                    <if test = "item.unitPrice != null">unit_price_,</if>
+                    <if test = "item.sort != null">sort_,</if>
+                    <if test = "item.extInfo1 != null">ext_info_1_,</if>
+                    <if test = "item.extInfo2 != null">ext_info_2_,</if>
+                    <if test = "item.extInfo3 != null">ext_info_3_,</if>
+                    <if test = "item.extInfo4 != null">ext_info_4_,</if>
+                    <if test = "item.extInfo5 != null">ext_info_5_,</if>
+                    <if test = "item.extInfo6 != null">ext_info_6_,</if>
+                </trim>
+                <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+                    <if test = "item.procBusinessKey != null">#{item.procBusinessKey, jdbcType=VARCHAR},</if>
+                    <if test = "item.mask != null">#{item.mask, jdbcType=VARCHAR},</if>
+                    <if test = "item.id != null">#{item.id, jdbcType=VARCHAR},</if>
+                    <if test = "item.researchProjectId != null">#{item.researchProjectId, jdbcType=VARCHAR},</if>
+                    <if test = "item.detailType != null">#{item.detailType, jdbcType=VARCHAR},</if>
+                    <if test = "item.name != null">#{item.name, jdbcType=VARCHAR},</if>
+                    <if test = "item.count != null">#{item.count, jdbcType=VARCHAR},</if>
+                    <if test = "item.unit != null">#{item.unit, jdbcType=VARCHAR},</if>
+                    <if test = "item.unitPrice != null">#{item.unitPrice, jdbcType=VARCHAR},</if>
+                    <if test = "item.sort != null">#{item.sort, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo1 != null">#{item.extInfo1, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo2 != null">#{item.extInfo2, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo3 != null">#{item.extInfo3, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo4 != null">#{item.extInfo4, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo5 != null">#{item.extInfo5, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo6 != null">#{item.extInfo6, jdbcType=VARCHAR},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+</mapper>

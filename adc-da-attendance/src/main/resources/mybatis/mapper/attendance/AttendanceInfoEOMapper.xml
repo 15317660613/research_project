@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.attendance.dao.AttendanceInfoEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.attendance.entity.AttendanceInfoEO" >
+    <id column="id" property="id" />
+    <result column="work_id" property="workId" />
+    <result column="human_name" property="humanName" />
+    <result column="attendance" property="attendance" />
+    <result column="attendance_time" property="attendanceTime" />
+    <result column="dept" property="dept" />
+    <result column="isdel" property="isdel" />
+    <result column="created_time" property="createdTime" />
+    <result column="created_user" property="createdUser" />
+    <result column="modified_time" property="modifiedTime" />
+    <result column="modifyed_user" property="modifyedUser" />
+    <result column="isexcept" property="isexcept" />
+  </resultMap>
+
+  <!-- ATTENDANCE_INFO table all fields -->
+  <sql id="Base_Column_List" >
+     id, work_id, human_name, attendance, attendance_time, dept, isdel, created_time, created_user, modified_time, modifyed_user, isexcept
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="workId != null" >
+        and work_id ${workIdOperator} #{workId}
+      </if>
+      <if test="humanName != null" >
+        and human_name ${humanNameOperator} #{humanName}
+      </if>
+      <if test="attendance != null" >
+        and attendance ${attendanceOperator} #{attendance}
+      </if>
+      <if test="attendance1 != null" >
+        and attendance &gt;= #{attendance1}
+      </if>
+      <if test="attendance2 != null" >
+        and attendance &lt;= #{attendance2}
+      </if>
+      <if test="attendanceTime != null" >
+        and attendance_time ${attendanceTimeOperator} #{attendanceTime}
+      </if>
+      <if test="dept != null" >
+        and dept ${deptOperator} #{dept}
+      </if>
+      <if test="isdel != null" >
+        and isdel ${isdelOperator} #{isdel}
+      </if>
+      <if test="createdTime != null" >
+        and created_time ${createdTimeOperator} #{createdTime}
+      </if>
+      <if test="createdTime1 != null" >
+        and created_time &gt;= #{createdTime1}
+      </if>
+      <if test="createdTime2 != null" >
+        and created_time &lt;= #{createdTime2}
+      </if>
+      <if test="createdUser != null" >
+        and created_user ${createdUserOperator} #{createdUser}
+      </if>
+      <if test="modifiedTime != null" >
+        and modified_time ${modifiedTimeOperator} #{modifiedTime}
+      </if>
+      <if test="modifiedTime1 != null" >
+        and modified_time &gt;= #{modifiedTime1}
+      </if>
+      <if test="modifiedTime2 != null" >
+        and modified_time &lt;= #{modifiedTime2}
+      </if>
+      <if test="modifyedUser != null" >
+        and modifyed_user ${modifyedUserOperator} #{modifyedUser}
+      </if>
+      <if test="isexcept != null" >
+        and isexcept ${isexceptOperator} #{isexcept}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.attendance.entity.AttendanceInfoEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_ATTENDANCE_INFO.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into ATTENDANCE_INFO(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{workId, jdbcType=VARCHAR}, #{humanName, jdbcType=VARCHAR}, #{attendance, jdbcType=TIMESTAMP}, #{attendanceTime, jdbcType=VARCHAR}, #{dept, jdbcType=VARCHAR}, #{isdel, jdbcType=VARCHAR}, #{createdTime, jdbcType=TIMESTAMP}, #{createdUser, jdbcType=VARCHAR}, #{modifiedTime, jdbcType=TIMESTAMP}, #{modifyedUser, jdbcType=VARCHAR}, #{isexcept, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.attendance.entity.AttendanceInfoEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_ATTENDANCE_INFO.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into ATTENDANCE_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="workId != null" >work_id,</if>
+                <if test="humanName != null" >human_name,</if>
+                <if test="attendance != null" >attendance,</if>
+                <if test="attendanceTime != null" >attendance_time,</if>
+                <if test="dept != null" >dept,</if>
+                <if test="isdel != null" >isdel,</if>
+                <if test="createdTime != null" >created_time,</if>
+                <if test="createdUser != null" >created_user,</if>
+                <if test="modifiedTime != null" >modified_time,</if>
+                <if test="modifyedUser != null" >modifyed_user,</if>
+                <if test="isexcept != null" >isexcept,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="workId != null" >#{workId, jdbcType=VARCHAR},</if>
+                <if test="humanName != null" >#{humanName, jdbcType=VARCHAR},</if>
+                <if test="attendance != null" >#{attendance, jdbcType=TIMESTAMP},</if>
+                <if test="attendanceTime != null" >#{attendanceTime, jdbcType=VARCHAR},</if>
+                <if test="dept != null" >#{dept, jdbcType=VARCHAR},</if>
+                <if test="isdel != null" >#{isdel, jdbcType=VARCHAR},</if>
+                <if test="createdTime != null" >#{createdTime, jdbcType=TIMESTAMP},</if>
+                <if test="createdUser != null" >#{createdUser, jdbcType=VARCHAR},</if>
+                <if test="modifiedTime != null" >#{modifiedTime, jdbcType=TIMESTAMP},</if>
+                <if test="modifyedUser != null" >#{modifyedUser, jdbcType=VARCHAR},</if>
+                <if test="isexcept != null" >#{isexcept, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.attendance.entity.AttendanceInfoEO" >
+    update ATTENDANCE_INFO
+       set  work_id = #{workId},
+            human_name = #{humanName},
+            attendance = #{attendance},
+            attendance_time = #{attendanceTime},
+            dept = #{dept},
+            isdel = #{isdel},
+            created_time = #{createdTime},
+            created_user = #{createdUser},
+            modified_time = #{modifiedTime},
+            modifyed_user = #{modifyedUser},
+            isexcept = #{isexcept}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.attendance.entity.AttendanceInfoEO" >
+    update ATTENDANCE_INFO
+    <set >
+      <if test="workId != null" >
+        work_id = #{workId},
+      </if>
+      <if test="humanName != null" >
+        human_name = #{humanName},
+      </if>
+      <if test="attendance != null" >
+        attendance = #{attendance},
+      </if>
+      <if test="attendanceTime != null" >
+        attendance_time = #{attendanceTime},
+      </if>
+      <if test="dept != null" >
+        dept = #{dept},
+      </if>
+      <if test="isdel != null" >
+        isdel = #{isdel},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+      <if test="createdUser != null" >
+        created_user = #{createdUser},
+      </if>
+      <if test="modifiedTime != null" >
+        modified_time = #{modifiedTime},
+      </if>
+      <if test="modifyedUser != null" >
+        modifyed_user = #{modifyedUser},
+      </if>
+      <if test="isexcept != null" >
+        isexcept = #{isexcept},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 ATTENDANCE_INFO -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from ATTENDANCE_INFO
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ATTENDANCE_INFO
+     where id = #{value}
+
+  </delete>
+
+  <!-- ATTENDANCE_INFO 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from ATTENDANCE_INFO
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询ATTENDANCE_INFO列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from ATTENDANCE_INFO
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from ATTENDANCE_INFO
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

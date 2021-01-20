@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.crm.dao.BTravelApprovalEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.crm.entity.BTravelApprovalEO" >
+    <id column="id" property="id" />
+    <result column="travel_start_and_finish_time" property="travelStartAndFinishTime" />
+    <result column="order_number" property="orderNumber" />
+    <result column="travel_user_id" property="travelUserId" />
+    <result column="dept_id" property="deptId" />
+    <result column="leader" property="leader" />
+    <result column="job" property="job" />
+    <result column="address" property="address" />
+    <result column="type" property="type" />
+    <result column="travel_start_time" property="travelStartTime" />
+    <result column="travel_end_time" property="travelEndTime" />
+    <result column="reason" property="reason" />
+    <result column="if_issue" property="ifIssue" />
+    <result column="issue_name" property="issueName" />
+    <result column="vehicle" property="vehicle" />
+    <result column="vehicle_reason" property="vehicleReason" />
+    <result column="if_reserve_from_ctrip" property="ifReserveFromCtrip" />
+    <result column="other_reserve_reason" property="otherReserveReason" />
+    <result column="customer_record_id" property="customerRecordId" />
+    <result column="dept_head_opinion" property="deptHeadOpinion" />
+    <result column="data_center_leader_opinion" property="dataCenterLeaderOpinion" />
+    <result column="del_flag" property="delFlag" />
+    <result column="created_time" property="createdTime" />
+    <result column="created_user" property="createdUser" />
+    <result column="modified_time" property="modifiedTime" />
+    <result column="modified_user" property="modifiedUser" />
+    <result column="check_status" property="checkStatus" />
+  </resultMap>
+
+  <!-- B_TRAVEL_APPROVAL table all fields -->
+  <sql id="Base_Column_List" >
+     travel_start_and_finish_time, id, order_number, travel_user_id, dept_id, leader, job, address, type, travel_start_time, travel_end_time, reason, if_issue, issue_name, vehicle, vehicle_reason, if_reserve_from_ctrip, other_reserve_reason, customer_record_id, dept_head_opinion, data_center_leader_opinion, del_flag, created_time, created_user, modified_time, modified_user, check_status
+  </sql>
+
+    <!-- B_TRAVEL_APPROVAL table all fields -->
+    <sql id="CRM_Column_List" >
+     travel_start_and_finish_time, id, order_number, (select u.usname from TS_USER u where u.usid = travel_user_id) as travel_user_id, (select org.org_name from TS_ORG org where id = dept_id) as dept_id, leader, job, address, type, travel_start_time , travel_end_time, reason, if_issue, issue_name, vehicle, vehicle_reason, if_reserve_from_ctrip, other_reserve_reason, customer_record_id, dept_head_opinion, data_center_leader_opinion, del_flag, created_time, created_user, modified_time, modified_user, check_status
+  </sql>
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="travelStartAndFinishTime != null" >
+        and travel_start_and_finish_time ${travelStartAndFinishTimeOperator} #{travelStartAndFinishTime}
+      </if>
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="orderNumber != null" >
+        and order_number ${orderNumberOperator} #{orderNumber}
+      </if>
+      <if test="travelUserId != null" >
+        and travel_user_id ${travelUserIdOperator} #{travelUserId}
+      </if>
+      <if test="deptId != null" >
+        and dept_id ${deptIdOperator} #{deptId}
+      </if>
+      <if test="leader != null" >
+        and leader ${leaderOperator} #{leader}
+      </if>
+      <if test="job != null" >
+        and job ${jobOperator} #{job}
+      </if>
+      <if test="address != null" >
+        and address ${addressOperator} #{address}
+      </if>
+      <if test="type != null" >
+        and type ${typeOperator} #{type}
+      </if>
+      <if test="travelStartTime != null" >
+        and travel_start_time ${travelStartTimeOperator} #{travelStartTime}
+      </if>
+      <if test="travelStartTime1 != null" >
+        and travel_start_time &gt;= #{travelStartTime1}
+      </if>
+      <if test="travelStartTime2 != null" >
+        and travel_start_time &lt;= #{travelStartTime2}
+      </if>
+      <if test="travelEndTime != null" >
+        and travel_end_time ${travelEndTimeOperator} #{travelEndTime}
+      </if>
+      <if test="travelEndTime1 != null" >
+        and travel_end_time &gt;= #{travelEndTime1}
+      </if>
+      <if test="travelEndTime2 != null" >
+        and travel_end_time &lt;= #{travelEndTime2}
+      </if>
+      <if test="reason != null" >
+        and reason ${reasonOperator} #{reason}
+      </if>
+      <if test="ifIssue != null" >
+        and if_issue ${ifIssueOperator} #{ifIssue}
+      </if>
+      <if test="issueName != null" >
+        and issue_name ${issueNameOperator} #{issueName}
+      </if>
+      <if test="vehicle != null" >
+        and vehicle ${vehicleOperator} #{vehicle}
+      </if>
+      <if test="vehicleReason != null" >
+        and vehicle_reason ${vehicleReasonOperator} #{vehicleReason}
+      </if>
+      <if test="ifReserveFromCtrip != null" >
+        and if_reserve_from_ctrip ${ifReserveFromCtripOperator} #{ifReserveFromCtrip}
+      </if>
+      <if test="otherReserveReason != null" >
+        and other_reserve_reason ${otherReserveReasonOperator} #{otherReserveReason}
+      </if>
+      <if test="customerRecordId != null" >
+        and customer_record_id ${customerRecordIdOperator} #{customerRecordId}
+      </if>
+      <if test="deptHeadOpinion != null" >
+        and dept_head_opinion ${deptHeadOpinionOperator} #{deptHeadOpinion}
+      </if>
+      <if test="dataCenterLeaderOpinion != null" >
+        and data_center_leader_opinion ${dataCenterLeaderOpinionOperator} #{dataCenterLeaderOpinion}
+      </if>
+      <if test="createdTime != null" >
+        and created_time ${createdTimeOperator} #{createdTime}
+      </if>
+      <if test="createdTime1 != null" >
+        and created_time &gt;= #{createdTime1}
+      </if>
+      <if test="createdTime2 != null" >
+        and created_time &lt;= #{createdTime2}
+      </if>
+      <if test="createdUser != null" >
+        and created_user ${createdUserOperator} #{createdUser}
+      </if>
+      <if test="modifiedTime != null" >
+        and modified_time ${modifiedTimeOperator} #{modifiedTime}
+      </if>
+      <if test="modifiedTime1 != null" >
+        and modified_time &gt;= #{modifiedTime1}
+      </if>
+      <if test="modifiedTime2 != null" >
+        and modified_time &lt;= #{modifiedTime2}
+      </if>
+      <if test="modifiedUser != null" >
+        and modified_user ${modifiedUserOperator} #{modifiedUser}
+      </if>
+      <if test="checkStatus != null" >
+        and check_status ${checkStatusOperator} #{checkStatus}
+      </if>
+            and del_flag = '0'
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.crm.entity.BTravelApprovalEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_B_TRAVEL_APPROVAL.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into B_TRAVEL_APPROVAL(<include refid="Base_Column_List" />)
+    values (#{travelStartAndFinishTime, jdbcType=VARCHAR}, #{id, jdbcType=VARCHAR}, #{orderNumber, jdbcType=VARCHAR}, #{travelUserId, jdbcType=VARCHAR}, #{deptId, jdbcType=VARCHAR}, #{leader, jdbcType=VARCHAR}, #{job, jdbcType=VARCHAR}, #{address, jdbcType=VARCHAR}, #{type, jdbcType=VARCHAR}, #{travelStartTime, jdbcType=TIMESTAMP}, #{travelEndTime, jdbcType=TIMESTAMP}, #{reason, jdbcType=CLOB}, #{ifIssue, jdbcType=VARCHAR}, #{issueName, jdbcType=VARCHAR}, #{vehicle, jdbcType=VARCHAR}, #{vehicleReason, jdbcType=CLOB}, #{ifReserveFromCtrip, jdbcType=VARCHAR}, #{otherReserveReason, jdbcType=VARCHAR}, #{customerRecordId, jdbcType=VARCHAR}, #{deptHeadOpinion, jdbcType=VARCHAR}, #{dataCenterLeaderOpinion, jdbcType=VARCHAR}, #{delFlag, jdbcType=VARCHAR}, #{createdTime, jdbcType=TIMESTAMP}, #{createdUser, jdbcType=VARCHAR}, #{modifiedTime, jdbcType=TIMESTAMP}, #{modifiedUser, jdbcType=VARCHAR}, #{checkStatus, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.crm.entity.BTravelApprovalEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_B_TRAVEL_APPROVAL.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into B_TRAVEL_APPROVAL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="travelStartAndFinishTime != null" >travel_start_and_finish_time,</if>
+                <if test="id != null" >id,</if>
+                <if test="orderNumber != null" >order_number,</if>
+                <if test="travelUserId != null" >travel_user_id,</if>
+                <if test="deptId != null" >dept_id,</if>
+                <if test="leader != null" >leader,</if>
+                <if test="job != null" >job,</if>
+                <if test="address != null" >address,</if>
+                <if test="type != null" >type,</if>
+                <if test="travelStartTime != null" >travel_start_time,</if>
+                <if test="travelEndTime != null" >travel_end_time,</if>
+                <if test="reason != null" >reason,</if>
+                <if test="ifIssue != null" >if_issue,</if>
+                <if test="issueName != null" >issue_name,</if>
+                <if test="vehicle != null" >vehicle,</if>
+                <if test="vehicleReason != null" >vehicle_reason,</if>
+                <if test="ifReserveFromCtrip != null" >if_reserve_from_ctrip,</if>
+                <if test="otherReserveReason != null" >other_reserve_reason,</if>
+                <if test="customerRecordId != null" >customer_record_id,</if>
+                <if test="deptHeadOpinion != null" >dept_head_opinion,</if>
+                <if test="dataCenterLeaderOpinion != null" >data_center_leader_opinion,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="createdTime != null" >created_time,</if>
+                <if test="createdUser != null" >created_user,</if>
+                <if test="modifiedTime != null" >modified_time,</if>
+                <if test="modifiedUser != null" >modified_user,</if>
+                <if test="checkStatus != null" >check_status,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="travelStartAndFinishTime != null" >#{travelStartAndFinishTime, jdbcType=VARCHAR},</if>
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="orderNumber != null" >#{orderNumber, jdbcType=VARCHAR},</if>
+                <if test="travelUserId != null" >#{travelUserId, jdbcType=VARCHAR},</if>
+                <if test="deptId != null" >#{deptId, jdbcType=VARCHAR},</if>
+                <if test="leader != null" >#{leader, jdbcType=VARCHAR},</if>
+                <if test="job != null" >#{job, jdbcType=VARCHAR},</if>
+                <if test="address != null" >#{address, jdbcType=VARCHAR},</if>
+                <if test="type != null" >#{type, jdbcType=VARCHAR},</if>
+                <if test="travelStartTime != null" >#{travelStartTime, jdbcType=TIMESTAMP},</if>
+                <if test="travelEndTime != null" >#{travelEndTime, jdbcType=TIMESTAMP},</if>
+                <if test="reason != null" >#{reason, jdbcType=CLOB},</if>
+                <if test="ifIssue != null" >#{ifIssue, jdbcType=VARCHAR},</if>
+                <if test="issueName != null" >#{issueName, jdbcType=VARCHAR},</if>
+                <if test="vehicle != null" >#{vehicle, jdbcType=VARCHAR},</if>
+                <if test="vehicleReason != null" >#{vehicleReason, jdbcType=CLOB},</if>
+                <if test="ifReserveFromCtrip != null" >#{ifReserveFromCtrip, jdbcType=VARCHAR},</if>
+                <if test="otherReserveReason != null" >#{otherReserveReason, jdbcType=VARCHAR},</if>
+                <if test="customerRecordId != null" >#{customerRecordId, jdbcType=VARCHAR},</if>
+                <if test="deptHeadOpinion != null" >#{deptHeadOpinion, jdbcType=VARCHAR},</if>
+                <if test="dataCenterLeaderOpinion != null" >#{dataCenterLeaderOpinion, jdbcType=VARCHAR},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=VARCHAR},</if>
+                <if test="createdTime != null" >#{createdTime, jdbcType=TIMESTAMP},</if>
+                <if test="createdUser != null" >#{createdUser, jdbcType=VARCHAR},</if>
+                <if test="modifiedTime != null" >#{modifiedTime, jdbcType=TIMESTAMP},</if>
+                <if test="modifiedUser != null" >#{modifiedUser, jdbcType=VARCHAR},</if>
+                <if test="checkStatus != null" >#{checkStatus, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.crm.entity.BTravelApprovalEO" >
+    update B_TRAVEL_APPROVAL
+       set  travel_start_and_finish_time = #{travelStartAndFinishTime},
+            order_number = #{orderNumber},
+            travel_user_id = #{travelUserId},
+            dept_id = #{deptId},
+            leader = #{leader},
+            job = #{job},
+            address = #{address},
+            type = #{type},
+            travel_start_time = #{travelStartTime},
+            travel_end_time = #{travelEndTime},
+            reason = #{reason},
+            if_issue = #{ifIssue},
+            issue_name = #{issueName},
+            vehicle = #{vehicle},
+            vehicle_reason = #{vehicleReason},
+            if_reserve_from_ctrip = #{ifReserveFromCtrip},
+            other_reserve_reason = #{otherReserveReason},
+            customer_record_id = #{customerRecordId},
+            dept_head_opinion = #{deptHeadOpinion},
+            data_center_leader_opinion = #{dataCenterLeaderOpinion},
+            del_flag = #{delFlag},
+            created_time = #{createdTime},
+            created_user = #{createdUser},
+            modified_time = #{modifiedTime},
+            modified_user = #{modifiedUser},
+            check_status = #{checkStatus}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.crm.entity.BTravelApprovalEO" >
+    update B_TRAVEL_APPROVAL
+    <set >
+      <if test="travelStartAndFinishTime != null" >
+        travel_start_and_finish_time = #{travelStartAndFinishTime},
+      </if>
+      <if test="orderNumber != null" >
+        order_number = #{orderNumber},
+      </if>
+      <if test="travelUserId != null" >
+        travel_user_id = #{travelUserId},
+      </if>
+      <if test="deptId != null" >
+        dept_id = #{deptId},
+      </if>
+      <if test="leader != null" >
+        leader = #{leader},
+      </if>
+      <if test="job != null" >
+        job = #{job},
+      </if>
+      <if test="address != null" >
+        address = #{address},
+      </if>
+      <if test="type != null" >
+        type = #{type},
+      </if>
+      <if test="travelStartTime != null" >
+        travel_start_time = #{travelStartTime},
+      </if>
+      <if test="travelEndTime != null" >
+        travel_end_time = #{travelEndTime},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason},
+      </if>
+      <if test="ifIssue != null" >
+        if_issue = #{ifIssue},
+      </if>
+      <if test="issueName != null" >
+        issue_name = #{issueName},
+      </if>
+      <if test="vehicle != null" >
+        vehicle = #{vehicle},
+      </if>
+      <if test="vehicleReason != null" >
+        vehicle_reason = #{vehicleReason},
+      </if>
+      <if test="ifReserveFromCtrip != null" >
+        if_reserve_from_ctrip = #{ifReserveFromCtrip},
+      </if>
+      <if test="otherReserveReason != null" >
+        other_reserve_reason = #{otherReserveReason},
+      </if>
+      <if test="customerRecordId != null" >
+        customer_record_id = #{customerRecordId},
+      </if>
+      <if test="deptHeadOpinion != null" >
+        dept_head_opinion = #{deptHeadOpinion},
+      </if>
+      <if test="dataCenterLeaderOpinion != null" >
+        data_center_leader_opinion = #{dataCenterLeaderOpinion},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+      <if test="createdUser != null" >
+        created_user = #{createdUser},
+      </if>
+      <if test="modifiedTime != null" >
+        modified_time = #{modifiedTime},
+      </if>
+      <if test="modifiedUser != null" >
+        modified_user = #{modifiedUser},
+      </if>
+      <if test="checkStatus != null" >
+        check_status = #{checkStatus},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 B_TRAVEL_APPROVAL -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from B_TRAVEL_APPROVAL
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from B_TRAVEL_APPROVAL
+     where id = #{value}
+
+  </delete>
+
+  <!-- B_TRAVEL_APPROVAL 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from B_TRAVEL_APPROVAL
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询B_TRAVEL_APPROVAL列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from B_TRAVEL_APPROVAL
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+
+  <!-- 查询B_TRAVEL_APPROVAL列表 -->
+  <select id="queryCRMListByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="CRM_Column_List" /> from B_TRAVEL_APPROVAL
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex} order by created_time desc
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from B_TRAVEL_APPROVAL
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+    <update id="updateByPrimaryKeyAndDelFlag" >
+        update B_TRAVEL_APPROVAL set del_flag=#{delFlag} where id=#{id}
+    </update>
+</mapper>

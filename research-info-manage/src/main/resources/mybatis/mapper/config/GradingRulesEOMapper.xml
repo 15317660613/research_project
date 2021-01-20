@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.research.config.dao.GradingRulesEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.research.config.entity.GradingRulesEO" >
+    <id column="id" property="id" />
+    <result column="grading_name" property="gradingName" />
+    <result column="lowest_score" property="lowestScore" />
+    <result column="capped_points" property="cappedPoints" />
+    <result column="rating_rules_id" property="ratingRulesId" />
+    <result column="del_flag" property="delFlag" />
+    <result column="create_time" property="createTime" />
+    <result column="modify_time" property="modifyTime" />
+    <result column="sort" property="sort" />
+    <result column="ext4" property="ext4" />
+    <result column="ext5" property="ext5" />
+  </resultMap>
+
+  <!-- RS_GRADING_RULES table all fields -->
+  <sql id="Base_Column_List" >
+     id, grading_name, lowest_score, capped_points, rating_rules_id, del_flag, create_time, modify_time, sort, ext4, ext5
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="gradingName != null" >
+        and grading_name ${gradingNameOperator} #{gradingName}
+      </if>
+      <if test="lowestScore != null" >
+        and lowest_score ${lowestScoreOperator} #{lowestScore}
+      </if>
+      <if test="cappedPoints != null" >
+        and capped_points ${cappedPointsOperator} #{cappedPoints}
+      </if>
+      <if test="ratingRulesId != null" >
+        and rating_rules_id ${ratingRulesIdOperator} #{ratingRulesId}
+      </if>
+      <if test="delFlag != null" >
+        and del_flag =0
+      </if>
+      <if test="createTime != null" >
+        and create_time ${ext1Operator} #{createTime}
+      </if>
+      <if test="modifyTime != null" >
+        and modify_time ${ext2Operator} #{modifyTime}
+      </if>
+      <if test="sort != null" >
+        and sort ${ext3Operator} #{sort}
+      </if>
+      <if test="ext4 != null" >
+        and ext4 ${ext4Operator} #{ext4}
+      </if>
+      <if test="ext5 != null" >
+        and ext5 ${ext5Operator} #{ext5}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.research.config.entity.GradingRulesEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RS_GRADING_RULES.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into RS_GRADING_RULES(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{gradingName, jdbcType=VARCHAR}, #{lowestScore, jdbcType=VARCHAR}, #{cappedPoints, jdbcType=VARCHAR}, #{ratingRulesId, jdbcType=VARCHAR}, #{delFlag, jdbcType=INTEGER}, #{createTime, jdbcType=TIMESTAMP}, #{modifyTime, jdbcType=TIMESTAMP}, #{sort, jdbcType=INTEGER}, #{ext4, jdbcType=VARCHAR}, #{ext5, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.research.config.entity.GradingRulesEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_RS_GRADING_RULES.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into RS_GRADING_RULES
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="gradingName != null" >grading_name,</if>
+                <if test="lowestScore != null" >lowest_score,</if>
+                <if test="cappedPoints != null" >capped_points,</if>
+                <if test="ratingRulesId != null" >rating_rules_id,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="modifyTime != null" >modify_time,</if>
+                <if test="sort != null" >sort,</if>
+                <if test="ext4 != null" >ext4,</if>
+                <if test="ext5 != null" >ext5,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="gradingName != null" >#{gradingName, jdbcType=VARCHAR},</if>
+                <if test="lowestScore != null" >#{lowestScore, jdbcType=VARCHAR},</if>
+                <if test="cappedPoints != null" >#{cappedPoints, jdbcType=VARCHAR},</if>
+                <if test="ratingRulesId != null" >#{ratingRulesId, jdbcType=VARCHAR},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=INTEGER},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="modifyTime != null" >#{modifyTime, jdbcType=TIMESTAMP},</if>
+                <if test="sort != null" >#{sort, jdbcType=INTEGER},</if>
+                <if test="ext4 != null" >#{ext4, jdbcType=VARCHAR},</if>
+                <if test="ext5 != null" >#{ext5, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.research.config.entity.GradingRulesEO" >
+    update RS_GRADING_RULES
+       set  grading_name = #{gradingName},
+            lowest_score = #{lowestScore},
+            capped_points = #{cappedPoints},
+            rating_rules_id = #{ratingRulesId},
+            del_flag = #{delFlag},
+            create_time = #{createTime},
+            modify_time = #{modifyTime},
+            sort = #{sort},
+            ext4 = #{ext4},
+            ext5 = #{ext5}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.research.config.entity.GradingRulesEO" >
+    update RS_GRADING_RULES
+    <set >
+      <if test="gradingName != null" >
+        grading_name = #{gradingName},
+      </if>
+      <if test="lowestScore != null" >
+        lowest_score = #{lowestScore},
+      </if>
+      <if test="cappedPoints != null" >
+        capped_points = #{cappedPoints},
+      </if>
+      <if test="ratingRulesId != null" >
+        rating_rules_id = #{ratingRulesId},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="createTime != null" >
+          create_time = #{createTime},
+      </if>
+      <if test="modifyTime != null" >
+          modify_time = #{modifyTime},
+      </if>
+      <if test="sort != null" >
+          sort = #{sort},
+      </if>
+      <if test="ext4 != null" >
+        ext4 = #{ext4},
+      </if>
+      <if test="ext5 != null" >
+        ext5 = #{ext5},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 RS_GRADING_RULES -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from RS_GRADING_RULES
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RS_GRADING_RULES
+     where id = #{value}
+
+  </delete>
+
+  <!-- RS_GRADING_RULES 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from RS_GRADING_RULES
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询RS_GRADING_RULES列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from RS_GRADING_RULES
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+      order by tmp_tb.CREATE_TIME desc
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from RS_GRADING_RULES
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+    <!--批量删除-->
+    <update id="batchDeleteByIds" parameterType="java.util.List">
+        update RS_GRADING_RULES set del_flag = 1 where rating_rules_id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")" index="index">
+            #{id}
+        </foreach>
+    </update>
+
+    <!--批量新增-->
+    <insert id = "batchInsertSelective">
+        INSERT ALL
+        <foreach collection = "gradingRulesEOS" item = "item" index = "index">
+            <if test = "item.id != null">
+                into RS_GRADING_RULES
+                <trim prefix="(" suffix=")" suffixOverrides="," >
+                    <if test="item.id != null" >id,</if>
+                    <if test="item.gradingName != null" >grading_name,</if>
+                    <if test="item.lowestScore != null" >lowest_score,</if>
+                    <if test="item.cappedPoints != null" >capped_points,</if>
+                    <if test="item.ratingRulesId != null" >rating_rules_id,</if>
+                    <if test="item.delFlag != null" >del_flag,</if>
+                    <if test="item.createTime != null" >create_time,</if>
+                    <if test="item.modifyTime != null" >modify_time,</if>
+                    <if test="item.sort != null" >sort,</if>
+                    <if test="item.ext4 != null" >ext4,</if>
+                    <if test="item.ext5 != null" >ext5,</if>
+                </trim>
+                <trim prefix="values (" suffix=")" suffixOverrides="," >
+                    <if test="item.id != null" >#{item.id, jdbcType=VARCHAR},</if>
+                    <if test="item.gradingName != null" >#{item.gradingName, jdbcType=VARCHAR},</if>
+                    <if test="item.lowestScore != null" >#{item.lowestScore, jdbcType=VARCHAR},</if>
+                    <if test="item.cappedPoints != null" >#{item.cappedPoints, jdbcType=VARCHAR},</if>
+                    <if test="item.ratingRulesId != null" >#{item.ratingRulesId, jdbcType=VARCHAR},</if>
+                    <if test="item.delFlag != null" >#{item.delFlag, jdbcType=INTEGER},</if>
+                    <if test="item.createTime != null" >#{item.createTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.modifyTime != null" >#{item.modifyTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.sort != null" >#{item.sort, jdbcType=INTEGER},</if>
+                    <if test="item.ext4 != null" >#{item.ext4, jdbcType=VARCHAR},</if>
+                    <if test="item.ext5 != null" >#{item.ext5, jdbcType=VARCHAR},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+    <!--根据模板id删除评分详情-->
+    <delete id="deleteByRatingRulesId">
+        delete from RS_GRADING_RULES
+     where rating_rules_id = #{ratingRulesId}
+    </delete>
+
+</mapper>

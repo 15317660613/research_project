@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.budget.dao.ProjectHistoryEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.budget.entity.ProjectHistoryEO" >
+    <id column="id" property="id" />
+    <result column="dept_id" property="deptId" />
+    <result column="project_member_ids" property="projectMemberIds" />
+    <result column="project_member_names" property="projectMemberNames" />
+    <result column="budget_id" property="budgetId" />
+    <result column="business_id" property="businessId" />
+    <result column="project_owner" property="projectOwner" />
+    <result column="project_start_time" property="projectStartTime" />
+    <result column="finished_status" property="finishedStatus" />
+    <result column="person_input" property="personInput" />
+    <result column="del_flag" property="delFlag" />
+    <result column="contract_no" property="contractNo" />
+    <result column="operate_date" property="operateDate" />
+    <result column="operate_time" property="operateTime" />
+    <result column="operate_user" property="operateUser" />
+    <result column="operate_type" property="operateType" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="project_id" property="projectId" />
+    <result column="project_name" property="projectName" />
+    <result column="project_description" property="projectDescription" />
+    <result column="project_leader_id" property="projectLeaderId" />
+    <result column="project_leader_name" property="projectLeaderName" />
+  </resultMap>
+
+  <!-- TS_PROJECT_HISTORY table all fields -->
+  <sql id="Base_Column_List" >
+     dept_id, project_member_ids, project_member_names, budget_id, business_id, project_owner, project_start_time, finished_status, person_input, del_flag, contract_no, operate_date, operate_time, operate_user, operate_type, create_user_id, id, project_id, project_name, project_description, project_leader_id, project_leader_name
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="deptId != null" >
+        and dept_id = #{deptId}
+      </if>
+      <if test="projectMemberIds != null" >
+        and project_member_ids = #{projectMemberIds}
+      </if>
+      <if test="projectMemberNames != null" >
+        and project_member_names = #{projectMemberNames}
+      </if>
+      <if test="budgetId != null" >
+        and budget_id = #{budgetId}
+      </if>
+      <if test="businessId != null" >
+        and business_id = #{businessId}
+      </if>
+      <if test="projectOwner != null" >
+        and project_owner = #{projectOwner}
+      </if>
+      <if test="projectStartTime != null" >
+        and project_start_time = #{projectStartTime}
+      </if>
+      <if test="projectStartTime1 != null" >
+        and project_start_time &gt;= #{projectStartTime1}
+      </if>
+      <if test="projectStartTime2 != null" >
+        and project_start_time &lt;= #{projectStartTime2}
+      </if>
+      <if test="finishedStatus != null" >
+        and finished_status = #{finishedStatus}
+      </if>
+      <if test="personInput != null" >
+        and person_input = #{personInput}
+      </if>
+      <if test="delFlag != null" >
+        and del_flag = #{delFlag}
+      </if>
+      <if test="contractNo != null" >
+        and contract_no = #{contractNo}
+      </if>
+      <if test="operateDate != null" >
+        and operate_date = #{operateDate}
+      </if>
+      <if test="operateDate1 != null" >
+        and operate_date &gt;= #{operateDate1}
+      </if>
+      <if test="operateDate2 != null" >
+        and operate_date &lt;= #{operateDate2}
+      </if>
+      <if test="operateTime != null" >
+        and operate_time = #{operateTime}
+      </if>
+      <if test="operateTime1 != null" >
+        and operate_time &gt;= #{operateTime1}
+      </if>
+      <if test="operateTime2 != null" >
+        and operate_time &lt;= #{operateTime2}
+      </if>
+      <if test="operateUser != null" >
+        and operate_user = #{operateUser}
+      </if>
+      <if test="operateType != null" >
+        and operate_type = #{operateType}
+      </if>
+      <if test="createUserId != null" >
+        and create_user_id = #{createUserId}
+      </if>
+      <if test="id != null" >
+        and id = #{id}
+      </if>
+      <if test="projectId != null" >
+        and project_id = #{projectId}
+      </if>
+      <if test="projectName != null" >
+        and project_name = #{projectName}
+      </if>
+      <if test="projectDescription != null" >
+        and project_description = #{projectDescription}
+      </if>
+      <if test="projectLeaderId != null" >
+        and project_leader_id = #{projectLeaderId}
+      </if>
+      <if test="projectLeaderName != null" >
+        and project_leader_name = #{projectLeaderName}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.budget.entity.ProjectHistoryEO" >
+     <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_PROJECT_HISTORY.NEXTVAL FROM DUAL
+    </selectKey>
+      insert into TS_PROJECT_HISTORY
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+                    <if test="deptId != null" >dept_id,</if>
+                    <if test="projectMemberIds != null" >project_member_ids,</if>
+                    <if test="projectMemberNames != null" >project_member_names,</if>
+                    <if test="budgetId != null" >budget_id,</if>
+                    <if test="businessId != null" >business_id,</if>
+                    <if test="projectOwner != null" >project_owner,</if>
+                    <if test="projectStartTime != null" >project_start_time,</if>
+                    <if test="finishedStatus != null" >finished_status,</if>
+                    <if test="personInput != null" >person_input,</if>
+                    <if test="delFlag != null" >del_flag,</if>
+                    <if test="contractNo != null" >contract_no,</if>
+                    <if test="operateDate != null" >operate_date,</if>
+                    <if test="operateTime != null" >operate_time,</if>
+                    <if test="operateUser != null" >operate_user,</if>
+                    <if test="operateType != null" >operate_type,</if>
+                    <if test="createUserId != null" >create_user_id,</if>
+                    <if test="id != null" >id,</if>
+                    <if test="projectId != null" >project_id,</if>
+                    <if test="projectName != null" >project_name,</if>
+                    <if test="projectDescription != null" >project_description,</if>
+                    <if test="projectLeaderId != null" >project_leader_id,</if>
+                    <if test="projectLeaderName != null" >project_leader_name,</if>
+                </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides="," >
+                    <if test="deptId != null" >#{deptId},</if>
+                    <if test="projectMemberIds != null" >#{projectMemberIds},</if>
+                    <if test="projectMemberNames != null" >#{projectMemberNames},</if>
+                    <if test="budgetId != null" >#{budgetId},</if>
+                    <if test="businessId != null" >#{businessId},</if>
+                    <if test="projectOwner != null" >#{projectOwner},</if>
+                    <if test="projectStartTime != null" >#{projectStartTime},</if>
+                    <if test="finishedStatus != null" >#{finishedStatus},</if>
+                    <if test="personInput != null" >#{personInput},</if>
+                    <if test="delFlag != null" >#{delFlag},</if>
+                    <if test="contractNo != null" >#{contractNo},</if>
+                    <if test="operateDate != null" >#{operateDate},</if>
+                    <if test="operateTime != null" >#{operateTime},</if>
+                    <if test="operateUser != null" >#{operateUser},</if>
+                    <if test="operateType != null" >#{operateType},</if>
+                    <if test="createUserId != null" >#{createUserId},</if>
+                    <if test="id != null" >#{id},</if>
+                    <if test="projectId != null" >#{projectId},</if>
+                    <if test="projectName != null" >#{projectName},</if>
+                    <if test="projectDescription != null" >#{projectDescription},</if>
+                    <if test="projectLeaderId != null" >#{projectLeaderId},</if>
+                    <if test="projectLeaderName != null" >#{projectLeaderName},</if>
+                </trim>
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.budget.entity.ProjectHistoryEO" >
+        <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_TS_PROJECT_HISTORY.NEXTVAL FROM DUAL
+    </selectKey>
+        insert into TS_PROJECT_HISTORY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="deptId != null" >dept_id,</if>
+                <if test="projectMemberIds != null" >project_member_ids,</if>
+                <if test="projectMemberNames != null" >project_member_names,</if>
+                <if test="budgetId != null" >budget_id,</if>
+                <if test="businessId != null" >business_id,</if>
+                <if test="projectOwner != null" >project_owner,</if>
+                <if test="projectStartTime != null" >project_start_time,</if>
+                <if test="finishedStatus != null" >finished_status,</if>
+                <if test="personInput != null" >person_input,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="contractNo != null" >contract_no,</if>
+                <if test="operateDate != null" >operate_date,</if>
+                <if test="operateTime != null" >operate_time,</if>
+                <if test="operateUser != null" >operate_user,</if>
+                <if test="operateType != null" >operate_type,</if>
+                <if test="createUserId != null" >create_user_id,</if>
+                <if test="id != null" >id,</if>
+                <if test="projectId != null" >project_id,</if>
+                <if test="projectName != null" >project_name,</if>
+                <if test="projectDescription != null" >project_description,</if>
+                <if test="projectLeaderId != null" >project_leader_id,</if>
+                <if test="projectLeaderName != null" >project_leader_name,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="deptId != null" >#{deptId},</if>
+                <if test="projectMemberIds != null" >#{projectMemberIds},</if>
+                <if test="projectMemberNames != null" >#{projectMemberNames},</if>
+                <if test="budgetId != null" >#{budgetId},</if>
+                <if test="businessId != null" >#{businessId},</if>
+                <if test="projectOwner != null" >#{projectOwner},</if>
+                <if test="projectStartTime != null" >#{projectStartTime},</if>
+                <if test="finishedStatus != null" >#{finishedStatus},</if>
+                <if test="personInput != null" >#{personInput},</if>
+                <if test="delFlag != null" >#{delFlag},</if>
+                <if test="contractNo != null" >#{contractNo},</if>
+                <if test="operateDate != null" >#{operateDate},</if>
+                <if test="operateTime != null" >#{operateTime},</if>
+                <if test="operateUser != null" >#{operateUser},</if>
+                <if test="operateType != null" >#{operateType},</if>
+                <if test="createUserId != null" >#{createUserId},</if>
+                <if test="id != null" >#{id},</if>
+                <if test="projectId != null" >#{projectId},</if>
+                <if test="projectName != null" >#{projectName},</if>
+                <if test="projectDescription != null" >#{projectDescription},</if>
+                <if test="projectLeaderId != null" >#{projectLeaderId},</if>
+                <if test="projectLeaderName != null" >#{projectLeaderName},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.budget.entity.ProjectHistoryEO" >
+    update TS_PROJECT_HISTORY
+       set  dept_id = #{deptId},
+            project_member_ids = #{projectMemberIds},
+            project_member_names = #{projectMemberNames},
+            budget_id = #{budgetId},
+            business_id = #{businessId},
+            project_owner = #{projectOwner},
+            project_start_time = #{projectStartTime},
+            finished_status = #{finishedStatus},
+            person_input = #{personInput},
+            del_flag = #{delFlag},
+            contract_no = #{contractNo},
+            operate_date = #{operateDate},
+            operate_time = #{operateTime},
+            operate_user = #{operateUser},
+            operate_type = #{operateType},
+            create_user_id = #{createUserId},
+            project_id = #{projectId},
+            project_name = #{projectName},
+            project_description = #{projectDescription},
+            project_leader_id = #{projectLeaderId},
+            project_leader_name = #{projectLeaderName}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.budget.entity.ProjectHistoryEO" >
+    update TS_PROJECT_HISTORY
+    <set >
+      <if test="deptId != null" >
+        dept_id = #{deptId},
+      </if>
+      <if test="projectMemberIds != null" >
+        project_member_ids = #{projectMemberIds},
+      </if>
+      <if test="projectMemberNames != null" >
+        project_member_names = #{projectMemberNames},
+      </if>
+      <if test="budgetId != null" >
+        budget_id = #{budgetId},
+      </if>
+      <if test="businessId != null" >
+        business_id = #{businessId},
+      </if>
+      <if test="projectOwner != null" >
+        project_owner = #{projectOwner},
+      </if>
+      <if test="projectStartTime != null" >
+        project_start_time = #{projectStartTime},
+      </if>
+      <if test="finishedStatus != null" >
+        finished_status = #{finishedStatus},
+      </if>
+      <if test="personInput != null" >
+        person_input = #{personInput},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="contractNo != null" >
+        contract_no = #{contractNo},
+      </if>
+      <if test="operateDate != null" >
+        operate_date = #{operateDate},
+      </if>
+      <if test="operateTime != null" >
+        operate_time = #{operateTime},
+      </if>
+      <if test="operateUser != null" >
+        operate_user = #{operateUser},
+      </if>
+      <if test="operateType != null" >
+        operate_type = #{operateType},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="projectId != null" >
+        project_id = #{projectId},
+      </if>
+      <if test="projectName != null" >
+        project_name = #{projectName},
+      </if>
+      <if test="projectDescription != null" >
+        project_description = #{projectDescription},
+      </if>
+      <if test="projectLeaderId != null" >
+        project_leader_id = #{projectLeaderId},
+      </if>
+      <if test="projectLeaderName != null" >
+        project_leader_name = #{projectLeaderName},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 TS_PROJECT_HISTORY -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from TS_PROJECT_HISTORY
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TS_PROJECT_HISTORY
+     where id = #{value}
+
+  </delete>
+
+  <!-- TS_PROJECT_HISTORY 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from TS_PROJECT_HISTORY
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TS_PROJECT_HISTORY列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from TS_PROJECT_HISTORY
+			 <include refid="Base_Where_Clause"/>
+			) tmp_tb where rownum &lt;= #{pager.endIndex})
+			where rn &gt;= #{pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from TS_PROJECT_HISTORY
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+</mapper>

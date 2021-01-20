@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.crm.dao.InvoiceInfoEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.crm.entity.InvoiceInfoEO" >
+    <id column="id" property="id" />
+    <result column="type" property="type" />
+    <result column="contract_id" property="contractId" />
+    <result column="project_no" property="projectNo" />
+    <result column="project_name" property="projectName" />
+    <result column="amount" property="amount" />
+    <result column="in_date" property="inDate" />
+    <result column="del_flag" property="delFlag" />
+    <result column="created_time" property="createdTime" />
+    <result column="created_user" property="createdUser" />
+    <result column="modified_time2" property="modifiedTime2" />
+    <result column="modified_user2" property="modifiedUser2" />
+  </resultMap>
+
+  <!-- INVOICE_INFO table all fields -->
+  <sql id="Base_Column_List" >
+     type, id, contract_id, project_no, project_name, amount, in_date, del_flag, created_time, created_user, modified_time2, modified_user2
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="type != null" >
+        and type ${typeOperator} #{type}
+      </if>
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="contractId != null" >
+        and contract_id ${contractIdOperator} #{contractId}
+      </if>
+      <if test="projectNo != null" >
+        and project_no ${projectNoOperator} #{projectNo}
+      </if>
+      <if test="projectName != null" >
+        and project_name ${projectNameOperator} #{projectName}
+      </if>
+      <if test="amount != null" >
+        and amount ${amountOperator} #{amount}
+      </if>
+      <if test="inDate != null" >
+        and in_date ${inDateOperator} #{inDate}
+      </if>
+      <if test="inDate1 != null" >
+        and in_date &gt;= #{inDate1}
+      </if>
+      <if test="inDate2 != null" >
+        and in_date &lt;= #{inDate2}
+      </if>
+      <if test="delFlag != null" >
+        and del_flag ${delFlagOperator} #{delFlag}
+      </if>
+      <if test="createdTime != null" >
+        and created_time ${createdTimeOperator} #{createdTime}
+      </if>
+      <if test="createdTime1 != null" >
+        and created_time &gt;= #{createdTime1}
+      </if>
+      <if test="createdTime2 != null" >
+        and created_time &lt;= #{createdTime2}
+      </if>
+      <if test="createdUser != null" >
+        and created_user ${createdUserOperator} #{createdUser}
+      </if>
+      <if test="modifiedTime2 != null" >
+        and modified_time2 ${modifiedTime2Operator} #{modifiedTime2}
+      </if>
+      <if test="modifiedTime21 != null" >
+        and modified_time2 &gt;= #{modifiedTime21}
+      </if>
+      <if test="modifiedTime22 != null" >
+        and modified_time2 &lt;= #{modifiedTime22}
+      </if>
+      <if test="modifiedUser2 != null" >
+        and modified_user2 ${modifiedUser2Operator} #{modifiedUser2}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.crm.entity.InvoiceInfoEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_INVOICE_INFO.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into INVOICE_INFO(<include refid="Base_Column_List" />)
+    values (#{type, jdbcType=VARCHAR}, #{id, jdbcType=VARCHAR}, #{contractId, jdbcType=VARCHAR}, #{projectNo, jdbcType=VARCHAR}, #{projectName, jdbcType=VARCHAR}, #{amount, jdbcType=VARCHAR}, #{inDate, jdbcType=TIMESTAMP}, #{delFlag, jdbcType=VARCHAR}, #{createdTime, jdbcType=TIMESTAMP}, #{createdUser, jdbcType=VARCHAR}, #{modifiedTime2, jdbcType=TIMESTAMP}, #{modifiedUser2, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.crm.entity.InvoiceInfoEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_INVOICE_INFO.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into INVOICE_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="type != null" >type,</if>
+                <if test="id != null" >id,</if>
+                <if test="contractId != null" >contract_id,</if>
+                <if test="projectNo != null" >project_no,</if>
+                <if test="projectName != null" >project_name,</if>
+                <if test="amount != null" >amount,</if>
+                <if test="inDate != null" >in_date,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="createdTime != null" >created_time,</if>
+                <if test="createdUser != null" >created_user,</if>
+                <if test="modifiedTime2 != null" >modified_time2,</if>
+                <if test="modifiedUser2 != null" >modified_user2,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="type != null" >#{type, jdbcType=VARCHAR},</if>
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="contractId != null" >#{contractId, jdbcType=VARCHAR},</if>
+                <if test="projectNo != null" >#{projectNo, jdbcType=VARCHAR},</if>
+                <if test="projectName != null" >#{projectName, jdbcType=VARCHAR},</if>
+                <if test="amount != null" >#{amount, jdbcType=VARCHAR},</if>
+                <if test="inDate != null" >#{inDate, jdbcType=TIMESTAMP},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=VARCHAR},</if>
+                <if test="createdTime != null" >#{createdTime, jdbcType=TIMESTAMP},</if>
+                <if test="createdUser != null" >#{createdUser, jdbcType=VARCHAR},</if>
+                <if test="modifiedTime2 != null" >#{modifiedTime2, jdbcType=TIMESTAMP},</if>
+                <if test="modifiedUser2 != null" >#{modifiedUser2, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.crm.entity.InvoiceInfoEO" >
+    update INVOICE_INFO
+       set  type = #{type},
+            contract_id = #{contractId},
+            project_no = #{projectNo},
+            project_name = #{projectName},
+            amount = #{amount},
+            in_date = #{inDate},
+            del_flag = #{delFlag},
+            created_time = #{createdTime},
+            created_user = #{createdUser},
+            modified_time2 = #{modifiedTime2},
+            modified_user2 = #{modifiedUser2}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.crm.entity.InvoiceInfoEO" >
+    update INVOICE_INFO
+    <set >
+      <if test="type != null" >
+        type = #{type},
+      </if>
+      <if test="contractId != null" >
+        contract_id = #{contractId},
+      </if>
+      <if test="projectNo != null" >
+        project_no = #{projectNo},
+      </if>
+      <if test="projectName != null" >
+        project_name = #{projectName},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount},
+      </if>
+      <if test="inDate != null" >
+        in_date = #{inDate},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+      <if test="createdUser != null" >
+        created_user = #{createdUser},
+      </if>
+      <if test="modifiedTime2 != null" >
+        modified_time2 = #{modifiedTime2},
+      </if>
+      <if test="modifiedUser2 != null" >
+        modified_user2 = #{modifiedUser2},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 INVOICE_INFO -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from INVOICE_INFO
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from INVOICE_INFO
+     where id = #{value}
+
+  </delete>
+    <delete id="deleteByContractId" parameterType="java.lang.String">
+        delete from INVOICE_INFO
+        where CONTRACT_ID = #{contract_id}
+        and TYPE = #{type}
+    </delete>
+
+  <!-- INVOICE_INFO 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from INVOICE_INFO
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询INVOICE_INFO列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from INVOICE_INFO
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from INVOICE_INFO
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+    <update id="updateByContractIdAndDelFlag">
+        update INVOICE_INFO set del_flag=#{delFlag} where id=#{contractId}
+    </update>
+
+</mapper>

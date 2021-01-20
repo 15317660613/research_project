@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+    <!--由于VO 和 EO 字段名称非完全对应,且有的字段类型不一样,所有需要依靠dozer进行转换-->
+    <!--调用时依靠Controller 中
+        @Autowired private BeanMapper beanMapper 进行自动装配，然后调用相应方法进行匹配-->
+
+
+
+
+</mappings>

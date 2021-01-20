@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.adc.da.statistics.dao.DataBoardOrgEODao">
+    <!-- Result Map-->
+    <resultMap id = "BaseResultMap" type = "com.adc.da.statistics.entity.DataBoardOrgEO">
+        <id column = "id_" property = "id"/>
+        <result column = "ext_info_02_" property = "extInfo02"/>
+        <result column = "ext_info_03_" property = "extInfo03"/>
+        <result column = "ext_info_04_" property = "extInfo04"/>
+        <result column = "ext_info_05_" property = "extInfo05"/>
+        <result column = "dept_id_" property = "deptId"/>
+        <result column = "billing_" property = "billing"/>
+        <result column = "credit_" property = "credit"/>
+        <result column = "expenditure_" property = "expenditure"/>
+        <result column = "work_time_" property = "workTime"/>
+        <result column = "create_time_" property = "createTime"/>
+        <result column = "year_" property = "year"/>
+        <result column = "month_" property = "month"/>
+        <result column = "ext_info_01_" property = "extInfo01"/>
+    </resultMap>
+
+    <!-- ST_DATA_BOARD_ORG table all fields -->
+    <sql id = "Base_Column_List">
+        ext_info_02_, ext_info_03_, ext_info_04_, ext_info_05_, id_, dept_id_, billing_, credit_, expenditure_,
+        work_time_, create_time_, year_, month_, ext_info_01_
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id = "Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides = ",">
+            <if test = "extInfo02 != null">
+                and ext_info_02_ ${extInfo02Operator} #{extInfo02}
+            </if>
+            <if test = "extInfo03 != null">
+                and ext_info_03_ ${extInfo03Operator} #{extInfo03}
+            </if>
+            <if test = "extInfo04 != null">
+                and ext_info_04_ ${extInfo04Operator} #{extInfo04}
+            </if>
+            <if test = "extInfo05 != null">
+                and ext_info_05_ ${extInfo05Operator} #{extInfo05}
+            </if>
+            <if test = "id != null">
+                and id_ ${idOperator} #{id}
+            </if>
+            <if test = "deptId != null">
+                and dept_id_ ${deptIdOperator} #{deptId}
+            </if>
+            <if test = "billing != null">
+                and billing_ ${billingOperator} #{billing}
+            </if>
+            <if test = "credit != null">
+                and credit_ ${creditOperator} #{credit}
+            </if>
+            <if test = "expenditure != null">
+                and expenditure_ ${expenditureOperator} #{expenditure}
+            </if>
+            <if test = "workTime != null">
+                and work_time_ ${workTimeOperator} #{workTime}
+            </if>
+            <if test = "createTime != null">
+                and create_time_ ${createTimeOperator} #{createTime}
+            </if>
+            <if test = "createTime1 != null">
+                and create_time_ &gt;= #{createTime1}
+            </if>
+            <if test = "createTime2 != null">
+                and create_time_ &lt;= #{createTime2}
+            </if>
+            <if test = "year != null">
+                and year_ ${yearOperator} #{year}
+            </if>
+            <if test = "month != null">
+                and month_ ${monthOperator} #{month}
+            </if>
+            <if test = "extInfo01 != null">
+                and ext_info_01_ ${extInfo01Operator} #{extInfo01}
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 插入记录 -->
+    <insert id = "insert" parameterType = "com.adc.da.statistics.entity.DataBoardOrgEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+            SELECT SEQ_ST_DATA_BOARD_ORG.NEXTVAL FROM DUAL
+        </selectKey> -->
+        insert into ST_DATA_BOARD_ORG(<include refid = "Base_Column_List"/>)
+        values (#{extInfo02, jdbcType=VARCHAR}, #{extInfo03, jdbcType=VARCHAR}, #{extInfo04, jdbcType=VARCHAR},
+        #{extInfo05, jdbcType=VARCHAR}, #{id, jdbcType=VARCHAR}, #{deptId, jdbcType=VARCHAR},
+        #{billing, jdbcType=DOUBLE}, #{credit, jdbcType=DOUBLE}, #{expenditure, jdbcType=DOUBLE},
+        #{workTime, jdbcType=DOUBLE}, #{createTime, jdbcType=TIMESTAMP}, #{year, jdbcType=INTEGER},
+        #{month, jdbcType=INTEGER}, #{extInfo01, jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 动态插入记录 主键是序列 -->
+    <insert id = "insertSelective" parameterType = "com.adc.da.statistics.entity.DataBoardOrgEO">
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_ST_DATA_BOARD_ORG.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into ST_DATA_BOARD_ORG
+        <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+            <if test = "extInfo02 != null">ext_info_02_,</if>
+            <if test = "extInfo03 != null">ext_info_03_,</if>
+            <if test = "extInfo04 != null">ext_info_04_,</if>
+            <if test = "extInfo05 != null">ext_info_05_,</if>
+            <if test = "id != null">id_,</if>
+            <if test = "deptId != null">dept_id_,</if>
+            <if test = "billing != null">billing_,</if>
+            <if test = "credit != null">credit_,</if>
+            <if test = "expenditure != null">expenditure_,</if>
+            <if test = "workTime != null">work_time_,</if>
+            <if test = "createTime != null">create_time_,</if>
+            <if test = "year != null">year_,</if>
+            <if test = "month != null">month_,</if>
+            <if test = "extInfo01 != null">ext_info_01_,</if>
+        </trim>
+        <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+            <if test = "extInfo02 != null">#{extInfo02, jdbcType=VARCHAR},</if>
+            <if test = "extInfo03 != null">#{extInfo03, jdbcType=VARCHAR},</if>
+            <if test = "extInfo04 != null">#{extInfo04, jdbcType=VARCHAR},</if>
+            <if test = "extInfo05 != null">#{extInfo05, jdbcType=VARCHAR},</if>
+            <if test = "id != null">#{id, jdbcType=VARCHAR},</if>
+            <if test = "deptId != null">#{deptId, jdbcType=VARCHAR},</if>
+            <if test = "billing != null">#{billing, jdbcType=DOUBLE},</if>
+            <if test = "credit != null">#{credit, jdbcType=DOUBLE},</if>
+            <if test = "expenditure != null">#{expenditure, jdbcType=DOUBLE},</if>
+            <if test = "workTime != null">#{workTime, jdbcType=DOUBLE},</if>
+            <if test = "createTime != null">#{createTime, jdbcType=TIMESTAMP},</if>
+            <if test = "year != null">#{year, jdbcType=INTEGER},</if>
+            <if test = "month != null">#{month, jdbcType=INTEGER},</if>
+            <if test = "extInfo01 != null">#{extInfo01, jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+    <insert id = "insertSelectiveAll" parameterType = "java.util.List">
+        INSERT ALL
+        <foreach collection = "list" item = "item" index = "index">
+            <if test = "item.id !=null">
+                into ST_DATA_BOARD_ORG
+                <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+                    <if test = "item.extInfo02 != null">ext_info_02_,</if>
+                    <if test = "item.extInfo03 != null">ext_info_03_,</if>
+                    <if test = "item.extInfo04 != null">ext_info_04_,</if>
+                    <if test = "item.extInfo05 != null">ext_info_05_,</if>
+                    <if test = "item.id != null">id_,</if>
+                    <if test = "item.deptId != null">dept_id_,</if>
+                    <if test = "item.billing != null">billing_,</if>
+                    <if test = "item.credit != null">credit_,</if>
+                    <if test = "item.expenditure != null">expenditure_,</if>
+                    <if test = "item.workTime != null">work_time_,</if>
+                    <if test = "item.createTime != null">create_time_,</if>
+                    <if test = "item.year != null">year_,</if>
+                    <if test = "item.month != null">month_,</if>
+                    <if test = "item.extInfo01 != null">ext_info_01_,</if>
+                </trim>
+                <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+                    <if test = "item.extInfo02 != null">#{item.extInfo02, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo03 != null">#{item.extInfo03, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo04 != null">#{item.extInfo04, jdbcType=VARCHAR},</if>
+                    <if test = "item.extInfo05 != null">#{item.extInfo05, jdbcType=VARCHAR},</if>
+                    <if test = "item.id != null">#{item.id, jdbcType=VARCHAR},</if>
+                    <if test = "item.deptId != null">#{item.deptId, jdbcType=VARCHAR},</if>
+                    <if test = "item.billing != null">#{item.billing, jdbcType=DOUBLE},</if>
+                    <if test = "item.credit != null">#{item.credit, jdbcType=DOUBLE},</if>
+                    <if test = "item.expenditure != null">#{item.expenditure, jdbcType=DOUBLE},</if>
+                    <if test = "item.workTime != null">#{item.workTime, jdbcType=DOUBLE},</if>
+                    <if test = "item.createTime != null">#{item.createTime, jdbcType=TIMESTAMP},</if>
+                    <if test = "item.year != null">#{item.year, jdbcType=INTEGER},</if>
+                    <if test = "item.month != null">#{item.month, jdbcType=INTEGER},</if>
+                    <if test = "item.extInfo01 != null">#{item.extInfo01, jdbcType=VARCHAR},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+    <!-- 根据pk，修改记录-->
+    <update id = "updateByPrimaryKey" parameterType = "com.adc.da.statistics.entity.DataBoardOrgEO">
+        UPDATE ST_DATA_BOARD_ORG
+        SET ext_info_02_ = #{extInfo02},
+            ext_info_03_ = #{extInfo03},
+            ext_info_04_ = #{extInfo04},
+            ext_info_05_ = #{extInfo05},
+            dept_id_     = #{deptId},
+            billing_     = #{billing},
+            credit_      = #{credit},
+            expenditure_ = #{expenditure},
+            work_time_   = #{workTime},
+            create_time_ = #{createTime},
+            YEAR_        = #{year},
+            MONTH_       = #{month},
+            ext_info_01_ = #{extInfo01}
+        WHERE id_ = #{id}
+    </update>
+
+    <!-- 修改记录，只修改只不为空的字段 -->
+    <update id = "updateByPrimaryKeySelective" parameterType = "com.adc.da.statistics.entity.DataBoardOrgEO">
+        update ST_DATA_BOARD_ORG
+        <set>
+            <if test = "extInfo02 != null">
+                ext_info_02_ = #{extInfo02},
+            </if>
+            <if test = "extInfo03 != null">
+                ext_info_03_ = #{extInfo03},
+            </if>
+            <if test = "extInfo04 != null">
+                ext_info_04_ = #{extInfo04},
+            </if>
+            <if test = "extInfo05 != null">
+                ext_info_05_ = #{extInfo05},
+            </if>
+            <if test = "deptId != null">
+                dept_id_ = #{deptId},
+            </if>
+            <if test = "billing != null">
+                billing_ = #{billing},
+            </if>
+            <if test = "credit != null">
+                credit_ = #{credit},
+            </if>
+            <if test = "expenditure != null">
+                expenditure_ = #{expenditure},
+            </if>
+            <if test = "workTime != null">
+                work_time_ = #{workTime},
+            </if>
+            <if test = "createTime != null">
+                create_time_ = #{createTime},
+            </if>
+            <if test = "year != null">
+                year_ = #{year},
+            </if>
+            <if test = "month != null">
+                month_ = #{month},
+            </if>
+            <if test = "extInfo01 != null">
+                ext_info_01_ = #{extInfo01},
+            </if>
+        </set>
+        where id_ = #{id}
+    </update>
+
+    <!-- 根据id查询 ST_DATA_BOARD_ORG -->
+    <select id = "selectByPrimaryKey" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+        select
+        <include refid = "Base_Column_List"/>
+        from ST_DATA_BOARD_ORG
+        where id_ = #{value}
+
+    </select>
+
+    <!-- 删除记录 -->
+    <delete id = "deleteByPrimaryKey" parameterType = "java.lang.String">
+        DELETE
+        FROM ST_DATA_BOARD_ORG
+        WHERE id_ = #{value}
+
+    </delete>
+
+    <!-- ST_DATA_BOARD_ORG 列表总数-->
+    <select id = "queryByCount" resultType = "java.lang.Integer" parameterType = "com.adc.da.base.page.BasePage">
+        select count(1) from ST_DATA_BOARD_ORG
+        <include refid = "Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询ST_DATA_BOARD_ORG列表 -->
+    <select id = "queryByPage" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from
+        (select tmp_tb.* , rownum rn from
+        (select
+        <include refid = "Base_Column_List"/>
+        from ST_DATA_BOARD_ORG
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn &gt;= ${pager.startIndex}
+    </select>
+
+    <select id = "queryByList" resultMap = "BaseResultMap" parameterType = "com.adc.da.base.page.BasePage">
+        select
+        <include refid = "Base_Column_List"/>
+        from ST_DATA_BOARD_ORG
+        <include refid = "Base_Where_Clause"/>
+        <if test = "pager.orderCondition != null and pager.orderCondition != ''">
+            ${pager.orderCondition}
+        </if>
+    </select>
+
+
+    <!-- 根据id查询 ST_DATA_BOARD_ORG -->
+    <select id = "querySumGroupByMonth" resultMap = "BaseResultMap">
+        SELECT MONTH_,
+               sum(EXPENDITURE_) AS EXPENDITURE_,
+               sum(BILLING_)     AS BILLING_,
+               sum(CREDIT_)      AS CREDIT_
+        FROM ST_DATA_BOARD_ORG
+        WHERE YEAR_ = #{year}
+          <if test="deptId != null" >
+              AND dept_id_ IN (
+              SELECT id
+              FROM ts_org
+              CONNECT BY PRIOR id = PARENT_ID
+              START WITH ID = #{deptId}
+              )
+          </if>
+        GROUP BY MONTH_
+    </select>
+
+
+    <!--开票-->
+    <select id = "queryInvoice" resultType = "java.lang.Float">
+        SELECT sum(INVOICE_AMOUNT)
+        FROM PF_PROJECT_CONTRACT_INVOICE ci
+                 LEFT JOIN ST_CONTRACT_AMOUNT ca ON ca.PROJECT_ID_ = ci.PROJECT_ID
+        WHERE DEPT_ID_ IN (
+            SELECT id FROM TS_ORG CONNECT BY PRIOR id = PARENT_ID START WITH id = #{deptId}
+        )
+          AND INVOICE_AMOUNT IS NOT NULL
+          AND INVOICE_DATE BETWEEN #{startTime} AND #{finishTime}
+    </select>
+
+    <select id = "queryBillingGroupByMonth" resultMap = "BaseResultMap">
+        SELECT TRUNC(pf.INVOICE_DATE, 'MON')  AS CREATE_TIME_,
+               to_char(pf.INVOICE_DATE, 'mm') AS MONTH_,
+               sum(pf.INVOICE_AMOUNT)         AS BILLING_
+        FROM PF_PROJECT_CONTRACT_INVOICE pf
+                 LEFT JOIN ST_CONTRACT_AMOUNT st ON pf.PROJECT_ID = st.PROJECT_ID_
+        WHERE INVOICE_DATE IS NOT NULL
+          AND DEPT_ID_ IS NOT NULL
+          AND DEPT_ID_ IN (
+            SELECT id FROM TS_ORG CONNECT BY PRIOR id = PARENT_ID START WITH id = #{deptId}
+        )
+          AND INVOICE_DATE BETWEEN #{startTime} AND #{finishTime}
+        GROUP BY TRUNC(pf.INVOICE_DATE, 'MON'), to_char(pf.INVOICE_DATE, 'mm')
+    </select>
+    <select id = "queryInvoiceGroupByMonthBudget" resultMap = "BaseResultMap">
+        SELECT
+               to_char(pf.INVOICE_DATE, 'mm') AS MONTH_,
+               TRUNC(pf.INVOICE_DATE, 'MON')  AS CREATE_TIME_,
+               sum(pf.INVOICE_AMOUNT)         AS BILLING_
+        FROM PF_PROJECT_CONTRACT_INVOICE pf
+                 LEFT JOIN ST_CONTRACT_AMOUNT st ON pf.PROJECT_ID = st.PROJECT_ID_
+        WHERE INVOICE_DATE IS NOT NULL
+        <if test = "budgetId != null">
+            AND BUSINESS_ID_ = #{budgetId}
+        </if>
+        AND INVOICE_DATE BETWEEN #{startTime} AND #{finishTime}
+        GROUP BY TRUNC(pf.INVOICE_DATE, 'MON'), to_char(pf.INVOICE_DATE, 'mm')
+    </select>
+
+</mapper>

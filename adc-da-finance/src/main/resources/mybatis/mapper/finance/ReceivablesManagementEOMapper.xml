@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.finance.dao.ReceivablesManagementEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.finance.entity.ReceivablesManagementEO" >
+    <id column="id" property="id" />
+    <result column="depart_id" property="departId" />
+    <result column="depart_name" property="departName" />
+    <result column="rem_year" property="remYear" />
+    <result column="rem_month" property="remMonth" />
+    <result column="business_gonfig_id" property="businessGonfigId" />
+    <result column="rem_money" property="remMoney" />
+    <result column="create_time" property="createTime" />
+    <result column="create_user_id" property="createUserId" />
+    <result column="create_user_name" property="createUserName" />
+    <result column="update_time" property="updateTime" />
+    <result column="update_user_id" property="updateUserId" />
+    <result column="update_user_name" property="updateUserName" />
+    <result column="del_flag" property="delFlag" />
+  </resultMap>
+
+  <!-- F_RECEIVABLES_MANAGEMENT table all fields -->
+  <sql id="Base_Column_List" >
+     id, depart_id, depart_name, rem_year, rem_month, business_gonfig_id, rem_money, create_time, create_user_id, create_user_name, update_time, update_user_id, update_user_name, del_flag
+  </sql>
+    <sql id="Base_Column_Lista">
+        REM.ID,
+        REM.DEPART_ID,
+        REM.REM_YEAR,
+        REM.REM_MONTH,
+        REM.BUSINESS_GONFIG_ID,
+        REM.REM_MONEY,
+        REM.CREATE_TIME,
+        REM.CREATE_USER_ID,
+        REM.CREATE_USER_NAME,
+        REM.UPDATE_TIME,
+        REM.UPDATE_USER_ID,
+        REM.UPDATE_USER_NAME,
+        REM.DEL_FLAG
+    </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null and id != ''" >
+        and REM.id ${idOperator} #{id}
+      </if>
+      <if test="departId != null and departId != ''" >
+        and REM.depart_id ${departIdOperator} #{departId}
+      </if>
+      <if test="departName != null and departName != ''" >
+        and TS_ORG.ORG_NAME ${departNameOperator} #{departName}
+      </if>
+      <if test="remYear != null and remYear != ''" >
+        and REM.rem_year ${remYearOperator} #{remYear}
+      </if>
+      <if test="remMonth != null and remMonth != ''" >
+        and REM.rem_month ${remMonthOperator} #{remMonth}
+      </if>
+      <if test="businessGonfigId != null and businessGonfigId != ''" >
+        and REM.business_gonfig_id ${businessGonfigIdOperator} #{businessGonfigId}
+      </if>
+        <if test="businessGonfigName != null and businessGonfigName != ''" >
+            and BG.BG_NAME ${businessGonfigNameOperator} #{businessGonfigName}
+        </if>
+      <if test="remMoney != null and remMoney != ''" >
+        and REM.rem_money ${remMoneyOperator} #{remMoney}
+      </if>
+      <if test="createTime != null and createTime != ''" >
+        and REM.create_time ${createTimeOperator} #{createTime}
+      </if>
+      <if test="createTime1 != null and createTime1 != ''" >
+        and REM.create_time &gt;= #{createTime1}
+      </if>
+      <if test="createTime2 != null and createTime2 != ''" >
+        and REM.create_time &lt;= #{createTime2}
+      </if>
+      <if test="createUserId != null and createUserId != ''" >
+        and REM.create_user_id ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="createUserName != null and createUserName != ''" >
+        and REM.create_user_name ${createUserNameOperator} #{createUserName}
+      </if>
+      <if test="updateTime != null and updateTime != ''" >
+        and REM.update_time ${updateTimeOperator} #{updateTime}
+      </if>
+      <if test="updateTime1 != null and updateTime1 != ''" >
+        and REM.update_time &gt;= #{updateTime1}
+      </if>
+      <if test="updateTime2 != null and updateTime2 != ''" >
+        and REM.update_time &lt;= #{updateTime2}
+      </if>
+      <if test="updateUserId != null and updateUserId != ''" >
+        and REM.update_user_id ${updateUserIdOperator} #{updateUserId}
+      </if>
+      <if test="updateUserName != null and updateUserName != ''" >
+        and REM.update_user_name ${updateUserNameOperator} #{updateUserName}
+      </if>
+      <if test="delFlag != null and delFlag != ''" >
+        and REM.del_flag ${delFlagOperator} #{delFlag}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.finance.entity.ReceivablesManagementEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_F_RECEIVABLES_MANAGEMENT.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into F_RECEIVABLES_MANAGEMENT(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{departId, jdbcType=VARCHAR}, #{departName, jdbcType=VARCHAR}, #{remYear, jdbcType=VARCHAR}, #{remMonth, jdbcType=VARCHAR}, #{businessGonfigId, jdbcType=VARCHAR}, #{remMoney, jdbcType=INTEGER}, #{createTime, jdbcType=TIMESTAMP}, #{createUserId, jdbcType=VARCHAR}, #{createUserName, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP}, #{updateUserId, jdbcType=VARCHAR}, #{updateUserName, jdbcType=VARCHAR}, #{delFlag, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.finance.entity.ReceivablesManagementEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_F_RECEIVABLES_MANAGEMENT.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into F_RECEIVABLES_MANAGEMENT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="departId != null" >depart_id,</if>
+                <if test="departName != null" >depart_name,</if>
+                <if test="remYear != null" >rem_year,</if>
+                <if test="remMonth != null" >rem_month,</if>
+                <if test="businessGonfigId != null" >business_gonfig_id,</if>
+                <if test="remMoney != null" >rem_money,</if>
+                <if test="createTime != null" >create_time,</if>
+                <if test="createUserId != null" >create_user_id,</if>
+                <if test="createUserName != null" >create_user_name,</if>
+                <if test="updateTime != null" >update_time,</if>
+                <if test="updateUserId != null" >update_user_id,</if>
+                <if test="updateUserName != null" >update_user_name,</if>
+                <if test="delFlag != null" >del_flag,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="departId != null" >#{departId, jdbcType=VARCHAR},</if>
+                <if test="departName != null" >#{departName, jdbcType=VARCHAR},</if>
+                <if test="remYear != null" >#{remYear, jdbcType=VARCHAR},</if>
+                <if test="remMonth != null" >#{remMonth, jdbcType=VARCHAR},</if>
+                <if test="businessGonfigId != null" >#{businessGonfigId, jdbcType=VARCHAR},</if>
+                <if test="remMoney != null" >#{remMoney, jdbcType=INTEGER},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="createUserId != null" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="createUserName != null" >#{createUserName, jdbcType=VARCHAR},</if>
+                <if test="updateTime != null" >#{updateTime, jdbcType=TIMESTAMP},</if>
+                <if test="updateUserId != null" >#{updateUserId, jdbcType=VARCHAR},</if>
+                <if test="updateUserName != null" >#{updateUserName, jdbcType=VARCHAR},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+    <insert id="insertList" parameterType="java.util.List">
+        INSERT ALL
+        <foreach collection="list" item="item" index="index">
+            <if test="item.id !=null">
+                INTO F_RECEIVABLES_MANAGEMENT
+                <trim prefix="(" suffix=")" suffixOverrides=",">
+                    <if test="item.id != null">id,</if>
+                    <if test="item.departId != null">depart_id,</if>
+                    <if test="item.departName != null">depart_name,</if>
+                    <if test="item.remYear != null">rem_year,</if>
+                    <if test="item.remMonth != null">rem_month,</if>
+                    <if test="item.businessGonfigId != null">business_gonfig_id,</if>
+                    <if test="item.remMoney != null">rem_money,</if>
+                    <if test="item.createTime != null">create_time,</if>
+                    <if test="item.createUserId != null">create_user_id,</if>
+                    <if test="item.createUserName != null">create_user_name,</if>
+                    <if test="item.updateTime != null">update_time,</if>
+                    <if test="item.updateUserId != null">update_user_id,</if>
+                    <if test="item.updateUserName != null">update_user_name,</if>
+                    <if test="item.delFlag != null">del_flag,</if>
+                </trim>
+                <trim prefix="values (" suffix=")" suffixOverrides=",">
+                    <if test="item.id != null">#{item.id, jdbcType=VARCHAR},</if>
+                    <if test="item.departId != null">#{item.departId, jdbcType=VARCHAR},</if>
+                    <if test="item.departName != null">#{item.departName, jdbcType=VARCHAR},</if>
+                    <if test="item.remYear != null">#{item.remYear, jdbcType=VARCHAR},</if>
+                    <if test="item.remMonth != null">#{item.remMonth, jdbcType=VARCHAR},</if>
+                    <if test="item.businessGonfigId != null">#{item.businessGonfigId, jdbcType=VARCHAR},</if>
+                    <if test="item.remMoney != null">#{item.remMoney, jdbcType=INTEGER},</if>
+                    <if test="item.createTime != null">#{item.createTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.createUserId != null">#{item.createUserId, jdbcType=VARCHAR},</if>
+                    <if test="item.createUserName != null">#{item.createUserName, jdbcType=VARCHAR},</if>
+                    <if test="item.updateTime != null">#{item.updateTime, jdbcType=TIMESTAMP},</if>
+                    <if test="item.updateUserId != null">#{item.updateUserId, jdbcType=VARCHAR},</if>
+                    <if test="item.updateUserName != null">#{item.updateUserName, jdbcType=VARCHAR},</if>
+                    <if test="item.delFlag != null">#{item.delFlag, jdbcType=VARCHAR},</if>
+                </trim>
+            </if>
+        </foreach>
+        SELECT 1 FROM dual
+    </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.finance.entity.ReceivablesManagementEO" >
+    update F_RECEIVABLES_MANAGEMENT
+       set  depart_id = #{departId},
+            depart_name = #{departName},
+            rem_year = #{remYear},
+            rem_month = #{remMonth},
+            business_gonfig_id = #{businessGonfigId},
+            rem_money = #{remMoney},
+            create_time = #{createTime},
+            create_user_id = #{createUserId},
+            create_user_name = #{createUserName},
+            update_time = #{updateTime},
+            update_user_id = #{updateUserId},
+            update_user_name = #{updateUserName},
+            del_flag = #{delFlag}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.finance.entity.ReceivablesManagementEO" >
+    update F_RECEIVABLES_MANAGEMENT
+    <set >
+      <if test="departId != null" >
+        depart_id = #{departId},
+      </if>
+      <if test="departName != null" >
+        depart_name = #{departName},
+      </if>
+      <if test="remYear != null" >
+        rem_year = #{remYear},
+      </if>
+      <if test="remMonth != null" >
+        rem_month = #{remMonth},
+      </if>
+      <if test="businessGonfigId != null" >
+        business_gonfig_id = #{businessGonfigId},
+      </if>
+      <if test="remMoney != null" >
+        rem_money = #{remMoney},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId},
+      </if>
+      <if test="createUserName != null" >
+        create_user_name = #{createUserName},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId},
+      </if>
+      <if test="updateUserName != null" >
+        update_user_name = #{updateUserName},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 F_RECEIVABLES_MANAGEMENT -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT BG.BG_NAME AS businessGonfigName,TS_ORG.ORG_NAME AS DEPART_NAME,REM.*
+    from F_RECEIVABLES_MANAGEMENT REM
+    LEFT JOIN F_BUSINESS_GONFIG BG ON REM.BUSINESS_GONFIG_ID = BG."ID"
+    LEFT JOIN TS_ORG ON REM.DEPART_ID = TS_ORG.ID
+     where REM.id = #{value}
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from F_RECEIVABLES_MANAGEMENT
+     where id = #{value}
+
+  </delete>
+    <!-- 根据业务id逻辑删除记录 -->
+    <update id="logicDeleteByBusinessGonfigId" parameterType="java.util.List">
+        update F_RECEIVABLES_MANAGEMENT set del_flag = '1' where BUSINESS_GONFIG_ID in
+        <foreach collection="businessGonfigIds" item="businessGonfigId" open="(" separator="," close=")" index="index">
+            #{businessGonfigId}
+        </foreach>
+    </update>
+    <!-- 根据id逻辑删除记录 -->
+    <update id="logicDeleteIds" parameterType="java.util.List">
+        update F_RECEIVABLES_MANAGEMENT set del_flag = '1' where id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")" index="index">
+            #{id}
+        </foreach>
+    </update>
+
+  <!-- F_RECEIVABLES_MANAGEMENT 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from F_RECEIVABLES_MANAGEMENT REM
+      LEFT JOIN F_BUSINESS_GONFIG BG ON REM.BUSINESS_GONFIG_ID = BG."ID"
+      LEFT JOIN TS_ORG ON REM.DEPART_ID = TS_ORG.ID
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询F_RECEIVABLES_MANAGEMENT列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select res.* from
+		(select tmp_tb.* , rownum rn from
+			(SELECT BG.BG_NAME AS businessGonfigName,TS_ORG.ORG_NAME AS DEPART_NAME,
+			    <include refid="Base_Column_Lista"></include>
+			  from F_RECEIVABLES_MANAGEMENT REM
+              LEFT JOIN F_BUSINESS_GONFIG BG ON REM.BUSINESS_GONFIG_ID = BG."ID"
+              LEFT JOIN TS_ORG ON REM.DEPART_ID = TS_ORG.ID
+              <include refid="Base_Where_Clause"/>
+			 <if test="sql_filter != null and sql_filter != ''" >
+			 	${sql_filter}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex}) res
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+      SELECT BG.BG_NAME AS businessGonfigName,TS_ORG.ORG_NAME AS DEPART_NAME,
+      <include refid="Base_Column_Lista"></include>
+      from F_RECEIVABLES_MANAGEMENT REM
+      LEFT JOIN F_BUSINESS_GONFIG BG ON REM.BUSINESS_GONFIG_ID = BG."ID"
+      LEFT JOIN TS_ORG ON REM.DEPART_ID = TS_ORG.ID
+      <include refid="Base_Where_Clause"/>
+      <if test="sql_filter != null and sql_filter != ''" >
+          ${sql_filter}
+      </if>
+  </select>
+
+    <select id="statisticsMoney" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT BUSINESS_GONFIG_ID,"SUM"(REM_MONEY) AS REM_MONEY FROM F_RECEIVABLES_MANAGEMENT
+        WHERE DEL_FLAG = '0'
+        AND BUSINESS_GONFIG_ID = #{businessGonfigId}
+        AND REM_YEAR = #{remYear}
+        AND REM_MONTH = #{remMonth}
+        GROUP BY BUSINESS_GONFIG_ID
+    </select>
+
+    <select id="queryByGroup" resultMap="BaseResultMap" parameterType="java.util.List">
+        SELECT(BG.BG_NAME||REM.REM_YEAR||REM.REM_MONTH) businessGonfigName,"SUM"(rem.REM_MONEY) REM_MONEY,REM.BUSINESS_GONFIG_ID,REM.REM_YEAR,REM.REM_MONTH
+        FROM F_RECEIVABLES_MANAGEMENT rem
+        LEFT JOIN F_BUSINESS_GONFIG bg ON BG."ID" = rem.BUSINESS_GONFIG_ID
+        WHERE REM."ID" IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")" index="index">
+            #{id}
+        </foreach>
+        AND rem.DEL_FLAG = '0'
+        GROUP BY (BG.BG_NAME||REM.REM_YEAR||REM.REM_MONTH),REM.BUSINESS_GONFIG_ID,REM.REM_YEAR,REM.REM_MONTH
+        ORDER BY REM_MONEY DESC
+    </select>
+
+
+    <select id="selectSumReceiveByYearAndMonthGroupByBusinessId" resultMap="BaseResultMap">
+        SELECT fbg.ID,SUM(frm.REM_MONEY) as REM_MONEY FROM F_BUSINESS_GONFIG fbg
+        left join F_RECEIVABLES_MANAGEMENT frm on fbg.ID = frm.BUSINESS_GONFIG_ID
+        where fbg.BG_STATUS = 0 AND  frm.REM_YEAR = #{remYear} AND  frm.REM_MONTH = #{remMonth}
+        GROUP BY fbg.ID
+    </select>
+
+</mapper>

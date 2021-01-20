@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.crm.dao.CustomerRecordEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.crm.entity.CustomerRecordEO" >
+    <id column="id" property="id" />
+    <result column="area_manager_id" property="areaManagerId" />
+    <result column="dept_id" property="deptId" />
+    <result column="created_date" property="createdDate" />
+    <result column="customer_number" property="customerNumber" />
+    <result column="customer_name" property="customerName" />
+    <result column="company_type" property="companyType" />
+    <result column="company_type_additional" property="companyTypeAdditional" />
+    <result column="customer_source" property="customerSource" />
+    <result column="province_code" property="provinceCode" />
+    <result column="city_code" property="cityCode" />
+    <result column="address" property="address" />
+    <result column="zip" property="zip" />
+    <result column="del_flag" property="delFlag" />
+    <result column="created_time" property="createdTime" />
+    <result column="created_user" property="createdUser" />
+    <result column="modified_time" property="modifiedTime" />
+    <result column="modified_user" property="modifiedUser" />
+  </resultMap>
+
+  <!-- CUSTOMER_RECORD table all fields -->
+  <sql id="Base_Column_List" >
+     id, area_manager_id, dept_id, created_date, customer_number, customer_name, company_type, company_type_additional, customer_source, province_code, city_code, address, zip, del_flag, created_time, created_user, modified_time, modified_user
+  </sql>
+  <!-- CUSTOMER_RECORD table all fields -->
+  <sql id="CRM_Column_List" >
+     id, (select u.usname from TS_USER u where u.usid = area_manager_id) as area_manager_id, (select org.org_name from TS_ORG org where id = dept_id) as dept_id, created_date, customer_number, customer_name, company_type, company_type_additional, customer_source, province_code, city_code, address, zip, del_flag, created_time, created_user, modified_time, modified_user
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="areaManagerId != null" >
+        and area_manager_id ${areaManagerIdOperator} #{areaManagerId}
+      </if>
+      <if test="deptId != null" >
+        and dept_id ${deptIdOperator} #{deptId}
+      </if>
+      <if test="createdDate != null" >
+        and created_date ${createdDateOperator} #{createdDate}
+      </if>
+      <if test="createdDate1 != null" >
+        and created_date &gt;= #{createdDate1}
+      </if>
+      <if test="createdDate2 != null" >
+        and created_date &lt;= #{createdDate2}
+      </if>
+      <if test="customerNumber != null" >
+        and customer_number ${customerNumberOperator} #{customerNumber}
+      </if>
+      <if test="customerName != null" >
+        and customer_name ${customerNameOperator} #{customerName}
+      </if>
+      <if test="companyType != null" >
+        and company_type ${companyTypeOperator} #{companyType}
+      </if>
+      <if test="companyTypeAdditional != null" >
+        and company_type_additional ${companyTypeAdditionalOperator} #{companyTypeAdditional}
+      </if>
+      <if test="customerSource != null" >
+        and customer_source ${customerSourceOperator} #{customerSource}
+      </if>
+      <if test="provinceCode != null" >
+        and province_code ${provinceCodeOperator} #{provinceCode}
+      </if>
+      <if test="cityCode != null" >
+        and city_code ${cityCodeOperator} #{cityCode}
+      </if>
+      <if test="address != null" >
+        and address ${addressOperator} #{address}
+      </if>
+      <if test="zip != null" >
+        and zip ${zipOperator} #{zip}
+      </if>
+      <if test="createdTime != null" >
+        and created_time ${createdTimeOperator} #{createdTime}
+      </if>
+      <if test="createdTime1 != null" >
+        and created_time &gt;= #{createdTime1}
+      </if>
+      <if test="createdTime2 != null" >
+        and created_time &lt;= #{createdTime2}
+      </if>
+      <if test="createdUser != null" >
+        and created_user ${createdUserOperator} #{createdUser}
+      </if>
+      <if test="modifiedTime != null" >
+        and modified_time ${modifiedTimeOperator} #{modifiedTime}
+      </if>
+      <if test="modifiedTime1 != null" >
+        and modified_time &gt;= #{modifiedTime1}
+      </if>
+      <if test="modifiedTime2 != null" >
+        and modified_time &lt;= #{modifiedTime2}
+      </if>
+      <if test="modifiedUser != null" >
+        and modified_user ${modifiedUserOperator} #{modifiedUser}
+      </if>
+        and del_flag = '0'
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.crm.entity.CustomerRecordEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_CUSTOMER_RECORD.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into CUSTOMER_RECORD(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{areaManagerId, jdbcType=VARCHAR}, #{deptId, jdbcType=VARCHAR}, #{createdDate, jdbcType=TIMESTAMP}, #{customerNumber, jdbcType=VARCHAR}, #{customerName, jdbcType=VARCHAR}, #{companyType, jdbcType=VARCHAR}, #{companyTypeAdditional, jdbcType=VARCHAR}, #{customerSource, jdbcType=VARCHAR}, #{provinceCode, jdbcType=VARCHAR}, #{cityCode, jdbcType=VARCHAR}, #{address, jdbcType=VARCHAR}, #{zip, jdbcType=VARCHAR}, #{delFlag, jdbcType=VARCHAR}, #{createdTime, jdbcType=TIMESTAMP}, #{createdUser, jdbcType=VARCHAR}, #{modifiedTime, jdbcType=TIMESTAMP}, #{modifiedUser, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.crm.entity.CustomerRecordEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_CUSTOMER_RECORD.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into CUSTOMER_RECORD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="areaManagerId != null" >area_manager_id,</if>
+                <if test="deptId != null" >dept_id,</if>
+                <if test="createdDate != null" >created_date,</if>
+                <if test="customerNumber != null" >customer_number,</if>
+                <if test="customerName != null" >customer_name,</if>
+                <if test="companyType != null" >company_type,</if>
+                <if test="companyTypeAdditional != null" >company_type_additional,</if>
+                <if test="customerSource != null" >customer_source,</if>
+                <if test="provinceCode != null" >province_code,</if>
+                <if test="cityCode != null" >city_code,</if>
+                <if test="address != null" >address,</if>
+                <if test="zip != null" >zip,</if>
+                <if test="delFlag != null" >del_flag,</if>
+                <if test="createdTime != null" >created_time,</if>
+                <if test="createdUser != null" >created_user,</if>
+                <if test="modifiedTime != null" >modified_time,</if>
+                <if test="modifiedUser != null" >modified_user,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="areaManagerId != null" >#{areaManagerId, jdbcType=VARCHAR},</if>
+                <if test="deptId != null" >#{deptId, jdbcType=VARCHAR},</if>
+                <if test="createdDate != null" >#{createdDate, jdbcType=TIMESTAMP},</if>
+                <if test="customerNumber != null" >#{customerNumber, jdbcType=VARCHAR},</if>
+                <if test="customerName != null" >#{customerName, jdbcType=VARCHAR},</if>
+                <if test="companyType != null" >#{companyType, jdbcType=VARCHAR},</if>
+                <if test="companyTypeAdditional != null" >#{companyTypeAdditional, jdbcType=VARCHAR},</if>
+                <if test="customerSource != null" >#{customerSource, jdbcType=VARCHAR},</if>
+                <if test="provinceCode != null" >#{provinceCode, jdbcType=VARCHAR},</if>
+                <if test="cityCode != null" >#{cityCode, jdbcType=VARCHAR},</if>
+                <if test="address != null" >#{address, jdbcType=VARCHAR},</if>
+                <if test="zip != null" >#{zip, jdbcType=VARCHAR},</if>
+                <if test="delFlag != null" >#{delFlag, jdbcType=VARCHAR},</if>
+                <if test="createdTime != null" >#{createdTime, jdbcType=TIMESTAMP},</if>
+                <if test="createdUser != null" >#{createdUser, jdbcType=VARCHAR},</if>
+                <if test="modifiedTime != null" >#{modifiedTime, jdbcType=TIMESTAMP},</if>
+                <if test="modifiedUser != null" >#{modifiedUser, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.crm.entity.CustomerRecordEO" >
+    update CUSTOMER_RECORD
+       set  area_manager_id = #{areaManagerId},
+            dept_id = #{deptId},
+            created_date = #{createdDate},
+            customer_number = #{customerNumber},
+            customer_name = #{customerName},
+            company_type = #{companyType},
+            company_type_additional = #{companyTypeAdditional},
+            customer_source = #{customerSource},
+            province_code = #{provinceCode},
+            city_code = #{cityCode},
+            address = #{address},
+            zip = #{zip},
+            del_flag = #{delFlag},
+            created_time = #{createdTime},
+            created_user = #{createdUser},
+            modified_time = #{modifiedTime},
+            modified_user = #{modifiedUser}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.crm.entity.CustomerRecordEO" >
+    update CUSTOMER_RECORD
+    <set >
+      <if test="areaManagerId != null" >
+        area_manager_id = #{areaManagerId},
+      </if>
+      <if test="deptId != null" >
+        dept_id = #{deptId},
+      </if>
+      <if test="createdDate != null" >
+        created_date = #{createdDate},
+      </if>
+      <if test="customerNumber != null" >
+        customer_number = #{customerNumber},
+      </if>
+      <if test="customerName != null" >
+        customer_name = #{customerName},
+      </if>
+      <if test="companyType != null" >
+        company_type = #{companyType},
+      </if>
+      <if test="companyTypeAdditional != null" >
+        company_type_additional = #{companyTypeAdditional},
+      </if>
+      <if test="customerSource != null" >
+        customer_source = #{customerSource},
+      </if>
+      <if test="provinceCode != null" >
+        province_code = #{provinceCode},
+      </if>
+      <if test="cityCode != null" >
+        city_code = #{cityCode},
+      </if>
+      <if test="address != null" >
+        address = #{address},
+      </if>
+      <if test="zip != null" >
+        zip = #{zip},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime},
+      </if>
+      <if test="createdUser != null" >
+        created_user = #{createdUser},
+      </if>
+      <if test="modifiedTime != null" >
+        modified_time = #{modifiedTime},
+      </if>
+      <if test="modifiedUser != null" >
+        modified_user = #{modifiedUser},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 CUSTOMER_RECORD -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from CUSTOMER_RECORD
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from CUSTOMER_RECORD
+     where id = #{value}
+
+  </delete>
+
+  <!-- CUSTOMER_RECORD 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from CUSTOMER_RECORD
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询CUSTOMER_RECORD列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from CUSTOMER_RECORD
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+  <!-- 查询CUSTOMER_RECORD列表 -->
+  <select id="queryCRMListByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="CRM_Column_List" /> from CUSTOMER_RECORD
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from CUSTOMER_RECORD
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+    <update id="updateByPrimaryKeyAndDelFlag">
+        update CUSTOMER_RECORD set del_flag=#{delFlag} where id=#{primaryKey}
+    </update>
+
+    <select id="getUserByName" resultType="com.adc.da.crm.entity.IdNameInfo">
+        SELECT usid AS id, usname AS name FROM TS_USER WHERE usname IN
+        <foreach collection="names" item="name" open="(" close=")" separator=",">
+            #{name}
+        </foreach>
+    </select>
+
+
+    <select id="getDeptByName" resultType="com.adc.da.crm.entity.IdNameInfo">
+        SELECT id, org_name AS name FROM TS_ORG WHERE org_name IN
+        <foreach collection="names" item="name" open="(" close=")" separator=",">
+            #{name}
+        </foreach>
+    </select>
+
+
+</mapper>

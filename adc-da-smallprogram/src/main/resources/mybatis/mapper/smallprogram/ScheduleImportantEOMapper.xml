@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.smallprogram.dao.ScheduleImportantEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.smallprogram.entity.ScheduleImportantEO" >
+    <id column="id_" property="id" />
+    <result column="name_" property="name" />
+    <result column="begin_time_" property="beginTime" />
+    <result column="end_time_" property="endTime" />
+    <result column="create_user_id_" property="createUserId" />
+    <result column="create_time_" property="createTime" />
+    <result column="file_id_" property="fileId" />
+    <result column="ext_info1_" property="extInfo1" />
+    <result column="ext_info2_" property="extInfo2" />
+    <result column="ext_info3_" property="extInfo3" />
+    <result column="ext_info4_" property="extInfo4" />
+    <result column="ext_info5_" property="extInfo5" />
+    <result column="ext_info6_" property="extInfo6" />
+  </resultMap>
+
+  <!-- TS_SCHEDULE_IMPORTANT table all fields -->
+  <sql id="Base_Column_List" >
+     name_, begin_time_, end_time_, create_user_id_, create_time_, file_id_, id_, ext_info1_, ext_info2_, ext_info3_, ext_info4_, ext_info5_, ext_info6_
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where DEL_FLAG_ != 1
+    <trim suffixOverrides="," >
+      <if test="name != null" >
+        and name_ ${nameOperator} #{name}
+      </if>
+      <if test="beginTime != null" >
+        and begin_time_ ${beginTimeOperator} #{beginTime}
+      </if>
+      <if test="beginTime1 != null" >
+        and begin_time_ &gt;= #{beginTime1}
+      </if>
+      <if test="beginTime2 != null" >
+        and begin_time_ &lt;= #{beginTime2}
+      </if>
+      <if test="endTime != null" >
+        and end_time_ ${endTimeOperator} #{endTime}
+      </if>
+      <if test="endTime1 != null" >
+        and end_time_ &gt;= #{endTime1}
+      </if>
+      <if test="endTime2 != null" >
+        and end_time_ &lt;= #{endTime2}
+      </if>
+      <if test="createUserId != null" >
+        and create_user_id_ ${createUserIdOperator} #{createUserId}
+      </if>
+      <if test="createTime != null" >
+        and create_time_ ${createTimeOperator} #{createTime}
+      </if>
+      <if test="fileId != null" >
+        and file_id_ ${fileIdOperator} #{fileId}
+      </if>
+      <if test="id != null" >
+        and id_ ${idOperator} #{id}
+      </if>
+      <if test="extInfo1 != null" >
+        and ext_info1_ ${extInfo1Operator} #{extInfo1}
+      </if>
+      <if test="extInfo2 != null" >
+        and ext_info2_ ${extInfo2Operator} #{extInfo2}
+      </if>
+      <if test="extInfo3 != null" >
+        and ext_info3_ ${extInfo3Operator} #{extInfo3}
+      </if>
+      <if test="extInfo4 != null" >
+        and ext_info4_ ${extInfo4Operator} #{extInfo4}
+      </if>
+      <if test="extInfo5 != null" >
+        and ext_info5_ ${extInfo5Operator} #{extInfo5}
+      </if>
+      <if test="extInfo6 != null" >
+        and ext_info6_ ${extInfo6Operator} #{extInfo6}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.smallprogram.entity.ScheduleImportantEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_TS_SCHEDULE_IMPORTANT.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into TS_SCHEDULE_IMPORTANT(<include refid="Base_Column_List" />)
+    values (#{name, jdbcType=VARCHAR}, #{beginTime, jdbcType=TIMESTAMP}, #{endTime, jdbcType=TIMESTAMP}, #{createUserId, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{fileId, jdbcType=VARCHAR}, #{id, jdbcType=VARCHAR}, #{extInfo1, jdbcType=VARCHAR}, #{extInfo2, jdbcType=VARCHAR}, #{extInfo3, jdbcType=VARCHAR}, #{extInfo4, jdbcType=VARCHAR}, #{extInfo5, jdbcType=VARCHAR}, #{extInfo6, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.smallprogram.entity.ScheduleImportantEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id_">
+        SELECT SEQ_TS_SCHEDULE_IMPORTANT.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into TS_SCHEDULE_IMPORTANT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="name != null" >name_,</if>
+                <if test="beginTime != null" >begin_time_,</if>
+                <if test="endTime != null" >end_time_,</if>
+                <if test="createUserId != null" >create_user_id_,</if>
+                <if test="createTime != null" >create_time_,</if>
+                <if test="fileId != null" >file_id_,</if>
+                <if test="id != null" >id_,</if>
+                <if test="extInfo1 != null" >ext_info1_,</if>
+                <if test="extInfo2 != null" >ext_info2_,</if>
+                <if test="extInfo3 != null" >ext_info3_,</if>
+                <if test="extInfo4 != null" >ext_info4_,</if>
+                <if test="extInfo5 != null" >ext_info5_,</if>
+                <if test="extInfo6 != null" >ext_info6_,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="name != null" >#{name, jdbcType=VARCHAR},</if>
+                <if test="beginTime != null" >#{beginTime, jdbcType=TIMESTAMP},</if>
+                <if test="endTime != null" >#{endTime, jdbcType=TIMESTAMP},</if>
+                <if test="createUserId != null" >#{createUserId, jdbcType=VARCHAR},</if>
+                <if test="createTime != null" >#{createTime, jdbcType=TIMESTAMP},</if>
+                <if test="fileId != null" >#{fileId, jdbcType=VARCHAR},</if>
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="extInfo1 != null" >#{extInfo1, jdbcType=VARCHAR},</if>
+                <if test="extInfo2 != null" >#{extInfo2, jdbcType=VARCHAR},</if>
+                <if test="extInfo3 != null" >#{extInfo3, jdbcType=VARCHAR},</if>
+                <if test="extInfo4 != null" >#{extInfo4, jdbcType=VARCHAR},</if>
+                <if test="extInfo5 != null" >#{extInfo5, jdbcType=VARCHAR},</if>
+                <if test="extInfo6 != null" >#{extInfo6, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.smallprogram.entity.ScheduleImportantEO" >
+    update TS_SCHEDULE_IMPORTANT
+       set  name_ = #{name},
+            begin_time_ = #{beginTime},
+            end_time_ = #{endTime},
+            create_user_id_ = #{createUserId},
+            CREATE_TIME_ = #{createTime},
+            file_id_ = #{fileId},
+            ext_info1_ = #{extInfo1},
+            ext_info2_ = #{extInfo2},
+            ext_info3_ = #{extInfo3},
+            ext_info4_ = #{extInfo4},
+            ext_info5_ = #{extInfo5},
+            ext_info6_ = #{extInfo6}
+     where  id_ = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.smallprogram.entity.ScheduleImportantEO" >
+    update TS_SCHEDULE_IMPORTANT
+    <set >
+      <if test="name != null" >
+        name_ = #{name},
+      </if>
+      <if test="beginTime != null" >
+        begin_time_ = #{beginTime},
+      </if>
+      <if test="endTime != null" >
+        end_time_ = #{endTime},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id_ = #{createUserId},
+      </if>
+      <if test="createTime != null" >
+        create_time_ = #{createTime},
+      </if>
+      <if test="fileId != null" >
+        file_id_ = #{fileId},
+      </if>
+      <if test="extInfo1 != null" >
+        ext_info1_ = #{extInfo1},
+      </if>
+      <if test="extInfo2 != null" >
+        ext_info2_ = #{extInfo2},
+      </if>
+      <if test="extInfo3 != null" >
+        ext_info3_ = #{extInfo3},
+      </if>
+      <if test="extInfo4 != null" >
+        ext_info4_ = #{extInfo4},
+      </if>
+      <if test="extInfo5 != null" >
+        ext_info5_ = #{extInfo5},
+      </if>
+      <if test="extInfo6 != null" >
+        ext_info6_ = #{extInfo6},
+      </if>
+    </set>
+     where id_ = #{id}
+  </update>
+
+  <!-- 根据id查询 TS_SCHEDULE_IMPORTANT -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+      from TS_SCHEDULE_IMPORTANT
+     where id_ = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TS_SCHEDULE_IMPORTANT
+     where id_ = #{value}
+
+  </delete>
+
+    <!-- 删除记录 -->
+    <delete id="softDeleteByPrimaryKey" parameterType="java.lang.String">
+    update TS_SCHEDULE_IMPORTANT set DEL_FLAG_ = 1
+     where id_ = #{value}
+  </delete>
+
+
+
+  <!-- TS_SCHEDULE_IMPORTANT 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from TS_SCHEDULE_IMPORTANT
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询TS_SCHEDULE_IMPORTANT列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select name_, begin_time_, end_time_, create_user_id_, create_time_, file_id_, id_, ext_info1_, ext_info2_ from
+		(select tmp_tb.* , rownum rn from
+			(select name_, begin_time_, end_time_, create_user_id_, create_time_, file_id_, id_, ext_info1_, tu.USNAME as ext_info2_ from TS_SCHEDULE_IMPORTANT tsi left join TS_USER tu on tu.USID = tsi.CREATE_USER_ID_
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+            order by CREATE_TIME_ desc
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from TS_SCHEDULE_IMPORTANT
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>

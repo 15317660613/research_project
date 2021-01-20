@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adc.da.epis.dao.BuisnessSubjectEODao" >
+  <!-- Result Map-->
+  <resultMap id="BaseResultMap" type="com.adc.da.epis.entity.BuisnessSubjectEO" >
+    <id column="id" property="id" />
+    <result column="project_id" property="projectId" />
+    <result column="department_id" property="departmentId" />
+    <result column="production_id" property="productionId" />
+    <result column="creat_time" property="creatTime" />
+    <result column="modify" property="modify" />
+    <result column="create_user" property="createUser" />
+    <result column="subject_name" property="subjectName" />
+  </resultMap>
+
+  <!-- BUISNESS_SUBJECT table all fields -->
+  <sql id="Base_Column_List" >
+     id, project_id, department_id, production_id, creat_time, modify, create_user, subject_name
+  </sql>
+
+  <!-- 查询条件 -->
+  <sql id="Base_Where_Clause">
+    where 1=1
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        and id ${idOperator} #{id}
+      </if>
+      <if test="projectId != null" >
+        and project_id ${projectIdOperator} #{projectId}
+      </if>
+      <if test="departmentId != null" >
+        and department_id ${departmentIdOperator} #{departmentId}
+      </if>
+      <if test="productionId != null" >
+        and production_id ${productionIdOperator} #{productionId}
+      </if>
+      <if test="creatTime != null" >
+        and creat_time ${creatTimeOperator} #{creatTime}
+      </if>
+      <if test="creatTime1 != null" >
+        and creat_time &gt;= #{creatTime1}
+      </if>
+      <if test="creatTime2 != null" >
+        and creat_time &lt;= #{creatTime2}
+      </if>
+      <if test="modify != null" >
+        and modify ${modifyOperator} #{modify}
+      </if>
+      <if test="modify1 != null" >
+        and modify &gt;= #{modify1}
+      </if>
+      <if test="modify2 != null" >
+        and modify &lt;= #{modify2}
+      </if>
+      <if test="createUser != null" >
+        and create_user ${createUserOperator} #{createUser}
+      </if>
+      <if test="subjectName != null" >
+        and subject_name ${subjectNameOperator} #{subjectName}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- 插入记录 -->
+  <insert id="insert" parameterType="com.adc.da.epis.entity.BuisnessSubjectEO" >
+    <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_BUISNESS_SUBJECT.NEXTVAL FROM DUAL
+    </selectKey> -->
+    insert into BUISNESS_SUBJECT(<include refid="Base_Column_List" />)
+    values (#{id, jdbcType=VARCHAR}, #{projectId, jdbcType=VARCHAR}, #{departmentId, jdbcType=VARCHAR}, #{productionId, jdbcType=VARCHAR}, #{creatTime, jdbcType=TIMESTAMP}, #{modify, jdbcType=TIMESTAMP}, #{createUser, jdbcType=VARCHAR}, #{subjectName, jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 动态插入记录 主键是序列 -->
+  <insert id="insertSelective" parameterType="com.adc.da.epis.entity.BuisnessSubjectEO" >
+        <!-- <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT SEQ_BUISNESS_SUBJECT.NEXTVAL FROM DUAL
+    </selectKey> -->
+        insert into BUISNESS_SUBJECT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="id != null" >id,</if>
+                <if test="projectId != null" >project_id,</if>
+                <if test="departmentId != null" >department_id,</if>
+                <if test="productionId != null" >production_id,</if>
+                <if test="creatTime != null" >creat_time,</if>
+                <if test="modify != null" >modify,</if>
+                <if test="createUser != null" >create_user,</if>
+                <if test="subjectName != null" >subject_name,</if>
+            </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="id != null" >#{id, jdbcType=VARCHAR},</if>
+                <if test="projectId != null" >#{projectId, jdbcType=VARCHAR},</if>
+                <if test="departmentId != null" >#{departmentId, jdbcType=VARCHAR},</if>
+                <if test="productionId != null" >#{productionId, jdbcType=VARCHAR},</if>
+                <if test="creatTime != null" >#{creatTime, jdbcType=TIMESTAMP},</if>
+                <if test="modify != null" >#{modify, jdbcType=TIMESTAMP},</if>
+                <if test="createUser != null" >#{createUser, jdbcType=VARCHAR},</if>
+                <if test="subjectName != null" >#{subjectName, jdbcType=VARCHAR},</if>
+            </trim>
+  </insert>
+
+  <!-- 根据pk，修改记录-->
+  <update id="updateByPrimaryKey" parameterType="com.adc.da.epis.entity.BuisnessSubjectEO" >
+    update BUISNESS_SUBJECT
+       set  project_id = #{projectId},
+            department_id = #{departmentId},
+            production_id = #{productionId},
+            creat_time = #{creatTime},
+            modify = #{modify},
+            create_user = #{createUser},
+            subject_name = #{subjectName}
+     where  id = #{id}
+  </update>
+
+  <!-- 修改记录，只修改只不为空的字段 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.adc.da.epis.entity.BuisnessSubjectEO" >
+    update BUISNESS_SUBJECT
+    <set >
+      <if test="projectId != null" >
+        project_id = #{projectId},
+      </if>
+      <if test="departmentId != null" >
+        department_id = #{departmentId},
+      </if>
+      <if test="productionId != null" >
+        production_id = #{productionId},
+      </if>
+      <if test="creatTime != null" >
+        creat_time = #{creatTime},
+      </if>
+      <if test="modify != null" >
+        modify = #{modify},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser},
+      </if>
+      <if test="subjectName != null" >
+        subject_name = #{subjectName},
+      </if>
+    </set>
+     where id = #{id}
+  </update>
+
+  <!-- 根据id查询 BUISNESS_SUBJECT -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" /> 
+      from BUISNESS_SUBJECT
+     where id = #{value}
+
+  </select>
+
+  <!-- 删除记录 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from BUISNESS_SUBJECT
+     where id = #{value}
+
+  </delete>
+
+  <!-- BUISNESS_SUBJECT 列表总数-->
+  <select id="queryByCount" resultType="java.lang.Integer" parameterType="com.adc.da.base.page.BasePage">
+    select count(1) from BUISNESS_SUBJECT
+    <include refid="Base_Where_Clause"/>
+  </select>
+
+  <!-- 查询BUISNESS_SUBJECT列表 -->
+  <select id="queryByPage" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+	select <include refid="Base_Column_List" /> from
+		(select tmp_tb.* , rownum rn from
+			(select <include refid="Base_Column_List" /> from BUISNESS_SUBJECT
+			 <include refid="Base_Where_Clause"/>
+			 <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+			 	${pager.orderCondition}
+			 </if>
+			) tmp_tb where rownum &lt;= ${pager.endIndex})
+			where rn &gt;= ${pager.startIndex}
+  </select>
+
+  <select id="queryByList" resultMap="BaseResultMap" parameterType="com.adc.da.base.page.BasePage">
+    select <include refid="Base_Column_List"/> from BUISNESS_SUBJECT
+    <include refid="Base_Where_Clause"/>
+    <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+       ${pager.orderCondition}
+    </if>
+  </select>
+
+</mapper>
